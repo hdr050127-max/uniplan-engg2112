@@ -1,18 +1,19 @@
 """How often local Qwen's rewritten reasons pass the fact check in llm/explain.py.
 
-Scenarios: every sentence in llm/parse/data/test_claude.csv (written by Claude, NOT real
+Scenarios: every sentence in a test set (default llm/parse/data/test_claude.csv, v1; written by Claude, NOT real
 students) with its hand-written answers as the confirmed conditions, planned on one of
 four course combinations from the committed timetable snapshots. The answers are used
 instead of parse() so that this measures the reasons alone.
 
     python3 scripts/evaluate_explain.py                        # all sentences, qwen2.5:7b
     python3 scripts/evaluate_explain.py --limit 8 --model none # template only, no model calls
-    python3 scripts/evaluate_explain.py --recheck output/explain/explain_eval_qwen2.5-7b.json
+    python3 scripts/evaluate_explain.py --test-file llm/parse/data/test_claude_v2.csv   # another frozen set
+    python3 scripts/evaluate_explain.py --recheck output/explain/explain_eval_qwen2.5-7b_test_claude.json
         # the saved model sentences, checked again with the current rules (no model calls)
 
 While it calls the model it holds the GPU lock of the machine llm/ollama.py uses
 (llm/gpu_lock.py). Temperature 0 and seed 0 are fixed in llm/explain.py. Writes
-output/explain/explain_eval_<model>.json (every scenario) and .md (summary).
+output/explain/explain_eval_<model>[_<tag>]_<test set>.json (every scenario) and .md (summary).
 """
 
 from __future__ import annotations
@@ -46,7 +47,7 @@ from uniplan.catalog import SnapshotCatalog  # noqa: E402
 from uniplan.main import main  # noqa: E402
 from uniplan.ranking import SCALES, axes_name  # noqa: E402
 
-TEST_SET = ROOT / "llm/parse/data/test_claude.csv"
+TEST_SET = ROOT / "llm/parse/data/test_claude.csv"  # v1; the default everywhere
 OUT = ROOT / "output/explain"
 UNIT_SETS = (["ENGG2112", "AMME2301"], ["ENGG2112", "CIVL3206"], ["AMME2301", "CIVL3206", "ENGG2112"],
              ["AMME2262", "AMME2301", "CIVL3206", "ENGG2112"])
@@ -127,10 +128,10 @@ def conditions_from(rows: list[dict[str, str]]) -> dict:
     return conditions
 
 
-def sentences() -> list[tuple[str, str, list[dict[str, str]]]]:
+def sentences(test_file: Path = TEST_SET) -> list[tuple[str, str, list[dict[str, str]]]]:
     """(sentence_id, sentence, clause rows); a row without an id continues the sentence above."""
     found: list[tuple[str, str, list[dict[str, str]]]] = []
-    with TEST_SET.open(encoding="utf-8") as handle:
+    with test_file.open(encoding="utf-8") as handle:
         for row in csv.DictReader(handle):
             if row["sentence_id"]:
                 found.append((row["sentence_id"], row["sentence"], []))
@@ -209,7 +210,7 @@ def run_one(index: int, sentence_id: str, sentence: str, rows: list[dict[str, st
     return record
 
 
-def summary(records: list[dict], model: str | None, note: str = "") -> str:
+def summary(records: list[dict], model: str | None, note: str = "", test_set: str = "llm/parse/data/test_claude.csv") -> str:
     ready = [record for record in records if record["status"] == "ready"]
     picks = [(position, pick) for record in ready for position, pick in enumerate(record["picks"])]
     asked = [(position, pick) for position, pick in picks if pick["model_text"] is not None]
@@ -225,7 +226,7 @@ def summary(records: list[dict], model: str | None, note: str = "") -> str:
 
     lines = [
         f"# Reason fact-check evaluation ({model or 'template only'})", "",
-        "Sentences: `llm/parse/data/test_claude.csv`, written by Claude (Opus 5.5) — **not real student data**. "
+        f"Sentences: `{test_set}`, written by Claude (Opus 5.5) — **not real student data**. "
         "Conditions are the file's hand-written answers (not `parse()` output); timetables come from the "
         "committed 2026 S2C snapshots. Model output was produced with temperature 0 and seed 0." + note, "",
         "| | |", "| --- | --- |",
@@ -276,19 +277,23 @@ def main_cli(argv: list[str] | None = None) -> int:
     parser.add_argument("--limit", type=int, default=0, help="only the first N sentences")
     parser.add_argument("--recheck", type=Path, help="a saved result file: check its model sentences again")
     parser.add_argument("--tag", default="", help="suffix for the output file names, e.g. before")
+    parser.add_argument("--test-file", type=Path, default=TEST_SET,
+                        help="a frozen test set with the columns of test_claude.csv (default: v1)")
     args = parser.parse_args(argv)
     model = None if args.model == "none" else args.model
     saved, server, note = {}, None, ""
     if args.recheck:
         previous = json.loads(args.recheck.read_text())
         model, server = previous["model"], previous["server"]
+        args.test_file = ROOT / previous.get("test_set", TEST_SET.relative_to(ROOT))  # the sentences it was run on
         saved = {record["sentence_id"]: record for record in previous["records"]}
         note = (f" The model sentences come from an earlier run against {server} and were checked again with "
                 "the current rules, without calling the model.")
     elif model and not ollama.available(model):
         print(f"{model} is not available on {ollama.base_url()}; see python3 -m llm.ollama", file=sys.stderr)
         return 1
-    chosen = sentences()[:args.limit or None]
+    test_file = args.test_file.resolve()
+    chosen = sentences(test_file)[:args.limit or None]
     records = []
     with tempfile.TemporaryDirectory() as temp:
         catalog = tracked_catalog(Path(temp))
@@ -305,14 +310,15 @@ def main_cli(argv: list[str] | None = None) -> int:
                                        saved.get(sentence_id) if args.recheck else None))
                 print(f"{sentence_id} {records[-1]['status']} {records[-1].get('explain_status', '')}", flush=True)
     OUT.mkdir(parents=True, exist_ok=True)
-    name = f"explain_eval_{(model or 'template').replace(':', '-')}" + (f"_{args.tag}" if args.tag else "")
+    name = (f"explain_eval_{(model or 'template').replace(':', '-')}" + (f"_{args.tag}" if args.tag else "") +
+            f"_{test_file.stem}")
     if model and not args.recheck:
         server = ollama.base_url()
     (OUT / f"{name}.json").write_text(json.dumps({"model": model, "server": server, "rechecked": bool(args.recheck),
-                                                   "test_set": str(TEST_SET.relative_to(ROOT)),
+                                                   "test_set": str(test_file.relative_to(ROOT)),
                                                    "data_note": "Sentences written by Claude; not real student data.",
                                                    "records": records}, ensure_ascii=False, indent=1) + "\n")
-    (OUT / f"{name}.md").write_text(summary(records, model, note))
+    (OUT / f"{name}.md").write_text(summary(records, model, note, str(test_file.relative_to(ROOT))))
     print(f"wrote {OUT / name}.json and .md")
     return 0
 

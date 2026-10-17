@@ -62,8 +62,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0007,
-   "total_seconds": 0.092,
+   "parse_seconds": 0.0006,
+   "total_seconds": 0.178,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -132,7 +132,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.018,
+   "total_seconds": 0.054,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -248,8 +248,8 @@
    "fields_wrong": [
     "unavailable_windows"
    ],
-   "parse_seconds": 0.0008,
-   "total_seconds": 0.024,
+   "parse_seconds": 0.0007,
+   "total_seconds": 0.022,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -296,8 +296,8 @@
    "fields_wrong": [
     "cares"
    ],
-   "parse_seconds": 0.0003,
-   "total_seconds": 0.088,
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.084,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -341,8 +341,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.084,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.174,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -399,7 +399,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.021,
+   "total_seconds": 0.066,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -467,7 +467,7 @@
     "lunch"
    ],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.12,
+   "total_seconds": 0.241,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -531,7 +531,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.144,
+   "total_seconds": 0.308,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -599,8 +599,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0006,
-   "total_seconds": 0.076,
+   "parse_seconds": 0.0005,
+   "total_seconds": 0.17,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -716,7 +716,7 @@
     "cares"
    ],
    "parse_seconds": 0.0005,
-   "total_seconds": 0.018,
+   "total_seconds": 0.04,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -781,8 +781,8 @@
    "fields_wrong": [
     "unavailable_windows"
    ],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.1,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.215,
    "status_parsed": "ready",
    "status_gold": "no_feasible",
    "picks_parsed": [
@@ -857,7 +857,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.15,
+   "total_seconds": 0.313,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -966,7 +966,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.071,
+   "total_seconds": 0.164,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -1022,7 +1022,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.021,
+   "total_seconds": 0.067,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -1079,7 +1079,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.096,
+   "total_seconds": 0.214,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -1136,7 +1136,7 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0003,
+   "parse_seconds": 0.0002,
    "total_seconds": 0.135,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
@@ -1178,7 +1178,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.101,
+   "total_seconds": 0.191,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -1256,7 +1256,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.02,
+   "total_seconds": 0.059,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -1338,7 +1338,7 @@
     "unavailable_windows"
    ],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.011,
+   "total_seconds": 0.012,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -1385,7 +1385,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.14,
+   "total_seconds": 0.315,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -1493,7 +1493,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.012,
+   "total_seconds": 0.011,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -1542,7 +1542,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.024,
+   "total_seconds": 0.069,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -1604,8 +1604,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.098,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.214,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -1664,8 +1664,8 @@
    "fields_wrong": [
     "max_days_per_week"
    ],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.091,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.087,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -1719,8 +1719,8 @@
    "fields_wrong": [
     "unavailable_windows"
    ],
-   "parse_seconds": 0.0003,
-   "total_seconds": 0.063,
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.151,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -1790,8 +1790,8 @@
    "fields_wrong": [
     "unavailable_windows"
    ],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.022,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.067,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -1852,7 +1852,7 @@
     "cares"
    ],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.096,
+   "total_seconds": 0.21,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -1911,7 +1911,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.148,
+   "total_seconds": 0.313,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -1967,7 +1967,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.092,
+   "total_seconds": 0.179,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -2036,8 +2036,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0005,
-   "total_seconds": 0.004,
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.003,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -2092,8 +2092,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0003,
-   "total_seconds": 0.084,
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.191,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -2160,7 +2160,7 @@
     "preferred_hours"
    ],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.144,
+   "total_seconds": 0.326,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -2217,7 +2217,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.109,
+   "total_seconds": 0.198,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -2346,7 +2346,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.121,
+   "total_seconds": 0.239,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -2506,7 +2506,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.022,
+   "total_seconds": 0.021,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -2552,8 +2552,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.082,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.174,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -2624,7 +2624,7 @@
     "unavailable_windows"
    ],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.018,
+   "total_seconds": 0.056,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -2691,7 +2691,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.116,
+   "total_seconds": 0.232,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -2801,7 +2801,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.034,
+   "total_seconds": 0.033,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -2864,7 +2864,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.095,
+   "total_seconds": 0.183,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -2928,7 +2928,7 @@
     "cares"
    ],
    "parse_seconds": 0.0005,
-   "total_seconds": 0.021,
+   "total_seconds": 0.069,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -2987,7 +2987,7 @@
     "max_days_per_week"
    ],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.099,
+   "total_seconds": 0.211,
    "status_parsed": "ready",
    "status_gold": "no_feasible",
    "picks_parsed": [
@@ -3074,8 +3074,8 @@
    "fields_wrong": [
     "unavailable_windows"
    ],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.02,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.021,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -3126,7 +3126,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.089,
+   "total_seconds": 0.183,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -3235,7 +3235,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.017,
+   "total_seconds": 0.039,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -3295,8 +3295,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0002,
-   "total_seconds": 0.096,
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.213,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -3456,7 +3456,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.015,
+   "total_seconds": 0.038,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -3514,7 +3514,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0001,
-   "total_seconds": 0.096,
+   "total_seconds": 0.211,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -3625,7 +3625,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0005,
-   "total_seconds": 0.27,
+   "total_seconds": 0.434,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -3692,7 +3692,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0005,
-   "total_seconds": 0.098,
+   "total_seconds": 0.187,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -3753,7 +3753,7 @@
     "cares"
    ],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.021,
+   "total_seconds": 0.067,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -3841,7 +3841,7 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0003,
+   "parse_seconds": 0.0002,
    "total_seconds": 0.013,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
@@ -3914,7 +3914,7 @@
     "unavailable_windows"
    ],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.035,
+   "total_seconds": 0.039,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -3987,7 +3987,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.044,
+   "total_seconds": 0.126,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -4043,7 +4043,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.021,
+   "total_seconds": 0.046,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -4097,7 +4097,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.1,
+   "total_seconds": 0.211,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -4160,7 +4160,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.14,
+   "total_seconds": 0.305,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -4228,7 +4228,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.085,
+   "total_seconds": 0.173,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -4329,7 +4329,7 @@
     "unavailable_windows"
    ],
    "parse_seconds": 0.0005,
-   "total_seconds": 0.006,
+   "total_seconds": 0.005,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -4380,8 +4380,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0003,
-   "total_seconds": 0.108,
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.224,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -4459,7 +4459,7 @@
     "unavailable_windows"
    ],
    "parse_seconds": 0.0006,
-   "total_seconds": 0.051,
+   "total_seconds": 0.052,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -4502,7 +4502,7 @@
     "in_person_only"
    ],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.087,
+   "total_seconds": 0.176,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -4583,7 +4583,7 @@
     "unavailable_windows"
    ],
    "parse_seconds": 0.0005,
-   "total_seconds": 0.019,
+   "total_seconds": 0.057,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -4644,7 +4644,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.091,
+   "total_seconds": 0.207,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -4713,7 +4713,7 @@
     "lunch"
    ],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.162,
+   "total_seconds": 0.329,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -4790,8 +4790,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0005,
-   "total_seconds": 0.086,
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.176,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -4859,7 +4859,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0005,
-   "total_seconds": 0.021,
+   "total_seconds": 0.069,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -4922,7 +4922,7 @@
     "cares"
    ],
    "parse_seconds": 0.0005,
-   "total_seconds": 0.042,
+   "total_seconds": 0.044,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -4976,8 +4976,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0002,
-   "total_seconds": 0.169,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.338,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -5041,8 +5041,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.082,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.169,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -5101,8 +5101,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0003,
-   "total_seconds": 0.021,
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.066,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -5170,7 +5170,7 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0003,
+   "parse_seconds": 0.0002,
    "total_seconds": 0.013,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
@@ -5215,8 +5215,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.145,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.312,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -5286,7 +5286,7 @@
     "unavailable_windows"
    ],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.01,
+   "total_seconds": 0.009,
    "status_parsed": "no_feasible",
    "status_gold": "ready",
    "picks_gold": [
@@ -5332,8 +5332,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.009,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.008,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -5375,7 +5375,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.119,
+   "total_seconds": 0.232,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -5441,7 +5441,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.163,
+   "total_seconds": 0.328,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -5534,7 +5534,7 @@
     "cares"
    ],
    "parse_seconds": 0.0005,
-   "total_seconds": 0.081,
+   "total_seconds": 0.167,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -5663,8 +5663,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0003,
-   "total_seconds": 0.1,
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.21,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -5721,8 +5721,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.145,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.311,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -5887,7 +5887,7 @@
     "unavailable_windows"
    ],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.021,
+   "total_seconds": 0.066,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -5968,8 +5968,8 @@
    "fields_wrong": [
     "max_daily_minutes"
    ],
-   "parse_seconds": 0.0005,
-   "total_seconds": 0.152,
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.252,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -6040,7 +6040,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.055,
+   "total_seconds": 0.054,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -6080,8 +6080,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0003,
-   "total_seconds": 0.087,
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.17,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -6149,7 +6149,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.018,
+   "total_seconds": 0.058,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -6212,7 +6212,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.095,
+   "total_seconds": 0.22,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -6290,7 +6290,7 @@
     "cares"
    ],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.032,
+   "total_seconds": 0.031,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -6342,8 +6342,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.075,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.167,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -6399,7 +6399,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.022,
+   "total_seconds": 0.066,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -6469,7 +6469,7 @@
     "cares"
    ],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.017,
+   "total_seconds": 0.016,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -6511,8 +6511,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0002,
-   "total_seconds": 0.074,
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.072,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -6631,7 +6631,7 @@
    "fields_wrong": [
     "unavailable_windows"
    ],
-   "parse_seconds": 0.0004,
+   "parse_seconds": 0.0003,
    "total_seconds": 0.008,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
@@ -6680,7 +6680,7 @@
     "cares"
    ],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.021,
+   "total_seconds": 0.067,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -6745,8 +6745,8 @@
    "fields_wrong": [
     "preferred_hours"
    ],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.141,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.289,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -6804,7 +6804,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.144,
+   "total_seconds": 0.32,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -6894,7 +6894,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.092,
+   "total_seconds": 0.182,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -6951,8 +6951,8 @@
    "fields_wrong": [
     "max_days_per_week"
    ],
-   "parse_seconds": 0.0003,
-   "total_seconds": 0.021,
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.067,
    "status_parsed": "ready",
    "status_gold": "no_feasible",
    "picks_parsed": [
@@ -7012,7 +7012,7 @@
     "in_person_only"
    ],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.098,
+   "total_seconds": 0.215,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -7069,8 +7069,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0005,
-   "total_seconds": 0.149,
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.308,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -7140,7 +7140,7 @@
     "unavailable_windows"
    ],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.01,
+   "total_seconds": 0.009,
    "status_parsed": "no_feasible",
    "status_gold": "ready",
    "picks_gold": [
@@ -7185,8 +7185,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0003,
-   "total_seconds": 0.027,
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.073,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -7254,7 +7254,7 @@
     "lunch"
    ],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.122,
+   "total_seconds": 0.241,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -7325,7 +7325,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0005,
-   "total_seconds": 0.055,
+   "total_seconds": 0.053,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -7381,7 +7381,7 @@
     "unavailable_windows"
    ],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.063,
+   "total_seconds": 0.149,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -7482,7 +7482,7 @@
     "cares"
    ],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.025,
+   "total_seconds": 0.07,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -7539,7 +7539,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.044,
+   "total_seconds": 0.042,
    "status_parsed": "no_feasible",
    "status_gold": "no_feasible"
   },
@@ -7582,7 +7582,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.143,
+   "total_seconds": 0.312,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -7662,7 +7662,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.054,
+   "total_seconds": 0.143,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -7725,7 +7725,7 @@
     "cares"
    ],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.021,
+   "total_seconds": 0.069,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -7804,7 +7804,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.109,
+   "total_seconds": 0.226,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -7875,7 +7875,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0006,
-   "total_seconds": 0.131,
+   "total_seconds": 0.299,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -7934,7 +7934,7 @@
     "max_days_per_week"
    ],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.04,
+   "total_seconds": 0.087,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -8015,8 +8015,8 @@
    "fields_wrong": [
     "unavailable_windows"
    ],
-   "parse_seconds": 0.0003,
-   "total_seconds": 0.021,
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.067,
    "status_parsed": "ready",
    "status_gold": "no_feasible",
    "picks_parsed": [
@@ -8166,7 +8166,7 @@
     "cares"
    ],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.14,
+   "total_seconds": 0.303,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -8224,7 +8224,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.079,
+   "total_seconds": 0.168,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -8407,7 +8407,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.096,
+   "total_seconds": 0.211,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -8569,8 +8569,8 @@
     "max_days_per_week",
     "cares"
    ],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.081,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.171,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -8723,7 +8723,7 @@
     "unavailable_windows"
    ],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.095,
+   "total_seconds": 0.212,
    "status_parsed": "ready",
    "status_gold": "no_feasible",
    "picks_parsed": [
@@ -8789,7 +8789,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.145,
+   "total_seconds": 0.316,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -8859,7 +8859,7 @@
     "cares"
    ],
    "parse_seconds": 0.0006,
-   "total_seconds": 0.104,
+   "total_seconds": 0.191,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -8997,7 +8997,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.101,
+   "total_seconds": 0.213,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -9070,8 +9070,8 @@
     "lunch",
     "preferred_hours"
    ],
-   "parse_seconds": 0.0005,
-   "total_seconds": 0.197,
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.363,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -9145,7 +9145,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0005,
-   "total_seconds": 0.063,
+   "total_seconds": 0.15,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -9202,8 +9202,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0003,
-   "total_seconds": 0.02,
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.034,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -9257,8 +9257,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0004,
-   "total_seconds": 0.097,
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.214,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -9317,7 +9317,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.147,
+   "total_seconds": 0.313,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -9376,7 +9376,7 @@
     "in_person_only"
    ],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.088,
+   "total_seconds": 0.178,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -9433,7 +9433,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0004,
-   "total_seconds": 0.021,
+   "total_seconds": 0.069,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -9555,7 +9555,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0003,
-   "total_seconds": 0.144,
+   "total_seconds": 0.315,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -9615,7 +9615,7 @@
    "exact": true,
    "fields_wrong": [],
    "parse_seconds": 0.0002,
-   "total_seconds": 0.082,
+   "total_seconds": 0.169,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [
@@ -9675,8 +9675,8 @@
    "dropped_by_form_rules": 0,
    "exact": true,
    "fields_wrong": [],
-   "parse_seconds": 0.0003,
-   "total_seconds": 0.021,
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.066,
    "status_parsed": "ready",
    "status_gold": "ready",
    "picks_parsed": [

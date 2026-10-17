@@ -24,15 +24,32 @@ class SummaryTests(unittest.TestCase):
     def test_restates_conditions_and_unrecognised(self):
         result = result_of(("我周二和周四晚上在餐厅打工", "blocked_time"), ("每天上课不超过5小时", "max_daily_hours"),
                            ("不想上太早的课", "prefer_no_early_late"), ("想和室友同一个 tutorial", "other"))
+        self.assertEqual([clarify.describe_clause(c) for c in result["clauses"]],
+                         ["Not available Tue and Thu after 6 pm", "At most 5 hours of class a day",
+                          "Fewer early classes, if possible", "Not something a timetable can use"])
         self.assertEqual(clarify.summary(result),
-                         "我理解为：周二、周四 18:00 以后不能上课；每天最多上 5 小时课；尽量少早晚课；"
-                         "“想和室友同一个 tutorial”这句排课管不了。")
+                         "Read as: not available Tue and Thu after 6 pm; at most 5 hours of class a day; "
+                         "fewer early classes, if possible. Not something a timetable can use: “想和室友同一个 tutorial”.")
 
     def test_whole_days_every_day_and_nothing_read(self):
         result = result_of(("周五要打工", "blocked_time"), ("十点前没法上课", "blocked_time"))
-        self.assertEqual(clarify.summary(result), "我理解为：周一到周四 10:00 以前不能上课；周五全天不能上课。")
-        self.assertEqual(clarify.summary(result_of(("每天早上送孩子", "blocked_time"))), "我理解为：每天 10:00 以前不能上课。")
-        self.assertEqual(clarify.summary(result_of(("hello there", "other"))), "我没读出排课要求。“hello there”这句排课管不了。")
+        self.assertEqual(clarify.summary(result), "Read as: not available Fri; not available before 10 am.")
+        self.assertEqual(clarify.summary(result_of(("每天早上送孩子", "blocked_time"))), "Read as: not available before 10 am.")
+        self.assertEqual(clarify.summary(result_of(("hello there", "other"))), "Not something a timetable can use: “hello there”.")
+
+    def test_margin_notes_for_each_kind_of_clause(self):
+        notes = {"I'm only free on Tuesdays and Thursdays": ("blocked_time", "Not available Mon, Wed and Fri"),
+                 "lunch at 12 for 45 minutes": ("lunch", "45 min for lunch between 12 pm and 12:45 pm"),
+                 "no online classes": ("in_person_only", "Only in-person classes"),
+                 "I'd prefer to start after 10": ("prefer_no_early_late", "No classes before 10 am, if possible"),
+                 "ideally done by 4:30": ("prefer_no_early_late", "Done by 4:30 pm, if possible"),
+                 "at most 3 days on campus": ("max_days", "At most 3 days a week"),
+                 "no more than 8 hours at uni a day": ("max_daily_hours", "At most 8 hours on campus a day"),
+                 "我要打工": ("blocked_time", "Busy, but no day or time given"),
+                 "fewer days please": ("prefer_fewer_days", "As few days on campus as possible"),
+                 "late classes drain me": ("prefer_no_early_late", "Fewer late classes, if possible")}
+        for text, (label, note) in notes.items():
+            self.assertEqual(clarify.describe_clause(result_of((text, label))["clauses"][0]), note, text)
 
 
 class QuestionTests(unittest.TestCase):
@@ -76,7 +93,7 @@ class QuestionTests(unittest.TestCase):
     def test_missing_values(self):
         days = clarify.questions(result_of(("少来几天，一周最多来几天", "max_days")), [True], None)
         self.assertEqual(days[0]["kind"], "missing_value")
-        self.assertEqual(days[0]["options"][0], {"text": "先这样，我在句子里补上", "label": "max_days", "fields": {}})
+        self.assertEqual(days[0]["options"][0], {"text": "Leave as is", "label": "max_days", "fields": {}})
         self.assertIn({"max_days_per_week": 3}, [o["fields"] for o in days[0]["options"]])
         work = clarify.questions(result_of(("我要打工", "blocked_time")), [True], agreeing)
         self.assertEqual([o["label"] for o in work[0]["options"]], ["blocked_time", "other"])
@@ -84,8 +101,10 @@ class QuestionTests(unittest.TestCase):
     def test_offers_follow_what_the_student_cares_about(self):
         found = clarify.questions(result_of(("课尽量排在一起", "prefer_fewer_days"), ("不想等太久", "prefer_less_waiting")),
                                   [True, True], None)
-        self.assertEqual([q["text"] for q in found], ["要不要定一个每周最多来几天？", "要不要留出午饭时间？"])
-        self.assertTrue(all(q["clause_index"] is None and q["options"][0]["text"].startswith("不用") for q in found))
+        self.assertEqual([q["text"] for q in found], ["Most days on campus?", "Lunch break?"])
+        self.assertEqual([[o["text"] for o in q["options"]] for q in found],
+                         [["No limit", "2", "3", "4"], ["No", "30 min between 11:30 am and 2 pm"]])
+        self.assertTrue(all(q["clause_index"] is None and not q["options"][0]["fields"] for q in found))
         online = clarify.questions(result_of(("online classes are fine", "other")), [True], None)
         self.assertEqual(online, [])
 
@@ -100,7 +119,7 @@ class ParseTests(unittest.TestCase):
     def test_parse_restates_asks_and_applies_answers(self):
         label = lambda text: "blocked_time" if "4" in text else "prefer_less_waiting"     # noqa: E731
         first = parse("ideally done by 4, I pick up my son. I hate long gaps", label)
-        self.assertTrue(first["summary"].startswith("我理解为："))
+        self.assertTrue(first["summary"].startswith("Read as: "))
         question = next(q for q in first["questions"] if q["kind"] == "hard_or_soft")
         soft = question["options"][1]
         again = parse("ideally done by 4, I pick up my son. I hate long gaps", label,

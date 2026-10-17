@@ -45,6 +45,20 @@ class ClassifierTests(unittest.TestCase):
             self.assertEqual(classify.ollama_classifier("qwen2.5:7b")("一周最多三天"), "max_days")
         self.assertEqual(chat.call_args.kwargs["schema"]["properties"]["label"]["enum"][0], "blocked_time")
 
+    def test_parse_falls_back_when_ollama_is_down(self):
+        import llm.parse as parse_module
+
+        def down(text):
+            raise OSError("connection refused")
+        with mock.patch.object(parse_module, "RUNTIME", "ollama-short:uniplan-parse-0.5b"), \
+                mock.patch.object(parse_module, "_down_since", None), \
+                mock.patch("llm.parse.classify.by_name", return_value=down), \
+                mock.patch.object(parse_module, "_fallback", return_value="lunch") as fallback, \
+                mock.patch("sys.stderr"):
+            result = parse_module.parse("中午要吃饭")
+        self.assertEqual(result["clauses"][0]["label"], "lunch")
+        fallback.assert_called_once()
+
     def test_unknown_name_is_refused(self):
         with self.assertRaises(ValueError):
             classify.by_name("gpt")

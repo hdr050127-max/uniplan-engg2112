@@ -5,6 +5,7 @@ from pathlib import Path
 from llm.parse import parse
 from llm.parse.extract import fields
 from llm.parse.gold import load, read_block, write_block
+from llm.parse.keywords import keyword_label
 from llm.parse.split import split_clauses
 from llm.parse.text import normalize
 
@@ -104,7 +105,7 @@ class GoldFormatTests(unittest.TestCase):
                 self.assertEqual(fields(clause["label"], clause["text"]), clause["fields"], clause["text"])
 
     def test_parse_merges_clauses(self):
-        result = parse("我周五要打工，每天早上送孩子，不想课之间等太久")
+        result = parse("我周五要打工，每天早上送孩子，不想课之间等太久", keyword_label)
         self.assertEqual([c["label"] for c in result["clauses"]],
                          ["blocked_time", "blocked_time", "prefer_less_waiting"])
         self.assertEqual(write_block(result["conditions"]["unavailable_windows"]),

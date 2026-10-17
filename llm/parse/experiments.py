@@ -1,9 +1,10 @@
-"""Train the character n-gram models with scikit-learn and save their predictions.
+"""Train TF-IDF + logistic regression with scikit-learn and save its predictions.
 
     /usr/local/bin/python3 -m llm.parse.experiments
 
-Models: TF-IDF + logistic regression, TF-IDF + naive Bayes, TF-IDF + a small neural network.
-Hyper-parameters are picked on the SYNTHETIC validation split only (the test set is
+Features are character n-grams (works for Chinese, English and mixed text alike).
+It trains on the latest graded round (llm/parse/output/train_round<N>.jsonl), so the labels are
+Claude's wherever a review round looked at them. Hyper-parameters are picked on the SYNTHETIC validation split only (the test set is
 never read here). The chosen logistic regression is refitted on train + val and exported to
 output/linear_model.json, which llm/parse/linear.py scores in plain Python at run time.
 Predictions go to output/predictions/ for llm/parse/evaluate.py to score with the others.
@@ -12,24 +13,16 @@ from __future__ import annotations
 
 import itertools
 import json
-import pickle
 import platform
 import time
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
-from sklearn.naive_bayes import ComplementNB
-from sklearn.neural_network import MLPClassifier
 
-from llm.parse.evaluate import OUTPUT, PREDICTIONS, SEED, data_sets, synthetic, texts_needed
+from llm.parse.evaluate import OUTPUT, PREDICTIONS, data_sets, synthetic, texts_needed
 from llm.parse.linear import MODEL_PATH, load, ngrams
 
-GRIDS = {
-    "tfidf+logreg": (LogisticRegression, [{"C": c, "max_iter": 3000} for c in (1, 3, 10, 30)]),
-    "tfidf+naive_bayes": (ComplementNB, [{"alpha": a} for a in (0.03, 0.1, 0.3, 1.0)]),
-    "tfidf+mlp": (MLPClassifier, [{"hidden_layer_sizes": (h,), "alpha": a, "max_iter": 300, "random_state": SEED}
-                                  for h, a in itertools.product((64, 256), (1e-4, 1e-2))]),
-}
+GRID = [{"C": c, "max_iter": 3000} for c in (1, 3, 10, 30)]
 NGRAMS = ((1, 3), (1, 4), (2, 5))
 MIN_DF = (1, 2)
 
@@ -87,32 +80,24 @@ def save_predictions(name: str, predict_one, texts: list[str], size_mb: float, n
 def main() -> int:
     train, val = synthetic("train"), synthetic("val")
     texts = texts_needed(data_sets(with_test=False))
-    summary = {}
-    for name, (model_class, grid) in GRIDS.items():
-        accuracy, settings = search(name, model_class, grid, train, val)
-        params = {k: v for k, v in settings.items() if k not in ("ngram_range", "min_df")}
-        vec = vectorizer(*settings["ngram_range"], settings["min_df"])
-        model = model_class(**params).fit(vec.fit_transform([r["text"] for r in train]), [r["label"] for r in train])
-        size = len(pickle.dumps((vec.vocabulary_, vec.idf_, model))) / 1e6
-        note = f"n-gram {settings['ngram_range']}, min_df {settings['min_df']}, " + \
-               ", ".join(f"{k}={v}" for k, v in params.items() if k not in ("max_iter", "random_state"))
-        if name == "tfidf+logreg":
-            export_linear(vec, model, settings)
-            runtime = load.__wrapped__(MODEL_PATH)
-            agree = sum(runtime(t) == p for t, p in zip(texts, model.predict(vec.transform(texts))))
-            print(f"  plain-Python scorer agrees with scikit-learn on {agree}/{len(texts)} texts")
-            save_predictions("linear", runtime, texts, MODEL_PATH.stat().st_size / 1e6,
-                             note + " (plain-Python scorer, trained on train only)")
-            # The run-time model: same settings, refitted on train + val.
-            both = train + val
-            vec_all = vectorizer(*settings["ngram_range"], settings["min_df"])
-            final = model_class(**params).fit(vec_all.fit_transform([r["text"] for r in both]),
-                                              [r["label"] for r in both])
-            export_linear(vec_all, final, settings)
-        else:
-            save_predictions(name, lambda t: model.predict(vec.transform([t]))[0], texts, size, note)
-        summary[name] = {"val_accuracy": round(float(accuracy), 4), "settings": {
-            k: (list(v) if isinstance(v, tuple) else v) for k, v in settings.items()}}
+    accuracy, settings = search("tfidf+logreg", LogisticRegression, GRID, train, val)
+    params = {k: v for k, v in settings.items() if k not in ("ngram_range", "min_df")}
+    vec = vectorizer(*settings["ngram_range"], settings["min_df"])
+    model = LogisticRegression(**params).fit(vec.fit_transform([r["text"] for r in train]), [r["label"] for r in train])
+    export_linear(vec, model, settings)
+    runtime = load.__wrapped__(MODEL_PATH)
+    agree = sum(runtime(t) == p for t, p in zip(texts, model.predict(vec.transform(texts))))
+    print(f"  plain-Python scorer agrees with scikit-learn on {agree}/{len(texts)} texts")
+    note = (f"TF-IDF char n-gram {tuple(settings['ngram_range'])}, min_df {settings['min_df']}, C={params['C']}; "
+            "plain-Python scorer, trained on train only")
+    save_predictions("linear", runtime, texts, MODEL_PATH.stat().st_size / 1e6, note)
+    # The run-time model: same settings, refitted on train + val.
+    vec_all = vectorizer(*settings["ngram_range"], settings["min_df"])
+    final = LogisticRegression(**params).fit(vec_all.fit_transform([r["text"] for r in train + val]),
+                                             [r["label"] for r in train + val])
+    export_linear(vec_all, final, settings)
+    summary = {"val_accuracy": round(float(accuracy), 4), "train": len(train), "val": len(val),
+               "settings": {k: (list(v) if isinstance(v, tuple) else v) for k, v in settings.items()}}
     (OUTPUT / "experiments_summary.json").write_text(json.dumps(summary, indent=2) + "\n")
     return 0
 

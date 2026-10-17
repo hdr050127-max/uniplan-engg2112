@@ -1,7 +1,7 @@
 """Teacher-student rounds: Qwen answers, Claude grades, the graded labels train Qwen.
 
     python3 -m llm.parse.review pool                 # question pool, minus anything close to the test set
-    python3 -m llm.gpu_lock -- python3 -m llm.parse.review answer qwen2.5:0.5b qwen2.5:1.5b
+    python3 -m llm.gpu_lock -- python3 -m llm.parse.review answer          # qwen2.5:7b, untrained
     python3 -m llm.parse.review sheet --round 1      # output/review_round1.jsonl for Claude to grade
     python3 -m llm.parse.review apply --round 1      # Claude's labels -> training data + round stats
 
@@ -81,7 +81,7 @@ def build_pool() -> dict:
 
 
 def answer(models: list[str]) -> None:
-    """Zero-shot answers from untrained Qwen models, cached with the evaluation predictions."""
+    """Answers from untrained Qwen (7B only since 2026-10-17), cached with the evaluation predictions."""
     from llm import ollama
     from llm.parse.classify import ollama_classifier
     from llm.parse.evaluate import data_sets, predict, texts_needed
@@ -161,7 +161,7 @@ def apply(round_number: int) -> None:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Teacher-student review rounds.")
     parser.add_argument("step", choices=("pool", "answer", "sheet", "apply"))
-    parser.add_argument("models", nargs="*", default=["qwen2.5:0.5b", "qwen2.5:1.5b"])
+    parser.add_argument("models", nargs="*", default=["qwen2.5:7b"])
     parser.add_argument("--round", type=int, default=1)
     args = parser.parse_args(argv)
     if args.step == "pool":

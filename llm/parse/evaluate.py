@@ -94,16 +94,17 @@ def predict(name: str, classify, texts: list[str], meta: dict) -> dict:
     path = PREDICTIONS / f"{name.replace(':', '_').replace('/', '_')}.json"
     saved = json.loads(path.read_text()) if path.exists() else {"model": name, "predictions": {}}
     todo = [text for text in texts if text not in saved["predictions"]]
+    saved.update({key: value for key, value in meta.items() if value is not None})
+    PREDICTIONS.mkdir(parents=True, exist_ok=True)
     if todo:
         classify(todo[0])                                     # warm up (model load) outside the timing
     for number, text in enumerate(todo, 1):
         started = time.perf_counter()
         label = classify(text)
         saved["predictions"][text] = {"label": label, "ms": round((time.perf_counter() - started) * 1000, 2)}
-        if number % 50 == 0:
+        if number % 50 == 0 or number == len(todo):          # saved as it goes, so a stop loses little
+            path.write_text(json.dumps(saved, ensure_ascii=False, indent=1))
             print(f"  {name}: {number}/{len(todo)}", file=sys.stderr)
-    saved.update({key: value for key, value in meta.items() if value is not None})
-    PREDICTIONS.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(saved, ensure_ascii=False, indent=1))
     return saved
 
@@ -199,6 +200,12 @@ def markdown(results: list[dict], sets: dict) -> str:
                          f"{_pct(s['sentence_all_right'])} | " + " | ".join(_pct(f[k]) for k in (
                              "unavailable_windows", "max_days_per_week", "max_daily_minutes", "max_daily_span",
                              "lunch", "in_person_only", "preferred_hours", "cares")) + " |")
+    lines += ["", "## 附：不训练的千问各尺寸（2026-10-16 在 Mac 上手工测的小样本，旧版提示词）", "",
+              "| 做法 | qwen2.5 0.5B | 1.5B | 3B | 7B |", "| --- | ---: | ---: | ---: | ---: |",
+              "| 按短句分 9 类（20 个短句） | 12/20 | 16/20 | 14/20 | 19/20（约 5 秒/句） |",
+              "| 一次输出整套条件 JSON（4 句） | – | – | 1/4 | 1/4 |", "",
+              "样本很小，只说明两件事：小模型不训练不够准；让模型一次写出整套条件会漏项、凭空加偏好，"
+              "所以改成「短句分类 + 规则提取」。"]
     best = max((r for r in results if r.get("val")), key=lambda r: r["val"]["accuracy"], default=None)
     if best:
         lines += ["", f"## 混淆矩阵（验证集，{best['model']}）", "",

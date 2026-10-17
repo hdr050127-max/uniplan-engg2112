@@ -82,6 +82,13 @@ class Ranked(TypedDict):
     score: float                     # higher is better for this student
 
 
+# What llm.rank.contributions(candidate, preferences) returns: how much each feature (names as in
+# llm/rank/model.json "features") adds to that candidate's score; the values sum to its score up to
+# a constant. explain() may use the difference between two candidates' contributions to say why the
+# first pick beats the second; the reason text is still fact-checked against the timetable.
+Contributions = dict[str, float]
+
+
 HARD_FIELDS = ("unavailable_windows", "max_days_per_week", "max_daily_minutes",
                "max_daily_span", "lunch", "in_person_only")
 SOFT_FIELDS = ("preferred_hours", "cares")

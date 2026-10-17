@@ -329,6 +329,8 @@ class FactCheckTests(unittest.TestCase):
         self.assertIsNone(self.check("No classes before 10 am, and nothing after 12 pm."))
         self.assertIsNone(self.check("Only on campus Tue and Wed."))
         self.assertIsNone(self.check("No classes on Mon, Thu or Fri."))
+        self.assertIsNone(self.check("No Friday classes."))                 # a day between "no" and "classes"
+        self.assertEqual(explainer._mentioned_days("4 weekdays on campus"), set())  # a count, not Mon to Fri
 
     def test_sameness_and_more_need_the_numbers(self):
         facts = {**self.facts[1], "versus": {"rival": 1, "strengths": ["1 h less waiting a week"], "costs": [],

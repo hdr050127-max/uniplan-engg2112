@@ -346,13 +346,14 @@ _RELATIVE = (re.compile(rf"(?:{_DURATION})[ \t]+{_DIRECTION}\b", re.I),
 _WEEK = re.compile(r"\b(?:a|per|each|every)\s+week\b|\bweekly\b", re.I)
 _DAILY = re.compile(r"\b(?:a|per|each|every)\s+day\b|\bdaily\b|\blongest day\b|\bbusiest day\b|\bthat day\b", re.I)
 _DAYNAME = r"(?:Mon(?:day)?|Tue(?:s(?:day)?)?|Wed(?:nesday)?|Thu(?:r(?:s(?:day)?)?)?|Fri(?:day)?|Sat(?:urday)?|Sun(?:day)?)s?"
-_WEEKDAY = re.compile(rf"\b({_DAYNAME})\b(?:\s*(?:to|through|until|till|-)\s*({_DAYNAME})\b)?|\b((?i:week(?:day|end))s?)\b")
+_WEEKDAY = re.compile(rf"\b({_DAYNAME})\b(?:\s*(?:to|through|until|till|-)\s*({_DAYNAME})\b)?|"
+                      rf"(?<!\d\s)\b((?i:week(?:day|end))s?)\b")  # "4 weekdays" counts days, it does not name them
 _DAY_LIST = re.compile(rf"\b({_DAYNAME}),\s*(?={_DAYNAME}\b)")
 _SENTENCE = re.compile(r"(?<!\d)\.(?!\d)|[!?\n]")
 _CLAUSE = re.compile(r"(?<!\d)\.(?!\d)|[,;:!?\n]")
 _PART = re.compile(r"(?<!\d)\.(?!\d)|[,;:!?\n()]|\b(?:but|though|although|while|and|plus|whereas)\b", re.I)
 # Words that say a day is free (not "no waiting", which is about gaps).
-_OFF = re.compile(r"\bno class(?:es)?\b|\bnothing\b|\bfree\b|\boff\b|\bdon'?t (?:have to |need to )?(?:come|go|be)\b|"
+_OFF = re.compile(rf"\bno (?:{_DAYNAME}\s+)?class(?:es)?\b|\bnothing\b|\bfree\b|\boff\b|\bdon'?t (?:have to |need to )?(?:come|go|be)\b|"
                   r"\bnot on campus\b|\bstay (?:at )?home\b|\bwithout class(?:es)?\b|\bclass-free\b|\brest\b|"
                   r"\bwork\b|\bjob\b|\bshifts?\b|\bsleep in\b|\bclear\b|\bempty\b", re.I)
 _CAMPUS = re.compile(r"\bcampus\b|\buni\b|\buniversity\b|\bcome in\b|\bgo in\b|\bin person\b", re.I)
@@ -389,8 +390,9 @@ _LUNCH = re.compile(r"\blunch|\bmeals?\b|\beat(?:ing)?\b|\bfood\b", re.I)
 _LUNCH_BAD = re.compile(r"\btight\b|\brushed\b|\bhurr\w*|\bnot enough\b|\bno time\b|\bcan'?t\b|\bcannot\b|\bsqueez\w*|"
                         r"\bshort\b", re.I)
 _EXAM = re.compile(r"\bexams?\b|\btests?\b|\bquiz\w*|\bassessments?\b|\bmidterms?\b", re.I)
-_EVERY_DAY = re.compile(r"\b(on campus|at uni|come in|go in|class(?:es)?)\b[^.,;]{0,15}\b(?:every|each)\s+(?:week)?day\b|"
-                        r"\b(?:every|each)\s+(?:week)?day\b[^.,;]{0,20}?\b(on campus|at uni|class(?:es)?)\b", re.I)
+_EVERY_DAY = re.compile(r"\b(on campus|at uni|come in|go in|class(?:es)?)\s+(?:(?:on|at|for)\s+)?(?:every|each)\s+"
+                        r"(?:single\s+)?(?:week)?day\b|\b(?:every|each)\s+(?:week)?day\s+(?:you(?:'re| are)?\s+)?"
+                        r"(on campus|at uni|class(?:es)?)\b", re.I)
 _ONLY = re.compile(r"\bonly\b|\bjust\b", re.I)
 # Absolute "none at all" claims; being the best of the picks is not enough for these.
 _ALMOST_NO_WAIT = re.compile(r"\b(?:almost|nearly|hardly any|barely any|virtually|practically)\s+(?:no\s+)?"

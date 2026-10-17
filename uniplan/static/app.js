@@ -50,6 +50,7 @@ const state = {
   cares: new Set(AXES), selected: null, variant: {}, week: {}, routeDay: {},
   tab: "week", enrolled: {}, friend: null, notice: "", compare: [], history: [],
   sharedPlan: null, participant: null, firstInteraction: null,
+  say: null, view: "all", reasons: {},
 };
 
 function minutes(value) {
@@ -274,8 +275,12 @@ function renderBlocks() {
     token.append(remove);
     box.append(token);
   });
+  // A preset is hidden once its times are already avoided (e.g. Friday from the sentence).
+  const avoided = state.blocks.flatMap((block) => block.windows);
   document.querySelectorAll(".preset[data-preset]").forEach((preset) => {
-    preset.hidden = state.blocks.some((block) => block.key === preset.dataset.preset);
+    preset.hidden = state.blocks.some((block) => block.key === preset.dataset.preset) ||
+      PRESETS[preset.dataset.preset].windows.every(([weekday, start, end]) => avoided.some((w) =>
+        w.weekday === weekday && w.start_min <= start && w.end_min >= end));
   });
 }
 
@@ -324,7 +329,7 @@ function setField(id, value) {
 }
 
 function syncSegmented() {
-  document.querySelectorAll(".segmented").forEach((group) => {
+  document.querySelectorAll(".segmented[data-target]").forEach((group) => {
     const value = $(group.dataset.target).value;
     group.querySelectorAll("button").forEach((choice) => {
       const on = choice.dataset.value === value;
@@ -389,6 +394,198 @@ function restoreSettings(settings) {
 
 function commuteMinutes() {
   return Math.max(0, numberOrNull("commute") || 0);
+}
+
+/* ===================== one sentence ===================== */
+
+// What each condition type means when the parser found the type but no usable value.
+const LABEL_NAME = {
+  blocked_time: "不能上课的时间", max_days: "每周最多到校天数", max_daily_hours: "每天最多上课时长",
+  lunch: "午饭时间", in_person_only: "只要现场课", prefer_fewer_days: "少到校",
+  prefer_less_waiting: "少空等", prefer_no_early_late: "少早晚课",
+};
+// Which form controls each parsed field fills in.
+const SAY_CONTROLS = {
+  max_days_per_week: ["maxDays"], max_daily_minutes: ["maxDaily"], max_daily_span: ["maxSpan"],
+  lunch: ["lunchOn", "lunchStart", "lunchEnd", "lunchMinutes"], in_person_only: ["inPerson"],
+  preferred_hours: ["preferredStart", "preferredEnd"],
+};
+
+function hoursLabel(value) {
+  return String(Number((value / 60).toFixed(2)));
+}
+
+function windowsLabel(windows) {
+  // "周五全天", "周一至周五 10:00 前", "周三 14:00–18:00"
+  const byTime = new Map();
+  windows.forEach((w) => {
+    const key = `${w.start_min}|${w.end_min}`;
+    if (!byTime.has(key)) byTime.set(key, []);
+    byTime.get(key).push(w.weekday);
+  });
+  return [...byTime].map(([key, days]) => {
+    const [start, end] = key.split("|").map(Number);
+    days.sort((a, b) => a - b);
+    const run = days.length >= 3 && days.every((day, index) => index === 0 || day === days[index - 1] + 1);
+    const dayText = run ? `周${DAY[days[0] - 1]}至周${DAY[days[days.length - 1] - 1]}` : days.map((day) => `周${DAY[day - 1]}`).join("、");
+    const time = start === 0 && end >= 1439 ? "全天" : start === 0 ? ` ${clock(end)} 前` : end >= 1439 ? ` ${clock(start)} 后` : ` ${clock(start)}–${clock(end)}`;
+    return `${dayText}${time}`;
+  }).join("，");
+}
+
+function clauseMeaning(clause) {
+  const f = clause.profile_fields;
+  const parts = [];
+  if (f.unavailable_windows) parts.push(`${windowsLabel(f.unavailable_windows)}不上课`);
+  if (f.max_days_per_week) parts.push(`每周最多到校 ${f.max_days_per_week} 天`);
+  if (f.max_daily_minutes) parts.push(`每天最多上课 ${hoursLabel(f.max_daily_minutes)} 小时`);
+  if (f.max_daily_span) parts.push(`每天最长在校 ${hoursLabel(f.max_daily_span)} 小时`);
+  if (f.lunch) parts.push(`${clock(f.lunch.start_min)}–${clock(f.lunch.end_min)} 留 ${f.lunch.minutes} 分钟吃午饭`);
+  if (f.in_person_only) parts.push("只要现场课");
+  if (f.preferred_hours) parts.push(`希望上课时间 ${clock(f.preferred_hours.start_min)}–${clock(f.preferred_hours.end_min)}`);
+  clause.cares.forEach((care) => parts.push(`在意${AXIS_CHIP[care]}`));
+  return parts.join("；");
+}
+
+function setSegment(target, value, text) {
+  // Parsed values may not be one of the preset buttons; add one so the choice stays visible.
+  const group = document.querySelector(`.segmented[data-target="${target}"]`);
+  if (group && ![...group.querySelectorAll("button")].some((choice) => choice.dataset.value === value)) {
+    const extra = el("button", "", text);
+    extra.type = "button";
+    extra.dataset.value = value;
+    group.append(extra);
+  }
+  $(target).value = value;
+}
+
+function sayControls(clause) {
+  return Object.keys(clause.profile_fields).flatMap((key) => SAY_CONTROLS[key] || []);
+}
+
+function unapplySay() {
+  // Back to the form as it was before the sentence was applied.
+  const say = state.say;
+  if (!say) return;
+  state.blocks = state.blocks.filter((block) => !String(block.key || "").startsWith("say"));
+  const touched = new Set(say.clauses.flatMap(sayControls));
+  touched.forEach((id) => {
+    if (SETTING_CHECKS.includes(id)) $(id).checked = say.base.settings[id];
+    else setField(id, say.base.settings[id]);
+  });
+  state.cares = new Set(say.base.cares);
+}
+
+function applySay() {
+  const say = state.say;
+  unapplySay();
+  const cares = new Set();
+  say.clauses.forEach((clause, index) => {
+    if (!say.on[index]) return;
+    const f = clause.profile_fields;
+    if (f.unavailable_windows) {
+      state.blocks.push({ key: `say${index}`, label: windowsLabel(f.unavailable_windows),
+        windows: f.unavailable_windows.map(({ weekday, start_min, end_min }) => ({ weekday, start_min, end_min })) });
+    }
+    if (f.max_days_per_week) setSegment("maxDays", String(f.max_days_per_week), `${f.max_days_per_week} 天`);
+    if (f.max_daily_minutes) setSegment("maxDaily", hoursLabel(f.max_daily_minutes), `${hoursLabel(f.max_daily_minutes)} 时`);
+    if (f.max_daily_span) setSegment("maxSpan", hoursLabel(f.max_daily_span), `${hoursLabel(f.max_daily_span)} 时`);
+    if (f.lunch) {
+      $("lunchOn").checked = true;
+      setField("lunchStart", clock(f.lunch.start_min));
+      setField("lunchEnd", clock(f.lunch.end_min));
+      setField("lunchMinutes", String(f.lunch.minutes));
+    }
+    if (f.in_person_only) $("inPerson").checked = true;
+    if (f.preferred_hours) {
+      setField("preferredStart", clock(f.preferred_hours.start_min));
+      setField("preferredEnd", clock(f.preferred_hours.end_min));
+    }
+    clause.cares.forEach((care) => cares.add(care));
+  });
+  if (cares.size) state.cares = cares;
+  renderBlocks();
+  updateSettingsCount();
+  document.querySelectorAll(".setting.said").forEach((row) => row.classList.remove("said"));
+  const said = say.clauses.filter((_, index) => say.on[index]).flatMap(sayControls);
+  said.forEach((id) => $(id).closest(".setting")?.classList.add("said"));
+  if (said.length) $("moreSettings").open = true;
+}
+
+function renderSay() {
+  const box = $("sayResult");
+  box.replaceChildren();
+  const say = state.say;
+  if (!say) {
+    box.hidden = true;
+    return;
+  }
+  box.append(el("p", "say-head", "我理解为"));
+  say.clauses.forEach((clause, index) => {
+    const quote = el("span", "quote", `“${clause.text}”`);
+    const row = el("div", "say-row");
+    if (Object.keys(clause.profile_fields).length || clause.cares.length) {
+      const label = el("label", "check");
+      const box = el("input");
+      box.type = "checkbox";
+      box.checked = say.on[index];
+      box.addEventListener("change", () => {
+        say.on[index] = box.checked;
+        applySay();
+      });
+      label.append(box, document.createTextNode(clauseMeaning(clause)));
+      row.append(label, quote);
+    } else {
+      row.classList.add("note");
+      const meaning = clause.label === "other" ? "没听懂，可以在下面手动设置"
+        : `听出是“${LABEL_NAME[clause.label] || clause.label}”，但没找到具体的数或时间，请在下面设置`;
+      row.append(el("span", "", clause.problems.length ? "识别出的时间或数字不合理，已忽略" : meaning), quote);
+    }
+    box.append(row);
+  });
+  const used = say.clauses.filter((_, index) => say.on[index]);
+  const places = [];
+  if (used.some((clause) => clause.profile_fields.unavailable_windows)) places.push("“不想上课的时间”");
+  if (used.some((clause) => sayControls(clause).length)) places.push("“更多设置”里左边有竖线的几项");
+  if (used.some((clause) => clause.cares.length)) places.push("结果页的“我在意”");
+  box.append(el("p", "say-foot", used.length
+    ? `已填进${places.join("、")}，可以直接改；没问题就点“生成课表”。`
+    : "这句话里没有能直接设置的条件。"));
+  box.hidden = false;
+}
+
+async function readSay() {
+  const text = $("sayText").value.trim();
+  setError("sayError", "");
+  if (!text) {
+    setError("sayError", "先写一句话");
+    return false;
+  }
+  const button = $("sayRead");
+  button.disabled = true;
+  try {
+    const data = await post("/api/parse", { text });
+    if (!data.clauses) throw new Error(data.error || "暂时无法识别");
+    unapplySay();
+    const clauses = data.clauses;
+    state.say = {
+      text, clauses, on: clauses.map((clause) => Boolean(Object.keys(clause.profile_fields).length || clause.cares.length)),
+      base: { settings: settingsSnapshot(), cares: [...state.cares] },
+    };
+    applySay();
+    renderSay();
+    return true;
+  } catch (error) {
+    setError("sayError", error.message);
+    return false;
+  } finally {
+    button.disabled = false;
+  }
+}
+
+function sayText() {
+  // The sentence goes to the ranker only while it is the one the shown conditions came from.
+  return state.say && $("sayText").value.trim() === state.say.text ? state.say.text : "";
 }
 
 /* ===================== requests ===================== */
@@ -470,7 +667,7 @@ async function plan(profile, { groups = null, pinned = {}, excluded = [], notice
       groups = defaultGroups(data);
       state.history = [];
     }
-    const body = { profile, save: $("consent").checked, required_groups: groups };
+    const body = { profile, save: $("consent").checked, required_groups: groups, student_text: sayText() };
     if (Object.keys(pinned).length) body.pinned = pinned;
     if (excluded.length) body.excluded = excluded;
     if (state.participant) body.participant = state.participant;
@@ -488,6 +685,10 @@ async function plan(profile, { groups = null, pinned = {}, excluded = [], notice
     state.routeDay = {};
     state.compare = [];
     state.notice = notice;
+    // A new plan opens on the three recommended timetables; re-plans keep the current view.
+    const recommended = Boolean(result.ranking_result?.recommendation);
+    if (!recommended) state.view = "all";
+    else if (!notice) state.view = state.sharedPlan ? "all" : "recommend";
     if (enrolled) state.enrolled = enrolled;
     else if (!notice) {
       state.enrolled = {};
@@ -536,6 +737,8 @@ function collapseSetup(collapsed) {
     chip.append(el("i", "dot"), document.createTextNode(unit.code));
     chips.append(chip);
   });
+  const said = sayText();
+  if (said) chips.append(el("span", "", `“${said.length > 18 ? `${said.slice(0, 18)}…` : said}”`));
   state.blocks.forEach((block) => chips.append(el("span", "", `避开 ${block.label}`)));
   const count = settingsCount();
   if (count) chips.append(el("span", "", `${count} 项设置`));
@@ -680,6 +883,59 @@ function menu() {
     .sort((a, b) => a.features.campus_days - b.features.campus_days || a.features.gap_min - b.features.gap_min);
 }
 
+function planLabel(index) {
+  return state.view === "recommend" ? String(index + 1) : LETTERS[index];
+}
+
+function recommendation() {
+  // The recommended picks for the features currently ticked under "我在意".
+  const rec = state.result?.ranking_result?.recommendation;
+  if (!rec) return null;
+  const axes = ["gap", "campus_days", "outside_hours"].filter((axis) => state.cares.has(axis)).join(",");
+  const menu = rec.menus[axes];
+  return menu ? { axes, menu, token: rec.explain_token, key: `${rec.explain_token}|${axes}` } : null;
+}
+
+function reasonOf(index) {
+  const rec = recommendation();
+  const written = state.reasons[rec.key];
+  return written?.reasons?.[index] || rec.menu.reasons[index];
+}
+
+function reasonSource() {
+  const written = state.reasons[recommendation().key];
+  const status = written?.status;
+  if (status === "pending") return "正在请本地千问把理由说得更口语…";
+  if (status === "model" || status === "partial") {
+    return `理由由本地千问（${written.model}）改写，每句都和课表核对过${status === "partial" ? "；没通过核对的句子保留原样" : ""}。`;
+  }
+  if (status === "rejected") return "千问改写的句子没通过和课表的核对，显示按课表数据生成的原句。";
+  if (status) return "本地千问暂时不可用，理由按课表数据生成。";
+  return "理由按课表数据生成。";
+}
+
+function updateReasons() {
+  // In place, so a late answer does not reset what the student is doing on the page.
+  if (state.view !== "recommend" || !recommendation()) return;
+  document.querySelectorAll("[data-reason]").forEach((node) => { node.textContent = reasonOf(Number(node.dataset.reason)); });
+  const source = document.querySelector(".reason-source");
+  if (source) source.textContent = reasonSource();
+}
+
+async function loadReasons() {
+  const rec = recommendation();
+  if (state.view !== "recommend" || !rec?.token || state.reasons[rec.key]) return;
+  state.reasons[rec.key] = { status: "pending" };
+  updateReasons();
+  try {
+    const data = await post("/api/explain", { token: rec.token, axes: rec.axes });
+    state.reasons[rec.key] = data.reasons ? data : { status: "failed" };
+  } catch {
+    state.reasons[rec.key] = { status: "failed" };
+  }
+  updateReasons();
+}
+
 function shownItem(base) {
   const shortlist = state.result.ranking_result.shortlist;
   return shortlist.items[state.variant[base.candidate_id] || base.candidate_id] || base;
@@ -704,7 +960,9 @@ function pickSharedPlan(plans) {
 function renderPlans() {
   const box = resultBox();
   const ranking = state.result.ranking_result;
-  const plans = menu();
+  const rec = state.view === "recommend" ? recommendation() : null;
+  if (state.view === "recommend" && !rec) state.view = "all";
+  const plans = rec ? rec.menu.picks.map((id) => ranking.shortlist.items[id]).filter(Boolean) : menu();
   pickSharedPlan(plans);
   if (!state.selected || !plans.some((item) => item.candidate_id === state.selected)) {
     state.selected = plans[0]?.candidate_id || null;
@@ -712,9 +970,33 @@ function renderPlans() {
   state.compare = state.compare.filter((id) => plans.some((item) => item.candidate_id === id));
 
   const head = el("div", "result-head");
-  head.append(el("h2", "", plans.length === 1 ? "最合适的课表" : `${plans.length} 个值得考虑的方案`));
-  head.append(el("span", "meta", `从 ${ranking.feasible_count.toLocaleString()} 种可行排法中挑出`), dataBadge(state.data));
-  head.append(el("span", "spacer"));
+  if (rec) {
+    head.append(el("h2", "", `为你挑的 ${plans.length} 份课表`), el("span", "meta",
+      `从 ${ranking.feasible_count.toLocaleString()} 种可行排法中先选出 ${rec.menu.candidates.length} 份候选，再按你的情况排序`));
+  } else {
+    head.append(el("h2", "", plans.length === 1 ? "最合适的课表" : `${plans.length} 个值得考虑的方案`));
+    head.append(el("span", "meta", `从 ${ranking.feasible_count.toLocaleString()} 种可行排法中挑出`));
+  }
+  head.append(dataBadge(state.data), el("span", "spacer"));
+  if (ranking.recommendation) {
+    const views = el("div", "segmented views");
+    views.setAttribute("role", "group");
+    views.setAttribute("aria-label", "显示哪些方案");
+    [["recommend", "推荐"], ["all", `全部方案 ${menu().length}`]].forEach(([key, text]) => {
+      const choice = el("button", state.view === key ? "on" : "", text);
+      choice.type = "button";
+      choice.setAttribute("aria-pressed", String(state.view === key));
+      choice.addEventListener("click", () => {
+        if (state.view === key) return;
+        state.view = key;
+        state.selected = null;
+        state.compare = [];
+        renderPlans();
+      });
+      views.append(choice);
+    });
+    head.append(views);
+  }
   // Otherwise the undo button sits in the notice inside the plan detail.
   if (state.history.length && state.compare.length === 2) head.append(button("撤销", undo));
   box.append(head);
@@ -742,6 +1024,7 @@ function renderPlans() {
   const workspace = el("div", "workspace");
   const list = el("div", "plan-list");
   plans.forEach((item, index) => list.append(planCard(item, index, plans)));
+  if (rec) list.append(el("p", "reason-source", reasonSource()));
   const side = el("div", "side");
   if (state.compare.length === 2) {
     const [a, b] = state.compare.map((id) => plans.find((item) => item.candidate_id === id));
@@ -749,7 +1032,7 @@ function renderPlans() {
   } else {
     if (state.compare.length === 1) {
       const bar = el("div", "compare-bar");
-      bar.append(document.createTextNode(`已选方案 ${LETTERS[plans.findIndex((item) => item.candidate_id === state.compare[0])]}，再选一个即可对比`),
+      bar.append(document.createTextNode(`已选方案 ${planLabel(plans.findIndex((item) => item.candidate_id === state.compare[0]))}，再选一个即可对比`),
         el("span", "spacer"), button("取消", () => { state.compare = []; renderPlans(); }, { className: "button ghost" }));
       side.append(bar);
     }
@@ -763,6 +1046,7 @@ function renderPlans() {
   if (hints) box.append(hints);
   box.append(renderAdjust(false));
   if (STUDY_MODE && state.result.study) box.append(renderStudy(state.result.study));
+  if (rec) loadReasons();
 }
 
 function planCard(base, index, plans) {
@@ -789,7 +1073,7 @@ function planCard(base, index, plans) {
   });
 
   const head = el("div", "plan-head");
-  head.append(el("span", "avatar", LETTERS[index]));
+  head.append(el("span", "avatar", planLabel(index)));
   const title = el("div", "plan-title", daysText(item.pattern));
   title.append(el("small", "", base.equivalent_count > 1 ? `${base.equivalent_count.toLocaleString()} 种排法指标相同` : "唯一排法"));
   head.append(title);
@@ -804,11 +1088,16 @@ function planCard(base, index, plans) {
     });
   }
   if (tags.childElementCount) card.append(tags);
+  if (state.view === "recommend") {
+    const reason = el("p", "reason", reasonOf(index));
+    reason.dataset.reason = String(index);
+    card.append(reason);
+  }
 
   if (plans.length > 1) {
     const toggle = el("button", `compare-toggle${compared ? " on" : ""}`, compared ? "已选对比" : "对比");
     toggle.type = "button";
-    toggle.setAttribute("aria-label", `对比方案 ${LETTERS[index]}`);
+    toggle.setAttribute("aria-label", `对比方案 ${planLabel(index)}`);
     toggle.setAttribute("aria-pressed", String(compared));
     toggle.addEventListener("click", () => {
       state.compare = compared ? state.compare.filter((id) => id !== base.candidate_id)
@@ -996,7 +1285,7 @@ const TABS = [["week", "周课表"], ["term", "学期"], ["time", "时间"], ["e
 function renderDetail(base, plans) {
   const item = shownItem(base);
   const index = plans.findIndex((other) => other.candidate_id === base.candidate_id);
-  const letter = LETTERS[index];
+  const letter = planLabel(index);
   const detail = el("section", "detail");
 
   const head = el("div", "detail-head");
@@ -1536,7 +1825,7 @@ function renderCompare(a, b, plans) {
   const box = el("section", "detail compare");
   const head = el("div", "detail-head");
   const title = el("h3");
-  title.append(document.createTextNode(`方案 ${LETTERS[plans.indexOf(a)]} 与 ${LETTERS[plans.indexOf(b)]}`));
+  title.append(document.createTextNode(`方案 ${planLabel(plans.indexOf(a))} 与 ${planLabel(plans.indexOf(b))}`));
   head.append(title, el("span", "spacer"),
     button("结束对比", () => { state.compare = []; renderPlans(); }, { className: "button ghost" }));
   box.append(head);
@@ -1548,7 +1837,7 @@ function renderCompare(a, b, plans) {
     const item = shownItem(own);
     const col = el("div", "compare-col");
     const title = el("div", "plan-head");
-    title.append(el("span", "avatar", LETTERS[plans.indexOf(own)]), el("div", "plan-title", daysText(item.pattern)));
+    title.append(el("span", "avatar", planLabel(plans.indexOf(own))), el("div", "plan-title", daysText(item.pattern)));
     col.append(title, stats(own.features, other), weekGrid(slotsOf(item.meetings), { range, compact: true }));
     col.append(button("看这个方案", () => { state.selected = own.candidate_id; state.compare = []; renderPlans(); }));
     grid.append(col);
@@ -1569,8 +1858,8 @@ function renderCompare(a, b, plans) {
     differing.forEach((group) => {
       const li = el("li");
       li.append(el("b", "", groupName(group)),
-        el("span", "", `${LETTERS[plans.indexOf(a)]}：${groupsA.get(group).split("|").pop()} ${slot(itemA, group)}`),
-        el("span", "", `${LETTERS[plans.indexOf(b)]}：${groupsB.get(group).split("|").pop()} ${slot(itemB, group)}`));
+        el("span", "", `${planLabel(plans.indexOf(a))}：${groupsA.get(group).split("|").pop()} ${slot(itemA, group)}`),
+        el("span", "", `${planLabel(plans.indexOf(b))}：${groupsB.get(group).split("|").pop()} ${slot(itemB, group)}`));
       list.append(li);
     });
     box.append(list);
@@ -1620,7 +1909,7 @@ async function acceptPlan(item, index, plans, node) {
   const axes = ["gap", "campus_days", "outside_hours"].filter((axis) => state.cares.has(axis));
   try {
     await post("/api/accept", {
-      profile_id: state.result.profile.profile_id, method: "shortlist", rank: index + 1,
+      profile_id: state.result.profile.profile_id, method: state.view === "recommend" ? "recommended" : "shortlist", rank: index + 1,
       candidate_id: item.candidate_id, elapsed_ms: elapsedMs(),
       menu: plans.map((other) => [other.features.gap_min, other.features.campus_days, other.features.outside_min]),
       chosen: index, axes,
@@ -2039,6 +2328,10 @@ function restoreShare(shared) {
   if (Array.isArray(shared.cares) && shared.cares.length) state.cares = new Set(shared.cares.filter((axis) => AXES.includes(axis)));
   if (!state.cares.size) state.cares = new Set(AXES);
   state.sharedPlan = Array.isArray(shared.plan) ? shared.plan : null;
+  state.say = null;
+  $("sayText").value = "";
+  renderSay();
+  document.querySelectorAll(".setting.said").forEach((row) => row.classList.remove("said"));
 }
 
 async function copyText(text, done) {
@@ -2068,7 +2361,7 @@ function storeFavourites(list) {
 }
 
 function saveFavourite(item, letter) {
-  const title = `${state.units.map((unit) => unit.code).join(" · ")} · 方案 ${letter} · ${daysText(item.pattern)}`;
+  const title = `${state.units.map((unit) => unit.code).join(" · ")} · ${state.view === "recommend" ? "推荐" : "方案"} ${letter} · ${daysText(item.pattern)}`;
   const list = loadFavourites().filter((entry) => entry.title !== title);
   storeFavourites([{ title, url: shareUrl(item), at: new Date().toISOString().slice(0, 10) }, ...list]);
 }
@@ -2140,11 +2433,12 @@ async function start() {
   fillTimes($("lunchEnd"), 12 * 60, 16 * 60, "14:00");
   fillTimes($("customStart"), 7 * 60, 22 * 60, "09:00");
   fillTimes($("customEnd"), 7 * 60 + 30, 23 * 60 + 30, "12:00");
-  document.querySelectorAll(".segmented").forEach((group) => {
+  document.querySelectorAll(".segmented[data-target]").forEach((group) => {
     group.addEventListener("click", (event) => {
       const choice = event.target.closest("button");
       if (!choice) return;
       $(group.dataset.target).value = choice.dataset.value;
+      group.closest(".setting")?.classList.remove("said");
       updateSettingsCount();
     });
   });
@@ -2195,13 +2489,29 @@ async function start() {
   }));
   $("customToggle").addEventListener("click", () => { $("customBlock").hidden = !$("customBlock").hidden; });
   $("customAdd").addEventListener("click", addCustomBlock);
-  [...SETTING_FIELDS, ...SETTING_CHECKS].forEach((id) => $(id).addEventListener("change", updateSettingsCount));
+  [...SETTING_FIELDS, ...SETTING_CHECKS].forEach((id) => $(id).addEventListener("change", () => {
+    $(id).closest(".setting")?.classList.remove("said");
+    updateSettingsCount();
+  }));
   updateSettingsCount();
   renderFavourites();
-  $("profileForm").addEventListener("submit", (event) => {
+  $("profileForm").addEventListener("submit", async (event) => {
     event.preventDefault();
+    const text = $("sayText").value.trim();
+    if (text && text !== state.say?.text) {
+      // Show what was understood first; the student confirms by pressing the button again.
+      if (await readSay()) toast("已按你的话填好设置，确认无误再点“生成课表”");
+      return;
+    }
     const profile = buildProfile();
     if (profile) plan(profile);
+  });
+  $("sayRead").addEventListener("click", readSay);
+  $("sayText").addEventListener("keydown", (event) => {
+    if (event.key === "Enter" && !event.shiftKey && !event.isComposing) {
+      event.preventDefault();
+      readSay();
+    }
   });
   $("profileForm").addEventListener("focusin", () => {
     if (state.firstInteraction === null) state.firstInteraction = performance.now();

@@ -176,6 +176,42 @@ def _normalize_fields(raw: Any) -> tuple[dict[str, Any] | None, list[dict[str, s
     }, []
 
 
+CONDITION_FIELDS = ("unavailable_windows", "max_days_per_week", "max_daily_minutes", "max_daily_span",
+                    "lunch", "in_person_only", "preferred_hours")
+
+
+def check_condition_fields(fields: dict[str, Any]) -> tuple[dict[str, Any], list[dict[str, str]]]:
+    """Keep the parsed profile fields the form would accept; report the rest.
+
+    Each field (and each avoided window) is checked on its own with the same rules
+    as a submitted form, so one bad value does not discard the others.
+    """
+    base = {"schema_version": 1, "year": 2026, "session_code": "X", "unit_codes": ["ABCD1234"]}
+    kept: dict[str, Any] = {}
+    problems: list[dict[str, str]] = []
+    for key, value in fields.items():
+        if key not in CONDITION_FIELDS:
+            problems.append(_error(key, "unknown_field", f"不支持的条件：{key}"))
+            continue
+        if key == "unavailable_windows" and isinstance(value, list):
+            windows = []
+            for window in value:
+                _, errors = _normalize_fields({**base, key: [window]})
+                if errors:
+                    problems.extend(errors)
+                else:
+                    windows.append(window)
+            if windows:
+                kept[key] = windows
+            continue
+        _, errors = _normalize_fields({**base, key: value})
+        if errors:
+            problems.extend(errors)
+        else:
+            kept[key] = value
+    return kept, problems
+
+
 def normalize_student_input(raw_input: Any) -> tuple[dict[str, Any] | None, list[dict[str, str]]]:
     """Validate form fields before any optional timetable network request."""
     return _normalize_fields(raw_input)

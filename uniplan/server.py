@@ -10,6 +10,7 @@ from pathlib import Path
 from threading import Lock
 from urllib.parse import parse_qs, urlsplit
 
+from .advisor import ExplainRegistry, read_sentence
 from .auto_fetch import AutoFetcher
 from .catalog import SnapshotCatalog, load_unit_catalog, suggest_units
 from .main import main as run_pipeline
@@ -23,6 +24,7 @@ from timetable_scraper import SYDNEY
 ROOT = Path(__file__).resolve().parent.parent
 STATIC = Path(__file__).resolve().parent / "static"
 MAX_BODY = 32768
+MAX_SENTENCE = 500
 
 
 class AppServer(ThreadingHTTPServer):
@@ -38,6 +40,7 @@ class AppServer(ThreadingHTTPServer):
         self.fetcher = AutoFetcher(root, allow_robots_disallowed=allow_robots_disallowed)
         self.fetch_lock = Lock()
         self.studies = StudyRegistry()
+        self.explanations = ExplainRegistry()
 
 
 def snapshot_age_days(snapshot_time: str | None) -> int | None:
@@ -161,7 +164,8 @@ class AppHandler(BaseHTTPRequestHandler):
             self._json(403, {"error": "Request origin not allowed"})
             return
         routes = {"/api/prepare": self._prepare, "/api/study": self._study,
-                  "/api/accept": self._accept}
+                  "/api/accept": self._accept, "/api/parse": self._parse,
+                  "/api/explain": self._explain}
         handler = routes.get(urlsplit(self.path).path)
         if handler is None:
             self._json(404, {"error": "Not found"})
@@ -172,7 +176,9 @@ class AppHandler(BaseHTTPRequestHandler):
 
     def _prepare(self, request: dict) -> None:
         try:
-            if not isinstance(request.get("save", False), bool):
+            student_text = request.get("student_text")
+            if (not isinstance(request.get("save", False), bool) or
+                    not (student_text is None or isinstance(student_text, str) and len(student_text) <= MAX_SENTENCE)):
                 raise ValueError("Invalid request")
             raw_profile = request.get("profile")
             normalized, errors = normalize_student_input(raw_profile)
@@ -192,8 +198,15 @@ class AppHandler(BaseHTTPRequestHandler):
                         participant=request.get("participant") if isinstance(request.get("participant"), str) else None,
                         pins=request.get("pinned"),
                         excluded=request.get("excluded"),
+                        student_text=student_text,
                     )
                 result["fetch"] = fetch_result
+                ranking = result.get("ranking_result") or {}
+                if ranking.get("recommendation"):
+                    # The sentence stays in memory for the reasons request; it is never saved.
+                    ranking["recommendation"]["explain_token"] = self.server.explanations.add(
+                        student_text, result["profile"], ranking["recommendation"],
+                        ranking["shortlist"]["items"])
                 data = result.get("module_two_result")
                 if data:
                     age = snapshot_age_days(data.get("snapshot_time"))
@@ -220,6 +233,29 @@ class AppHandler(BaseHTTPRequestHandler):
             self._json(500, {"error": "无法保存档案，请稍后重试。"})
             return
         self._json(422 if result["status"] == "invalid" else 200, result)
+
+    def _parse(self, request: dict) -> None:
+        text = request.get("text")
+        if not isinstance(text, str) or not 0 < len(text.strip()) <= MAX_SENTENCE:
+            self._json(400, {"error": f"请用 1 至 {MAX_SENTENCE} 个字说说你的情况。"})
+            return
+        try:
+            result = read_sentence(text.strip())
+        except Exception:  # noqa: BLE001 - the parser is replaceable; the page keeps working without it
+            self._json(500, {"error": "暂时无法识别这句话，可以直接在下面手动设置。"})
+            return
+        self._json(200, result)
+
+    def _explain(self, request: dict) -> None:
+        token, axes = request.get("token"), request.get("axes")
+        if not isinstance(token, str) or not isinstance(axes, str):
+            self._json(400, {"error": "Invalid request"})
+            return
+        result = self.server.explanations.explain(token, axes)
+        if result is None:
+            self._json(404, {"error": "推荐已过期，请重新生成。"})
+            return
+        self._json(200, result)
 
     def _study(self, request: dict) -> None:
         study_id = request.get("study_id")
@@ -254,9 +290,9 @@ class AppHandler(BaseHTTPRequestHandler):
     def _accept(self, request: dict) -> None:
         profile_id, method = request.get("profile_id"), request.get("method")
         rank = request.get("rank")
-        detail = _shortlist_choice(request) if method == "shortlist" else {}
+        detail = _shortlist_choice(request) if method in {"shortlist", "recommended"} else {}
         if (not isinstance(profile_id, str) or
-                method not in {"learned", "baseline", "equal", "shortlist"} or
+                method not in {"learned", "baseline", "equal", "shortlist", "recommended"} or
                 not isinstance(rank, int) or isinstance(rank, bool) or
                 not 1 <= rank <= (MAX_MENU if method == "shortlist" else 3) or
                 not isinstance(request.get("candidate_id"), str) or detail is None):

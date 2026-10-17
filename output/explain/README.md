@@ -30,3 +30,24 @@ stated difference must match; "最早/最晚" needs a time), added after spot-ch
 without a time. With the checker as first committed for the new reasons (`d37ef49`), before
 those rules, the after run passed 194 / 314 (62%).
 On the Windows RTX 4090 the same 7B request takes about 1 second.
+
+## Final results (models frozen; `_final_` files, qwen2.5:7b on the Windows RTX 4090)
+
+v1 (`test_claude.csv`) is in-sample for the checker; v2 (`test_claude_v2.csv`, also written by Claude,
+frozen before round 2) was never used to write or tune it, so v2 is the out-of-sample result.
+
+| | v1 (in-sample) | v2 (out-of-sample) |
+| --- | --- | --- |
+| Plannable sentences | 106 / 142 | 87 / 126 |
+| Recommended timetables with a clash or broken hard condition | 0 / 314 | 0 / 256 |
+| Template reasons passing the checker | 314 / 314 | 256 / 256 |
+| Pick 1: main reason = the model's biggest contribution difference, template | 98 / 106 (92%) | 74 / 87 (85%) |
+| — reason actually shown | 95 / 106 (90%) | 73 / 87 (84%) |
+| 7B rewrites that pass the check and are shown | 193 / 314 (61%) | 143 / 256 (56%) |
+| — pick 1 / 2 / 3 | 67% / 66% / 51% | 64% / 56% / 46% |
+| Seconds per 7B request (median, max) | 1.2, 4.3 | 1.2, 2.0 |
+
+Manual check of 30 random v2 rewrites that passed (by Claude, the integration session): 29 state only
+true facts; 1 names the wrong pick as the comparison ("比第3份" for a difference with pick 1), because
+the checker accepts any "第 N 份" as the reference. About 6 more give a difference without saying which
+pick it is against. Rules were frozen at this point, so this is reported, not fixed.

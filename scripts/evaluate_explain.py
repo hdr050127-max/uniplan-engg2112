@@ -249,8 +249,10 @@ def summary(records: list[dict], model: str | None, note: str = "", test_set: st
         lines.append(f"| Seconds per request (median, max) | {statistics.median(seconds):.1f}, {max(seconds):.1f} |")
     lines += ["", "Rejected, by first failed check: " + (", ".join(f"{why} {count}" for why, count in reasons.most_common())
                                                      or "none"), "",
-              "The checker's rules were refined after spot-checking earlier runs on these same sentences, "
-              "so this pass rate is in-sample and likely optimistic for new sentences.", "",
+              ("The checker's rules were refined after spot-checking earlier runs on these same sentences, "
+               "so this pass rate is in-sample and likely optimistic for new sentences."
+               if Path(test_set).stem == "test_claude" else
+               "These sentences were never used to write or tune the checker: this pass rate is out-of-sample."), "",
               "Passing means every claim the checker can read (weekdays, clock times, amounts with units, "
               "best-of-picks and comparison words, topics it has no facts for) matched the timetable. "
               "Claims it cannot read are not verified, so the passed sentences below should be spot-checked by a person.", "",

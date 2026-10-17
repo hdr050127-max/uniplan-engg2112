@@ -124,3 +124,31 @@ Find timetables                       (主按钮：ink 底白字，直角)
 ## 9. 不改的东西
 
 解析的标签和取值、反问的触发规则、排课、打分模型、理由的核对规则都不改，只改显示语言和界面。理由改成英文以后，核对规则要换成英文的同一套检查，并在 v1、v2、期末考卷上重跑一次理由评估，报告里写明这是英文版。
+
+## 10. 第二版（2026-10-17，用户试用后提出）
+
+### 10.1 排不出时给最接近的课表
+- 不再出现"排不出课表"这种死路。先在全部要求下排；排不出来时，自动找"违反学生限制最少"的不冲突课表：
+  - 先比违反了几条限制；
+  - 再比违反了多少：落在不能上课时段里的分钟数、超出的天数或分钟数、哪天没留出午饭；
+  - 最后用打分模型排序。
+- 每份推荐的第一行写清楚违反了什么，例如 "Breaks one limit: 1 class on Wed before 9:30 am"。
+- 真正的课程冲突（同一时间两节必须去的课）永远不允许。如果课程本身就排不开，就从有录播的讲座里挑一节改成看录播，选缺课时长最少的，写明 "Watch the recording of AMME2301 Lecture 2"。还是不行，才说明哪两门课冲突。
+- 这是排不出来时才走的后备路径，排得出时什么都不变。打分模型、解析、期末考试的成绩都不受影响。
+
+### 10.2 按钮看得见，文字少
+- 主按钮：ink 实心底、白字、直角，高 44px。次要按钮：1px ink 边框、直角、透明底。选项组：相连的直角方块，选中的格子用 jacaranda 填满、字是白色，没选中的是细边框。可点的东西高度至少 40px。仍然不用圆角卡片和阴影。
+- 文字预算：每块只留必要的一句。删掉：
+  - 操作说明（Enter、方向键、Compare 用法、Select a day…）；
+  - 结果统计（from N that fit、N candidates ranked、N ways to get this same week、Just as good on…）；
+  - 数据日期（移到页脚）；
+  - "These are filled in below…" 这类过渡句。
+  需要读屏时，放进 visually-hidden 或 aria 属性里。
+- 推荐理由压成一行："Fewest one-class days. Costs 2 h 32 min more waiting." 天数和课表已经在标题和周视图里，理由里不再重复。
+- 每个短句后面的 "Leave this out" 改成小的 × 按钮，aria-label 写 "Leave this out"。
+- 结果页默认只露出：
+  - 3 份推荐（标题、三个数字、一行理由）；
+  - 周视图；
+  - Use this timetable 和 Download calendar。
+  Share、Save、Print、学期视图、Hours、Enrolment、With a friend、研究保存收进一个 "More" 里。
+- "Loosening one limit would help…" 只在推荐违反了限制、或用户自己展开时才显示。

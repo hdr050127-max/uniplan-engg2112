@@ -10,7 +10,7 @@ A change here goes through the coordinator so every block moves together.
 """
 from __future__ import annotations
 
-from typing import Literal, TypedDict
+from typing import Literal, NotRequired, TypedDict
 
 # The 9 condition types a clause can be mapped to (see llm/parse/labels.py for definitions).
 Label = Literal["blocked_time", "max_days", "max_daily_hours", "lunch", "in_person_only",
@@ -55,10 +55,32 @@ class Clause(TypedDict):
     fields: Conditions               # what this clause contributed
 
 
+class Option(TypedDict):
+    """One answer button. Choosing it either relabels the clause the question is about (label set:
+    its fields are read again from the clause, then ``fields`` overrides them), or, for an offer,
+    merges ``fields`` into the conditions."""
+    text: str                        # button text shown to the student
+    label: Label | None
+    fields: Conditions
+
+
+class Question(TypedDict):
+    # hard_or_soft: "can't" or "would rather not"; low_confidence: the models disagree on the
+    # label; missing_value: the label needs a number or time the clause does not give;
+    # offer: something the student did not mention that the scheduler can do
+    kind: Literal["hard_or_soft", "low_confidence", "missing_value", "offer"]
+    clause_index: int | None         # index into ParseResult.clauses; None for an offer
+    text: str                        # the question as shown on the page
+    options: list[Option]            # the first option is what parse() already assumed
+
+
 class ParseResult(TypedDict):
     clauses: list[Clause]
     conditions: Conditions           # all clauses merged
     unrecognised: list[str]          # clauses labelled "other", shown to the student
+    summary: NotRequired[str]        # one sentence restating conditions and unrecognised, built from
+                                     # them by rules (no free model text), shown before scheduling
+    questions: NotRequired[list[Question]]  # at most a few; clarifications first, then offers
 
 
 class Candidate(TypedDict, total=False):

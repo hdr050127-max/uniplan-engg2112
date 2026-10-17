@@ -28,7 +28,18 @@ CANDIDATES = [
 class ContractTests(unittest.TestCase):
     def test_parse_returns_clauses_conditions_and_leftovers(self):
         result = parse("我周五要打工，而且不想课之间等太久. I hate long gaps")
-        self.assertEqual(set(result), {"clauses", "conditions", "unrecognised"})
+        self.assertTrue({"clauses", "conditions", "unrecognised"} <= set(result)
+                        <= {"clauses", "conditions", "unrecognised", "summary", "questions"})
+        self.assertIsInstance(result.get("summary", ""), str)
+        for question in result.get("questions", []):
+            self.assertIn(question["kind"], ("hard_or_soft", "low_confidence", "missing_value", "offer"))
+            index = question["clause_index"]
+            self.assertTrue(index is None if question["kind"] == "offer" else 0 <= index < len(result["clauses"]))
+            self.assertTrue(question["text"] and question["options"])
+            for option in question["options"]:
+                self.assertTrue(option["text"])
+                self.assertTrue(option["label"] is None or option["label"] in LABELS)
+                self.assertTrue(set(option["fields"]) <= set(HARD_FIELDS + SOFT_FIELDS))
         for clause in result["clauses"]:
             self.assertEqual(set(clause), {"text", "label", "fields"})
             self.assertIn(clause["label"], LABELS)

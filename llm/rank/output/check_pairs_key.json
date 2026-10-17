@@ -1678,5 +1678,455 @@
   "b_id": "b3e80cfca53e15b1",
   "red": "A",
   "near_equal_focus": false
+ },
+ "b001": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "commuter_9",
+  "a_id": "c60ecb1ac55ccfe4",
+  "b_id": "242acf0485aa89ea",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b002": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "early_bird_9",
+  "a_id": "0866432bc083c1ac",
+  "b_id": "72e2bff61e6bec06",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b003": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "intern_11",
+  "a_id": "0ffbb4fb18fafe4e",
+  "b_id": "a7ba338e9dfb0e4a",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b004": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "commuter_13",
+  "a_id": "c8c4def8e0ca8e93",
+  "b_id": "005253c1c071c45e",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b005": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "night_owl_14",
+  "a_id": "511dcdf06a0b9871",
+  "b_id": "bbc22935f0bbe84c",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b006": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "athlete_14",
+  "a_id": "04609a7886b47740",
+  "b_id": "f9c26dc31ff91662",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b007": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "intern_12",
+  "a_id": "76ad6c4363b5bdad",
+  "b_id": "468e1f320a9720e7",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b008": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "night_owl_14",
+  "a_id": "0e2eba9406bea30c",
+  "b_id": "d4241e6fc21b4bc5",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b009": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "carer_12",
+  "a_id": "70ec095b42b42d5a",
+  "b_id": "9087df928f159b29",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b010": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "other_14",
+  "a_id": "ed41720d909cd9da",
+  "b_id": "2d04fd873412181f",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b011": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "athlete_11",
+  "a_id": "8977893cdc399154",
+  "b_id": "9fcefc7693ee070f",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b012": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "near_campus_11",
+  "a_id": "295326b7387535f3",
+  "b_id": "cd38d6052725d609",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b013": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "intern_13",
+  "a_id": "95b2ab1190aba678",
+  "b_id": "543cca9be3db187a",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b014": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "other_10",
+  "a_id": "54b92651677494c8",
+  "b_id": "4a9ed720def9abda",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b015": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "early_bird_9",
+  "a_id": "7460d2bd79d447cf",
+  "b_id": "3f555a361050e726",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b016": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "near_campus_13",
+  "a_id": "521bda5fd678adbe",
+  "b_id": "14c54a1efc4d671a",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b017": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "commuter_14",
+  "a_id": "130877738c933b2e",
+  "b_id": "0602f49af422d4b3",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b018": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "early_bird_13",
+  "a_id": "bd53fbf399dffec1",
+  "b_id": "71da55db2c817ff7",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b019": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "athlete_12",
+  "a_id": "0901158417c8d89c",
+  "b_id": "b4d5c0ae8fe565d5",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b020": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "other_10",
+  "a_id": "54b92651677494c8",
+  "b_id": "4e78958aa6709e3c",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b021": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "night_owl_14",
+  "a_id": "c36a3463ddba87f9",
+  "b_id": "d4241e6fc21b4bc5",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b022": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "parent_12",
+  "a_id": "1b86cf4c40b56476",
+  "b_id": "ca40930b9ff97bd7",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b023": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "commuter_13",
+  "a_id": "40c691e8a197a278",
+  "b_id": "0f34d13403f6ffd3",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b024": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "early_bird_9",
+  "a_id": "79c1457e4938d876",
+  "b_id": "0866432bc083c1ac",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b025": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "early_bird_13",
+  "a_id": "71da55db2c817ff7",
+  "b_id": "fe1d5ae5d9c2b128",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b026": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "commuter_11",
+  "a_id": "42d1310d0b1818ad",
+  "b_id": "31bec4256a0340e7",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b027": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "night_owl_13",
+  "a_id": "c1a8ed2b0dd4e36c",
+  "b_id": "d1e811559c512d0a",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b028": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "intern_12",
+  "a_id": "13d853d72de884a5",
+  "b_id": "3a970844182ff225",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b029": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "near_campus_9",
+  "a_id": "42d1310d0b1818ad",
+  "b_id": "dbd9683df4f835ff",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b030": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "parent_14",
+  "a_id": "fb635bfd8939c8f5",
+  "b_id": "529129ab9ef5c03f",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b031": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "near_campus_10",
+  "a_id": "9cab232cb7ea6ef9",
+  "b_id": "25918a74406ab33a",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b032": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "carer_14",
+  "a_id": "0f1a90c56f8f56fc",
+  "b_id": "0210cf607ea8ff78",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b033": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "near_campus_13",
+  "a_id": "9c35cc89c2b85324",
+  "b_id": "0c53dee0c286b6a8",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b034": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "commuter_9",
+  "a_id": "2ca369768895433d",
+  "b_id": "48a5ee7afbb15c21",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b035": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "commuter_10",
+  "a_id": "c690624dd090f591",
+  "b_id": "4e0d2cdfe1a8eb1b",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b036": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "intern_12",
+  "a_id": "18b6c7febf5526cc",
+  "b_id": "147e54f4bd8ff2e6",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b037": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "athlete_12",
+  "a_id": "6f5ad869185012f2",
+  "b_id": "0c5c11a616bdf12b",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b038": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "near_campus_11",
+  "a_id": "f3802f28100b9c24",
+  "b_id": "b499776f7700f26e",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b039": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "night_owl_13",
+  "a_id": "805b97bd806ce947",
+  "b_id": "ff35258db5f2cc8c",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b040": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "early_bird_9",
+  "a_id": "5b80725b4af5406d",
+  "b_id": "0866432bc083c1ac",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b041": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "commuter_11",
+  "a_id": "31bec4256a0340e7",
+  "b_id": "ac74243fcff9fb82",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b042": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "near_campus_10",
+  "a_id": "023d025ded5b3fac",
+  "b_id": "25918a74406ab33a",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b043": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "intern_11",
+  "a_id": "85d67f24ab055abb",
+  "b_id": "d3167d48f5517dce",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b044": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "night_owl_10",
+  "a_id": "faab37121f99bee6",
+  "b_id": "52c98d39125c24b9",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b045": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "early_bird_10",
+  "a_id": "e90fbc6c8c143275",
+  "b_id": "3e3d558ba70c64d2",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b046": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "other_14",
+  "a_id": "ed41720d909cd9da",
+  "b_id": "2d439f03f222e214",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b047": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "night_owl_9",
+  "a_id": "23708499f209e0cd",
+  "b_id": "8c9934b5a41889c8",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b048": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "parent_14",
+  "a_id": "529129ab9ef5c03f",
+  "b_id": "ec50a8543e2b7d1b",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "b049": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "near_campus_12",
+  "a_id": "62cb7c0137abbd22",
+  "b_id": "84885cb57109cdb7",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "b050": {
+  "purpose": "teacher_audit",
+  "round": 2,
+  "persona": "carer_11",
+  "a_id": "1045ac1bdb08017b",
+  "b_id": "295326b7387535f3",
+  "red": "A",
+  "near_equal_focus": false
  }
 }

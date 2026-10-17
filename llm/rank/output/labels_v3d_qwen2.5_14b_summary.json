@@ -9,23 +9,23 @@
   "gap": 0.5,
   "outside_hours": 0.5
  },
- "pairs": 1512,
- "program_ties": 174,
- "program_dominance": 199,
- "asked_model": 1139,
- "consistent_all": "1390/1512",
- "consistent_rate_all": 0.919,
- "consistent_rate_asked": 0.893,
+ "pairs": 2471,
+ "program_ties": 194,
+ "program_dominance": 216,
+ "asked_model": 2061,
+ "consistent_all": "2263/2471",
+ "consistent_rate_all": 0.916,
+ "consistent_rate_asked": 0.899,
  "answers_by_position": {
-  "red(first)": 1211,
-  "blue(second)": 1067
+  "red(first)": 2173,
+  "blue(second)": 1949
  },
- "focus_correct": "1640/2278",
+ "focus_correct": "3057/4122",
  "draw_hint_pairs": "0/0 consistent",
  "by_focus": {
-  "campus_days": "499/512",
-  "gap": "431/516",
-  "outside_hours": "460/484"
+  "campus_days": "824/847",
+  "gap": "689/836",
+  "outside_hours": "750/788"
  },
- "seconds_per_asked_pair": 4.54
+ "seconds_per_asked_pair": 4.45
 }

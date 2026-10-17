@@ -1,0 +1,85 @@
+windows GPU busy (python3 -c 
+import os,time
+print('holding windows for LoRA round 2', flush=True) since 18:15); waiting...
+unloading qwen2.5:7b to leave the GPU to qwen2.5:14b
+2471 pairs, 1512 already labelled, model qwen2.5:14b at http://192.168.1.120:11434
+  20/959  4.1s per pair, ~64 min left
+  40/959  4.2s per pair, ~64 min left
+  60/959  4.1s per pair, ~62 min left
+  80/959  4.3s per pair, ~62 min left
+  100/959  4.4s per pair, ~62 min left
+  120/959  4.3s per pair, ~60 min left
+  140/959  4.3s per pair, ~59 min left
+  160/959  4.3s per pair, ~57 min left
+  180/959  4.2s per pair, ~54 min left
+  200/959  4.2s per pair, ~53 min left
+  220/959  4.2s per pair, ~52 min left
+  240/959  4.2s per pair, ~51 min left
+  260/959  4.2s per pair, ~49 min left
+  280/959  4.2s per pair, ~48 min left
+  300/959  4.2s per pair, ~46 min left
+  320/959  4.2s per pair, ~45 min left
+  340/959  4.0s per pair, ~41 min left
+  360/959  4.0s per pair, ~40 min left
+  380/959  4.0s per pair, ~39 min left
+  400/959  4.0s per pair, ~37 min left
+  420/959  4.0s per pair, ~36 min left
+  440/959  4.1s per pair, ~35 min left
+  460/959  4.1s per pair, ~34 min left
+  480/959  4.1s per pair, ~33 min left
+  500/959  4.1s per pair, ~31 min left
+  520/959  4.1s per pair, ~30 min left
+  540/959  4.1s per pair, ~28 min left
+  560/959  4.1s per pair, ~27 min left
+  580/959  4.1s per pair, ~26 min left
+  600/959  4.1s per pair, ~25 min left
+  620/959  4.1s per pair, ~23 min left
+  640/959  4.1s per pair, ~22 min left
+  660/959  4.1s per pair, ~21 min left
+  680/959  4.1s per pair, ~19 min left
+  700/959  4.2s per pair, ~18 min left
+  720/959  4.2s per pair, ~17 min left
+  740/959  4.2s per pair, ~15 min left
+  760/959  4.2s per pair, ~14 min left
+  780/959  4.2s per pair, ~12 min left
+  800/959  4.2s per pair, ~11 min left
+  820/959  4.2s per pair, ~10 min left
+  840/959  4.2s per pair, ~8 min left
+  860/959  4.2s per pair, ~7 min left
+  880/959  4.2s per pair, ~6 min left
+  900/959  4.2s per pair, ~4 min left
+  920/959  4.2s per pair, ~3 min left
+  940/959  4.2s per pair, ~1 min left
+  959/959  4.2s per pair, ~0 min left
+{
+ "note": "合成标签（SYNTHETIC）：由大模型扮演合成画像给出，不是真实学生的选择。",
+ "model": "qwen2.5:14b",
+ "server": "http://192.168.1.120:11434",
+ "prompt_version": 3,
+ "ties": "dominance",
+ "tie_thresholds": {
+  "campus_days": 0.25,
+  "gap": 0.5,
+  "outside_hours": 0.5
+ },
+ "pairs": 2471,
+ "program_ties": 194,
+ "program_dominance": 216,
+ "asked_model": 2061,
+ "consistent_all": "2263/2471",
+ "consistent_rate_all": 0.916,
+ "consistent_rate_asked": 0.899,
+ "answers_by_position": {
+  "red(first)": 2173,
+  "blue(second)": 1949
+ },
+ "focus_correct": "3057/4122",
+ "draw_hint_pairs": "0/0 consistent",
+ "by_focus": {
+  "campus_days": "824/847",
+  "gap": "689/836",
+  "outside_hours": "750/788"
+ },
+ "seconds_per_asked_pair": 4.45
+}
+exit=0

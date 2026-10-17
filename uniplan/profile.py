@@ -24,10 +24,10 @@ ALLOWED_FIELDS = {
 }
 # Optional lifestyle limits: (field, lowest, highest, message). None switches a limit off.
 LIMITS = (
-    ("max_days_per_week", 1, 7, "每周最多到校天数须为 1 至 7。"),
-    ("max_daily_minutes", 60, 720, "每天最多上课时长须在 1 至 12 小时之间。"),
-    ("max_daily_span", 60, 900, "每天最长在校时长须在 1 至 15 小时之间。"),
-    ("walk_speed", 20, 120, "步行速度须为每分钟 20 至 120 米。"),
+    ("max_days_per_week", 1, 7, "Days on campus a week must be 1 to 7."),
+    ("max_daily_minutes", 60, 720, "Hours of class a day must be between 1 and 12."),
+    ("max_daily_span", 60, 900, "Hours on campus a day must be between 1 and 15."),
+    ("walk_speed", 20, 120, "Walking speed must be 20 to 120 metres a minute."),
 )
 
 
@@ -41,28 +41,28 @@ def _is_int(value: Any) -> bool:
 
 def _time_pair(value: Any, field: str, errors: list[dict[str, str]]) -> dict[str, int] | None:
     if not isinstance(value, dict) or set(value) != {"start_min", "end_min"}:
-        errors.append(_error(field, "time_shape", "请填写开始和结束时间。"))
+        errors.append(_error(field, "time_shape", "Enter a start and an end time."))
         return None
     start, end = value["start_min"], value["end_min"]
     if not _is_int(start) or not _is_int(end) or not 0 <= start < end <= 1440:
-        errors.append(_error(field, "time_range", "开始时间须早于结束时间；跨午夜请拆成两段。"))
+        errors.append(_error(field, "time_range", "The start time must be before the end time. Split times past midnight into two."))
         return None
     return {"start_min": start, "end_min": end}
 
 
 def _normalize_windows(raw: Any, errors: list[dict[str, str]]) -> list[dict[str, int]]:
     if not isinstance(raw, list) or len(raw) > 35:
-        errors.append(_error("unavailable_windows", "window_count", "最多可填写 35 个不可上课时段。"))
+        errors.append(_error("unavailable_windows", "window_count", "You can add up to 35 times you can't make."))
         return []
     windows: list[dict[str, int]] = []
     for index, item in enumerate(raw):
         field = f"unavailable_windows.{index}"
         if not isinstance(item, dict) or set(item) != {"weekday", "start_min", "end_min"}:
-            errors.append(_error(field, "window_shape", "请填写星期、开始和结束时间。"))
+            errors.append(_error(field, "window_shape", "Enter a day, a start time and an end time."))
             continue
         day = item["weekday"]
         if not _is_int(day) or not 1 <= day <= 7:
-            errors.append(_error(field, "weekday", "请选择周一至周日。"))
+            errors.append(_error(field, "weekday", "Choose a day from Monday to Sunday."))
             continue
         interval = _time_pair(
             {"start_min": item["start_min"], "end_min": item["end_min"]}, field, errors,
@@ -82,36 +82,36 @@ def _normalize_weights(raw: Any, errors: list[dict[str, str]]) -> dict[str, floa
     if raw is None:
         return {key: 1 / 3 for key in WEIGHT_KEYS}
     if not isinstance(raw, dict) or set(raw) != set(WEIGHT_KEYS):
-        errors.append(_error("weights", "weight_shape", "请提供空档、到校天数和偏好时段三项优先级。"))
+        errors.append(_error("weights", "weight_shape", "Give a priority for waiting, days on campus and preferred hours."))
         return None
     numbers = [raw[key] for key in WEIGHT_KEYS]
     if any(isinstance(n, bool) or not isinstance(n, (int, float)) or
            not math.isfinite(n) or not 0 <= n <= 5 for n in numbers):
-        errors.append(_error("weights", "weight_range", "每项优先级须为 0 至 5 的数字。"))
+        errors.append(_error("weights", "weight_range", "Each priority must be a number from 0 to 5."))
         return None
     total = sum(numbers)
     if total == 0:
-        errors.append(_error("weights", "weight_zero", "三项优先级不能全部为零。"))
+        errors.append(_error("weights", "weight_zero", "At least one priority must be above 0."))
         return None
     return {key: numbers[index] / total for index, key in enumerate(WEIGHT_KEYS)}
 
 
 def _normalize_fields(raw: Any) -> tuple[dict[str, Any] | None, list[dict[str, str]]]:
     if not isinstance(raw, dict):
-        return None, [_error("profile", "object_required", "输入必须是一个表单对象。")]
+        return None, [_error("profile", "object_required", "The request must be a form object.")]
     errors: list[dict[str, str]] = []
     unknown = sorted(set(raw) - ALLOWED_FIELDS)
     if unknown:
-        errors.append(_error("profile", "unknown_fields", "不支持的字段：" + ", ".join(unknown)))
+        errors.append(_error("profile", "unknown_fields", "Unknown fields: " + ", ".join(unknown)))
     version = raw.get("schema_version", 1)
     if not _is_int(version) or version != 1:
-        errors.append(_error("schema_version", "unsupported_version", "只支持第 1 版输入格式。"))
+        errors.append(_error("schema_version", "unsupported_version", "Only version 1 of the input format is supported."))
     year = raw.get("year")
     if not _is_int(year) or not 2000 <= year <= 2100:
-        errors.append(_error("year", "invalid_year", "请选择有效的课表年份。"))
+        errors.append(_error("year", "invalid_year", "Choose a timetable year from the list."))
     session = raw.get("session_code")
     if not isinstance(session, str) or not SESSION_RE.fullmatch(session.strip().upper()):
-        errors.append(_error("session_code", "invalid_session", "请选择有效的学期。"))
+        errors.append(_error("session_code", "invalid_session", "Choose a semester from the list."))
         session = None
     else:
         session = session.strip().upper()
@@ -119,22 +119,22 @@ def _normalize_fields(raw: Any) -> tuple[dict[str, Any] | None, list[dict[str, s
     raw_units = raw.get("unit_codes")
     units: list[str] = []
     if not isinstance(raw_units, list):
-        errors.append(_error("unit_codes", "units_required", "请填写 1 至 5 门课程代码。"))
+        errors.append(_error("unit_codes", "units_required", "Add 1 to 5 unit codes."))
     else:
         for index, item in enumerate(raw_units):
             if not isinstance(item, str) or not UNIT_RE.fullmatch(item.strip().upper()):
-                errors.append(_error("unit_codes", "invalid_unit", f"第 {index + 1} 个课程代码应为 4 个字母加 4 个数字。"))
+                errors.append(_error("unit_codes", "invalid_unit", f"Unit code {index + 1} should be 4 letters and 4 digits, like ENGG2112."))
                 continue
             code = item.strip().upper()
             if code not in units:
                 units.append(code)
         if not 1 <= len(units) <= 5:
-            errors.append(_error("unit_codes", "unit_count", "每次请输入 1 至 5 门不同课程。"))
+            errors.append(_error("unit_codes", "unit_count", "Add 1 to 5 different units."))
 
     windows = _normalize_windows(raw.get("unavailable_windows", []), errors)
     transition = raw.get("transition_min", 0)
     if not _is_int(transition) or not 0 <= transition <= 120:
-        errors.append(_error("transition_min", "transition_range", "换楼缓冲须为 0 至 120 分钟的整数。"))
+        errors.append(_error("transition_min", "transition_range", "Time between buildings must be a whole number from 0 to 120 minutes."))
     hours = _time_pair(raw.get("preferred_hours", DEFAULT_HOURS), "preferred_hours", errors)
     weights = _normalize_weights(raw.get("weights"), errors)
     limits = {}
@@ -149,14 +149,14 @@ def _normalize_fields(raw: Any) -> tuple[dict[str, Any] | None, list[dict[str, s
                 not all(_is_int(lunch[key]) for key in lunch) or
                 not 0 <= lunch["start_min"] < lunch["end_min"] <= 1440 or
                 not 10 <= lunch["minutes"] <= lunch["end_min"] - lunch["start_min"]):
-            errors.append(_error("lunch", "lunch_range", "午饭时间须在所给时段内，且至少 10 分钟。"))
+            errors.append(_error("lunch", "lunch_range", "The lunch break must fit inside its time window and be at least 10 minutes."))
             lunch = None
     in_person_only = raw.get("in_person_only", False)
     if not isinstance(in_person_only, bool):
-        errors.append(_error("in_person_only", "in_person_type", "“只要现场课”须为是或否。"))
+        errors.append(_error("in_person_only", "in_person_type", "\"In-person classes only\" must be yes or no."))
     min_seats = raw.get("min_seats", 0)
     if not _is_int(min_seats) or not 0 <= min_seats <= 50:
-        errors.append(_error("min_seats", "min_seats_range", "最少余位须为 0 至 50。"))
+        errors.append(_error("min_seats", "min_seats_range", "Minimum seats must be 0 to 50."))
     if errors:
         return None, errors
     return {
@@ -191,7 +191,7 @@ def check_condition_fields(fields: dict[str, Any]) -> tuple[dict[str, Any], list
     problems: list[dict[str, str]] = []
     for key, value in fields.items():
         if key not in CONDITION_FIELDS:
-            problems.append(_error(key, "unknown_field", f"不支持的条件：{key}"))
+            problems.append(_error(key, "unknown_field", f"Unknown condition: {key}"))
             continue
         if key == "unavailable_windows" and isinstance(value, list):
             windows = []

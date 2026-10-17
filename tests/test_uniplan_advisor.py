@@ -12,7 +12,7 @@ from urllib.request import Request, urlopen
 
 import llm.parse as parse_module
 from llm import explain as explainer
-from uniplan import advisor
+from uniplan import advisor, wording
 from uniplan.advisor import (CANDIDATE_MAX, CANDIDATE_MIN, conditions_of, merge_conditions,
                              plan_from_sentence, read_sentence, select_candidates)
 from uniplan.catalog import SnapshotCatalog
@@ -159,10 +159,48 @@ class ClarifyTests(unittest.TestCase):
         self.assertEqual(hard["options"][1]["cares"], ["campus_days"])
         self.assertEqual(missing["options"][1]["profile_fields"], {"max_days_per_week": 3})
         self.assertEqual(offer["options"][0]["profile_fields"]["lunch"]["minutes"], 30)
-        self.assertEqual(offer["options"][-1]["text"], "不用")       # every offer can be declined
+        self.assertEqual(offer["options"][-1]["text"], "No")         # every offer can be declined
         with mock.patch.object(advisor, "parse", return_value=ASKING) as parsed:
             read_sentence("我周五要打工")
         parsed.assert_called_once_with("我周五要打工")                # no overrides: parse() as before
+
+    def test_notes_and_questions_are_in_english(self):
+        with mock.patch.object(advisor, "parse", return_value=ASKING), \
+                mock.patch.object(advisor.wording, "clause_describer", return_value=None):
+            result = read_sentence("我周五要打工，最多来几天吧")
+        self.assertEqual([clause["note"] for clause in result["clauses"]],
+                         ["Not available Fri", "A cap on days a week, but no number was given"])
+        hard, missing, offer = result["questions"]
+        self.assertEqual(hard["text"], "Can't, or would rather not?")
+        self.assertEqual([(o["text"], o["note"]) for o in hard["options"]],
+                         [("Can't", "Not available Fri"), ("Would rather not", "Fewer days on campus, if possible")])
+        self.assertEqual([o["text"] for o in missing["options"]], ["I'll add it to the sentence", "3"])
+        self.assertEqual(missing["options"][1]["note"], "At most 3 days on campus a week")
+        self.assertEqual(offer["text"], "Lunch break?")
+        self.assertEqual([o["text"] for o in offer["options"]], ["30 min between 11:30 am and 2 pm", "No"])
+        self.assertNotIn("note", offer["options"][0])
+
+    def test_the_parsers_describer_writes_the_notes_when_it_works(self):
+        describe = mock.Mock(side_effect=lambda clause: f"{clause['label']} read")
+        with mock.patch.object(advisor, "parse", return_value=ASKING), \
+                mock.patch.object(advisor.wording, "clause_describer", return_value=describe):
+            result = read_sentence("我周五要打工，最多来几天吧")
+        self.assertEqual([clause["note"] for clause in result["clauses"]], ["blocked_time read", "max_days read"])
+        self.assertEqual(result["questions"][0]["options"][1]["note"], "prefer_fewer_days read")
+        broken = mock.Mock(side_effect=KeyError("fields"))
+        with mock.patch.object(advisor, "parse", return_value=ASKING), \
+                mock.patch.object(advisor.wording, "clause_describer", return_value=broken):
+            result = read_sentence("我周五要打工，最多来几天吧")
+        self.assertEqual(result["clauses"][0]["note"], "Not available Fri")   # falls back to uniplan.wording
+
+    def test_times_and_days_are_written_the_australian_way(self):
+        self.assertEqual([wording.clock(m) for m in (540, 570, 720, 1110, 1440)],
+                         ["9 am", "9:30 am", "12 pm", "6:30 pm", "midnight"])
+        evenings = [{"weekday": day, "start_min": 1080, "end_min": 1439} for day in (2, 4)]
+        self.assertEqual(wording.windows_text(evenings), "Tue and Thu after 6 pm")
+        mornings = [{"weekday": day, "start_min": 0, "end_min": 600} for day in range(1, 6)]
+        self.assertEqual(wording.windows_text(mornings + [{"weekday": 3, "start_min": 840, "end_min": 1080}]),
+                         "weekdays before 10 am; Wed 2 pm to 6 pm")
 
     def test_without_questions_the_result_is_as_before(self):
         plain = {"clauses": ASKING["clauses"], "conditions": {}, "unrecognised": []}

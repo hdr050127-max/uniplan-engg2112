@@ -83,7 +83,7 @@ class AutoFetcher:
     def ensure(self, profile: dict[str, Any], catalog: SnapshotCatalog) -> dict[str, Any]:
         """Get a usable snapshot or explain exactly why fetching stopped."""
         if self._recent_snapshot(profile, catalog):
-            return {"status": "cached", "message": "已使用最近 24 小时内的本地课表快照。"}
+            return {"status": "cached", "message": "Using the local timetable copy from the last 24 hours."}
 
         stale_rows: list[dict[str, Any]] = []
         stale_report: dict[str, Any] = {}
@@ -91,7 +91,7 @@ class AutoFetcher:
             rows, report = self._collect(profile, offline=True)
             if report["complete"] and self._rows_recent(rows):
                 self._store(profile, catalog, rows, report, offline=True)
-                return {"status": "cached", "message": "已从本地抓取缓存生成课表快照。"}
+                return {"status": "cached", "message": "Built the timetable from the local download cache."}
             if report["complete"] and rows:
                 stale_rows, stale_report = rows, report
         except (OSError, TimetableError, ValueError):
@@ -101,17 +101,17 @@ class AutoFetcher:
         try:
             robots_allowed = self.robots_check()
         except TimetableError as exc:
-            return {"status": "failed", "message": f"无法核查课表网站的自动访问规则：{exc}"}
+            return {"status": "failed", "message": f"Could not check the timetable site's rules for automatic access: {exc}"}
         if not robots_allowed and not self.allow_robots_disallowed:
             if stale_rows:
                 self._store(profile, catalog, stale_rows, stale_report, offline=True)
                 return {
                     "status": "stale_cache",
-                    "message": "实时抓取被网站规则阻止，只能使用超过 24 小时的本地缓存。",
+                    "message": "The timetable site does not allow automatic downloads, so a local copy older than 24 hours is used.",
                 }
             return {
                 "status": "blocked",
-                "message": "已自动检查公开课表，但网站的 robots.txt 禁止自动请求；未进行实时抓取。请使用已授权的数据来源或在获得访问许可后启用实时查询。",
+                "message": "The timetable site's robots.txt does not allow automatic requests, so nothing was downloaded. Use a data source you have permission for.",
             }
 
         try:
@@ -122,14 +122,14 @@ class AutoFetcher:
                 self._store(profile, catalog, stale_rows, stale_report, offline=True)
                 return {
                     "status": "stale_cache",
-                    "message": f"实时查询失败（{exc}），只能使用超过 24 小时的本地缓存。",
+                    "message": f"The live timetable could not be reached ({exc}), so a local copy older than 24 hours is used.",
                 }
-            return {"status": "failed", "message": f"实时课表查询失败：{exc}"}
+            return {"status": "failed", "message": f"The live timetable could not be reached: {exc}"}
         if report["complete"]:
-            return {"status": "fetched", "message": "已自动获取所选课程的公开课表并保存快照。"}
+            return {"status": "fetched", "message": "Downloaded the public timetable for these units and saved a copy."}
         missing = [code for code, detail in report["units"].items()
                    if detail.get("status") != "ok"]
         return {
             "status": "failed",
-            "message": "查询完成，但未取得这些课程的完整课表：" + ", ".join(missing),
+            "message": "The download finished, but these units are incomplete: " + ", ".join(missing),
         }

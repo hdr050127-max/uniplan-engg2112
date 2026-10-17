@@ -105,7 +105,7 @@ class ScheduleTests(unittest.TestCase):
         ranking = arrange_timetables(rows, {"TEST1234": ["G1", "G2"]}, profile())
         self.assertEqual(ranking["feasible_count"], 0)
         self.assertEqual(ranking["search"]["groups_without_options"], ())
-        self.assertIn("时间重叠", ranking["no_feasible_reason"])
+        self.assertIn("same times", ranking["no_feasible_reason"])
 
     def test_assessment_parts_stay_together_and_ignore_day_avoidance(self):
         assessment = []
@@ -197,7 +197,7 @@ class ExplanationTests(unittest.TestCase):
         self.assertEqual(ranking["feasible_count"], 0)
         self.assertEqual(ranking["conflict_core"]["group_ids"], ["G1", "G2"])
         self.assertEqual(ranking["conflict_core"]["reason"], "time_overlap")
-        self.assertEqual(ranking["conflict_core"]["slots"]["G1"], ["周一 09:00–10:00"])
+        self.assertEqual(ranking["conflict_core"]["slots"]["G1"], ["Mon 9 am to 10 am"])
         self.assertIn("G1", ranking["no_feasible_reason"])
         self.assertNotIn("G3", ranking["no_feasible_reason"])
 
@@ -249,6 +249,6 @@ class ExplanationTests(unittest.TestCase):
         self.assertFalse(scale_sensitivity(close, weights, limit=1)["stable"])
 
     def test_group_defaults_skip_ignored_and_non_teaching_groups(self):
-        self.assertEqual(group_default("X|Assessment-IGN", {"Assessment"}), (False, "来源标记 IGN"))
+        self.assertEqual(group_default("X|Assessment-IGN", {"Assessment"}), (False, "Marked IGN in the source"))
         self.assertEqual(group_default("X|Consultation", {"Other (non teaching)*"})[0], False)
         self.assertEqual(group_default("X|Tutorial", {"Tutorial"}), (True, None))

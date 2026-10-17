@@ -1,8 +1,8 @@
 {
- "model": "linear",
+ "model": "linear-r2",
  "machine": "arm64 Mac CPU",
  "size_mb": 1.22,
- "note": "TF-IDF char n-gram (1, 4), min_df 2, C=30; plain-Python scorer, trained on train only",
+ "note": "TF-IDF char n-gram (1, 4), min_df 2, C=30; plain-Python scorer, trained on train only; round 2 (val: fitted on train only; the train+val model is output/round2/linear_model.json)",
  "predictions": {
   "周一不能上课，有兼职。": {
    "label": "blocked_time",

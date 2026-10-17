@@ -20,7 +20,7 @@ import re
 from llm.parse.text import find_days, find_parts, find_times, normalize
 
 _CUT = re.compile(
-    r"[，。；;！!？?\n]+|,(?!\d{3}\b)|(?<![\d.])\.(?![\d.])|\s+-\s+"
+    r"[，。；;！!？?\n]+|,(?!\d{3}\b)|(?<![\d.])\.(?![\d.])|(?<=\d)\.(?=\s)|\s+-\s+"
     r"|而且|并且|但是|不过|可是|另外|此外|再加上|再就是"
     r"|\b(?:but|plus|however|although|though|as well as)\b|\s+and\s+",
     re.IGNORECASE,

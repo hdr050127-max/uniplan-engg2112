@@ -6,12 +6,15 @@
 Only the classifier is learnt; splitting and number reading are rules (llm/parse/split.py,
 llm/parse/extract.py). The label set and its boundary rules are in llm/parse/labels.py.
 
-The run-time classifier is RUNTIME (picked from llm/parse/output/parse_results.md). If it is a
-model served by Ollama and the server does not answer, clauses fall back to the plain-Python
-linear model, and to keyword rules if that file is missing. Everything here is standard library.
+The run-time classifier is RUNTIME: the round-2 QLoRA fine-tune of Qwen 7B served by Ollama, chosen
+in llm/parse/output/test_v2/DECISION.md. If the server does not answer (or takes longer than 15 s,
+classify.ollama_classifier), clauses fall back to the plain-Python linear model in output/linear_model.json (the
+round-1 model, chosen on the validation set), and to keyword rules if that file is missing.
+UNIPLAN_PARSE_RUNTIME overrides RUNTIME, e.g. "linear" for offline runs. Standard library only.
 """
 from __future__ import annotations
 
+import os
 import sys
 import time
 from typing import Callable
@@ -23,8 +26,8 @@ from llm.parse.labels import HEDGES
 from llm.parse.split import split_clauses
 from llm.parse.text import find_times, named_days, normalize
 
-RUNTIME = "linear"                 # or "ollama-short:<model>" for a fine-tuned model in Ollama
-GUARD = False                      # apply rule 5 after the model (see guarded); off by default
+RUNTIME = os.environ.get("UNIPLAN_PARSE_RUNTIME", "ollama-short:uniplan-parse-7b-r2")
+GUARD = False                      # apply rule 5 after the model (see guarded); off: chosen on the validation set
 _RETRY_AFTER = 60                  # seconds to wait before trying a server that failed again
 _down_since: float | None = None
 
@@ -40,7 +43,8 @@ def _fallback(text: str) -> str:
 def _runtime(text: str) -> str:
     global _down_since
     if not RUNTIME.startswith("ollama"):
-        return _fallback(text)
+        from llm.parse.classify import by_name
+        return by_name(RUNTIME)(text)
     if _down_since is not None and time.monotonic() - _down_since < _RETRY_AFTER:
         return _fallback(text)
     from llm.parse.classify import by_name

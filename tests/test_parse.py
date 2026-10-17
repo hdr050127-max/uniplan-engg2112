@@ -59,6 +59,11 @@ class SplitTests(unittest.TestCase):
             self.assertEqual(split_clauses(text), [text])
         self.assertEqual(split_clauses("I work Fridays, I hate gaps"), ["I work Fridays", "I hate gaps"])
 
+    def test_full_stop_after_a_number_ends_the_sentence(self):
+        self.assertEqual(split_clauses("no 8ams, and ideally I'm done by 4. Fridays off please"),
+                         ["no 8ams", "ideally I'm done by 4", "Fridays off please"])
+        self.assertEqual(split_clauses("4.5 hours a day max"), ["4.5 hours a day max"])
+
     def test_drops_pleasantries_and_empty_text(self):
         self.assertEqual(split_clauses("一周最多三天，谢谢！"), ["一周最多三天"])
         self.assertEqual(split_clauses("  "), [])

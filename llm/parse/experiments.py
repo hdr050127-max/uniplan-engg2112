@@ -14,7 +14,9 @@ from __future__ import annotations
 import itertools
 import json
 import platform
+import sys
 import time
+from pathlib import Path
 
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
@@ -77,6 +79,23 @@ def save_predictions(name: str, predict_one, texts: list[str], size_mb: float, n
          "predictions": predictions}, ensure_ascii=False, indent=1))
 
 
+def export_train_only(data: Path, settings_from: Path, out: Path) -> None:
+    """Refit a saved run-time model on the training split only, for honest validation scores of
+    things built on top of it (the clarifying questions use it as a second opinion)."""
+    saved = json.loads(settings_from.read_text())
+    settings = {"ngram_range": tuple(saved["ngram_range"]), **saved["settings"]}
+    rows = [json.loads(line) for line in open(data, encoding="utf-8") if json.loads(line)["split"] == "train"]
+    vec = vectorizer(*settings["ngram_range"], settings["min_df"])
+    params = {k: v for k, v in settings.items() if k not in ("ngram_range", "min_df")}
+    model = LogisticRegression(**params).fit(vec.fit_transform([r["text"] for r in rows]), [r["label"] for r in rows])
+    global MODEL_PATH
+    MODEL_PATH, saved_path = out, MODEL_PATH
+    try:
+        export_linear(vec, model, settings)
+    finally:
+        MODEL_PATH = saved_path
+
+
 def main() -> int:
     train, val = synthetic("train"), synthetic("val")
     texts = texts_needed(data_sets(with_test=False))
@@ -103,4 +122,7 @@ def main() -> int:
 
 
 if __name__ == "__main__":
+    if sys.argv[1:2] == ["--train-only"]:     # --train-only <train_roundN.jsonl> <run-time model.json> <out.json>
+        export_train_only(*map(Path, sys.argv[2:5]))
+        raise SystemExit(0)
     raise SystemExit(main())

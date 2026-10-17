@@ -10,6 +10,7 @@ from unittest import mock
 from urllib.error import HTTPError
 from urllib.request import Request, urlopen
 
+import llm.parse as parse_module
 from llm import explain as explainer
 from uniplan import advisor
 from uniplan.advisor import (CANDIDATE_MAX, CANDIDATE_MIN, conditions_of, merge_conditions,
@@ -21,6 +22,15 @@ from uniplan.store import ProfileStore
 
 ROOT = Path(__file__).resolve().parent.parent
 UNITS = ["ENGG2112", "AMME2301", "AMME2262", "CIVL3206"]
+_runtime = parse_module.RUNTIME
+
+
+def setUpModule():
+    parse_module.RUNTIME = "linear"   # offline and deterministic: no call to the Ollama server
+
+
+def tearDownModule():
+    parse_module.RUNTIME = _runtime
 
 
 def entry(cid, gap, days, outside):

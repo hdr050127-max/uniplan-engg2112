@@ -66,7 +66,8 @@
 
 - "时段词"指下面默认值表里有默认时段的词：morning(s)、afternoon(s)、arvo、evening(s)、night(s)、早上、上午、中午、下午、晚上。
 - 时段词 + 要求（不能、要空出来、别排课、no … classes、keep … free、不想／不选 + 时段）→ `blocked_time`。第 5 条的软化例外只管钟点、不管时段词，所以 "keep mornings free if u can" 也是 `blocked_time`。
-- 只有感受、含糊的程度词、带修饰的时段 → `prefer_no_early_late`（见第 6 条）。
+- 只有感受、含糊的程度词、带修饰的时段 → `prefer_no_early_late`（见第 6 条）。"早上早课"就是 early morning classes，算带修饰的时段。
+- **优先顺序**：同一个短句里既有"时段词 + 要求"，又有"带软化词的钟点"，按钟点走第 5 条，判 `prefer_no_early_late`，`prefer_hours` 取那个钟点（"尽量避免早上上课，最好十点以后" → 10:00-18:00）。钟点比时段词具体，学生给钟点时也加了软化词。两个界限都软、又不一致（"尽量上午不要有课，尤其是九点前"）的，说不清取哪个，不进训练数据。
 - 第 1 轮训练数据里和这条冲突的标签已改正，改动清单在 `llm/parse/output/round2_relabels.jsonl`。
 
 ## 怎么切短句

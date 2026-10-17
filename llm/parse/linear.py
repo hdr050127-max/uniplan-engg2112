@@ -53,6 +53,6 @@ class LinearModel:
         return self.labels[scores.index(max(scores))]
 
 
-@lru_cache(maxsize=1)
+@lru_cache(maxsize=2)
 def load(path: str | Path = MODEL_PATH) -> LinearModel:
     return LinearModel(json.loads(Path(path).read_text()))

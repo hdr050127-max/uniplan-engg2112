@@ -4,7 +4,8 @@ Rules only. The text is cut at sentence punctuation and at joining words (而且
 "and" only cuts when a new clause starts after it ("lectures and tutes" stays whole). Then
 pieces that cannot stand alone are glued back, following the splitting rules in data/README.md:
 - only weekdays or times ("Wed", "周三也是"), only a hedge ("if possible"), only a number added
-  on ("maybe 2", "but 3 is ok", "no more"), "all day" without a weekday, or a back-reference
+  on ("maybe 2", "but 3 is ok", "no more"), an emphatic tail ("no exceptions"), "all day" without a
+  weekday, or a back-reference
   (所以, 那天, so, before that, "the happier I am") joins the piece before it;
 - 其他天 / other days joins the piece before it unless it brings its own clock time;
 - a reason with no time and no request of its own ("I have a casual job", "有兼职") joins its
@@ -45,6 +46,8 @@ _ADDON = re.compile(r"(?:maybe|perhaps|probably|realistically|honestly|ideally|i
                     r"\d+(?:\.\d+)?|\s|[,，.。!！])+", re.IGNORECASE)
 _NO_MORE = re.compile(r"(?:but\s+)?(?:no more|not more|nothing more|no longer|not any more|no more than that)[\s.!。]*",
                       re.IGNORECASE)
+_EMPHASIS = re.compile(r"(?:no exceptions?|without exception|full stop|period|no matter what|end of story|for real|"
+                       r"seriously|没得商量|绝对的)[\s.!！。]*", re.IGNORECASE)
 _ALL_DAY = re.compile(r"全天|一整天|整天|\ball day\b|\bwhole day\b|\bfull day\b", re.IGNORECASE)
 # Words that make a piece a request of its own; a piece with none of them and no time is a reason.
 _REQUEST = re.compile(r"不|没|别|想|要求|希望|最好|尽量|只|最多|超过|少|多|早|晚|空|等|吃|饭|线上|线下|网课|课|"
@@ -98,7 +101,7 @@ def _all_day_back(piece: str) -> bool:
 
 def _joins_back(piece: str) -> bool:
     return bool(_BACKWARD.match(piece) or _only_days_or_times(piece) or _HEDGE_ONLY.fullmatch(piece)
-                or _addon(piece) or _all_day_back(piece) or _reason(piece)
+                or _addon(piece) or _all_day_back(piece) or _reason(piece) or _EMPHASIS.fullmatch(piece)
                 or _OTHER_DAYS.match(piece) and not find_times(normalize(piece)))
 
 

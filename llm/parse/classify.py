@@ -42,6 +42,8 @@ def by_name(name: str) -> Classifier:
         return keyword_label
     if name == "linear":
         return linear_classifier()
+    if name == "linear-r1":                           # the round-1 run-time model, kept for comparison
+        return linear.load(linear.MODEL_PATH.parent / "round1" / "linear_model.json")
     if name.startswith("ollama:"):                # full prompt v1, as measured in round 1
         return ollama_classifier(name.removeprefix("ollama:"), prompt=lambda text: messages(text, "v1"))
     if name.startswith("ollama-v2:"):             # full prompt v2 (fixed example, part-of-day rule)

@@ -28,7 +28,9 @@
 - 每个窗口在自己的工作树和分支上工作。做完一段就跑测试再提交：`python3 -m unittest discover -s tests`，`tests/test_contracts.py` 必须一直通过。
 - 只用 Python 标准库写 `uniplan/`。`llm/` 里需要的额外包装在 `/Users/handongrui/Desktop/ENGG2112/.venv-llm`（已有 `mlx-lm`）；要装新包先问用户。
 - 本地模型通过 Ollama 调用，统一用 `llm/ollama.py`。已下载：`qwen2.5:0.5b`、`1.5b`、`3b`、`7b`。服务地址由环境变量 `UNIPLAN_OLLAMA_URL` 决定，默认本机，也可以指向局域网里的另一台电脑。
-- 这台 Mac 只有一块 GPU、16GB 内存。凡是大活（7B 批量打标签、LoRA 微调）都要套上锁，排队执行：`python3 -m llm.gpu_lock -- <命令>`。
+- **算力分工**：用户另有一台 Windows 笔记本（RTX 4090 Laptop，16GB 显存），在局域网里跑 Ollama，专门承担大模型批量推理（7B/14B 打标签、批量评估）。用法：`UNIPLAN_OLLAMA_URL=http://<Windows IP>:11434`，具体地址问用户或看总控窗口。连不上时退回本机，并告诉用户。
+- 这台 Mac 只有一块 GPU、16GB 内存。凡是在 Mac 上跑的大活（本机 7B 批量推理、MLX LoRA 微调）都要套上锁，排队执行：`python3 -m llm.gpu_lock -- <命令>`。
+- **运行时只用标准库**：网页实际调用的 `parse()`、`rank()`、`explain()` 只能依赖 Python 标准库和 Ollama 的 HTTP 接口（比如逻辑回归权重存成 JSON，用纯 Python 计算；微调后的模型导入 Ollama 再调用）。训练和评估脚本可以用 `.venv-llm` 或 `/usr/local/bin/python3`（自带 scikit-learn 1.6.1）里的包。
 - 数据要诚实：大模型生成的标签和句子必须在代码、输出和报告里注明是合成的，不能说成真实学生的数据。测试集由组员亲手写，训练之前定好，之后不改。
 - 要用到大模型的结果都可复现：写成脚本，固定随机种子，输出存到各自的 `output/` 里。
 - 课程资料在 `ENGG2112 课程资料 Course Materials/`（不进仓库）。作业要求见其中 `04 作业与评估 Assessments/06 期末报告 Final Report.html`。

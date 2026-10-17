@@ -1,0 +1,413 @@
+{
+ "personas": [
+  {
+   "id": "x01",
+   "text": "I live up on the Central Coast and the train to uni takes forever, so I'd like my classes packed together so I make as few trips in as possible.",
+   "units": [
+    "AMME1362",
+    "AMME2301"
+   ],
+   "conditions": {
+    "cares": [
+     "campus_days"
+    ]
+   }
+  },
+  {
+   "id": "x02",
+   "text": "I drive in and the car park charges by the hour, so sitting around between classes literally costs me money. More than anything I want my classes back to back.",
+   "units": [
+    "AMME2262",
+    "AMME1362"
+   ],
+   "conditions": {
+    "cares": [
+     "gap"
+    ]
+   }
+  },
+  {
+   "id": "x03",
+   "text": "Total night owl here, I go to bed late and sleep in, so ideally nothing before 11am.",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 1,
+     "start_min": 660,
+     "end_min": 1080
+    },
+    "cares": [
+     "outside_hours"
+    ]
+   }
+  },
+  {
+   "id": "x04",
+   "text": "My kid isn't at daycare on Fridays so I'm home with him and can't come in that day. What matters most is having my classes on as few days as possible, and after that, no really early or late classes.",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "campus_days",
+     "outside_hours"
+    ]
+   }
+  },
+  {
+   "id": "x05",
+   "text": "I do food delivery after class to cover rent, so the main thing is no long waits between classes, I want to get in, do them back to back and leave. Fewer days on campus would be nice too but that's secondary.",
+   "units": [
+    "CIVL3206",
+    "AMME2301",
+    "ENGG2112"
+   ],
+   "conditions": {
+    "cares": [
+     "gap",
+     "campus_days"
+    ]
+   }
+  },
+  {
+   "id": "x06",
+   "text": "I get migraines and early starts and late finishes both wreck me, that's my biggest concern. Second to that, I'd like to be on campus fewer days.",
+   "units": [
+    "AMME2262",
+    "AMME2301"
+   ],
+   "conditions": {
+    "cares": [
+     "outside_hours",
+     "campus_days"
+    ]
+   }
+  },
+  {
+   "id": "x07",
+   "text": "I row for the uni club and have training from 4pm on Tuesdays and Thursdays. Other than that I'd like my classes squeezed into as few days as possible.",
+   "units": [
+    "AMME1362",
+    "CIVL3206"
+   ],
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 2,
+      "start_min": 960,
+      "end_min": 1440
+     },
+     {
+      "weekday": 4,
+      "start_min": 960,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "campus_days"
+    ]
+   }
+  },
+  {
+   "id": "x08",
+   "text": "I go to the mosque for Friday prayers between 12 and 2pm, so no classes then. Apart from that, what I hate most is sitting around between classes, the fewer gaps the better.",
+   "units": [
+    "AMME1362",
+    "MTRX3700"
+   ],
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 5,
+      "start_min": 720,
+      "end_min": 840
+     }
+    ],
+    "cares": [
+     "gap"
+    ]
+   }
+  },
+  {
+   "id": "x09",
+   "text": "I drop my little brother at school every day so I can't get to uni before 9:30. What I care about most is not having late classes, and after that coming in fewer days.",
+   "units": [
+    "ENGG2112",
+    "MTRX3700"
+   ],
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 0,
+      "end_min": 570
+     },
+     {
+      "weekday": 2,
+      "start_min": 0,
+      "end_min": 570
+     },
+     {
+      "weekday": 3,
+      "start_min": 0,
+      "end_min": 570
+     },
+     {
+      "weekday": 4,
+      "start_min": 0,
+      "end_min": 570
+     },
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 570
+     }
+    ],
+    "cares": [
+     "outside_hours",
+     "campus_days"
+    ]
+   }
+  },
+  {
+   "id": "x10",
+   "text": "I'm doing an internship at a consulting firm this semester, so I can only come in 3 days a week max, and within that I want my classes as bunched up as possible.",
+   "units": [
+    "ENGG2112",
+    "AMME1362"
+   ],
+   "conditions": {
+    "max_days_per_week": 3,
+    "cares": [
+     "campus_days"
+    ]
+   }
+  },
+  {
+   "id": "x11",
+   "text": "I've got type 1 diabetes so I need a proper lunch break. Most important for me is not waiting around between classes, and second, no super early or late classes.",
+   "units": [
+    "ENGG2112",
+    "AMME2262"
+   ],
+   "conditions": {
+    "lunch": {
+     "start_min": 690,
+     "end_min": 840,
+     "minutes": 30
+    },
+    "cares": [
+     "gap",
+     "outside_hours"
+    ]
+   }
+  },
+  {
+   "id": "x12",
+   "text": "I'm an early bird and I'm pretty useless by late afternoon, so if possible I'd rather be done by 4pm.",
+   "units": [
+    "AMME2262",
+    "AMME1362",
+    "MTRX3700"
+   ],
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 1,
+     "start_min": 540,
+     "end_min": 960
+    },
+    "cares": [
+     "outside_hours"
+    ]
+   }
+  },
+  {
+   "id": "x13",
+   "text": "I'm an international student and I work a full shift at the supermarket every Wednesday. Top priority is coming to campus on as few days as possible, and after that not having long gaps between classes.",
+   "units": [
+    "AMME1362",
+    "MTRX1705"
+   ],
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 3,
+      "start_min": 0,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "campus_days",
+     "gap"
+    ]
+   }
+  },
+  {
+   "id": "x14",
+   "text": "I volunteer at the hospital on Thursday afternoons so no classes then. Otherwise the thing I care about most is not killing time between classes.",
+   "units": [
+    "AMME2301",
+    "AMME1362",
+    "ENGG2112"
+   ],
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 4,
+      "start_min": 720,
+      "end_min": 1080
+     }
+    ],
+    "cares": [
+     "gap"
+    ]
+   }
+  },
+  {
+   "id": "x15",
+   "text": "I live at a college right next to campus so getting in is easy, but I'm not a morning person, ideally nothing before 9:30, and that matters most. Second, I'd like short gaps between classes.",
+   "units": [
+    "CIVL3206",
+    "AMME2262",
+    "AMME2301"
+   ],
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 1,
+     "start_min": 570,
+     "end_min": 1080
+    },
+    "cares": [
+     "outside_hours",
+     "gap"
+    ]
+   }
+  },
+  {
+   "id": "x16",
+   "text": "I'm on a site placement Mondays and Fridays so I can't come in those days. On the other days I mostly want to come in as few times as possible, and second, not sit around between classes.",
+   "units": [
+    "AMME2262",
+    "AMME1362"
+   ],
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 0,
+      "end_min": 1440
+     },
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "campus_days",
+     "gap"
+    ]
+   }
+  },
+  {
+   "id": "x17",
+   "text": "I work at a restaurant at night so no evening classes. During the day, what I care about most is not having big gaps between classes.",
+   "units": [
+    "ENGG2112",
+    "AMME1362"
+   ],
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 2,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 3,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 4,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 5,
+      "start_min": 1080,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "gap"
+    ]
+   }
+  },
+  {
+   "id": "x18",
+   "text": "I'm a drummer in a band and we rehearse Thursday nights. Apart from that, I really can't stand early starts or late classes.",
+   "units": [
+    "ENGG2112",
+    "AMME1362",
+    "MTRX3700"
+   ],
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 4,
+      "start_min": 1080,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   }
+  },
+  {
+   "id": "x19",
+   "text": "I look after my nan who can't get around much, so I can't be out of the house all the time. I'd like my classes crammed into as few days as possible.",
+   "units": [
+    "MTRX1705",
+    "AMME2301"
+   ],
+   "conditions": {
+    "cares": [
+     "campus_days"
+    ]
+   }
+  },
+  {
+   "id": "x20",
+   "text": "There's nowhere quiet at home to do online classes, so no online classes please. Also I'd like as little waiting between classes as possible.",
+   "units": [
+    "ENGG2112",
+    "AMME1362",
+    "CIVL3206"
+   ],
+   "conditions": {
+    "in_person_only": true,
+    "cares": [
+     "gap"
+    ]
+   }
+  }
+ ]
+}

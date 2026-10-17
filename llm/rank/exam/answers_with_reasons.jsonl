@@ -1,0 +1,540 @@
+{"pair_id": "x0001", "choice": "蓝", "why": "Top concern is gaps; blue waits 1.6h less weekly."}
+{"pair_id": "x0002", "choice": "红", "why": "Gaps matter most; red has none, blue has an hour."}
+{"pair_id": "x0003", "choice": "蓝", "why": "Red's Friday has a six-hour gap; blue is compact, both under 3 days."}
+{"pair_id": "x0004", "choice": "红", "why": "Waiting gap only about one hour; red saves a day, no 7pm."}
+{"pair_id": "x0005", "choice": "差不多", "why": "Only a Thursday class time differs; no gaps either way."}
+{"pair_id": "x0006", "choice": "蓝", "why": "Blue needs only one campus day, top priority."}
+{"pair_id": "x0007", "choice": "蓝", "why": "Red has a 9am tutorial; blue starts at 11 every day."}
+{"pair_id": "x0008", "choice": "蓝", "why": "Blue halves the waiting between classes, less paid parking."}
+{"pair_id": "x0009", "choice": "红", "why": "Both finish by 3pm; red has one fewer day."}
+{"pair_id": "x0010", "choice": "蓝", "why": "Waiting about equal; blue needs one fewer day on campus."}
+{"pair_id": "x0011", "choice": "蓝", "why": "Blue cuts waiting from 3.7h to 1h, lunch still free."}
+{"pair_id": "x0012", "choice": "蓝", "why": "Blue means two trips a week instead of three."}
+{"pair_id": "x0013", "choice": "蓝", "why": "Blue waits 1.8h less, her main concern."}
+{"pair_id": "x0014", "choice": "红", "why": "Red needs only two trips in; blue needs three."}
+{"pair_id": "x0015", "choice": "红", "why": "Early/late tie; red needs one fewer campus day."}
+{"pair_id": "x0016", "choice": "蓝", "why": "Blue's Monday lecture is online, saving a trip in."}
+{"pair_id": "x0017", "choice": "红", "why": "Only one extra hour waiting, but red avoids a Friday drive."}
+{"pair_id": "x0018", "choice": "差不多", "why": "Same days, waiting and parking hours; only tutorial times shift."}
+{"pair_id": "x0019", "choice": "蓝", "why": "Same early classes; blue has 1.7h less waiting."}
+{"pair_id": "x0020", "choice": "蓝", "why": "Blue never starts before 11; red has a 9am tutorial."}
+{"pair_id": "x0021", "choice": "蓝", "why": "One extra hour waiting beats a Friday 17–19 trip for one class."}
+{"pair_id": "x0022", "choice": "蓝", "why": "Both within hours; blue needs three campus days, not five."}
+{"pair_id": "x0023", "choice": "差不多", "why": "Only Thursday lecture online vs in person; no real difference."}
+{"pair_id": "x0024", "choice": "蓝", "why": "Blue has no late class; red ends 19:00 Friday."}
+{"pair_id": "x0025", "choice": "红", "why": "Red's Monday lecture is online, one fewer day in."}
+{"pair_id": "x0026", "choice": "红", "why": "Blue has a Friday class until 19:00; red stays within hours."}
+{"pair_id": "x0027", "choice": "红", "why": "Red blocks less work time; Friday class is after work."}
+{"pair_id": "x0028", "choice": "蓝", "why": "Same days; blue has far less waiting and shorter days."}
+{"pair_id": "x0029", "choice": "蓝", "why": "Blue skips Friday's drive for just one extra waiting hour."}
+{"pair_id": "x0030", "choice": "蓝", "why": "Blue cuts waiting by 2.5 hours a week."}
+{"pair_id": "x0031", "choice": "红", "why": "Both have the 9am; red avoids a 9-to-6 day."}
+{"pair_id": "x0032", "choice": "差不多", "why": "Same in-person days and waiting; only one lecture moves online."}
+{"pair_id": "x0033", "choice": "红", "why": "Same campus days; red's evening class clashes less with internship."}
+{"pair_id": "x0034", "choice": "蓝", "why": "Blue skips Friday's drive for one extra waiting hour."}
+{"pair_id": "x0035", "choice": "蓝", "why": "Nothing before 11 in both; blue needs three trips, not four."}
+{"pair_id": "x0036", "choice": "蓝", "why": "Blue has no gaps; red wastes a whole Friday waiting."}
+{"pair_id": "x0037", "choice": "红", "why": "Same three days; red waits 8.3h versus 12h."}
+{"pair_id": "x0038", "choice": "红", "why": "Days nearly equal; red avoids blue's 8am Tuesday start."}
+{"pair_id": "x0039", "choice": "红", "why": "Red starts at 11; blue has a 9am tutorial."}
+{"pair_id": "x0040", "choice": "红", "why": "Mornings and gaps equal; red keeps Friday free."}
+{"pair_id": "x0041", "choice": "红", "why": "Red keeps everything 09–18; blue has a class until 19:00."}
+{"pair_id": "x0042", "choice": "红", "why": "Red needs two days in, blue nearly four."}
+{"pair_id": "x0043", "choice": "红", "why": "Red has less waiting and finishes earlier."}
+{"pair_id": "x0044", "choice": "蓝", "why": "Same week, but blue's Friday starts at 12, not 9."}
+{"pair_id": "x0045", "choice": "蓝", "why": "Blue packs everything into two trips instead of three."}
+{"pair_id": "x0046", "choice": "蓝", "why": "Same early starts; blue's back-to-back Monday cuts 1.7h waiting."}
+{"pair_id": "x0047", "choice": "蓝", "why": "Both have a late class; blue needs one fewer campus day."}
+{"pair_id": "x0048", "choice": "差不多", "why": "Both keep the same 5-hour Monday gap; other differences tiny."}
+{"pair_id": "x0049", "choice": "红", "why": "Same three days; red waits two hours less."}
+{"pair_id": "x0050", "choice": "蓝", "why": "Same early start and days; blue avoids the 18:00 Wednesday finish."}
+{"pair_id": "x0051", "choice": "蓝", "why": "Blue has no late class; red ends 19:00 Friday."}
+{"pair_id": "x0052", "choice": "红", "why": "Red waits 1.9h less, her top concern."}
+{"pair_id": "x0053", "choice": "蓝", "why": "Blue waits less and drops red's 08:30 Tuesday start."}
+{"pair_id": "x0054", "choice": "红", "why": "Same early classes; red has 1.7h less waiting."}
+{"pair_id": "x0055", "choice": "蓝", "why": "Early/late tie; blue saves almost two campus days."}
+{"pair_id": "x0056", "choice": "蓝", "why": "Blue finishes by 3pm daily with less waiting."}
+{"pair_id": "x0057", "choice": "红", "why": "Waiting gap under an hour; blue adds Friday 7pm class."}
+{"pair_id": "x0058", "choice": "蓝", "why": "Same three days; blue waits 6.3h versus 13h."}
+{"pair_id": "x0059", "choice": "蓝", "why": "Both end by 4pm; blue avoids lone Friday afternoon trip."}
+{"pair_id": "x0060", "choice": "蓝", "why": "Blue has no gaps; red's Tuesday wastes over four hours."}
+{"pair_id": "x0061", "choice": "差不多", "why": "Same two trips and waiting; one lecture online in blue."}
+{"pair_id": "x0062", "choice": "红", "why": "Waiting differs under an hour; red avoids Friday 7pm."}
+{"pair_id": "x0063", "choice": "红", "why": "Red: fewer campus days, only one 9am start."}
+{"pair_id": "x0064", "choice": "红", "why": "One extra hour waiting beats blue's Friday 17–19 trip."}
+{"pair_id": "x0065", "choice": "蓝", "why": "No gaps either way; blue ends 16:00 on campus, fewer days."}
+{"pair_id": "x0066", "choice": "蓝", "why": "Blue needs two trips in; red needs three."}
+{"pair_id": "x0067", "choice": "蓝", "why": "Blue's Monday lecture is online, one fewer day in."}
+{"pair_id": "x0068", "choice": "差不多", "why": "Same days, waiting and 4pm finish; only tutorial day swaps."}
+{"pair_id": "x0069", "choice": "蓝", "why": "No gaps in either; blue's online lecture saves a campus day."}
+{"pair_id": "x0070", "choice": "红", "why": "Same campus days; red halves waiting and avoids 8am."}
+{"pair_id": "x0071", "choice": "红", "why": "Red has no gaps; blue's Friday waits three hours, ends 19:00."}
+{"pair_id": "x0072", "choice": "蓝", "why": "Blue has no gaps and finishes earlier."}
+{"pair_id": "x0073", "choice": "红", "why": "Both start at 11; red needs two days in, not four."}
+{"pair_id": "x0074", "choice": "蓝", "why": "Blue's one-hour gap isn't big; only one campus day."}
+{"pair_id": "x0075", "choice": "差不多", "why": "Same days, same total waiting; gaps just shift around."}
+{"pair_id": "x0076", "choice": "蓝", "why": "Blue merges two single-class trips into one day."}
+{"pair_id": "x0077", "choice": "蓝", "why": "Online Monday lecture lets her leave at 3pm."}
+{"pair_id": "x0078", "choice": "差不多", "why": "Same days and same 12h waiting; only a lecture shifts."}
+{"pair_id": "x0079", "choice": "蓝", "why": "Early/late tie; blue needs one fewer campus day."}
+{"pair_id": "x0080", "choice": "红", "why": "Red needs two campus days, blue nearly three."}
+{"pair_id": "x0081", "choice": "蓝", "why": "Rowing fine in both; blue fits classes into one fewer day."}
+{"pair_id": "x0082", "choice": "红", "why": "Same early start and days; red avoids Friday 18:00 finish."}
+{"pair_id": "x0083", "choice": "红", "why": "Both one Friday; red's gap is half as long."}
+{"pair_id": "x0084", "choice": "红", "why": "No gaps either; red needs two campus days, not four."}
+{"pair_id": "x0085", "choice": "蓝", "why": "Blue has no gaps; red waits an hour Thursday."}
+{"pair_id": "x0086", "choice": "红", "why": "Same early classes; red's back-to-back Monday cuts waiting 1.7h."}
+{"pair_id": "x0087", "choice": "蓝", "why": "No gaps either; blue needs two campus days, not four."}
+{"pair_id": "x0088", "choice": "红", "why": "Red waits about an hour less and avoids a 9-hour day."}
+{"pair_id": "x0089", "choice": "差不多", "why": "Same waiting and days; only how hours spread differs."}
+{"pair_id": "x0090", "choice": "差不多", "why": "No gaps, same days; only one tutorial moves."}
+{"pair_id": "x0091", "choice": "红", "why": "Early/late tie; red needs one fewer campus day."}
+{"pair_id": "x0092", "choice": "蓝", "why": "Under an hour more waiting avoids a Friday 17–19 trip."}
+{"pair_id": "x0093", "choice": "红", "why": "Both have one late class; red needs one fewer day."}
+{"pair_id": "x0094", "choice": "红", "why": "Same early classes; red has 1.7h less waiting."}
+{"pair_id": "x0095", "choice": "蓝", "why": "Early/late tie; blue has fewer days and earlier finish."}
+{"pair_id": "x0096", "choice": "红", "why": "Red needs two days in, blue nearly four."}
+{"pair_id": "x0097", "choice": "红", "why": "Both done by 4pm; red frees Friday, waiting similar."}
+{"pair_id": "x0098", "choice": "蓝", "why": "Red has a Friday class until 19:00; blue stays within hours."}
+{"pair_id": "x0099", "choice": "红", "why": "Same three days; red waits 6.3h versus 9h."}
+{"pair_id": "x0100", "choice": "蓝", "why": "Both done by 4pm; blue frees Friday, waiting similar."}
+{"pair_id": "x0101", "choice": "红", "why": "Red starts at 11; blue has a 9am tutorial."}
+{"pair_id": "x0102", "choice": "红", "why": "Red has no gaps; blue's Tuesday wastes over four hours."}
+{"pair_id": "x0103", "choice": "蓝", "why": "No gaps either; blue frees Friday, four days not five."}
+{"pair_id": "x0104", "choice": "蓝", "why": "Same early classes; blue waits 3.4h less."}
+{"pair_id": "x0105", "choice": "蓝", "why": "Waiting differs under an hour; blue avoids Friday 7pm."}
+{"pair_id": "x0106", "choice": "蓝", "why": "Both end by 4pm; blue skips lone Friday afternoon trip."}
+{"pair_id": "x0107", "choice": "差不多", "why": "Identical except a Monday tutorial moves two hours."}
+{"pair_id": "x0108", "choice": "蓝", "why": "Red has Wednesday class until 6pm; blue ends by 3pm."}
+{"pair_id": "x0109", "choice": "蓝", "why": "Blue never starts before 11; red has a 9am tutorial."}
+{"pair_id": "x0110", "choice": "红", "why": "Both start at 11; red needs three days in, not four."}
+{"pair_id": "x0111", "choice": "蓝", "why": "Online Monday lecture lets her leave at 3pm."}
+{"pair_id": "x0112", "choice": "红", "why": "Same three days; red waits about half as long."}
+{"pair_id": "x0113", "choice": "蓝", "why": "Blue needs one campus day instead of two."}
+{"pair_id": "x0114", "choice": "红", "why": "Blue has a Friday class until 19:00; red stays within hours."}
+{"pair_id": "x0115", "choice": "红", "why": "No gaps either; red needs three campus days, not four."}
+{"pair_id": "x0116", "choice": "蓝", "why": "Red has a Friday class until 19:00; blue ends by 15:00."}
+{"pair_id": "x0117", "choice": "红", "why": "Same days; red waits an hour less, no 8am."}
+{"pair_id": "x0118", "choice": "红", "why": "Waiting nearly equal; red needs almost one fewer day."}
+{"pair_id": "x0119", "choice": "红", "why": "Red has no late class; blue ends 19:00 Friday."}
+{"pair_id": "x0120", "choice": "蓝", "why": "Blue has no gaps; red waits an hour Thursday."}
+{"pair_id": "x0121", "choice": "红", "why": "Red keeps all classes 09–18; blue runs to 19:00 Friday."}
+{"pair_id": "x0122", "choice": "蓝", "why": "Same early classes; blue waits 3.4h less."}
+{"pair_id": "x0123", "choice": "蓝", "why": "Online Monday lecture avoids a three-hour wait on campus."}
+{"pair_id": "x0124", "choice": "蓝", "why": "Early bird prefers the Friday 9am tutorial; otherwise equal."}
+{"pair_id": "x0125", "choice": "差不多", "why": "Only one tutorial moves from Thursday to Friday afternoon."}
+{"pair_id": "x0126", "choice": "蓝", "why": "Both within hours; blue waits 3h versus 8.3h."}
+{"pair_id": "x0127", "choice": "蓝", "why": "Same days, no gaps; blue's online lecture frees Monday evening."}
+{"pair_id": "x0128", "choice": "蓝", "why": "Nothing early in either; blue needs three days, not four."}
+{"pair_id": "x0129", "choice": "红", "why": "Waiting gap under an hour; blue adds Friday 7pm class."}
+{"pair_id": "x0130", "choice": "蓝", "why": "Waiting about equal; blue needs one fewer day on campus."}
+{"pair_id": "x0131", "choice": "蓝", "why": "Same days; blue waits 3.8h versus 5.5h."}
+{"pair_id": "x0132", "choice": "差不多", "why": "Same days and waiting; just which lecture is online."}
+{"pair_id": "x0133", "choice": "红", "why": "Waiting differs under an hour; red avoids Friday 7pm."}
+{"pair_id": "x0134", "choice": "红", "why": "Red has half the waiting between classes, less paid parking."}
+{"pair_id": "x0135", "choice": "蓝", "why": "Blue needs only two days in, red three."}
+{"pair_id": "x0136", "choice": "蓝", "why": "Both one day; blue waits less and has shorter day."}
+{"pair_id": "x0137", "choice": "蓝", "why": "Early/late tie; blue needs about one fewer campus day."}
+{"pair_id": "x0138", "choice": "红", "why": "Both one late class; red has no gaps, shorter days."}
+{"pair_id": "x0139", "choice": "红", "why": "Early/late tie; red needs about one fewer campus day."}
+{"pair_id": "x0140", "choice": "蓝", "why": "Same days; blue starts at noon and has no waiting."}
+{"pair_id": "x0141", "choice": "红", "why": "Rowing fine in both; red needs one fewer campus day."}
+{"pair_id": "x0142", "choice": "红", "why": "Same gaps; red's Monday lecture is online, leaves campus at 16."}
+{"pair_id": "x0143", "choice": "蓝", "why": "Both done by 4pm; blue waits less, no lone trips."}
+{"pair_id": "x0144", "choice": "红", "why": "Rowing fine in both; red needs one fewer campus day."}
+{"pair_id": "x0145", "choice": "蓝", "why": "Waiting about equal; blue needs one fewer day on campus."}
+{"pair_id": "x0146", "choice": "蓝", "why": "Same hours and waiting; blue avoids red's 9-hour Tuesday."}
+{"pair_id": "x0147", "choice": "差不多", "why": "Same days and waiting; one short lone lecture either way."}
+{"pair_id": "x0148", "choice": "红", "why": "Same waiting; red's online lectures mean less time on campus."}
+{"pair_id": "x0149", "choice": "蓝", "why": "Red runs to 6pm Wednesday; blue done by 4pm."}
+{"pair_id": "x0150", "choice": "红", "why": "Early/late tie; red needs about one fewer campus day."}
+{"pair_id": "x0151", "choice": "差不多", "why": "Same four days; only Thursday tutorial time moves."}
+{"pair_id": "x0152", "choice": "红", "why": "Gaps matter most; red has none, blue waits an hour."}
+{"pair_id": "x0153", "choice": "蓝", "why": "No gaps either; blue needs two campus days, red five."}
+{"pair_id": "x0154", "choice": "红", "why": "Same days; red waits less and finishes earlier Monday."}
+{"pair_id": "x0155", "choice": "蓝", "why": "Blue avoids red's three-hour Monday gap, halving waiting."}
+{"pair_id": "x0156", "choice": "红", "why": "Red's online Thursday lecture saves a campus day."}
+{"pair_id": "x0157", "choice": "红", "why": "Gaps equal; red finishes 14:00 and has shorter days."}
+{"pair_id": "x0158", "choice": "蓝", "why": "Blue waits 1.8h less, her main concern."}
+{"pair_id": "x0159", "choice": "蓝", "why": "Same early classes; blue waits 3h less."}
+{"pair_id": "x0160", "choice": "蓝", "why": "Blue's Monday lecture is online, one fewer day in."}
+{"pair_id": "x0161", "choice": "红", "why": "Red needs one fewer campus day, her top priority."}
+{"pair_id": "x0162", "choice": "蓝", "why": "Blue waits slightly less and avoids an 08:30 Tuesday start."}
+{"pair_id": "x0163", "choice": "蓝", "why": "Blue fits everything into three days instead of four."}
+{"pair_id": "x0164", "choice": "蓝", "why": "Blue cuts the three-hour Monday gap to one hour."}
+{"pair_id": "x0165", "choice": "蓝", "why": "Blue's one-hour gap isn't big; one campus day versus four."}
+{"pair_id": "x0166", "choice": "红", "why": "Red's Monday lecture is online, so no real wait on campus."}
+{"pair_id": "x0167", "choice": "蓝", "why": "Waiting nearly equal; blue needs one fewer campus day."}
+{"pair_id": "x0168", "choice": "蓝", "why": "Blue skips the Friday drive for under an hour more waiting."}
+{"pair_id": "x0169", "choice": "红", "why": "Same days; red has a shorter Monday gap."}
+{"pair_id": "x0170", "choice": "差不多", "why": "Same four days, no early or late classes; tiny differences."}
+{"pair_id": "x0171", "choice": "红", "why": "Same early classes; red waits 2h less, Friday free."}
+{"pair_id": "x0172", "choice": "差不多", "why": "Same three days in; waiting and times nearly identical."}
+{"pair_id": "x0173", "choice": "红", "why": "Early/late tie; red saves almost two campus days."}
+{"pair_id": "x0174", "choice": "红", "why": "Same two days; red avoids blue's 9-to-6 Wednesday."}
+{"pair_id": "x0175", "choice": "红", "why": "Same four days; red avoids blue's 8am Tuesday start."}
+{"pair_id": "x0176", "choice": "蓝", "why": "Blue needs three days, not four, and no 8am start."}
+{"pair_id": "x0177", "choice": "蓝", "why": "Blue needs two days in, red nearly four."}
+{"pair_id": "x0178", "choice": "红", "why": "Both within hours; red waits 1h versus 4.8h, ends 15:00."}
+{"pair_id": "x0179", "choice": "红", "why": "Same days; red waits an hour less, done by 3pm."}
+{"pair_id": "x0180", "choice": "红", "why": "Red never starts before 11; blue has a 9am tutorial."}
+{"pair_id": "x0181", "choice": "红", "why": "Same three days; red waits 9h versus 12h."}
+{"pair_id": "x0182", "choice": "蓝", "why": "Blue's one-hour gap isn't big; one campus day versus five."}
+{"pair_id": "x0183", "choice": "红", "why": "Same days; red has an hour less waiting."}
+{"pair_id": "x0184", "choice": "蓝", "why": "Blue needs three days in, red four."}
+{"pair_id": "x0185", "choice": "红", "why": "Red needs three days in, blue four."}
+{"pair_id": "x0186", "choice": "红", "why": "Red needs two trips in; blue needs three."}
+{"pair_id": "x0187", "choice": "蓝", "why": "Same three days; blue avoids red's 8am Tuesday start."}
+{"pair_id": "x0188", "choice": "蓝", "why": "Waiting differs by an hour; red adds Friday 7pm class."}
+{"pair_id": "x0189", "choice": "红", "why": "Both within hours; red has fewer days and half the waiting."}
+{"pair_id": "x0190", "choice": "蓝", "why": "No gaps either; blue needs two campus days, red five."}
+{"pair_id": "x0191", "choice": "红", "why": "Red has no late class; blue ends 19:00 Thursday."}
+{"pair_id": "x0192", "choice": "红", "why": "Both done by 4pm; red frees Friday, waiting similar."}
+{"pair_id": "x0193", "choice": "红", "why": "Red ends by 17:00 and avoids blue's 9-hour Tuesday."}
+{"pair_id": "x0194", "choice": "红", "why": "Same early start and days; red never finishes after 16:00."}
+{"pair_id": "x0195", "choice": "红", "why": "Red's Monday lecture is online, one fewer day in."}
+{"pair_id": "x0196", "choice": "差不多", "why": "Same four days and same waiting; gaps just shift around."}
+{"pair_id": "x0197", "choice": "红", "why": "Red fits everything into three days instead of four."}
+{"pair_id": "x0198", "choice": "蓝", "why": "Red has a six-hour Wednesday gap; blue barely waits."}
+{"pair_id": "x0199", "choice": "蓝", "why": "Blue waits 2.7h less, her top concern."}
+{"pair_id": "x0200", "choice": "蓝", "why": "Blue ends by 17:00, Thursday free from 14:00 for rehearsal."}
+{"pair_id": "x0201", "choice": "红", "why": "Red needs two days in, blue three."}
+{"pair_id": "x0202", "choice": "蓝", "why": "Blue needs one fewer day and finishes by 3pm."}
+{"pair_id": "x0203", "choice": "蓝", "why": "Blue has three hours less waiting, so less paid parking."}
+{"pair_id": "x0204", "choice": "蓝", "why": "Both done by 4pm; blue waits an hour less."}
+{"pair_id": "x0205", "choice": "蓝", "why": "Same days; blue waits an hour less."}
+{"pair_id": "x0206", "choice": "红", "why": "No gaps in either; red needs two fewer campus days."}
+{"pair_id": "x0207", "choice": "红", "why": "Same two trips; red has five hours less waiting."}
+{"pair_id": "x0208", "choice": "蓝", "why": "Same waiting; blue's online lectures cut time sitting on campus."}
+{"pair_id": "x0209", "choice": "差不多", "why": "Same days, waiting and parking hours; gap just moves."}
+{"pair_id": "x0210", "choice": "差不多", "why": "Same early classes and gaps; lives next door, extra day costs little."}
+{"pair_id": "x0211", "choice": "蓝", "why": "Blue skips the Friday drive for one extra waiting hour."}
+{"pair_id": "x0212", "choice": "蓝", "why": "Red runs to 6pm Wednesday; blue done by 4pm."}
+{"pair_id": "x0213", "choice": "红", "why": "Red's online Thursday lecture saves a campus day."}
+{"pair_id": "x0214", "choice": "蓝", "why": "Waiting nearly equal; blue needs almost one fewer day."}
+{"pair_id": "x0215", "choice": "蓝", "why": "Red sits five hours Monday; blue waits 2.5h less overall."}
+{"pair_id": "x0216", "choice": "差不多", "why": "Same four days; one tutorial just moves Thursday to Friday."}
+{"pair_id": "x0217", "choice": "红", "why": "Everything equal except red finishes Monday two hours earlier."}
+{"pair_id": "x0218", "choice": "蓝", "why": "Red has a six-hour Wednesday gap; blue waits far less."}
+{"pair_id": "x0219", "choice": "红", "why": "Same early classes; red waits 3h less."}
+{"pair_id": "x0220", "choice": "蓝", "why": "Same early start and days; blue avoids the 18:00 Wednesday finish."}
+{"pair_id": "x0221", "choice": "蓝", "why": "Red runs to 6pm Wednesday; blue done by 4pm."}
+{"pair_id": "x0222", "choice": "红", "why": "Same early classes; red's back-to-back Monday cuts waiting."}
+{"pair_id": "x0223", "choice": "红", "why": "Blue runs to 6pm Wednesday; red done by 4pm."}
+{"pair_id": "x0224", "choice": "蓝", "why": "Red has a six-hour Wednesday gap; blue's Monday lecture is online."}
+{"pair_id": "x0225", "choice": "红", "why": "Red needs two trips in; blue needs three."}
+{"pair_id": "x0226", "choice": "蓝", "why": "Waiting about equal; blue needs one fewer day on campus."}
+{"pair_id": "x0227", "choice": "差不多", "why": "Same early/late, days, finish; only Monday tutorial shifts."}
+{"pair_id": "x0228", "choice": "红", "why": "No gaps in either; red needs one fewer campus day."}
+{"pair_id": "x0229", "choice": "红", "why": "Red waits 1.9h less, her top concern."}
+{"pair_id": "x0230", "choice": "红", "why": "Same four days; red avoids blue's 8am Tuesday start."}
+{"pair_id": "x0231", "choice": "蓝", "why": "Early/late tie; blue saves almost two campus days."}
+{"pair_id": "x0232", "choice": "红", "why": "Red waits an hour less and has no 9-hour days."}
+{"pair_id": "x0233", "choice": "红", "why": "Red never starts before noon; blue has a 9am tutorial."}
+{"pair_id": "x0234", "choice": "红", "why": "Red needs two trips in; blue needs three."}
+{"pair_id": "x0235", "choice": "红", "why": "Red's online Thursday lecture saves a campus day."}
+{"pair_id": "x0236", "choice": "红", "why": "Both three days; red's Tuesday trip fits training, keeps Friday free."}
+{"pair_id": "x0237", "choice": "红", "why": "Red fits everything into three days instead of four."}
+{"pair_id": "x0238", "choice": "红", "why": "Both start at 11; red needs two days in, not three."}
+{"pair_id": "x0239", "choice": "红", "why": "Same three days; red waits a bit less."}
+{"pair_id": "x0240", "choice": "红", "why": "Same three days; red waits less, shorter longest day."}
+{"pair_id": "x0241", "choice": "差不多", "why": "Same days and waiting; lone Thursday lecture either way."}
+{"pair_id": "x0242", "choice": "红", "why": "Early/late tie; red needs one fewer campus day."}
+{"pair_id": "x0243", "choice": "红", "why": "Same three days in; red has much less waiting."}
+{"pair_id": "x0244", "choice": "红", "why": "Mornings and gaps equal; red's Friday class ends at 2pm."}
+{"pair_id": "x0245", "choice": "蓝", "why": "Blue fits everything into three days instead of four."}
+{"pair_id": "x0246", "choice": "蓝", "why": "Blue's Monday lecture is online, one fewer day in."}
+{"pair_id": "x0247", "choice": "红", "why": "Same three days; red waits less, shorter longest day."}
+{"pair_id": "x0248", "choice": "蓝", "why": "Blue fits everything into three days instead of four."}
+{"pair_id": "x0249", "choice": "红", "why": "Red's gaps are short; blue adds a Friday 17–19 trip."}
+{"pair_id": "x0250", "choice": "蓝", "why": "Blue's online Tuesday lecture saves a campus day."}
+{"pair_id": "x0251", "choice": "蓝", "why": "Blue waits less and avoids the Friday 7pm class."}
+{"pair_id": "x0252", "choice": "蓝", "why": "Waiting differs by an hour; red adds a 5-7pm Friday class."}
+{"pair_id": "x0253", "choice": "蓝", "why": "A bit more waiting beats red's Friday 17–19 trip."}
+{"pair_id": "x0254", "choice": "蓝", "why": "Blue cuts waiting by nearly two hours, less parking."}
+{"pair_id": "x0255", "choice": "蓝", "why": "Blue has no gaps; red's Friday waits three hours, ends 19:00."}
+{"pair_id": "x0256", "choice": "红", "why": "Red keeps all classes 09–18; blue runs to 19:00 Friday."}
+{"pair_id": "x0257", "choice": "红", "why": "Same early classes; red's back-to-back Monday cuts waiting."}
+{"pair_id": "x0258", "choice": "红", "why": "Waiting nearly equal; red avoids blue's 08:30 Tuesday start."}
+{"pair_id": "x0259", "choice": "蓝", "why": "Same three days; blue waits 6.3h versus 12h."}
+{"pair_id": "x0260", "choice": "蓝", "why": "Same days; blue's Tuesday gap is shorter, less waiting."}
+{"pair_id": "x0261", "choice": "红", "why": "No gaps in either; red needs one fewer campus day."}
+{"pair_id": "x0262", "choice": "蓝", "why": "Blue has no gaps; red waits an hour Thursday."}
+{"pair_id": "x0263", "choice": "蓝", "why": "Rowing fine in both; blue needs one fewer campus day."}
+{"pair_id": "x0264", "choice": "红", "why": "Gaps matter most; red has none, blue waits an hour."}
+{"pair_id": "x0265", "choice": "蓝", "why": "Both one day; blue barely waits, red waits six hours."}
+{"pair_id": "x0266", "choice": "红", "why": "Red's one-hour gap isn't big; one campus day versus two."}
+{"pair_id": "x0267", "choice": "红", "why": "Red fits everything into three days instead of four."}
+{"pair_id": "x0268", "choice": "红", "why": "Red never starts before 11; blue has a 9am tutorial."}
+{"pair_id": "x0269", "choice": "红", "why": "Red's gaps are short; blue adds a Friday 17–19 trip."}
+{"pair_id": "x0270", "choice": "红", "why": "Same three days; red waits 6.3h versus 11h."}
+{"pair_id": "x0271", "choice": "蓝", "why": "Blue needs two trips in; red needs three."}
+{"pair_id": "x0272", "choice": "红", "why": "Red fits everything into three days instead of four."}
+{"pair_id": "x0273", "choice": "红", "why": "Gaps matter most; red has none, blue waits an hour."}
+{"pair_id": "x0274", "choice": "蓝", "why": "Waiting nearly equal; blue avoids red's 08:30 Tuesday start."}
+{"pair_id": "x0275", "choice": "蓝", "why": "Same three days; blue waits 8.3h versus 12h."}
+{"pair_id": "x0276", "choice": "红", "why": "Red needs two days in; blue four single-class trips."}
+{"pair_id": "x0277", "choice": "红", "why": "Same early start and days; red never finishes after 16:00."}
+{"pair_id": "x0278", "choice": "红", "why": "Blue has a five-hour Monday gap; red waits less."}
+{"pair_id": "x0279", "choice": "红", "why": "Red's Monday lecture is online, one fewer day in."}
+{"pair_id": "x0280", "choice": "蓝", "why": "Blue skips the Friday drive for one extra waiting hour."}
+{"pair_id": "x0281", "choice": "红", "why": "Same three days; red waits 8.3h versus 11h."}
+{"pair_id": "x0282", "choice": "蓝", "why": "Red has a six-hour Wednesday gap; blue barely waits."}
+{"pair_id": "x0283", "choice": "红", "why": "Waiting close; blue adds a Thursday trip for a 5-7pm class."}
+{"pair_id": "x0284", "choice": "蓝", "why": "Monday lecture is online; blue's gap is at home, done 1pm."}
+{"pair_id": "x0285", "choice": "蓝", "why": "Both within hours; blue: three days, half the waiting."}
+{"pair_id": "x0286", "choice": "差不多", "why": "Same days and waiting; lone Tuesday lecture either way."}
+{"pair_id": "x0287", "choice": "蓝", "why": "Same two trips; blue has two hours less waiting."}
+{"pair_id": "x0288", "choice": "差不多", "why": "Only one Thursday lecture time differs; waiting almost equal."}
+{"pair_id": "x0289", "choice": "红", "why": "Same days; red has less waiting on Monday."}
+{"pair_id": "x0290", "choice": "蓝", "why": "Same days; blue halves waiting and avoids 8am."}
+{"pair_id": "x0291", "choice": "蓝", "why": "Same three days; blue waits less, shorter longest day."}
+{"pair_id": "x0292", "choice": "差不多", "why": "No gaps, same days; only one tutorial moves."}
+{"pair_id": "x0293", "choice": "红", "why": "No gaps either; red needs two campus days, not four."}
+{"pair_id": "x0294", "choice": "蓝", "why": "Same waiting; blue needs one fewer day on campus."}
+{"pair_id": "x0295", "choice": "蓝", "why": "Blue has no gaps and finishes earlier."}
+{"pair_id": "x0296", "choice": "蓝", "why": "Same three days; blue waits an hour less."}
+{"pair_id": "x0297", "choice": "红", "why": "Red needs two trips in; blue needs three."}
+{"pair_id": "x0298", "choice": "蓝", "why": "Blue has no late class; red ends 19:00 Thursday."}
+{"pair_id": "x0299", "choice": "蓝", "why": "Same days; blue waits 1.2h less, done by 3pm."}
+{"pair_id": "x0300", "choice": "蓝", "why": "Same three days; blue waits about two hours less."}
+{"pair_id": "x0301", "choice": "蓝", "why": "Rowing fine in both; blue needs one fewer campus day."}
+{"pair_id": "x0302", "choice": "蓝", "why": "Blue's gaps are short; red adds a Friday 17–19 trip."}
+{"pair_id": "x0303", "choice": "红", "why": "Same three days; red finishes by 4pm with little waiting."}
+{"pair_id": "x0304", "choice": "蓝", "why": "Blue fits all classes in one Wednesday, short one-hour break."}
+{"pair_id": "x0305", "choice": "红", "why": "Same days; red avoids blue's three-hour Monday gap."}
+{"pair_id": "x0306", "choice": "蓝", "why": "Same days; blue has no gaps, red waits an hour."}
+{"pair_id": "x0307", "choice": "蓝", "why": "Blue cuts waiting by nearly two hours, less parking."}
+{"pair_id": "x0308", "choice": "蓝", "why": "Rowing fine in both; blue needs one fewer campus day."}
+{"pair_id": "x0309", "choice": "蓝", "why": "Both within hours; blue has fewer days, half the waiting."}
+{"pair_id": "x0310", "choice": "蓝", "why": "No gaps in either; blue's online lecture saves a campus day."}
+{"pair_id": "x0311", "choice": "差不多", "why": "Only one tutorial moves from Thursday to Friday; same waiting."}
+{"pair_id": "x0312", "choice": "红", "why": "Same early classes; red waits 1.7h less."}
+{"pair_id": "x0313", "choice": "红", "why": "Early bird: red's Friday tutorial ends at 2pm, not 4pm."}
+{"pair_id": "x0314", "choice": "红", "why": "Same days; red avoids blue's five-hour Monday gap."}
+{"pair_id": "x0315", "choice": "蓝", "why": "Blue waits 1.9h less, her main concern."}
+{"pair_id": "x0316", "choice": "红", "why": "No gaps either; red's online Tuesday saves a campus day."}
+{"pair_id": "x0317", "choice": "蓝", "why": "Blue has no gaps; red wastes a whole Friday waiting."}
+{"pair_id": "x0318", "choice": "红", "why": "Red: three days, little waiting, done by 15:00."}
+{"pair_id": "x0319", "choice": "蓝", "why": "Blue fits everything into three days instead of four."}
+{"pair_id": "x0320", "choice": "蓝", "why": "Blue fits all classes in one Wednesday, short one-hour break."}
+{"pair_id": "x0321", "choice": "蓝", "why": "Blue skips the Friday drive for under an hour more waiting."}
+{"pair_id": "x0322", "choice": "红", "why": "Red skips the Friday drive for under an hour more waiting."}
+{"pair_id": "x0323", "choice": "红", "why": "Waiting nearly equal; red avoids Friday 7pm class."}
+{"pair_id": "x0324", "choice": "蓝", "why": "Same early classes; blue waits 1.3h less."}
+{"pair_id": "x0325", "choice": "蓝", "why": "Blue's Monday lecture is online; no 3h wait, no 7pm Friday."}
+{"pair_id": "x0326", "choice": "红", "why": "Same early classes; red waits 1.3h less."}
+{"pair_id": "x0327", "choice": "差不多", "why": "Same days and gaps; only Thursday lecture time differs."}
+{"pair_id": "x0328", "choice": "蓝", "why": "Same three days; blue has far less waiting, shorter days."}
+{"pair_id": "x0329", "choice": "蓝", "why": "Same three days; blue waits 6.3h versus 10.9h."}
+{"pair_id": "x0330", "choice": "蓝", "why": "Same three days; blue waits 9h versus 13h."}
+{"pair_id": "x0331", "choice": "红", "why": "Early/late tie; red needs one fewer campus day."}
+{"pair_id": "x0332", "choice": "蓝", "why": "No late classes in either; blue needs one fewer day."}
+{"pair_id": "x0333", "choice": "红", "why": "Red: three days, one 9am start, done by 15:00."}
+{"pair_id": "x0334", "choice": "蓝", "why": "Blue's online lectures mean one campus day, not three."}
+{"pair_id": "x0335", "choice": "蓝", "why": "No gaps either; blue needs three campus days, red five."}
+{"pair_id": "x0336", "choice": "红", "why": "No gaps either; red frees Friday, four days not five."}
+{"pair_id": "x0337", "choice": "蓝", "why": "No gaps either; blue's online Thursday saves a campus day."}
+{"pair_id": "x0338", "choice": "差不多", "why": "Same days and waiting; only lone lecture times shift."}
+{"pair_id": "x0339", "choice": "红", "why": "Red needs one campus day instead of two."}
+{"pair_id": "x0340", "choice": "红", "why": "Blue has a five-hour Monday gap; red waits less."}
+{"pair_id": "x0341", "choice": "蓝", "why": "Blue's one-hour gap isn't big; one campus day versus three."}
+{"pair_id": "x0342", "choice": "蓝", "why": "Waiting differs by an hour; red's 5-7pm Thursday blocks delivery."}
+{"pair_id": "x0343", "choice": "蓝", "why": "Same three days; blue waits 9h versus 12h."}
+{"pair_id": "x0344", "choice": "红", "why": "Both three days; red's Thursday fits training, keeps Friday free."}
+{"pair_id": "x0345", "choice": "红", "why": "Same early classes; red waits 1.7h less."}
+{"pair_id": "x0346", "choice": "红", "why": "Rowing fine in both; red needs one fewer campus day."}
+{"pair_id": "x0347", "choice": "红", "why": "Both end by 4pm; red avoids a lone Friday trip."}
+{"pair_id": "x0348", "choice": "红", "why": "Red needs two days in, blue three."}
+{"pair_id": "x0349", "choice": "差不多", "why": "Same early classes and gaps; lives next door, extra day costs little."}
+{"pair_id": "x0350", "choice": "蓝", "why": "Both one late class; blue's online lecture saves a day."}
+{"pair_id": "x0351", "choice": "蓝", "why": "Same four days; blue avoids red's 8am Tuesday start."}
+{"pair_id": "x0352", "choice": "红", "why": "Same days; red starts at 11, blue has a 9am."}
+{"pair_id": "x0353", "choice": "红", "why": "Same days; blue has a six-hour Wednesday gap."}
+{"pair_id": "x0354", "choice": "蓝", "why": "Blue needs two trips in; red needs three."}
+{"pair_id": "x0355", "choice": "差不多", "why": "Only one Thursday lecture time differs; waiting almost equal."}
+{"pair_id": "x0356", "choice": "红", "why": "Red: three days, done by 17:00, one 9am start."}
+{"pair_id": "x0357", "choice": "红", "why": "Waiting gap under an hour; blue adds Friday 7pm class."}
+{"pair_id": "x0358", "choice": "蓝", "why": "Same days; blue has an hour less waiting."}
+{"pair_id": "x0359", "choice": "红", "why": "Red's Monday lecture is online, one fewer day in."}
+{"pair_id": "x0360", "choice": "红", "why": "Red needs one campus day instead of two."}
+{"pair_id": "x0361", "choice": "红", "why": "Red has over two hours less waiting, less parking."}
+{"pair_id": "x0362", "choice": "蓝", "why": "Waiting differs by under an hour; red adds a 5-7pm class."}
+{"pair_id": "x0363", "choice": "蓝", "why": "No gaps either; blue's online classes halve campus days."}
+{"pair_id": "x0364", "choice": "蓝", "why": "Both three days; blue's Thursday fits training, keeps Friday free."}
+{"pair_id": "x0365", "choice": "差不多", "why": "Identical except a Monday tutorial moves two hours."}
+{"pair_id": "x0366", "choice": "红", "why": "Waiting differs under an hour; red avoids Friday 7pm."}
+{"pair_id": "x0367", "choice": "红", "why": "Red's Monday lecture is online, one fewer day in."}
+{"pair_id": "x0368", "choice": "红", "why": "Same early classes; red waits 1.7h less."}
+{"pair_id": "x0369", "choice": "蓝", "why": "Same two trips; blue has two hours less waiting."}
+{"pair_id": "x0370", "choice": "蓝", "why": "Blue needs one fewer day and avoids a 5-7pm Friday class."}
+{"pair_id": "x0371", "choice": "红", "why": "Red needs two days in, blue three."}
+{"pair_id": "x0372", "choice": "红", "why": "Waiting differs by an hour; blue's 5-7pm Thursday blocks delivery."}
+{"pair_id": "x0373", "choice": "红", "why": "Same days; red never starts before noon and has no waiting."}
+{"pair_id": "x0374", "choice": "红", "why": "Both one day; red barely waits and finishes 14:00."}
+{"pair_id": "x0375", "choice": "蓝", "why": "Blue needs one campus day instead of two."}
+{"pair_id": "x0376", "choice": "蓝", "why": "Same two trips; blue has five hours less waiting."}
+{"pair_id": "x0377", "choice": "红", "why": "Red has no gaps; blue's Tuesday wastes over four hours."}
+{"pair_id": "x0378", "choice": "蓝", "why": "Both two days, no gaps; blue pairs Monday classes, frees Friday."}
+{"pair_id": "x0379", "choice": "红", "why": "Gaps matter most; red has none, blue waits an hour."}
+{"pair_id": "x0380", "choice": "蓝", "why": "Same two trips; blue avoids a 9am start and waits less."}
+{"pair_id": "x0381", "choice": "红", "why": "Red has no late class; blue ends 19:00 Thursday."}
+{"pair_id": "x0382", "choice": "红", "why": "Same three days; red waits 8.3h versus 10.9h."}
+{"pair_id": "x0383", "choice": "红", "why": "Red needs two trips in; blue needs three."}
+{"pair_id": "x0384", "choice": "红", "why": "No gaps in either; red needs one fewer campus day."}
+{"pair_id": "x0385", "choice": "红", "why": "Red waits less and avoids the Friday 7pm class."}
+{"pair_id": "x0386", "choice": "蓝", "why": "Same days; blue has an hour less waiting."}
+{"pair_id": "x0387", "choice": "红", "why": "Both within hours; red: three days, half the waiting."}
+{"pair_id": "x0388", "choice": "蓝", "why": "Both start at 11; blue needs two days in, not four."}
+{"pair_id": "x0389", "choice": "蓝", "why": "Red runs to 6pm Wednesday; blue done by 3pm."}
+{"pair_id": "x0390", "choice": "红", "why": "Same waiting; red needs almost one fewer day."}
+{"pair_id": "x0391", "choice": "红", "why": "Rowing fine in both; red needs one fewer campus day."}
+{"pair_id": "x0392", "choice": "红", "why": "Early/late tie; red needs one fewer campus day."}
+{"pair_id": "x0393", "choice": "差不多", "why": "No gaps, three campus days each; just different single-class days."}
+{"pair_id": "x0394", "choice": "差不多", "why": "Same days, both extra trips fall on training days."}
+{"pair_id": "x0395", "choice": "蓝", "why": "Blue waits 1.8h less, her main concern."}
+{"pair_id": "x0396", "choice": "蓝", "why": "No gaps in either; blue needs one fewer campus day."}
+{"pair_id": "x0397", "choice": "蓝", "why": "Rowing fine in both; blue needs one fewer campus day."}
+{"pair_id": "x0398", "choice": "差不多", "why": "Same days and waiting; lone lecture just moves days."}
+{"pair_id": "x0399", "choice": "红", "why": "Red has no gaps; blue's Friday waits three hours, ends 19:00."}
+{"pair_id": "x0400", "choice": "差不多", "why": "Same early classes and gaps; lives next door, extra day costs little."}
+{"pair_id": "x0401", "choice": "红", "why": "Red waits 1.5h less, her top concern."}
+{"pair_id": "x0402", "choice": "蓝", "why": "Same days; blue waits an hour less, no 8am."}
+{"pair_id": "x0403", "choice": "红", "why": "Waiting close; blue adds a Friday trip for a 5-7pm class."}
+{"pair_id": "x0404", "choice": "蓝", "why": "Waiting gap under an hour; red adds Friday 7pm class."}
+{"pair_id": "x0405", "choice": "差不多", "why": "Identical except the evening tutorial is Thursday versus Friday."}
+{"pair_id": "x0406", "choice": "蓝", "why": "One extra hour waiting beats red's Friday 17–19 trip."}
+{"pair_id": "x0407", "choice": "红", "why": "Waiting close; blue adds a Thursday trip for a 5-7pm class."}
+{"pair_id": "x0408", "choice": "差不多", "why": "Only one Thursday lecture time differs; waiting almost equal."}
+{"pair_id": "x0409", "choice": "蓝", "why": "Blue skips the Friday drive for under an hour more waiting."}
+{"pair_id": "x0410", "choice": "蓝", "why": "Waiting differs by under an hour; red's 5-7pm Thursday blocks delivery."}
+{"pair_id": "x0411", "choice": "蓝", "why": "Blue never starts before 11; red has a 9am tutorial."}
+{"pair_id": "x0412", "choice": "蓝", "why": "Red sits five hours Monday; blue waits less overall."}
+{"pair_id": "x0413", "choice": "红", "why": "Same three trips; red finishes by 4pm, shorter days."}
+{"pair_id": "x0414", "choice": "差不多", "why": "No gaps, four campus days each; only which day differs."}
+{"pair_id": "x0415", "choice": "差不多", "why": "No gaps, four campus days each; only which day differs."}
+{"pair_id": "x0416", "choice": "红", "why": "Same early start and days; red avoids Friday 18:00 finish."}
+{"pair_id": "x0417", "choice": "差不多", "why": "No gaps, three campus days each; just different single-class days."}
+{"pair_id": "x0418", "choice": "红", "why": "Blue has a five-hour Monday gap; red waits less."}
+{"pair_id": "x0419", "choice": "差不多", "why": "Same days count; one tutorial moves Thursday to Friday."}
+{"pair_id": "x0420", "choice": "红", "why": "Red needs two campus days, blue nearly three."}
+{"pair_id": "x0421", "choice": "红", "why": "No gaps in either; red needs one fewer campus day."}
+{"pair_id": "x0422", "choice": "红", "why": "Blue runs to 6pm Wednesday; red done by 3pm."}
+{"pair_id": "x0423", "choice": "蓝", "why": "Same three days; blue waits 9h versus 11h."}
+{"pair_id": "x0424", "choice": "蓝", "why": "Blue's long Monday gap is before an online lecture; no 7pm Friday."}
+{"pair_id": "x0425", "choice": "红", "why": "Red needs two campus days, blue nearly three."}
+{"pair_id": "x0426", "choice": "蓝", "why": "Same three trips; blue finishes by 4pm, shorter days."}
+{"pair_id": "x0427", "choice": "蓝", "why": "No gaps in either; blue needs one fewer campus day."}
+{"pair_id": "x0428", "choice": "蓝", "why": "Same two trips; blue waits three hours less, no 9am."}
+{"pair_id": "x0429", "choice": "蓝", "why": "Blue fits all classes in one Wednesday, short one-hour break."}
+{"pair_id": "x0430", "choice": "蓝", "why": "Blue has no gaps; red waits an hour Thursday."}
+{"pair_id": "x0431", "choice": "蓝", "why": "Early/late tie; blue needs one fewer campus day."}
+{"pair_id": "x0432", "choice": "红", "why": "Both one late class; red saves almost two campus days."}
+{"pair_id": "x0433", "choice": "红", "why": "Red needs two trips in; blue needs three."}
+{"pair_id": "x0434", "choice": "红", "why": "Red fits everything in one short Wednesday; blue spreads out."}
+{"pair_id": "x0435", "choice": "蓝", "why": "Both one day; blue barely waits, red waits four hours."}
+{"pair_id": "x0436", "choice": "红", "why": "No gaps either; red needs two campus days, not four."}
+{"pair_id": "x0437", "choice": "红", "why": "Same early classes; red waits 2h less."}
+{"pair_id": "x0438", "choice": "蓝", "why": "Blue avoids red's three-hour Monday gap on campus."}
+{"pair_id": "x0439", "choice": "蓝", "why": "Blue fits everything into three days instead of four."}
+{"pair_id": "x0440", "choice": "红", "why": "Red's online Tuesday lecture saves a campus day."}
+{"pair_id": "x0441", "choice": "蓝", "why": "Blue has no gaps; red's Tuesday wastes over four hours."}
+{"pair_id": "x0442", "choice": "红", "why": "Mornings and gaps equal; red's Friday class ends at 2pm."}
+{"pair_id": "x0443", "choice": "蓝", "why": "Rowing fine in both; blue needs one fewer campus day."}
+{"pair_id": "x0444", "choice": "差不多", "why": "Same three days, all finish by 4pm; only start times shift."}
+{"pair_id": "x0445", "choice": "红", "why": "Both within hours; red waits 1h, done by 15:00."}
+{"pair_id": "x0446", "choice": "蓝", "why": "Same week, but blue's Thursday ends 15:00 with less waiting."}
+{"pair_id": "x0447", "choice": "蓝", "why": "Blue needs two days in, red three."}
+{"pair_id": "x0448", "choice": "红", "why": "Red has over two hours less waiting, less parking."}
+{"pair_id": "x0449", "choice": "蓝", "why": "Rowing fine in both; blue needs one fewer campus day."}
+{"pair_id": "x0450", "choice": "红", "why": "Rowing fine in both; red needs one fewer campus day."}
+{"pair_id": "x0451", "choice": "差不多", "why": "Same four days; one tutorial moves Thursday to Friday."}
+{"pair_id": "x0452", "choice": "红", "why": "Rowing fine in both; red needs one fewer campus day."}
+{"pair_id": "x0453", "choice": "差不多", "why": "Same days, both extra trips fall on training days."}
+{"pair_id": "x0454", "choice": "红", "why": "Early/late tie; red needs about one fewer campus day."}
+{"pair_id": "x0455", "choice": "差不多", "why": "Same waiting and days; one tutorial moves Thursday to Friday."}
+{"pair_id": "x0456", "choice": "红", "why": "Early/late tie; red needs one fewer day, finishes earlier."}
+{"pair_id": "x0457", "choice": "蓝", "why": "Waiting differs by an hour; red's 5-7pm Friday blocks delivery."}
+{"pair_id": "x0458", "choice": "差不多", "why": "Same days, same waiting; time on campus just shifts."}
+{"pair_id": "x0459", "choice": "蓝", "why": "Blue's Monday lecture is online, one fewer day in."}
+{"pair_id": "x0460", "choice": "红", "why": "Both one late class; red needs one fewer campus day."}
+{"pair_id": "x0461", "choice": "红", "why": "All else equal; red finishes Monday at 13:00, not 17:00."}
+{"pair_id": "x0462", "choice": "红", "why": "Same three days; red waits 6.3h versus 8.3h."}
+{"pair_id": "x0463", "choice": "蓝", "why": "Both two days, no gaps; blue pairs Monday classes, frees Friday."}
+{"pair_id": "x0464", "choice": "红", "why": "No gaps either; red needs three campus days, not four."}
+{"pair_id": "x0465", "choice": "差不多", "why": "Same days and waiting; one tutorial moves Friday to Thursday."}
+{"pair_id": "x0466", "choice": "蓝", "why": "Same two trips; blue waits three hours less, no 9am."}
+{"pair_id": "x0467", "choice": "蓝", "why": "Same two trips; blue waits three hours less, no 9am."}
+{"pair_id": "x0468", "choice": "蓝", "why": "Same three days; blue waits less, shorter longest day."}
+{"pair_id": "x0469", "choice": "红", "why": "No gaps in either; red needs one fewer campus day."}
+{"pair_id": "x0470", "choice": "红", "why": "Waiting differs under an hour; red avoids Friday 7pm."}
+{"pair_id": "x0471", "choice": "红", "why": "Red's one-hour gap isn't big; one campus day versus four."}
+{"pair_id": "x0472", "choice": "差不多", "why": "Same days, waiting and parking; only Friday tutorial time shifts."}
+{"pair_id": "x0473", "choice": "红", "why": "Both done by 4pm; red frees Friday, waiting about an hour more."}
+{"pair_id": "x0474", "choice": "红", "why": "Red needs two trips in; blue needs three."}
+{"pair_id": "x0475", "choice": "红", "why": "Rowing fine in both; red needs one fewer campus day."}
+{"pair_id": "x0476", "choice": "红", "why": "Red needs two days in, blue three."}
+{"pair_id": "x0477", "choice": "蓝", "why": "Early bird: blue's Friday tutorial is 9am, done by 3pm."}
+{"pair_id": "x0478", "choice": "红", "why": "Same days; red waits less and finishes Monday at 16:00."}
+{"pair_id": "x0479", "choice": "蓝", "why": "Red has a six-hour Wednesday gap; blue waits less."}
+{"pair_id": "x0480", "choice": "红", "why": "Early/late tie; red needs one fewer campus day."}
+{"pair_id": "x0481", "choice": "蓝", "why": "Blue: three days, done by 17:00, Thursday free from 14:00."}
+{"pair_id": "x0482", "choice": "红", "why": "Red's Monday lecture is online, so no real wait; no 7pm Friday."}
+{"pair_id": "x0483", "choice": "蓝", "why": "Blue's online lectures mean one campus day, not three."}
+{"pair_id": "x0484", "choice": "蓝", "why": "No gaps either; blue needs two campus days, not four."}
+{"pair_id": "x0485", "choice": "红", "why": "Same four days; red avoids blue's 8am Tuesday start."}
+{"pair_id": "x0486", "choice": "蓝", "why": "Same waiting; blue needs one fewer day on campus."}
+{"pair_id": "x0487", "choice": "红", "why": "Both within hours; red waits far less, Thursday free from 14:00."}
+{"pair_id": "x0488", "choice": "蓝", "why": "Same early classes; blue waits 3.4h less."}
+{"pair_id": "x0489", "choice": "蓝", "why": "Blue needs two days in, red four."}
+{"pair_id": "x0490", "choice": "红", "why": "Blue has a three-hour Monday gap; red waits far less."}
+{"pair_id": "x0491", "choice": "蓝", "why": "Waiting nearly equal; blue avoids Friday 7pm, fewer days."}
+{"pair_id": "x0492", "choice": "红", "why": "Red: three days, one 9am start, done by 17:00."}
+{"pair_id": "x0493", "choice": "差不多", "why": "Same days, waiting and parking hours; gap just moves."}
+{"pair_id": "x0494", "choice": "红", "why": "Red has no gaps; blue's Friday waits three hours."}
+{"pair_id": "x0495", "choice": "蓝", "why": "Same waiting; blue needs one fewer day on campus."}
+{"pair_id": "x0496", "choice": "蓝", "why": "Rowing fine in both; blue needs one fewer campus day."}
+{"pair_id": "x0497", "choice": "红", "why": "Mornings and gaps equal; red keeps Friday free."}
+{"pair_id": "x0498", "choice": "红", "why": "Blue has a six-hour Wednesday gap; red barely waits."}
+{"pair_id": "x0499", "choice": "蓝", "why": "Same two trips; blue has two hours less waiting."}
+{"pair_id": "x0500", "choice": "红", "why": "Blue has a six-hour Wednesday gap; red waits far less."}
+{"pair_id": "x0501", "choice": "蓝", "why": "Blue never starts before noon; red has a 9am tutorial."}
+{"pair_id": "x0502", "choice": "蓝", "why": "Blue never starts before 11; red has a 9am tutorial."}
+{"pair_id": "x0503", "choice": "红", "why": "Red needs two days in, blue three."}
+{"pair_id": "x0504", "choice": "蓝", "why": "Same days, no gaps; blue's evening class clashes less with internship."}
+{"pair_id": "x0505", "choice": "蓝", "why": "Blue needs two trips in; red needs three."}
+{"pair_id": "x0506", "choice": "红", "why": "Red: three days, little waiting, done by 15:00."}
+{"pair_id": "x0507", "choice": "红", "why": "Red has no late class; blue ends 19:00 Friday."}
+{"pair_id": "x0508", "choice": "蓝", "why": "Same days; blue waits 3.8h versus 5h."}
+{"pair_id": "x0509", "choice": "红", "why": "Same early classes; red waits 3.4h less."}
+{"pair_id": "x0510", "choice": "红", "why": "Both done by 3pm; red skips the Friday trip."}
+{"pair_id": "x0511", "choice": "蓝", "why": "Same early classes; blue waits 1.7h less."}
+{"pair_id": "x0512", "choice": "蓝", "why": "Same three days; blue waits 8.3h versus 13h."}
+{"pair_id": "x0513", "choice": "红", "why": "Blue sits five hours Monday; red waits 2.7h less overall."}
+{"pair_id": "x0514", "choice": "红", "why": "Red's online Tuesday lecture saves a campus day."}
+{"pair_id": "x0515", "choice": "蓝", "why": "Waiting differs by an hour; red's 5-7pm Friday blocks delivery."}
+{"pair_id": "x0516", "choice": "红", "why": "Waiting differs by an hour; blue's 5-7pm Friday blocks delivery."}
+{"pair_id": "x0517", "choice": "红", "why": "Red waits an hour less and has no long days."}
+{"pair_id": "x0518", "choice": "蓝", "why": "Blue has no gaps; red wastes a whole Friday waiting."}
+{"pair_id": "x0519", "choice": "差不多", "why": "Same days and same waiting; gaps just shift around."}
+{"pair_id": "x0520", "choice": "红", "why": "Same days; red waits an hour less."}
+{"pair_id": "x0521", "choice": "差不多", "why": "Same days and waiting; lone lecture just moves days."}
+{"pair_id": "x0522", "choice": "蓝", "why": "No gaps in either; blue needs two fewer campus days."}
+{"pair_id": "x0523", "choice": "蓝", "why": "Same three days; blue waits 9h versus 10.9h."}
+{"pair_id": "x0524", "choice": "蓝", "why": "Same four days; blue avoids red's 8am Tuesday start."}
+{"pair_id": "x0525", "choice": "蓝", "why": "Blue waits 1.5h less, finishes by 3pm; Friday class is morning."}
+{"pair_id": "x0526", "choice": "红", "why": "Same waiting; red needs one fewer day on campus."}
+{"pair_id": "x0527", "choice": "蓝", "why": "Blue avoids red's 9-to-6 Wednesday, two hours less waiting."}
+{"pair_id": "x0528", "choice": "蓝", "why": "Blue waits 1.1h less and avoids a 9-hour Wednesday."}
+{"pair_id": "x0529", "choice": "蓝", "why": "Early/late tie; blue needs one fewer campus day."}
+{"pair_id": "x0530", "choice": "红", "why": "Red needs two trips in; blue needs three."}
+{"pair_id": "x0531", "choice": "蓝", "why": "Blue's one-hour gap isn't big; one campus day versus four."}
+{"pair_id": "x0532", "choice": "红", "why": "Rowing fine in both; red needs one fewer campus day."}
+{"pair_id": "x0533", "choice": "差不多", "why": "Same three days, all finish by 4pm; one tutorial shifts."}
+{"pair_id": "x0534", "choice": "红", "why": "Red has about two hours less waiting, less parking."}
+{"pair_id": "x0535", "choice": "红", "why": "Early/late tie; red needs one fewer campus day."}
+{"pair_id": "x0536", "choice": "差不多", "why": "Both one long day with four-plus hours waiting; neither is bunched."}
+{"pair_id": "x0537", "choice": "蓝", "why": "Blue needs one fewer campus day, her top priority."}
+{"pair_id": "x0538", "choice": "红", "why": "Red has no late class; blue ends 19:00 Thursday."}
+{"pair_id": "x0539", "choice": "蓝", "why": "One two-hour Tuesday gap beats red's Friday 17–19 trip."}
+{"pair_id": "x0540", "choice": "红", "why": "A bit more waiting beats blue's Friday 17–19 trip."}

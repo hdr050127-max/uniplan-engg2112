@@ -90,13 +90,17 @@ class SetBaseline:
         cares = [CARE_FEATURE[c] for c in prefs.get("cares") or ()] if self.use_cares else []
         return cares or list(BASE)
 
-    def scores(self, xs, prefs, s):
+    def scores(self, xs, prefs, s, stats_from=None):
         keys = self.keys(prefs)
-        stats = {k: (np.mean([x[k] for x in xs]), np.std([x[k] for x in xs]) or 1.0) for k in keys}
+        base = stats_from or xs
+        stats = {k: (np.mean([x[k] for x in base]), np.std([x[k] for x in base]) or 1.0) for k in keys}
         return [-sum((x[k] - stats[k][0]) / stats[k][1] for k in keys) for x in xs]
 
     def prob(self, xa, xb, prefs, s, context):
-        a, b = self.scores([xa, xb] + context, prefs, s)[:2]
+        """Compare A and B within the student's own list (z-scores depend on the list)."""
+        pool = list(context) or [xa, xb]
+        scores = self.scores(pool + [xa, xb], prefs, s, stats_from=pool)
+        a, b = scores[-2:]
         return 0.5 if a == b else float(a > b)
 
 
@@ -281,7 +285,7 @@ def main() -> int:
     ]
     results, fitted = [], {}
     for make, grid in candidates:
-        params, cv = choose(make, grid, train) if len(grid) > 1 else (grid[0], float("nan"))
+        params, cv = choose(make, grid, train) if len(grid) > 1 else (grid[0], None)
         model = make(**params).fit(decided(train), spec)
         accuracy, hits = pairwise_accuracy(model, test, sets)
         low, high = bootstrap(hits)
@@ -292,7 +296,7 @@ def main() -> int:
                         "ms_per_student": timing(model, {k: sets[k] for k in sorted(sets)[:20]}, personas),
                         "per_persona_top3": top["per_persona"]})
         fitted[model.name] = model
-        print(f"{model.name:22s} cv={cv:.3f} acc={accuracy:.3f} [{low:.3f},{high:.3f}] "
+        print(f"{model.name:22s} cv={cv if cv is None else round(cv, 3)} acc={accuracy:.3f} [{low:.3f},{high:.3f}] "
               f"top3={top['top3_hit']:.3f}/{top['top3_ceiling']:.3f} best@3={top['best_in_top3']:.3f} {params}",
               flush=True)
     for path in args.direct:

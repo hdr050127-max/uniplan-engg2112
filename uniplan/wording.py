@@ -1,10 +1,8 @@
-"""English wording for what the page shows about a sentence: a note beside each clause, the
-clarifying questions and their options (docs/DESIGN.md, section 7).
+"""English notes beside the clauses of a sentence (docs/DESIGN.md, section 7), and the times,
+days and windows the scheduler's messages name.
 
-Notes come from ``llm.parse.clarify.describe_clause`` once the parsing window provides it;
-until then (or if it fails) ``describe`` below stands in. Questions and options are worded
-here from their kind, label and fields; ``llm.parse`` decides what to ask and what each
-option means, this module only says it.
+Notes come from ``llm.parse.clarify.describe_clause``; ``describe`` below stands in only if that
+fails. Questions and their options are worded by ``llm.parse.clarify`` and shown as given.
 """
 
 from __future__ import annotations
@@ -27,11 +25,7 @@ LABEL_NOTE = {
     "prefer_no_early_late": CARE_NOTE["outside_hours"],
     "other": "Not something a timetable can use",
 }
-# A reading offered as an answer when the clause gives it no time or number.
-READING = {"blocked_time": "Times you can't make", "max_days": "A cap on days a week",
-           "max_daily_hours": "A cap on hours a day", "lunch": "A lunch break", "other": LABEL_NOTE["other"]}
 UNUSABLE = "The time or number here doesn't add up, so it is left out"
-HARD = ("blocked_time", "max_days", "max_daily_hours", "lunch", "in_person_only")
 
 
 def clock(minute: int) -> str:
@@ -134,60 +128,3 @@ def clause_describer() -> Callable[[dict[str, Any]], str] | None:
     except ImportError:
         return None
     return describe_clause
-
-
-def question_text(question: dict[str, Any], clause: dict[str, Any] | None) -> str:
-    kind = question["kind"]
-    if kind == "hard_or_soft":
-        return "Can't, or would rather not?"
-    if kind == "low_confidence":
-        return "Which do you mean?"
-    if kind == "missing_value":
-        return {"blocked_time": "Which days and times? Add them to the sentence.",
-                "max_days": "How many days at most?",
-                "max_daily_hours": "How many hours of class a day at most?"}.get(clause["label"], "Which value?")
-    keys = {key for option in question["options"] for key in option.get("fields") or {}}
-    if "max_days_per_week" in keys:
-        return "Most days on campus?"
-    if "lunch" in keys:
-        return "Lunch break?"
-    if "in_person_only" in keys:
-        return "In-person classes only?"
-    return "Add this?"
-
-
-def option_text(question: dict[str, Any], option: dict[str, Any], clause: dict[str, Any] | None,
-                note: str | None, has_values: bool = True) -> str:
-    """Short words for one option. ``note`` is what the option would make the clause mean;
-    ``has_values``: that reading gives the page something to apply."""
-    kind, label, fields = question["kind"], option.get("label"), option.get("fields") or {}
-    if kind == "hard_or_soft":
-        return "Can't" if label in HARD else "Would rather not"
-    if kind == "low_confidence":
-        return note if note and (has_values or label not in READING) else READING.get(label, LABEL_NOTE.get(label, label))
-    if kind == "missing_value":
-        if label == clause["label"] and not fields:
-            return "I'll add it to the sentence"
-        if "max_days_per_week" in fields:
-            return str(fields["max_days_per_week"])
-        if "max_daily_minutes" in fields:
-            return f"{fields['max_daily_minutes'] / 60:g} h"
-        if label == "prefer_fewer_days":
-            return "No cap, just fewer days"
-        if label == "other":
-            return "No limit" if clause["label"] == "max_daily_hours" else "Not a timetable request"
-        return note or LABEL_NOTE.get(label, label)
-    # An offer: something the scheduler can do that the sentence did not mention.
-    if "max_days_per_week" in fields:
-        return str(fields["max_days_per_week"])
-    if "lunch" in fields:
-        lunch = fields["lunch"]
-        return f"{lunch['minutes']} min between {clock(lunch['start_min'])} and {clock(lunch['end_min'])}"
-    if fields.get("in_person_only"):
-        return "Yes"
-    keys = {key for other in question["options"] for key in other.get("fields") or {}}
-    if "max_days_per_week" in keys:
-        return "No limit"
-    if "in_person_only" in keys:
-        return "No, online is fine"
-    return "No"

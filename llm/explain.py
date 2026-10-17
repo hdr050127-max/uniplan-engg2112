@@ -31,10 +31,6 @@ BEST_NAME = {"campus_days": "Fewest days on campus", "gap": "Least waiting",
              "outside_hours": "Least early or late class time"}
 TIES = {"campus_days": 0.05, "gap_min": 1.0, "outside_min": 1.0}
 DEFAULT_HOURS = {"start_min": 540, "end_min": 1080}
-# Bigger is better when the Windows GPU machine answers; on this Mac the 3B is the
-# best trade-off between speed and how often its sentences pass the fact check.
-REMOTE_MODELS = ("qwen2.5:7b", "qwen2.5:3b", "qwen2.5:1.5b")
-LOCAL_MODELS = ("qwen2.5:3b", "qwen2.5:1.5b", "qwen2.5:7b")
 TIMEOUT = 60
 
 
@@ -731,15 +727,20 @@ def prompt(student_text: str, conditions: Conditions, all_facts: list[dict]) -> 
     return "\n".join(head) + "\n\n" + "\n\n".join(blocks)
 
 
+def rewriting_on() -> bool:
+    """Whether a model is named to reword the reasons (UNIPLAN_EXPLAIN_MODEL, e.g. "qwen2.5:7b").
+
+    Off by default: the site shows the templates, which are true by construction. English
+    rewrites by qwen2.5:7b passed the fact check only 24-34% of the time, and a manual check of
+    30 that passed found 10 wrong (output/explain/README.md).
+    """
+    return bool(os.environ.get("UNIPLAN_EXPLAIN_MODEL"))
+
+
 def choose_model() -> str | None:
-    """UNIPLAN_EXPLAIN_MODEL wins; otherwise the first preferred Qwen the server has."""
+    """The model UNIPLAN_EXPLAIN_MODEL names, if the server has it; None when unset."""
     wanted = os.environ.get("UNIPLAN_EXPLAIN_MODEL")
-    if wanted is not None:
-        return wanted if wanted and ollama.available(wanted) else None
-    if not ollama.available():
-        return None
-    order = LOCAL_MODELS if ollama.base_url() == ollama.LOCAL else REMOTE_MODELS
-    return next((model for model in order if ollama.available(model)), None)
+    return wanted if wanted and ollama.available(wanted) else None
 
 
 def gpu_busy() -> bool:

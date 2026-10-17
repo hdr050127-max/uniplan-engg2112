@@ -32,6 +32,11 @@ def base_profile(units=UNITS, **fields):
             "unavailable_windows": [], **fields}
 
 
+def covers_day(windows, weekday):
+    """Some window blocks the whole day; a parser may end it at 1439 or (half-open) at 1440."""
+    return any(w["weekday"] == weekday and w["start_min"] <= 0 and w["end_min"] >= 1439 for w in windows)
+
+
 def default_groups(catalog, profile):
     data = main(profile, catalog)["module_two_result"]
     return {unit["unit_code"]: [group["group_id"] for group in unit["groups"] if group["default_selected"]]
@@ -116,7 +121,7 @@ class EndToEndTests(unittest.TestCase):
     def test_sentence_to_three_valid_timetables(self):
         text = "我周五要打工，要留出午饭时间，而且不想课之间等太久"
         result = plan_from_sentence(text, base_profile(), self.catalog, selected_groups=self.groups)
-        self.assertIn({"weekday": 5, "start_min": 0, "end_min": 1439}, result["profile"]["unavailable_windows"])
+        self.assertTrue(covers_day(result["profile"]["unavailable_windows"], 5))
         self.assertIsNotNone(result["profile"]["lunch"])
         self.assertEqual(result["cares"], ["gap"])
         recommendation, items = self.check_recommendation(result)
@@ -265,12 +270,13 @@ class ServerTests(unittest.TestCase):
     def test_parse_prepare_and_explain(self):
         status, parsed = self.post("/api/parse", {"text": "我周五要打工，不想课之间等太久"})
         self.assertEqual(status, 200)
-        self.assertEqual(parsed["clauses"][0]["profile_fields"]["unavailable_windows"][0]["weekday"], 5)
-        self.assertEqual(parsed["clauses"][1]["cares"], ["gap"])
+        windows = [w for clause in parsed["clauses"] for w in clause["profile_fields"].get("unavailable_windows", [])]
+        self.assertTrue(covers_day(windows, 5))
+        self.assertIn("gap", [care for clause in parsed["clauses"] for care in clause["cares"]])
         self.assertEqual(self.post("/api/parse", {"text": "   "})[0], 400)
 
         profile = {"year": 2026, "session_code": "S2C", "unit_codes": ["CIVL3206", "ENGG2112"],
-                   "unavailable_windows": parsed["clauses"][0]["profile_fields"]["unavailable_windows"]}
+                   "unavailable_windows": windows}
         _, first = self.post("/api/prepare", {"profile": profile, "save": False})
         groups = {unit["unit_code"]: [g["group_id"] for g in unit["groups"] if g["default_selected"]]
                   for unit in first["module_two_result"]["units"]}

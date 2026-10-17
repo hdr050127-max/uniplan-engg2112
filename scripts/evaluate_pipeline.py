@@ -1,6 +1,6 @@
 """End-to-end check: sentence -> parse() -> plan -> rank() -> reasons, against hand-written answers.
 
-Sentences: llm/parse/data/test_claude.csv (written by Claude, NOT real students). Each sentence
+Sentences: a frozen test set, default llm/parse/data/test_claude.csv (v1; written by Claude, NOT real students). Each sentence
 is planned twice on the same courses (the four committed combinations of scripts/evaluate_explain.py):
 with its hand-written conditions, and with what parse() reads from the sentence. Reported:
 
@@ -14,10 +14,11 @@ with its hand-written conditions, and with what parse() reads from the sentence.
     python3 scripts/evaluate_pipeline.py --linear-from claude/cool-bun-40355d
         # the plain-Python linear classifier committed on that ref, for comparison
     python3 scripts/evaluate_pipeline.py --ranker rule   # rank() without llm/rank/model.json
+    python3 scripts/evaluate_pipeline.py --test-file llm/parse/data/test_claude_v2.csv
     python3 scripts/evaluate_pipeline.py --compare output/pipeline/A.json output/pipeline/B.json
 
 Runs on this Mac only: llm/ollama.py is pointed at 127.0.0.1 unless --configured-server is given.
-Writes output/pipeline/pipeline_eval_<classifier>.json and .md.
+Writes output/pipeline/pipeline_eval_<classifier>_<ranker>_<test set>.json and .md.
 """
 
 from __future__ import annotations
@@ -42,7 +43,7 @@ ROOT = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(ROOT))
 
 import llm.parse as parsing  # noqa: E402
-from evaluate_explain import UNIT_SETS, base_profile, conditions_from, sentences, tracked_catalog  # noqa: E402
+from evaluate_explain import TEST_SET, UNIT_SETS, base_profile, conditions_from, sentences, tracked_catalog  # noqa: E402
 from llm import ollama  # noqa: E402
 from llm.contracts import to_profile_fields  # noqa: E402
 from llm.gpu_lock import gpu_lock  # noqa: E402
@@ -155,14 +156,14 @@ def stats(records: list[dict]) -> dict:
     }
 
 
-def summary(records: list[dict], classifier: str, ranker: str) -> str:
+def summary(records: list[dict], classifier: str, ranker: str, test_set: str) -> str:
     numbers = stats(records)
     exact, checked, broken, picks, both = (numbers[key] for key in ("exact", "checked", "broken", "picks", "both"))
     same_first, same_set, seconds = numbers["same_first"], numbers["same_set"], numbers["seconds"]
     parse_seconds, feasibility, wrong_fields = numbers["parse_seconds"], numbers["feasibility"], numbers["wrong_fields"]
     lines = [
         f"# End-to-end pipeline evaluation (classifier: {classifier})", "",
-        "Sentences: `llm/parse/data/test_claude.csv`, written by Claude (Opus 5.5) — **not real student data**. "
+        f"Sentences: `{test_set}`, written by Claude (Opus 5.5) — **not real student data**. "
         "Each sentence is planned twice on the same courses: with its hand-written conditions and with what "
         "`parse()` reads. Run on this Mac only.", "",
         f"- Clause classifier: {classifier}",
@@ -212,7 +213,7 @@ def comparison(first: Path, second: Path) -> str:
     shared = [sid for sid in by_id[0] if "picks_gold" in by_id[0][sid] and "picks_gold" in by_id[1].get(sid, {})]
     moved = sum(by_id[0][sid]["picks_gold"][0] != by_id[1][sid]["picks_gold"][0] for sid in shared)
     lines = ["# Pipeline evaluation: two runs compared", "",
-             "Sentences: `llm/parse/data/test_claude.csv` (written by Claude; not real student data).", "",
+             f"Sentences: `{runs[0].get('test_set')}` (written by Claude; not real student data).", "",
              f"| | `{first.name}` | `{second.name}` |", "| --- | --- | --- |"]
     lines += [f"| {name} | {a} | {b} |" for name, a, b in rows]
     lines += ["", f"With the same hand-written conditions, the two runs put a different timetable first in "
@@ -230,6 +231,8 @@ def main_cli(argv: list[str] | None = None) -> int:
                         help="rank() with llm/rank/model.json, or the z-score rule it falls back to")
     parser.add_argument("--compare", nargs=2, type=Path, metavar="JSON", help="compare two saved runs")
     parser.add_argument("--limit", type=int, default=0, help="only the first N sentences")
+    parser.add_argument("--test-file", type=Path, default=TEST_SET,
+                        help="a frozen test set with the columns of test_claude.csv (default: v1)")
     args = parser.parse_args(argv)
     if args.compare:
         target = OUT / f"compare_{args.compare[0].stem}_vs_{args.compare[1].stem}.md"
@@ -261,7 +264,10 @@ def main_cli(argv: list[str] | None = None) -> int:
     name += "_model" if trained else "_rule"
     rule_only = mock.patch.object(rank_model, "load", return_value=None) if args.ranker == "rule" else nullcontext()
 
-    chosen = sentences()[:args.limit or None]
+    test_file = args.test_file.resolve()
+    test_set = str(test_file.relative_to(ROOT))
+    name += f"_{test_file.stem}"
+    chosen = sentences(test_file)[:args.limit or None]
     records = []
     lock = gpu_lock("scripts/evaluate_pipeline.py", "mac") if parsing.RUNTIME.startswith("ollama") and not args.linear_from \
         else nullcontext()
@@ -277,10 +283,10 @@ def main_cli(argv: list[str] | None = None) -> int:
             print(f"{sentence_id} exact={records[-1]['exact']} parsed={records[-1]['status_parsed']}", flush=True)
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / f"pipeline_eval_{name}.json").write_text(json.dumps({
-        "classifier": classifier, "ranker": ranker, "test_set": "llm/parse/data/test_claude.csv",
+        "classifier": classifier, "ranker": ranker, "test_set": test_set,
         "data_note": "Sentences written by Claude; not real student data.", "records": records,
     }, ensure_ascii=False, indent=1) + "\n")
-    (OUT / f"pipeline_eval_{name}.md").write_text(summary(records, classifier, ranker))
+    (OUT / f"pipeline_eval_{name}.md").write_text(summary(records, classifier, ranker, test_set))
     print(f"wrote {OUT}/pipeline_eval_{name}.json and .md")
     return 0
 

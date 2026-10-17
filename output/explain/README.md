@@ -1,14 +1,16 @@
 # Reason fact-check results (`scripts/evaluate_explain.py`)
 
-Sentences: `llm/parse/data/test_claude.csv` (written by Claude; not real student data), planned with
+Sentences: `llm/parse/data/test_claude.csv` (v1; written by Claude; not real student data), planned with
 their hand-written conditions on four committed course combinations. The checker was refined while
 spot-checking runs on these same sentences, so every pass rate here is in-sample and optimistic.
+File names end in the test set they ran on (`_test_claude` = v1; `--test-file` picks another). The
+out-of-sample numbers will come from v2 (`test_claude_v2.csv`), which has not been run.
 
 | File | Ranker | Reasons | Model and machine | Checker |
 | --- | --- | --- | --- | --- |
-| `explain_eval_qwen2.5-7b.*` | rule (no `model.json` yet) | template v1 | qwen2.5:7b, Windows RTX 4090 | as of `550bf73` |
-| `explain_eval_template_before.*`, `explain_eval_qwen2.5-7b_before.*` | trained (`llm/rank/model.json`) | template v1: best-of-picks first | qwen2.5:7b, this Mac | as of `8676873` |
-| `explain_eval_template_after.*`, `explain_eval_qwen2.5-7b_after.*` | trained | template v2: why pick 1 beats pick 2 (`llm.rank.contributions`) and its cost | qwen2.5:7b, this Mac (sentences re-checked with the final rules) | final |
+| `explain_eval_qwen2.5-7b_test_claude.*` | rule (no `model.json` yet) | template v1 | qwen2.5:7b, Windows RTX 4090 | as of `550bf73` |
+| `explain_eval_template_before_test_claude.*`, `explain_eval_qwen2.5-7b_before_test_claude.*` | trained (`llm/rank/model.json`) | template v1: best-of-picks first | qwen2.5:7b, this Mac | as of `8676873` |
+| `explain_eval_template_after_test_claude.*`, `explain_eval_qwen2.5-7b_after_test_claude.*` | trained | template v2: why pick 1 beats pick 2 (`llm.rank.contributions`) and its cost | qwen2.5:7b, this Mac (sentences re-checked with the final rules) | final |
 
 ## Before and after grounding reasons in the ranking model (same picks, same machine)
 

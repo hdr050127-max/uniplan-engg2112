@@ -1,0 +1,179 @@
+"""Teacher-student rounds: Qwen answers, Claude grades, the graded labels train Qwen.
+
+    python3 -m llm.parse.review pool                 # question pool, minus anything close to the test set
+    python3 -m llm.gpu_lock -- python3 -m llm.parse.review answer          # qwen2.5:7b, untrained
+    python3 -m llm.parse.review sheet --round 1      # output/review_round1.jsonl for Claude to grade
+    python3 -m llm.parse.review apply --round 1      # Claude's labels -> training data + round stats
+
+The pool is the SYNTHETIC clauses written by qwen2.5:7b (source qwen_synth, label = the label they
+were generated for) plus Claude's hard training clauses in data/train_claude.csv (source claude_train).
+data/test_claude.csv never enters a pool: pool clauses that look like any test clause are removed.
+Claude writes its grades to output/review_round<N>_claude.jsonl: one line per id with
+"label" (the right label) and "keep" (false when the clause itself is unusable).
+"""
+from __future__ import annotations
+
+import argparse
+import difflib
+import hashlib
+import json
+import random
+import sys
+from collections import Counter
+from pathlib import Path
+
+from llm.parse.gold import clause_key, load
+from llm.parse.labels import LABELS, short_messages
+
+HERE = Path(__file__).resolve().parent
+OUTPUT = HERE / "output"
+POOL = OUTPUT / "review_pool.jsonl"
+SYNTHETIC = OUTPUT / "synthetic_clauses.jsonl"
+TRAIN_CLAUDE = HERE / "data" / "train_claude.csv"
+TEST = HERE / "data" / "test_claude.csv"
+LORA_DATA = HERE / "windows" / "data"
+SEED = 2112
+SIMILAR = 0.85          # character similarity at which a pool clause counts as a copy of a test clause
+AGREE_SAMPLE = 0.10     # share of clauses both models got "right" that Claude still checks
+
+
+def _read(path: Path) -> list[dict]:
+    with open(path, encoding="utf-8") as handle:
+        return [json.loads(line) for line in handle if line.strip()]
+
+
+def _write(path: Path, rows: list[dict]) -> None:
+    with open(path, "w", encoding="utf-8") as handle:
+        for row in rows:
+            handle.write(json.dumps(row, ensure_ascii=False) + "\n")
+
+
+def _val_share(key: str, share: float = 0.15) -> bool:
+    return int(hashlib.sha256(f"{SEED}|{key}".encode()).hexdigest()[:8], 16) / 0xFFFFFFFF < share
+
+
+def build_pool() -> dict:
+    rows = [{"id": f"syn-{index:04d}", "clause": row["text"], "gen_label": row["label"], "source": "qwen_synth",
+             "language": row["language"], "split": row["split"]} for index, row in enumerate(_read(SYNTHETIC))]
+    if TRAIN_CLAUDE.exists():
+        for sentence in load(TRAIN_CLAUDE):
+            split = "val" if _val_share(sentence["id"]) else "train"
+            rows += [{"id": f"cl-{sentence['id']}-{number}", "clause": clause["text"], "gen_label": clause["label"],
+                      "source": "claude_train", "language": "en", "split": split}
+                     for number, clause in enumerate(sentence["clauses"], 1)]
+    # Remove anything close to a test clause. Only counts are printed; the test text is never shown.
+    test = [clause_key(c["text"]) for s in load(TEST) for c in s["clauses"]] if TEST.exists() else []
+    kept, removed = [], Counter()
+    for row in rows:
+        key = clause_key(row["clause"])
+        close = any(difflib.SequenceMatcher(None, key, other).quick_ratio() >= SIMILAR
+                    and difflib.SequenceMatcher(None, key, other).ratio() >= SIMILAR for other in test)
+        if close:
+            removed[row["source"]] += 1
+        else:
+            kept.append(row)
+    _write(POOL, kept)
+    stats = {"pool": len(kept), "by_source": dict(Counter(r["source"] for r in kept)),
+             "by_split": dict(Counter(r["split"] for r in kept)), "removed_as_close_to_test": dict(removed),
+             "similarity_threshold": SIMILAR}
+    print(json.dumps(stats, indent=2))
+    return stats
+
+
+def answer(models: list[str]) -> None:
+    """Answers from untrained Qwen (7B only since 2026-10-17), cached with the evaluation predictions."""
+    from llm import ollama
+    from llm.parse.classify import ollama_classifier
+    from llm.parse.evaluate import data_sets, predict, texts_needed
+    texts = list(dict.fromkeys([row["clause"] for row in _read(POOL)] + texts_needed(data_sets(False))))
+    for number, model in enumerate(models):
+        if number:
+            ollama.unload(models[number - 1])
+        predict(f"ollama:{model}", ollama_classifier(model), texts,
+                {"machine": ollama.base_url(), "note": "no training, full prompt with rules, constrained to the 9 labels"})
+
+
+def _predictions(model: str) -> dict:
+    path = OUTPUT / "predictions" / f"ollama_{model.replace(':', '_')}.json"
+    return json.loads(path.read_text())["predictions"]
+
+
+def sheet(round_number: int, models: list[str]) -> None:
+    pool = _read(POOL)
+    answers = {model: _predictions(model) for model in models}
+    rng = random.Random(SEED + round_number)
+    picked, counts = [], Counter()
+    for row in pool:
+        preds = {model: answers[model][row["clause"]]["label"] for model in models}
+        disagree = any(pred != row["gen_label"] for pred in preds.values())
+        if disagree or rng.random() < AGREE_SAMPLE:
+            picked.append({"id": row["id"], "clause": row["clause"], "gen_label": row["gen_label"],
+                           **{f"pred_{model.split(':')[-1]}": pred for model, pred in preds.items()},
+                           "source": row["source"], "split": row["split"]})
+            counts["disagree" if disagree else "agree_sample"] += 1
+    _write(OUTPUT / f"review_round{round_number}.jsonl", picked)
+    stats = {"round": round_number, "pool": len(pool), "to_grade": len(picked), **counts,
+             "by_source": dict(Counter(r["source"] for r in picked)),
+             "agree_sample_share": AGREE_SAMPLE, "sample_seed": SEED + round_number,
+             "zero_shot_accuracy_vs_gen_label": {
+                 model: round(sum(answers[model][r["clause"]]["label"] == r["gen_label"] for r in pool) / len(pool), 4)
+                 for model in models}}
+    (OUTPUT / f"review_round{round_number}_stats.json").write_text(json.dumps(stats, indent=2) + "\n")
+    print(json.dumps(stats, indent=2))
+
+
+def apply(round_number: int) -> None:
+    """Training data for this round: Claude's label where graded, the generation label elsewhere."""
+    pool = {row["id"]: row for row in _read(POOL)}
+    graded = {row["id"]: row for row in _read(OUTPUT / f"review_round{round_number}_claude.jsonl")}
+    unknown = [key for key in graded if key not in pool]
+    bad = [key for key, row in graded.items() if row.get("keep", True) and row.get("label") not in LABELS]
+    if unknown or bad:
+        sys.exit(f"grades with unknown ids {unknown[:5]} or labels {bad[:5]}")
+    rows, changes = [], Counter()
+    for key, row in pool.items():
+        grade = graded.get(key)
+        if grade is not None and grade.get("keep", True) is False:
+            changes[f"dropped_{row['source']}"] += 1
+            continue
+        label = grade["label"] if grade else row["gen_label"]
+        if grade:
+            changes[f"graded_{row['source']}"] += 1
+            if label != row["gen_label"]:
+                changes[f"relabelled_{row['source']}"] += 1
+                changes[f"{row['gen_label']} -> {label}"] += 1
+        rows.append({"text": row["clause"], "label": label, "label_from": "claude" if grade else "generation",
+                     "source": row["source"], "language": row["language"], "split": row["split"], "id": key})
+    _write(OUTPUT / f"train_round{round_number}.jsonl", rows)
+    LORA_DATA.mkdir(parents=True, exist_ok=True)
+    for split, name in (("train", "train"), ("val", "valid")):
+        _write(LORA_DATA / f"{name}.jsonl", [
+            {"messages": short_messages(r["text"]) + [{"role": "assistant", "content": r["label"]}]}
+            for r in rows if r["split"] == split])
+    stats = json.loads((OUTPUT / f"review_round{round_number}_stats.json").read_text())
+    stats["applied"] = {"training_rows": len(rows), "by_split": dict(Counter(r["split"] for r in rows)),
+                        "by_source": dict(Counter(r["source"] for r in rows)),
+                        "label_from": dict(Counter(r["label_from"] for r in rows)), **dict(changes)}
+    (OUTPUT / f"review_round{round_number}_stats.json").write_text(json.dumps(stats, indent=2) + "\n")
+    print(json.dumps(stats["applied"], indent=2))
+
+
+def main(argv: list[str] | None = None) -> int:
+    parser = argparse.ArgumentParser(description="Teacher-student review rounds.")
+    parser.add_argument("step", choices=("pool", "answer", "sheet", "apply"))
+    parser.add_argument("models", nargs="*", default=["qwen2.5:7b"])
+    parser.add_argument("--round", type=int, default=1)
+    args = parser.parse_args(argv)
+    if args.step == "pool":
+        build_pool()
+    elif args.step == "answer":
+        answer(args.models)
+    elif args.step == "sheet":
+        sheet(args.round, args.models)
+    else:
+        apply(args.round)
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

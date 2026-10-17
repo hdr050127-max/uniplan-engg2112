@@ -1,11 +1,22 @@
 """The shapes every block promises the others (llm/contracts.py). Must stay green on every branch."""
 import unittest
 
+import llm.parse as parse_module
 from llm.contracts import HARD_FIELDS, SOFT_FIELDS, to_profile_fields, preferences_of
 from llm.explain import explain
 from llm.parse import parse
 from llm.parse.labels import LABELS
 from llm.rank import rank
+
+_runtime = parse_module.RUNTIME
+
+
+def setUpModule():
+    parse_module.RUNTIME = "linear"   # offline and deterministic: no call to the Ollama server
+
+
+def tearDownModule():
+    parse_module.RUNTIME = _runtime
 
 CANDIDATES = [
     {"candidate_id": "a", "features": {"campus_days": 3.0, "gap_min": 100.0, "outside_min": 0.0}},

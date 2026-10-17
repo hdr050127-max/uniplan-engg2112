@@ -618,7 +618,8 @@ function renderSay() {
   box.append(el("p", "say-head", "我理解为"));
   if (say.summary) {
     const changed = Object.values(say.answers).some(Boolean);
-    box.append(el("p", "say-summary", changed ? `${say.summary}（已按你的回答调整，见下面）` : say.summary));
+    const summary = say.summary.replace(/^我理解为[:：]\s*/, "");  // the heading above already says it
+    box.append(el("p", "say-summary", changed ? `${summary}（已按你的回答调整，见下面）` : summary));
   }
   if (say.mode?.simplified) {
     box.append(el("p", "say-note", "简化模式：识别用的大模型暂时连不上，改用了简单的识别方法，请仔细核对下面每一条。"));

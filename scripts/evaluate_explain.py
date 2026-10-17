@@ -19,6 +19,7 @@ from __future__ import annotations
 
 import argparse
 import csv
+import re
 import json
 import shutil
 import statistics
@@ -37,7 +38,9 @@ sys.path.insert(0, str(ROOT))
 from llm import explain as explainer  # noqa: E402
 from llm import ollama  # noqa: E402
 from llm.explain import allowed_values, check_reason, explain_detailed, fact_lines, facts_of  # noqa: E402
+from llm.contracts import preferences_of  # noqa: E402
 from llm.gpu_lock import gpu_lock, target_of_ollama  # noqa: E402
+from llm.rank import contributions  # noqa: E402
 from uniplan.advisor import conditions_of, hard_violations, merge_conditions  # noqa: E402
 from uniplan.catalog import SnapshotCatalog  # noqa: E402
 from uniplan.main import main  # noqa: E402
@@ -48,6 +51,31 @@ OUT = ROOT / "output/explain"
 UNIT_SETS = (["ENGG2112", "AMME2301"], ["ENGG2112", "CIVL3206"], ["AMME2301", "CIVL3206", "ENGG2112"],
              ["AMME2262", "AMME2301", "CIVL3206", "ENGG2112"])
 DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+# Words that name each ranking feature (llm/rank/features.py), most specific first.
+FEATURE_WORDS = (("single_class_days", r"一节课"), ("building_changes", r"换.{0,2}楼"), ("friday_free", r"周五"),
+                 ("earliest_start", r"最早"), ("latest_end", r"最晚|下课"),
+                 ("longest_day_h", r"最久|最长的一天|在校.{0,6}一天"), ("heaviest_day_h", r"课最多的一天"),
+                 ("outside_h", r"早晚课|以外的课"), ("early_h", r"早课"), ("late_h", r"晚课"),
+                 ("gap_h", r"等|空档"), ("campus_days", r"到校|来学校|天数"), ("online_share", r"线上"))
+ROUTINE = re.compile(r"每周固定|平时不用到校")
+
+
+def main_feature(text: str | None) -> str | None:
+    """The feature a reason names first, before its description of the weekly routine."""
+    if not text:
+        return None
+    head = ROUTINE.split(text, maxsplit=1)[0]
+    found = [(match.start(), name) for name, words in FEATURE_WORDS for match in [re.search(words, head)] if match]
+    return min(found)[1] if found else None
+
+
+def biggest_difference(picks: list[dict], conditions: dict, sentence: str, pool: list[dict]) -> list[tuple[str, float]]:
+    """Pick 1's contributions minus pick 2's (llm.rank.contributions), biggest first."""
+    prefs = preferences_of(conditions, sentence)
+    first, second = (contributions(pick, prefs, pool) for pick in picks[:2])
+    return sorted(((name, first[name] - second[name]) for name in first), key=lambda item: -item[1])
+
+
 CARE_OF = {"prefer_fewer_days": "campus_days", "prefer_less_waiting": "gap", "prefer_no_early_late": "outside_hours"}
 
 
@@ -142,23 +170,30 @@ def run_one(index: int, sentence_id: str, sentence: str, rows: list[dict[str, st
     menu = ranking["recommendation"]["menus"][axes]
     picks = [items[cid] for cid in menu["picks"]]
     confirmed = conditions_of(result["profile"], axes.split(","), conditions["cares"])
+    pool = ranking["recommendation"]["_candidates"][axes]
     started = time.monotonic()
     texts = [pick.get("model_text") for pick in (saved or {}).get("picks", [])]
     same_picks = saved is not None and [pick["candidate_id"] for pick in saved.get("picks", [])] == menu["picks"]
     if saved is None:
-        written = explain_detailed(sentence, confirmed, picks, model=model)
+        written = explain_detailed(sentence, confirmed, picks, model=model, candidates=pool)
     elif same_picks and texts and all(texts):
         # The planner is deterministic, so these are the same picks the model wrote about.
         with mock.patch.object(explainer, "ask_model", return_value=texts):
-            written = explain_detailed(sentence, confirmed, picks, model=model)
+            written = explain_detailed(sentence, confirmed, picks, model=model, candidates=pool)
     else:
-        written = explain_detailed(sentence, confirmed, picks, model=None)
+        written = explain_detailed(sentence, confirmed, picks, model=None, candidates=pool)
         written["status"] = "not rechecked" if not same_picks else saved.get("explain_status", "template")
     seconds = saved.get("seconds", 0) if saved else round(time.monotonic() - started, 2)
     record.update(axes=axes, candidates=len(menu["candidates"]), seconds=seconds,
                   explain_status=written["status"], picks=[])
+    if len(picks) > 1:
+        differences = biggest_difference(picks, confirmed, sentence, pool)
+        record["differences"] = [[name, round(value, 3)] for name, value in differences[:3]]
+        record["main_feature"] = differences[0][0]
+        record["template_feature"] = main_feature(menu["reasons"][0])
+        record["shown_feature"] = main_feature(written["reasons"][0])
     for position, (pick, template) in enumerate(zip(picks, menu["reasons"])):
-        facts = facts_of(position, picks, confirmed)
+        facts = facts_of(position, picks, confirmed, pool)
         allowed = allowed_values([f"{facts['count']} 份", *fact_lines(facts)])
         record["picks"].append({
             "candidate_id": pick["candidate_id"], "pattern": pick["pattern"],
@@ -183,6 +218,7 @@ def summary(records: list[dict], model: str | None, note: str = "") -> str:
     statuses = Counter(record["explain_status"] for record in ready)
     reasons = Counter(pick["rejected_why"] for _, pick in asked if not pick["model_passed"])
     seconds = [record["seconds"] for record in ready if record["explain_status"] not in ("template",)]
+    compared = [record for record in ready if record.get("main_feature")]
 
     def rate(part: int, whole: int) -> str:
         return f"{part}/{whole} ({part / whole:.0%})" if whole else "0/0"
@@ -198,6 +234,10 @@ def summary(records: list[dict], model: str | None, note: str = "") -> str:
         f"| Recommended timetables | {len(picks)}; with a time clash or a broken hard condition: "
         f"{sum(bool(pick['violations']) for _, pick in picks)} |",
         f"| Template reasons passing the checker | {rate(template_ok, len(picks))} |",
+        f"| Pick 1: main reason = the model's biggest difference from pick 2, template | "
+        f"{rate(sum(r['template_feature'] == r['main_feature'] for r in compared), len(compared))} |",
+        f"| — the reason shown (model rewrite if it passed, else template) | "
+        f"{rate(sum(r['shown_feature'] == r['main_feature'] for r in compared), len(compared))} |",
         f"| Model sentences returned | {len(asked)} (requests by status: {dict(statuses)}) |",
         f"| Model sentences that passed and were shown | {rate(len(passed), len(asked))} |",
     ]
@@ -235,6 +275,7 @@ def main_cli(argv: list[str] | None = None) -> int:
     parser.add_argument("--model", default="qwen2.5:7b", help='Ollama model, or "none" for the template only')
     parser.add_argument("--limit", type=int, default=0, help="only the first N sentences")
     parser.add_argument("--recheck", type=Path, help="a saved result file: check its model sentences again")
+    parser.add_argument("--tag", default="", help="suffix for the output file names, e.g. before")
     args = parser.parse_args(argv)
     model = None if args.model == "none" else args.model
     saved, server, note = {}, None, ""
@@ -264,7 +305,7 @@ def main_cli(argv: list[str] | None = None) -> int:
                                        saved.get(sentence_id) if args.recheck else None))
                 print(f"{sentence_id} {records[-1]['status']} {records[-1].get('explain_status', '')}", flush=True)
     OUT.mkdir(parents=True, exist_ok=True)
-    name = f"explain_eval_{(model or 'template').replace(':', '-')}"
+    name = f"explain_eval_{(model or 'template').replace(':', '-')}" + (f"_{args.tag}" if args.tag else "")
     if model and not args.recheck:
         server = ollama.base_url()
     (OUT / f"{name}.json").write_text(json.dumps({"model": model, "server": server, "rechecked": bool(args.recheck),

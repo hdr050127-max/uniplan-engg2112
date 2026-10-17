@@ -120,7 +120,7 @@ def recommend(pool: list[dict[str, Any]], profile: dict[str, Any], student_text:
     """
     by_id = {entry["candidate_id"]: entry for entry in pool}
     built: dict[str, dict[str, Any]] = {}
-    menus, sources = {}, set()
+    menus, sources, pools = {}, set(), {}
     for axes in AXIS_SETS:
         conditions = conditions_of(profile, axes, cares)
         ordered = tuple(conditions["cares"])
@@ -139,10 +139,13 @@ def recommend(pool: list[dict[str, Any]], profile: dict[str, Any], student_text:
             "candidates": [entry["candidate_id"] for entry in chosen], "from_front": from_front,
             "picks": [pick["candidate_id"] for pick in picks],
             "scores": [scores.get(pick["candidate_id"]) for pick in picks],
-            "reasons": explain(student_text, conditions, picks, model=None),
+            "reasons": explain(student_text, conditions, picks, model=None, candidates=candidates),
         }
+        pools[axes_name(axes)] = candidates
+    # "_candidates" is private (meetings of up to 20 timetables per menu): the reasons
+    # registry needs it so explain() sees the same list as rank(); callers pop it before output.
     return {"menus": menus, "ranker": " / ".join(sorted(sources)), "reasons_by": "template",
-            "candidate_range": [CANDIDATE_MIN, CANDIDATE_MAX]}
+            "candidate_range": [CANDIDATE_MIN, CANDIDATE_MAX], "_candidates": pools}
 
 
 def conditions_of(profile: dict[str, Any], axes: tuple[str, ...] | list[str],
@@ -275,13 +278,13 @@ class ExplainRegistry:
         self._lock = Lock()
 
     def add(self, student_text: str, profile: dict[str, Any], recommendation: dict[str, Any],
-            items: dict[str, dict[str, Any]]) -> str:
+            items: dict[str, dict[str, Any]], candidates: dict[str, list[dict[str, Any]]] | None = None) -> str:
         token = secrets.token_hex(12)
         picks = {axes: [items[cid] for cid in menu["picks"]] for axes, menu in recommendation["menus"].items()}
         cares = {axes: menu.get("cares") or axes.split(",") for axes, menu in recommendation["menus"].items()}
         with self._lock:
             self._items[token] = {"student_text": student_text, "profile": profile, "picks": picks,
-                                  "cares": cares, "done": {}, "locks": {}}
+                                  "cares": cares, "candidates": candidates or {}, "done": {}, "locks": {}}
             while len(self._items) > self._limit:
                 self._items.popitem(last=False)
         return token
@@ -298,5 +301,5 @@ class ExplainRegistry:
                 context["done"][axes] = explain_detailed(
                     context["student_text"],
                     conditions_of(context["profile"], context["cares"][axes], context["cares"][axes]),
-                    context["picks"][axes])
+                    context["picks"][axes], candidates=context["candidates"].get(axes))
             return context["done"][axes]

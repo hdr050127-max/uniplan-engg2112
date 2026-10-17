@@ -141,7 +141,9 @@ class EndToEndTests(unittest.TestCase):
         self.assertEqual(len(recommendation["menus"]), 7)
         for axes, menu in recommendation["menus"].items():
             self.assertTrue(min(CANDIDATE_MIN, ranking["distinct_profile_count"]) <= len(menu["candidates"]) <= CANDIDATE_MAX)
-            self.assertEqual(len(menu["picks"]), min(3, ranking["distinct_profile_count"]))
+            self.assertTrue(1 <= len(menu["picks"]) <= 3)
+            for a, b in zip(menu["picks"], menu["picks"][1:]):  # never two near-copies
+                self.assertFalse(advisor.similar(items[a], items[b], advisor.CARES))
             self.assertEqual(len(menu["reasons"]), len(menu["picks"]))
             for cid in menu["picks"]:
                 self.assertIn(cid, menu["candidates"])

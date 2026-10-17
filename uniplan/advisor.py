@@ -18,7 +18,7 @@ from llm.parse import parse
 from llm.rank import rank
 
 from .profile import check_condition_fields
-from .ranking import AXIS_SETS, SCALES, _order, _score, axes_name, pareto_front
+from .ranking import AXIS_FEATURE, AXIS_SETS, SCALES, _order, _score, axes_name, pareto_front
 
 CANDIDATE_MIN = 10
 CANDIDATE_MAX = 20
@@ -34,24 +34,33 @@ def preference_order(entries: list[dict[str, Any]], axes: tuple[str, ...]) -> li
 
 
 # Differences a student would not notice in a weekly routine.
-NOTICEABLE = {"gap_min": 30.0, "campus_days": 0.2, "outside_min": 30.0}
+NOTICEABLE = {"gap": 30.0, "campus_days": 0.2, "outside_hours": 30.0}
 
 
-def similar(a: dict[str, Any], b: dict[str, Any]) -> bool:
-    return all(abs(a["features"][key] - b["features"][key]) < limit for key, limit in NOTICEABLE.items())
+def similar(a: dict[str, Any], b: dict[str, Any], axes: tuple[str, ...]) -> bool:
+    """No noticeable difference on any feature the student cares about."""
+    return all(abs(a["features"][AXIS_FEATURE[axis]] - b["features"][AXIS_FEATURE[axis]]) < NOTICEABLE[axis]
+               for axis in axes)
 
 
-def distinct_first(entries: list[dict[str, Any]], count: int) -> list[dict[str, Any]]:
-    """Up to ``count`` entries in order, skipping near-copies of ones already taken.
+def distinct_first(entries: list[dict[str, Any]], count: int, axes: tuple[str, ...], *,
+                   copies: bool = True) -> list[dict[str, Any]]:
+    """Up to ``count`` entries in order, skipping near-copies (on ``axes``) of ones already taken.
 
-    Skipped entries only come back if there are not enough distinct ones.
+    If that leaves too few, skipped entries come back: first those that differ on
+    some other feature, then (only with ``copies``) the rest.
     """
     taken, skipped = [], []
     for entry in entries:
         if len(taken) == count:
             break
-        (skipped if any(similar(entry, other) for other in taken) else taken).append(entry)
-    return taken + skipped[:count - len(taken)]
+        (skipped if any(similar(entry, other, axes) for other in taken) else taken).append(entry)
+    for entry in skipped:
+        if len(taken) < count and not any(similar(entry, other, CARES) for other in taken):
+            taken.append(entry)
+    if copies:
+        taken += [entry for entry in skipped if entry not in taken][:count - len(taken)]
+    return taken
 
 
 def select_candidates(pool: list[dict[str, Any]], axes: tuple[str, ...]) -> tuple[list[dict[str, Any]], int]:
@@ -60,17 +69,17 @@ def select_candidates(pool: list[dict[str, Any]], axes: tuple[str, ...]) -> tupl
     The front (no other timetable is at least as good on all three features) comes
     first. A small front is topped up with the next best timetables by the student's
     preference; a large one keeps the best on each cared-about feature, then the
-    preference order. Near-copies (see ``NOTICEABLE``) are skipped while there are
+    preference order. Near-copies on the cared-about features are skipped while there are
     other choices. A pool smaller than 10 is used whole.
     """
     front = pareto_front(pool)
     if len(front) > CANDIDATE_MAX:
         anchors = [pareto_front(pool, (axis,))[0] for axis in axes]
         ordered = list({entry["candidate_id"]: entry for entry in anchors + preference_order(front, axes)}.values())
-        return distinct_first(ordered, CANDIDATE_MAX), CANDIDATE_MAX
+        return distinct_first(ordered, CANDIDATE_MAX, axes), CANDIDATE_MAX
     on_front = {entry["candidate_id"] for entry in front}
     rest = preference_order([entry for entry in pool if entry["candidate_id"] not in on_front], axes)
-    chosen = distinct_first(preference_order(front, axes) + rest, max(CANDIDATE_MIN, len(front)))
+    chosen = distinct_first(preference_order(front, axes) + rest, max(CANDIDATE_MIN, len(front)), axes)
     return chosen, sum(entry["candidate_id"] in on_front for entry in chosen)
 
 
@@ -112,8 +121,9 @@ def recommend(pool: list[dict[str, Any]], profile: dict[str, Any], student_text:
         conditions = conditions_of(profile, axes)
         order, scores, source = rank_candidates(candidates, preferences_of(conditions, student_text))
         sources.add(source)
-        # Three near-identical timetables help nobody: keep the ranker's order, minus near-copies.
-        picks = [item(entry) for entry in distinct_first([by_id[cid] for cid in order], PICKS)]
+        # Near-identical timetables help nobody: keep the ranker's order, minus near-copies,
+        # even if that leaves fewer than three.
+        picks = [item(entry) for entry in distinct_first([by_id[cid] for cid in order], PICKS, axes, copies=False)]
         menus[axes_name(axes)] = {
             "candidates": [entry["candidate_id"] for entry in chosen], "from_front": from_front,
             "picks": [pick["candidate_id"] for pick in picks],

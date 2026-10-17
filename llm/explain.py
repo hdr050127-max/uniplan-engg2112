@@ -19,7 +19,7 @@ from threading import Lock
 
 from llm import ollama
 from llm.contracts import Candidate, Conditions
-from llm.gpu_lock import LOCK_PATH
+from llm.gpu_lock import LOCKS, target_of_ollama
 
 DAY = "一二三四五六日"
 FEATURE = {"campus_days": "campus_days", "gap": "gap_min", "outside_hours": "outside_min"}
@@ -436,11 +436,9 @@ def choose_model() -> str | None:
 
 
 def gpu_busy() -> bool:
-    """A batch job holds this Mac's GPU lock (llm.gpu_lock); the page should not compete with it."""
-    if ollama.base_url() != ollama.LOCAL:
-        return False
+    """A batch job holds the lock of the machine Ollama runs on (llm.gpu_lock); do not compete with it."""
     try:
-        with open(LOCK_PATH, "a+") as handle:
+        with open(LOCKS[target_of_ollama()], "a+") as handle:
             fcntl.flock(handle, fcntl.LOCK_EX | fcntl.LOCK_NB)
             fcntl.flock(handle, fcntl.LOCK_UN)
     except BlockingIOError:

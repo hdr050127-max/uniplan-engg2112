@@ -229,11 +229,16 @@ def main(argv: list[str] | None = None) -> int:
     sets = data_sets(args.test)
     texts = texts_needed(sets)
     if not args.report_only:
+        from llm import ollama
+        loaded = None                     # one model on the GPU at a time: unload before switching
         for name in args.models:
             machine = args.machine or (None if name.startswith("ollama") else f"{platform.machine()} Mac CPU")
-            if name.startswith("ollama") and not args.machine:
-                from llm import ollama
-                machine = ollama.base_url()
+            if name.startswith("ollama"):
+                machine = args.machine or ollama.base_url()
+                model = name.split(":", 1)[1]
+                if loaded and loaded != model:
+                    ollama.unload(loaded)
+                loaded = model
             predict(name, by_name(name), texts, {"machine": machine, "size_mb": args.size_mb, "note": args.note})
     results = [score(json.loads(path.read_text()), sets) for path in sorted(PREDICTIONS.glob("*.json"))]
     order = {name: index for index, name in enumerate(["keywords", "linear"])}

@@ -18,7 +18,7 @@ _COMMITMENT = re.compile(
     r"\b(?:work|job|shift|intern\w*|pick\s?up|drop\s?off|kids?|child\w*|daughter|son|training|practice|game|"
     r"church|mosque|temple|pray\w*|tutor(?:ing|s)?|commut\w*|appointment|volunteer\w*|gym|club|rehearsal)\b")
 _NEGATION = re.compile(r"不|没|别|无法|忙|有事|\b(?:can'?t|cannot|can not|not|no|nothing|don'?t|won'?t|busy|"
-                       r"unavailable|avoid|hate|never|unable)\b")
+                       r"unavailable|avoid|skip|hate|never|unable)\b")
 _ONLY = re.compile(r"只|仅|才|\b(?:only|not until|no earlier)\b")
 _ONLY_AFTER = re.compile(r"只|仅|(?<!my )(?<!the )(?<!our )\bonly\b")     # "Wed and Thu only", not "my only day"
 _AVAILABLE = re.compile(r"有空|可以|能来|能上|空闲|\b(?:free|available|ok|okay|fine)\b")
@@ -32,7 +32,8 @@ _EXCEPT_ONLY = re.compile(r"除了.*都" + _UNFREE + r"|(?:其他|其余|别的)
 _SPAN = re.compile(r"在校|在学校|待|呆|留在|\b(?:on campus|at uni|at school|at campus|stay\w*|spend\w*|be there|"
                    r"leave campus|arriv\w*|within)\b")
 # "put all my classes on Tue and Wed", "都排在周三周四", "Tue and Thu are my uni days": the named days are the free ones
-_ALL_ON = re.compile(r"\ball (?:my |of my |the )?(?:classes|units|subjects|lectures)\b|\beverything\b|都排在|都放在|"
+_ALL_ON = re.compile(r"\ball (?:my |of my |the )?(?:classes|units|subjects|lectures)\b|\bevery (?:class|lecture|unit)\b|"
+                     r"\beverything\b|都排在|都放在|"
                      r"全部排在|全排在|集中在|\b(?:uni|campus|study) days\b")
 _OFF = re.compile(r"休息|空出|\b(?:off|free days?)\b")
 _HOURS = re.compile(r"(\d+(?:\.\d+)?)\s*(?:个)?\s*(半)?\s*(?:小时|钟头|hours?\b|hrs?\b|h\b)")

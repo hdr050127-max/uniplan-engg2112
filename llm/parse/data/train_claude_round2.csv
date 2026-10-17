@@ -5,8 +5,8 @@ r2-003,I need to be done by 4,I need to be done by 4,blocked_time,Mon-Fri 16:00-
 r2-004,anything before 9 is a no from me,anything before 9 is a no from me,blocked_time,Mon-Fri 0:00-9:00,,,,,,
 r2-005,not after 7pm,not after 7pm,blocked_time,Mon-Fri 19:00-24:00,,,,,,
 r2-006,I can't start before 10,I can't start before 10,blocked_time,Mon-Fri 0:00-10:00,,,,,,
-r2-007,no classes later than 5,no classes later than 5,blocked_time,Mon-Fri 17:00-24:00,,,,,,
-r2-008,please nothing before 9:30,please nothing before 9:30,blocked_time,Mon-Fri 0:00-9:30,,,,,,
+r2-007,nothing on my timetable after 5,nothing on my timetable after 5,blocked_time,Mon-Fri 17:00-24:00,,,,,,
+r2-008,9:30 is the earliest start I can do,9:30 is the earliest start I can do,blocked_time,Mon-Fri 0:00-9:30,,,,,,
 r2-009,out by 3 every day,out by 3 every day,blocked_time,Mon-Fri 15:00-24:00,,,,,,
 r2-010,nothing that finishes after 6pm,nothing that finishes after 6pm,blocked_time,Mon-Fri 18:00-24:00,,,,,,
 r2-011,no 9am starts,no 9am starts,blocked_time,Mon-Fri 0:00-10:00,,,,,,
@@ -31,14 +31,14 @@ r2-029,the earliest I can get there is 10,the earliest I can get there is 10,blo
 r2-030,no evening classes after 6:30,no evening classes after 6:30,blocked_time,Mon-Fri 18:30-24:00,,,,,,
 r2-031,anything after 5:30pm is out,anything after 5:30pm is out,blocked_time,Mon-Fri 17:30-24:00,,,,,,
 r2-032,I'm unavailable before 11,I'm unavailable before 11,blocked_time,Mon-Fri 0:00-11:00,,,,,,
-r2-033,no classes before 8:30,no classes before 8:30,blocked_time,Mon-Fri 0:00-8:30,,,,,,
+r2-033,can't make anything that starts before 8:30,can't make anything that starts before 8:30,blocked_time,Mon-Fri 0:00-8:30,,,,,,
 r2-034,can't do 7pm tutes,can't do 7pm tutes,blocked_time,Mon-Fri 19:00-24:00,,,,,,
 r2-035,I need to leave campus by 3:30,I need to leave campus by 3:30,blocked_time,Mon-Fri 15:30-24:00,,,,,,
 r2-036,my day has to start after 10,my day has to start after 10,blocked_time,Mon-Fri 0:00-10:00,,,,,,
 r2-037,nothing before 9 thanks,nothing before 9 thanks,blocked_time,Mon-Fri 0:00-9:00,,,,,,
 r2-038,no 5pm classes,no 5pm classes,blocked_time,Mon-Fri 17:00-24:00,,,,,,
 r2-039,don't put anything after 4,don't put anything after 4,blocked_time,Mon-Fri 16:00-24:00,,,,,,
-r2-040,absolutely nothing before 10am,absolutely nothing before 10am,blocked_time,Mon-Fri 0:00-10:00,,,,,,
+r2-040,zero chance I'm in before 10am,zero chance I'm in before 10am,blocked_time,Mon-Fri 0:00-10:00,,,,,,
 r2-041,8am 的课不行,8am 的课不行,blocked_time,Mon-Fri 0:00-9:00,,,,,,
 r2-042,6pm 以后 no class,6pm 以后 no class,blocked_time,Mon-Fri 18:00-24:00,,,,,,
 r2-043,下午4点前必须下课,下午4点前必须下课,blocked_time,Mon-Fri 16:00-24:00,,,,,,
@@ -52,7 +52,7 @@ r2-050,十点以前都别安排,十点以前都别安排,blocked_time,Mon-Fri 0:
 r2-051,ideally no 8ams,ideally no 8ams,prefer_no_early_late,,,,,,9:00-18:00,
 r2-052,if possible nothing past 6,if possible nothing past 6,prefer_no_early_late,,,,,,9:00-18:00,
 r2-053,I'd prefer to be done by 4,I'd prefer to be done by 4,prefer_no_early_late,,,,,,9:00-16:00,
-r2-054,I'd rather not start before 10,I'd rather not start before 10,prefer_no_early_late,,,,,,10:00-18:00,
+r2-054,I'd rather my first class be at 10 or later,I'd rather my first class be at 10 or later,prefer_no_early_late,,,,,,10:00-18:00,
 r2-055,preferably nothing later than 5,preferably nothing later than 5,prefer_no_early_late,,,,,,9:00-17:00,
 r2-056,ideally out by 3,ideally out by 3,prefer_no_early_late,,,,,,9:00-15:00,
 r2-057,would rather avoid anything before 9:30,would rather avoid anything before 9:30,prefer_no_early_late,,,,,,9:30-18:00,
@@ -80,7 +80,7 @@ r2-078,最好九点半以后开始,最好九点半以后开始,prefer_no_early_l
 r2-079,"ideally done by 4, I pick up my son","ideally done by 4, I pick up my son",blocked_time,Mon-Fri 16:00-24:00,,,,,,"hedge, but a reason is given"
 r2-080,最好下午三点前下课，要去接妹妹,最好下午三点前下课，要去接妹妹,blocked_time,Mon-Fri 15:00-24:00,,,,,,"hedge, but a reason is given"
 r2-081,I can only make it in on Tuesdays and Thursdays,I can only make it in on Tuesdays and Thursdays,blocked_time,"Mon,Wed,Fri all",,,,,,
-r2-082,put all my classes on Tuesday and Wednesday,put all my classes on Tuesday and Wednesday,blocked_time,"Mon,Thu,Fri all",,,,,,
+r2-082,I'd like every class on Tue and Wed,I'd like every class on Tue and Wed,blocked_time,"Mon,Thu,Fri all",,,,,,
 r2-083,I want Fridays free,I want Fridays free,blocked_time,Fri all,,,,,,
 r2-084,keep Monday clear,keep Monday clear,blocked_time,Mon all,,,,,,
 r2-085,Wednesday and Thursday only,Wednesday and Thursday only,blocked_time,"Mon,Tue,Fri all",,,,,,
@@ -98,13 +98,13 @@ r2-096,课都排在周三周四吧,课都排在周三周四吧,blocked_time,"Mon
 r2-097,周五想空出来,周五想空出来,blocked_time,Fri all,,,,,,
 r2-098,周一别排课,周一别排课,blocked_time,Mon all,,,,,,
 r2-099,只有周二下午和周四上午有空,只有周二下午和周四上午有空,blocked_time,"Mon,Wed,Fri all; Tue 0:00-12:00; Tue 18:00-24:00; Thu 12:00-24:00",,,,,,
-r2-100,Tue and Thu are my uni days,Tue and Thu are my uni days,blocked_time,"Mon,Wed,Fri all",,,,,,
+r2-100,"Tuesdays and Thursdays only, the rest of the week I'm at work","Tuesdays and Thursdays only, the rest of the week I'm at work",blocked_time,"Mon,Wed,Fri all",,,,,,
 r2-101,Friday's off limits,Friday's off limits,blocked_time,Fri all,,,,,,
 r2-102,I'd rather not come in on Mondays,I'd rather not come in on Mondays,blocked_time,Mon all,,,,,,
 r2-103,Mon/Wed only pls,Mon/Wed only pls,blocked_time,"Tue,Thu,Fri all",,,,,,
 r2-104,只想 Tue 和 Thu 去 campus,只想 Tue 和 Thu 去 campus,blocked_time,"Mon,Wed,Fri all",,,,,,
 r2-105,only Mondays and Wednesdays for me,only Mondays and Wednesdays for me,blocked_time,"Tue,Thu,Fri all",,,,,,
-r2-106,"as few days as possible, maybe 2","as few days as possible, maybe 2",max_days,,2,,,,,
+r2-106,"the fewer days the better, ideally 2","the fewer days the better, ideally 2",max_days,,2,,,,,
 r2-107,3 days on campus max,3 days on campus max,max_days,,3,,,,,
 r2-108,no more than four days a week,no more than four days a week,max_days,,4,,,,,
 r2-109,two days a week would be perfect,two days a week would be perfect,max_days,,2,,,,,
@@ -120,7 +120,7 @@ r2-118,keep it to 3 days a week,keep it to 3 days a week,max_days,,3,,,,,
 r2-119,a 2-day week would be amazing,a 2-day week would be amazing,max_days,,2,,,,,
 r2-120,I'd rather have more days that are shorter,I'd rather have more days that are shorter,other,,,,,,,"more, shorter days is not a condition the scheduler has"
 r2-121,more days with less on each is better for me,more days with less on each is better for me,other,,,,,,,"more, shorter days is not a condition the scheduler has"
-r2-122,I don't mind coming in every day,I don't mind coming in every day,other,,,,,,,"more, shorter days is not a condition the scheduler has"
+r2-122,daily trips to campus are fine by me,daily trips to campus are fine by me,other,,,,,,,"more, shorter days is not a condition the scheduler has"
 r2-123,spread out is better than long days,spread out is better than long days,other,,,,,,,"more, shorter days is not a condition the scheduler has"
 r2-124,宁愿多来几天，每天短一点,宁愿多来几天,other,,,,,,,
 ,,每天短一点,other,,,,,,,
@@ -129,7 +129,7 @@ r2-126,late classes drain me,late classes drain me,prefer_no_early_late,,,,,,,
 r2-127,mornings are rough for me,mornings are rough for me,prefer_no_early_late,,,,,,,
 r2-128,I struggle to stay focused in evening classes,I struggle to stay focused in evening classes,prefer_no_early_late,,,,,,,
 r2-129,not a fan of early mornings,not a fan of early mornings,prefer_no_early_late,,,,,,,
-r2-130,I'd rather not have super late classes,I'd rather not have super late classes,prefer_no_early_late,,,,,,,
+r2-130,super late finishes aren't ideal,super late finishes aren't ideal,prefer_no_early_late,,,,,,,
 r2-131,早上的课我起不来,早上的课我起不来,prefer_no_early_late,,,,,,,
 r2-132,不太喜欢晚课,不太喜欢晚课,prefer_no_early_late,,,,,,,
 r2-133,早课能少就少,早课能少就少,prefer_no_early_late,,,,,,,
@@ -137,7 +137,7 @@ r2-134,"I'm a bit of a night owl, so later starts suit me","I'm a bit of a night
 r2-135,I'm way more awake in the afternoon,I'm way more awake in the afternoon,prefer_no_early_late,,,,,,,
 r2-136,not too early please,not too early please,prefer_no_early_late,,,,,,,
 r2-137,"no mornings, I work at a café","no mornings, I work at a café",blocked_time,Mon-Fri 0:00-10:00,,,,,,
-r2-138,keep my mornings free,keep my mornings free,blocked_time,Mon-Fri 0:00-10:00,,,,,,firm: keep free
+r2-138,mornings need to stay empty for me,mornings need to stay empty for me,blocked_time,Mon-Fri 0:00-10:00,,,,,,firm: keep free
 r2-139,I can't do nights,I can't do nights,blocked_time,Mon-Fri 18:00-24:00,,,,,,firm refusal of a part of the day
 r2-140,evenings are a no for me,evenings are a no for me,blocked_time,Mon-Fri 18:00-24:00,,,,,,firm refusal of a part of the day
 r2-141,"afternoons are taken, I nanny","afternoons are taken, I nanny",blocked_time,Mon-Fri 12:00-18:00,,,,,,
@@ -155,11 +155,11 @@ r2-152,别给我排晚上的课,别给我排晚上的课,blocked_time,Mon-Fri 18
 r2-153,evenings off please,evenings off please,blocked_time,Mon-Fri 18:00-24:00,,,,,,part-of-day word + request: hedges do not soften it
 r2-154,I'd rather keep nights free,I'd rather keep nights free,blocked_time,Mon-Fri 18:00-24:00,,,,,,part-of-day word + request: hedges do not soften it
 r2-155,最好晚上别排课,最好晚上别排课,blocked_time,Mon-Fri 18:00-24:00,,,,,,part-of-day word + request: hedges do not soften it
-r2-156,don't give me any morning classes,don't give me any morning classes,blocked_time,Mon-Fri 0:00-10:00,,,,,,part-of-day word + request: hedges do not soften it
+r2-156,zero morning classes for me please,zero morning classes for me please,blocked_time,Mon-Fri 0:00-10:00,,,,,,part-of-day word + request: hedges do not soften it
 r2-157,上午尽量空着,上午尽量空着,blocked_time,Mon-Fri 0:00-12:00,,,,,,part-of-day word + request: hedges do not soften it
 r2-158,mornings and I don't get along,mornings and I don't get along,prefer_no_early_late,,,,,,,"feeling, no request"
 r2-159,evening tutes are brutal,evening tutes are brutal,prefer_no_early_late,,,,,,,"feeling, no request"
-r2-160,early morning classes wreck me,early morning classes wreck me,prefer_no_early_late,,,,,,,qualified period
+r2-160,crack-of-dawn lectures wipe me out,crack-of-dawn lectures wipe me out,prefer_no_early_late,,,,,,,vague word
 r2-161,late afternoon stuff isn't great for me,late afternoon stuff isn't great for me,prefer_no_early_late,,,,,,,qualified period
 r2-162,晚上上课我会很累,晚上上课我会很累,prefer_no_early_late,,,,,,,"feeling, no request"
 r2-163,nothing too late please,nothing too late please,prefer_no_early_late,,,,,,,vague word
@@ -167,7 +167,7 @@ r2-164,太早的课我真的不行,太早的课我真的不行,prefer_no_early_l
 r2-165,super early classes are a struggle,super early classes are a struggle,prefer_no_early_late,,,,,,,vague word
 r2-166,late night classes aren't for me,late night classes aren't for me,prefer_no_early_late,,,,,,,qualified period
 r2-167,Mondays are totally fine,Mondays are totally fine,other,,,,,,,no request
-r2-168,I don't mind early classes,I don't mind early classes,other,,,,,,,no request
+r2-168,early starts are no problem for me,early starts are no problem for me,other,,,,,,,no request
 r2-169,8am is ok for me,8am is ok for me,other,,,,,,,no request
 r2-170,late finishes don't bother me,late finishes don't bother me,other,,,,,,,no request
 r2-171,any time on Wednesday works,any time on Wednesday works,other,,,,,,,no request
@@ -179,24 +179,24 @@ r2-175,"I can only come Tue and Thu, max 5 hours a day",I can only come Tue and 
 ,,max 5 hours a day,max_daily_hours,,,5,,,,
 r2-176,"Fridays off please, and keep it to 3 days",Fridays off please,blocked_time,Fri all,,,,,,
 ,,keep it to 3 days,max_days,,3,,,,,
-r2-177,"nothing past 6pm because of work, and I'd like a lunch break",nothing past 6pm because of work,blocked_time,Mon-Fri 18:00-24:00,,,,,,
-,,I'd like a lunch break,lunch,,,,,11:30-14:00 30,,
-r2-178,"mornings are rough for me, but no classes before 9 at all",mornings are rough for me,prefer_no_early_late,,,,,,,
-,,no classes before 9 at all,blocked_time,Mon-Fri 0:00-9:00,,,,,,
+r2-177,"nothing past 6pm because of work, and a break to grab lunch would be nice",nothing past 6pm because of work,blocked_time,Mon-Fri 18:00-24:00,,,,,,
+,,a break to grab lunch would be nice,lunch,,,,,11:30-14:00 30,,
+r2-178,"mornings are rough for me, but nothing at all until 9",mornings are rough for me,prefer_no_early_late,,,,,,,
+,,nothing at all until 9,blocked_time,Mon-Fri 0:00-9:00,,,,,,
 r2-179,"I'd prefer to finish by 5, Wednesdays I can't stay past 3",I'd prefer to finish by 5,prefer_no_early_late,,,,,,9:00-17:00,
 ,,Wednesdays I can't stay past 3,blocked_time,Wed 15:00-24:00,,,,,,
 r2-180,8am 不行，最好十点以后,8am 不行,blocked_time,Mon-Fri 0:00-9:00,,,,,,
 ,,最好十点以后,prefer_no_early_late,,,,,,10:00-18:00,
 r2-181,只周二周四来，每天不超过五小时,只周二周四来,blocked_time,"Mon,Wed,Fri all",,,,,,
 ,,每天不超过五小时,max_daily_hours,,,5,,,,
-r2-182,"as few days as possible, maybe 2, and no long gaps","as few days as possible, maybe 2",max_days,,2,,,,,
+r2-182,"minimise my days on campus, 2 at a push, and no long gaps","minimise my days on campus, 2 at a push",max_days,,2,,,,,
 ,,no long gaps,prefer_less_waiting,,,,,,,
-r2-183,"keep Mondays free, I'd rather not have 8ams either",keep Mondays free,blocked_time,Mon all,,,,,,
-,,I'd rather not have 8ams either,prefer_no_early_late,,,,,,9:00-18:00,
+r2-183,"keep Mondays free, would rather skip 8am starts too",keep Mondays free,blocked_time,Mon all,,,,,,
+,,would rather skip 8am starts too,prefer_no_early_late,,,,,,9:00-18:00,
 r2-184,"Tue and Wed only, and I need an hour for lunch",Tue and Wed only,blocked_time,"Mon,Thu,Fri all",,,,,,
 ,,I need an hour for lunch,lunch,,,,,11:30-14:00 60,,
 r2-185,"late classes drain me, so nothing after 7pm","late classes drain me, so nothing after 7pm",blocked_time,Mon-Fri 19:00-24:00,,,,,,
-r2-186,"no online stuff, and fewer days would be great",no online stuff,in_person_only,,,,,,,
+r2-186,"keep it all face to face, and fewer days would be great",keep it all face to face,in_person_only,,,,,,,
 ,,fewer days would be great,prefer_fewer_days,,,,,,,
-r2-187,"2 days max, no tutes before 10",2 days max,max_days,,2,,,,,
+r2-187,"two campus days tops, no tutes before 10",two campus days tops,max_days,,2,,,,,
 ,,no tutes before 10,blocked_time,Mon-Fri 0:00-10:00,,,,,,

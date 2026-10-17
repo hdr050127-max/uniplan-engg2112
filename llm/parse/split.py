@@ -40,7 +40,7 @@ _AND_CLAUSE = re.compile(r"(?:i|i'm|i'd|i've|i'll|im|id|also|no|not|never|nothin
                          r"online|in[- ]person)\b", re.IGNORECASE)
 _TOGETHER = re.compile(r"\b(?:partner|friend|mate|wife|husband|boyfriend|girlfriend|sister|brother|mum|mom|dad|son|"
                        r"daughter|kids?|roommate|flatmate)\s*$", re.IGNORECASE)     # "my partner and I"
-_ADDON = re.compile(r"(?:maybe|perhaps|probably|realistically|honestly|but|or|at a push|is|are|"
+_ADDON = re.compile(r"(?:maybe|perhaps|probably|realistically|honestly|ideally|if possible|if you can|but|or|at a push|is|are|"
                     r"would be|could be|be|ok|okay|fine|good|too|days?|hours?|hrs?|天|小时|个|也行|也可以|可以|就行|吧|"
                     r"\d+(?:\.\d+)?|\s|[,，.。!！])+", re.IGNORECASE)
 _NO_MORE = re.compile(r"(?:but\s+)?(?:no more|not more|nothing more|no longer|not any more|no more than that)[\s.!。]*",
@@ -123,8 +123,9 @@ def _spans(text: str) -> list[tuple[int, int]]:
     trimmed = []
     for start, end in spans:
         piece = text[start:end]
-        if piece.strip():
-            trimmed.append((start + len(piece) - len(piece.lstrip()), start + len(piece.rstrip())))
+        lead = re.match(r"\s*(?:(?:and|or)\s+)?", piece, re.IGNORECASE).end()     # ", and a break ..." starts at "a"
+        if piece[lead:].strip():
+            trimmed.append((start + lead, start + len(piece.rstrip())))
     return trimmed
 
 

@@ -1,0 +1,482 @@
+{
+ "t001": {
+  "purpose": "test_check",
+  "persona": "athlete_3",
+  "a_id": "66ffb8489f8603db",
+  "b_id": "9087df928f159b29",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t002": {
+  "purpose": "test_check",
+  "persona": "athlete_3",
+  "a_id": "66ffb8489f8603db",
+  "b_id": "93b7a06fd7c12584",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t003": {
+  "purpose": "test_check",
+  "persona": "athlete_3",
+  "a_id": "93b7a06fd7c12584",
+  "b_id": "c89a5e2d0bc6a5f5",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t004": {
+  "purpose": "test_check",
+  "persona": "athlete_6",
+  "a_id": "3817bc9db1374607",
+  "b_id": "0679791cc223adb8",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t005": {
+  "purpose": "test_check",
+  "persona": "athlete_6",
+  "a_id": "3817bc9db1374607",
+  "b_id": "00c54d54e0d2e8fd",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t006": {
+  "purpose": "test_check",
+  "persona": "athlete_6",
+  "a_id": "02e9f17b75a0d88d",
+  "b_id": "9759ff9f3ac5f18c",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t007": {
+  "purpose": "test_check",
+  "persona": "carer_5",
+  "a_id": "2d35bb6d49f60bf6",
+  "b_id": "66ffb8489f8603db",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t008": {
+  "purpose": "test_check",
+  "persona": "carer_5",
+  "a_id": "66ffb8489f8603db",
+  "b_id": "f3802f28100b9c24",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t009": {
+  "purpose": "test_check",
+  "persona": "carer_5",
+  "a_id": "9087df928f159b29",
+  "b_id": "ae0189acac0a7317",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t010": {
+  "purpose": "test_check",
+  "persona": "carer_8",
+  "a_id": "42d1310d0b1818ad",
+  "b_id": "31bec4256a0340e7",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t011": {
+  "purpose": "test_check",
+  "persona": "carer_8",
+  "a_id": "06e816666e5a0f24",
+  "b_id": "42d1310d0b1818ad",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t012": {
+  "purpose": "test_check",
+  "persona": "carer_8",
+  "a_id": "3c1705607cc96f6b",
+  "b_id": "04e1fa677ee060fd",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t013": {
+  "purpose": "test_check",
+  "persona": "commuter_2",
+  "a_id": "c384b2a0b353c85d",
+  "b_id": "5e4ccb2c08bcf712",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t014": {
+  "purpose": "test_check",
+  "persona": "commuter_2",
+  "a_id": "8209e9236d30d147",
+  "b_id": "5e4ccb2c08bcf712",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t015": {
+  "purpose": "test_check",
+  "persona": "commuter_2",
+  "a_id": "dfa7de3d61c54bc2",
+  "b_id": "65702ead4b752ae3",
+  "red": "B",
+  "near_equal_focus": true
+ },
+ "t016": {
+  "purpose": "test_check",
+  "persona": "commuter_5",
+  "a_id": "3d3d3a99182946ec",
+  "b_id": "fb9a56700e7d54a8",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t017": {
+  "purpose": "test_check",
+  "persona": "commuter_5",
+  "a_id": "676fe0674c88d075",
+  "b_id": "529129ab9ef5c03f",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t018": {
+  "purpose": "test_check",
+  "persona": "commuter_5",
+  "a_id": "676fe0674c88d075",
+  "b_id": "482f8345e2bf1103",
+  "red": "B",
+  "near_equal_focus": true
+ },
+ "t019": {
+  "purpose": "test_check",
+  "persona": "early_bird_1",
+  "a_id": "0866432bc083c1ac",
+  "b_id": "264f6d815d17e9a6",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t020": {
+  "purpose": "test_check",
+  "persona": "early_bird_1",
+  "a_id": "05bde77f7238c9ac",
+  "b_id": "3f555a361050e726",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t021": {
+  "purpose": "test_check",
+  "persona": "early_bird_1",
+  "a_id": "3836af235e6d77bf",
+  "b_id": "0866432bc083c1ac",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t022": {
+  "purpose": "test_check",
+  "persona": "early_bird_5",
+  "a_id": "00c89795475076e2",
+  "b_id": "9fefde9e13a09390",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t023": {
+  "purpose": "test_check",
+  "persona": "early_bird_5",
+  "a_id": "213d5c8dbacd48cb",
+  "b_id": "00c89795475076e2",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t024": {
+  "purpose": "test_check",
+  "persona": "early_bird_5",
+  "a_id": "00c89795475076e2",
+  "b_id": "fe1d5ae5d9c2b128",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t025": {
+  "purpose": "test_check",
+  "persona": "intern_5",
+  "a_id": "161cfdf136d08395",
+  "b_id": "dfab05bf9e8cb84f",
+  "red": "B",
+  "near_equal_focus": true
+ },
+ "t026": {
+  "purpose": "test_check",
+  "persona": "intern_5",
+  "a_id": "31bec4256a0340e7",
+  "b_id": "4acc015e77dffdcb",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t027": {
+  "purpose": "test_check",
+  "persona": "intern_5",
+  "a_id": "3c1705607cc96f6b",
+  "b_id": "06e816666e5a0f24",
+  "red": "B",
+  "near_equal_focus": true
+ },
+ "t028": {
+  "purpose": "test_check",
+  "persona": "intern_8",
+  "a_id": "04bad9310f97e290",
+  "b_id": "529129ab9ef5c03f",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t029": {
+  "purpose": "test_check",
+  "persona": "intern_8",
+  "a_id": "e9d66b48aa968ec3",
+  "b_id": "fb9a56700e7d54a8",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t030": {
+  "purpose": "test_check",
+  "persona": "intern_8",
+  "a_id": "04bad9310f97e290",
+  "b_id": "fb9a56700e7d54a8",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t031": {
+  "purpose": "test_check",
+  "persona": "near_campus_3",
+  "a_id": "66ffb8489f8603db",
+  "b_id": "c89a5e2d0bc6a5f5",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t032": {
+  "purpose": "test_check",
+  "persona": "near_campus_3",
+  "a_id": "9087df928f159b29",
+  "b_id": "66ffb8489f8603db",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t033": {
+  "purpose": "test_check",
+  "persona": "near_campus_3",
+  "a_id": "9087df928f159b29",
+  "b_id": "2d35bb6d49f60bf6",
+  "red": "B",
+  "near_equal_focus": true
+ },
+ "t034": {
+  "purpose": "test_check",
+  "persona": "near_campus_4",
+  "a_id": "0e244e940cc26fec",
+  "b_id": "e475821aefa0c7fe",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t035": {
+  "purpose": "test_check",
+  "persona": "near_campus_4",
+  "a_id": "0937e0177b54a45f",
+  "b_id": "e18524d11f5a9a1a",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t036": {
+  "purpose": "test_check",
+  "persona": "near_campus_4",
+  "a_id": "6c471bc1d978ba30",
+  "b_id": "e475821aefa0c7fe",
+  "red": "B",
+  "near_equal_focus": true
+ },
+ "t037": {
+  "purpose": "test_check",
+  "persona": "night_owl_2",
+  "a_id": "8e988325a4f2ad8e",
+  "b_id": "5e4ccb2c08bcf712",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t038": {
+  "purpose": "test_check",
+  "persona": "night_owl_2",
+  "a_id": "5e4ccb2c08bcf712",
+  "b_id": "94a693007fd1ebfe",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t039": {
+  "purpose": "test_check",
+  "persona": "night_owl_2",
+  "a_id": "94a693007fd1ebfe",
+  "b_id": "c384b2a0b353c85d",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t040": {
+  "purpose": "test_check",
+  "persona": "night_owl_8",
+  "a_id": "597b5330466bd7b6",
+  "b_id": "008642d90a6be4be",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t041": {
+  "purpose": "test_check",
+  "persona": "night_owl_8",
+  "a_id": "597b5330466bd7b6",
+  "b_id": "0031f6c34a75aab8",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t042": {
+  "purpose": "test_check",
+  "persona": "night_owl_8",
+  "a_id": "0031f6c34a75aab8",
+  "b_id": "9fefde9e13a09390",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t043": {
+  "purpose": "test_check",
+  "persona": "other_5",
+  "a_id": "cf0d377fd7aa4b80",
+  "b_id": "167cfab78c5deffd",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t044": {
+  "purpose": "test_check",
+  "persona": "other_5",
+  "a_id": "cf0d377fd7aa4b80",
+  "b_id": "2e67ce59fac37f29",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t045": {
+  "purpose": "test_check",
+  "persona": "other_5",
+  "a_id": "a017d60dbb24a9b7",
+  "b_id": "cf0d377fd7aa4b80",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t046": {
+  "purpose": "test_check",
+  "persona": "other_8",
+  "a_id": "107721599df7eebd",
+  "b_id": "4456717b93754a29",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t047": {
+  "purpose": "test_check",
+  "persona": "other_8",
+  "a_id": "107721599df7eebd",
+  "b_id": "5b80725b4af5406d",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t048": {
+  "purpose": "test_check",
+  "persona": "other_8",
+  "a_id": "464d10c8d1b097cb",
+  "b_id": "107721599df7eebd",
+  "red": "A",
+  "near_equal_focus": true
+ },
+ "t049": {
+  "purpose": "test_check",
+  "persona": "parent_6",
+  "a_id": "c384b2a0b353c85d",
+  "b_id": "5e4ccb2c08bcf712",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t050": {
+  "purpose": "test_check",
+  "persona": "parent_6",
+  "a_id": "01fee07ceeb8c378",
+  "b_id": "c384b2a0b353c85d",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t051": {
+  "purpose": "test_check",
+  "persona": "parent_6",
+  "a_id": "01032883b790da42",
+  "b_id": "554ec05671f04244",
+  "red": "B",
+  "near_equal_focus": true
+ },
+ "t052": {
+  "purpose": "test_check",
+  "persona": "parent_8",
+  "a_id": "dfcb79d0c3435d6f",
+  "b_id": "8a371a25af7b3802",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t053": {
+  "purpose": "test_check",
+  "persona": "parent_8",
+  "a_id": "1a9f7c2ee186b855",
+  "b_id": "dfcb79d0c3435d6f",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t054": {
+  "purpose": "test_check",
+  "persona": "parent_8",
+  "a_id": "58ed0afa970295bf",
+  "b_id": "2f778462a0f826c0",
+  "red": "B",
+  "near_equal_focus": true
+ },
+ "t055": {
+  "purpose": "test_check",
+  "persona": "worker_4",
+  "a_id": "8e988325a4f2ad8e",
+  "b_id": "860b8321e004c2ea",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t056": {
+  "purpose": "test_check",
+  "persona": "worker_4",
+  "a_id": "8e988325a4f2ad8e",
+  "b_id": "00a21a5f468dc966",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t057": {
+  "purpose": "test_check",
+  "persona": "worker_4",
+  "a_id": "860b8321e004c2ea",
+  "b_id": "00a21a5f468dc966",
+  "red": "B",
+  "near_equal_focus": true
+ },
+ "t058": {
+  "purpose": "test_check",
+  "persona": "worker_8",
+  "a_id": "1110dad913133cec",
+  "b_id": "3817bc9db1374607",
+  "red": "A",
+  "near_equal_focus": false
+ },
+ "t059": {
+  "purpose": "test_check",
+  "persona": "worker_8",
+  "a_id": "04543c734591f89c",
+  "b_id": "3817bc9db1374607",
+  "red": "B",
+  "near_equal_focus": false
+ },
+ "t060": {
+  "purpose": "test_check",
+  "persona": "worker_8",
+  "a_id": "e3af8630d77e1763",
+  "b_id": "04543c734591f89c",
+  "red": "B",
+  "near_equal_focus": true
+ }
+}

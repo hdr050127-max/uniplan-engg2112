@@ -1,0 +1,18 @@
+{
+  "year": 2026,
+  "session_code": "S2C",
+  "requested_units": [
+    "AMME2301"
+  ],
+  "units": {
+    "AMME2301": {
+      "offerings": 1,
+      "meetings": 268,
+      "status": "ok"
+    }
+  },
+  "warnings": [],
+  "meeting_count": 268,
+  "complete": true,
+  "robots_policy": "disallowed_override"
+}

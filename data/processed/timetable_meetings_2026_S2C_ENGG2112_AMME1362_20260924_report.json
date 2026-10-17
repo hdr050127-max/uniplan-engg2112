@@ -1,0 +1,24 @@
+{
+  "year": 2026,
+  "session_code": "S2C",
+  "requested_units": [
+    "ENGG2112",
+    "AMME1362"
+  ],
+  "units": {
+    "ENGG2112": {
+      "offerings": 1,
+      "meetings": 167,
+      "status": "ok"
+    },
+    "AMME1362": {
+      "offerings": 1,
+      "meetings": 457,
+      "status": "ok"
+    }
+  },
+  "warnings": [],
+  "meeting_count": 624,
+  "complete": true,
+  "robots_policy": "disallowed_override"
+}

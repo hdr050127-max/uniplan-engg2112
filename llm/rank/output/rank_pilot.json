@@ -1,0 +1,894 @@
+{
+ "summary": {
+  "model": "qwen2.5:7b",
+  "pairs": 30,
+  "consistent": 16,
+  "consistent_rate": 0.533,
+  "answers_by_position": {
+   "A": 36,
+   "B": 24
+  },
+  "consistent_on_front_pairs": "6/14",
+  "by_persona": {
+   "commuter": "3/5",
+   "friday_worker": "2/5",
+   "parent": "4/5",
+   "night_owl": "1/5",
+   "intern": "5/5",
+   "near_campus": "1/5"
+  },
+  "seconds": 309
+ },
+ "records": [
+  {
+   "persona": "commuter",
+   "persona_text": "我住得很远，单程通勤 90 分钟。希望每周来学校的天数越少越好，一天课多一点、中间等一会儿都没关系。",
+   "a_id": "0ec99b16c3e6a0ca",
+   "b_id": "a7ba338e9dfb0e4a",
+   "a_features": {
+    "gap_min": 46.15384615384615,
+    "campus_days": 2.8461538461538463,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 226.15384615384616,
+    "campus_days": 1.9230769230769231,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 2.8 天，课间空等 0.8 小时，最早 09:00，最晚 16:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 1.9 天，课间空等 3.8 小时，最早 09:00，最晚 18:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "课表A每周到校天数较少，符合希望减少通勤次数的需求。虽然课间有空等时间，但总体上比课表B更符合要求。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "课表A每周到校天数较少，只有1.9天，符合希望每周来学校的天数越少的条件。虽然课间有3.8小时的空等时间，但总体上减少了通勤次数，对通勤时间较长的我来说更为合适。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": false
+  },
+  {
+   "persona": "commuter",
+   "persona_text": "我住得很远，单程通勤 90 分钟。希望每周来学校的天数越少越好，一天课多一点、中间等一会儿都没关系。",
+   "a_id": "0ec99b16c3e6a0ca",
+   "b_id": "e475821aefa0c7fe",
+   "a_features": {
+    "gap_min": 46.15384615384615,
+    "campus_days": 2.8461538461538463,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 0.0,
+    "campus_days": 3.769230769230769,
+    "outside_min": 60.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 2.8 天，课间空等 0.8 小时，最早 09:00，最晚 16:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 3.8 天，课间空等 0.0 小时，最早 09:00，最晚 19:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "课表A每周到校天数较少，符合我希望每周来学校的天数越少的期望。虽然课间有空等的时间，但总体上还是更符合我的需求。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "课表B每周到校天数较少，只有2.8天，符合希望每周来学校的天数越少的条件。虽然课间有0.8小时的空等时间，但总体来说，这会减少通勤次数，节省时间。",
+    "choice": "B"
+   },
+   "swapped_as_original": "A",
+   "consistent": true
+  },
+  {
+   "persona": "commuter",
+   "persona_text": "我住得很远，单程通勤 90 分钟。希望每周来学校的天数越少越好，一天课多一点、中间等一会儿都没关系。",
+   "a_id": "532233b4dcf36e8b",
+   "b_id": "a7ba338e9dfb0e4a",
+   "a_features": {
+    "gap_min": 207.69230769230768,
+    "campus_days": 2.0,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 226.15384615384616,
+    "campus_days": 1.9230769230769231,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：11:00–13:00 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 2.0 天，课间空等 3.5 小时，最早 11:00，最晚 18:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 1.9 天，课间空等 3.8 小时，最早 09:00，最晚 18:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "课表A每周只需要来校2天，比课表B少一天，更符合我希望每周来学校的天数越少的期望。虽然课表B有半天的课程在早上，但整体来看，课表A更符合我的需求。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "课表A每周只需要来校1.9天，比课表B少一天，更符合我希望每周来学校的天数越少越好这一需求。虽然课表B的课程时间更紧凑，但考虑到通勤时间，课表A的灵活性更高。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": false
+  },
+  {
+   "persona": "commuter",
+   "persona_text": "我住得很远，单程通勤 90 分钟。希望每周来学校的天数越少越好，一天课多一点、中间等一会儿都没关系。",
+   "a_id": "04d8ab7cf857337b",
+   "b_id": "e7654e7c959ded4a",
+   "a_features": {
+    "gap_min": 350.7692307692308,
+    "campus_days": 2.923076923076923,
+    "outside_min": 30.0
+   },
+   "b_features": {
+    "gap_min": 9.23076923076923,
+    "campus_days": 3.769230769230769,
+    "outside_min": 60.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture\n周二：08:30–10:30 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 2.9 天，课间空等 5.8 小时，最早 08:30，最晚 18:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 3.8 天，课间空等 0.2 小时，最早 09:00，最晚 19:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "课表A每周需要通勤2.9天，而课表B每周需要通勤3.8天，考虑到你住得很远，单程通勤90分钟，课表A可以减少通勤次数，减轻通勤压力。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "课表B可以让我减少每天通勤的时间，因为每周只需要到校2.9天，比课表A少了近1天。虽然课表B的课间空等时间较长，但考虑到通勤时间的节省，整体上对我更有利。",
+    "choice": "B"
+   },
+   "swapped_as_original": "A",
+   "consistent": true
+  },
+  {
+   "persona": "commuter",
+   "persona_text": "我住得很远，单程通勤 90 分钟。希望每周来学校的天数越少越好，一天课多一点、中间等一会儿都没关系。",
+   "a_id": "78f9ba3fa874c793",
+   "b_id": "ae3b915ef58794e1",
+   "a_features": {
+    "gap_min": 207.69230769230768,
+    "campus_days": 2.923076923076923,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 50.76923076923077,
+    "campus_days": 2.8461538461538463,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture\n周二：11:00–13:00 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 2.9 天，课间空等 3.5 小时，最早 11:00，最晚 18:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 2.8 天，课间空等 0.8 小时，最早 09:00，最晚 16:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "课表B可以让我减少一天通勤，而且大部分课程都可以在线上完成，这样可以节省很多时间。",
+    "choice": "B"
+   },
+   "swapped": {
+    "reason": "课表A每周到校天数较少，只有2.8天，而课表B每周到校2.9天，多出一天，这会增加通勤时间，考虑到你住得远，单程通勤就需要90分钟，所以选择课表A可以减少通勤次数，减轻负担。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": true
+  },
+  {
+   "persona": "friday_worker",
+   "persona_text": "我周五全天打工，所以周五不能有课。其他日子希望课排得紧凑，不想在学校干等，空档对我来说是浪费。",
+   "a_id": "a7ba338e9dfb0e4a",
+   "b_id": "0ec99b16c3e6a0ca",
+   "a_features": {
+    "gap_min": 226.15384615384616,
+    "campus_days": 1.9230769230769231,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 46.15384615384615,
+    "campus_days": 2.8461538461538463,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 1.9 天，课间空等 3.8 小时，最早 09:00，最晚 18:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 2.8 天，课间空等 0.8 小时，最早 09:00，最晚 16:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "课表A在周五没有课程，符合你的需求。而课表B虽然每天到校时间更长，但你周五全天需要打工，所以课表A更合适。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "因为周五全天不能上课，所以课表A可以让我周五不用浪费时间去学校，直接用来打工。虽然课表A到校天数比课表B多，但是课表B的课程时间安排比较分散，中间有较多空档时间，这对我来说是浪费。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": false
+  },
+  {
+   "persona": "friday_worker",
+   "persona_text": "我周五全天打工，所以周五不能有课。其他日子希望课排得紧凑，不想在学校干等，空档对我来说是浪费。",
+   "a_id": "532233b4dcf36e8b",
+   "b_id": "a7ba338e9dfb0e4a",
+   "a_features": {
+    "gap_min": 207.69230769230768,
+    "campus_days": 2.0,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 226.15384615384616,
+    "campus_days": 1.9230769230769231,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：11:00–13:00 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 2.0 天，课间空等 3.5 小时，最早 11:00，最晚 18:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 1.9 天，课间空等 3.8 小时，最早 09:00，最晚 18:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "课表A的课程时间更紧凑，没有空档期，符合我希望课程紧凑，不想在学校干等的要求。虽然A表每周到校天数比B表多0.1天，但考虑到周五全天不能上课，实际上影响不大。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "因为周五全天不能上课，所以课表A和B都符合这个条件。但是课表A的课程时间更紧凑，没有空档期，而课表B在周二和周三之间有1小时的空档期，这对我来说是浪费时间。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": false
+  },
+  {
+   "persona": "friday_worker",
+   "persona_text": "我周五全天打工，所以周五不能有课。其他日子希望课排得紧凑，不想在学校干等，空档对我来说是浪费。",
+   "a_id": "532233b4dcf36e8b",
+   "b_id": "0ec99b16c3e6a0ca",
+   "a_features": {
+    "gap_min": 207.69230769230768,
+    "campus_days": 2.0,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 46.15384615384615,
+    "campus_days": 2.8461538461538463,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：11:00–13:00 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 2.0 天，课间空等 3.5 小时，最早 11:00，最晚 18:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 2.8 天，课间空等 0.8 小时，最早 09:00，最晚 16:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "课表B的课程更加紧凑，没有空档时间，符合我希望课程紧凑，不想在学校干等的要求。",
+    "choice": "B"
+   },
+   "swapped": {
+    "reason": "课表A每周到校天数较多，且课间空档时间较少，符合你希望课程紧凑，不想在学校干等的要求。虽然A表周五有课，但你周五全天打工，所以不影响你。相比之下，课表B虽然周五没有课，但到校天数较少，且课间空档时间较多，不符合你希望课程紧凑的要求。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": true
+  },
+  {
+   "persona": "friday_worker",
+   "persona_text": "我周五全天打工，所以周五不能有课。其他日子希望课排得紧凑，不想在学校干等，空档对我来说是浪费。",
+   "a_id": "e4a8b82414da9ff9",
+   "b_id": "09eb5730b9756f77",
+   "a_features": {
+    "gap_min": 216.92307692307693,
+    "campus_days": 2.0,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 55.38461538461539,
+    "campus_days": 3.769230769230769,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：11:00–13:00 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 2.0 天，课间空等 3.6 小时，最早 11:00，最晚 18:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 3.8 天，课间空等 0.9 小时，最早 09:00，最晚 18:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "课表B的课程安排更紧凑，没有空档时间，而且每天到校时间更早，可以更好地利用时间。而课表A在周五全天没有课程，但其他时间有较多空档，这对我来说是浪费。",
+    "choice": "B"
+   },
+   "swapped": {
+    "reason": "课表A在周五没有课程，符合你的需求。而且课程时间相对紧凑，没有空档时间，可以避免在学校干等。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": true
+  },
+  {
+   "persona": "friday_worker",
+   "persona_text": "我周五全天打工，所以周五不能有课。其他日子希望课排得紧凑，不想在学校干等，空档对我来说是浪费。",
+   "a_id": "06f6b15fe67dae20",
+   "b_id": "2c69b27e3a0b7acd",
+   "a_features": {
+    "gap_min": 346.15384615384613,
+    "campus_days": 2.076923076923077,
+    "outside_min": 30.0
+   },
+   "b_features": {
+    "gap_min": 161.53846153846155,
+    "campus_days": 3.8461538461538463,
+    "outside_min": 60.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：08:30–10:30 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 2.1 天，课间空等 5.8 小时，最早 08:30，最晚 18:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture\n周二：14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：17:00–19:00 ENGG2112 Tutorial\n周五：没课\n合计：每周到校 3.8 天，课间空等 2.7 小时，最早 12:00，最晚 19:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "课表A在周五没有课程，符合我周五全天打工的需求。虽然课表B的课程时间更紧凑，但周五的空档对我来说很重要。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "因为你周五全天打工，所以课表A在周五没有课程，符合你的需求。此外，课表A的课程时间更紧凑，减少了空档时间。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": false
+  },
+  {
+   "persona": "parent",
+   "persona_text": "我每天早上要送孩子上学，九点半之前到不了学校；下午最好早点结束，四点以后的课越少越好。",
+   "a_id": "4f857f318b79a74e",
+   "b_id": "532233b4dcf36e8b",
+   "a_features": {
+    "gap_min": 0.0,
+    "campus_days": 3.769230769230769,
+    "outside_min": 60.0
+   },
+   "b_features": {
+    "gap_min": 207.69230769230768,
+    "campus_days": 2.0,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2\n周四：14:00–16:00 AMME2301 Tutorial\n周五：17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 3.8 天，课间空等 0.0 小时，最早 12:00，最晚 19:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：11:00–13:00 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 2.0 天，课间空等 3.5 小时，最早 11:00，最晚 18:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "课表B可以让我下午早点结束，而且没有四点以后的课，这对我来说更好。虽然课表B需要我亲自到校两天，但比起早上的时间，我更在意下午的时间安排。",
+    "choice": "B"
+   },
+   "swapped": {
+    "reason": "课表A每天到校时间都在9点之后，符合你早上不能早到的要求，而且下午课程较少，可以早点结束。课表B虽然课程时间更紧凑，但你早上还是需要早点到学校。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": true
+  },
+  {
+   "persona": "parent",
+   "persona_text": "我每天早上要送孩子上学，九点半之前到不了学校；下午最好早点结束，四点以后的课越少越好。",
+   "a_id": "532233b4dcf36e8b",
+   "b_id": "f3e9322a3f2b0e88",
+   "a_features": {
+    "gap_min": 207.69230769230768,
+    "campus_days": 2.0,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 55.38461538461539,
+    "campus_days": 2.8461538461538463,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：11:00–13:00 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 2.0 天，课间空等 3.5 小时，最早 11:00，最晚 18:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：11:00–13:00 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2\n周四：14:00–16:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 2.8 天，课间空等 0.9 小时，最早 11:00，最晚 16:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "根据你的需求，课表B更适合你。因为你每天早上无法按时到校，课表B可以让你减少到校天数，并且课后时间更早结束。",
+    "choice": "B"
+   },
+   "swapped": {
+    "reason": "根据你的需求，课表A更适合你。因为你可以避免早上到校，而且下午的课程时间较早结束。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": true
+  },
+  {
+   "persona": "parent",
+   "persona_text": "我每天早上要送孩子上学，九点半之前到不了学校；下午最好早点结束，四点以后的课越少越好。",
+   "a_id": "4f857f318b79a74e",
+   "b_id": "f3e9322a3f2b0e88",
+   "a_features": {
+    "gap_min": 0.0,
+    "campus_days": 3.769230769230769,
+    "outside_min": 60.0
+   },
+   "b_features": {
+    "gap_min": 55.38461538461539,
+    "campus_days": 2.8461538461538463,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2\n周四：14:00–16:00 AMME2301 Tutorial\n周五：17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 3.8 天，课间空等 0.0 小时，最早 12:00，最晚 19:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：11:00–13:00 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2\n周四：14:00–16:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 2.8 天，课间空等 0.9 小时，最早 11:00，最晚 16:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "课表B可以让我每天早上不用去学校，而且下午课程较少，四点以后的课只有1天，符合我的需求。",
+    "choice": "B"
+   },
+   "swapped": {
+    "reason": "根据你的需求，课表A可以让你早上不用到校，减少早上的奔波。而且课表A的课程时间较早结束，最晚到16:00，符合你希望下午早点结束课程的要求。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": true
+  },
+  {
+   "persona": "parent",
+   "persona_text": "我每天早上要送孩子上学，九点半之前到不了学校；下午最好早点结束，四点以后的课越少越好。",
+   "a_id": "13993ab088e68af2",
+   "b_id": "8d988f28b33e7ded",
+   "a_features": {
+    "gap_min": 13.846153846153847,
+    "campus_days": 4.6923076923076925,
+    "outside_min": 60.0
+   },
+   "b_features": {
+    "gap_min": 55.38461538461539,
+    "campus_days": 2.923076923076923,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture\n周二：14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2\n周四：14:00–16:00 AMME2301 Tutorial\n周五：17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 4.7 天，课间空等 0.2 小时，最早 12:00，最晚 19:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：11:00–13:00 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2\n周四：14:00–16:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 2.9 天，课间空等 0.9 小时，最早 11:00，最晚 16:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "课表B可以让我避免早上送孩子上学，而且下午四点以后的课比较少，对我更方便。",
+    "choice": "B"
+   },
+   "swapped": {
+    "reason": "课表A在早上没有课程，可以避免早起送孩子上学的问题，而且课程时间较早结束，符合下午早结束的需求。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": true
+  },
+  {
+   "persona": "parent",
+   "persona_text": "我每天早上要送孩子上学，九点半之前到不了学校；下午最好早点结束，四点以后的课越少越好。",
+   "a_id": "0bc66f5dbdea5a4b",
+   "b_id": "2c5f169a79f56f20",
+   "a_features": {
+    "gap_min": 180.0,
+    "campus_days": 2.8461538461538463,
+    "outside_min": 60.0
+   },
+   "b_features": {
+    "gap_min": 170.76923076923077,
+    "campus_days": 2.923076923076923,
+    "outside_min": 60.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2\n周四：没课\n周五：12:00–14:00 AMME2301 Tutorial；17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 2.8 天，课间空等 3.0 小时，最早 12:00，最晚 19:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：17:00–19:00 ENGG2112 Tutorial\n周五：没课\n合计：每周到校 2.9 天，课间空等 2.8 小时，最早 12:00，最晚 19:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "课表A在下午的课程较少，且最晚的课程在19:00，这样可以早点回家照顾孩子。虽然课表B的课程时间更紧凑，但考虑到你的时间安排，课表A更适合你。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "课表A在下午的课程较少，且最晚的课程在19:00，这样可以早点回家照顾孩子。虽然课表B的课程时间更紧凑，但考虑到您的情况，课表A更适合。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": false
+  },
+  {
+   "persona": "night_owl",
+   "persona_text": "我是夜猫子，早上起不来，最好十点以后再上课，晚一点下课没关系。",
+   "a_id": "a7ba338e9dfb0e4a",
+   "b_id": "e475821aefa0c7fe",
+   "a_features": {
+    "gap_min": 226.15384615384616,
+    "campus_days": 1.9230769230769231,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 0.0,
+    "campus_days": 3.769230769230769,
+    "outside_min": 60.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 1.9 天，课间空等 3.8 小时，最早 09:00，最晚 18:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 3.8 天，课间空等 0.0 小时，最早 09:00，最晚 19:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "因为你是夜猫子，早上起不来，所以最好十点以后再上课。课表A的课程都在下午，符合你的作息时间。而课表B虽然也有下午的课程，但有上午的课程，不符合你的需求。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "因为你是一个夜猫子，早上起不来，所以最好十点以后再上课。课表A的课程都在十点以后开始，符合你的作息习惯。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": false
+  },
+  {
+   "persona": "night_owl",
+   "persona_text": "我是夜猫子，早上起不来，最好十点以后再上课，晚一点下课没关系。",
+   "a_id": "0ec99b16c3e6a0ca",
+   "b_id": "a7ba338e9dfb0e4a",
+   "a_features": {
+    "gap_min": 46.15384615384615,
+    "campus_days": 2.8461538461538463,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 226.15384615384616,
+    "campus_days": 1.9230769230769231,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 2.8 天，课间空等 0.8 小时，最早 09:00，最晚 16:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 1.9 天，课间空等 3.8 小时，最早 09:00，最晚 18:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "因为你是夜猫子，早上起不来，所以最好十点以后再上课。课表A的课程都在下午，符合你的作息时间。而课表B虽然也有下午的课程，但周三的课程安排得比较早，不符合你的需求。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "因为你是个夜猫子，早上起不来，所以最好十点以后再上课。课表A的课程都在下午，符合你的作息习惯。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": false
+  },
+  {
+   "persona": "night_owl",
+   "persona_text": "我是夜猫子，早上起不来，最好十点以后再上课，晚一点下课没关系。",
+   "a_id": "0ec99b16c3e6a0ca",
+   "b_id": "532233b4dcf36e8b",
+   "a_features": {
+    "gap_min": 46.15384615384615,
+    "campus_days": 2.8461538461538463,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 207.69230769230768,
+    "campus_days": 2.0,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 2.8 天，课间空等 0.8 小时，最早 09:00，最晚 16:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：11:00–13:00 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 2.0 天，课间空等 3.5 小时，最早 11:00，最晚 18:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "因为你是一个夜猫子，早上起不来，所以最好十点以后再上课。课表A的课程都在下午，符合你的作息时间。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "课表A的课程都在下午，符合夜猫子的作息习惯，而且没有早上的课程，可以避免早起。虽然课间有空等时间，但都在可接受范围内。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": false
+  },
+  {
+   "persona": "night_owl",
+   "persona_text": "我是夜猫子，早上起不来，最好十点以后再上课，晚一点下课没关系。",
+   "a_id": "43822e2d344adf5a",
+   "b_id": "c77aae45e754a229",
+   "a_features": {
+    "gap_min": 13.846153846153847,
+    "campus_days": 3.769230769230769,
+    "outside_min": 60.0
+   },
+   "b_features": {
+    "gap_min": 193.84615384615384,
+    "campus_days": 3.769230769230769,
+    "outside_min": 30.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 3.8 天，课间空等 0.2 小时，最早 09:00，最晚 19:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture\n周二：08:30–10:30 ENGG2112 Tutorial；14:00–16:00 AMME2301 Lecture1\n周三：12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 3.8 天，课间空等 3.2 小时，最早 08:30，最晚 18:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "因为你是一个夜猫子，早上起不来，所以最好十点以后再上课。课表A的课程都在十点以后开始，符合你的作息习惯。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "因为你是一个夜猫子，早上起不来，所以最好十点以后再上课。课表B的课程都在下午，符合你的作息习惯。",
+    "choice": "B"
+   },
+   "swapped_as_original": "A",
+   "consistent": true
+  },
+  {
+   "persona": "night_owl",
+   "persona_text": "我是夜猫子，早上起不来，最好十点以后再上课，晚一点下课没关系。",
+   "a_id": "dde8f0a22290727f",
+   "b_id": "6cc86406aa5f793c",
+   "a_features": {
+    "gap_min": 50.76923076923077,
+    "campus_days": 2.923076923076923,
+    "outside_min": 0.0
+   },
+   "b_features": {
+    "gap_min": 244.6153846153846,
+    "campus_days": 2.0,
+    "outside_min": 0.0
+   },
+   "a_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2\n周四：09:00–11:00 AMME2301 Tutorial\n周五：没课\n合计：每周到校 2.9 天，课间空等 0.8 小时，最早 09:00，最晚 16:00",
+   "b_text": "周一：16:00–18:00 ENGG2112 Lecture（线上）\n周二：14:00–16:00 AMME2301 Lecture1\n周三：09:00–11:00 ENGG2112 Tutorial；12:00–13:00 AMME2301 Lecture2；16:00–18:00 AMME2301 Tutorial\n周四：没课\n周五：没课\n合计：每周到校 2.0 天，课间空等 4.1 小时，最早 09:00，最晚 18:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "因为你是夜猫子，早上起不来，所以最好十点以后再上课。课表A的课程都在十点以后开始，符合你的作息习惯。而课表B虽然也有部分课程在十点以后开始，但也有课程在早上9点开始，不符合你的需求。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "因为你是个夜猫子，早上起不来，所以最好十点以后再上课。课表A的课程都在下午，符合你的作息习惯。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": false
+  },
+  {
+   "persona": "intern",
+   "persona_text": "我在做实习，想把课集中在尽量少的几天，空出整天去上班。",
+   "a_id": "fec2713a8a815954",
+   "b_id": "8fec0c5bc9ea94ab",
+   "a_features": {
+    "gap_min": 493.84615384615387,
+    "campus_days": 3.923076923076923,
+    "outside_min": 73.84615384615384
+   },
+   "b_features": {
+    "gap_min": 433.84615384615387,
+    "campus_days": 4.923076923076923,
+    "outside_min": 133.84615384615384
+   },
+   "a_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1；11:00–13:00 ENGG2112 Tutorial\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：没课\n合计：每周到校 3.9 天，课间空等 8.2 小时，最早 08:00，最晚 18:00",
+   "b_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 4.9 天，课间空等 7.2 小时，最早 08:00，最晚 19:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "课表A可以让我在一周内集中上课，空出整天去实习，而课表B则需要分散在几天上课，这会占用我实习的时间。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "课表B可以让我在周五不用到校，这样我可以专心去实习，而且每天到校的时间都比较早，可以早点下班。",
+    "choice": "B"
+   },
+   "swapped_as_original": "A",
+   "consistent": true
+  },
+  {
+   "persona": "intern",
+   "persona_text": "我在做实习，想把课集中在尽量少的几天，空出整天去上班。",
+   "a_id": "38c59f87a60a6f51",
+   "b_id": "ce78657f01fb58fb",
+   "a_features": {
+    "gap_min": 733.8461538461538,
+    "campus_days": 3.923076923076923,
+    "outside_min": 73.84615384615384
+   },
+   "b_features": {
+    "gap_min": 470.7692307692308,
+    "campus_days": 4.923076923076923,
+    "outside_min": 133.84615384615384
+   },
+   "a_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1；15:00–17:00 ENGG2112 Tutorial\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：没课\n合计：每周到校 3.9 天，课间空等 12.2 小时，最早 08:00，最晚 18:00",
+   "b_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 4.9 天，课间空等 7.8 小时，最早 08:00，最晚 19:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "课表A可以让我在周二和周五空出整天去实习，而课表B则需要在周五下午占用时间，这对我来说不太方便。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "课表B可以让我在周五不用到校，这样我可以专心去实习，而且每天到校的时间都比较早，可以早点下班。",
+    "choice": "B"
+   },
+   "swapped_as_original": "A",
+   "consistent": true
+  },
+  {
+   "persona": "intern",
+   "persona_text": "我在做实习，想把课集中在尽量少的几天，空出整天去上班。",
+   "a_id": "b50c274ddc90844d",
+   "b_id": "a9d0a2b834cee4c0",
+   "a_features": {
+    "gap_min": 627.6923076923077,
+    "campus_days": 3.923076923076923,
+    "outside_min": 73.84615384615384
+   },
+   "b_features": {
+    "gap_min": 775.3846153846154,
+    "campus_days": 3.923076923076923,
+    "outside_min": 73.84615384615384
+   },
+   "a_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1；11:00–13:00 ENGG2112 Tutorial\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial；16:00–18:00 AMME2262 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：没课\n合计：每周到校 3.9 天，课间空等 10.5 小时，最早 08:00，最晚 18:00",
+   "b_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1；15:00–17:00 ENGG2112 Tutorial\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：没课\n合计：每周到校 3.9 天，课间空等 12.9 小时，最早 08:00，最晚 18:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "课表A的课程集中在周一和周三，可以让我在周二、周四和周五有整天的时间去实习，这更符合我的需求。虽然课表B的课程时间更分散，但整体到校天数和最晚课程时间差不多，且课间空等时间更多，这对我来说并不是最重要的。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "课表A中有两天的课程时间比较密集，需要在一天内完成两节大课和一节小课，这与你希望把课集中在尽量少的几天以空出整天去上班的需求不符。而课表B则将课程分散在三天，这样可以更好地配合你的实习安排。",
+    "choice": "B"
+   },
+   "swapped_as_original": "A",
+   "consistent": true
+  },
+  {
+   "persona": "intern",
+   "persona_text": "我在做实习，想把课集中在尽量少的几天，空出整天去上班。",
+   "a_id": "f3f1107fe3091790",
+   "b_id": "f3b18e97d761c467",
+   "a_features": {
+    "gap_min": 475.38461538461536,
+    "campus_days": 4.923076923076923,
+    "outside_min": 133.84615384615384
+   },
+   "b_features": {
+    "gap_min": 934.6153846153846,
+    "campus_days": 4.076923076923077,
+    "outside_min": 133.84615384615384
+   },
+   "a_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 4.9 天，课间空等 7.9 小时，最早 08:00，最晚 19:00",
+   "b_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial；16:00–18:00 AMME2262 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3；17:00–19:00 ENGG2112 Tutorial\n周五：没课\n合计：每周到校 4.1 天，课间空等 15.6 小时，最早 08:00，最晚 19:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "课表B可以让我在周五不用到校，这样我可以专心去实习，而且课表B的空闲时间更多，可以更好地安排实习和学习之间的平衡。",
+    "choice": "B"
+   },
+   "swapped": {
+    "reason": "课表A可以让我在一周内集中到校四天，空出一天整天去实习，而课表B则需要我分散到五天上课，无法保证有整天的时间去实习。",
+    "choice": "A"
+   },
+   "swapped_as_original": "B",
+   "consistent": true
+  },
+  {
+   "persona": "intern",
+   "persona_text": "我在做实习，想把课集中在尽量少的几天，空出整天去上班。",
+   "a_id": "222cec486e12e302",
+   "b_id": "4ed7f8320320b88c",
+   "a_features": {
+    "gap_min": 530.7692307692307,
+    "campus_days": 3.923076923076923,
+    "outside_min": 73.84615384615384
+   },
+   "b_features": {
+    "gap_min": 650.7692307692307,
+    "campus_days": 3.923076923076923,
+    "outside_min": 73.84615384615384
+   },
+   "a_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1；11:00–13:00 ENGG2112 Tutorial\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：没课\n合计：每周到校 3.9 天，课间空等 8.8 小时，最早 08:00，最晚 18:00",
+   "b_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1；11:00–13:00 ENGG2112 Tutorial\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial；16:00–18:00 AMME2262 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：没课\n合计：每周到校 3.9 天，课间空等 10.8 小时，最早 08:00，最晚 18:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "课表A的课程集中在周一和周三，可以让我在周二、周四和周五专心上班，这样可以更好地利用整天的时间。而课表B的课程分散在三天，无法让我有连续的整天时间去上班。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "课表B比课表A减少了1小时的空堂时间，这可以让我有更多的时间去实习。",
+    "choice": "B"
+   },
+   "swapped_as_original": "A",
+   "consistent": true
+  },
+  {
+   "persona": "near_campus",
+   "persona_text": "我就住在学校旁边，不介意天天来。但我讨厌一天上很多课，也讨厌课和课之间等很久。",
+   "a_id": "8fec0c5bc9ea94ab",
+   "b_id": "fec2713a8a815954",
+   "a_features": {
+    "gap_min": 433.84615384615387,
+    "campus_days": 4.923076923076923,
+    "outside_min": 133.84615384615384
+   },
+   "b_features": {
+    "gap_min": 493.84615384615387,
+    "campus_days": 3.923076923076923,
+    "outside_min": 73.84615384615384
+   },
+   "a_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 4.9 天，课间空等 7.2 小时，最早 08:00，最晚 19:00",
+   "b_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1；11:00–13:00 ENGG2112 Tutorial\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：没课\n合计：每周到校 3.9 天，课间空等 8.2 小时，最早 08:00，最晚 18:00",
+   "both_on_front": true,
+   "forward": {
+    "reason": "虽然课表B每周到校天数较少，但课间等待时间较短，且没有周五的课程，可以更好地安排个人时间。",
+    "choice": "B"
+   },
+   "swapped": {
+    "reason": "虽然课表B每天到校时间多一小时，但是减少了课间等待时间，更符合我对课间等待时间长的厌恶。",
+    "choice": "B"
+   },
+   "swapped_as_original": "A",
+   "consistent": false
+  },
+  {
+   "persona": "near_campus",
+   "persona_text": "我就住在学校旁边，不介意天天来。但我讨厌一天上很多课，也讨厌课和课之间等很久。",
+   "a_id": "13dd03e65d6e37c7",
+   "b_id": "8e253eccc5b31e42",
+   "a_features": {
+    "gap_min": 595.3846153846154,
+    "campus_days": 4.923076923076923,
+    "outside_min": 133.84615384615384
+   },
+   "b_features": {
+    "gap_min": 833.0769230769231,
+    "campus_days": 4.076923076923077,
+    "outside_min": 133.84615384615384
+   },
+   "a_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial；16:00–18:00 AMME2262 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：17:00–19:00 ENGG2112 Tutorial\n合计：每周到校 4.9 天，课间空等 9.9 小时，最早 08:00，最晚 19:00",
+   "b_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3；17:00–19:00 ENGG2112 Tutorial\n周五：没课\n合计：每周到校 4.1 天，课间空等 13.9 小时，最早 08:00，最晚 19:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "课表A虽然每天到校时间较多，但课间等待时间较短，可以更高效地利用时间。而课表B虽然每天到校时间较少，但课间等待时间较长，可能会浪费很多时间。考虑到你不喜欢课间等待太久，所以选择课表A。",
+    "choice": "A"
+   },
+   "swapped": {
+    "reason": "课表A每天上课时间较少，且课间等待时间较长，这会让我感到疲惫。课表B虽然每天上课时间稍多，但课间等待时间较短，可以让我有更多休息时间。",
+    "choice": "B"
+   },
+   "swapped_as_original": "A",
+   "consistent": true
+  },
+  {
+   "persona": "near_campus",
+   "persona_text": "我就住在学校旁边，不介意天天来。但我讨厌一天上很多课，也讨厌课和课之间等很久。",
+   "a_id": "183a9477be272d0b",
+   "b_id": "0e3dcbc55564304a",
+   "a_features": {
+    "gap_min": 793.8461538461538,
+    "campus_days": 3.923076923076923,
+    "outside_min": 73.84615384615384
+   },
+   "b_features": {
+    "gap_min": 733.8461538461538,
+    "campus_days": 4.076923076923077,
+    "outside_min": 73.84615384615384
+   },
+   "a_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1；15:00–17:00 ENGG2112 Tutorial\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：没课\n合计：每周到校 3.9 天，课间空等 13.2 小时，最早 08:00，最晚 18:00",
+   "b_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1；15:00–17:00 ENGG2112 Tutorial\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：没课\n合计：每周到校 4.1 天，课间空等 12.2 小时，最早 08:00，最晚 18:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "虽然课表B每天到校时间多0.2天，但是课间等待时间减少了1小时，这可以让我有更多时间休息或者做其他事情，符合我讨厌课间等待时间过长的要求。",
+    "choice": "B"
+   },
+   "swapped": {
+    "reason": "虽然两份课表的课程时间基本相同，但是课表A每天到校4.1天，比课表B多半天，这会让我感到疲惫。而且课表B的课间等待时间更少，这可以让我有更多时间休息或者做其他事情。",
+    "choice": "B"
+   },
+   "swapped_as_original": "A",
+   "consistent": false
+  },
+  {
+   "persona": "near_campus",
+   "persona_text": "我就住在学校旁边，不介意天天来。但我讨厌一天上很多课，也讨厌课和课之间等很久。",
+   "a_id": "02d862be0ceb08d3",
+   "b_id": "222cec486e12e302",
+   "a_features": {
+    "gap_min": 738.4615384615385,
+    "campus_days": 3.923076923076923,
+    "outside_min": 73.84615384615384
+   },
+   "b_features": {
+    "gap_min": 530.7692307692307,
+    "campus_days": 3.923076923076923,
+    "outside_min": 73.84615384615384
+   },
+   "a_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1；15:00–17:00 ENGG2112 Tutorial\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：没课\n合计：每周到校 3.9 天，课间空等 12.3 小时，最早 08:00，最晚 18:00",
+   "b_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1；11:00–13:00 ENGG2112 Tutorial\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：没课\n合计：每周到校 3.9 天，课间空等 8.8 小时，最早 08:00，最晚 18:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "虽然两份课表到校天数和最晚时间都差不多，但是课表B的课间等待时间更短，可以减少等待的时间，更符合我对课间等待时间短的要求。",
+    "choice": "B"
+   },
+   "swapped": {
+    "reason": "课表B相比课表A减少了课间等待时间，从8.8小时减少到了12.3小时，虽然等待时间增加，但总体上更紧凑，可以减少一天中的空闲时间，符合你不喜欢课间等待太久的要求。",
+    "choice": "B"
+   },
+   "swapped_as_original": "A",
+   "consistent": false
+  },
+  {
+   "persona": "near_campus",
+   "persona_text": "我就住在学校旁边，不介意天天来。但我讨厌一天上很多课，也讨厌课和课之间等很久。",
+   "a_id": "8e253eccc5b31e42",
+   "b_id": "06b56fd1455db3c9",
+   "a_features": {
+    "gap_min": 833.0769230769231,
+    "campus_days": 4.076923076923077,
+    "outside_min": 133.84615384615384
+   },
+   "b_features": {
+    "gap_min": 840.0,
+    "campus_days": 4.076923076923077,
+    "outside_min": 73.84615384615384
+   },
+   "a_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；11:00–13:00 AMME2262 Tutorial；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3；17:00–19:00 ENGG2112 Tutorial\n周五：没课\n合计：每周到校 4.1 天，课间空等 13.9 小时，最早 08:00，最晚 19:00",
+   "b_text": "周一：08:30–11:00 CIVL3206 Lecture；09:00–11:00 CIVL3206 Lecture；16:00–18:00 ENGG2112 Lecture\n周二：09:00–10:00 AMME2262 Lecture1；15:00–17:00 ENGG2112 Tutorial\n周三：09:00–10:00 AMME2262 Lecture2；14:00–16:00 CIVL3206 Tutorial；16:00–18:00 AMME2262 Tutorial\n周四：08:00–10:00 AMME2262 Lecture3\n周五：没课\n合计：每周到校 4.1 天，课间空等 14.0 小时，最早 08:00，最晚 18:00",
+   "both_on_front": false,
+   "forward": {
+    "reason": "虽然两份课表到校天数和最晚时间都差不多，但是课表B减少了课间等待时间，并且课表B的课程安排更加紧凑，可以减少一天上很多课的次数。",
+    "choice": "B"
+   },
+   "swapped": {
+    "reason": "虽然两份课表到校天数和时间差不多，但是课表B减少了课间等待时间，并且最晚的课程在19:00结束，比课表A晚一个小时，这样可以留出更多的时间来放松或者处理个人事务。",
+    "choice": "B"
+   },
+   "swapped_as_original": "A",
+   "consistent": false
+  }
+ ]
+}

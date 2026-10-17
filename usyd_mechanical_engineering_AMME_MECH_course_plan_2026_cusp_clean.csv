@@ -1,0 +1,41 @@
+year,semester,category,credit_points,unit_code,unit_title,source_url
+1,1,Projects Table / introductory project,6,MECH1560,Introduction to Mechanical Engineering,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+1,1,Mechanical Stream Core,6,AMME1705,Introduction to Electromechanical Systems,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+1,2,Mechanical Stream Core,6,AMME1802,Engineering Mechanics,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+1,2,Mechanical Stream Core,6,AMME1362,Introduction to Engineering Materials,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+1,2,Mechanical Stream Core,6,MECH1400,Design and Construction of Mechanical Systems,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+2,1,Mechanical Stream Core,6,AMME2500,Engineering Dynamics,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+2,1,Mechanical Stream Core,6,AMME2000,Engineering Analysis,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+2,1,Mechanical Stream Core,6,AMME2261,Fluid Mechanics 1,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+2,1,Mechanical Stream Core,6,MECH2400,Mechanical Systems Design 1,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+2,2,Mechanical Stream Core,6,AMME2301,Mechanics of Solids,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+2,2,Mechanical Stream Core,6,AMME2262,Introduction to Thermal Engineering,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+2,2,Mechanical Stream Core,6,MECH2460,Manufacturing Engineering,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+3,1,Mechanical Stream Core,6,AMME3500,System Dynamics and Control,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+3,1,Mechanical Stream Core,6,MECH3362,Engineering Materials for Adv Manufacturing,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+3,1,Mechanical Stream Core,6,MECH3261,Fluid Mechanics 2,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+3,2,Mechanical Stream Core,6,MECH3260,Thermal Engineering and Environment,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+3,2,Mechanical Stream Core,6,MECH3361,Mechanics of Solids 2,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+3,2,Mechanical Stream Core,6,MECH3460,Mechanical Systems Design 2,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+3,2,Mechanical Stream Core,6,AMME3060,Engineering Methods,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,1,Projects Table / thesis,6,AMME4111,Thesis A,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Projects Table / thesis,6,AMME4112,Thesis B,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,AMME5202,Computational Fluid Dynamics,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,AMME5271,Computational Nanotechnology,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,AMME5912,Crash Analysis and Design,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,AMME5060,Advanced Computational Engineering,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,AMME5292,Applied Fluid Dynamics and Turbulence,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,AMME5510,Vibration and Acoustics,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,MECH5255,Air Conditioning and Refrigeration,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,MECH5265,Combustion,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,AMME5101,Energy and the Environment,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,MECH5275,Renewable Energy,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,AMME4401,Industrial and Product Design Engineering,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,AMME5902,Computer Aided Manufacturing,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,MECH4460,Design of Micro- and Nanosystems,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,MECH5461,Design for Advanced Manufacturing,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,AMME5310,Engineering Tribology,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,MECH5304,Materials Failure,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,MECH5305,Smart Materials,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,MECH5310,Advanced Engineering Materials,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443
+4,2,Mechanical elective or specialisation option,,MECH5311,Microscopy and Microanalysis of Materials,https://cusp.sydney.edu.au/students/view-degree-page/degree_id/443

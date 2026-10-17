@@ -1,0 +1,18 @@
+{
+  "year": 2026,
+  "session_code": "S2C",
+  "requested_units": [
+    "MTRX3700"
+  ],
+  "units": {
+    "MTRX3700": {
+      "offerings": 1,
+      "meetings": 52,
+      "status": "ok"
+    }
+  },
+  "warnings": [],
+  "meeting_count": 52,
+  "complete": true,
+  "robots_policy": "disallowed_override"
+}

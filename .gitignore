@@ -1,0 +1,24 @@
+# Student preferences and consented research data must stay local.
+data/private/
+__pycache__/
+*.pyc
+.DS_Store
+.Rhistory
+.venv-llm/
+.claude/
+.playwright-cli/
+output/playwright/
+tmp/
+
+# Course materials and files unrelated to UniPlan are not part of the project code.
+ENGG2112 课程资料 Course Materials/
+Week 0*/
+论文中文翻译/
+/*.png
+/*.pdf
+Assignment Proposal/*
+!Assignment Proposal/proposal_draft.md
+
+# Model weights and adapters are rebuilt by scripts, not committed.
+llm/**/adapters/
+llm/**/*.safetensors

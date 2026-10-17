@@ -1,0 +1,159 @@
+{
+  "source": "https://maps.sydney.edu.au/",
+  "position_kind": "building_map_point",
+  "buildings": {
+    "A08": {
+      "name": "Heydon Laurence Building",
+      "latitude": -33.88530309709776,
+      "longitude": 151.18623204477964,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005097",
+      "map_building_id": 1005097,
+      "campus": "Camperdown Campus"
+    },
+    "A14": {
+      "name": "The Quadrangle",
+      "latitude": -33.885932941249294,
+      "longitude": 151.18874218448005,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005109",
+      "map_building_id": 1005109,
+      "campus": "Camperdown Campus"
+    },
+    "A28": {
+      "name": "Physics Building",
+      "latitude": -33.88814223970316,
+      "longitude": 151.1871287307535,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005123",
+      "map_building_id": 1005123,
+      "campus": "Camperdown Campus"
+    },
+    "A31": {
+      "name": "Sydney Nanoscience Hub (SNH)",
+      "latitude": -33.88848107390519,
+      "longitude": 151.18749878828143,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005127",
+      "map_building_id": 1005127,
+      "campus": "Camperdown Campus"
+    },
+    "F07": {
+      "name": "Carslaw Building",
+      "latitude": -33.88826995897281,
+      "longitude": 151.19071970305254,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005155",
+      "map_building_id": 1005155,
+      "campus": "Camperdown Campus"
+    },
+    "F10A": {
+      "name": "Law Building Annex",
+      "latitude": -33.88755440904132,
+      "longitude": 151.19052199449058,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005158",
+      "map_building_id": 1005158,
+      "campus": "Camperdown Campus"
+    },
+    "F11": {
+      "name": "Chemistry Building",
+      "latitude": -33.88790822108144,
+      "longitude": 151.18948065475172,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005159",
+      "map_building_id": 1005159,
+      "campus": "Camperdown Campus"
+    },
+    "F19": {
+      "name": "Eastern Avenue Auditorium and Theatre Complex",
+      "latitude": -33.88811939333119,
+      "longitude": 151.19034681142008,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005164",
+      "map_building_id": 1005164,
+      "campus": "Camperdown Campus"
+    },
+    "G04": {
+      "name": "Wilkinson Building",
+      "latitude": -33.888752381441996,
+      "longitude": 151.19218726329132,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005291",
+      "map_building_id": 1005291,
+      "campus": "Darlington Campus"
+    },
+    "H03": {
+      "name": "Institute Building",
+      "latitude": -33.890947598416126,
+      "longitude": 151.18966804185848,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005263",
+      "map_building_id": 1005263,
+      "campus": "Darlington Campus"
+    },
+    "H04": {
+      "name": "Merewether Building",
+      "latitude": -33.89046006676509,
+      "longitude": 151.19025533862367,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005264",
+      "map_building_id": 1005264,
+      "campus": "Darlington Campus"
+    },
+    "H10": {
+      "name": "Storie Dixson Wing",
+      "latitude": -33.89108998092281,
+      "longitude": 151.18977186722472,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005250",
+      "map_building_id": 1005250,
+      "campus": "Darlington Campus"
+    },
+    "H70": {
+      "name": "Belinda Hutchinson Building",
+      "latitude": -33.89217445027956,
+      "longitude": 151.19043953939703,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005240",
+      "map_building_id": 1005240,
+      "campus": "Darlington Campus"
+    },
+    "J02": {
+      "name": "PNR Building",
+      "latitude": -33.89014940553652,
+      "longitude": 151.19310612742305,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005284",
+      "map_building_id": 1005284,
+      "campus": "Darlington Campus"
+    },
+    "J05": {
+      "name": "Civil Engineering Building",
+      "latitude": -33.890710536019824,
+      "longitude": 151.19362196907903,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005286",
+      "map_building_id": 1005286,
+      "campus": "Darlington Campus"
+    },
+    "J07": {
+      "name": "Mechanical Engineering Building",
+      "latitude": -33.8892464383114,
+      "longitude": 151.19411932685932,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005282",
+      "map_building_id": 1005282,
+      "campus": "Darlington Campus"
+    },
+    "J11": {
+      "name": "Aeronautical Engineering Building",
+      "latitude": -33.88870430904465,
+      "longitude": 151.19429225240626,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005281",
+      "map_building_id": 1005281,
+      "campus": "Darlington Campus"
+    },
+    "J12": {
+      "name": "Computer Science Building",
+      "latitude": -33.88823611042073,
+      "longitude": 151.1941024833688,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005293",
+      "map_building_id": 1005293,
+      "campus": "Darlington Campus"
+    },
+    "J13": {
+      "name": "Engineering Link Building",
+      "latitude": -33.88966741712333,
+      "longitude": 151.1938945746415,
+      "map_url": "https://maps.sydney.edu.au/?buildingId=1005283",
+      "map_building_id": 1005283,
+      "campus": "Darlington Campus"
+    }
+  },
+  "fetched_at_utc": "2026-09-25T07:57:31+00:00"
+}

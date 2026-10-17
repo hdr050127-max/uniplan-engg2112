@@ -1,0 +1,24 @@
+{
+  "year": 2026,
+  "session_code": "S2C",
+  "requested_units": [
+    "ENGG2112",
+    "MTRX1705"
+  ],
+  "units": {
+    "ENGG2112": {
+      "offerings": 1,
+      "meetings": 167,
+      "status": "ok"
+    },
+    "MTRX1705": {
+      "offerings": 1,
+      "meetings": 83,
+      "status": "ok"
+    }
+  },
+  "warnings": [],
+  "meeting_count": 250,
+  "complete": true,
+  "robots_policy": "offline"
+}

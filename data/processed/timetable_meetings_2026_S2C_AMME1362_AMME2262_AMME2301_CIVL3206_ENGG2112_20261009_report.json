@@ -1,0 +1,42 @@
+{
+  "year": 2026,
+  "session_code": "S2C",
+  "requested_units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112",
+    "AMME1362"
+  ],
+  "units": {
+    "AMME2262": {
+      "offerings": 1,
+      "meetings": 160,
+      "status": "ok"
+    },
+    "AMME2301": {
+      "offerings": 1,
+      "meetings": 268,
+      "status": "ok"
+    },
+    "CIVL3206": {
+      "offerings": 1,
+      "meetings": 53,
+      "status": "ok"
+    },
+    "ENGG2112": {
+      "offerings": 1,
+      "meetings": 167,
+      "status": "ok"
+    },
+    "AMME1362": {
+      "offerings": 1,
+      "meetings": 457,
+      "status": "ok"
+    }
+  },
+  "warnings": [],
+  "meeting_count": 1105,
+  "complete": true,
+  "robots_policy": "offline"
+}

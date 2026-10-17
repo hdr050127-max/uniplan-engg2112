@@ -27,17 +27,21 @@ function button(label, handler, { className = "button", title = null } = {}) {
   return node;
 }
 
-const DAY = ["一", "二", "三", "四", "五", "六", "日"];
+const DAY = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+const DAY_LONG = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September",
+  "October", "November", "December"];
 const AXES = ["campus_days", "gap", "outside_hours"];
 const AXIS_FEATURE = { gap: "gap_min", campus_days: "campus_days", outside_hours: "outside_min" };
-const AXIS_CHIP = { campus_days: "少到校", gap: "少空等", outside_hours: "少早晚课" };
-const AXIS_TAG = { campus_days: "到校最少", gap: "空等最少", outside_hours: "早晚课最少" };
+const AXIS_CHIP = { campus_days: "Fewer days on campus", gap: "Less waiting", outside_hours: "Fewer early or late classes" };
+const AXIS_TAG = { campus_days: "fewest days on campus", gap: "least waiting", outside_hours: "least early or late class" };
 const PRESETS = {
-  mon: { label: "周一全天", windows: [[1, 0, 1439]] },
-  fri: { label: "周五全天", windows: [[5, 0, 1439]] },
-  early: { label: "10 点前", windows: [1, 2, 3, 4, 5].map((day) => [day, 0, 600]) },
-  late: { label: "18 点后", windows: [1, 2, 3, 4, 5].map((day) => [day, 1080, 1439]) },
+  mon: { label: "Mondays", windows: [[1, 0, 1439]] },
+  fri: { label: "Fridays", windows: [[5, 0, 1439]] },
+  early: { label: "Weekdays before 10 am", windows: [1, 2, 3, 4, 5].map((day) => [day, 0, 600]) },
+  late: { label: "Weekdays after 6 pm", windows: [1, 2, 3, 4, 5].map((day) => [day, 1080, 1439]) },
 };
+const COURSE_COLOURS = 5; // sandstone, eucalypt, harbour, jacaranda, brick (docs/DESIGN.md)
 const STUDY_MODE = new URLSearchParams(location.search).has("study");
 const LETTERS = "ABCDEFGHIJKL";
 const NOW = new Date();
@@ -51,7 +55,7 @@ const state = {
   tab: "week", enrolled: {}, friend: null, notice: "", compare: [], history: [],
   sharedPlan: null, participant: null, firstInteraction: null,
   say: null, view: "all", viewPicked: false, reasons: {},
-  // Whether the student has stated an order for "我在意" (state.cares keeps insertion order).
+  // Whether the student has stated an order for "What matters" (state.cares keeps insertion order).
   caresTouched: false,
 };
 
@@ -62,7 +66,47 @@ function minutes(value) {
 }
 
 function clock(value) {
+  // The value of a time field: "09:00".
   return `${String(Math.floor(value / 60)).padStart(2, "0")}:${String(value % 60).padStart(2, "0")}`;
+}
+
+function keepUnits(text) {
+  // A number stays on the same line as its unit: "3 h 14 min", "6 pm", "2.8 days".
+  return String(text).replace(/(\d) (?=(?:h|min|days?|am|pm)\b)/g, "$1\u00a0").replace(/\bh (?=\d)/g, "h\u00a0");
+}
+
+function timeText(value) {
+  // How a time reads on the page: "9 am", "6:30 pm".
+  if (value >= 1440) return "midnight";
+  const hour = Math.floor(value / 60);
+  const minute = value % 60;
+  return keepUnits(`${hour % 12 || 12}${minute ? `:${String(minute).padStart(2, "0")}` : ""} ${hour < 12 ? "am" : "pm"}`);
+}
+
+function spanText(start, end) {
+  return `${timeText(start)} to ${timeText(end)}`;
+}
+
+function durationText(minutes) {
+  // 72 -> "1 h 12 min", 45 -> "45 min".
+  const total = Math.round(minutes);
+  const hours = Math.floor(total / 60);
+  const rest = total % 60;
+  if (!hours) return keepUnits(`${rest} min`);
+  return keepUnits(rest ? `${hours} h ${rest} min` : `${hours} h`);
+}
+
+function joinWords(words, last = "and") {
+  return words.length <= 1 ? words.join("") : `${words.slice(0, -1).join(", ")} ${last} ${words[words.length - 1]}`;
+}
+
+function plural(count, word) {
+  return `${count} ${word}${count === 1 ? "" : "s"}`;
+}
+
+function termName(year, sessionCode) {
+  const semester = /^S([12])/.exec(sessionCode || "");
+  return semester ? `Semester ${semester[1]}, ${year}` : `${sessionCode} ${year}`;
 }
 
 function term() {
@@ -80,11 +124,11 @@ function activityOf(meeting) {
 }
 
 function daysText(pattern) {
-  return pattern ? `周${[...pattern].map((day) => DAY[Number(day) - 1]).join("")}` : "无固定到校日";
+  return pattern ? [...pattern].map((day) => DAY[Number(day) - 1]).join(", ") : "No set campus days";
 }
 
 function hoursText(minutesPerWeek) {
-  return minutesPerWeek >= 60 ? `${(minutesPerWeek / 60).toFixed(1)} 小时` : `${Math.round(minutesPerWeek)} 分钟`;
+  return durationText(minutesPerWeek);
 }
 
 function addDays(isoDate, days) {
@@ -101,8 +145,20 @@ function weekdayOf(isoDate) {
   return ((new Date(`${isoDate}T00:00:00Z`).getUTCDay() + 6) % 7) + 1;
 }
 
-function shortDate(isoDate) {
-  return `${Number(isoDate.slice(5, 7))}/${Number(isoDate.slice(8, 10))}`;
+function dateText(isoDate) {
+  // "12 October", the Australian way.
+  return `${Number(isoDate.slice(8, 10))} ${MONTHS[Number(isoDate.slice(5, 7)) - 1]}`;
+}
+
+function dayDate(isoDate) {
+  // "Mon 12 October".
+  return `${DAY[weekdayOf(isoDate) - 1]} ${dateText(isoDate)}`;
+}
+
+function rangeText(from, to) {
+  // "12 to 18 October", or "28 September to 4 October".
+  return from.slice(5, 7) === to.slice(5, 7) ? `${Number(from.slice(8, 10))} to ${dateText(to)}`
+    : `${dateText(from)} to ${dateText(to)}`;
 }
 
 function elapsedMs() {
@@ -111,6 +167,13 @@ function elapsedMs() {
 
 function setError(id, message) {
   $(id).textContent = message || "";
+}
+
+function announce(text) {
+  // One short line for screen readers; the redrawn regions themselves are not live.
+  const box = $("announce");
+  box.textContent = "";
+  setTimeout(() => { box.textContent = text || ""; }, 60); // a fresh change, so the same words are read again
 }
 
 let toastTimer = null;
@@ -123,7 +186,7 @@ function toast(message) {
   toastTimer = setTimeout(() => {
     box.classList.remove("show");
     toastTimer = setTimeout(() => { box.hidden = true; }, 220);
-  }, 2400);
+  }, Math.max(2400, message.length * 60));
 }
 
 /* ===================== theme ===================== */
@@ -140,7 +203,9 @@ function applyTheme() {
   // A saved choice wins; otherwise follow the system setting.
   const dark = (storedTheme() || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light")) === "dark";
   document.documentElement.dataset.theme = dark ? "dark" : "light";
-  $("themeToggle").textContent = dark ? "浅色" : "深色";
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", dark ? "#14161d" : "#ffffff");
+  $("themeToggle").textContent = dark ? "Light" : "Dark";
+  $("themeToggle").setAttribute("aria-label", dark ? "Use the light theme" : "Use the dark theme");
 }
 
 function toggleTheme() {
@@ -158,10 +223,12 @@ function toggleTheme() {
 function hideSuggestions() {
   $("suggestions").hidden = true;
   $("unitQuery").setAttribute("aria-expanded", "false");
+  $("unitQuery").removeAttribute("aria-activedescendant");
   state.activeMatch = -1;
 }
 
 function renderSuggestions() {
+  // A combobox: focus stays in the field, arrow keys move the highlighted option.
   const list = $("suggestions");
   list.replaceChildren();
   if (!state.matches.length) {
@@ -170,18 +237,23 @@ function renderSuggestions() {
   }
   state.matches.forEach((item, index) => {
     const li = el("li");
+    li.id = `suggestion-${index}`;
     li.setAttribute("role", "option");
     li.setAttribute("aria-selected", String(index === state.activeMatch));
-    const choice = el("button", index === state.activeMatch ? "active" : "");
-    choice.type = "button";
-    choice.append(el("span", "suggest-code", item.unit_code), el("span", "suggest-name", item.unit_name));
-    if (!item.available_in_snapshot) choice.append(el("span", "suggest-note", "暂无课表数据"));
-    choice.addEventListener("click", () => addUnit(item.unit_code, item.unit_name));
-    li.append(choice);
+    li.append(el("span", "suggest-code", item.unit_code), el("span", "suggest-name", item.unit_name));
+    if (!item.available_in_snapshot) li.append(el("span", "suggest-note", "No timetable data"));
+    li.addEventListener("mousedown", (event) => event.preventDefault()); // keep focus in the field
+    li.addEventListener("click", () => addUnit(item.unit_code, item.unit_name));
     list.append(li);
   });
   list.hidden = false;
   $("unitQuery").setAttribute("aria-expanded", "true");
+  if (state.activeMatch >= 0) {
+    $("unitQuery").setAttribute("aria-activedescendant", `suggestion-${state.activeMatch}`);
+    $(`suggestion-${state.activeMatch}`).scrollIntoView({ block: "nearest" });
+  } else {
+    $("unitQuery").removeAttribute("aria-activedescendant");
+  }
 }
 
 async function searchUnits() {
@@ -210,12 +282,15 @@ function renderUnits() {
   box.replaceChildren();
   state.units.forEach((unit) => {
     const chip = el("span", "chip");
-    chip.style.setProperty("--c", `var(--c${courseIndex(unit.code)})`);
-    chip.append(el("i", "dot"), el("strong", "", unit.code));
-    if (unit.name) chip.append(el("span", "", unit.name));
+    const swatch = el("i", "swatch");
+    paint(swatch, unit.code);
+    const code = el("strong", "", unit.code);
+    code.translate = false;
+    chip.append(swatch, code);
+    if (unit.name) chip.append(el("span", "name", unit.name));
     const remove = el("button", "", "×");
     remove.type = "button";
-    remove.setAttribute("aria-label", `移除 ${unit.code}`);
+    remove.setAttribute("aria-label", `Remove ${unit.code}`);
     remove.addEventListener("click", () => {
       state.units = state.units.filter((other) => other.code !== unit.code);
       renderUnits();
@@ -223,21 +298,22 @@ function renderUnits() {
     chip.append(remove);
     box.append(chip);
   });
-  $("unitQuery").placeholder = state.units.length ? (state.units.length >= 5 ? "最多 5 门" : "继续添加") : "输入课程代码，如 ENGG2112";
+  $("unitQuery").placeholder = state.units.length ? (state.units.length >= 5 ? "5 units at most" : "Add another unit")
+    : "Add a unit, like ENGG2112";
 }
 
 function addUnit(code, name = "") {
   code = code.trim().toUpperCase();
   if (!/^[A-Z]{4}\d{4}$/.test(code)) {
-    setError("unitError", "课程代码应为 4 个字母加 4 个数字");
+    setError("unitError", "A unit code is 4 letters and 4 digits, like ENGG2112.");
     return false;
   }
   if (state.units.some((unit) => unit.code === code)) {
-    setError("unitError", `${code} 已添加`);
+    setError("unitError", `${code} is already added.`);
     return false;
   }
   if (state.units.length >= 5) {
-    setError("unitError", "最多 5 门课");
+    setError("unitError", "You can add up to 5 units. Remove one first.");
     return false;
   }
   const unit = { code, name };
@@ -269,7 +345,7 @@ function renderBlocks() {
     const token = el("span", "token", block.label);
     const remove = el("button", "", "×");
     remove.type = "button";
-    remove.setAttribute("aria-label", `删除 ${block.label}`);
+    remove.setAttribute("aria-label", `Remove ${block.label}`);
     remove.addEventListener("click", () => {
       state.blocks = state.blocks.filter((other) => other !== block);
       renderBlocks();
@@ -297,11 +373,11 @@ function addCustomBlock() {
   const start = minutes($("customStart").value);
   const end = minutes($("customEnd").value);
   if (start === null || end === null || start >= end) {
-    setError("windowError", "结束时间要晚于开始时间");
+    setError("windowError", "The end time must be after the start time.");
     return;
   }
   setError("windowError", "");
-  addBlock(null, `周${DAY[day - 1]} ${clock(start)}–${clock(end)}`, [[day, start, end]]);
+  addBlock(null, windowsLabel([{ weekday: day, start_min: start, end_min: end }]), [[day, start, end]]);
 }
 
 /* ===================== settings ===================== */
@@ -312,7 +388,7 @@ const SETTING_CHECKS = ["lunchOn", "inPerson"];
 
 function fillTimes(select, from, to, value) {
   for (let minute = from; minute <= to; minute += 30) {
-    const option = el("option", "", clock(minute));
+    const option = el("option", "", timeText(minute));
     option.value = clock(minute);
     select.append(option);
   }
@@ -323,7 +399,7 @@ function setField(id, value) {
   // Old share links may carry times that are not on the half-hour list.
   const field = $(id);
   if (field.tagName === "SELECT" && value !== "" && ![...field.options].some((option) => option.value === value)) {
-    const extra = el("option", "", value);
+    const extra = el("option", "", minutes(value) === null ? value : timeText(minutes(value)));
     extra.value = value;
     field.append(extra);
   }
@@ -331,14 +407,39 @@ function setField(id, value) {
 }
 
 function syncSegmented() {
+  // Option groups behave as radio groups: one tab stop, the chosen option checked.
   document.querySelectorAll(".segmented[data-target]").forEach((group) => {
     const value = $(group.dataset.target).value;
     group.querySelectorAll("button").forEach((choice) => {
       const on = choice.dataset.value === value;
-      choice.classList.toggle("on", on);
-      choice.setAttribute("aria-pressed", String(on));
+      choice.setAttribute("role", "radio");
+      choice.setAttribute("aria-checked", String(on));
+      choice.tabIndex = on ? 0 : -1;
     });
   });
+}
+
+function radioKeys(group) {
+  // Arrow keys move to the next option and choose it, as in a native radio group.
+  group.addEventListener("keydown", (event) => {
+    const keys = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 };
+    if (!(event.key in keys) && event.key !== "Home" && event.key !== "End") return;
+    const choices = [...group.querySelectorAll("[role=radio]")].filter((choice) => !choice.disabled);
+    const at = choices.indexOf(document.activeElement);
+    if (at < 0 || !choices.length) return;
+    event.preventDefault();
+    const next = event.key === "Home" ? 0 : event.key === "End" ? choices.length - 1
+      : (at + keys[event.key] + choices.length) % choices.length;
+    choices[next].focus();
+    choices[next].click();
+  });
+}
+
+function paint(node, code) {
+  // A unit's colour: a light fill and a darker edge of the same hue.
+  const index = courseIndex(code);
+  node.style.setProperty("--fill", `var(--c${index}-fill)`);
+  node.style.setProperty("--edge", `var(--c${index}-edge)`);
 }
 
 function numberOrNull(id) {
@@ -374,7 +475,7 @@ function settingsCount() {
 function updateSettingsCount() {
   const count = settingsCount();
   $("moreCount").hidden = !count;
-  $("moreCount").textContent = String(count);
+  $("moreCount").textContent = `${count} set`;
   $("lunchRow").hidden = !$("lunchOn").checked;
   syncSegmented();
 }
@@ -400,12 +501,6 @@ function commuteMinutes() {
 
 /* ===================== one sentence ===================== */
 
-// What each condition type means when the parser found the type but no usable value.
-const LABEL_NAME = {
-  blocked_time: "不能上课的时间", max_days: "每周最多到校天数", max_daily_hours: "每天最多上课时长",
-  lunch: "午饭时间", in_person_only: "只要现场课", prefer_fewer_days: "少到校",
-  prefer_less_waiting: "少空等", prefer_no_early_late: "少早晚课",
-};
 // Which form controls each parsed field fills in.
 const SAY_CONTROLS = {
   max_days_per_week: ["maxDays"], max_daily_minutes: ["maxDaily"], max_daily_span: ["maxSpan"],
@@ -417,8 +512,12 @@ function hoursLabel(value) {
   return String(Number((value / 60).toFixed(2)));
 }
 
+function capital(text) {
+  return text ? text[0].toUpperCase() + text.slice(1) : text;
+}
+
 function windowsLabel(windows) {
-  // "周五全天", "周一至周五 10:00 前", "周三 14:00–18:00"
+  // "Fri", "weekdays before 10 am", "Tue and Thu after 6 pm", "Wed 2 pm to 6 pm"
   const byTime = new Map();
   windows.forEach((w) => {
     const key = `${w.start_min}|${w.end_min}`;
@@ -429,34 +528,22 @@ function windowsLabel(windows) {
     const [start, end] = key.split("|").map(Number);
     days.sort((a, b) => a - b);
     const run = days.length >= 3 && days.every((day, index) => index === 0 || day === days[index - 1] + 1);
-    const dayText = run ? `周${DAY[days[0] - 1]}至周${DAY[days[days.length - 1] - 1]}` : days.map((day) => `周${DAY[day - 1]}`).join("、");
-    const time = start === 0 && end >= 1439 ? "全天" : start === 0 ? ` ${clock(end)} 前` : end >= 1439 ? ` ${clock(start)} 后` : ` ${clock(start)}–${clock(end)}`;
+    const dayText = days.join() === "1,2,3,4,5" ? "weekdays" : days.join() === "6,7" ? "weekends"
+      : run ? `${DAY[days[0] - 1]} to ${DAY[days[days.length - 1] - 1]}` : joinWords(days.map((day) => DAY[day - 1]));
+    const time = start <= 0 && end >= 1439 ? "" : start <= 0 ? ` before ${timeText(end)}`
+      : end >= 1439 ? ` after ${timeText(start)}` : ` ${spanText(start, end)}`;
     return `${dayText}${time}`;
-  }).join("，");
-}
-
-function clauseMeaning(clause) {
-  const f = clause.profile_fields;
-  const parts = [];
-  if (f.unavailable_windows) parts.push(`${windowsLabel(f.unavailable_windows)}不上课`);
-  if (f.max_days_per_week) parts.push(`每周最多到校 ${f.max_days_per_week} 天`);
-  if (f.max_daily_minutes) parts.push(`每天最多上课 ${hoursLabel(f.max_daily_minutes)} 小时`);
-  if (f.max_daily_span) parts.push(`每天最长在校 ${hoursLabel(f.max_daily_span)} 小时`);
-  if (f.lunch) parts.push(`${clock(f.lunch.start_min)}–${clock(f.lunch.end_min)} 留 ${f.lunch.minutes} 分钟吃午饭`);
-  if (f.in_person_only) parts.push("只要现场课");
-  if (f.preferred_hours) parts.push(`希望上课时间 ${clock(f.preferred_hours.start_min)}–${clock(f.preferred_hours.end_min)}`);
-  clause.cares.forEach((care) => parts.push(`在意${AXIS_CHIP[care]}`));
-  return parts.join("；");
+  }).join("; ");
 }
 
 function setSegment(target, value, text) {
-  // Parsed values may not be one of the preset buttons; add one so the choice stays visible.
+  // Parsed values may not be one of the preset options; add one so the choice stays visible.
   const group = document.querySelector(`.segmented[data-target="${target}"]`);
   if (group && ![...group.querySelectorAll("button")].some((choice) => choice.dataset.value === value)) {
     const extra = el("button", "", text);
     extra.type = "button";
     extra.dataset.value = value;
-    // Keep the numbers in order ("不限" has no number and stays first).
+    // Keep the numbers in order ("No limit" has no number and stays first).
     const after = [...group.querySelectorAll("button")].find((choice) =>
       choice.dataset.value !== "" && Number(choice.dataset.value) > Number(value));
     group.insertBefore(extra, after || null);
@@ -518,12 +605,12 @@ function applySay() {
   used.forEach((item) => {
     const f = item.profile_fields;
     if (f.unavailable_windows) {
-      state.blocks.push({ key: item.key, label: windowsLabel(f.unavailable_windows),
+      state.blocks.push({ key: item.key, label: capital(windowsLabel(f.unavailable_windows)),
         windows: f.unavailable_windows.map(({ weekday, start_min, end_min }) => ({ weekday, start_min, end_min })) });
     }
-    if (f.max_days_per_week) setSegment("maxDays", String(f.max_days_per_week), `${f.max_days_per_week} 天`);
-    if (f.max_daily_minutes) setSegment("maxDaily", hoursLabel(f.max_daily_minutes), `${hoursLabel(f.max_daily_minutes)} 时`);
-    if (f.max_daily_span) setSegment("maxSpan", hoursLabel(f.max_daily_span), `${hoursLabel(f.max_daily_span)} 时`);
+    if (f.max_days_per_week) setSegment("maxDays", String(f.max_days_per_week), String(f.max_days_per_week));
+    if (f.max_daily_minutes) setSegment("maxDaily", hoursLabel(f.max_daily_minutes), `${hoursLabel(f.max_daily_minutes)} h`);
+    if (f.max_daily_span) setSegment("maxSpan", hoursLabel(f.max_daily_span), `${hoursLabel(f.max_daily_span)} h`);
     if (f.lunch) {
       $("lunchOn").checked = true;
       setField("lunchStart", clock(f.lunch.start_min));
@@ -543,20 +630,22 @@ function applySay() {
   }
   renderBlocks();
   updateSettingsCount();
-  document.querySelectorAll(".setting.said").forEach((row) => row.classList.remove("said"));
+  document.querySelectorAll(".setting.from-sentence").forEach((row) => row.classList.remove("from-sentence"));
   const said = used.flatMap(sayControls);
-  said.forEach((id) => $(id).closest(".setting")?.classList.add("said"));
+  said.forEach((id) => $(id).closest(".setting")?.classList.add("from-sentence"));
   if (said.length) $("moreSettings").open = true;
 }
 
 async function answer(q, o) {
   // An answer to a question about a clause re-reads that clause as the chosen type; an offer is
-  // applied like a setting. Questions stay as first asked, so any answer can be changed back.
+  // applied like a setting. Questions stay as first asked, so any answer can be changed back,
+  // and an offer answered here is never asked again by a later re-read.
   const say = state.say;
   const before = say.answers[q] || 0;
   if (before === o || say.busy) return;
   const question = say.questions[q];
   say.answers[q] = o;
+  say.focus = `[data-q="${q}"][data-o="${o}"]`;
   if (question.kind !== "offer") {
     if (o) say.on[question.clause_index] = true;
     const overrides = {};
@@ -572,11 +661,14 @@ async function answer(q, o) {
       renderSay();
       try {
         const data = await post("/api/parse", { text: say.text, overrides });
-        if (!data.clauses || data.clauses.length !== say.clauses.length) throw new Error(data.error || "暂时无法按你的回答重新识别");
+        if (!data.clauses || data.clauses.length !== say.clauses.length) {
+          throw new Error(data.error || "The sentence could not be read again with that answer. Try again, or set it below.");
+        }
         unapplySay();
-        Object.assign(say, { clauses: data.clauses, summary: data.summary || say.summary, mode: data.mode, overrides });
+        Object.assign(say, { clauses: data.clauses, mode: data.mode, overrides });
       } catch (error) {
         say.answers[q] = before;
+        say.focus = `[data-q="${q}"][data-o="${before}"]`;
         setError("sayError", error.message);
       } finally {
         say.busy = false;
@@ -587,27 +679,40 @@ async function answer(q, o) {
   renderSay();
 }
 
-function renderAsk(say, question, q) {
-  // One line: the question, then its options; the first is what was already assumed.
-  const row = el("div", "say-ask");
-  row.append(el("span", "say-ask-text", question.text));
-  const options = el("div", "segmented say-options");
-  options.setAttribute("role", "group");
-  options.setAttribute("aria-label", question.text);
+function renderOptions(say, question, q, labelledBy) {
+  // The options of one question as a radio group; the first is what was already assumed.
+  const group = el("div", "segmented");
+  group.setAttribute("role", "radiogroup");
+  group.setAttribute("aria-labelledby", labelledBy);
   question.options.forEach((option, o) => {
     const on = (say.answers[q] || 0) === o;
-    const choice = el("button", on ? "on" : "", option.text);
+    const choice = el("button", "", keepUnits(option.text));
     choice.type = "button";
+    choice.setAttribute("role", "radio");
+    choice.setAttribute("aria-checked", String(on));
+    choice.tabIndex = on ? 0 : -1;
+    choice.dataset.q = String(q);
+    choice.dataset.o = String(o);
     choice.disabled = Boolean(say.busy);
-    choice.setAttribute("aria-pressed", String(on));
     choice.addEventListener("click", () => answer(q, o));
-    options.append(choice);
+    group.append(choice);
   });
-  row.append(options);
-  return row;
+  radioKeys(group);
+  return group;
+}
+
+function clauseNote(say, index, item) {
+  // The note beside a clause: what it was read as, or what the chosen answer makes it.
+  const question = say.questions.find((other) => other.kind !== "offer" && other.clause_index === index);
+  const answerIndex = question ? say.answers[say.questions.indexOf(question)] || 0 : 0;
+  const note = answerIndex && question.options[answerIndex].note ? question.options[answerIndex].note
+    : say.clauses[index].note || "";
+  if (!say.on[index] && (Object.keys(item.profile_fields).length || item.cares.length)) return keepUnits(`Left out: ${note}`);
+  return keepUnits(note);
 }
 
 function renderSay() {
+  // The student's own words, each clause underlined, with what was read written beside it.
   const box = $("sayResult");
   box.replaceChildren();
   const say = state.say;
@@ -615,73 +720,100 @@ function renderSay() {
     box.hidden = true;
     return;
   }
-  box.append(el("p", "say-head", "我理解为"));
-  if (say.summary) {
-    const changed = Object.values(say.answers).some(Boolean);
-    const summary = say.summary.replace(/^我理解为[:：]\s*/, "");  // the heading above already says it
-    box.append(el("p", "say-summary", changed ? `${summary}（已按你的回答调整，见下面）` : summary));
-  }
+  box.append(el("p", "readback-head", "Read as"));
   if (say.mode?.simplified) {
-    box.append(el("p", "say-note", "简化模式：识别用的大模型暂时连不上，改用了简单的识别方法，请仔细核对下面每一条。"));
+    box.append(el("p", "readback-note", "The sentence reader is offline, so a simpler one was used. Check each line below."));
   }
-  say.questions.forEach((question, q) => box.append(renderAsk(say, question, q)));
   const items = sayItems(say);
+  const list = el("ol", `clauses${say.animate ? "" : " drawn still"}`);
   say.clauses.forEach((clause, index) => {
     const item = items[index];
-    const quote = el("span", "quote", `“${clause.text}”`);
-    const row = el("div", "say-row");
-    if (Object.keys(item.profile_fields).length || item.cares.length) {
-      const label = el("label", "check");
-      const box = el("input");
-      box.type = "checkbox";
-      box.checked = say.on[index];
-      box.addEventListener("change", () => {
-        say.on[index] = box.checked;
+    const usable = Boolean(Object.keys(item.profile_fields).length || item.cares.length);
+    const used = usable && say.on[index];
+    const row = el("li", "clause");
+    const said = el("p", "said");
+    const mark = el("span", `mark${usable ? "" : " unread"}${usable && !used ? " left-out" : ""}`, clause.text);
+    mark.style.setProperty("--i", String(index));
+    said.append(mark);
+    const note = el("div", "note");
+    note.id = `clause-note-${index}`;
+    said.setAttribute("aria-describedby", note.id);
+    note.append(el("p", `note-text${used ? "" : " quiet"}`, clauseNote(say, index, item)));
+    say.questions.forEach((question, q) => {
+      if (question.kind === "offer" || question.clause_index !== index) return;
+      const ask = el("div", "ask");
+      const text = el("span", "ask-text", question.text);
+      text.id = `ask-${q}`;
+      ask.append(text, renderOptions(say, question, q, text.id));
+      note.append(ask);
+    });
+    if (usable) {
+      const toggle = button(say.on[index] ? "Leave this out" : "Use this again", () => {
+        say.on[index] = !say.on[index];
+        say.focus = `[data-toggle="${index}"]`;
         applySay();
-      });
-      label.append(box, document.createTextNode(clauseMeaning(item)));
-      row.append(label, quote);
-    } else {
-      row.classList.add("note");
-      const meaning = clause.label === "other" ? "这句我们管不了，排课时不会考虑"
-        : `听出是“${LABEL_NAME[clause.label] || clause.label}”，但没读出具体的数字或时间，可以在下面自己设置`;
-      row.append(el("span", "", clause.problems.length ? "识别出的时间或数字不合理，已忽略" : meaning), quote);
+        renderSay();
+      }, { className: "button quiet toggle" });
+      toggle.dataset.toggle = String(index);
+      note.append(toggle);
     }
-    box.append(row);
+    row.append(said, note);
+    list.append(row);
   });
-  const used = items.filter((item) => item.on);
-  const places = [];
-  if (used.some((item) => item.profile_fields.unavailable_windows)) places.push("“不想上课的时间”");
-  if (used.some((item) => sayControls(item).length)) places.push("“更多设置”里左边有竖线的几项");
-  if (used.some((item) => item.cares.length)) places.push("结果页的“我在意”");
-  box.append(el("p", "say-foot", used.length
-    ? `已填进${places.join("、")}，可以直接改；没问题就点“生成课表”。`
-    : "这句话里没有能直接设置的条件。"));
+  box.append(list);
+  const offers = say.questions.map((question, q) => [question, q]).filter(([question]) => question.kind === "offer");
+  if (offers.length) {
+    const wrap = el("div", "offers");
+    offers.forEach(([question, q]) => {
+      const row = el("div", "offer");
+      const text = el("p", "offer-text", question.text);
+      text.id = `ask-${q}`;
+      row.append(text, renderOptions(say, question, q, text.id));
+      wrap.append(row);
+    });
+    box.append(wrap);
+  }
+  const used = items.filter((item) => item.on && (Object.keys(item.profile_fields).length || item.cares.length));
+  box.append(el("p", "readback-foot", used.length
+    ? "These are filled in below, and the priorities on the results page. Change anything that is wrong, then find timetables."
+    : "Nothing in this sentence can be set for you. Use the settings below."));
   box.hidden = false;
+  if (say.focus && !say.busy) {
+    // Keep keyboard focus on the answer just chosen (the whole read-back was drawn again).
+    box.querySelector(say.focus)?.focus();
+    say.focus = null;
+  }
+  if (say.animate) {
+    // The one animation on the site: the underlines are drawn once, when the sentence is read.
+    say.animate = false;
+    requestAnimationFrame(() => requestAnimationFrame(() => list.classList.add("drawn")));
+  }
 }
 
 async function readSay() {
   const text = $("sayText").value.trim();
   setError("sayError", "");
   if (!text) {
-    setError("sayError", "先写一句话");
+    setError("sayError", "Write a sentence first, or leave it empty and use the settings below.");
     return false;
   }
   const button = $("sayRead");
   button.disabled = true;
   try {
     const data = await post("/api/parse", { text });
-    if (!data.clauses) throw new Error(data.error || "暂时无法识别");
+    if (!data.clauses) throw new Error(data.error || "The sentence could not be read. Set the conditions below by hand.");
     unapplySay();
     const clauses = data.clauses;
     state.say = {
-      text, clauses, mode: data.mode, summary: data.summary || "", questions: data.questions || [],
+      text, clauses, mode: data.mode, questions: data.questions || [], animate: true, focus: null,
       answers: {}, overrides: {}, busy: false, firstLabels: clauses.map((clause) => clause.label),
       on: clauses.map((clause) => Boolean(Object.keys(clause.profile_fields).length || clause.cares.length)),
       base: { settings: settingsSnapshot(), cares: [...state.cares], caresTouched: state.caresTouched },
     };
     applySay();
     renderSay();
+    const asked = state.say.questions.length;
+    announce(`Read ${plural(clauses.length, "part")} of your sentence${asked ? `, with ${plural(asked, "question")} to answer` : ""}.`);
     return true;
   } catch (error) {
     setError("sayError", error.message);
@@ -703,24 +835,27 @@ function buildProfile() {
   const typed = $("unitQuery").value.trim();
   if (typed && !addUnit(typed, state.matches.find((item) => item.unit_code === typed.toUpperCase())?.unit_name || "")) return null;
   if (!state.units.length) {
-    setError("unitError", "请至少添加 1 门课");
+    setError("unitError", "Add at least one unit.");
     collapseSetup(false);
     $("unitQuery").focus();
     return null;
   }
-  const fail = (message) => {
+  const fail = (message, field) => {
     collapseSetup(false);
     $("moreSettings").open = true;
     setError("settingsError", message);
+    $(field)?.focus();
     return null;
   };
   const start = minutes($("preferredStart").value);
   const end = minutes($("preferredEnd").value);
-  if (start === null || end === null || start >= end) return fail("希望上课的结束时间要晚于开始时间");
+  if (start === null || end === null || start >= end) return fail("The preferred end time must be after the start time.", "preferredEnd");
   const settings = readSettings();
   if (settings.lunch) {
     const { start_min: from, end_min: to, minutes: length } = settings.lunch;
-    if (from === null || to === null || from >= to || length > to - from) return fail("午饭时间要放得进所选时段");
+    if (from === null || to === null || from >= to || length > to - from) {
+      return fail("The lunch break must fit between its earliest and latest times.", "lunchStart");
+    }
   }
   const { year, session_code } = term();
   return {
@@ -738,7 +873,7 @@ async function post(path, body) {
     method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body),
   });
   const data = await response.json();
-  if (!response.ok && !data.status && response.status !== 422) throw new Error(data.error || "请求失败");
+  if (!response.ok && !data.status && response.status !== 422) throw new Error(data.error || "The request failed. Try again.");
   return data;
 }
 
@@ -748,7 +883,7 @@ function defaultGroups(data) {
 }
 
 function snapshot() {
-  // Everything a re-plan may change, so "撤销" can put it back.
+  // Everything a re-plan may change, so "Undo" can put it back.
   return { groups: structuredClone(state.groups), pinned: { ...state.pinned }, excluded: [...state.excluded],
     enrolled: { ...state.enrolled }, blocks: structuredClone(state.blocks), settings: settingsSnapshot(), tab: state.tab };
 }
@@ -768,7 +903,7 @@ async function plan(profile, { groups = null, pinned = {}, excluded = [], notice
         return;
       }
       if (!first.module_two_result) {
-        showEmpty("暂时无法生成", first.blockers?.[0]?.message || "缺少这些课程的课表数据。", []);
+        showEmpty("No timetables yet", first.blockers?.[0]?.message || "There is no timetable data for these units.", []);
         return;
       }
       data = first.module_two_result;
@@ -808,11 +943,24 @@ async function plan(profile, { groups = null, pinned = {}, excluded = [], notice
     if (result.status === "invalid") showInvalid(result);
     else showResult(result);
   } catch (error) {
-    showEmpty("服务暂时不可用", error.message, []);
+    showEmpty("The planner is not answering", `${error.message} Reload the page and try again.`, []);
   } finally {
     state.busy = false;
     submit.disabled = false;
+    announce($("result").hidden ? "" : $("result").querySelector("h2")?.textContent);
+    focusResult();
   }
+}
+
+function focusResult() {
+  // The button that started the plan is often hidden or redrawn by now; carry keyboard focus
+  // to the result heading instead of dropping it at the top of the page.
+  const active = document.activeElement;
+  if (active && active !== document.body && active.isConnected && active.offsetParent !== null) return;
+  const heading = $("result").hidden ? null : $("result").querySelector("h2");
+  if (!heading) return;
+  heading.tabIndex = -1;
+  heading.focus();
 }
 
 function replan(notice, { groups = state.groups, pinned = state.pinned, excluded = state.excluded, undoTo = snapshot() } = {}) {
@@ -831,7 +979,7 @@ function undo() {
   const profile = buildProfile();
   if (!profile) return;
   plan(profile, { groups: previous.groups, pinned: previous.pinned, excluded: previous.excluded,
-    notice: "已撤销上一步", enrolled: previous.enrolled });
+    notice: "Undid the last change", enrolled: previous.enrolled });
 }
 
 function collapseSetup(collapsed) {
@@ -843,15 +991,16 @@ function collapseSetup(collapsed) {
   chips.replaceChildren();
   state.units.forEach((unit) => {
     const chip = el("span", "course");
-    chip.style.setProperty("--c", `var(--c${courseIndex(unit.code)})`);
-    chip.append(el("i", "dot"), document.createTextNode(unit.code));
+    const swatch = el("i", "swatch");
+    paint(swatch, unit.code);
+    chip.append(swatch, document.createTextNode(unit.code));
     chips.append(chip);
   });
   const said = sayText();
-  if (said) chips.append(el("span", "", `“${said.length > 18 ? `${said.slice(0, 18)}…` : said}”`));
-  state.blocks.forEach((block) => chips.append(el("span", "", `避开 ${block.label}`)));
+  if (said) chips.append(el("span", "", `“${said.length > 32 ? `${said.slice(0, 32)}…` : said}”`));
+  state.blocks.forEach((block) => chips.append(el("span", "", `Not ${block.label}`)));
   const count = settingsCount();
-  if (count) chips.append(el("span", "", `${count} 项设置`));
+  if (count) chips.append(el("span", "", plural(count, "setting")));
 }
 
 /* ===================== result states ===================== */
@@ -864,9 +1013,7 @@ function resultBox() {
 }
 
 function showLoading() {
-  const line = el("div", "loading");
-  line.append(el("span", "spinner"), document.createTextNode("正在计算所有可行的排法…"));
-  resultBox().append(line);
+  resultBox().append(el("p", "loading", "Checking every combination of classes…"));
 }
 
 function showInvalid(result) {
@@ -890,12 +1037,12 @@ function showEmpty(title, message, fixes) {
   if (state.notice && state.result) card.append(el("div", "notice", state.notice));
   card.append(el("h2", "", title), el("p", "", message));
   if (fixes.length) {
-    card.append(el("h4", "section-title", "这样改就能排出来"));
+    card.append(el("h3", "section-title", "Try one change"));
     const list = el("div", "fixes");
     fixes.forEach((fix) => list.append(fix));
     card.append(list);
   }
-  if (state.history.length) card.append(button("撤销上一步", undo));
+  if (state.history.length) card.append(button("Undo the last change", undo));
   resultBox().append(card);
 }
 
@@ -903,19 +1050,18 @@ function dataBadge(data) {
   const age = data?.snapshot_age_days;
   const time = data?.snapshot_time || "";
   const badge = el("span", `badge${age >= 1 ? " stale" : ""}`,
-    time ? `数据 ${shortDate(time.slice(0, 10))}${age >= 1 ? ` · ${age} 天前` : ""}` : "本地数据");
-  if (age >= 1) badge.title = "无法实时查询，座位和时间可能已变化";
+    time ? `Timetable data from ${dateText(time.slice(0, 10))}${age >= 1 ? ` (${plural(age, "day")} old)` : ""}`
+      : "Local timetable data");
+  if (age >= 1) badge.title = "Live data could not be fetched, so seats and times may have changed.";
   return badge;
 }
 
 function changeLabel(change) {
-  if (change.kind === "group") return `${groupName(change.group_id)} 不去（如看录播）`;
-  if (change.kind === "pin") return `取消固定 ${groupName(change.group_id)}`;
-  if (change.kind === "buffer") return "换楼时间改为 0";
+  if (change.kind === "group") return `Skip ${groupName(change.group_id)} (watch the recording)`;
+  if (change.kind === "pin") return `Unpin ${groupName(change.group_id)}`;
+  if (change.kind === "buffer") return "No time set aside to change buildings";
   if (change.kind !== "window") return change.label;
-  const w = change.window;
-  const full = w.start_min === 0 && w.end_min >= 1439;
-  return `周${DAY[w.weekday - 1]}${full ? "全天" : ` ${clock(w.start_min)}–${clock(w.end_min)}`}也可以上课`;
+  return `Allow classes on ${windowsLabel([change.window])}`;
 }
 
 function applyChange(change) {
@@ -941,10 +1087,10 @@ function applyChange(change) {
     Object.keys(groups).forEach((unit) => { groups[unit] = groups[unit].filter((id) => id !== change.group_id); });
   }
   if (change.kind === "pin") delete pinned[change.group_id];
-  replan(`已调整：${changeLabel(change)}`, { groups, pinned, undoTo });
+  replan(`Changed: ${changeLabel(change)}`, { groups, pinned, undoTo });
 }
 
-function hintLine(text, change, actionLabel = "改成这样") {
+function hintLine(text, change, actionLabel = "Apply") {
   const line = el("div", "hint-line");
   line.append(el("span", "text", text), button(actionLabel, () => applyChange(change)));
   return line;
@@ -956,23 +1102,23 @@ function showResult(result) {
   if (result.status === "no_feasible" && ranking) {
     const core = ranking.conflict_core;
     const reason = core
-      ? `${core.group_ids.map((id) => `${groupName(id)}（${core.slots[id].join("、")}）`).join(" 与 ")}${{
-        time_overlap: "时间冲突", limits: "在你设的每天或每周限制下排不进去",
-        filters: "按你的选班条件找不到能一起上的班" }[core.reason] || "之间换楼时间不够"}。`
+      ? `${joinWords(core.group_ids.map((id) => `${groupName(id)} (${core.slots[id].join(", ")})`))} ${{
+        time_overlap: "meet at the same times", limits: "don't fit within your daily or weekly limits",
+        filters: "have no classes that meet your class settings" }[core.reason] || "leave too little time to change buildings"}.`
       : emptiedGroups().length
-        ? `${emptiedGroups().map(groupName).join("、")} 的班都被标记为已满，没有可选的班。`
-        : "所选活动之间没有不冲突的组合。";
+        ? `Every class of ${joinWords(emptiedGroups().map(groupName))} is marked as full.`
+        : "No combination of the chosen activities avoids a clash.";
     // When a one-step loosening works as well as dropping the limit, only offer the smaller change.
     const changes = ranking.what_if?.changes || [];
     const fixes = changes.filter((change) => !(change.value == null && changes.some((other) =>
       other.kind === change.kind && other.value != null && other.count === change.count))).map((change) =>
-      hintLine(`${changeLabel(change)} → ${change.count.toLocaleString()} 种排法`, change));
-    showEmpty("排不出课表", reason, fixes);
+      hintLine(`${changeLabel(change)}: ${plural(change.count, "timetable").replace(/^\d+/, change.count.toLocaleString("en-AU"))} would fit`, change));
+    showEmpty("No timetable fits all of these", reason, fixes);
     $("result").append(renderAdjust(true));
     return;
   }
   if (!ranking?.feasible_count) {
-    showEmpty("暂时无法生成", (result.blockers || [])[0]?.message || "请调整课程后重试。", []);
+    showEmpty("No timetables yet", (result.blockers || [])[0]?.message || "Change the units and try again.", []);
     if (state.data) $("result").append(renderAdjust(true));
     return;
   }
@@ -983,7 +1129,7 @@ function showResult(result) {
 
 function courseIndex(code) {
   const index = state.units.findIndex((unit) => unit.code === code);
-  return (index < 0 ? 0 : index) % 6;
+  return (index < 0 ? 0 : index) % COURSE_COLOURS;
 }
 
 function menu() {
@@ -998,7 +1144,7 @@ function planLabel(index) {
 }
 
 function recommendation() {
-  // The recommended picks for the features currently ticked under "我在意".
+  // The recommended picks for the features currently chosen under "What matters".
   const rec = state.result?.ranking_result?.recommendation;
   if (!rec) return null;
   const axes = ["gap", "campus_days", "outside_hours"].filter((axis) => state.cares.has(axis)).join(",");
@@ -1009,7 +1155,7 @@ function recommendation() {
 function reasonOf(index) {
   const rec = recommendation();
   const written = state.reasons[rec.key];
-  return written?.reasons?.[index] || rec.menu.reasons[index];
+  return keepUnits(written?.reasons?.[index] || rec.menu.reasons[index]);
 }
 
 function reasonSimplified() {
@@ -1021,15 +1167,18 @@ function reasonSimplified() {
 function reasonSource() {
   const written = state.reasons[recommendation().key];
   const status = written?.status;
-  if (status === "pending") return "正在请本地千问把理由说得更口语…";
+  if (status === "pending") return "Rewording the reasons…";
   if (status === "model" || status === "partial") {
-    const where = written.fell_back ? "大模型服务器暂时不在线（简化模式），理由由本机的" : "理由由本地";
-    return `${where}千问（${written.model}）改写，每句都和课表核对过${status === "partial" ? "；没通过核对的句子保留原样" : ""}。`;
+    const where = written.fell_back
+      ? `The model server is offline, so ${written.model} on this computer reworded the reasons`
+      : `Reworded by ${written.model} on our own machine`;
+    return `${where}. Every sentence was checked against its timetable${
+      status === "partial" ? "; sentences that failed the check keep their original wording" : ""}.`;
   }
-  if (status === "rejected") return "千问改写的句子没通过和课表的核对，显示按课表数据生成的原句。";
-  if (status === "busy") return "显卡正在跑批量任务，这次没请千问改写，理由按课表数据生成。";
-  if (status) return "简化模式：千问暂时不可用，理由按课表数据生成。";
-  return "理由按课表数据生成。";
+  if (status === "rejected") return "The reworded reasons did not match the timetables, so the original wording is shown.";
+  if (status === "busy") return "The model server is busy with a batch job, so the reasons keep their original wording.";
+  if (status) return "Simplified mode: the language model is offline, so the reasons keep their original wording.";
+  return "Reasons are written from the timetable data.";
 }
 
 function updateReasons() {
@@ -1079,13 +1228,14 @@ function pickSharedPlan(plans) {
 }
 
 function renderPlans() {
+  const focusKey = document.activeElement?.closest?.("#result [data-key]")?.dataset.key;
   const box = resultBox();
   const ranking = state.result.ranking_result;
   const rec = state.view === "recommend" ? recommendation() : null;
   if (state.view === "recommend" && !rec) state.view = "all";
   if (rec && state.caresTouched && rec.menu.cares && rec.menu.cares.join() !== [...state.cares].join() && !state.busy) {
     // The picks were ranked for another order of importance (e.g. a care ticked off and on again).
-    replan("已按你在意的先后重新排序");
+    replan("Ranked again in the new order of what matters");
     return;
   }
   const plans = rec ? rec.menu.picks.map((id) => ranking.shortlist.items[id]).filter(Boolean) : menu();
@@ -1096,22 +1246,26 @@ function renderPlans() {
   state.compare = state.compare.filter((id) => plans.some((item) => item.candidate_id === id));
 
   const head = el("div", "result-head");
+  const fit = ranking.feasible_count.toLocaleString("en-AU");
   if (rec) {
-    head.append(el("h2", "", `为你挑的 ${plans.length} 份课表`), el("span", "meta",
-      `从 ${ranking.feasible_count.toLocaleString()} 种可行排法中先选出 ${rec.menu.candidates.length} 份候选，再按你的情况排序`));
+    head.append(el("h2", "", `${plural(plans.length, "timetable")}, from ${fit} that fit`));
   } else {
-    head.append(el("h2", "", plans.length === 1 ? "最合适的课表" : `${plans.length} 个值得考虑的方案`));
-    head.append(el("span", "meta", `从 ${ranking.feasible_count.toLocaleString()} 种可行排法中挑出`));
+    head.append(el("h2", "", plans.length === 1 ? `The best timetable, from ${fit} that fit` : `${plural(plans.length, "option")}, from ${fit} that fit`));
   }
-  head.append(dataBadge(state.data), el("span", "spacer"));
+  const meta = el("div", "result-meta");
+  if (rec) meta.append(el("span", "", `${plural(rec.menu.candidates.length, "candidate")} ranked for what matters to you`));
+  meta.append(dataBadge(state.data));
   if (ranking.recommendation) {
     const views = el("div", "segmented views");
-    views.setAttribute("role", "group");
-    views.setAttribute("aria-label", "显示哪些方案");
-    [["recommend", "推荐"], ["all", `全部方案 ${menu().length}`]].forEach(([key, text]) => {
-      const choice = el("button", state.view === key ? "on" : "", text);
+    views.setAttribute("role", "radiogroup");
+    views.setAttribute("aria-label", "Which timetables to show");
+    [["recommend", "Picked for you"], ["all", `All options (${menu().length})`]].forEach(([key, text]) => {
+      const choice = el("button", "", text);
       choice.type = "button";
-      choice.setAttribute("aria-pressed", String(state.view === key));
+      choice.dataset.key = `view-${key}`;
+      choice.setAttribute("role", "radio");
+      choice.setAttribute("aria-checked", String(state.view === key));
+      choice.tabIndex = state.view === key ? 0 : -1;
       choice.addEventListener("click", () => {
         if (state.view === key) return;
         state.view = key;
@@ -1122,21 +1276,29 @@ function renderPlans() {
       });
       views.append(choice);
     });
-    head.append(views);
+    radioKeys(views);
+    meta.append(views);
   }
   // Otherwise the undo button sits in the notice inside the plan detail.
-  if (state.history.length && state.compare.length === 2) head.append(button("撤销", undo));
+  if (state.history.length && state.compare.length === 2) meta.append(button("Undo", undo));
+  head.append(meta);
   box.append(head);
 
   const cares = el("div", "cares");
-  cares.append(el("span", "", "我在意"));
+  const caresLabel = el("span", "cares-label", "What matters");
+  caresLabel.id = "caresLabel";
+  const toggles = el("div", "segmented");
+  toggles.setAttribute("role", "group");
+  toggles.setAttribute("aria-labelledby", "caresLabel");
+  cares.append(caresLabel, toggles);
   AXES.forEach((axis) => {
-    const chip = el("button", `care${state.cares.has(axis) ? " on" : ""}`, AXIS_CHIP[axis]);
+    const chip = el("button", "", AXIS_CHIP[axis]);
     chip.type = "button";
+    chip.dataset.key = `care-${axis}`;
     chip.setAttribute("aria-pressed", String(state.cares.has(axis)));
     chip.addEventListener("click", () => {
       if (state.cares.has(axis) && state.cares.size === 1) {
-        toast("至少保留一项");
+        toast("Keep at least one.");
         return;
       }
       // A Set keeps its order: the rest stay as they were and a newly ticked one goes last.
@@ -1145,9 +1307,9 @@ function renderPlans() {
       writeShareHash();
       renderPlans();
     });
-    cares.append(chip);
+    toggles.append(chip);
   });
-  if (plans.length > 1) cares.append(el("span", "cares-hint", "点卡片右上角可对比两个方案"));
+  if (plans.length > 1) cares.append(el("span", "cares-hint", "Use Compare on two options to see them side by side."));
   box.append(cares);
 
   const workspace = el("div", "workspace");
@@ -1161,8 +1323,8 @@ function renderPlans() {
   } else {
     if (state.compare.length === 1) {
       const bar = el("div", "compare-bar");
-      bar.append(document.createTextNode(`已选方案 ${planLabel(plans.findIndex((item) => item.candidate_id === state.compare[0]))}，再选一个即可对比`),
-        el("span", "spacer"), button("取消", () => { state.compare = []; renderPlans(); }, { className: "button ghost" }));
+      bar.append(document.createTextNode(`Option ${planLabel(plans.findIndex((item) => item.candidate_id === state.compare[0]))} chosen. Pick one more to compare.`),
+        button("Cancel", () => { state.compare = []; renderPlans(); }, { className: "button quiet" }));
       side.append(bar);
     }
     const current = plans.find((item) => item.candidate_id === state.selected);
@@ -1175,6 +1337,7 @@ function renderPlans() {
   if (hints) box.append(hints);
   box.append(renderAdjust(false));
   if (STUDY_MODE && state.result.study) box.append(renderStudy(state.result.study));
+  if (focusKey) box.querySelector(`[data-key="${focusKey}"]`)?.focus();
   if (rec) loadReasons();
 }
 
@@ -1182,41 +1345,37 @@ function planCard(base, index, plans) {
   const item = shownItem(base);
   const selected = base.candidate_id === state.selected && state.compare.length < 2;
   const compared = state.compare.includes(base.candidate_id);
+  // The days are the button that shows this timetable; a click anywhere else on it does the same.
   const card = el("div", `plan${selected ? " selected" : ""}${compared ? " compared" : ""}`);
-  card.tabIndex = 0;
-  card.setAttribute("role", "button");
-  card.setAttribute("aria-pressed", String(selected));
-  const select = () => {
+  card.addEventListener("click", (event) => {
+    if (event.target.closest(".variants, .compare-toggle")) return;
     state.selected = base.candidate_id;
     if (state.compare.length === 2) state.compare = [];
     renderPlans();
-  };
-  card.addEventListener("click", (event) => {
-    if (!event.target.closest(".variant, .compare-toggle")) select();
-  });
-  card.addEventListener("keydown", (event) => {
-    if (event.target === card && (event.key === "Enter" || event.key === " ")) {
-      event.preventDefault();
-      select();
-    }
   });
 
   const head = el("div", "plan-head");
-  head.append(el("span", "avatar", planLabel(index)));
-  const title = el("div", "plan-title", daysText(item.pattern));
-  title.append(el("small", "", base.equivalent_count > 1 ? `${base.equivalent_count.toLocaleString()} 种排法指标相同` : "唯一排法"));
+  head.append(el("span", `rank${state.view === "recommend" && index === 0 ? " first" : ""}`, planLabel(index)));
+  const title = el("div");
+  const show = el("button", "plan-title", daysText(item.pattern));
+  show.type = "button";
+  show.dataset.key = `plan-${base.candidate_id}`;
+  show.setAttribute("aria-pressed", String(selected));
+  show.setAttribute("aria-label", `${state.view === "recommend" ? "Pick" : "Option"} ${planLabel(index)}: ${daysText(item.pattern)}`);
+  title.append(show, el("div", "plan-sub", base.equivalent_count > 1
+    ? `${base.equivalent_count.toLocaleString("en-AU")} ways to get this same week` : "The only way to get this week"));
   head.append(title);
   card.append(head);
-  const tags = el("div", "tags");
+  const best = [];
   if (plans.length > 1) {
     AXES.filter((axis) => state.cares.has(axis)).forEach((axis) => {
       const key = AXIS_FEATURE[axis];
       const values = plans.map((other) => other.features[key]);
-      const best = Math.min(...values);
-      if (Math.max(...values) - best > 1e-6 && Math.abs(base.features[key] - best) < 1e-6) tags.append(el("span", "tag", AXIS_TAG[axis]));
+      const lowest = Math.min(...values);
+      if (Math.max(...values) - lowest > 1e-6 && Math.abs(base.features[key] - lowest) < 1e-6) best.push(AXIS_TAG[axis]);
     });
   }
-  if (tags.childElementCount) card.append(tags);
+  if (best.length) card.append(el("p", "tags", capital(`${joinWords(best)} of these`)));
   if (state.view === "recommend") {
     const reason = el("p", "reason", reasonOf(index));
     reason.dataset.reason = String(index);
@@ -1224,9 +1383,10 @@ function planCard(base, index, plans) {
   }
 
   if (plans.length > 1) {
-    const toggle = el("button", `compare-toggle${compared ? " on" : ""}`, compared ? "已选对比" : "对比");
+    const toggle = el("button", "compare-toggle", compared ? "Comparing" : "Compare");
     toggle.type = "button";
-    toggle.setAttribute("aria-label", `对比方案 ${planLabel(index)}`);
+    toggle.dataset.key = `compare-${base.candidate_id}`;
+    toggle.setAttribute("aria-label", `Compare option ${planLabel(index)}`);
     toggle.setAttribute("aria-pressed", String(compared));
     toggle.addEventListener("click", () => {
       state.compare = compared ? state.compare.filter((id) => id !== base.candidate_id)
@@ -1240,45 +1400,58 @@ function planCard(base, index, plans) {
   const variants = (base.variants || []).filter((variant) => state.result.ranking_result.shortlist.items[variant.candidate_id]);
   if (variants.length > 1) {
     const row = el("div", "variants");
-    row.append(el("span", "variants-label", "同样好的到校日"));
+    const label = el("span", "variants-label", "Just as good on");
+    label.id = `variants-${base.candidate_id}`;
+    const group = el("div", "segmented");
+    group.setAttribute("role", "radiogroup");
+    group.setAttribute("aria-labelledby", label.id);
     variants.forEach((variant) => {
       const active = (state.variant[base.candidate_id] || base.candidate_id) === variant.candidate_id;
-      const chip = el("button", `variant${active ? " on" : ""}`, daysText(variant.pattern));
+      const chip = el("button", "", daysText(variant.pattern));
       chip.type = "button";
-      chip.setAttribute("aria-pressed", String(active));
+      chip.dataset.key = `variant-${variant.candidate_id}`;
+      chip.setAttribute("role", "radio");
+      chip.setAttribute("aria-checked", String(active));
+      chip.tabIndex = active ? 0 : -1;
       chip.addEventListener("click", () => {
+        if (active) return;
         state.variant[base.candidate_id] = variant.candidate_id;
         state.selected = base.candidate_id;
         renderPlans();
       });
-      row.append(chip);
+      group.append(chip);
     });
+    radioKeys(group);
+    row.append(label, group);
     card.append(row);
   }
   return card;
 }
 
+function daysAmount(value) {
+  const text = value.toFixed(1).replace(/\.0$/, "");
+  return `${text} day${text === "1" ? "" : "s"}`;
+}
+
 function stats(features, compareTo = null) {
-  const box = el("div", "stats");
+  // Three lines, as the reasons word them; the ones the student does not care about are dimmed.
+  const box = el("ul", "stats");
   const values = [
-    ["campus_days", features.campus_days.toFixed(1), "天", "每周到校", "campus_days"],
-    ["gap", features.gap_min >= 60 ? (features.gap_min / 60).toFixed(1) : String(Math.round(features.gap_min)), features.gap_min >= 60 ? "时" : "分", "每周空等", "gap_min"],
-    ["outside_hours", String(Math.round(features.outside_min)), "分", "每周早晚课", "outside_min"],
+    ["campus_days", daysAmount(features.campus_days), "on campus a week", "campus_days"],
+    ["gap", durationText(features.gap_min), "waiting a week", "gap_min"],
+    ["outside_hours", durationText(features.outside_min), "early or late class a week", "outside_min"],
   ];
-  values.forEach(([axis, value, unit, label, key]) => {
-    const stat = el("div", `stat${state.cares.has(axis) ? "" : " dim"}`);
-    const strong = el("strong", "", value);
-    strong.append(el("small", "", unit));
+  values.forEach(([axis, value, label, key]) => {
+    const line = el("li", state.cares.has(axis) ? "" : "dim");
+    line.append(el("strong", "", value), document.createTextNode(` ${label}`));
     if (compareTo) {
       const diff = features[key] - compareTo.features[key];
       if (Math.abs(diff) > (key === "campus_days" ? 0.05 : 1)) {
-        const text = key === "campus_days" ? `${diff.toFixed(1)}天`
-          : Math.abs(diff) >= 60 ? `${(diff / 60).toFixed(1)}时` : `${Math.round(diff)}分`;
-        strong.append(el("span", `delta ${diff < 0 ? "better" : "worse"}`, `${diff > 0 ? "+" : ""}${text}`));
+        const amount = key === "campus_days" ? Math.abs(diff).toFixed(1).replace(/\.0$/, "") : durationText(Math.abs(diff));
+        line.append(document.createTextNode(" "), el("span", `delta ${diff < 0 ? "better" : "worse"}`, `${diff > 0 ? "+" : "−"}${amount}`));
       }
     }
-    stat.append(strong, el("span", "", label));
-    box.append(stat);
+    box.append(line);
   });
   return box;
 }
@@ -1353,19 +1526,19 @@ function weekGrid(meetings, { thumb = false, dates = null, range = null, pattern
     const head = el(onDay ? "button" : "div", `head${index === todayIndex ? " today" : ""}${activeDay === day ? " active" : ""}`);
     if (onDay) {
       head.type = "button";
-      head.title = "查看这天的路线";
+      head.title = `Show the route for ${DAY_LONG[day - 1]}`;
       head.setAttribute("aria-pressed", String(activeDay === day));
       head.addEventListener("click", () => onDay(day));
     }
-    head.append(el("b", "", `周${DAY[day - 1]}`));
-    if (dates) head.append(document.createTextNode(index === todayIndex ? "今天" : dates[index]));
+    head.append(el("b", "", DAY[day - 1]));
+    if (dates) head.append(document.createTextNode(index === todayIndex ? "Today" : dates[index]));
     grid.append(head);
   });
   if (!thumb) {
     const hours = el("div", "hours");
     hours.style.height = `${height}px`;
     for (let hour = from; hour <= to; hour += 60) {
-      const label = el("span", "", `${hour / 60}:00`);
+      const label = el("span", "", timeText(hour));
       label.style.top = `${((hour - from) / 60) * hourHeight}px`;
       hours.append(label);
     }
@@ -1378,7 +1551,7 @@ function weekGrid(meetings, { thumb = false, dates = null, range = null, pattern
     const layout = lanes ? laneLayout(daily) : null;
     daily.forEach((meeting) => {
       const block = el("div", `block${meeting.is_online ? " online" : ""}${meeting.unavailable_exception ? " exception" : ""}`);
-      block.style.setProperty("--c", `var(--c${courseIndex(meeting.unit_code)})`);
+      paint(block, meeting.unit_code);
       block.style.top = `${((meeting.start_min - from) / 60) * hourHeight}px`;
       block.style.height = `${Math.max(((meeting.end_min - meeting.start_min) / 60) * hourHeight - 2, 3)}px`;
       if (layout && layout.get(meeting).lanes > 1) {
@@ -1388,8 +1561,8 @@ function weekGrid(meetings, { thumb = false, dates = null, range = null, pattern
         block.style.width = `calc(${100 / count}% - 4px)`;
       }
       const activity = activityOf(meeting);
-      const room = meeting.is_online ? "线上" : meeting.building_code || "";
-      block.title = `${meeting.unit_code} ${activity} ${meeting.class_code || ""}  ${clock(meeting.start_min)}–${clock(meeting.end_min)}  ${meeting.is_online ? "线上" : meeting.location_raw || room}`;
+      const room = meeting.is_online ? "Online" : meeting.building_code || "";
+      block.title = `${meeting.unit_code} ${activity} ${meeting.class_code || ""}, ${spanText(meeting.start_min, meeting.end_min)}, ${meeting.is_online ? "online" : meeting.location_raw || room}`;
       if (!thumb) {
         block.append(el("b", "", meeting.unit_code), el("span", "act", `${activity} ${meeting.class_code || ""}`.trim()));
         if (room) block.append(el("span", "room", room));
@@ -1409,7 +1582,7 @@ function weekGrid(meetings, { thumb = false, dates = null, range = null, pattern
 
 /* ===================== detail ===================== */
 
-const TABS = [["week", "周课表"], ["term", "学期"], ["time", "时间"], ["enrol", "选课"], ["friend", "和朋友"]];
+const TABS = [["week", "Week"], ["term", "Semester"], ["time", "Hours"], ["enrol", "Enrolment"], ["friend", "With a friend"]];
 
 function renderDetail(base, plans) {
   const item = shownItem(base);
@@ -1419,21 +1592,22 @@ function renderDetail(base, plans) {
 
   const head = el("div", "detail-head");
   const title = el("h3");
-  title.append(el("span", "avatar", letter), document.createTextNode(daysText(item.pattern)));
-  head.append(title, el("span", "spacer"));
-  const tools = el("div", "tool-row");
-  tools.append(
-    button("日历", () => { downloadIcs(item); toast("已导出 .ics，可导入 Google / Apple / Outlook 日历"); }, { title: "导出到日历" }),
-    button("分享", () => copyText(shareUrl(item), "链接已复制，朋友打开就能看到这个方案"), { title: "复制分享链接" }),
-    button("收藏", () => { saveFavourite(item, letter); toast("已收藏，回到首页可打开"); }, { title: "收藏到本机" }),
-    button("打印", () => window.print(), { title: "打印" }),
-    button("就选这个", (node) => acceptPlan(item, index, plans, node), { className: "button primary" }),
-  );
-  head.append(tools);
+  title.append(el("span", `rank${state.view === "recommend" && index === 0 ? " first" : ""}`, letter),
+    document.createTextNode(daysText(item.pattern)));
+  head.append(title);
   detail.append(head);
+  const tools = el("div", "detail-actions");
+  tools.append(
+    button("Use this timetable", (node) => acceptPlan(item, index, plans, node), { className: "button primary" }),
+    button("Download calendar (.ics)", () => { downloadIcs(item); toast("Calendar file downloaded. Import it into Google, Apple or Outlook calendar."); }),
+    button("Share link", () => copyText(shareUrl(item), "Link copied. Anyone who opens it sees this timetable.")),
+    button("Save", () => { saveFavourite(item, letter); toast("Saved on this device. It is listed on the first page."); }),
+    button("Print", () => window.print()),
+  );
+  detail.append(tools);
   if (state.notice) {
     const notice = el("div", "notice", state.notice);
-    if (state.history.length) notice.append(button("撤销", undo, { className: "button ghost" }));
+    if (state.history.length) notice.append(button("Undo", undo, { className: "button quiet" }));
     detail.append(notice);
   }
   const next = nextClass(item);
@@ -1441,22 +1615,42 @@ function renderDetail(base, plans) {
 
   const bar = el("div", "tabs");
   bar.setAttribute("role", "tablist");
+  bar.setAttribute("aria-label", "Views of this timetable");
   const panel = el("div", "tab-panel");
+  panel.id = "tab-panel";
+  panel.setAttribute("role", "tabpanel");
   TABS.forEach(([key, label]) => {
-    const tab = el("button", `tab${state.tab === key ? " on" : ""}`, label);
+    const tab = el("button", "tab", label);
     tab.type = "button";
+    tab.id = `tab-${key}`;
+    tab.dataset.tab = key;
     tab.setAttribute("role", "tab");
+    tab.setAttribute("aria-controls", panel.id);
     tab.setAttribute("aria-selected", String(state.tab === key));
+    tab.tabIndex = state.tab === key ? 0 : -1;
     tab.addEventListener("click", () => {
       state.tab = key;
       bar.querySelectorAll(".tab").forEach((other) => {
-        other.classList.toggle("on", other === tab);
         other.setAttribute("aria-selected", String(other === tab));
+        other.tabIndex = other === tab ? 0 : -1;
       });
+      panel.setAttribute("aria-labelledby", tab.id);
       panel.replaceChildren(TAB_VIEWS[key](item, base));
     });
     bar.append(tab);
   });
+  bar.addEventListener("keydown", (event) => {
+    // Arrow keys move between tabs (the ARIA tabs pattern); Tab moves into the panel.
+    const step = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
+    if (!step) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const tabs = [...bar.querySelectorAll(".tab")];
+    const next = tabs[(tabs.indexOf(document.activeElement) + step + tabs.length) % tabs.length];
+    next.focus();
+    next.click();
+  });
+  panel.setAttribute("aria-labelledby", `tab-${state.tab}`);
   panel.append(TAB_VIEWS[state.tab](item, base));
   detail.append(bar, panel);
   return detail;
@@ -1470,12 +1664,12 @@ function nextClass(item) {
   const first = item.meetings.reduce((min, meeting) => (meeting.date < min ? meeting.date : min), "9999");
   if (!upcoming || daysBetween(TODAY, first) > 14) return null;
   const days = daysBetween(TODAY, upcoming.date);
-  const when = days === 0 ? (upcoming.start_min <= NOW_MIN ? "正在上" : `今天 ${clock(upcoming.start_min)}`)
-    : days === 1 ? `明天 ${clock(upcoming.start_min)}` : `${shortDate(upcoming.date)} 周${DAY[upcoming.weekday - 1]} ${clock(upcoming.start_min)}`;
+  const when = days === 0 ? (upcoming.start_min <= NOW_MIN ? "On now" : `Today, ${timeText(upcoming.start_min)}`)
+    : days === 1 ? `Tomorrow, ${timeText(upcoming.start_min)}` : `${dayDate(upcoming.date)}, ${timeText(upcoming.start_min)}`;
   const box = el("div", "next-class");
-  box.append(el("span", "next-label", days === 0 && upcoming.start_min <= NOW_MIN ? "现在" : "下一节"),
+  box.append(el("span", "next-label", days === 0 && upcoming.start_min <= NOW_MIN ? "Now" : "Next class"),
     el("b", "", when), el("span", "", `${upcoming.unit_code} ${activityOf(upcoming)} ${upcoming.class_code || ""}`),
-    el("span", "muted", upcoming.is_online ? "线上" : upcoming.location_raw && upcoming.location_raw !== "-" ? upcoming.location_raw : upcoming.building_code || ""));
+    el("span", "muted", upcoming.is_online ? "Online" : upcoming.location_raw && upcoming.location_raw !== "-" ? upcoming.location_raw : upcoming.building_code || ""));
   return box;
 }
 
@@ -1503,13 +1697,14 @@ function weekView(item, base) {
     draw();
   };
   const nav = el("div", "week-nav");
-  const prev = button("←", () => move(-1), { className: "button ghost", title: "上一周" });
-  const next = button("→", () => move(1), { className: "button ghost", title: "下一周" });
+  const prev = button("Previous", () => move(-1), { title: "Previous week" });
+  const next = button("Next", () => move(1), { title: "Next week" });
   const label = el("span", "label");
-  const nowPill = el("span", "pill", "本周");
+  label.setAttribute("aria-live", "polite");
+  const nowPill = el("span", "pill", "this week");
   const thisWeek = currentWeekIndex(weeks);
-  const back = button("回到本周", () => { state.week[base.candidate_id] = thisWeek; draw(); }, { className: "button ghost" });
-  nav.append(prev, next, label, nowPill, back, el("span", "hint", "点星期看当天路线 · ← → 换周"));
+  const back = button("Back to this week", () => { state.week[base.candidate_id] = thisWeek; draw(); });
+  nav.append(label, nowPill, prev, next, back, el("span", "hint", "Select a day to see its route. Left and right arrow keys change the week."));
   const holder = el("div", "week-holder");
   const route = el("div");
   box.append(nav, holder, route);
@@ -1521,7 +1716,7 @@ function weekView(item, base) {
     const week = weeks[position];
     const end = addDays(week, 6);
     const meetings = item.meetings.filter((meeting) => meeting.date >= week && meeting.date <= end);
-    label.textContent = `第 ${position + 1} 周 · ${shortDate(week)}–${shortDate(end)}`;
+    label.textContent = `Week ${position + 1}, ${rangeText(week, end)}`;
     nowPill.hidden = position !== thisWeek;
     back.hidden = thisWeek < 0 || position === thisWeek;
     prev.disabled = position === 0;
@@ -1531,13 +1726,13 @@ function weekView(item, base) {
     const todayIndex = dayList.findIndex((day) => addDays(week, day - 1) === TODAY);
     const activeDay = state.routeDay[base.candidate_id] || null;
     holder.replaceChildren(weekGrid(meetings, {
-      dates: dayList.map((day) => shortDate(addDays(week, day - 1))), range, todayIndex, activeDay, nowLine: true,
+      dates: dayList.map((day) => String(Number(addDays(week, day - 1).slice(8, 10)))), range, todayIndex, activeDay, nowLine: true,
       onDay: (day) => {
         state.routeDay[base.candidate_id] = state.routeDay[base.candidate_id] === day ? null : day;
         draw();
       },
     }));
-    if (!meetings.length) holder.append(el("p", "week-empty", "这周没有课"));
+    if (!meetings.length) holder.append(el("p", "week-empty", "No classes this week"));
     route.replaceChildren();
     if (activeDay) {
       const date = addDays(week, activeDay - 1);
@@ -1549,12 +1744,12 @@ function weekView(item, base) {
   const legend = el("div", "legend");
   state.units.forEach((unit) => {
     const key = el("span");
-    const swatch = el("i");
-    swatch.style.setProperty("--c", `var(--c${courseIndex(unit.code)})`);
+    const swatch = el("i", "swatch");
+    paint(swatch, unit.code);
     key.append(swatch, document.createTextNode(unit.code));
     legend.append(key);
   });
-  legend.append(el("span", "", "斜纹为线上课"));
+  legend.append(el("span", "", "Striped blocks are online"));
   box.append(legend);
   const transfers = tightTransfers(item.meetings);
   if (transfers.length) {
@@ -1573,7 +1768,7 @@ function routeView(meetings, date) {
   // The day's walk between buildings, drawn from the campus map coordinates.
   const box = el("div", "route");
   const head = el("div", "route-head");
-  head.append(el("b", "", `${shortDate(date)} 周${DAY[weekdayOf(date) - 1]} 路线`));
+  head.append(el("b", "", `Route on ${dayDate(date)}`));
   box.append(head);
   const stops = [];
   meetings.filter((meeting) => !meeting.is_online && meeting.building_code)
@@ -1582,21 +1777,21 @@ function routeView(meetings, date) {
       const last = stops[stops.length - 1];
       if (last && last.code === meeting.building_code) {
         last.until = meeting.end_min;
-        last.what += ` · ${meeting.unit_code} ${activityOf(meeting)}`;
+        last.what += `, ${meeting.unit_code} ${activityOf(meeting)}`;
         return;
       }
       stops.push({ code: meeting.building_code, location: meeting.building_location, from: meeting.start_min,
         until: meeting.end_min, what: `${meeting.unit_code} ${activityOf(meeting)}` });
     });
   if (!stops.length) {
-    head.append(el("span", "meta", meetings.length ? "这天只有线上课" : "这天没有课"));
+    head.append(el("span", "meta", meetings.length ? "Only online classes this day" : "No classes this day"));
     return box;
   }
   const located = stops.filter((stop) => stop.location?.latitude != null);
   let metres = 0;
   for (let index = 1; index < located.length; index += 1) metres += distanceMetres(located[index - 1].location, located[index].location);
-  head.append(el("span", "meta", stops.length === 1 ? `整天都在 ${stops[0].code}` :
-    `${stops.length} 段 · 共步行约 ${Math.max(1, Math.round((metres * 1.3) / 80))} 分钟（按地图直线距离估算）`));
+  head.append(el("span", "meta", stops.length === 1 ? `All day in ${stops[0].code}` :
+    `${stops.length} stops, about ${Math.max(1, Math.round((metres * 1.3) / 80))} min on foot in all (from map distances)`));
   if (located.length) {
     const lat0 = located.reduce((sum, stop) => sum + stop.location.latitude, 0) / located.length;
     const project = (location) => [location.longitude * Math.cos((lat0 * Math.PI) / 180), -location.latitude];
@@ -1611,7 +1806,7 @@ function routeView(meetings, date) {
     const offsetX = (width - spanX * scale) / 2;
     const offsetY = (height - spanY * scale) / 2;
     const xy = raw.map(([x, y]) => [offsetX + (x - minX) * scale, offsetY + (y - minY) * scale]);
-    const svg = svgEl("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": "当天在各楼之间的路线" });
+    const svg = svgEl("svg", { viewBox: `0 0 ${width} ${height}`, role: "img", "aria-label": "Map of the walk between buildings this day" });
     if (xy.length > 1) svg.append(svgEl("polyline", { class: "road", points: xy.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(" ") }));
     const byCode = new Map();
     located.forEach((stop, index) => {
@@ -1619,7 +1814,7 @@ function routeView(meetings, date) {
       byCode.get(stop.code).numbers.push(stops.indexOf(stop) + 1);
     });
     byCode.forEach(({ at: [x, y], numbers }, code) => {
-      const text = numbers.join("·");
+      const text = numbers.join(",");
       svg.append(svgEl("circle", { class: "dot", cx: x.toFixed(1), cy: y.toFixed(1), r: 11 + 3.5 * (text.length - 1) }));
       const number = svgEl("text", { class: "dot-label", x: x.toFixed(1), y: y.toFixed(1) });
       number.textContent = text;
@@ -1639,14 +1834,15 @@ function routeView(meetings, date) {
       const b = stop.location;
       const walk = a?.latitude != null && b?.latitude != null ? Math.max(1, Math.round((distanceMetres(a, b) * 1.3) / 80)) : null;
       const leg = el("li", `leg${walk !== null && walk > gap ? " tight" : ""}`,
-        `↓ 空 ${gap} 分钟${walk !== null ? `，走过去约 ${walk} 分钟` : ""}`);
+        `Then ${gap} min free${walk !== null ? `, about ${walk} min to walk there` : ""}`);
       list.append(leg);
     }
     const name = stop.location?.name ? ` ${stop.location.name}` : "";
-    li.append(el("b", "", String(index + 1)), el("span", "stop-time", `${clock(stop.from)}–${clock(stop.until)}`),
+    li.append(el("b", "", String(index + 1)), el("span", "stop-time", spanText(stop.from, stop.until)),
       el("strong", "", `${stop.code}${name}`), el("span", "muted", stop.what));
     if (stop.location?.map_url) {
-      const link = el("a", "map-link", "地图");
+      const link = el("a", "map-link", "Map");
+      link.setAttribute("aria-label", `Map of ${stop.code}`);
       link.href = stop.location.map_url;
       link.target = "_blank";
       link.rel = "noopener noreferrer";
@@ -1665,41 +1861,42 @@ function termView(item) {
   const now = currentWeekIndex(weeks);
   const heat = el("div", "heat");
   heat.append(el("span"));
-  for (let day = 1; day <= 5; day += 1) heat.append(el("span", "heat-head", `周${DAY[day - 1]}`));
+  for (let day = 1; day <= 5; day += 1) heat.append(el("span", "heat-head", DAY[day - 1]));
   weeks.forEach((week, position) => {
-    if (position && daysBetween(weeks[position - 1], week) > 7) heat.append(el("span", "heat-break", "期中假"));
-    heat.append(el("span", `heat-week${position === now ? " now" : ""}`, `第 ${position + 1} 周`));
+    if (position && daysBetween(weeks[position - 1], week) > 7) heat.append(el("span", "heat-break", "Mid-semester break"));
+    heat.append(el("span", `heat-week${position === now ? " now" : ""}`, `Week ${position + 1}`));
     for (let day = 1; day <= 5; day += 1) {
       const date = addDays(week, day - 1);
       const meetings = item.meetings.filter((meeting) => meeting.date === date);
       const onCampus = meetings.filter((meeting) => !meeting.is_online);
       const hours = onCampus.reduce((sum, meeting) => sum + meeting.end_min - meeting.start_min, 0) / 60;
       const cell = el("span", `heat-cell${onCampus.length ? "" : meetings.length ? " online" : " off"}${date === TODAY ? " now" : ""}${date < TODAY ? " past" : ""}`,
-        onCampus.length ? `${Number(hours.toFixed(1))}h` : meetings.length ? "线上" : "–");
+        onCampus.length ? `${Number(hours.toFixed(1))} h` : meetings.length ? "Online" : "");
       if (onCampus.length) cell.style.setProperty("--level", String(Math.min(1, hours / 6)));
       if (meetings.some((meeting) => meeting.is_fixed_assessment)) cell.classList.add("exam");
-      cell.title = `${shortDate(date)} ${meetings.map((meeting) => `${meeting.unit_code} ${activityOf(meeting)} ${clock(meeting.start_min)}`).join("，") || "无课"}`;
+      cell.title = `${dayDate(date)}: ${meetings.map((meeting) => `${meeting.unit_code} ${activityOf(meeting)} ${timeText(meeting.start_min)}`).join(", ") || "no classes"}`;
       heat.append(cell);
     }
   });
   box.append(heat);
   const key = el("div", "legend");
-  key.append(el("span", "", "颜色越深在校越久"), el("span", "", "橙框为考试或固定测验"), el("span", "", "蓝框为今天"));
+  key.append(el("span", "", "Hours on campus each day; darker means longer"), el("span", "", "Amber outline: exam or fixed test"),
+    el("span", "", "Purple outline: today"));
   box.append(key);
   const routine = new Set(slotsOf(item.meetings).map((slot) => `${slot.weekday}|${slot.start_min}|${slot.group_id}`));
   const oneOff = item.meetings.filter((meeting) => !routine.has(`${meeting.weekday}|${meeting.start_min}|${meeting.group_id}`))
     .sort((a, b) => a.date.localeCompare(b.date) || a.start_min - b.start_min);
   if (oneOff.length) {
-    box.append(el("h4", "section-title", "不在每周固定时间的课"));
+    box.append(el("h4", "section-title", "Classes outside the weekly pattern"));
     const list = el("ul", "list");
     oneOff.forEach((meeting) => {
       const li = el("li", `${meeting.is_fixed_assessment ? "exam" : ""}${meeting.date < TODAY ? " past" : ""}`.trim());
       const days = daysBetween(TODAY, meeting.date);
-      li.append(el("b", "", `${shortDate(meeting.date)} 周${DAY[meeting.weekday - 1]}`),
-        el("span", "", `${clock(meeting.start_min)}–${clock(meeting.end_min)}`),
+      li.append(el("b", "", dayDate(meeting.date)),
+        el("span", "", spanText(meeting.start_min, meeting.end_min)),
         el("span", "", `${meeting.unit_code} ${activityOf(meeting)} ${meeting.class_code || ""}`),
-        el("span", "muted", meeting.is_online ? "线上" : meeting.building_code || ""));
-      if (days >= 0 && days <= 21) li.append(el("span", "soon", days === 0 ? "今天" : `${days} 天后`));
+        el("span", "muted", meeting.is_online ? "Online" : meeting.building_code || ""));
+      if (days >= 0 && days <= 21) li.append(el("span", "soon", days === 0 ? "Today" : `In ${plural(days, "day")}`));
       list.append(li);
     });
     box.append(list);
@@ -1713,47 +1910,48 @@ function timeView(item) {
   const f = item.features;
   const classMinutes = item.meetings.reduce((sum, meeting) => sum + meeting.end_min - meeting.start_min, 0) / weeks;
   const commute = commuteMinutes() * 2 * f.campus_days;
-  const rows = [["上课", classMinutes, "c0"], ["空等", f.gap_min, "c2"], ["通勤", commute, "c4"]];
+  const rows = [["Class", classMinutes, "c2"], ["Waiting", f.gap_min, "c0"], ["Travel", commute, "c4"]];
   const total = rows.reduce((sum, [, value]) => sum + value, 0);
   const ledger = el("div", "ledger");
   const totalLine = el("div", "ledger-total", hoursText(total));
-  totalLine.append(el("small", "", `每周平均 · 整学期约 ${Math.round((total * weeks) / 60)} 小时`));
+  totalLine.append(document.createTextNode(" "), el("small", "", `a week on average, about ${Math.round((total * weeks) / 60)} h over the semester`));
   const bar = el("div", "ledger-bar");
   rows.forEach(([label, value, color]) => {
     if (!value) return;
     const part = el("i");
     part.style.setProperty("--w", `${(value / total) * 100}%`);
-    part.style.setProperty("--c", `var(--${color})`);
-    part.title = `${label} ${hoursText(value)}`;
+    part.style.setProperty("--edge", `var(--${color}-edge)`);
+    part.title = `${label}: ${hoursText(value)}`;
     bar.append(part);
   });
   const legend = el("div", "ledger-legend");
   rows.forEach(([label, value, color]) => {
     const key = el("span");
-    const swatch = el("i");
-    swatch.style.setProperty("--c", `var(--${color})`);
-    key.append(swatch, document.createTextNode(`${label} ${hoursText(value)}`));
+    const swatch = el("i", "swatch");
+    swatch.style.setProperty("--fill", `var(--${color}-edge)`);
+    swatch.style.setProperty("--edge", `var(--${color}-edge)`);
+    key.append(swatch, document.createTextNode(`${label}: ${hoursText(value)}`));
     legend.append(key);
   });
-  if (!commuteMinutes()) legend.append(el("span", "muted", "在“更多设置”里选单程通勤，可把路上时间算进来"));
+  if (!commuteMinutes()) legend.append(el("span", "muted", "Set travel time each way under More settings to count it here."));
   ledger.append(totalLine, bar, legend);
   box.append(ledger);
 
   const routine = slotsOf(item.meetings);
   const table = el("table", "table");
   const header = el("tr");
-  ["", "到校", "上课", "空等"].forEach((text) => header.append(el("th", "", text)));
+  ["", "On campus", "Class", "Waiting"].forEach((text) => header.append(el("th", "", text)));
   table.append(header);
   const free = [];
   for (let day = 1; day <= 5; day += 1) {
     const daily = routine.filter((slot) => slot.weekday === day).sort((a, b) => a.start_min - b.start_min);
     const campus = daily.filter((slot) => !slot.is_online);
     const row = el("tr");
-    row.append(el("td", "", `周${DAY[day - 1]}`));
+    row.append(el("td", "", DAY[day - 1]));
     if (!daily.length) {
-      row.append(el("td", "muted", "不用上课"), el("td"), el("td"));
+      row.append(el("td", "muted", "No classes"), el("td"), el("td"));
     } else {
-      const span = campus.length ? `${clock(campus[0].start_min)}–${clock(Math.max(...campus.map((slot) => slot.end_min)))}` : "只有线上课";
+      const span = campus.length ? spanText(campus[0].start_min, Math.max(...campus.map((slot) => slot.end_min))) : "Online only";
       const taught = daily.reduce((sum, slot) => sum + slot.end_min - slot.start_min, 0);
       let waiting = 0;
       let latest = daily[0].end_min;
@@ -1761,24 +1959,24 @@ function timeView(item) {
         waiting += Math.max(0, slot.start_min - latest);
         latest = Math.max(latest, slot.end_min);
       });
-      row.append(el("td", "", span), el("td", "", hoursText(taught)), el("td", "", waiting ? hoursText(waiting) : "—"));
+      row.append(el("td", "", span), el("td", "", hoursText(taught)), el("td", "", waiting ? hoursText(waiting) : "None"));
     }
     table.append(row);
     let cursor = 9 * 60;
     [...daily, { start_min: 18 * 60, end_min: 18 * 60 }].forEach((slot) => {
       const start = Math.min(slot.start_min, 18 * 60);
-      if (start - cursor >= 180) free.push(`周${DAY[day - 1]} ${clock(cursor)}–${clock(start)}`);
+      if (start - cursor >= 180) free.push(`${DAY[day - 1]} ${spanText(cursor, start)}`);
       cursor = Math.max(cursor, slot.end_min);
     });
   }
-  box.append(el("h4", "section-title", "典型一周"), table);
-  box.append(el("h4", "section-title", "整块空闲 · 适合打工或自习"));
+  box.append(el("h4", "section-title", "A usual week"), table);
+  box.append(el("h4", "section-title", "Free blocks of 3 hours or more, for work or study"));
   if (free.length) {
     const chips = el("div", "free-blocks");
     free.forEach((text) => chips.append(el("span", "", text)));
     box.append(chips);
   } else {
-    box.append(el("p", "muted", "9:00–18:00 内没有 3 小时以上的空闲"));
+    box.append(el("p", "muted", "No free block of 3 hours or more between 9 am and 6 pm."));
   }
   return box;
 }
@@ -1789,7 +1987,7 @@ function optionOf(item, group) {
 
 function seatPill(info) {
   const seats = seatNumber(info.seats);
-  return el("span", `seat${seats === null ? "" : seats <= 3 ? " low" : " ok"}`, info.seats || "–");
+  return el("span", `seat${seats === null ? "" : seats <= 3 ? " low" : " ok"}`, info.seats || "unknown");
 }
 
 function enrolView(item) {
@@ -1804,11 +2002,11 @@ function enrolView(item) {
   const fill = el("i");
   fill.style.setProperty("--w", `${order.length ? (doneCount / order.length) * 100 : 0}%`);
   track.append(fill);
-  progress.append(el("span", "", `已报 ${doneCount} / ${order.length}`), track);
-  box.append(progress, el("p", "muted", "从上往下报：余位少、没有同等替代的排在前面。点“满了”会保留已报上的班，重新安排其余的。"));
+  progress.append(el("span", "", `${doneCount} of ${order.length} enrolled`), track);
+  box.append(progress, el("p", "muted", "Enrol from the top: classes with few seats and no equal backup come first. Mark a class as full to keep what you have and plan the rest again."));
   const table = el("table", "table");
   const head = el("tr");
-  ["", "课程", "班", "余位", "满了可换", ""].forEach((text) => head.append(el("th", "", text)));
+  ["", "Activity", "Class", "Seats", "Backup if full", ""].forEach((text) => head.append(el("th", "", text)));
   table.append(head);
   order.forEach(({ group, info }, index) => {
     const option = optionOf(item, group);
@@ -1819,21 +2017,22 @@ function enrolView(item) {
     seatCell.append(seatPill(info));
     row.append(seatCell);
     const backup = el("td", "backup");
-    if (done) backup.textContent = "已报上";
-    else if (!info.backups.length) backup.textContent = "没有不冲突的备选";
+    if (done) backup.textContent = "Enrolled";
+    else if (!info.backups.length) backup.textContent = "No backup without a clash";
     else {
-      backup.textContent = info.backups.slice(0, 2).map((entry) => `${entry.code}（${deltaShort(entry.delta)}）`).join("　");
-      if (info.alternatives > 2) backup.textContent += `　+${info.alternatives - 2}`;
+      backup.textContent = info.backups.slice(0, 2).map((entry) => `${entry.code} (${deltaShort(entry.delta)})`).join(", ");
+      if (info.alternatives > 2) backup.textContent += `, ${info.alternatives - 2} more`;
     }
     row.append(backup);
     const actions = el("td", "row-actions");
     if (!done) {
       actions.append(
-        button("报上了", () => { state.enrolled[group] = option; renderPlans(); toast(`${groupName(group)} ${info.code} 已报上`); }),
-        button("满了", () => markFull(group, option), { className: "button danger" }),
+        button("Enrolled", () => { state.enrolled[group] = option; renderPlans(); toast(`${groupName(group)} ${info.code} marked as enrolled.`); },
+          { title: `Mark ${groupName(group)} ${info.code} as enrolled` }),
+        button("Full", () => markFull(group, option), { title: `Mark ${groupName(group)} ${info.code} as full` }),
       );
     } else if (state.enrolled[group] === option) {
-      actions.append(button("取消", () => { delete state.enrolled[group]; renderPlans(); }, { className: "button ghost" }));
+      actions.append(button("Undo", () => { delete state.enrolled[group]; renderPlans(); }, { className: "button quiet" }));
     }
     row.append(actions);
     table.append(row);
@@ -1842,9 +2041,9 @@ function enrolView(item) {
   scroller.append(table);
   box.append(scroller);
   const tools = el("div", "tool-row spaced");
-  tools.append(button("复制选课清单", () => copyText(`UniPlan 选课清单\n${enrolmentText(item)}`, "选课清单已复制")));
+  tools.append(button("Copy enrolment list", () => copyText(`UniPlan enrolment list\n${enrolmentText(item)}`, "Enrolment list copied.")));
   if (state.excluded.length) {
-    tools.append(button(`清除已满标记（${state.excluded.length}）`, () => replan("已清除已满标记", { excluded: [] })));
+    tools.append(button(`Clear full marks (${state.excluded.length})`, () => replan("Full marks cleared", { excluded: [] })));
   }
   box.append(tools);
   return box;
@@ -1856,30 +2055,31 @@ function markFull(group, option) {
   const pinned = { ...state.pinned };
   Object.entries(state.enrolled).forEach(([enrolledGroup, enrolledOption]) => { pinned[enrolledGroup] = [enrolledOption]; });
   state.tab = "enrol";
-  replan(`${groupName(group)} ${option.split("|").pop()} 已满，已保留报上的班并重新安排。`,
+  replan(`${groupName(group)} ${option.split("|").pop()} is full. Your enrolled classes are kept and the rest is planned again.`,
     { pinned, excluded: [...new Set([...state.excluded, option])], undoTo });
 }
 
 function friendView(item) {
   const box = el("div");
-  box.append(el("p", "muted", "粘贴朋友分享的方案链接，看看你们哪些课同班、哪天能一起吃饭，或者一键排到同一个班。"));
+  box.append(el("p", "muted", "Paste a friend's share link to see which classes you share and when you are both free for lunch, or to move into the same classes."));
   const row = el("div", "friend-row");
   const input = el("input", "input");
   input.type = "url";
-  input.placeholder = "朋友的分享链接";
+  input.placeholder = "Your friend's share link";
+  input.setAttribute("aria-label", "Your friend's share link");
   input.value = state.friend?.link || "";
   const result = el("div");
   const compare = () => {
     const shared = parseShare(input.value.split("#")[1] || "");
     if (!shared?.plan) {
-      result.replaceChildren(el("p", "field-error", "这个链接里没有方案，请让朋友在方案详情里点“分享”"));
+      result.replaceChildren(el("p", "field-error", "That link has no timetable in it. Ask your friend to press Share link on a timetable."));
       return;
     }
     state.friend = { link: input.value, plan: shared.plan, slots: shared.slots || null };
     result.replaceChildren(friendCompare(item));
   };
   input.addEventListener("keydown", (event) => { if (event.key === "Enter") compare(); });
-  row.append(input, button("对比", compare, { className: "button primary" }));
+  row.append(input, button("Compare", compare, { className: "button primary" }));
   box.append(row, result);
   if (state.friend) result.append(friendCompare(item));
   return box;
@@ -1897,7 +2097,7 @@ function freeTogether(item, friendSlots) {
     let cursor = 11 * 60;
     [...both.sort((a, b) => a.start_min - b.start_min), { start_min: 15 * 60, end_min: 15 * 60 }].forEach((slot) => {
       const start = Math.min(slot.start_min, 15 * 60);
-      if (start - cursor >= 45) out.push(`周${DAY[day - 1]} ${clock(cursor)}–${clock(start)}`);
+      if (start - cursor >= 45) out.push(`${DAY[day - 1]} ${spanText(cursor, start)}`);
       cursor = Math.max(cursor, slot.end_min);
     });
   }
@@ -1911,38 +2111,38 @@ function friendCompare(item) {
   const shared = [...theirs.keys()].filter((group) => mine.has(group));
   if (state.friend.slots) {
     const together = freeTogether(item, state.friend.slots);
-    box.append(el("h4", "section-title", "你们都在学校又都有空（午饭时段）"));
+    box.append(el("h4", "section-title", "Both on campus and free, 11 am to 3 pm"));
     if (together.length) {
       const chips = el("div", "free-blocks");
       together.forEach((text) => chips.append(el("span", "", text)));
       box.append(chips);
     } else {
-      box.append(el("p", "muted", "11:00–15:00 之间没有共同的 45 分钟空档"));
+      box.append(el("p", "muted", "No 45 min gap you share between 11 am and 3 pm."));
     }
   }
   if (!shared.length) {
-    box.append(el("p", "muted", "你们没有共同的课程活动。"));
+    box.append(el("p", "muted", "You have no activities in common."));
     return box;
   }
-  box.append(el("h4", "section-title", `共同的课 · 同班 ${shared.filter((group) => mine.get(group) === theirs.get(group)).length} / ${shared.length}`));
+  box.append(el("h4", "section-title", `Shared activities: same class in ${shared.filter((group) => mine.get(group) === theirs.get(group)).length} of ${shared.length}`));
   const list = el("ul", "list");
   shared.forEach((group) => {
     const same = mine.get(group) === theirs.get(group);
     const li = el("li", same ? "same" : "");
     li.append(el("b", "", groupName(group)),
-      el("span", "", same ? `同班 ${mine.get(group).split("|").pop()}` : `你 ${mine.get(group).split("|").pop()} · 朋友 ${theirs.get(group).split("|").pop()}`));
+      el("span", "", same ? `Same class, ${mine.get(group).split("|").pop()}` : `You ${mine.get(group).split("|").pop()}, your friend ${theirs.get(group).split("|").pop()}`));
     list.append(li);
   });
   box.append(list);
   const different = shared.filter((group) => mine.get(group) !== theirs.get(group));
   if (different.length) {
-    const join = button("尽量和朋友同班", () => {
+    const join = button("Move into your friend's classes where possible", () => {
       const undoTo = snapshot();
       const pinned = { ...state.pinned };
       different.forEach((group) => { pinned[group] = [theirs.get(group)]; });
       state.tab = "friend";
-      replan("已按朋友的班级重新安排；排不进去时会提示要放宽哪一项。", { pinned, undoTo });
-    }, { className: "button primary spaced" });
+      replan("Planned again with your friend's classes. If they don't fit, the page says what to loosen.", { pinned, undoTo });
+    }, { className: "button primary" });
     box.append(join);
   }
   return box;
@@ -1954,9 +2154,9 @@ function renderCompare(a, b, plans) {
   const box = el("section", "detail compare");
   const head = el("div", "detail-head");
   const title = el("h3");
-  title.append(document.createTextNode(`方案 ${planLabel(plans.indexOf(a))} 与 ${planLabel(plans.indexOf(b))}`));
+  title.append(document.createTextNode(`Options ${planLabel(plans.indexOf(a))} and ${planLabel(plans.indexOf(b))}`));
   head.append(title, el("span", "spacer"),
-    button("结束对比", () => { state.compare = []; renderPlans(); }, { className: "button ghost" }));
+    button("Stop comparing", () => { state.compare = []; renderPlans(); }, { className: "button quiet" }));
   box.append(head);
   const itemA = shownItem(a);
   const itemB = shownItem(b);
@@ -1966,9 +2166,9 @@ function renderCompare(a, b, plans) {
     const item = shownItem(own);
     const col = el("div", "compare-col");
     const title = el("div", "plan-head");
-    title.append(el("span", "avatar", planLabel(plans.indexOf(own))), el("div", "plan-title", daysText(item.pattern)));
+    title.append(el("span", "rank", planLabel(plans.indexOf(own))), el("div", "plan-title", daysText(item.pattern)));
     col.append(title, stats(own.features, other), weekGrid(slotsOf(item.meetings), { range, compact: true }));
-    col.append(button("看这个方案", () => { state.selected = own.candidate_id; state.compare = []; renderPlans(); }));
+    col.append(button("See this option", () => { state.selected = own.candidate_id; state.compare = []; renderPlans(); }));
     grid.append(col);
   });
   box.append(grid);
@@ -1976,19 +2176,19 @@ function renderCompare(a, b, plans) {
   const groupsA = byGroup(itemA);
   const groupsB = byGroup(itemB);
   const differing = [...groupsA.keys()].filter((group) => groupsA.get(group) !== groupsB.get(group));
-  box.append(el("h4", "section-title", differing.length ? `只有 ${differing.length} 门活动的班不同` : "两个方案的班级完全相同"));
+  box.append(el("h4", "section-title", differing.length ? `${plural(differing.length, "activity").replace("activitys", "activities")} differ` : "Both options use the same classes"));
   if (differing.length) {
     const slot = (item, group) => {
       const meeting = slotsOf(item.meetings).find((entry) => entry.option_id.startsWith(group)) ||
         item.meetings.find((entry) => entry.option_id.startsWith(group));
-      return meeting ? `周${DAY[meeting.weekday - 1]} ${clock(meeting.start_min)}` : "";
+      return meeting ? `${DAY[meeting.weekday - 1]} ${timeText(meeting.start_min)}` : "";
     };
     const list = el("ul", "list");
     differing.forEach((group) => {
       const li = el("li");
       li.append(el("b", "", groupName(group)),
-        el("span", "", `${planLabel(plans.indexOf(a))}：${groupsA.get(group).split("|").pop()} ${slot(itemA, group)}`),
-        el("span", "", `${planLabel(plans.indexOf(b))}：${groupsB.get(group).split("|").pop()} ${slot(itemB, group)}`));
+        el("span", "", `${planLabel(plans.indexOf(a))}: ${groupsA.get(group).split("|").pop()} ${slot(itemA, group)}`),
+        el("span", "", `${planLabel(plans.indexOf(b))}: ${groupsB.get(group).split("|").pop()} ${slot(itemB, group)}`));
       list.append(li);
     });
     box.append(list);
@@ -2005,10 +2205,14 @@ function seatNumber(text) {
 
 function deltaShort(delta) {
   const parts = [];
-  if (Math.abs(delta.campus_days) >= 0.05) parts.push(`到校${delta.campus_days > 0 ? "+" : "−"}${Math.abs(delta.campus_days).toFixed(1)} 天`);
-  if (Math.abs(delta.gap_min) >= 1) parts.push(`${delta.gap_min > 0 ? "多" : "少"}等 ${Math.round(Math.abs(delta.gap_min))} 分`);
-  if (Math.abs(delta.outside_min) >= 1) parts.push(`早晚课${delta.outside_min > 0 ? "+" : "−"}${Math.round(Math.abs(delta.outside_min))} 分`);
-  return parts.length ? parts.join("，") : "不变";
+  if (Math.abs(delta.campus_days) >= 0.05) {
+    parts.push(`${Math.abs(delta.campus_days).toFixed(1).replace(/\.0$/, "")} ${delta.campus_days > 0 ? "more" : "fewer"} days on campus`);
+  }
+  if (Math.abs(delta.gap_min) >= 1) parts.push(`${durationText(Math.abs(delta.gap_min))} ${delta.gap_min > 0 ? "more" : "less"} waiting`);
+  if (Math.abs(delta.outside_min) >= 1) {
+    parts.push(`${durationText(Math.abs(delta.outside_min))} ${delta.outside_min > 0 ? "more" : "less"} early or late`);
+  }
+  return parts.length ? parts.join(", ") : "no change";
 }
 
 function enrolmentOrder(item) {
@@ -2022,17 +2226,17 @@ function enrolmentOrder(item) {
 
 function enrolmentText(item) {
   return enrolmentOrder(item).map(({ group, info }, index) => {
-    const backups = info.backups.slice(0, 2).map((backup) => `${backup.code}（${deltaShort(backup.delta)}）`).join("、");
-    return `${index + 1}. ${groupName(group)} ${info.code}${info.seats ? `，剩 ${info.seats} 座` : ""}${backups ? `；满了换 ${backups}` : ""}`;
+    const backups = info.backups.slice(0, 2).map((backup) => `${backup.code} (${deltaShort(backup.delta)})`).join(", ");
+    return `${index + 1}. ${groupName(group)} ${info.code}${info.seats ? `, ${info.seats} seats left` : ""}${backups ? `; if full: ${backups}` : ""}`;
   }).join("\n");
 }
 
 async function acceptPlan(item, index, plans, node) {
   node.disabled = true;
-  node.textContent = "已选定";
+  node.textContent = "Chosen";
   state.tab = "enrol";
-  toast("已选定，去“选课”按顺序报名");
-  const tab = [...document.querySelectorAll(".tab")].find((other) => other.textContent === "选课");
+  toast("Chosen. Enrol in the order shown under Enrolment.");
+  const tab = document.querySelector('.tab[data-tab="enrol"]');
   if (tab) tab.click();
   if (!state.result?.saved) return;
   const axes = ["gap", "campus_days", "outside_hours"].filter((axis) => state.cares.has(axis));
@@ -2055,16 +2259,16 @@ function renderHints(costs) {
     change.gain.campus_days > 0.05 || change.gain.gap_min > 15 || change.gain.outside_min > 15);
   if (!useful.length) {
     return costs?.changes?.length && !costs.skipped
-      ? el("p", "muted hints-ok", "你设的限制没有让最好的方案变差，放宽也不会更好。") : null;
+      ? el("p", "muted hints-ok", "None of your limits makes the best timetable worse, so loosening one would not help.") : null;
   }
   const box = el("div", "hints");
-  box.append(el("h4", "section-title", "放宽一项会更好"));
+  box.append(el("h3", "section-title", "Loosening one limit would help"));
   useful.forEach((change) => {
     const gains = [];
-    if (change.gain.campus_days > 0.05) gains.push(`每周少到校 ${change.gain.campus_days.toFixed(1)} 天`);
-    if (change.gain.gap_min > 15) gains.push(`少等 ${hoursText(change.gain.gap_min)}`);
-    if (change.gain.outside_min > 15) gains.push(`早晚课少 ${Math.round(change.gain.outside_min)} 分钟`);
-    box.append(hintLine(`${changeLabel(change)}，最多可以${gains.join("、")}`, change, "试试"));
+    if (change.gain.campus_days > 0.05) gains.push(`${change.gain.campus_days.toFixed(1).replace(/\.0$/, "")} fewer days on campus a week`);
+    if (change.gain.gap_min > 15) gains.push(`${hoursText(change.gain.gap_min)} less waiting a week`);
+    if (change.gain.outside_min > 15) gains.push(`${durationText(change.gain.outside_min)} less early or late class a week`);
+    box.append(hintLine(`${changeLabel(change)}: up to ${joinWords(gains)}`, change, "Try it"));
   });
   return box;
 }
@@ -2094,17 +2298,21 @@ function renderExplorer(unit, group, pinSelect, currentItem) {
         const clash = others.find((slot) => overlaps(meeting, slot));
         if (full) {
           block.classList.add("full");
-          block.style.removeProperty("--c");
+          block.style.removeProperty("--fill");
+          block.style.removeProperty("--edge");
         } else {
-          block.style.setProperty("--c", seats !== null && seats <= 3 ? "var(--c3)" : "var(--c1)");
+          const hue = seats !== null && seats <= 3 ? "c4" : "c1";
+          block.style.setProperty("--fill", `var(--${hue}-fill)`);
+          block.style.setProperty("--edge", `var(--${hue}-edge)`);
         }
         if (blocked && !full) block.classList.add("avoid");
         if (pinSelect.value === meeting.option_id) block.classList.add("picked");
         if (current && current === meeting.option_id) block.classList.add("current");
-        const note = full ? "已满" : blocked ? "在你避开的时间"
-          : clash && current !== meeting.option_id ? `撞 ${clash.unit_code} ${activityOf(clash)}`
-            : meeting.seats ? `剩 ${meeting.seats}` : "余位未知";
-        block.title = `${meeting.class_code} · 周${DAY[meeting.weekday - 1]} ${clock(meeting.start_min)}–${clock(meeting.end_min)} · ${meeting.building_code || "线上"} · ${note}`;
+        const note = full ? "Full" : blocked ? "During times you can't make"
+          : clash && current !== meeting.option_id ? `Clashes with ${clash.unit_code} ${activityOf(clash)}`
+            : meeting.seats ? `${meeting.seats} seats left` : "Seats unknown";
+        block.title = `${meeting.class_code}, ${DAY[meeting.weekday - 1]} ${spanText(meeting.start_min, meeting.end_min)}, ${meeting.building_code || "online"}: ${note}`;
+        block.setAttribute("aria-label", block.title);
         block.replaceChildren(el("b", "", meeting.class_code), el("span", "", note));
         if (full) return;
         block.tabIndex = 0;
@@ -2122,7 +2330,7 @@ function renderExplorer(unit, group, pinSelect, currentItem) {
           }
         });
       },
-    }), el("p", "muted", "绿色有余位，红色余位 ≤ 3，斜纹已满，淡色在你避开的时间，虚框是当前方案的班。点一个班即固定它，再点“重新生成”。"));
+    }), el("p", "muted", "Green has seats, red has 3 or fewer, striped is full, faded is during times you can't make, and the dashed outline is the class in this option. Select a class to pin it, then press Plan again."));
   };
   draw();
   return box;
@@ -2132,9 +2340,9 @@ function renderAdjust(open) {
   const details = el("details", "adjust");
   details.open = open;
   const summary = el("summary");
-  summary.append(el("span", "", "调整课程活动与班级"));
+  summary.append(el("span", "", "Activities and classes"));
   const pinnedCount = Object.keys(state.pinned).length;
-  if (pinnedCount) summary.append(el("span", "count", String(pinnedCount)));
+  if (pinnedCount) summary.append(el("span", "count", `${pinnedCount} pinned`));
   details.append(summary);
   const data = state.data;
   if (!data) return details;
@@ -2142,12 +2350,13 @@ function renderAdjust(open) {
   const current = state.result?.ranking_result?.shortlist && state.selected
     ? shownItem(state.result.ranking_result.shortlist.items[state.selected] || {}) : null;
   const container = el("div", "groups");
-  container.append(el("p", "muted", "不勾选的活动不参与排课（比如 Lecture 看录播）；选定某个班会固定它。"));
+  container.append(el("p", "muted", "Untick an activity to leave it out, for example a lecture you watch as a recording. Choose a class to pin it."));
   (data.units || []).forEach((unit) => {
     const fieldset = el("fieldset", "unit-groups");
     const legend = el("legend");
-    legend.style.setProperty("--c", `var(--c${courseIndex(unit.unit_code)})`);
-    legend.append(el("i", "dot"), document.createTextNode(unit.unit_code));
+    const swatch = el("i", "swatch");
+    paint(swatch, unit.unit_code);
+    legend.append(swatch, document.createTextNode(unit.unit_code));
     fieldset.append(legend);
     unit.groups.forEach((group) => {
       const row = el("div", `group-row${conflict.has(group.group_id) ? " conflict" : ""}`);
@@ -2157,31 +2366,34 @@ function renderAdjust(open) {
       checkbox.value = group.group_id;
       checkbox.dataset.unit = unit.unit_code;
       checkbox.checked = (state.groups?.[unit.unit_code] || []).includes(group.group_id);
-      label.append(checkbox, document.createTextNode(`${group.group_id.split("|").pop()}${conflict.has(group.group_id) ? "（冲突）" : ""}`));
+      label.append(checkbox, document.createTextNode(`${group.group_id.split("|").pop()}${conflict.has(group.group_id) ? " (clash)" : ""}`));
       row.append(label);
       if (!group.default_selected && group.default_reason) row.append(el("span", "muted", group.default_reason));
       fieldset.append(row);
       if ((group.options || []).length > 1) {
         const pin = el("select", "select");
         pin.dataset.group = group.group_id;
-        pin.setAttribute("aria-label", `${group.group_id.split("|").pop()} 班级`);
-        const any = el("option", "", `任意班（共 ${group.options.length} 个）`);
+        pin.setAttribute("aria-label", `${unit.unit_code} ${group.group_id.split("|").pop()} class`);
+        const any = el("option", "", `Any class (${group.options.length})`);
         any.value = "";
         pin.append(any);
         group.options.forEach((option) => {
-          const seats = option.status === "full" ? " · 满" : option.available_seats ? ` · 剩 ${option.available_seats}` : "";
-          const choice = el("option", "", `${option.class_code} · 周${DAY[option.weekday - 1]} ${option.start_time}${seats}`);
+          const seats = option.status === "full" ? ", full" : option.available_seats ? `, ${option.available_seats} seats left` : "";
+          const start = minutes(option.start_time);
+          const choice = el("option", "", `${option.class_code}, ${DAY[option.weekday - 1]} ${start === null ? option.start_time : timeText(start)}${seats}`);
           choice.value = option.option_id;
           pin.append(choice);
         });
         pin.value = (state.pinned[group.group_id] || [""])[0];
         pin.addEventListener("change", () => { if (pin.value) checkbox.checked = true; });
         const explorerHolder = el("div");
-        const browse = button("看全部班级", (node) => {
+        const browse = button("See all classes", (node) => {
           const open = !explorerHolder.childElementCount;
           explorerHolder.replaceChildren(...(open ? [renderExplorer(unit, group, pin, current)] : []));
-          node.classList.toggle("on", open);
+          node.setAttribute("aria-expanded", String(open));
+          node.textContent = open ? "Hide classes" : "See all classes";
         });
+        browse.setAttribute("aria-expanded", "false");
         row.append(pin, browse);
         fieldset.append(explorerHolder);
       }
@@ -2190,7 +2402,7 @@ function renderAdjust(open) {
   });
   const actions = el("div", "groups-actions");
   const error = el("p", "field-error");
-  actions.append(button("重新生成", () => {
+  actions.append(button("Plan again", () => {
     const groups = {};
     container.querySelectorAll("input[type=checkbox]").forEach((input) => {
       groups[input.dataset.unit] = groups[input.dataset.unit] || [];
@@ -2198,7 +2410,7 @@ function renderAdjust(open) {
     });
     const empty = Object.entries(groups).find(([, ids]) => !ids.length);
     if (empty) {
-      error.textContent = `${empty[0]} 至少要保留一项`;
+      error.textContent = `Keep at least one activity for ${empty[0]}.`;
       return;
     }
     const chosen = Object.values(groups).flat();
@@ -2206,16 +2418,16 @@ function renderAdjust(open) {
     container.querySelectorAll("select[data-group]").forEach((pin) => {
       if (pin.value && chosen.includes(pin.dataset.group)) pinned[pin.dataset.group] = [pin.value];
     });
-    replan("已按调整重新生成", { groups, pinned });
-  }, { className: "button primary" }), button("Lecture 都看录播", () => {
+    replan("Planned again with your changes", { groups, pinned });
+  }, { className: "button primary" }), button("Watch every lecture as a recording", () => {
     container.querySelectorAll("input[type=checkbox]").forEach((input) => {
       if (/lecture/i.test(input.value.split("|").pop())) input.checked = false;
     });
-    toast("已取消所有 Lecture，点“重新生成”");
-  }), button("清除固定", () => {
+    toast("Every lecture is unticked. Press Plan again.");
+  }), button("Clear pins", () => {
     container.querySelectorAll("select[data-group]").forEach((pin) => { pin.value = ""; });
-    toast("已清除所有固定的班，点“重新生成”");
-  }, { className: "button ghost" }));
+    toast("All pins cleared. Press Plan again.");
+  }, { className: "button quiet" }));
   container.append(actions, error);
   details.append(container);
   return details;
@@ -2263,8 +2475,8 @@ const SYDNEY_VTIMEZONE = [
 
 function downloadIcs(item) {
   const stamp = new Date().toISOString().replace(/[-:]/g, "").replace(/\.\d{3}/, "");
-  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//UniPlan//Timetable//ZH",
-    "CALSCALE:GREGORIAN", "X-WR-CALNAME:UniPlan 课表", ...SYDNEY_VTIMEZONE];
+  const lines = ["BEGIN:VCALENDAR", "VERSION:2.0", "PRODID:-//UniPlan//Timetable//EN",
+    "CALSCALE:GREGORIAN", "X-WR-CALNAME:UniPlan timetable", ...SYDNEY_VTIMEZONE];
   item.meetings.forEach((meeting, index) => {
     const day = meeting.date.replace(/-/g, "");
     const place = meeting.is_online ? "Online" :
@@ -2313,8 +2525,8 @@ function tightTransfers(meetings) {
       const a = prev.building_location;
       const b = next.building_location;
       const walk = a?.latitude != null && b?.latitude != null
-        ? `，步行约 ${Math.max(1, Math.round((distanceMetres(a, b) * 1.3) / 80))} 分钟` : "";
-      seen.set(key, `周${DAY[next.weekday - 1]} ${clock(prev.end_min)} 从 ${prev.building_code} 到 ${next.building_code} 只有 ${gap} 分钟${walk}`);
+        ? `, about ${Math.max(1, Math.round((distanceMetres(a, b) * 1.3) / 80))} min on foot` : "";
+      seen.set(key, `Tight change on ${DAY[next.weekday - 1]} at ${timeText(prev.end_min)}: ${prev.building_code} to ${next.building_code} in ${gap} min${walk}`);
     });
   });
   return [...seen.values()];
@@ -2324,19 +2536,19 @@ function tightTransfers(meetings) {
 
 function renderStudy(study) {
   const box = el("section", "study");
-  box.append(el("h3", "", "偏好比较"));
+  box.append(el("h3", "", "Preference comparison"));
   if (!study.available) {
     box.append(el("p", "muted", study.reason));
     return box;
   }
-  box.append(button(`开始（${study.pairs.length} 组）`, () => runStudy(study, box)));
+  box.append(button(`Start (${study.pairs.length} pairs)`, () => runStudy(study, box)));
   return box;
 }
 
 function studyCard(card, letter) {
   const box = el("div", "plan");
   const head = el("div", "plan-head");
-  head.append(el("span", "avatar", letter));
+  head.append(el("span", "rank", letter));
   const meetings = card.slots.filter((slot) => slot.weeks >= 3).map((slot) => ({
     weekday: slot.weekday, start_min: slot.start_min, end_min: slot.end_min, unit_code: slot.unit_code,
     group_id: slot.activity, is_online: slot.online, class_code: "",
@@ -2350,7 +2562,7 @@ function runStudy(study, box) {
   const started = performance.now();
   let index = 0;
   const stage = el("div");
-  box.replaceChildren(el("h3", "", "偏好比较"), stage);
+  box.replaceChildren(el("h3", "", "Preference comparison"), stage);
   const choose = (choice) => {
     answers.set(study.pairs[index].pair_id, choice);
     index += 1;
@@ -2358,16 +2570,16 @@ function runStudy(study, box) {
   };
   function draw() {
     const pair = study.pairs[index];
-    stage.replaceChildren(el("p", "muted", `${index + 1} / ${study.pairs.length} · 你更想要哪一个？`));
+    stage.replaceChildren(el("p", "muted", `${index + 1} of ${study.pairs.length}: which would you rather have?`));
     const grid = el("div", "pair");
     grid.append(studyCard(study.schedules[pair.left], "A"), studyCard(study.schedules[pair.right], "B"));
     const row = el("div", "choice-row");
     row.append(button("A", () => choose("left"), { className: "button primary" }),
-      button("差不多", () => choose("tie")), button("B", () => choose("right"), { className: "button primary" }));
+      button("About the same", () => choose("tie")), button("B", () => choose("right"), { className: "button primary" }));
     stage.append(grid, row);
   }
   async function submit() {
-    stage.replaceChildren(el("p", "muted", "计算中…"));
+    stage.replaceChildren(el("p", "muted", "Working it out…"));
     try {
       const data = await post("/api/study", {
         study_id: study.study_id,
@@ -2391,11 +2603,11 @@ function runStudy(study, box) {
         bars.append(row);
       });
       const result = data.evaluation;
-      const percent = (value) => (value == null ? "—" : `${Math.round(value * 100)}%`);
-      stage.append(el("p", "muted", "你的选择显示的偏好"), bars,
-        el("p", "muted", `留出检验：学习 ${percent(result.learned?.accuracy)} · 等权 ${percent(result.equal_weight?.accuracy)} · 随机 50%`));
+      const percent = (value) => (value == null ? "not available" : `${Math.round(value * 100)}%`);
+      stage.append(el("p", "muted", "What your choices show"), bars,
+        el("p", "muted", `Held-out check: learned ${percent(result.learned?.accuracy)}, equal weights ${percent(result.equal_weight?.accuracy)}, chance 50%`));
     } catch (error) {
-      stage.replaceChildren(el("p", "", `无法完成：${error.message}`));
+      stage.replaceChildren(el("p", "", `This could not finish: ${error.message}`));
     }
   }
   draw();
@@ -2461,7 +2673,7 @@ function restoreShare(shared) {
   state.say = null;
   $("sayText").value = "";
   renderSay();
-  document.querySelectorAll(".setting.said").forEach((row) => row.classList.remove("said"));
+  document.querySelectorAll(".setting.from-sentence").forEach((row) => row.classList.remove("from-sentence"));
 }
 
 async function copyText(text, done) {
@@ -2469,7 +2681,7 @@ async function copyText(text, done) {
     await navigator.clipboard.writeText(text);
     toast(done);
   } catch {
-    window.prompt("复制以下内容", text);
+    window.prompt("Copy this text", text);
   }
 }
 
@@ -2491,7 +2703,7 @@ function storeFavourites(list) {
 }
 
 function saveFavourite(item, letter) {
-  const title = `${state.units.map((unit) => unit.code).join(" · ")} · ${state.view === "recommend" ? "推荐" : "方案"} ${letter} · ${daysText(item.pattern)}`;
+  const title = `${state.units.map((unit) => unit.code).join(", ")}: ${state.view === "recommend" ? "pick" : "option"} ${letter}, ${daysText(item.pattern)}`;
   const list = loadFavourites().filter((entry) => entry.title !== title);
   storeFavourites([{ title, url: shareUrl(item), at: new Date().toISOString().slice(0, 10) }, ...list]);
 }
@@ -2504,7 +2716,7 @@ function renderFavourites() {
     box.hidden = true;
     return;
   }
-  box.append(el("span", "field-label", "收藏的方案"));
+  box.append(el("span", "field-label", "Saved timetables"));
   list.forEach((entry, index) => {
     const row = el("div", "saved-row");
     const link = el("a", "", entry.title);
@@ -2519,9 +2731,9 @@ function renderFavourites() {
     });
     const remove = el("button", "remove", "×");
     remove.type = "button";
-    remove.setAttribute("aria-label", "删除收藏");
+    remove.setAttribute("aria-label", `Remove ${entry.title}`);
     remove.addEventListener("click", () => storeFavourites(loadFavourites().filter((_, position) => position !== index)));
-    row.append(link, el("span", "muted", entry.at), remove);
+    row.append(link, el("span", "muted", /^\d{4}-\d{2}-\d{2}$/.test(entry.at || "") ? dateText(entry.at) : entry.at || ""), remove);
     box.append(row);
   });
   box.hidden = !$("setupSummary").hidden;
@@ -2534,15 +2746,21 @@ async function withdrawSaved(event) {
   const code = $("withdrawCode").value.trim().toLowerCase();
   const message = $("withdrawMessage");
   if (!/^[0-9a-f]{32}$/.test(code)) {
-    message.textContent = "请输入完整的 32 位参与码";
+    message.textContent = "Enter the full 32-character participant code.";
     return;
   }
+  if (state.confirmWithdraw !== code) {
+    state.confirmWithdraw = code;
+    message.textContent = "This deletes the saved answers for good. Press Delete saved answers again to confirm.";
+    return;
+  }
+  state.confirmWithdraw = null;
   try {
     const response = await fetch(`/api/profiles/${code}`, { method: "DELETE" });
     const data = await response.json();
-    message.textContent = data.removed ? "已删除" : "没有找到这个参与码";
+    message.textContent = data.removed ? "Deleted." : "No saved answers match that code.";
   } catch {
-    message.textContent = "暂时无法连接";
+    message.textContent = "The server is not answering. Try again later.";
   }
 }
 
@@ -2568,9 +2786,10 @@ async function start() {
       const choice = event.target.closest("button");
       if (!choice) return;
       $(group.dataset.target).value = choice.dataset.value;
-      group.closest(".setting")?.classList.remove("said");
+      group.closest(".setting")?.classList.remove("from-sentence");
       updateSettingsCount();
     });
+    radioKeys(group);
   });
 
   try {
@@ -2581,7 +2800,7 @@ async function start() {
       const value = `${snap.year}|${snap.session_code}`;
       if (seen.has(value)) return;
       seen.add(value);
-      const option = el("option", "", `${snap.year} ${snap.session_code}`);
+      const option = el("option", "", termName(snap.year, snap.session_code));
       option.value = value;
       $("termSelect").append(option);
     });
@@ -2617,10 +2836,14 @@ async function start() {
     const chosen = PRESETS[preset.dataset.preset];
     addBlock(preset.dataset.preset, chosen.label, chosen.windows);
   }));
-  $("customToggle").addEventListener("click", () => { $("customBlock").hidden = !$("customBlock").hidden; });
+  $("customToggle").addEventListener("click", () => {
+    $("customBlock").hidden = !$("customBlock").hidden;
+    $("customToggle").setAttribute("aria-expanded", String(!$("customBlock").hidden));
+    if (!$("customBlock").hidden) $("customDay").focus();
+  });
   $("customAdd").addEventListener("click", addCustomBlock);
   [...SETTING_FIELDS, ...SETTING_CHECKS].forEach((id) => $(id).addEventListener("change", () => {
-    $(id).closest(".setting")?.classList.remove("said");
+    $(id).closest(".setting")?.classList.remove("from-sentence");
     updateSettingsCount();
   }));
   updateSettingsCount();
@@ -2630,7 +2853,7 @@ async function start() {
     const text = $("sayText").value.trim();
     if (text && text !== state.say?.text) {
       // Show what was understood first; the student confirms by pressing the button again.
-      if (await readSay()) toast("已按你的话填好设置，确认无误再点“生成课表”");
+      if (await readSay()) toast("The sentence is read and filled in. Check it, then press Find timetables.");
       return;
     }
     const profile = buildProfile();
@@ -2648,10 +2871,19 @@ async function start() {
   });
   $("editSetup").addEventListener("click", () => {
     collapseSetup(false);
-    $("profileForm").scrollIntoView({ behavior: "smooth", block: "start" });
+    $("profileForm").scrollIntoView({ block: "start" });
+    $("unitQuery").focus({ preventScroll: true });
   });
-  $("withdrawToggle").addEventListener("click", () => { $("withdrawForm").hidden = !$("withdrawForm").hidden; });
+  $("withdrawToggle").addEventListener("click", () => {
+    $("withdrawForm").hidden = !$("withdrawForm").hidden;
+    $("withdrawToggle").setAttribute("aria-expanded", String(!$("withdrawForm").hidden));
+    if (!$("withdrawForm").hidden) $("withdrawCode").focus();
+  });
   $("withdrawForm").addEventListener("submit", withdrawSaved);
+  $("withdrawCode").addEventListener("input", () => {
+    state.confirmWithdraw = null;
+    $("withdrawMessage").textContent = "";
+  });
   document.addEventListener("click", (event) => {
     if (!event.target.closest(".course-input-wrap")) hideSuggestions();
   });

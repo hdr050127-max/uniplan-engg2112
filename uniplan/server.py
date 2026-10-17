@@ -97,7 +97,8 @@ class AppHandler(BaseHTTPRequestHandler):
         self.send_header("Content-Length", str(len(body)))
         self.send_header("Cache-Control", "no-store")
         self.send_header("X-Content-Type-Options", "nosniff")
-        self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self'")
+        self.send_header("Content-Security-Policy", "default-src 'self'; script-src 'self'; "
+                         "style-src 'self' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com")
         self.end_headers()
         self.wfile.write(body)
 
@@ -221,10 +222,10 @@ class AppHandler(BaseHTTPRequestHandler):
                         # Old local data still supports a clearly marked trial plan.
                         result["warnings"].insert(0, {
                             "code": "stale_snapshot",
-                            "message": f"{fetch_result['message']} 当前结果基于 "
-                                       f"{data.get('snapshot_time') or '未知时间'} 的本地快照"
-                                       f"{f'（约 {age} 天前）' if age is not None else ''}，"
-                                       "仅供试算；座位、班级和时间可能已变化。",
+                            "message": f"{fetch_result['message']} These results use the local copy from "
+                                       f"{(data.get('snapshot_time') or 'an unknown date')[:10]}"
+                                       f"{f' ({age} days old)' if age is not None else ''}, "
+                                       "so seats, classes and times may have changed.",
                         })
                     else:
                         result["blockers"].insert(0, {
@@ -235,14 +236,14 @@ class AppHandler(BaseHTTPRequestHandler):
             self._json(400, {"error": "Invalid JSON request"})
             return
         except (OSError, sqlite3.Error):
-            self._json(500, {"error": "无法保存档案，请稍后重试。"})
+            self._json(500, {"error": "Your answers could not be saved. Try again in a moment."})
             return
         self._json(422 if result["status"] == "invalid" else 200, result)
 
     def _parse(self, request: dict) -> None:
         text, raw = request.get("text"), request.get("overrides") or {}
         if not isinstance(text, str) or not 0 < len(text.strip()) <= MAX_SENTENCE:
-            self._json(400, {"error": f"请用 1 至 {MAX_SENTENCE} 个字说说你的情况。"})
+            self._json(400, {"error": f"Write the sentence in 1 to {MAX_SENTENCE} characters."})
             return
         # The student's answers: clause index (a JSON key, so a string) -> the label they chose.
         if (not isinstance(raw, dict) or len(raw) > 20 or
@@ -252,7 +253,7 @@ class AppHandler(BaseHTTPRequestHandler):
         try:
             result = read_sentence(text.strip(), {int(key): value for key, value in raw.items()})
         except Exception:  # noqa: BLE001 - the parser is replaceable; the page keeps working without it
-            self._json(500, {"error": "暂时无法识别这句话，可以直接在下面手动设置。"})
+            self._json(500, {"error": "The sentence could not be read just now. Set the conditions below by hand."})
             return
         self._json(200, result)
 
@@ -263,7 +264,7 @@ class AppHandler(BaseHTTPRequestHandler):
             return
         result = self.server.explanations.explain(token, axes)
         if result is None:
-            self._json(404, {"error": "推荐已过期，请重新生成。"})
+            self._json(404, {"error": "These picks have expired. Find timetables again."})
             return
         self._json(200, {**result, **model_server()})
 
@@ -293,7 +294,7 @@ class AppHandler(BaseHTTPRequestHandler):
                     }, _optional_ms(request.get("elapsed_ms")))
                     result["saved"] = True
             except (OSError, sqlite3.Error):
-                self._json(500, {"error": "无法保存比较结果，请稍后重试。"})
+                self._json(500, {"error": "The comparison could not be saved. Try again in a moment."})
                 return
         self._json(200, result)
 
@@ -314,7 +315,7 @@ class AppHandler(BaseHTTPRequestHandler):
                 **detail,
             }, _optional_ms(request.get("elapsed_ms")))
         except (OSError, sqlite3.Error):
-            self._json(500, {"error": "无法记录选择，请稍后重试。"})
+            self._json(500, {"error": "Your choice could not be recorded. Try again in a moment."})
             return
         self._json(200, {"recorded": recorded})
 

@@ -86,7 +86,7 @@ class StudyRegistry:
         design = design_study(pool, self.seed_source())
         if design is None:
             return {"available": False,
-                    "reason": f"只有 {len(pool)} 种不同特征的可行课表，少于比较所需的 5 种；请直接参考规则排序。"}
+                    "reason": f"Only {len(pool)} timetables differ enough to compare, and 5 are needed. Use the ranked list instead."}
         session = StudySession(
             study_id=secrets.token_hex(16), design=design, pool=pool, options=options,
             profile=profile,
@@ -117,16 +117,16 @@ class StudyRegistry:
     def submit(self, study_id: str, raw_answers: Any) -> tuple[StudySession, dict[str, Any]]:
         session = self.get(study_id)
         if session is None:
-            raise StudyError("比较会话已过期，请重新生成课表后再比较。")
+            raise StudyError("This comparison has expired. Find timetables again, then compare.")
         design = session.design
         if not isinstance(raw_answers, list) or len(raw_answers) != len(design.pairs):
-            raise StudyError("请完成全部比较后再提交。")
+            raise StudyError("Answer every comparison before you submit.")
         answers: dict[int, str] = {}
         for item in raw_answers:
             if (not isinstance(item, dict) or not isinstance(item.get("pair_id"), int) or
                     isinstance(item.get("pair_id"), bool) or item.get("choice") not in CHOICES or
                     not 0 <= item["pair_id"] < len(design.pairs) or item["pair_id"] in answers):
-                raise StudyError("比较答案格式无效。")
+                raise StudyError("The comparison answers are in the wrong format.")
             answers[item["pair_id"]] = CHOICES[item["choice"]]
         session.answers = answers
         return session, self._result(session)
@@ -140,15 +140,15 @@ class StudyRegistry:
         result: dict[str, Any] = {"evaluation": {k: v for k, v in report.items() if k != "beta"}}
         if report["status"] != "learned":
             result["status"] = "insufficient"
-            result["message"] = (f"非“差不多”的训练比较少于 {report['required_train_responses']} 组，"
-                                 "无法可靠学习偏好；请参考规则排序。")
+            result["message"] = (f"Fewer than {report['required_train_responses']} answers picked one timetable over the other, "
+                                 "which is too few to learn from. Use the ranked list instead.")
             return result
         beta = report["beta"]
         meaning = interpret(beta)
         result["model"] = {"coefficients": dict(zip(AXES, beta)), "spec": MODEL_SPEC, **meaning}
         if not meaning["informative"]:
             result["status"] = "insufficient"
-            result["message"] = "你的选择没有显示一致的取舍方向；请参考规则排序。"
+            result["message"] = "Your answers don't point one way, so no preference was learned. Use the ranked list instead."
             return result
         result["status"] = "learned"
         top = rank_by_utility(session.pool, beta)

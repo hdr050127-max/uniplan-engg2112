@@ -5,7 +5,8 @@ Both writers start from the same fact sheet, built from the actual dated meeting
 * local Qwen (llm.ollama), asked to say the same facts in plain words.
 Every model sentence is checked against that pick's facts (weekdays, times, numbers,
 "best of the picks" claims, course codes). A sentence that fails keeps the template,
-so a reason never says something the timetable does not show.
+so a reason never says something the timetable does not show. Reasons are in English
+(docs/DESIGN.md); the checks are the same ones the Chinese version made, read in English.
 """
 from __future__ import annotations
 
@@ -23,10 +24,11 @@ from llm.rank import contributions
 from llm.rank.features import candidate_features
 from llm.gpu_lock import LOCKS, target_of_ollama
 
-DAY = "一二三四五六日"
+DAYS = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 FEATURE = {"campus_days": "campus_days", "gap": "gap_min", "outside_hours": "outside_min"}
-CARE_NAME = {"campus_days": "少到校", "gap": "少空等", "outside_hours": "少早晚课"}
-BEST_NAME = {"campus_days": "到校天数最少", "gap": "空等最少", "outside_hours": "早晚课最少"}
+CARE_NAME = {"campus_days": "fewer days on campus", "gap": "less waiting", "outside_hours": "fewer early or late classes"}
+BEST_NAME = {"campus_days": "Fewest days on campus", "gap": "Least waiting",
+             "outside_hours": "Least early or late class time"}
 TIES = {"campus_days": 0.05, "gap_min": 1.0, "outside_min": 1.0}
 DEFAULT_HOURS = {"start_min": 540, "end_min": 1080}
 # Bigger is better when the Windows GPU machine answers; on this Mac the 3B is the
@@ -37,15 +39,38 @@ TIMEOUT = 60
 
 
 def _clock(minute: int) -> str:
-    return f"{minute // 60}:{minute % 60:02d}"
+    """540 -> "9 am", 1110 -> "6:30 pm" (docs/DESIGN.md: times as "6 pm", "9:30 am")."""
+    if minute >= 1440:
+        return "midnight"
+    hour, rest = divmod(minute, 60)
+    return f"{hour % 12 or 12}{f':{rest:02d}' if rest else ''} {'am' if hour < 12 else 'pm'}"
 
 
-def _days(days: list[int]) -> str:
-    return "、".join(f"周{DAY[day - 1]}" for day in days)
+def _join(words: list[str], last: str = "and") -> str:
+    return words[0] if len(words) == 1 else f"{', '.join(words[:-1])} {last} {words[-1]}"
+
+
+def _days(days: list[int], last: str = "and") -> str:
+    return _join([DAYS[day - 1] for day in days], last)
+
+
+def _span(hours: tuple[int, int]) -> str:
+    return f"{_clock(hours[0])} to {_clock(hours[1])}"
+
+
+def _num(value: float) -> str:
+    """0.9 -> "0.9", 1.0 -> "1"."""
+    return f"{value:.1f}".rstrip("0").rstrip(".")
 
 
 def _amount(minutes: float) -> str:
-    return f"{minutes / 60:.1f} 小时" if minutes >= 60 else f"{round(minutes)} 分钟"
+    """72 -> "1 h 12 min", 45 -> "45 min", 120 -> "2 h"."""
+    hours, rest = divmod(round(minutes), 60)
+    return f"{hours} h" + (f" {rest} min" if rest else "") if hours else f"{rest} min"
+
+
+def _plural(value: float, word: str) -> str:
+    return f"{_num(value)} {word}{'' if _num(value) == '1' else 's'}"
 
 
 def _best(pick: Candidate, picks: list[Candidate]) -> list[str]:
@@ -79,45 +104,57 @@ def _difference(name: str, pick: Candidate, rival: Candidate, x: dict, y: dict, 
                 hours: str) -> str | None:
     """How ``pick`` differs from pick ``rival_no`` on one ranking feature, or None if a student
     would not notice. The three page figures come from the pick's own features (as on its card);
-    the rest from llm.rank.features, the numbers the ranking model used."""
-    def more_or_less(diff: float) -> str:
-        return "多" if diff > 0 else "少"
+    the rest from llm.rank.features, the numbers the ranking model used. Each phrase follows
+    "it has": "0.9 fewer days on campus a week", "1 h 12 min more waiting a week"."""
+    def more_or_less(diff: float, count: bool = False) -> str:
+        return "more" if diff > 0 else "fewer" if count else "less"
 
     if name in ("campus_days", "gap_h", "outside_h"):
         key = {"campus_days": "campus_days", "gap_h": "gap_min", "outside_h": "outside_min"}[name]
         diff = pick["features"][key] - rival["features"][key]
         if name == "campus_days":
-            return None if abs(diff) < 0.1 else f"每周{more_or_less(diff)}到校 {abs(diff):.1f} 天"
+            if abs(diff) < 0.1:
+                return None
+            days = _plural(abs(diff), "day").split(" ", 1)
+            return f"{days[0]} {more_or_less(diff, count=True)} {days[1]} on campus a week"
         if abs(diff) < 15:
             return None
-        return (f"每周{more_or_less(diff)}等 {_amount(abs(diff))}" if name == "gap_h"
-                else f"{hours} 以外的课每周{more_or_less(diff)} {_amount(abs(diff))}")
+        return (f"{_amount(abs(diff))} {more_or_less(diff)} waiting a week" if name == "gap_h"
+                else f"{_amount(abs(diff))} {more_or_less(diff)} class outside {hours} a week")
     if name not in x or name not in y:
         return None
     diff = x[name] - y[name]
     if name in ("early_h", "late_h"):
         minutes = abs(diff) * 60
-        return None if minutes < 15 else f"{'早课' if name == 'early_h' else '晚课'}每周{more_or_less(diff)} {_amount(minutes)}"
+        what = "early" if name == "early_h" else "late"
+        return None if minutes < 15 else f"{_amount(minutes)} {more_or_less(diff)} {what} class time a week"
     if name in ("earliest_start", "latest_end"):
         if abs(diff) < 0.25:
             return None
-        word, verb = ("最早", "上课") if name == "earliest_start" else ("最晚", "下课")
-        return f"平时{word} {_clock(round(x[name] * 60))} {verb}（第 {rival_no} 份 {_clock(round(y[name] * 60))}）"
+        verb = "start" if name == "earliest_start" else "end"
+        return (f"days that usually {verb} at {_clock(round(x[name] * 60))} "
+                f"({_clock(round(y[name] * 60))} in option {rival_no})")
     if name in ("longest_day_h", "heaviest_day_h"):
-        what = "在校最久的那天平均" if name == "longest_day_h" else "课排得最满的那天平均"
-        return None if abs(diff) < 0.25 else f"{what}{more_or_less(diff)} {abs(diff):.1f} 小时"
+        if abs(diff) < 0.25:
+            return None
+        what = "on campus on its longest day" if name == "longest_day_h" else "of class on its busiest day"
+        return f"{_amount(abs(diff) * 60)} {more_or_less(diff)} {what}"
     if name == "friday_free":
         if diff > 0.05 and x[name] >= 1:
-            return f"周五整天不用到校（第 {rival_no} 份要去）"
+            return f"Fridays free (option {rival_no} has classes on Friday)"
         if diff < -0.05 and y[name] >= 1 and "5" in pick.get("pattern", ""):
-            return f"周五也要到校（第 {rival_no} 份不用）"
+            return f"classes on Friday (option {rival_no} has none then)"
         return None
     if name == "building_changes":
-        return None if abs(diff) < 0.2 else f"每周{more_or_less(diff)}换 {abs(diff):.1f} 次楼"
+        if abs(diff) < 0.2:
+            return None
+        return f"{_num(abs(diff))} {more_or_less(diff, count=True)} building changes a week"
     if name == "single_class_days":
-        return None if abs(diff) < 0.2 else f"只上单节课的日子每周{more_or_less(diff)} {abs(diff):.1f} 天"
+        if abs(diff) < 0.2:
+            return None
+        return f"{_num(abs(diff))} {more_or_less(diff, count=True)} days a week with just one class"
     if name == "online_share":
-        return None if abs(diff) < 0.05 else f"线上课{more_or_less(diff)}一些"
+        return None if abs(diff) < 0.05 else f"{more_or_less(diff, count=True)} online classes"
     return None
 
 
@@ -154,7 +191,7 @@ def versus(index: int, picks: list[Candidate], conditions: Conditions,
     mine, theirs = (contributions(picks[i], prefs, pool) for i in (index, rival))
     features = {candidate["candidate_id"]: f for candidate, f in zip(pool, candidate_features(pool, prefs))}
     x, y = features[picks[index]["candidate_id"]], features[picks[rival]["candidate_id"]]
-    hours = "–".join(_clock(value) for value in _hours(conditions))
+    hours = _span(_hours(conditions))
     named = []
     for name in sorted(mine, key=lambda name: theirs.get(name, 0) - mine[name]):
         diff = mine[name] - theirs.get(name, 0)
@@ -219,14 +256,14 @@ def _compare_text(facts: dict) -> str:
     compared = facts["versus"]
     if not compared:
         return ""
-    rival, plus, minus = compared["rival"], "、".join(compared["strengths"]), "、".join(compared["costs"])
+    rival, plus, minus = compared["rival"], " and ".join(compared["strengths"]), " and ".join(compared["costs"])
     if facts["index"] == 0:
         if not plus:
-            return f"排第 1，和第 {rival} 份差别很小。"
-        return f"排第 1 是因为比第 {rival} 份{plus}" + (f"；代价是{minus}。" if minus else "。")
+            return f"First, with little difference from option {rival}. "
+        return f"First because, compared with option {rival}, it has {plus}" + (f", but it has {minus}. " if minus else ". ")
     if plus:
-        return f"和第 {rival} 份比，{plus}" + (f"，但{minus}。" if minus else "。")
-    return f"可作第 {rival} 份的备选，{minus}。" if minus else f"和第 {rival} 份差别很小。"
+        return f"Compared with option {rival}, it has {plus}" + (f", but it has {minus}. " if minus else ". ")
+    return f"A backup to option {rival}: it has {minus}. " if minus else f"Little difference from option {rival}. "
 
 
 def template_reason(facts: dict, cares: list[str]) -> str:
@@ -234,170 +271,271 @@ def template_reason(facts: dict, cares: list[str]) -> str:
     f = facts["features"]
     text = _compare_text(facts)
     if not facts["has_meetings"]:
-        days = [f"平均每周到校 {f['campus_days']:.1f} 天"]
+        text += f"On campus {_num(f['campus_days'])} days a week on average."
     elif facts["campus"]:
-        days = [f"每周固定{_days(facts['campus'])}到校"]
+        text += f"On campus {_days(facts['campus'])} each week."
     else:
-        days = ["平时不用到校，课都在线上"]
+        text += "No campus days; every class is online."
     weekday_off = [day for day in facts["free"] if day <= 5]
     if weekday_off:
-        days.append(f"{_days(weekday_off)}没课")
+        text += f" No classes on {_days(weekday_off, 'or')}."
     if facts["lunch"]:
-        days.append(_lunch_text(facts["lunch"]))
-    text += "，".join(days) + "。"
+        text += f" {_lunch_text(facts['lunch'])}."
     if facts["exceptions"]:
-        text += f"另有 {facts['exceptions']} 次考试或测验落在你不想上课的时间。"
+        count = facts["exceptions"]
+        text += (f" {count} exam{'s' if count > 1 else ''} or test{'s' if count > 1 else ''} "
+                 f"{'fall' if count > 1 else 'falls'} in times you can't make.")
     return text
 
 
 def _lunch_text(lunch: dict) -> str:
-    return f"每天 {_clock(lunch['start_min'])}–{_clock(lunch['end_min'])} 都能空出 {lunch['minutes']} 分钟吃饭"
+    return (f"A {lunch['minutes']} min lunch break fits between {_clock(lunch['start_min'])} and "
+            f"{_clock(lunch['end_min'])} on every class day")
 
 
 def fact_lines(facts: dict) -> list[str]:
     """The same facts as the template, one per line, for the model to rephrase."""
-    f, hours = facts["features"], "–".join(_clock(value) for value in facts["hours"])
-    lines = [f"到校日：{_days(facts['campus'])}（每周 {len(facts['campus'])} 天）" if facts["campus"]
-             else "到校日：无（课都在线上）"]
+    f, hours = facts["features"], _span(facts["hours"])
+    count = len(facts["campus"])
+    lines = [f"Days on campus: {_days(facts['campus'])} ({count} day{'' if count == 1 else 's'} a week)"
+             if facts["campus"] else "Days on campus: none (every class is online)"]
     weekday_off = [day for day in facts["free"] if day <= 5]
     if weekday_off:
-        lines.append(f"整学期都没课的工作日：{_days(weekday_off)}")
+        lines.append(f"Weekdays with no classes all term: {_days(weekday_off)}")
     if facts["earliest"] is not None:
-        lines.append(f"最早 {_clock(facts['earliest'])} 上课，最晚 {_clock(facts['latest'])} 下课")
-    lines.append("课之间基本不用等" if f["gap_min"] < 10 else f"每周课间空等约 {_amount(f['gap_min'])}")
-    lines.append(f"{hours} 以外的课：每周 {round(f['outside_min'])} 分钟")
-    lines.extend(f"这 {facts['count']} 份里{BEST_NAME[care]}" for care in facts["best"])
+        lines.append(f"Earliest start {_clock(facts['earliest'])}, latest finish {_clock(facts['latest'])}")
+    lines.append("Almost no waiting between classes" if f["gap_min"] < 10
+                 else f"Waiting between classes: about {_amount(f['gap_min'])} a week")
+    lines.append(f"Class outside {hours}: {round(f['outside_min'])} min a week")
+    lines.extend(f"{BEST_NAME[care]} of these {facts['count']} options" for care in facts["best"])
     compared = facts["versus"]
     if compared and (compared["strengths"] or compared["costs"]):
-        lines.append(f"和第 {compared['rival']} 份比：" + "，".join(compared["strengths"] + compared["costs"]))
+        lines.append(f"Compared with option {compared['rival']}: " + ", ".join(compared["strengths"] + compared["costs"]))
     if facts["lunch"]:
         lines.append(_lunch_text(facts["lunch"]))
     if facts["exceptions"]:
-        lines.append(f"有 {facts['exceptions']} 次考试或测验落在学生不想上课的时间")
+        lines.append(f"{facts['exceptions']} exams or tests fall in times the student can't make")
     return lines
 
 
 # ---------- checking a model sentence against the facts ----------
+#
+# The same checks as the Chinese version (weekdays, clock times, amounts with units, which
+# pick a difference is against, best-of-picks words, comparisons, opinions and topics with no
+# facts behind them), written for English. Every rejection names the first check that failed.
 
-_CN_DIGIT = {"一": 1, "二": 2, "两": 2, "三": 3, "四": 4, "五": 5, "六": 6, "七": 7, "八": 8, "九": 9}
-_CN_NUMBER = re.compile(r"([一二两三四五六七八九十]+)(?=个?(?:天|小时|分钟|节|次|份|门))")
-_WEEKDAY = re.compile(r"(?:周|星期|礼拜)([一二三四五六日天])((?:[一二三四五六日天])*)"
-                      r"(?:\s*(?:到|至|~|-|–|—)\s*(?:周|星期|礼拜)?([一二三四五六日天]))?")
-_TIME = re.compile(r"(上午|早上|中午|下午|晚上)?\s*(\d{1,2})(?:[:：](\d{2})|\s*点(半)?)")
-_AMOUNT = re.compile(r"(\d+(?:\.\d+)?)\s*(个?小时|分钟|天|份|次)")
-_SENTENCE = re.compile(r"[。！？!?\n]")
-_CLAUSE = re.compile(r"[，,。；;！!？?\n]")
-_PART = re.compile(r"[，,。；;、！!？?\n]|但是|但|不过|虽然|而且|并且|同时")
-# Words that say a day is free (not "不用等", which is about gaps).
-_OFF = re.compile(r"没课|没有课|无课|不用上|不用到|不用去|不用来|不必|不去|不来|不上课|空出|空着|空闲|休息|自由|"
-                  r"打工|上班|兼职|放假|整天有空")
-_CAMPUS = re.compile(r"到校|学校|校园")
-_SUPER = re.compile(r"最(少|短|省|低|小|多|好|佳|适合|理想|轻松|方便)")
-_OPINION_WORDS = ("好", "佳", "适合", "理想", "轻松", "方便")
-_AXIS = (("campus_days", re.compile(r"到校|来学校|天")), ("gap", re.compile(r"等|空档")),
-         ("outside_hours", re.compile(r"早|晚")))
+_WORD_NUMBER = {"one": 1, "two": 2, "three": 3, "four": 4, "five": 5, "six": 6, "seven": 7, "eight": 8,
+                "nine": 9, "ten": 10}
+_UNITS = (r"(?:days?|hours?|hrs?|h|minutes?|mins?|min|options?|timetables?|picks?|times|"
+          r"building changes?|changes?|exams?|tests?)")
+_WORD_AMOUNT = re.compile(rf"\b(one|two|three|four|five|six|seven|eight|nine|ten)\b"
+                          rf"(?=\s+(?:(?:more|fewer|less|extra)\s+)?(?:[a-z-]+\s+)?{_UNITS}\b)", re.I)
+_TIME = re.compile(r"\b(\d{1,2})(?::(\d{2}))?\s*(am|pm)\b|\b(\d{1,2}):(\d{2})\b", re.I)
+# Amounts stay on one line ([ \t], not \s): fact lines are joined with newlines.
+_DURATION = (r"(\d+(?:\.\d+)?)[ \t]*(?:h|hrs?|hours?)\b(?:[ \t]*(?:and[ \t]+)?(\d+)[ \t]*(?:min|mins|minutes?)\b)?"
+             r"|(\d+(?:\.\d+)?)[ \t]*(?:min|mins|minutes?)\b")
+_COUNTED = r"(days?|options?|timetables?|picks?|building changes?|changes?|times|exams?|tests?)"
+_NOT_WORD = r"(?!(?:more|fewer|less|extra|days?|options?|timetables?|picks?|changes?|times|exams?|tests?)\b)"
+_AMOUNT = re.compile(rf"{_DURATION}|(\d+(?:\.\d+)?)[ \t]+(?:{_NOT_WORD}[a-z-]+[ \t]+)?{_COUNTED}\b", re.I)
+# "1 h 12 min more", "0.9 fewer days", "1 day fewer": a difference between two picks.
+_DIRECTION = r"(more|fewer|less|extra)"
+_RELATIVE = (re.compile(rf"(?:{_DURATION})[ \t]+{_DIRECTION}\b", re.I),
+             re.compile(rf"(\d+(?:\.\d+)?)[ \t]+{_DIRECTION}[ \t]+(?:{_NOT_WORD}[a-z-]+[ \t]+)?"
+                        rf"(days?|building changes?|changes?)\b", re.I),
+             re.compile(rf"(\d+(?:\.\d+)?)[ \t]+(days?|building changes?|changes?)[ \t]+{_DIRECTION}\b", re.I))
+_WEEK = re.compile(r"\b(?:a|per|each|every)\s+week\b|\bweekly\b", re.I)
+_DAILY = re.compile(r"\b(?:a|per|each|every)\s+day\b|\bdaily\b|\blongest day\b|\bbusiest day\b|\bthat day\b", re.I)
+_DAYNAME = r"(?:Mon(?:day)?|Tue(?:s(?:day)?)?|Wed(?:nesday)?|Thu(?:r(?:s(?:day)?)?)?|Fri(?:day)?|Sat(?:urday)?|Sun(?:day)?)s?"
+_WEEKDAY = re.compile(rf"\b({_DAYNAME})\b(?:\s*(?:to|through|until|till|-)\s*({_DAYNAME})\b)?|"
+                      rf"(?<!\d\s)\b((?i:week(?:day|end))s?)\b")  # "4 weekdays" counts days, it does not name them
+_DAY_LIST = re.compile(rf"\b({_DAYNAME}),\s*(?={_DAYNAME}\b)")
+_SENTENCE = re.compile(r"(?<!\d)\.(?!\d)|[!?\n]")
+_CLAUSE = re.compile(r"(?<!\d)\.(?!\d)|[,;:!?\n]")
+_PART = re.compile(r"(?<!\d)\.(?!\d)|[,;:!?\n()]|\b(?:but|though|although|while|and|plus|whereas)\b", re.I)
+# Words that say a day is free (not "no waiting", which is about gaps).
+_OFF = re.compile(rf"\bno (?:{_DAYNAME}\s+)?class(?:es)?\b|\bnothing\b|\bfree\b|\boff\b|\bdon'?t (?:have to |need to )?(?:come|go|be)\b|"
+                  r"\bnot on campus\b|\bstay (?:at )?home\b|\bwithout class(?:es)?\b|\bclass-free\b|\brest\b|"
+                  r"\bwork\b|\bjob\b|\bshifts?\b|\bsleep in\b|\bclear\b|\bempty\b", re.I)
+_CAMPUS = re.compile(r"\bcampus\b|\buni\b|\buniversity\b|\bcome in\b|\bgo in\b|\bin person\b", re.I)
+_SUPER = re.compile(r"\b(fewest|least|shortest|lowest|smallest|most|best|ideal|easiest|lightest|nicest|optimal)\b", re.I)
+_OPINION_WORDS = ("best", "ideal", "easiest", "nicest", "optimal")
+_AXIS = (("campus_days", re.compile(r"\bdays?\b|\bcampus\b", re.I)), ("gap", re.compile(r"\bwait|\bgaps?\b", re.I)),
+         ("outside_hours", re.compile(r"\bearly\b|\blate\b", re.I)))
 # Which feature a plain-word claim is about, and which way it points.
-_TOPIC = (("gap", re.compile(r"等|空档|间隔|课间|空窗")),
-          ("campus_days", re.compile(r"到校|去学校|来学校|跑学校|天数|校园|通勤")),
-          ("outside_hours", re.compile(r"早晚课|早课|晚课|早上|晚上|太早|太晚|很早|很晚|早起|起早")))
-_GOOD = re.compile(r"不多|不长|不早|不晚|不用|无需|不需|没有|少|短|省|低|集中|紧凑")
-_BAD = re.compile(r"多|(?<!最)长|(?<!最)久|分散|散|高|早些|晚些")
-_FIRST = re.compile(r"第\s*[1-3一二三](?:\s*[份名])?")  # a pick ("排第 1", "第 2 份"); not a claim
-_COMPARATIVE = re.compile(r"更|比较|较为|相对|比")
-_OPINION = re.compile(r"高效|灵活|方便|合适|适合|理想|舒服|划算|完美|很好|不错")
-# "多等 37 分钟", "少到校 0.9 天", "少换 1.0 次楼": a difference between two picks.
-_RELATIVE = re.compile(r"(?<![最至])(多|少)[^\d，。；、]{0,4}?\s*(\d+(?:\.\d+)?)\s*(个?小时|分钟|天|次)")
-_EARLIEST_LATEST = re.compile(r"最[早晚]")
-_WITHIN = re.compile(r"之内|之间|以内|内|里")
-_OUTSIDE = re.compile(r"以外|之外|外")
+_TOPIC = (("gap", re.compile(r"\bwait\w*|\bgaps?\b|(?<!lunch )\bbreaks?\b|\bdowntime\b|\bidle\b", re.I)),
+          ("campus_days", re.compile(r"\bcampus\b|\bcome in\b|\bgo in\b|\bcommut\w*|\btrips?\b", re.I)),
+          ("outside_hours", re.compile(r"\bearly\b|\blate\b|\bmornings?\b|\bevenings?\b|\bnights?\b|\boutside\b", re.I)))
+_GOOD = re.compile(r"\bnot (?:much|many|long|early|late)\b|\b(?:little|few|fewer|less|short|shorter|no|low|lower|"
+                   r"compact|light|lighter|minimal|hardly|barely)\b", re.I)
+_BAD = re.compile(r"\b(?:lots?|many|more|much|long|longer|plenty|spread|scattered|high|higher|heavy|heavier|extra)\b", re.I)
+_FIRST = re.compile(r"\b(?:option|pick|choice|timetable|number)\s*#?\s*[1-3]\b|"
+                    r"\b(?:first|second|third|1st|2nd|3rd|top)\s+(?:option|pick|choice|timetable|one)\b|"
+                    r"\b(?:ranked|ranks|comes|placed|is|sits)\s+(?:first|second|third|1st|2nd|3rd|top)\b|"
+                    r"^\s*(?:first|second|third)\b", re.I)  # a pick ("option 2", "ranked first"); not a claim
+_COMPARATIVE = re.compile(r"\b(?:more|less|fewer|better|worse|shorter|longer|lighter|heavier|earlier|later|than|"
+                          r"compared|versus|vs)\b", re.I)
+_MORE_LY = re.compile(r"\b(?:more|less|fewer|better|worse|shorter|longer)\b", re.I)
+_OPINION = re.compile(r"\b(?:efficient|flexible|convenient|suitable|suits?|ideal|comfortable|perfect|great|good|nice|"
+                      r"balanced|relaxed|easy|easier|manageable|smooth|handy|excellent|fantastic|amazing|awesome)\b", re.I)
+_EARLIEST_LATEST = re.compile(r"\b(?:earliest|latest)\b", re.I)
+_WITHIN = re.compile(r"\bwithin\b|\bbetween\b|\binside\b|\bfrom\b", re.I)
+_OUTSIDE = re.compile(r"\boutside\b|\bbefore\b|\bafter\b|\bbeyond\b|\bpast\b", re.I)
 # Things the fact sheet says nothing about; a sentence mentioning them cannot be checked.
-_UNKNOWN = re.compile(r"老师|教授|教室|(?<![换次])楼|食堂|作业|成绩|难度|内容|同学|朋友|交通|天气|睡|课外|活动|时间一样|时间相同|上课少|上课多|(?<![早晚])课[多少]|多上|少上")
-_LUNCH = re.compile(r"吃饭|午饭|午餐|午休|饭")
-_LUNCH_BAD = re.compile(r"紧|不够|赶|没时间|来不及|不能")
-_EXAM = re.compile(r"考试|测验|考")
-_EVERY_DAY = re.compile(r"每天(?:都)?(?:要|得|需要)?(到校|去学校|来学校|在校园|在学校|在校|上课|有课)")
-_ONLY = re.compile(r"固定|只|仅")
+_UNKNOWN = re.compile(r"\b(?:teachers?|lecturers?|tutors?|professors?|staff|rooms?|classrooms?|labs?|librar(?:y|ies)|"
+                      r"cafeteria|canteen|cafe|homework|assignments?|grades?|marks|difficult\w*|content|classmates?|"
+                      r"friends?|transport|traffic|bus(?:es)?|trains?|parking|weather|sleep\w*|extracurricular|"
+                      r"activit(?:y|ies)|social|clubs?|sports?|gym)\b|\bbuildings?\b(?!\s+changes?)|"
+                      r"\b(?:fewer|more|less) (?:classes|lectures|lessons|tutorials)\b|\bsame (?:times?|hours)\b", re.I)
+_LUNCH = re.compile(r"\blunch|\bmeals?\b|\beat(?:ing)?\b|\bfood\b", re.I)
+_LUNCH_BAD = re.compile(r"\btight\b|\brushed\b|\bhurr\w*|\bnot enough\b|\bno time\b|\bcan'?t\b|\bcannot\b|\bsqueez\w*|"
+                        r"\bshort\b", re.I)
+_EXAM = re.compile(r"\bexams?\b|\btests?\b|\bquiz\w*|\bassessments?\b|\bmidterms?\b", re.I)
+_EVERY_DAY = re.compile(r"\b(on campus|at uni|come in|go in|class(?:es)?)\s+(?:(?:on|at|for)\s+)?(?:every|each)\s+"
+                        r"(?:single\s+)?(?:week)?day\b|\b(?:every|each)\s+(?:week)?day\s+(?:you(?:'re| are)?\s+)?"
+                        r"(on campus|at uni|class(?:es)?)\b", re.I)
+_ONLY = re.compile(r"\bonly\b|\bjust\b", re.I)
 # Absolute "none at all" claims; being the best of the picks is not enough for these.
-_NO_WAIT = re.compile(r"不用等|无需等|不需要等|没有空等|没空等|不用空等|零空等")
-_NO_EARLY_LATE = re.compile(r"没有?早晚课|无早晚课|没有早课|没有晚课|没早课|没晚课")
-_NO_CLASS_BY = re.compile(r"((?:上午|早上|中午|下午|晚上)?\s*\d{1,2}(?:[:：]\d{2}|\s*点半?))\s*(之前|以前|前|之后|以后|后)"
-                          r"\s*(?:都)?(?:没课|没有课|不上课|无课|不用上课)")
-_SAME = re.compile(r"一样|相同|差不多|持平|不变")
+_ALMOST_NO_WAIT = re.compile(r"\b(?:almost|nearly|hardly any|barely any|virtually|practically)\s+(?:no\s+)?"
+                             r"(?:waiting|wait|gaps?)\b", re.I)
+_NO_WAIT = re.compile(r"\bno (?:waiting|wait|gaps?|downtime)\b|\bwithout (?:any )?(?:waiting|gaps?)\b|"
+                      r"\bnever (?:have to )?wait\b|\bzero (?:waiting|gaps?)\b|\bback[- ]to[- ]back\b", re.I)
+_NO_EARLY_LATE = re.compile(r"\bno (?:early|late|early or late|early and late|morning|evening) "
+                            r"(?:classes|class|lectures|starts|finishes)\b|\bnothing (?:early|late)\b", re.I)
+_CLOCK = r"(\d{1,2}(?::\d{2})?\s*(?:am|pm)?)"
+_NO_CLASS_BY = (re.compile(rf"\b(?:no class(?:es)?|nothing|free|never starts?|no starts?)\s+(?:before|until|till)\s+{_CLOCK}",
+                           re.I),
+                re.compile(rf"\b(?:no class(?:es)?|nothing)\s+(?:after|past|beyond)\s+{_CLOCK}|"
+                           rf"\b(?:done|finished|finish(?:es)?|ends?|home|out)\s+(?:by|before)\s+{_CLOCK}", re.I))
+_SAME = re.compile(r"\b(?:same|equal|similar|unchanged|identical|no different|as many|as much)\b", re.I)
 _UNIT = re.compile(r"[A-Z]{4}\d{4}")
-
-
-def _cn_number(text: str) -> int:
-    if text == "十":
-        return 10
-    if "十" in text:
-        tens, _, ones = text.partition("十")
-        return _CN_DIGIT.get(tens, 1) * 10 + _CN_DIGIT.get(ones, 0)
-    return _CN_DIGIT.get(text, 0)
+_LATIN = re.compile(r"[A-Za-z]")
+_CJK = re.compile(r"[一-鿿]")
 
 
 def _digits(text: str) -> str:
-    """"三天" -> "3天", "半天" -> "0.5天", "1个半小时" -> "1.5小时"; "周三" is left alone."""
-    text = _CN_NUMBER.sub(lambda match: str(_cn_number(match.group(1))), text)
-    text = re.sub(r"(\d+)个半(?=小时)", r"\1.5个", text)
-    return re.sub(r"(?<![\d.])半(?=个?(?:天|小时))", "0.5", text)
+    """"two days" -> "2 days", "half an hour" -> "30 min", "a.m." -> "am"; "one of them" is left alone."""
+    text = re.sub(r"\b([ap])\.m\.", r"\1m", text, flags=re.I)
+    text = re.sub(r"\bhalf an hour\b", "30 min", text, flags=re.I)
+    text = re.sub(r"\ban hour and a half\b", "90 min", text, flags=re.I)
+    text = re.sub(r"\b(?:an|one) hour\b", "1 h", text, flags=re.I)
+    text = re.sub(r"\bhalf a day\b", "0.5 days", text, flags=re.I)
+    text = re.sub(r"\b(?:noon|midday)\b", "12 pm", text, flags=re.I)
+    return _WORD_AMOUNT.sub(lambda match: str(_WORD_NUMBER[match.group(1).lower()]), text)
 
 
 def _times(text: str) -> tuple[list[int], str]:
     """Clock times in the text (minutes after midnight) and the text with them removed."""
     found = []
     for match in _TIME.finditer(text):
-        part, hour, minute, half = match.groups()
-        value = int(hour) * 60 + (int(minute) if minute else 30 if half else 0)
-        if part in ("下午", "晚上") and int(hour) < 12:
-            value += 720
-        found.append(value)
+        hour, minute, half, hour24, minute24 = match.groups()
+        if hour24 is not None:
+            found.append(int(hour24) * 60 + int(minute24))
+            continue
+        value = (int(hour) % 12) * 60 + int(minute or 0)
+        found.append(value + (720 if half.lower() == "pm" else 0))
     return found, _TIME.sub(" ", text)
 
 
+def _minutes_of(groups: tuple) -> float:
+    hours, extra, minutes = groups[:3]
+    return float(hours) * 60 + float(extra or 0) if hours is not None else float(minutes)
+
+
+def _unit(word: str) -> str:
+    word = word.lower()
+    if word.startswith("day"):
+        return "day"
+    if word.startswith(("option", "timetable", "pick")):
+        return "option"
+    if word.startswith(("exam", "test")):
+        return "exam"
+    return "change"  # building changes, changes, times
+
+
 def _amounts(text: str) -> tuple[list[tuple[float, str]], str]:
-    """(number, unit) pairs and the text with them removed; "个小时" counts as "小时"."""
-    found = [(float(number), unit.lstrip("个")) for number, unit in _AMOUNT.findall(text)]
+    """(number, unit) pairs and the text with them removed; durations count in minutes."""
+    found = []
+    for match in _AMOUNT.finditer(text):
+        groups = match.groups()
+        if groups[0] is not None or groups[2] is not None:
+            found.append((_minutes_of(groups), "min"))
+        else:
+            found.append((float(groups[3]), _unit(groups[4])))
     return found, _AMOUNT.sub(" ", text)
+
+
+def _relative_matches(text: str) -> list[tuple[int, int, str, float, str]]:
+    """(start, end, "more" or "less", number, unit) for each difference stated in the text."""
+    found: list[tuple[int, int, str, float, str]] = []
+    taken: list[tuple[int, int]] = []
+    for kind, pattern in enumerate(_RELATIVE):
+        for match in pattern.finditer(text):
+            if any(start < match.end() and match.start() < end for start, end in taken):
+                continue
+            groups = match.groups()
+            if kind == 0:
+                value, unit, way = _minutes_of(groups), "min", groups[3]
+            elif kind == 1:
+                value, way, unit = float(groups[0]), groups[1], _unit(groups[2])
+            else:
+                value, unit, way = float(groups[0]), _unit(groups[1]), groups[2]
+            way = "more" if way.lower() in ("more", "extra") else "less"
+            found.append((match.start(), match.end(), way, value, unit))
+            taken.append((match.start(), match.end()))
+    return sorted(found)
+
+
+def _without_relative(text: str) -> str:
+    for start, end, *_ in reversed(_relative_matches(text)):
+        text = text[:start] + " " + text[end:]
+    return text
 
 
 def _numbers(text: str) -> list[float]:
     return [float(value) for value in re.findall(r"\d+(?:\.\d+)?", text)]
 
 
-def _weekday(char: str) -> int:
-    return 7 if char in "日天" else DAY.index(char) + 1
+def _weekday(name: str) -> int:
+    return DAYS.index(name[:3].title()) + 1
 
 
 def _mentioned_days(clause: str) -> set[int]:
     days = set()
     for match in _WEEKDAY.finditer(clause):
-        first, more, last = match.groups()
+        first, last, group = match.groups()
+        if group:
+            days.update(range(1, 6) if group.lower().startswith("weekday") else (6, 7))
+            continue
         start = _weekday(first)
         days.add(start)
-        days.update(_weekday(char) for char in more)
         if last:
             days.update(range(start, _weekday(last) + 1))
     return days
 
 
 def _relative_claims(text: str) -> set[tuple[str, float, str, str | None]]:
-    """("多" or "少", number, unit, "day"/"week"/None) for each difference stated in the text."""
+    """("more" or "less", number, unit, "day"/"week"/None) for each difference stated in the text."""
     claims = set()
-    for match in _RELATIVE.finditer(text):
-        before = re.split(r"[，,。；;、！!？?\n]", text[:match.start()])[-1]
-        markers = [(found.start(), "week" if found.group() == "每周" else "day")
-                   for found in re.finditer(r"每天|那天|每周", before)]
-        period = max(markers)[1] if markers else None
-        claims.add((match.group(1), float(match.group(2)), match.group(3).lstrip("个"), period))
+    for start, end, way, value, unit in _relative_matches(text):
+        clause_end = min([found.start() + end for found in [_CLAUSE.search(text[end:])] if found] or [len(text)])
+        after = text[end:clause_end]
+        before = _CLAUSE.split(text[:start])[-1]
+        markers = sorted([(found.start(), "week") for found in _WEEK.finditer(after)] +
+                         [(found.start(), "day") for found in _DAILY.finditer(after)])
+        if not markers:
+            markers = sorted([(-found.start(), "week") for found in _WEEK.finditer(before)] +
+                             [(-found.start(), "day") for found in _DAILY.finditer(before)])
+        period = markers[0][1] if markers else None
+        claims.add((way, value, unit, period))
     return claims
 
 
 def allowed_values(lines: list[str]) -> dict:
     """Times, (number, unit) amounts and bare numbers that the fact lines state.
 
-    Differences from another pick ("和第 2 份比：每周多等 37 分钟") are kept apart:
-    a sentence may only use them while saying what they are compared with. Clock
-    times are facts wherever they appear.
+    Differences from another pick ("Compared with option 2: 1 h 12 min more waiting a week")
+    are kept apart: a sentence may only use them while saying what they are compared with.
+    Clock times are facts wherever they appear.
     """
     relative = [line for line in lines if _FIRST.search(line)]
     times = set(_times(_digits(_FIRST.sub(" ", "\n".join(lines))))[0])
@@ -405,7 +543,12 @@ def allowed_values(lines: list[str]) -> dict:
     amounts, rest = _amounts(rest)
     return {"times": times, "amounts": set(amounts),
             "relative": _relative_claims(_FIRST.sub(" ", _digits("\n".join(relative)))),
-            "numbers": [number for number, _ in amounts] + _numbers(_WEEKDAY.sub(" ", rest))}
+            "numbers": [number for number, _ in amounts] + _numbers(rest)}
+
+
+def allowed_for(facts: dict) -> dict:
+    """What a reason for this pick may state: its fact lines and how many picks there are."""
+    return allowed_values([f"{facts['count']} options", *fact_lines(facts)])
 
 
 def _close(value: float, others) -> bool:
@@ -413,26 +556,27 @@ def _close(value: float, others) -> bool:
 
 
 def _axis_near(text: str, start: int, end: int) -> str | None:
-    """The feature a "最…" refers to: the closest feature word before it, else the first after it."""
-    before = text[max(0, start - 8):start]
-    found = [(match.end(), care) for care, pattern in _AXIS for match in pattern.finditer(before)]
-    if found:
-        return max(found)[1]
-    after = text[end:end + 6]
+    """The feature a superlative refers to: the first feature word after it, else the closest before it."""
+    after = text[end:end + 25]
     found = [(match.start(), care) for care, pattern in _AXIS for match in pattern.finditer(after)]
-    return min(found)[1] if found else None
+    if found:
+        return min(found)[1]
+    before = text[max(0, start - 20):start]
+    found = [(match.end(), care) for care, pattern in _AXIS for match in pattern.finditer(before)]
+    return max(found)[1] if found else None
 
 
 def check_reason(text: str, facts: dict, allowed: dict, first: bool) -> str | None:
     """None if every checkable claim matches the facts, else why the sentence was rejected."""
-    if not 4 <= len(text) <= 140 or not re.search(r"[\u4e00-\u9fff]", text):
+    if not 10 <= len(text) <= 420 or not _LATIN.search(text) or _CJK.search(text):
         return "length"
     if any(code not in facts["units"] for code in _UNIT.findall(text)):
         return "unit"
-    if (_UNKNOWN.search(text) or (_LUNCH.search(text) and (not facts["lunch"] or _LUNCH_BAD.search(text))) or
-            (_EXAM.search(text) and not facts["exceptions"])):
+    sentences = list(filter(str.strip, _SENTENCE.split(_digits(text))))
+    if (_UNKNOWN.search(text) or (_EXAM.search(text) and not facts["exceptions"]) or
+            any(_LUNCH.search(sentence) and (not facts["lunch"] or _LUNCH_BAD.search(sentence)) for sentence in sentences)):
         return "topic"
-    for sentence in filter(None, _SENTENCE.split(_digits(text))):
+    for sentence in sentences:
         problem = _check_sentence(sentence, facts, allowed, first)
         if problem:
             return problem
@@ -440,27 +584,27 @@ def check_reason(text: str, facts: dict, allowed: dict, first: bool) -> str | No
 
 
 def _check_sentence(text: str, facts: dict, allowed: dict, first: bool) -> str | None:
-    """One sentence; a comparison with the top pick only covers the sentence it is made in."""
+    """One sentence; a comparison with another pick only covers the sentence it is made in."""
     against_first = bool(_FIRST.search(text))
     times, rest = _times(_FIRST.sub(" ", text))
     if any(value not in allowed["times"] for value in times):
         return "time"
     for way, number, unit, period in _relative_claims(rest):
-        # Same direction, amount and unit as a stated difference, and not "每天" for a weekly figure.
+        # Same direction, amount and unit as a stated difference, and not "a day" for a weekly figure.
         if not any(way == fact_way and abs(number - fact_number) <= 0.01 and unit == fact_unit and
                    (period is None or fact_period is None or period == fact_period)
                    for fact_way, fact_number, fact_unit, fact_period in allowed["relative"]):
             return "number"
         if not against_first:
             return "reference"
-    amounts, rest = _amounts(_RELATIVE.sub(" ", rest))
+    amounts, rest = _amounts(_without_relative(rest))
     for number, unit in amounts:
         if not _close(number, [value for value, kind in allowed["amounts"] if kind == unit]):
             return "number"
-    if any(not _close(value, allowed["numbers"]) for value in _numbers(_WEEKDAY.sub(" ", rest))):
+    if any(not _close(value, allowed["numbers"]) for value in _numbers(rest)):
         return "number"
     off_campus = {day for day in range(1, 8) if day not in facts["campus"]}
-    for clause in _CLAUSE.split(text):
+    for clause in _CLAUSE.split(_DAY_LIST.sub(r"\1 and ", text)):
         days = _mentioned_days(clause)
         if not days:
             continue
@@ -469,37 +613,42 @@ def _check_sentence(text: str, facts: dict, allowed: dict, first: bool) -> str |
                 return "weekday"
         elif not days <= set(facts["class_days"]) | set(facts["campus"]):
             return "weekday"
-        elif _ONLY.search(clause):  # "固定周二、周三到校" must name every such day
+        elif _ONLY.search(clause):  # "only on campus Tue and Wed" must name every such day
             if days != (set(facts["campus"]) if _CAMPUS.search(clause) else set(facts["class_days"]) | set(facts["campus"])):
                 return "weekday"
-    if (_NO_WAIT.search(text) and not re.search(r"基本不用等", text) and facts["features"]["gap_min"] >= 1 or
-            re.search(r"基本不用等", text) and facts["features"]["gap_min"] >= SMALL["gap_min"]):
+    gap = facts["features"]["gap_min"]
+    if _ALMOST_NO_WAIT.search(text) and gap >= SMALL["gap_min"]:
+        return "direction"
+    if _NO_WAIT.search(_ALMOST_NO_WAIT.sub(" ", text)) and gap >= 1:
         return "direction"
     if _NO_EARLY_LATE.search(text) and facts["features"]["outside_min"] >= 1:
         return "direction"
     for match in _EVERY_DAY.finditer(text):
-        days = set(facts["campus"]) | (set(facts["class_days"]) if match.group(1) in ("上课", "有课") else set())
+        where = (match.group(1) or match.group(2) or "").lower()
+        days = set(facts["campus"]) | (set(facts["class_days"]) if where.startswith("class") else set())
         if not set(range(1, 6)) <= days:
             return "weekday"
-    for match in _NO_CLASS_BY.finditer(text):
-        clock = _times(match.group(1))[0][0]
-        before = match.group(2) in ("之前", "以前", "前")
-        bound = facts["earliest"] if before else facts["latest"]
-        if bound is not None and (bound < clock if before else bound > clock):
-            return "time"
+    for before, pattern in zip((True, False), _NO_CLASS_BY):
+        for match in pattern.finditer(text):
+            found = _times(next(group for group in match.groups() if group))[0]
+            if not found:
+                continue
+            bound = facts["earliest"] if before else facts["latest"]
+            if bound is not None and (bound < found[0] if before else bound > found[0]):
+                return "time"
     for match in _EARLIEST_LATEST.finditer(text):
-        if not re.match(r"\D{0,3}\d", text[match.end():match.end() + 5]):
-            return "superlative"  # "最晚下课" with no time compares picks without a fact behind it
+        if not re.match(r"\D{0,25}?\d", text[match.end():match.end() + 30]):
+            return "superlative"  # "finishes latest" with no time compares picks without a fact behind it
     for match in _SUPER.finditer(text):
-        word = match.group(1)
+        word = match.group(1).lower()
         if word in _OPINION_WORDS:
             if not first:
                 return "superlative"
             continue
-        if re.match(r"\D{0,3}\d", _FIRST.sub("第份", text[match.end():match.end() + 8])):
-            continue  # "最多 3 天" restates a limit; the number itself was checked above
+        if re.match(r"\D{0,3}\d", _FIRST.sub("option", text[match.end():match.end() + 8])):
+            continue  # "at most 3 days" restates a limit; the number itself was checked above
         care = _axis_near(text, match.start(), match.end())
-        if word == "多" or care not in facts["best"]:
+        if word == "most" or care not in facts["best"]:
             return "superlative"
     if _COMPARATIVE.search(text) and not against_first:
         return "comparison"
@@ -509,29 +658,30 @@ def _check_sentence(text: str, facts: dict, allowed: dict, first: bool) -> str |
 
 
 def _check_directions(text: str, facts: dict, against_first: bool) -> str | None:
-    """Plain-word claims such as "空等时间短" must point the way the numbers do."""
+    """Plain-word claims such as "short waits" must point the way the numbers do."""
     f = facts["features"]
     compared = facts["versus"] or {"strengths": [], "costs": []}
     stated = compared["strengths"] + compared["costs"]
     good = set(facts["best"]) | {care for care, key in FEATURE.items() if f[key] < SMALL[key]}
     bad = set(facts["worst"]) | {care for care, key in FEATURE.items() if f[key] >= LARGE[key]}
-    words = {"campus_days": ("到校",), "gap": ("等",), "outside_hours": ("早晚课", "以外的课", "早课", "晚课")}
-    for part in _PART.split(text):
-        if _mentioned_days(part):
-            continue  # weekday claims are checked against the routine above
-        if (set(facts["hours"]) <= set(_times(part)[0]) and _WITHIN.search(part) and
-                not _OUTSIDE.search(part) and f["outside_min"] >= 1):
+    words = {"campus_days": ("campus",), "gap": ("waiting",), "outside_hours": ("early", "late", "outside")}
+    for clause in _CLAUSE.split(text):
+        if (set(facts["hours"]) <= set(_times(clause)[0]) and _WITHIN.search(clause) and
+                not _OUTSIDE.search(clause) and f["outside_min"] >= 1):
             return "hours"
+    for part in _PART.split(_DAY_LIST.sub(r"\1 and ", text)):
+        if not part or _mentioned_days(part):
+            continue  # weekday claims are checked against the routine above
         topics = [care for care, pattern in _TOPIC if pattern.search(part)]
         if not topics or _SUPER.search(part):
             continue
         if against_first:
             differs = [care for care in topics if any(word in entry for word in words[care] for entry in stated)]
-            if _SAME.search(part):  # "到校天数一样": only if the numbers do not differ
+            if _SAME.search(part):  # "the same waiting": only if the numbers do not differ
                 if differs:
                     return "comparison"
                 continue
-            if "更" in part and len(differs) < len(topics):  # "空等更充裕" needs a real difference
+            if _MORE_LY.search(part) and len(differs) < len(topics):  # "better early classes" needs a real difference
                 return "comparison"
         is_good = bool(_GOOD.search(part))
         is_bad = bool(_BAD.search(_GOOD.sub("", part)))
@@ -542,7 +692,7 @@ def _check_directions(text: str, facts: dict, against_first: bool) -> str | None
         for care in topics:
             if against_first:  # the comparison must say the same feature moves the same way
                 said = [entry for entry in stated if any(word in entry for word in words[care])
-                        and ("少" if is_good else "多") in entry]
+                        and (("fewer" in entry or "less" in entry) if is_good else "more" in entry)]
                 if not said:
                     return "direction"
             elif care not in (good if is_good else bad):
@@ -553,27 +703,30 @@ def _check_directions(text: str, facts: dict, against_first: bool) -> str | None
 # ---------- asking the local model ----------
 
 SYSTEM = (
-    "你是大学排课助手。每份课表都已经满足学生的硬性条件。我会给你每份课表的事实和一句草稿理由，"
-    "请把草稿改写成一两句更口语、像朋友提醒那样的大白话。规则：\n"
-    "1. 只能保留或删掉草稿里的信息，不能加入草稿里没有的说法。\n"
-    "2. 星期、时间和数字照抄草稿，用阿拉伯数字，不要换算单位。\n"
-    "3. 不要用“更”“比较”“最”，除非草稿里就有这个说法。\n"
-    "4. 草稿里和别的份比较时（如“比第 2 份”“和第 1 份比”），改写后也要写明是和第几份比。\n"
-    "5. 先说草稿里排在最前面的原因，再说代价。\n"
-    "6. 不要复述学生的话，不要评价“适合”“灵活”。\n"
-    "7. 每条不超过 60 个字，不要写编号。\n"
-    "按 JSON 输出：{\"reasons\": [第1份的理由, 第2份的理由, ...]}，条数和课表份数相同。"
+    "You help university students choose a timetable. Every timetable already meets the student's hard "
+    "conditions. For each timetable you get its facts and a draft reason. Rewrite each draft as one or two "
+    "plain, friendly sentences, the way a friend would point it out. Rules:\n"
+    "1. Only keep or drop what the draft says. Never add a claim the draft does not make.\n"
+    "2. Copy weekdays, times and numbers exactly as the draft writes them, in digits. Do not convert units.\n"
+    "3. Do not use \"more\", \"less\", \"fewer\", \"better\", \"most\", \"least\" or \"best\" unless the draft "
+    "uses that word in that place.\n"
+    "4. When the draft compares with another option (\"compared with option 2\"), say which option the "
+    "comparison is with.\n"
+    "5. Give the draft's first reason first, then the cost.\n"
+    "6. Do not repeat the student's words. Do not call a timetable \"suitable\" or \"flexible\".\n"
+    "7. At most 45 words each. No numbering, no dashes.\n"
+    "Answer in JSON: {\"reasons\": [reason for option 1, reason for option 2, ...]}, one reason per timetable."
 )
 
 
 def prompt(student_text: str, conditions: Conditions, all_facts: list[dict]) -> str:
     cares = _cares(conditions)
-    hours = "–".join(_clock(value) for value in all_facts[0]["hours"])
-    head = [f"学生说：「{student_text.strip()}」" if student_text.strip() else "学生没有补充说明。",
-            f"学生在意：{'、'.join(CARE_NAME[care] for care in cares)}", f"学生希望的上课时间：{hours}",
-            f"一共 {len(all_facts)} 份课表。"]
-    blocks = [f"第 {index} 份\n事实：\n" + "\n".join(f"- {line}" for line in fact_lines(facts))
-              + f"\n草稿：{template_reason(facts, cares)}"
+    head = [f"The student wrote: \"{student_text.strip()}\"" if student_text.strip() else "The student wrote no sentence.",
+            f"The student cares about: {', '.join(CARE_NAME[care] for care in cares)}",
+            f"Preferred class hours: {_span(all_facts[0]['hours'])}",
+            f"{len(all_facts)} timetables in all."]
+    blocks = [f"Option {index}\nFacts:\n" + "\n".join(f"- {line}" for line in fact_lines(facts))
+              + f"\nDraft: {template_reason(facts, cares)}"
               for index, facts in enumerate(all_facts, start=1)]
     return "\n".join(head) + "\n\n" + "\n\n".join(blocks)
 
@@ -655,8 +808,7 @@ def explain_detailed(student_text: str, conditions: Conditions, picks: list[Cand
         return {**result, "status": "failed"}
     for index, (text, facts) in enumerate(zip(written, all_facts)):
         # Only this pick's own facts count; the student's numbers are limits, not facts.
-        allowed = allowed_values([f"{facts['count']} 份", *fact_lines(facts)])
-        problem = check_reason(text, facts, allowed, first=index == 0)
+        problem = check_reason(text, facts, allowed_for(facts), first=index == 0)
         if problem is None:
             reasons[index], result["by"][index] = text, model
         else:

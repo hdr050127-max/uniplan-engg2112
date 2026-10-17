@@ -337,7 +337,7 @@ class ConflictReasonTests(unittest.TestCase):
         ranking = arrange_timetables(rows, required, profile(max_days_per_week=1))
         self.assertEqual(ranking["feasible_count"], 0)
         self.assertEqual(ranking["conflict_core"]["reason"], "limits")
-        self.assertIn("限制", ranking["no_feasible_reason"])
+        self.assertIn("limits", ranking["no_feasible_reason"])
         clash = [meeting("a", "G1", "A", "2026-08-03", 540, 600),
                  meeting("b", "G2", "B", "2026-08-03", 570, 630)]
         self.assertEqual(arrange_timetables(clash, required, profile(max_days_per_week=1))["conflict_core"]["reason"],

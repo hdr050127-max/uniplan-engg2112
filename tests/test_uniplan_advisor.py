@@ -12,7 +12,7 @@ from urllib.request import Request, urlopen
 
 import llm.parse as parse_module
 from llm import explain as explainer
-from uniplan import advisor
+from uniplan import advisor, wording
 from uniplan.advisor import (CANDIDATE_MAX, CANDIDATE_MIN, conditions_of, merge_conditions,
                              plan_from_sentence, read_sentence, select_candidates)
 from uniplan.catalog import SnapshotCatalog
@@ -159,10 +159,48 @@ class ClarifyTests(unittest.TestCase):
         self.assertEqual(hard["options"][1]["cares"], ["campus_days"])
         self.assertEqual(missing["options"][1]["profile_fields"], {"max_days_per_week": 3})
         self.assertEqual(offer["options"][0]["profile_fields"]["lunch"]["minutes"], 30)
-        self.assertEqual(offer["options"][-1]["text"], "不用")       # every offer can be declined
+        self.assertEqual(offer["options"][-1]["text"], "No")         # every offer can be declined
         with mock.patch.object(advisor, "parse", return_value=ASKING) as parsed:
             read_sentence("我周五要打工")
         parsed.assert_called_once_with("我周五要打工")                # no overrides: parse() as before
+
+    def test_notes_and_questions_are_in_english(self):
+        with mock.patch.object(advisor, "parse", return_value=ASKING), \
+                mock.patch.object(advisor.wording, "clause_describer", return_value=None):
+            result = read_sentence("我周五要打工，最多来几天吧")
+        self.assertEqual([clause["note"] for clause in result["clauses"]],
+                         ["Not available Fri", "A cap on days a week, but no number was given"])
+        hard, missing, offer = result["questions"]
+        self.assertEqual(hard["text"], "Can't, or would rather not?")
+        self.assertEqual([(o["text"], o["note"]) for o in hard["options"]],
+                         [("Can't", "Not available Fri"), ("Would rather not", "Fewer days on campus, if possible")])
+        self.assertEqual([o["text"] for o in missing["options"]], ["I'll add it to the sentence", "3"])
+        self.assertEqual(missing["options"][1]["note"], "At most 3 days on campus a week")
+        self.assertEqual(offer["text"], "Lunch break?")
+        self.assertEqual([o["text"] for o in offer["options"]], ["30 min between 11:30 am and 2 pm", "No"])
+        self.assertNotIn("note", offer["options"][0])
+
+    def test_the_parsers_describer_writes_the_notes_when_it_works(self):
+        describe = mock.Mock(side_effect=lambda clause: f"{clause['label']} read")
+        with mock.patch.object(advisor, "parse", return_value=ASKING), \
+                mock.patch.object(advisor.wording, "clause_describer", return_value=describe):
+            result = read_sentence("我周五要打工，最多来几天吧")
+        self.assertEqual([clause["note"] for clause in result["clauses"]], ["blocked_time read", "max_days read"])
+        self.assertEqual(result["questions"][0]["options"][1]["note"], "prefer_fewer_days read")
+        broken = mock.Mock(side_effect=KeyError("fields"))
+        with mock.patch.object(advisor, "parse", return_value=ASKING), \
+                mock.patch.object(advisor.wording, "clause_describer", return_value=broken):
+            result = read_sentence("我周五要打工，最多来几天吧")
+        self.assertEqual(result["clauses"][0]["note"], "Not available Fri")   # falls back to uniplan.wording
+
+    def test_times_and_days_are_written_the_australian_way(self):
+        self.assertEqual([wording.clock(m) for m in (540, 570, 720, 1110, 1440)],
+                         ["9 am", "9:30 am", "12 pm", "6:30 pm", "midnight"])
+        evenings = [{"weekday": day, "start_min": 1080, "end_min": 1439} for day in (2, 4)]
+        self.assertEqual(wording.windows_text(evenings), "Tue and Thu after 6 pm")
+        mornings = [{"weekday": day, "start_min": 0, "end_min": 600} for day in range(1, 6)]
+        self.assertEqual(wording.windows_text(mornings + [{"weekday": 3, "start_min": 840, "end_min": 1080}]),
+                         "weekdays before 10 am; Wed 2 pm to 6 pm")
 
     def test_without_questions_the_result_is_as_before(self):
         plain = {"clauses": ASKING["clauses"], "conditions": {}, "unrecognised": []}
@@ -255,8 +293,8 @@ class EndToEndTests(unittest.TestCase):
             conditions = conditions_of(result["profile"], axes.split(","), menu["cares"])
             for index, reason in enumerate(menu["reasons"]):
                 facts = explainer.facts_of(index, picks, conditions, recommendation["_candidates"][axes])
-                allowed = explainer.allowed_values([f"{facts['count']} 份", *explainer.fact_lines(facts)])
-                self.assertIsNone(explainer.check_reason(reason, facts, allowed, first=index == 0), (axes, reason))
+                self.assertIsNone(explainer.check_reason(reason, facts, explainer.allowed_for(facts), first=index == 0),
+                                  (axes, reason))
 
 
 class FactCheckTests(unittest.TestCase):
@@ -275,52 +313,62 @@ class FactCheckTests(unittest.TestCase):
         self.facts = [explainer.facts_of(index, self.picks, conditions) for index in range(2)]
         # A fixed comparison of pick 2 with pick 1, as llm.rank.contributions would phrase it.
         self.facts[1]["versus"] = {"rival": 1, "strengths": [], "main": None,
-                                   "costs": ["每周多等 4.5 小时", "每周多到校 1.0 天", "9:00–18:00 以外的课每周多 1.0 小时"]}
+                                   "costs": ["4 h 30 min more waiting a week", "1 more day on campus a week",
+                                             "1 h more class outside 9 am to 6 pm a week"]}
 
     def check(self, text, index=0):
         facts = self.facts[index]
-        allowed = explainer.allowed_values([f"{facts['count']} 份", *explainer.fact_lines(facts)])
-        return explainer.check_reason(text, facts, allowed, first=index == 0)
+        return explainer.check_reason(text, facts, explainer.allowed_for(facts), first=index == 0)
 
     def test_true_sentences_pass(self):
-        self.assertIsNone(self.check("每周只要周二、周三到校，周五没课，课之间基本不用等。"))
-        self.assertIsNone(self.check("这 2 份里空等最少，最早 10:00 上课。"))
-        self.assertIsNone(self.check("比第 1 份每周多等 4.5 小时，多到校 1.0 天。", index=1))
-        self.assertIsNone(self.check("10:00 前没课，12:00 以后也没课。"))
-        self.assertIsNone(self.check("只要周二、周三到校。"))
+        self.assertIsNone(self.check("Only on campus Tue and Wed each week, no classes on Fri, "
+                                     "and almost no waiting between classes."))
+        self.assertIsNone(self.check("The least waiting of these 2 options, and the earliest class is at 10 am."))
+        self.assertIsNone(self.check("Compared with option 1, it has 4 h 30 min more waiting a week "
+                                     "and one more day on campus a week.", index=1))
+        self.assertIsNone(self.check("No classes before 10 am, and nothing after 12 pm."))
+        self.assertIsNone(self.check("Only on campus Tue and Wed."))
+        self.assertIsNone(self.check("No classes on Mon, Thu or Fri."))
+        self.assertIsNone(self.check("No Friday classes."))                 # a day between "no" and "classes"
+        self.assertEqual(explainer._mentioned_days("4 weekdays on campus"), set())  # a count, not Mon to Fri
 
     def test_sameness_and_more_need_the_numbers(self):
-        facts = {**self.facts[1], "versus": {"rival": 1, "strengths": ["每周少等 1.0 小时"], "costs": [],
+        facts = {**self.facts[1], "versus": {"rival": 1, "strengths": ["1 h less waiting a week"], "costs": [],
                                              "main": "gap_h"}}  # only the waiting differs
-        allowed = explainer.allowed_values([f"{facts['count']} 份", *explainer.fact_lines(facts)])
-        self.assertIsNone(explainer.check_reason("比第 1 份每周少等 1.0 小时，早晚课一样。", facts, allowed, False))
-        self.assertEqual(explainer.check_reason("比第 1 份早晚课更充裕。", facts, allowed, False), "comparison")
+        allowed = explainer.allowed_for(facts)
+        self.assertIsNone(explainer.check_reason(
+            "Compared with option 1, it has 1 h less waiting a week, and the same early or late class time.",
+            facts, allowed, False))
+        self.assertEqual(explainer.check_reason("Compared with option 1, it has better early or late class times.",
+                                                facts, allowed, False), "comparison")
 
     def test_false_sentences_are_rejected(self):
         cases = {  # text: (pick index, why)
-            "周一没课。": (1, "weekday"),
-            "每周到校 3 天。": (0, "number"),
-            "最早 8:00 上课。": (0, "time"),
-            "这 2 份里早晚课最少。": (1, "superlative"),
-            "每周多等 4.5 小时。": (1, "reference"),
-            "空等时间短，更灵活。": (0, "comparison"),
-            "离食堂很近。": (0, "topic"),
-            "多上半天课。": (1, "topic"),
-            "课都在 9:00–18:00 之内。": (1, "hours"),
-            "空等时间很短。": (1, "direction"),
-            "很适合你。": (1, "opinion"),
-            "每天都要到校。": (0, "weekday"),
-            "上午 11 点前没课。": (0, "time"),
-            "课外活动时间 0 分钟。": (0, "topic"),
-            "比第 1 份每周少等 4.5 小时。": (1, "number"),      # the stated difference is 多等
-            "比第 1 份每天多等 4.5 小时。": (1, "number"),      # a weekly figure said per day
-            "这份最晚下课。": (0, "superlative"),
-            "比第 1 份多等 4.5 小时，早晚课一样。": (1, "comparison"),  # pick 2 has 60 more minutes
-            "固定周二到校。": (0, "weekday"),  # leaves out Wednesday
-            "每天都有午休时间。": (0, "topic"),  # no lunch condition was set
-            "适合你每天在校园。": (0, "weekday"),
-            "没早晚课。": (1, "direction"),           # pick 2 has 60 minutes a week
-            "课之间不用等。": (0, "direction"),       # 30 minutes a week is not none
+            "No classes on Mon.": (1, "weekday"),
+            "On campus 3 days a week.": (0, "number"),
+            "The earliest class is at 8 am.": (0, "time"),
+            "The least early or late class time of these 2 options.": (1, "superlative"),
+            "4 h 30 min more waiting a week.": (1, "reference"),
+            "Short waits, and more flexible.": (0, "comparison"),
+            "Close to the cafeteria.": (0, "topic"),
+            "More classes than option 1.": (1, "topic"),
+            "All classes are within 9 am to 6 pm.": (1, "hours"),
+            "Waiting time is very short.": (1, "direction"),
+            "It suits you well.": (1, "opinion"),
+            "You come in every day.": (0, "weekday"),
+            "No classes before 11 am.": (0, "time"),
+            "0 min of extracurricular activities.": (0, "topic"),
+            "Compared with option 1, it has 4 h 30 min less waiting a week.": (1, "number"),  # it is more
+            "Compared with option 1, it has 4 h 30 min more waiting a day.": (1, "number"),   # a weekly figure per day
+            "This one finishes latest.": (0, "superlative"),
+            "Compared with option 1, it has 4 h 30 min more waiting a week, and the same early or late class time.":
+                (1, "comparison"),  # pick 2 has 60 more minutes
+            "Only on campus Tue.": (0, "weekday"),  # leaves out Wednesday
+            "A lunch break every day.": (0, "topic"),  # no lunch condition was set
+            "Good for being on campus every day.": (0, "weekday"),
+            "No early or late classes.": (1, "direction"),  # pick 2 has 60 minutes a week
+            "No waiting between classes.": (0, "direction"),  # 30 minutes a week is not none
+            "两天到校，课少。": (0, "length"),  # the page is in English
         }
         for text, (index, why) in cases.items():
             with self.subTest(text=text):
@@ -329,13 +377,23 @@ class FactCheckTests(unittest.TestCase):
     def test_model_reasons_replace_template_only_when_they_pass(self):
         with mock.patch.object(explainer, "choose_model", return_value="fake"), \
                 mock.patch.object(explainer, "gpu_busy", return_value=False), \
-                mock.patch.object(explainer, "ask_model", return_value=["周二、周三到校，课之间基本不用等。", "空等很短。"]):
+                mock.patch.object(explainer, "ask_model", return_value=[
+                    "Tue and Wed on campus, with almost no waiting between classes.", "Waiting is short."]):
             result = explainer.explain_detailed("", {"cares": ["gap"]}, self.picks)
         self.assertEqual(result["by"], ["fake", "template"])
         self.assertEqual(result["status"], "partial")
         self.assertEqual(result["rejected"][1]["why"], "direction")
         with mock.patch.object(explainer, "choose_model", return_value=None):
             self.assertEqual(explainer.explain_detailed("", {}, self.picks)["status"], "unavailable")
+
+    def test_templates_read_as_plain_english(self):
+        reasons = explainer.explain("", {"cares": ["gap"]}, self.picks, model=None)
+        self.assertTrue(reasons[0].startswith("First because, compared with option 2, it has "), reasons[0])
+        self.assertIn("On campus Tue and Wed each week. No classes on Mon, Thu or Fri.", reasons[0])
+        self.assertTrue(reasons[1].startswith("Compared with option 1, it has ") or
+                        reasons[1].startswith("A backup to option 1: it has "), reasons[1])
+        for reason in reasons:
+            self.assertNotRegex(reason, "[\u2013\u2014\u00b7]")  # no dashes or middle dots (docs/DESIGN.md)
 
 
 class RegistryTests(unittest.TestCase):

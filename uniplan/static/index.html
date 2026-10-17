@@ -1,134 +1,143 @@
 <!doctype html>
-<html lang="zh-CN">
+<html lang="en-AU">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light dark">
-  <title>UniPlan · 课表规划</title>
+  <meta name="theme-color" content="#ffffff">
+  <title>UniPlan</title>
+  <meta name="description" content="Pick your units, describe your week in one sentence, and get three clash-free timetables with the reasons for each.">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible+Next:wght@400;600&amp;display=swap">
   <link rel="stylesheet" href="/style.css">
   <script src="/app.js" defer></script>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to the form</a>
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="/">UniPlan</a>
+      <a class="brand" href="/" translate="no">UniPlan</a>
       <div class="top-actions">
-        <select id="termSelect" class="pill-select" aria-label="学期"></select>
-        <button id="themeToggle" class="link" type="button" aria-label="切换深色模式"></button>
+        <select id="termSelect" class="term-select" aria-label="Semester"></select>
+        <button id="themeToggle" class="link" type="button"></button>
       </div>
     </div>
   </header>
 
-  <main class="main">
+  <main class="main" id="main">
+    <h1 class="visually-hidden">Plan your semester timetable</h1>
+    <p id="announce" class="visually-hidden" role="status" aria-live="polite"></p>
     <form id="profileForm" class="setup" novalidate>
-      <div id="setupFull">
+      <div id="setupFull" class="setup-full">
         <div class="field">
-          <label class="field-label" for="unitQuery">课程</label>
+          <label class="field-label" for="unitQuery">Units</label>
           <div class="course-box">
             <div id="chosenUnits" class="chips" aria-live="polite"></div>
             <div class="course-input-wrap">
-              <input id="unitQuery" type="text" autocomplete="off" spellcheck="false"
+              <input id="unitQuery" type="text" autocomplete="off" spellcheck="false" role="combobox"
                      aria-controls="suggestions" aria-autocomplete="list" aria-expanded="false"
-                     placeholder="输入课程代码，如 ENGG2112" maxlength="32">
-              <ul id="suggestions" role="listbox" aria-label="课程建议" hidden></ul>
+                     placeholder="Add a unit, like ENGG2112" maxlength="32">
+              <ul id="suggestions" role="listbox" aria-label="Matching units" hidden></ul>
             </div>
           </div>
           <p class="field-error" id="unitError" aria-live="polite"></p>
         </div>
 
         <div class="field">
-          <label class="field-label" for="sayText">用一句话说说你的情况（可选）</label>
-          <div class="say-box">
-            <textarea id="sayText" rows="2" maxlength="500" spellcheck="false"
-                      placeholder="例如：我周五要打工，不想一大早上课，课之间别等太久"></textarea>
-            <button type="button" class="button" id="sayRead">识别</button>
+          <label class="field-label" for="sayText">Your week, in a sentence</label>
+          <textarea id="sayText" class="say-text" rows="2" maxlength="500"
+                    placeholder="I work Tuesday and Thursday nights, no more than 5 hours of class a day, and mornings aren't great."></textarea>
+          <div class="say-actions">
+            <span class="hint">Optional. Enter reads it, Shift and Enter starts a new line.</span>
+            <button type="button" class="button" id="sayRead">Read sentence</button>
           </div>
-          <div id="sayResult" class="say-result" aria-live="polite" hidden></div>
+          <div id="sayResult" class="readback" hidden></div>
           <p class="field-error" id="sayError" aria-live="polite"></p>
         </div>
 
         <div class="field">
-          <span class="field-label">不想上课的时间</span>
-          <div class="token-row">
+          <span class="field-label" id="blocksLabel">Times you can't make</span>
+          <div class="token-row" role="group" aria-labelledby="blocksLabel">
             <div id="blocks" class="tokens"></div>
-            <button type="button" class="preset" data-preset="mon">周一全天</button>
-            <button type="button" class="preset" data-preset="fri">周五全天</button>
-            <button type="button" class="preset" data-preset="early">10 点前</button>
-            <button type="button" class="preset" data-preset="late">18 点后</button>
-            <button type="button" class="preset" id="customToggle">自定义…</button>
+            <button type="button" class="preset" data-preset="mon">Mondays</button>
+            <button type="button" class="preset" data-preset="fri">Fridays</button>
+            <button type="button" class="preset" data-preset="early">Before 10 am</button>
+            <button type="button" class="preset" data-preset="late">After 6 pm</button>
+            <button type="button" class="preset" id="customToggle" aria-expanded="false" aria-controls="customBlock">Other times</button>
           </div>
           <div id="customBlock" class="custom-block" hidden>
-            <select id="customDay" class="select" aria-label="星期">
-              <option value="1">周一</option><option value="2">周二</option><option value="3">周三</option>
-              <option value="4">周四</option><option value="5">周五</option><option value="6">周六</option><option value="7">周日</option>
+            <select id="customDay" class="select" aria-label="Day">
+              <option value="1">Monday</option><option value="2">Tuesday</option><option value="3">Wednesday</option>
+              <option value="4">Thursday</option><option value="5">Friday</option><option value="6">Saturday</option><option value="7">Sunday</option>
             </select>
-            <select id="customStart" class="select time-select" aria-label="开始"></select>
-            <span class="dash">–</span>
-            <select id="customEnd" class="select time-select" aria-label="结束"></select>
-            <button type="button" class="button" id="customAdd">添加</button>
+            <select id="customStart" class="select" aria-label="From"></select>
+            <span class="to">to</span>
+            <select id="customEnd" class="select" aria-label="To"></select>
+            <button type="button" class="button" id="customAdd">Add</button>
           </div>
           <p class="field-error" id="windowError" aria-live="polite"></p>
         </div>
 
         <details class="drawer" id="moreSettings">
-          <summary>更多设置<span id="moreCount" class="count" hidden></span></summary>
+          <summary>More settings<span id="moreCount" class="count" hidden></span></summary>
           <div class="settings">
-            <section class="setting-group">
-              <h3>每天</h3>
+            <section class="setting-group" aria-labelledby="groupDay">
+              <h2 id="groupDay">Each day</h2>
               <div class="setting">
-                <span class="setting-label">希望上课时间</span>
-                <span class="time-range"><select id="preferredStart" class="select time-select" aria-label="最早"></select><span class="dash">–</span><select id="preferredEnd" class="select time-select" aria-label="最晚"></select></span>
+                <span class="setting-label" id="labelPreferred">Preferred class hours</span>
+                <span class="time-range" role="group" aria-labelledby="labelPreferred"><select id="preferredStart" class="select" aria-label="Preferred start"></select><span class="to">to</span><select id="preferredEnd" class="select" aria-label="Preferred end"></select></span>
               </div>
               <div class="setting">
-                <span class="setting-label">最多上课</span>
-                <div class="segmented" data-target="maxDaily"><button type="button" data-value="">不限</button><button type="button" data-value="3">3 时</button><button type="button" data-value="4">4 时</button><button type="button" data-value="6">6 时</button><button type="button" data-value="8">8 时</button></div>
+                <span class="setting-label" id="labelDaily">Most class a day</span>
+                <div class="segmented" data-target="maxDaily" role="radiogroup" aria-labelledby="labelDaily"><button type="button" data-value="">No limit</button><button type="button" data-value="3">3 h</button><button type="button" data-value="4">4 h</button><button type="button" data-value="6">6 h</button><button type="button" data-value="8">8 h</button></div>
                 <input type="hidden" id="maxDaily" value="">
               </div>
               <div class="setting">
-                <span class="setting-label">最长在校</span>
-                <div class="segmented" data-target="maxSpan"><button type="button" data-value="">不限</button><button type="button" data-value="5">5 时</button><button type="button" data-value="7">7 时</button><button type="button" data-value="9">9 时</button></div>
+                <span class="setting-label" id="labelSpan">Longest day on campus</span>
+                <div class="segmented" data-target="maxSpan" role="radiogroup" aria-labelledby="labelSpan"><button type="button" data-value="">No limit</button><button type="button" data-value="5">5 h</button><button type="button" data-value="7">7 h</button><button type="button" data-value="9">9 h</button></div>
                 <input type="hidden" id="maxSpan" value="">
               </div>
               <div class="setting">
-                <label class="check"><input id="lunchOn" type="checkbox"> 留出午饭时间</label>
-                <span class="time-range" id="lunchRow" hidden><select id="lunchStart" class="select time-select" aria-label="午饭最早"></select><span class="dash">–</span><select id="lunchEnd" class="select time-select" aria-label="午饭最晚"></select><select id="lunchMinutes" class="select" aria-label="至少空出"><option value="20">留 20 分</option><option value="30" selected>留 30 分</option><option value="45">留 45 分</option><option value="60">留 60 分</option></select></span>
+                <label class="check"><input id="lunchOn" type="checkbox"> Lunch break</label>
+                <span class="time-range" id="lunchRow" hidden><select id="lunchMinutes" class="select" aria-label="Lunch length"><option value="20">20 min</option><option value="30" selected>30 min</option><option value="45">45 min</option><option value="60">60 min</option></select><span class="to">between</span><select id="lunchStart" class="select" aria-label="Lunch window starts"></select><span class="to">and</span><select id="lunchEnd" class="select" aria-label="Lunch window ends"></select></span>
               </div>
             </section>
-            <section class="setting-group">
-              <h3>每周</h3>
+            <section class="setting-group" aria-labelledby="groupWeek">
+              <h2 id="groupWeek">Each week</h2>
               <div class="setting">
-                <span class="setting-label">最多到校</span>
-                <div class="segmented" data-target="maxDays"><button type="button" data-value="">不限</button><button type="button" data-value="1">1 天</button><button type="button" data-value="2">2 天</button><button type="button" data-value="3">3 天</button><button type="button" data-value="4">4 天</button></div>
+                <span class="setting-label" id="labelDays">Most days on campus</span>
+                <div class="segmented" data-target="maxDays" role="radiogroup" aria-labelledby="labelDays"><button type="button" data-value="">No limit</button><button type="button" data-value="1">1</button><button type="button" data-value="2">2</button><button type="button" data-value="3">3</button><button type="button" data-value="4">4</button></div>
                 <input type="hidden" id="maxDays" value="">
               </div>
             </section>
-            <section class="setting-group">
-              <h3>路上</h3>
+            <section class="setting-group" aria-labelledby="groupTravel">
+              <h2 id="groupTravel">Getting around</h2>
               <div class="setting">
-                <span class="setting-label">单程通勤</span>
-                <div class="segmented" data-target="commute"><button type="button" data-value="">不算</button><button type="button" data-value="15">15 分</button><button type="button" data-value="30">30 分</button><button type="button" data-value="45">45 分</button><button type="button" data-value="60">1 时</button><button type="button" data-value="90">1.5 时</button></div>
+                <span class="setting-label" id="labelCommute">Travel time each way</span>
+                <div class="segmented" data-target="commute" role="radiogroup" aria-labelledby="labelCommute"><button type="button" data-value="">Not counted</button><button type="button" data-value="15">15 min</button><button type="button" data-value="30">30 min</button><button type="button" data-value="45">45 min</button><button type="button" data-value="60">1 h</button><button type="button" data-value="90">1 h 30 min</button></div>
                 <input type="hidden" id="commute" value="">
               </div>
               <div class="setting">
-                <span class="setting-label">换楼至少留</span>
-                <div class="segmented" data-target="transition"><button type="button" data-value="">0</button><button type="button" data-value="5">5 分</button><button type="button" data-value="10">10 分</button><button type="button" data-value="15">15 分</button></div>
+                <span class="setting-label" id="labelTransition">Time to change buildings</span>
+                <div class="segmented" data-target="transition" role="radiogroup" aria-labelledby="labelTransition"><button type="button" data-value="">None</button><button type="button" data-value="5">5 min</button><button type="button" data-value="10">10 min</button><button type="button" data-value="15">15 min</button></div>
                 <input type="hidden" id="transition" value="">
               </div>
               <div class="setting">
-                <span class="setting-label">按楼间距离算步行</span>
-                <div class="segmented" data-target="walkSpeed"><button type="button" data-value="">不算</button><button type="button" data-value="80">正常</button><button type="button" data-value="55">慢些</button><button type="button" data-value="35">行动不便</button></div>
+                <span class="setting-label" id="labelWalk">Walking between buildings</span>
+                <div class="segmented" data-target="walkSpeed" role="radiogroup" aria-labelledby="labelWalk"><button type="button" data-value="">Not counted</button><button type="button" data-value="80">Usual pace</button><button type="button" data-value="55">Slower</button><button type="button" data-value="35">Limited mobility</button></div>
                 <input type="hidden" id="walkSpeed" value="">
               </div>
             </section>
-            <section class="setting-group">
-              <h3>选班</h3>
+            <section class="setting-group" aria-labelledby="groupClasses">
+              <h2 id="groupClasses">Classes</h2>
               <div class="setting">
-                <label class="check"><input id="inPerson" type="checkbox"> 只要现场课</label>
+                <label class="check"><input id="inPerson" type="checkbox"> In-person classes only</label>
               </div>
               <div class="setting">
-                <span class="setting-label">避开余位少的班</span>
-                <div class="segmented" data-target="minSeats"><button type="button" data-value="">不限</button><button type="button" data-value="2">少于 2</button><button type="button" data-value="5">少于 5</button><button type="button" data-value="10">少于 10</button></div>
+                <span class="setting-label" id="labelSeats">Skip classes with few seats</span>
+                <div class="segmented" data-target="minSeats" role="radiogroup" aria-labelledby="labelSeats"><button type="button" data-value="">No</button><button type="button" data-value="2">Under 2</button><button type="button" data-value="5">Under 5</button><button type="button" data-value="10">Under 10</button></div>
                 <input type="hidden" id="minSeats" value="">
               </div>
             </section>
@@ -137,27 +146,29 @@
         </details>
 
         <div class="submit-row">
-          <button id="submitButton" class="button primary large" type="submit">生成课表</button>
-          <label class="consent"><input id="consent" type="checkbox"> 保存结果用于 UniPlan 研究（可撤回）</label>
+          <button id="submitButton" class="button primary" type="submit">Find timetables</button>
+          <label class="consent"><input id="consent" type="checkbox"> Save your answers for UniPlan research (you can withdraw them later)</label>
         </div>
         <div id="saved" class="saved" hidden></div>
       </div>
 
       <div id="setupSummary" class="setup-summary" hidden>
         <div id="summaryChips" class="summary-chips"></div>
-        <button type="button" class="button ghost" id="editSetup">修改</button>
+        <button type="button" class="button" id="editSetup">Edit</button>
       </div>
     </form>
 
-    <section id="result" class="result" aria-live="polite" hidden></section>
+    <section id="result" class="result" aria-label="Timetables" hidden></section>
   </main>
 
   <footer class="footer">
-    <span>数据来自悉尼大学公开课表的本地快照，座位和时间以学校选课系统为准。</span>
-    <button type="button" class="link" id="withdrawToggle">撤回已保存的数据</button>
-    <form id="withdrawForm" hidden>
-      <input id="withdrawCode" type="text" autocomplete="off" spellcheck="false" maxlength="32" placeholder="32 位参与码">
-      <button class="button" type="submit">删除</button>
+    <p>Timetables are built and checked by a scheduler; the sentence is read by a fine-tuned language model running on our own machine. Synthetic test data only; this is a student project for ENGG2112.</p>
+    <p>Class times come from a local copy of the University of Sydney's public timetable. Check seats and times in the university's enrolment system.
+      <button type="button" class="link" id="withdrawToggle" aria-expanded="false" aria-controls="withdrawForm">Withdraw saved answers</button></p>
+    <form id="withdrawForm" class="withdraw" hidden>
+      <label for="withdrawCode" class="visually-hidden">Participant code</label>
+      <input id="withdrawCode" type="text" autocomplete="off" spellcheck="false" maxlength="32" placeholder="32-character participant code">
+      <button class="button" type="submit">Delete saved answers</button>
       <span id="withdrawMessage" aria-live="polite"></span>
     </form>
   </footer>

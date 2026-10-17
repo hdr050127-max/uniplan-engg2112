@@ -16,9 +16,10 @@ from .advisor import recommend
 from .ranking import (AXIS_SETS, axes_name, common_teaching_weeks, dated_meetings,
                       extract_schedule_features, feature_key, pareto_front, pool_from_search,
                       rank_pool, scaled_features, weekday_pattern)
-from .schedule import (WEEKDAY_NAMES, Candidate, ClassOption, FastSearch, ScheduleDataError,
+from .schedule import (Candidate, ClassOption, FastSearch, ScheduleDataError,
                        SearchLimitError, SearchStats, extract_class_options, find_conflict_core,
                        lifestyle_allows, linked_option_id, option_fits_with)
+from .wording import windows_text
 
 
 def validate_group_selection(
@@ -26,7 +27,7 @@ def validate_group_selection(
 ) -> dict[str, list[str]]:
     """Accept only nonempty groups from the chosen units and snapshot."""
     if not isinstance(selection, dict) or set(selection) != set(unit_codes):
-        raise ScheduleDataError("请为每门课程选择要纳入试算的活动组。")
+        raise ScheduleDataError("Choose which activities to plan for each unit.")
     available: dict[str, set[str]] = {code: set() for code in unit_codes}
     for row in meetings:
         if row["unit_code"] in available:
@@ -37,7 +38,7 @@ def validate_group_selection(
         if (not isinstance(groups, list) or not 1 <= len(groups) <= len(available[code]) or
                 any(not isinstance(group, str) or group not in available[code] for group in groups) or
                 len(set(groups)) != len(groups)):
-            raise ScheduleDataError(f"{code} 的活动组选择无效；请从当前课表中至少选择一组。")
+            raise ScheduleDataError(f"The activities chosen for {code} are not in its timetable. Choose at least one from the list.")
         normalized[code] = sorted(groups)
     return normalized
 
@@ -273,9 +274,8 @@ RELAX_SECONDS = 6.0
 
 
 def describe_window(window: dict[str, int]) -> str:
-    def clock(value: int) -> str:
-        return f"{value // 60:02d}:{value % 60:02d}"
-    return f"{WEEKDAY_NAMES[window['weekday'] - 1]} {clock(window['start_min'])}–{clock(window['end_min'])}"
+    """"Fri", "Mon after 6 pm", "Wed 2 pm to 6 pm"."""
+    return windows_text([window])
 
 
 def _explore(groups: list[tuple[str, tuple[ClassOption, ...]]], profile: dict[str, Any],
@@ -306,27 +306,28 @@ def relaxations(groups: list[tuple[str, tuple[ClassOption, ...]]], profile: dict
     """
     trials: list[tuple[dict[str, Any], list, dict[str, Any]]] = []
     for index, window in enumerate(profile["unavailable_windows"]):
-        trials.append(({"kind": "window", "window": window, "label": f"不再避开{describe_window(window)}"},
+        trials.append(({"kind": "window", "window": window, "label": f"Allow classes on {describe_window(window)}"},
                        groups, {**profile, "unavailable_windows": [
                            other for position, other in enumerate(profile["unavailable_windows"])
                            if position != index]}))
     if profile.get("transition_min"):
-        trials.append(({"kind": "buffer", "label": f"换楼缓冲从 {profile['transition_min']} 分钟改为 0"},
+        trials.append(({"kind": "buffer", "label": f"Cut the time between buildings from {profile['transition_min']} min to 0"},
                        groups, {**profile, "transition_min": 0}))
     for group_id in drop_groups:
         trials.append(({"kind": "group", "group_id": group_id,
-                        "label": f"不参加 {group_label(group_id)}（例如看录播，或与学校确认可免）"},
+                        "label": f"Skip {group_label(group_id)} (watch the recording, or check the unit allows it)"},
                        [group for group in groups if group[0] != group_id], profile))
-    lifted = {"max_days_per_week": (None, "不限每周到校天数"), "max_daily_minutes": (None, "不限每天上课时长"),
-              "max_daily_span": (None, "不限每天在校时长"), "lunch": (None, "不留午饭时间"),
-              "in_person_only": (False, "线上课也可以"), "min_seats": (0, "余位少的班也可以"),
-              "walk_speed": (None, "换楼不按距离估算")}
+    lifted = {"max_days_per_week": (None, "No limit on days on campus"),
+              "max_daily_minutes": (None, "No limit on hours of class a day"),
+              "max_daily_span": (None, "No limit on hours on campus a day"), "lunch": (None, "No lunch break"),
+              "in_person_only": (False, "Allow online classes"), "min_seats": (0, "Allow classes with few seats left"),
+              "walk_speed": (None, "Don't count walking time between buildings")}
     for key, (off, label) in lifted.items():
         if profile.get(key):
             trials.append(({"kind": key, "label": label}, groups, {**profile, key: off}))
     for group_id, all_options in (unpin or {}).items():
         trials.append(({"kind": "pin", "group_id": group_id,
-                        "label": f"不再固定 {group_label(group_id)} 的班级"},
+                        "label": f"Unpin the {group_label(group_id)} class"},
                        [(gid, all_options if gid == group_id else options) for gid, options in groups],
                        profile))
     started = time.monotonic()
@@ -357,9 +358,9 @@ def relaxations(groups: list[tuple[str, tuple[ClassOption, ...]]], profile: dict
 
 
 LIMIT_STEPS = {
-    "max_days_per_week": ((2, 3, 4), lambda value: f"每周最多到校改为 {value} 天"),
-    "max_daily_minutes": ((240, 360, 480), lambda value: f"每天最多上课改为 {value // 60} 小时"),
-    "max_daily_span": ((420, 540), lambda value: f"每天最长在校改为 {value // 60} 小时"),
+    "max_days_per_week": ((2, 3, 4), lambda value: f"Allow up to {value} days on campus"),
+    "max_daily_minutes": ((240, 360, 480), lambda value: f"Allow up to {value // 60} hours of class a day"),
+    "max_daily_span": ((420, 540), lambda value: f"Allow up to {value // 60} hours on campus a day"),
 }
 
 
@@ -382,13 +383,14 @@ def group_label(group_id: str) -> str:
 
 
 def _conflict_message(core: dict[str, Any]) -> str:
-    parts = [f"{group_label(group_id)}（{'、'.join(core['slots'][group_id])}）"
+    parts = [f"{group_label(group_id)} ({', '.join(core['slots'][group_id])})"
              for group_id in core["group_ids"]]
-    reason = {"time_overlap": "这些活动组的可选班级在实际上课日期时间重叠",
-              "limits": "在你设的每天或每周限制下无法同时安排",
-              "filters": "按你的选班条件（只要现场课、余位）找不到能同时安排的班",
-              }.get(core["reason"], "这些活动组的班级不重叠，但换楼时间不够")
-    return f"无法同时安排：{' 与 '.join(parts)}。{reason}；系统不会自动放宽条件。可取消其中非必需的活动组，或调整课程与限制后重试。"
+    reason = {"time_overlap": "their classes meet at the same times",
+              "limits": "they don't fit within your daily or weekly limits",
+              "filters": "no classes meet your class conditions (in person only, seats left)",
+              }.get(core["reason"], "their classes don't overlap, but there is too little time to change buildings")
+    return (f"{' and '.join(parts)} can't all fit: {reason}. Nothing is relaxed automatically. "
+            "Drop an activity you don't need, or change your units or limits.")
 
 
 def validate_pins(meetings: list[dict[str, Any]], required: dict[str, list[str]],
@@ -404,13 +406,13 @@ def validate_pins(meetings: list[dict[str, Any]], required: dict[str, list[str]]
     for row in meetings:
         by_group.setdefault(row["group_id"], set()).add(linked_option_id(row))
     if not isinstance(pins, dict) or len(pins) > len(selected):
-        raise ScheduleDataError("固定班级的格式无效。")
+        raise ScheduleDataError("The pinned classes are in the wrong format.")
     normalized = {}
     for group_id, option_ids in pins.items():
         if (group_id not in selected or not isinstance(option_ids, list) or not option_ids or
                 any(not isinstance(option_id, str) or option_id not in by_group.get(group_id, set())
                     for option_id in option_ids)):
-            raise ScheduleDataError("固定的班级不属于所选活动组；请重新选择。")
+            raise ScheduleDataError("A pinned class is not part of the chosen activities. Pick it again.")
         normalized[group_id] = sorted(set(option_ids))
     return normalized
 
@@ -424,7 +426,7 @@ def validate_excluded(meetings: list[dict[str, Any]], required: dict[str, list[s
     known = {linked_option_id(row) for row in meetings if row["group_id"] in selected}
     if (not isinstance(excluded, list) or len(excluded) > 200 or
             any(not isinstance(option_id, str) or option_id not in known for option_id in excluded)):
-        raise ScheduleDataError("标记为已满的班级无效；请刷新后重试。")
+        raise ScheduleDataError("A class marked as full is not in the timetable. Reload the page and try again.")
     return sorted(set(excluded))
 
 
@@ -513,10 +515,10 @@ def arrange_timetables(
         fixes["changes"] = [change for change in fixes["changes"] if change["count"]]
         ranking["what_if"] = fixes
         ranking["no_feasible_reason"] = (
-            "以下必修活动组没有可用班级选项（可能已满、与你的不可上课时段冲突，或班级自身时间冲突）：" +
-            "、".join(stats.groups_without_options)
+            "These required activities have no class you can take (full, during times you can't make, "
+            "or clashing with themselves): " + ", ".join(group_label(group) for group in stats.groups_without_options)
             if stats.groups_without_options else
             _conflict_message(core) if core else
-            "班级各自可选，但组合后与时间重叠或换楼缓冲条件冲突。"
+            "Each class fits on its own, but together they overlap or leave too little time between buildings."
         )
     return ranking

@@ -11,6 +11,7 @@ import re
 from typing import Any, Callable, Iterator
 
 from .locations import building_location
+from .wording import clock
 
 
 class ScheduleDataError(Exception):
@@ -114,7 +115,7 @@ def extract_class_options(
         group_ids = {row["group_id"] for row in option_rows}
         unit_codes = {row["unit_code"] for row in option_rows}
         if len(group_ids) != 1 or len(unit_codes) != 1:
-            raise ScheduleDataError(f"选项 {option_id} 跨越多个课程或活动组。")
+            raise ScheduleDataError(f"Option {option_id} spans more than one unit or activity.")
         meetings = tuple(sorted((Meeting(
             date=date.fromisoformat(row["date"]),
             start_min=int(row["start_min"]),
@@ -141,14 +142,14 @@ def extract_class_options(
     seen_groups: set[str] = set()
     for unit_code, group_ids in required_groups.items():
         if not group_ids:
-            raise ScheduleDataError(f"{unit_code} 没有经核实的必修活动组。")
+            raise ScheduleDataError(f"{unit_code} has no checked list of required activities.")
         for group_id in group_ids:
             if group_id in seen_groups:
-                raise ScheduleDataError(f"活动组 {group_id} 重复列为必修。")
+                raise ScheduleDataError(f"Activity {group_id} is listed as required twice.")
             seen_groups.add(group_id)
             matching_rows = [row for row in rows if row["group_id"] == group_id]
             if not matching_rows or {row["unit_code"] for row in matching_rows} != {unit_code}:
-                raise ScheduleDataError(f"{unit_code} 的必修活动组 {group_id} 与课表不匹配。")
+                raise ScheduleDataError(f"Required activity {group_id} of {unit_code} is not in the timetable.")
             extracted.append((group_id, tuple(sorted(
                 by_group.get(group_id, []), key=lambda item: item.option_id,
             ))))
@@ -360,7 +361,7 @@ def generate_feasible_schedules(
     if max_nodes < 1:
         raise ValueError("max_nodes must be positive")
     if not groups:
-        raise ScheduleDataError("缺少必修活动组，不能生成课表。")
+        raise ScheduleDataError("Required activities are missing, so no timetable can be built.")
     if stats is None:
         stats = SearchStats()
     stats.required_groups = len(groups)
@@ -373,9 +374,9 @@ def generate_feasible_schedules(
         if stats.visited_nodes > max_nodes:
             busiest = max(eligible, key=lambda item: len(item[1]))[0]
             raise SearchLimitError(
-                "组合数量超出当前原型的完整搜索上限。可选班级最多的是 "
-                f"{busiest.split('|')[0].split('-')[0]} {busiest.rpartition('|')[2]}；"
-                "可添加不可上课时段或减少一门课后重试。")
+                "There are too many combinations to check them all. "
+                f"{busiest.split('|')[0].split('-')[0]} {busiest.rpartition('|')[2]} has the most classes to choose from. "
+                "Add times you can't make, or drop a unit, and try again.")
         if index == len(ordered):
             if not lifestyle_allows(placed, profile):
                 stats.rejected_branches += 1
@@ -398,11 +399,7 @@ def generate_feasible_schedules(
     yield from search(0, (), (), 1)
 
 
-WEEKDAY_NAMES = ("周一", "周二", "周三", "周四", "周五", "周六", "周日")
-
-
-def _clock(value: int) -> str:
-    return f"{value // 60:02d}:{value % 60:02d}"
+WEEKDAY_NAMES = ("Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun")
 
 
 def option_slots(options: tuple[ClassOption, ...], limit: int = 4) -> list[str]:
@@ -412,11 +409,10 @@ def option_slots(options: tuple[ClassOption, ...], limit: int = 4) -> list[str]:
         if not option.meetings:
             continue
         first = option.meetings[0]
-        label = (f"{WEEKDAY_NAMES[first.date.isoweekday() - 1]} "
-                 f"{_clock(first.start_min)}–{_clock(first.end_min)}")
+        label = f"{WEEKDAY_NAMES[first.date.isoweekday() - 1]} {clock(first.start_min)} to {clock(first.end_min)}"
         if label not in slots:
             slots.append(label)
-    return slots[:limit] + ([f"等 {len(slots)} 个时段"] if len(slots) > limit else [])
+    return slots[:limit] + ([f"{len(slots)} times in all"] if len(slots) > limit else [])
 
 
 class _Found(Exception):
@@ -505,7 +501,7 @@ class FastSearch:
     def __init__(self, groups: list[tuple[str, tuple[ClassOption, ...]]], profile: dict[str, Any],
                  weeks: int, stats: SearchStats | None = None):
         if not groups:
-            raise ScheduleDataError("缺少必修活动组，不能生成课表。")
+            raise ScheduleDataError("Required activities are missing, so no timetable can be built.")
         self.stats = stats if stats is not None else SearchStats()
         self.stats.required_groups = len(groups)
         self.weeks = weeks
@@ -645,9 +641,9 @@ class FastSearch:
             if stats.visited_nodes > max_nodes:
                 busiest = max(self.eligible, key=lambda item: len(item[1]))[0]
                 raise SearchLimitError(
-                    "组合数量超出当前原型的完整搜索上限。可选班级最多的是 "
-                    f"{busiest.split('|')[0].split('-')[0]} {busiest.rpartition('|')[2]}；"
-                    "可添加不可上课时段、固定某个班级或减少一门课后重试。")
+                    "There are too many combinations to check them all. "
+                    f"{busiest.split('|')[0].split('-')[0]} {busiest.rpartition('|')[2]} has the most classes to choose from. "
+                    "Add times you can't make, pin a class, or drop a unit, and try again.")
             if group == groups:
                 stats.feasible_count += copies
                 sink(chosen, copies, state[0], state[1], state[2], state[3])

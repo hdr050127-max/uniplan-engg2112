@@ -31,16 +31,16 @@ def _validate_meeting(row: dict[str, Any]) -> None:
     required = ("meeting_id", "unit_code", "group_id", "option_id", "date",
                 "start_min", "end_min", "status")
     if any(row.get(field) in (None, "") for field in required):
-        raise TimetableDataError("课表快照含缺失的课程标识或时间字段。")
+        raise TimetableDataError("The timetable data is missing unit codes or times.")
     try:
         date.fromisoformat(row["date"])
         start, end = int(row["start_min"]), int(row["end_min"])
     except (TypeError, ValueError) as exc:
-        raise TimetableDataError("课表快照含无法解析的教学日期或时间。") from exc
+        raise TimetableDataError("The timetable data has dates or times that can't be read.") from exc
     if not 0 <= start < end <= 1440:
-        raise TimetableDataError("课表快照含无效的上课时间范围。")
+        raise TimetableDataError("The timetable data has classes that end before they start.")
     if row["status"] not in {"available", "full", "unknown"}:
-        raise TimetableDataError("课表快照含未知格式的班级状态。")
+        raise TimetableDataError("The timetable data has a class status in an unknown format.")
 
 
 def _option_preview(rows: list[dict[str, Any]]) -> dict[str, Any]:
@@ -78,9 +78,9 @@ def group_default(group_id: str, activity_types: set[str]) -> tuple[bool, str | 
     the result is labelled as their selection, not a verified requirement.
     """
     if IGN_RE.search(group_id.rpartition("|")[2]):
-        return False, "来源标记 IGN"
+        return False, "Marked IGN in the source"
     if activity_types and all("non teaching" in kind.lower() for kind in activity_types):
-        return False, "非教学活动（如答疑）"
+        return False, "Not a class (for example, consultation)"
     return True, None
 
 
@@ -95,24 +95,24 @@ def load_timetable_data(
     """
     snapshot = snapshot_catalog.resolve_snapshot(snapshot_ref)
     if snapshot is None:
-        raise TimetableDataError("所选课表快照已变化，请刷新页面后重新提交。")
+        raise TimetableDataError("The timetable data has changed. Reload the page and try again.")
     if snapshot["year"] != profile["year"] or snapshot["session_code"] != profile["session_code"]:
-        raise TimetableDataError("课表快照与所选学期不匹配。")
+        raise TimetableDataError("The timetable data is for a different semester.")
 
     requested = set(profile["unit_codes"])
     if not requested.issubset(snapshot["unit_codes"]):
-        raise TimetableDataError("课表快照缺少所选课程。")
+        raise TimetableDataError("The timetable data does not include the chosen units.")
     rows = [row for row in snapshot["rows"] if row.get("unit_code") in requested]
     if not rows or {row["unit_code"] for row in rows} != requested:
-        raise TimetableDataError("所选课程没有可用的逐次上课记录。")
+        raise TimetableDataError("The chosen units have no class dates in the timetable data.")
 
     seen_ids: set[str] = set()
     for row in rows:
         _validate_meeting(row)
         if str(row["year"]) != str(profile["year"]) or row["session_code"] != profile["session_code"]:
-            raise TimetableDataError("课表快照混入了其他学期的记录。")
+            raise TimetableDataError("The timetable data includes classes from another semester.")
         if row["meeting_id"] in seen_ids:
-            raise TimetableDataError("课表快照含重复的逐次上课记录。")
+            raise TimetableDataError("The timetable data lists some classes twice.")
         seen_ids.add(row["meeting_id"])
 
     units = []

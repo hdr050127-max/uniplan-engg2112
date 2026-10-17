@@ -140,16 +140,16 @@ class SnapshotCatalog:
     ) -> list[dict[str, str]]:
         path = self.requirements_dir / f"requirements_{year}_{session}.json"
         if not path.is_file():
-            return [{"code": "requirements_unverified", "message": "必修活动组尚未核实，暂不能生成课表。"}]
+            return [{"code": "requirements_unverified", "message": "The required activities have not been checked yet, so no timetable can be built."}]
         try:
             data = json.loads(path.read_text(encoding="utf-8"))
         except (OSError, ValueError):
-            return [{"code": "requirements_invalid", "message": "必修活动组核实文件无法读取。"}]
+            return [{"code": "requirements_invalid", "message": "The file of required activities can't be read."}]
         if data.get("year") != year or data.get("session_code") != session:
-            return [{"code": "requirements_mismatch", "message": "必修活动组与所选学期不匹配。"}]
+            return [{"code": "requirements_mismatch", "message": "The required activities are for a different semester."}]
         verified = data.get("verified_units")
         if not isinstance(verified, dict):
-            return [{"code": "requirements_invalid", "message": "必修活动组核实文件格式不正确。"}]
+            return [{"code": "requirements_invalid", "message": "The file of required activities is in the wrong format."}]
         blockers = []
         for unit in units:
             record = verified.get(unit)
@@ -160,7 +160,7 @@ class SnapshotCatalog:
                     not all(isinstance(group, str) and group for group in record["group_ids"]) or
                     not set(record["group_ids"]).issubset(available_groups) or
                     not record.get("source_url") or not record.get("snapshot_time")):
-                blockers.append({"code": "requirements_unverified", "message": f"{unit} 的必修活动组尚未核实。"})
+                blockers.append({"code": "requirements_unverified", "message": f"The required activities of {unit} have not been checked yet."})
         return blockers
 
     def verified_group_ids(
@@ -180,20 +180,20 @@ class SnapshotCatalog:
         same_term = [snap for snap in self.snapshots
                      if snap["year"] == year and snap["session_code"] == session]
         if not same_term:
-            return None, [{"code": "missing_session", "message": "该学期尚无可用的课表快照。"}], []
+            return None, [{"code": "missing_session", "message": "There is no timetable data for this semester yet."}], []
         candidates = [snap for snap in same_term if set(units).issubset(snap["unit_codes"])]
         warnings = []
         if not candidates:
             known = self.available_codes(year, session)
             missing = [unit for unit in units if unit not in known]
             if missing:
-                return None, [{"code": "missing_timetable", "message": "缺少这些课程的课表：" + ", ".join(missing)
-                               + "。实时查询受限时，请在学校官方课表网站核对这些课程。"}], []
+                return None, [{"code": "missing_timetable", "message": "There is no timetable data for " + ", ".join(missing)
+                               + ". Check these units on the university's timetable site."}], []
             combined = self._combine(same_term, units)
             candidates = [combined]
-            warnings.append({"code": "mixed_snapshots", "message": "所选课程来自不同日期的快照，已按每门课最新的一份合并：" +
-                             "、".join(f"{unit} {stamp[:10]}" for unit, stamp in combined["combined_from"].items()) +
-                             "。数据日期按最早的一份显示。"})
+            warnings.append({"code": "mixed_snapshots", "message": "The units come from timetable copies made on different days, so the newest copy of each was used: " +
+                             ", ".join(f"{unit} {stamp[:10]}" for unit, stamp in combined["combined_from"].items()) +
+                             ". The oldest date is shown."})
         snap = max(candidates, key=lambda item: item["snapshot_time"])
         rows = [row for row in snap["rows"] if row.get("unit_code") in units
                 and str(row.get("year")) == str(year) and row.get("session_code") == session]
@@ -202,7 +202,7 @@ class SnapshotCatalog:
         unknown_status = sum(row.get("status") == "unknown" for row in rows)
         unknown_building = sum(not row.get("building_code") for row in rows)
         if unknown_status:
-            warnings.append({"code": "unknown_status", "message": f"有 {unknown_status} 次课程的状态未知，后续结果须核对。"})
+            warnings.append({"code": "unknown_status", "message": f"{unknown_status} classes have an unknown status. Check them before you enrol."})
         if unknown_building:
-            warnings.append({"code": "unknown_building", "message": f"有 {unknown_building} 次活动未标识教学楼（可能包括在线活动），换楼缓冲无法检查这些记录。"})
+            warnings.append({"code": "unknown_building", "message": f"{unknown_building} classes have no building (some may be online), so the time between buildings can't be checked for them."})
         return ref, blockers, warnings

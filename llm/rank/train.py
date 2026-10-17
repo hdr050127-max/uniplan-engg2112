@@ -184,7 +184,7 @@ def pairwise_accuracy(model, rows, sets) -> tuple[float, dict]:
 
 
 def top3_metrics(model, test_rows, sets, personas) -> dict:
-    hit, best, per = [], [], {}
+    hit, best, ceiling, per = [], [], [], {}
     by_persona = defaultdict(list)
     for r in test_rows:
         by_persona[r["persona"]].append(r)
@@ -200,9 +200,11 @@ def top3_metrics(model, test_rows, sets, personas) -> dict:
         scores = model.scores([c["x"] for c in candidates], prefs, runtime.student_terms(prefs))
         picked = [ids[i] for i in sorted(range(len(ids)), key=lambda i: (-scores[i], ids[i]))[:3]]
         hit.append(sum(share[i] for i in picked) / 3)
+        ceiling.append(sum(sorted(share.values(), reverse=True)[:3]) / 3)   # a perfect guess of the teacher
         best.append(sum(i in picked for i in winners) / len(winners))
         per[pid] = round(hit[-1], 3)
-    return {"top3_hit": float(np.mean(hit)), "best_in_top3": float(np.mean(best)), "per_persona": per}
+    return {"top3_hit": float(np.mean(hit)), "best_in_top3": float(np.mean(best)),
+            "top3_ceiling": float(np.mean(ceiling)), "per_persona": per}
 
 
 def bootstrap(hits: dict[str, list[float]], rounds: int = 2000) -> tuple[float, float]:
@@ -281,12 +283,14 @@ def main() -> int:
         low, high = bootstrap(hits)
         top = top3_metrics(model, test, sets, personas)
         results.append({"model": model.name, "params": params, "cv_accuracy": cv, "pairwise_accuracy": accuracy,
-                        "ci95": [low, high], "top3_hit": top["top3_hit"], "best_in_top3": top["best_in_top3"],
+                        "ci95": [low, high], "top3_hit": top["top3_hit"], "top3_ceiling": top["top3_ceiling"],
+                        "best_in_top3": top["best_in_top3"],
                         "ms_per_student": timing(model, {k: sets[k] for k in sorted(sets)[:20]}, personas),
                         "per_persona_top3": top["per_persona"]})
         fitted[model.name] = model
         print(f"{model.name:22s} cv={cv:.3f} acc={accuracy:.3f} [{low:.3f},{high:.3f}] "
-              f"top3={top['top3_hit']:.3f} best@3={top['best_in_top3']:.3f} {params}", flush=True)
+              f"top3={top['top3_hit']:.3f}/{top['top3_ceiling']:.3f} best@3={top['best_in_top3']:.3f} {params}",
+              flush=True)
     for path in args.direct:
         results.append(direct_result(Path(path), test))
     random_top3 = 3 / 8

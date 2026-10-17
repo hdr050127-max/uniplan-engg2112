@@ -16,23 +16,23 @@
  "consistent_rate_all": 0.8,
  "consistent_rate_asked": 0.8,
  "answers_by_position": {
-  "red(first)": 30,
-  "blue(second)": 30
+  "red(first)": 28,
+  "blue(second)": 32
  },
  "focus_correct": "44/44",
  "draw_hint_pairs": "5/8 consistent",
  "by_focus": {
-  "campus_days": "8/10",
-  "gap": "7/10",
+  "campus_days": "9/10",
+  "gap": "6/10",
   "outside_hours": "9/10"
  },
- "seconds_per_asked_pair": 2.37,
+ "seconds_per_asked_pair": 2.2,
  "by_persona": {
-  "commuter_1": "3/5",
+  "commuter_1": "4/5",
   "worker_1": "3/5",
   "parent_1": "5/5",
   "night_owl_1": "4/5",
   "intern_1": "5/5",
-  "near_campus_1": "4/5"
+  "near_campus_1": "3/5"
  }
 }

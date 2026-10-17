@@ -1,0 +1,256 @@
+unloading qwen2.5:14b to leave the GPU to qwen2.5:7b
+30 pairs, 0 already labelled, model qwen2.5:7b at http://192.168.1.120:11434
+  20/30  1.7s per pair, ~0 min left
+  30/30  1.7s per pair, ~0 min left
+{
+ "note": "合成标签（SYNTHETIC）：由大模型扮演合成画像给出，不是真实学生的选择。",
+ "model": "qwen2.5:7b",
+ "server": "http://192.168.1.120:11434",
+ "prompt_version": 3,
+ "ties": "strict",
+ "tie_thresholds": {
+  "campus_days": 0.25,
+  "gap": 0.5,
+  "outside_hours": 0.5
+ },
+ "pairs": 30,
+ "program_ties": 8,
+ "asked_model": 22,
+ "consistent_all": "27/30",
+ "consistent_rate_all": 0.9,
+ "consistent_rate_asked": 0.864,
+ "answers_by_position": {
+  "red(first)": 21,
+  "blue(second)": 23
+ },
+ "focus_correct": "44/44",
+ "draw_hint_pairs": "0/0 consistent",
+ "by_focus": {
+  "campus_days": "9/10",
+  "gap": "8/10",
+  "outside_hours": "10/10"
+ },
+ "seconds_per_asked_pair": 2.3,
+ "by_persona": {
+  "commuter_1": "4/5",
+  "worker_1": "4/5",
+  "parent_1": "5/5",
+  "night_owl_1": "5/5",
+  "intern_1": "5/5",
+  "near_campus_1": "4/5"
+ }
+}
+windows GPU busy (scripts/evaluate_explain.py since 15:23); waiting...
+30 pairs, 0 already labelled, model qwen2.5:7b at http://192.168.1.120:11434
+  20/30  2.2s per pair, ~0 min left
+  30/30  2.2s per pair, ~0 min left
+{
+ "note": "合成标签（SYNTHETIC）：由大模型扮演合成画像给出，不是真实学生的选择。",
+ "model": "qwen2.5:7b",
+ "server": "http://192.168.1.120:11434",
+ "prompt_version": 3,
+ "ties": "hint",
+ "tie_thresholds": {
+  "campus_days": 0.25,
+  "gap": 0.5,
+  "outside_hours": 0.5
+ },
+ "pairs": 30,
+ "program_ties": 0,
+ "asked_model": 30,
+ "consistent_all": "24/30",
+ "consistent_rate_all": 0.8,
+ "consistent_rate_asked": 0.8,
+ "answers_by_position": {
+  "red(first)": 28,
+  "blue(second)": 32
+ },
+ "focus_correct": "44/44",
+ "draw_hint_pairs": "5/8 consistent",
+ "by_focus": {
+  "campus_days": "9/10",
+  "gap": "6/10",
+  "outside_hours": "9/10"
+ },
+ "seconds_per_asked_pair": 2.2,
+ "by_persona": {
+  "commuter_1": "4/5",
+  "worker_1": "3/5",
+  "parent_1": "5/5",
+  "night_owl_1": "4/5",
+  "intern_1": "5/5",
+  "near_campus_1": "3/5"
+ }
+}
+unloading qwen2.5:7b to leave the GPU to qwen2.5:14b
+30 pairs, 0 already labelled, model qwen2.5:14b at http://192.168.1.120:11434
+  20/30  3.7s per pair, ~1 min left
+  30/30  3.6s per pair, ~0 min left
+{
+ "note": "合成标签（SYNTHETIC）：由大模型扮演合成画像给出，不是真实学生的选择。",
+ "model": "qwen2.5:14b",
+ "server": "http://192.168.1.120:11434",
+ "prompt_version": 3,
+ "ties": "strict",
+ "tie_thresholds": {
+  "campus_days": 0.25,
+  "gap": 0.5,
+  "outside_hours": 0.5
+ },
+ "pairs": 30,
+ "program_ties": 8,
+ "asked_model": 22,
+ "consistent_all": "28/30",
+ "consistent_rate_all": 0.933,
+ "consistent_rate_asked": 0.909,
+ "answers_by_position": {
+  "red(first)": 24,
+  "blue(second)": 20
+ },
+ "focus_correct": "35/44",
+ "draw_hint_pairs": "0/0 consistent",
+ "by_focus": {
+  "campus_days": "10/10",
+  "gap": "8/10",
+  "outside_hours": "10/10"
+ },
+ "seconds_per_asked_pair": 4.96,
+ "by_persona": {
+  "commuter_1": "5/5",
+  "worker_1": "4/5",
+  "parent_1": "5/5",
+  "night_owl_1": "5/5",
+  "intern_1": "5/5",
+  "near_campus_1": "4/5"
+ }
+}
+windows GPU busy (python3 -m llm.parse.review answer since 15:29); waiting...
+unloading qwen2.5:7b to leave the GPU to qwen2.5:14b
+30 pairs, 0 already labelled, model qwen2.5:14b at http://192.168.1.120:11434
+windows GPU busy (python3 -m llm.rank.label pilot --model qwen2.5:14b --ties hint since 15:37); waiting...
+  20/30  4.5s per pair, ~1 min left
+  30/30  4.4s per pair, ~0 min left
+{
+ "note": "合成标签（SYNTHETIC）：由大模型扮演合成画像给出，不是真实学生的选择。",
+ "model": "qwen2.5:14b",
+ "server": "http://192.168.1.120:11434",
+ "prompt_version": 3,
+ "ties": "hint",
+ "tie_thresholds": {
+  "campus_days": 0.25,
+  "gap": 0.5,
+  "outside_hours": 0.5
+ },
+ "pairs": 30,
+ "program_ties": 0,
+ "asked_model": 30,
+ "consistent_all": "26/30",
+ "consistent_rate_all": 0.867,
+ "consistent_rate_asked": 0.867,
+ "answers_by_position": {
+  "red(first)": 34,
+  "blue(second)": 26
+ },
+ "focus_correct": "35/44",
+ "draw_hint_pairs": "6/8 consistent",
+ "by_focus": {
+  "campus_days": "8/10",
+  "gap": "8/10",
+  "outside_hours": "10/10"
+ },
+ "seconds_per_asked_pair": 4.45,
+ "by_persona": {
+  "commuter_1": "4/5",
+  "worker_1": "4/5",
+  "parent_1": "5/5",
+  "night_owl_1": "5/5",
+  "intern_1": "4/5",
+  "near_campus_1": "4/5"
+ }
+}
+30 pairs, 0 already labelled, model qwen2.5:14b at http://192.168.1.120:11434
+  20/30  3.5s per pair, ~1 min left
+  30/30  3.4s per pair, ~0 min left
+{
+ "note": "合成标签（SYNTHETIC）：由大模型扮演合成画像给出，不是真实学生的选择。",
+ "model": "qwen2.5:14b",
+ "server": "http://192.168.1.120:11434",
+ "prompt_version": 3,
+ "ties": "dominance",
+ "tie_thresholds": {
+  "campus_days": 0.25,
+  "gap": 0.5,
+  "outside_hours": 0.5
+ },
+ "pairs": 30,
+ "program_ties": 3,
+ "program_dominance": 5,
+ "asked_model": 22,
+ "consistent_all": "28/30",
+ "consistent_rate_all": 0.933,
+ "consistent_rate_asked": 0.909,
+ "answers_by_position": {
+  "red(first)": 24,
+  "blue(second)": 20
+ },
+ "focus_correct": "35/44",
+ "draw_hint_pairs": "0/0 consistent",
+ "by_focus": {
+  "campus_days": "10/10",
+  "gap": "8/10",
+  "outside_hours": "10/10"
+ },
+ "seconds_per_asked_pair": 4.58,
+ "by_persona": {
+  "commuter_1": "5/5",
+  "worker_1": "4/5",
+  "parent_1": "5/5",
+  "night_owl_1": "5/5",
+  "intern_1": "5/5",
+  "near_campus_1": "4/5"
+ }
+}
+windows GPU busy (scripts/evaluate_explain.py since 15:41); waiting...
+unloading qwen2.5:14b to leave the GPU to qwen2.5:7b
+30 pairs, 0 already labelled, model qwen2.5:7b at http://192.168.1.120:11434
+  20/30  1.7s per pair, ~0 min left
+  30/30  1.6s per pair, ~0 min left
+{
+ "note": "合成标签（SYNTHETIC）：由大模型扮演合成画像给出，不是真实学生的选择。",
+ "model": "qwen2.5:7b",
+ "server": "http://192.168.1.120:11434",
+ "prompt_version": 3,
+ "ties": "dominance",
+ "tie_thresholds": {
+  "campus_days": 0.25,
+  "gap": 0.5,
+  "outside_hours": 0.5
+ },
+ "pairs": 30,
+ "program_ties": 3,
+ "program_dominance": 5,
+ "asked_model": 22,
+ "consistent_all": "27/30",
+ "consistent_rate_all": 0.9,
+ "consistent_rate_asked": 0.864,
+ "answers_by_position": {
+  "red(first)": 21,
+  "blue(second)": 23
+ },
+ "focus_correct": "44/44",
+ "draw_hint_pairs": "0/0 consistent",
+ "by_focus": {
+  "campus_days": "9/10",
+  "gap": "8/10",
+  "outside_hours": "10/10"
+ },
+ "seconds_per_asked_pair": 2.21,
+ "by_persona": {
+  "commuter_1": "4/5",
+  "worker_1": "4/5",
+  "parent_1": "5/5",
+  "night_owl_1": "5/5",
+  "intern_1": "5/5",
+  "near_campus_1": "4/5"
+ }
+}

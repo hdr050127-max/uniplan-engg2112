@@ -1,0 +1,1903 @@
+{
+ "note": "核对者是 Claude（总控窗口），不是真人；千问老师和 Claude 都是 AI。画像是合成的。",
+ "answered": 210,
+ "labels": "llm/rank/output/labels_v3d_qwen2.5_14b_corrected.jsonl",
+ "test_check": {
+  "pairs": 60,
+  "claude_answers": {
+   "B": 31,
+   "A": 19,
+   "tie": 10
+  },
+  "qwen_labels": {
+   "B": 25,
+   "flip": 4,
+   "tie": 12,
+   "A": 19
+  },
+  "teacher_vs_claude": {
+   "agree": 39,
+   "compared": 42,
+   "rate": 0.929,
+   "left_out_ties": 18
+  },
+  "by_source": {
+   "model": {
+    "pairs": 36,
+    "teacher_labels": {
+     "B": 19,
+     "flip": 4,
+     "A": 13
+    },
+    "claude_answers": {
+     "B": 22,
+     "A": 14
+    },
+    "teacher_vs_claude": {
+     "agree": 29,
+     "compared": 32,
+     "rate": 0.906,
+     "left_out_ties": 4
+    }
+   },
+   "program": {
+    "pairs": 12,
+    "teacher_labels": {
+     "tie": 12
+    },
+    "claude_answers": {
+     "B": 3,
+     "tie": 8,
+     "A": 1
+    },
+    "teacher_vs_claude": {
+     "agree": 0,
+     "compared": 0,
+     "rate": null,
+     "left_out_ties": 12
+    }
+   },
+   "program_dominance": {
+    "pairs": 12,
+    "teacher_labels": {
+     "B": 6,
+     "A": 6
+    },
+    "claude_answers": {
+     "B": 6,
+     "A": 4,
+     "tie": 2
+    },
+    "teacher_vs_claude": {
+     "agree": 10,
+     "compared": 10,
+     "rate": 1.0,
+     "left_out_ties": 2
+    }
+   }
+  },
+  "model_vs_claude": {
+   "agree": 45,
+   "compared": 50,
+   "rate": 0.9,
+   "left_out_ties": 10
+  },
+  "model_vs_teacher": {
+   "agree": 38,
+   "compared": 44,
+   "rate": 0.864,
+   "left_out_ties": 16
+  },
+  "main_concern_clear": {
+   "pairs": 36,
+   "teacher_vs_claude": {
+    "agree": 29,
+    "compared": 32,
+    "rate": 0.906,
+    "left_out_ties": 4
+   },
+   "model_vs_claude": {
+    "agree": 32,
+    "compared": 36,
+    "rate": 0.889,
+    "left_out_ties": 0
+   }
+  },
+  "main_concern_near_equal": {
+   "pairs": 24,
+   "claude_said_tie": 10,
+   "teacher_vs_claude": {
+    "agree": 10,
+    "compared": 10,
+    "rate": 1.0,
+    "left_out_ties": 14
+   },
+   "model_vs_claude": {
+    "agree": 13,
+    "compared": 14,
+    "rate": 0.929,
+    "left_out_ties": 10
+   }
+  },
+  "rows": [
+   {
+    "pair_id": "t001",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t002",
+    "claude": "B",
+    "qwen": "flip",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t003",
+    "claude": "B",
+    "qwen": "tie",
+    "source": "program",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t004",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t005",
+    "claude": "B",
+    "qwen": "flip",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t006",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t007",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t008",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t009",
+    "claude": "tie",
+    "qwen": "tie",
+    "source": "program",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t010",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t011",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t012",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "t013",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t014",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t015",
+    "claude": "tie",
+    "qwen": "tie",
+    "source": "program",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t016",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t017",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t018",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t019",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t020",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t021",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "t022",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t023",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t024",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t025",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "t026",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "t027",
+    "claude": "tie",
+    "qwen": "tie",
+    "source": "program",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "t028",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t029",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t030",
+    "claude": "B",
+    "qwen": "tie",
+    "source": "program",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t031",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t032",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t033",
+    "claude": "tie",
+    "qwen": "tie",
+    "source": "program",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t034",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t035",
+    "claude": "B",
+    "qwen": "flip",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t036",
+    "claude": "tie",
+    "qwen": "tie",
+    "source": "program",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t037",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t038",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t039",
+    "claude": "tie",
+    "qwen": "tie",
+    "source": "program",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t040",
+    "claude": "B",
+    "qwen": "flip",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t041",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t042",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t043",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t044",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t045",
+    "claude": "tie",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "t046",
+    "claude": "tie",
+    "qwen": "tie",
+    "source": "program",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t047",
+    "claude": "A",
+    "qwen": "tie",
+    "source": "program",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "t048",
+    "claude": "B",
+    "qwen": "tie",
+    "source": "program",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "t049",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t050",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t051",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t052",
+    "claude": "B",
+    "qwen": "A",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "t053",
+    "claude": "A",
+    "qwen": "B",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t054",
+    "claude": "tie",
+    "qwen": "tie",
+    "source": "program",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t055",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t056",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t057",
+    "claude": "tie",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "t058",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t059",
+    "claude": "A",
+    "qwen": "B",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "t060",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   }
+  ]
+ },
+ "teacher_audit": {
+  "pairs": 150,
+  "claude_answers": {
+   "A": 65,
+   "B": 85
+  },
+  "qwen_labels": {
+   "A": 65,
+   "B": 85
+  },
+  "teacher_vs_claude": {
+   "agree": 150,
+   "compared": 150,
+   "rate": 1.0,
+   "left_out_ties": 0
+  },
+  "by_source": {
+   "model": {
+    "pairs": 123,
+    "teacher_labels": {
+     "A": 52,
+     "B": 71
+    },
+    "claude_answers": {
+     "A": 52,
+     "B": 71
+    },
+    "teacher_vs_claude": {
+     "agree": 123,
+     "compared": 123,
+     "rate": 1.0,
+     "left_out_ties": 0
+    }
+   },
+   "program_dominance": {
+    "pairs": 27,
+    "teacher_labels": {
+     "A": 13,
+     "B": 14
+    },
+    "claude_answers": {
+     "A": 13,
+     "B": 14
+    },
+    "teacher_vs_claude": {
+     "agree": 27,
+     "compared": 27,
+     "rate": 1.0,
+     "left_out_ties": 0
+    }
+   }
+  },
+  "model_vs_claude": {
+   "agree": 136,
+   "compared": 150,
+   "rate": 0.907,
+   "left_out_ties": 0
+  },
+  "model_vs_teacher": {
+   "agree": 136,
+   "compared": 150,
+   "rate": 0.907,
+   "left_out_ties": 0
+  },
+  "main_concern_clear": {
+   "pairs": 123,
+   "teacher_vs_claude": {
+    "agree": 123,
+    "compared": 123,
+    "rate": 1.0,
+    "left_out_ties": 0
+   },
+   "model_vs_claude": {
+    "agree": 111,
+    "compared": 123,
+    "rate": 0.902,
+    "left_out_ties": 0
+   }
+  },
+  "main_concern_near_equal": {
+   "pairs": 27,
+   "claude_said_tie": 0,
+   "teacher_vs_claude": {
+    "agree": 27,
+    "compared": 27,
+    "rate": 1.0,
+    "left_out_ties": 0
+   },
+   "model_vs_claude": {
+    "agree": 25,
+    "compared": 27,
+    "rate": 0.926,
+    "left_out_ties": 0
+   }
+  },
+  "rows": [
+   {
+    "pair_id": "a001",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a002",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a003",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a004",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a005",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a006",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a007",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a008",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a009",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a010",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a011",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a012",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a013",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a014",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a015",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a016",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a017",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a018",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a019",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a020",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a021",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a022",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a023",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a024",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a025",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a026",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a027",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a028",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a029",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a030",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a031",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a032",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a033",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a034",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a035",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a036",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a037",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a038",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a039",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a040",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a041",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a042",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a043",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a044",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a045",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a046",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a047",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a048",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a049",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a050",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a051",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a052",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a053",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a054",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a055",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a056",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a057",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a058",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a059",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a060",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a061",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a062",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a063",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a064",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a065",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a066",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a067",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a068",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a069",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a070",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a071",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a072",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a073",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a074",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a075",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a076",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a077",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a078",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a079",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a080",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a081",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a082",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a083",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a084",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a085",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a086",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a087",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a088",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a089",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a090",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a091",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a092",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a093",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a094",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a095",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a096",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a097",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a098",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a099",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a100",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a101",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a102",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a103",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a104",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a105",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a106",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a107",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a108",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a109",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a110",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a111",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a112",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a113",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a114",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a115",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a116",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a117",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a118",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a119",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a120",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a121",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a122",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a123",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a124",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a125",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a126",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a127",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a128",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a129",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a130",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a131",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a132",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a133",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a134",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a135",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a136",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a137",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a138",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a139",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false
+   },
+   {
+    "pair_id": "a140",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a141",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a142",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a143",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a144",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a145",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a146",
+    "claude": "B",
+    "qwen": "B",
+    "source": "program_dominance",
+    "model": "B",
+    "near": true
+   },
+   {
+    "pair_id": "a147",
+    "claude": "A",
+    "qwen": "A",
+    "source": "program_dominance",
+    "model": "A",
+    "near": true
+   },
+   {
+    "pair_id": "a148",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a149",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false
+   },
+   {
+    "pair_id": "a150",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "A",
+    "near": false
+   }
+  ]
+ }
+}

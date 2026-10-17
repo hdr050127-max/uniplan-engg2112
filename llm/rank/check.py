@@ -177,25 +177,33 @@ def score(labels: Path) -> dict:
             info = key[pair_id]
             row = teacher.get((info["persona"], info["a_id"], info["b_id"]))
             qwen = row["label"] if row else "missing"
+            source = row["source"] if row else "missing"
             persona = personas[info["persona"]]
             mine = model_choice(spec, persona, xs[(info["persona"], info["a_id"])], xs[(info["persona"], info["b_id"])])
-            rows.append({"pair_id": pair_id, "claude": answers[pair_id], "qwen": qwen, "model": mine,
-                         "near": info["near_equal_focus"]})
+            rows.append({"pair_id": pair_id, "claude": answers[pair_id], "qwen": qwen, "source": source,
+                         "model": mine, "near": info["near_equal_focus"]})
         clear = [r for r in rows if not r["near"]]
         near = [r for r in rows if r["near"]]
         report[purpose] = {
             "pairs": len(rows),
             "claude_answers": dict(Counter(r["claude"] for r in rows)),
             "qwen_labels": dict(Counter(r["qwen"] for r in rows)),
-            "qwen_vs_claude": agreement([(r["qwen"], r["claude"]) for r in rows]),
+            # "teacher" = the final label: Qwen's answer, or the program's rule on a near-equal main concern
+            "teacher_vs_claude": agreement([(r["qwen"], r["claude"]) for r in rows]),
+            "by_source": {source: {"pairs": sum(r["source"] == source for r in rows),
+                                   "teacher_labels": dict(Counter(r["qwen"] for r in rows if r["source"] == source)),
+                                   "claude_answers": dict(Counter(r["claude"] for r in rows if r["source"] == source)),
+                                   "teacher_vs_claude": agreement([(r["qwen"], r["claude"]) for r in rows
+                                                                   if r["source"] == source])}
+                          for source in sorted({r["source"] for r in rows})},
             "model_vs_claude": agreement([(r["model"], r["claude"]) for r in rows]),
-            "model_vs_qwen": agreement([(r["model"], r["qwen"]) for r in rows]),
+            "model_vs_teacher": agreement([(r["model"], r["qwen"]) for r in rows]),
             "main_concern_clear": {"pairs": len(clear),
-                                   "qwen_vs_claude": agreement([(r["qwen"], r["claude"]) for r in clear]),
+                                   "teacher_vs_claude": agreement([(r["qwen"], r["claude"]) for r in clear]),
                                    "model_vs_claude": agreement([(r["model"], r["claude"]) for r in clear])},
             "main_concern_near_equal": {"pairs": len(near),
                                         "claude_said_tie": sum(r["claude"] == "tie" for r in near),
-                                        "qwen_vs_claude": agreement([(r["qwen"], r["claude"]) for r in near]),
+                                        "teacher_vs_claude": agreement([(r["qwen"], r["claude"]) for r in near]),
                                         "model_vs_claude": agreement([(r["model"], r["claude"]) for r in near])},
             "rows": rows,
         }
@@ -217,7 +225,7 @@ def corrected(labels: Path) -> Path:
                 row = {**row, "label": fix, "qwen_label": row["label"], "corrected_by": "claude"}
                 changed += 1
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
-    print(f"{changed} of {len(fixes)} audited labels replaced by Claude's answer -> {out.relative_to(ROOT)}")
+    print(f"{changed} of {len(fixes)} audited labels replaced by Claude's answer -> {out}")
     return out
 
 

@@ -7,13 +7,15 @@ Prompt version 3 (after the pilot in llm/rank/pilot.py, 22/30 consistent in vers
 - early/late classes are counted against the persona's own comfortable hours
   (``preferred_hours``), not a fixed 09:00-18:00;
 - when the two timetables are almost equal on the persona's main concern (``focus``,
-  i.e. ``cares[0]``), the program records a tie and the model is not asked;
+  i.e. ``cares[0]``), the program decides and the model is not asked: if one timetable is no
+  worse on every "less is better" row and clearly better on at least one, it wins
+  (source ``program_dominance``); otherwise the pair is a tie;
 - the model must pick red or blue; every pair is asked twice with the sides swapped and
   only answers that agree become labels.
 
-``--ties hint`` is a variant for comparison: a near-equal main concern is no longer a tie by
-itself. The program tells the model that this item is a draw and lets it decide on the
-rest; only when every row of the table is near-equal does the program call a tie.
+Two variants were tried on the pilot and kept for comparison: ``--ties strict`` makes every
+near-equal main concern a tie; ``--ties hint`` tells the model the main concern is a draw and
+lets it decide on the rest (80% consistent on the pilot with 7B, so it was not used).
 
     python3 -m llm.rank.label pilot --model qwen2.5:7b      # the pilot's 30 pairs, version 3
     python3 -m llm.rank.label run --model qwen2.5:14b       # ~1,500 pairs over 80 personas
@@ -49,6 +51,9 @@ DAYS = "一二三四五六日"
 
 # A difference smaller than this on the persona's main concern is a tie, decided by the program.
 TIE = {"campus_days": ("campus_days", 0.25), "gap": ("gap_h", 0.5), "outside_hours": ("outside_h", 0.5)}
+# Rows where less is better, with the gap that counts as a real difference (dominance rule).
+LESS_IS_BETTER = {"campus_days": 0.25, "gap_h": 0.5, "outside_h": 0.5, "longest_day_h": 0.5,
+                  "single_class_days": 0.25}
 # "hint" mode: a pair is a program tie only if every table row is this close.
 NEAR = {"campus_days": 0.25, "gap_h": 0.5, "outside_h": 0.5, "earliest_start": 0.5, "latest_end": 0.5,
         "longest_day_h": 0.5, "single_class_days": 0.25}
@@ -63,6 +68,7 @@ SCHEMA = {"type": "object", "properties": {
     # The cap stops a model that keeps writing inside the string (14B looped there without it).
     "reason": {"type": "string", "maxLength": 150}, "choice": {"type": "string", "enum": ["红", "蓝"]}},
     "required": ["focus", "reason", "choice"]}
+SUFFIX = {"strict": "", "hint": "h", "dominance": "d"}    # output file names per tie mode
 TRAIN_PAIRS, TEST_SET = 16, 8   # pairs per training persona; candidates per test persona (all 28 pairs)
 
 
@@ -116,6 +122,12 @@ def program_tie(persona: dict, a: dict, b: dict) -> bool:
     return abs(a["x"][key] - b["x"][key]) < threshold
 
 
+def dominates(a: dict, b: dict) -> bool:
+    """a is no worse than b on every less-is-better row and clearly better on one."""
+    return (all(a["x"][k] <= b["x"][k] + t for k, t in LESS_IS_BETTER.items()) and
+            any(a["x"][k] < b["x"][k] - t for k, t in LESS_IS_BETTER.items()))
+
+
 def all_near(a: dict, b: dict) -> bool:
     return all(abs(a["x"][key] - b["x"][key]) < threshold for key, threshold in NEAR.items())
 
@@ -147,12 +159,17 @@ def ask(model: str, persona: dict, red: dict, blue: dict, draw: bool = False) ->
     raise ValueError(f"{model} gave no complete answer for {persona['id']}")
 
 
-def judge(model: str, persona: dict, a: dict, b: dict, ties: str = "strict") -> dict:
+def judge(model: str, persona: dict, a: dict, b: dict, ties: str = "dominance") -> dict:
     """One labelled pair. ``label`` is A, B, tie (program) or flip (the two orders disagree)."""
     record = {"persona": persona["id"], "split": persona["split"], "focus": persona["focus"],
               "a_id": a["candidate_id"], "b_id": b["candidate_id"], "a_x": a["x"], "b_x": b["x"],
               "model": model, "prompt_version": PROMPT_VERSION, "ties": ties, "synthetic": True}
     draw = program_tie(persona, a, b)
+    if draw and ties == "dominance":
+        winner = "A" if dominates(a, b) else "B" if dominates(b, a) else None
+        if winner:
+            return {**record, "label": winner, "source": "program_dominance"}
+        return {**record, "label": "tie", "source": "program"}
     if draw and (ties == "strict" or all_near(a, b)):
         return {**record, "label": "tie", "source": "program"}
     started = time.time()
@@ -168,20 +185,21 @@ def judge(model: str, persona: dict, a: dict, b: dict, ties: str = "strict") -> 
 
 
 def free_other_models(model: str) -> None:
-    """One model per batch: unload any other model the server holds in GPU memory."""
+    """One model per batch: unload the other qwen2.5 models this window uses (never another
+    window's models, such as the parsing block's fine-tuned one)."""
     try:
         with urllib.request.urlopen(f"{ollama.base_url()}/api/ps", timeout=5) as response:
             loaded = [item["name"] for item in json.loads(response.read())["models"]]
     except (OSError, ValueError, KeyError):
         return
     for name in loaded:
-        if name != model:
+        if name != model and name.startswith("qwen2.5:"):
             print(f"unloading {name} to leave the GPU to {model}", flush=True)
             ollama.unload(name)
 
 
 def run_jobs(model: str, jobs: list[tuple[dict, dict, dict]], path: Path, workers: int,
-             ties: str = "strict") -> list[dict]:
+             ties: str = "dominance") -> list[dict]:
     """Judge every (persona, a, b), appending each result to ``path`` as it finishes (resumable)."""
     done = {}
     if path.exists():
@@ -216,7 +234,8 @@ def report(rows: list[dict]) -> dict:
     plain = [row for row in asked if not row.get("draw_hint")]
     first = Counter(answer["choice"] for row in asked for answer in (row["forward"], row["swapped"]))
     return {
-        "pairs": len(rows), "program_ties": len(rows) - len(asked), "asked_model": len(asked),
+        "pairs": len(rows), "program_ties": sum(r["source"] == "program" for r in rows),
+        "program_dominance": sum(r["source"] == "program_dominance" for r in rows), "asked_model": len(asked),
         "consistent_all": f"{len(rows) - len(asked) + len(agree)}/{len(rows)}",
         "consistent_rate_all": round((len(rows) - len(asked) + len(agree)) / max(len(rows), 1), 3),
         "consistent_rate_asked": round(len(agree) / max(len(asked), 1), 3),
@@ -286,17 +305,17 @@ def main() -> int:
     parser.add_argument("mode", choices=("pilot", "run"))
     parser.add_argument("--model", default="qwen2.5:7b")
     parser.add_argument("--workers", type=int, default=1, help="requests in flight at once")
-    parser.add_argument("--ties", choices=("strict", "hint"), default="strict",
-                        help="strict: near-equal main concern is a tie; hint: tell the model and let it decide")
+    parser.add_argument("--ties", choices=("dominance", "strict", "hint"), default="dominance",
+                        help="what to do when the main concern is near-equal (see the module notes)")
     parser.add_argument("--limit", type=int, default=0, help="only the first N pairs (a quick check)")
     args = parser.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     tag = args.model.replace(":", "_")
     if args.mode == "pilot":
-        jobs, name = pilot_jobs(), f"rank_pilot_v3{'h' if args.ties == 'hint' else ''}_{tag}"
+        jobs, name = pilot_jobs(), f"rank_pilot_v3{SUFFIX[args.ties]}_{tag}"
     else:
         jobs, sets = full_jobs()
-        name = f"labels_v3{'h' if args.ties == 'hint' else ''}_{tag}"
+        name = f"labels_v3{SUFFIX[args.ties]}_{tag}"
         (OUT / "candidate_sets.json").write_text(json.dumps(
             {"note": "合成数据：80 个合成画像的候选课表（真实课表快照排出的可行课表）与特征。", "seed": SEED,
              "sets": sets}, ensure_ascii=False), encoding="utf-8")

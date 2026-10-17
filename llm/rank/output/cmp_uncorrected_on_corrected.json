@@ -1,0 +1,313 @@
+{
+ "note": "合成数据：训练和测试标签都来自大模型扮演的合成画像，不是真实学生。",
+ "labels": "llm/rank/output/labels_v3d_qwen2.5_14b.jsonl",
+ "program_pairs_added": "strict",
+ "program_share": null,
+ "train_pairs": 2187,
+ "test_pairs": 380,
+ "test_personas": 20,
+ "random_baseline": {
+  "pairwise_accuracy": 0.5,
+  "top3_hit": 0.375
+ },
+ "results": [
+  {
+   "model": "等权打分",
+   "params": {},
+   "cv_accuracy": null,
+   "pairwise_accuracy": 0.7631578947368421,
+   "ci95": [
+    0.6829816151202749,
+    0.8343378271213322
+   ],
+   "accuracy_by_label_source": {
+    "model": 0.6570048309178744,
+    "program_dominance": 0.8901734104046243
+   },
+   "top3_hit": 0.6638888888888889,
+   "top3_ceiling": 0.9083333333333334,
+   "best_in_top3": 0.7833333333333333,
+   "ms_per_student": 0.031363749876618385,
+   "per_persona_top3": {
+    "commuter_2": 0.667,
+    "commuter_5": 0.333,
+    "worker_4": 0.333,
+    "worker_8": 0.667,
+    "parent_6": 0.667,
+    "parent_8": 0.667,
+    "night_owl_2": 0.667,
+    "night_owl_8": 0.833,
+    "intern_5": 0.778,
+    "intern_8": 0.667,
+    "near_campus_3": 0.667,
+    "near_campus_4": 0.333,
+    "early_bird_1": 0.833,
+    "early_bird_5": 1.0,
+    "athlete_3": 0.778,
+    "athlete_6": 0.667,
+    "carer_5": 0.667,
+    "carer_8": 0.667,
+    "other_5": 0.833,
+    "other_8": 0.556
+   }
+  },
+  {
+   "model": "按 cares 打分（基准）",
+   "params": {},
+   "cv_accuracy": null,
+   "pairwise_accuracy": 0.6855263157894737,
+   "ci95": [
+    0.6082815508021391,
+    0.7573014629049112
+   ],
+   "accuracy_by_label_source": {
+    "model": 0.855072463768116,
+    "program_dominance": 0.48265895953757226
+   },
+   "top3_hit": 0.3583333333333333,
+   "top3_ceiling": 0.9083333333333334,
+   "best_in_top3": 0.325,
+   "ms_per_student": 0.013008327223360538,
+   "per_persona_top3": {
+    "commuter_2": 0.333,
+    "commuter_5": 0.333,
+    "worker_4": 0.333,
+    "worker_8": 0.333,
+    "parent_6": 0.0,
+    "parent_8": 0.333,
+    "night_owl_2": 0.0,
+    "night_owl_8": 0.167,
+    "intern_5": 0.444,
+    "intern_8": 0.667,
+    "near_campus_3": 0.333,
+    "near_campus_4": 0.667,
+    "early_bird_1": 0.667,
+    "early_bird_5": 0.0,
+    "athlete_3": 0.444,
+    "athlete_6": 0.333,
+    "carer_5": 0.333,
+    "carer_8": 0.5,
+    "other_5": 0.5,
+    "other_8": 0.444
+   }
+  },
+  {
+   "model": "成对逻辑回归（只用课表特征）",
+   "params": {
+    "C": 0.1
+   },
+   "cv_accuracy": 0.8969853330822642,
+   "pairwise_accuracy": 0.7578947368421053,
+   "ci95": [
+    0.6632221370952424,
+    0.8445673142320106
+   ],
+   "accuracy_by_label_source": {
+    "model": 0.5555555555555556,
+    "program_dominance": 1.0
+   },
+   "top3_hit": 0.6166666666666667,
+   "top3_ceiling": 0.9083333333333334,
+   "best_in_top3": 0.8583333333333332,
+   "ms_per_student": 0.02034583128988743,
+   "per_persona_top3": {
+    "commuter_2": 0.833,
+    "commuter_5": 1.0,
+    "worker_4": 0.333,
+    "worker_8": 0.667,
+    "parent_6": 0.667,
+    "parent_8": 0.667,
+    "night_owl_2": 0.667,
+    "night_owl_8": 0.667,
+    "intern_5": 0.778,
+    "intern_8": 0.5,
+    "near_campus_3": 0.333,
+    "near_campus_4": 0.333,
+    "early_bird_1": 0.5,
+    "early_bird_5": 1.0,
+    "athlete_3": 0.556,
+    "athlete_6": 0.667,
+    "carer_5": 0.333,
+    "carer_8": 0.667,
+    "other_5": 0.833,
+    "other_8": 0.333
+   },
+   "accuracy_two_cares": 0.7558139534883721
+  },
+  {
+   "model": "成对逻辑回归 + 学生交叉项",
+   "params": {
+    "C": 0.3
+   },
+   "cv_accuracy": 0.9373456712134957,
+   "pairwise_accuracy": 0.8921052631578947,
+   "ci95": [
+    0.8203753351206434,
+    0.9458128078817734
+   ],
+   "accuracy_by_label_source": {
+    "model": 0.8454106280193237,
+    "program_dominance": 0.9479768786127167
+   },
+   "top3_hit": 0.7805555555555556,
+   "top3_ceiling": 0.9083333333333334,
+   "best_in_top3": 0.9833333333333332,
+   "ms_per_student": 0.04352666903287172,
+   "per_persona_top3": {
+    "commuter_2": 0.833,
+    "commuter_5": 1.0,
+    "worker_4": 0.333,
+    "worker_8": 0.833,
+    "parent_6": 0.667,
+    "parent_8": 0.667,
+    "night_owl_2": 1.0,
+    "night_owl_8": 0.833,
+    "intern_5": 0.778,
+    "intern_8": 0.833,
+    "near_campus_3": 0.667,
+    "near_campus_4": 0.667,
+    "early_bird_1": 0.833,
+    "early_bird_5": 1.0,
+    "athlete_3": 0.778,
+    "athlete_6": 1.0,
+    "carer_5": 0.667,
+    "carer_8": 0.833,
+    "other_5": 0.833,
+    "other_8": 0.556
+   },
+   "accuracy_two_cares": 0.8488372093023255
+  },
+  {
+   "model": "成对逻辑回归 + 交叉项（不看 cares 顺序）",
+   "params": {
+    "C": 3
+   },
+   "cv_accuracy": 0.9391132792205086,
+   "pairwise_accuracy": 0.8868421052631579,
+   "ci95": [
+    0.8127826285492887,
+    0.95
+   ],
+   "accuracy_by_label_source": {
+    "model": 0.8599033816425121,
+    "program_dominance": 0.9190751445086706
+   },
+   "top3_hit": 0.763888888888889,
+   "top3_ceiling": 0.9083333333333334,
+   "best_in_top3": 0.9333333333333332,
+   "ms_per_student": 0.044815829023718834,
+   "per_persona_top3": {
+    "commuter_2": 0.833,
+    "commuter_5": 1.0,
+    "worker_4": 0.667,
+    "worker_8": 0.833,
+    "parent_6": 0.667,
+    "parent_8": 0.667,
+    "night_owl_2": 0.667,
+    "night_owl_8": 0.833,
+    "intern_5": 0.778,
+    "intern_8": 0.833,
+    "near_campus_3": 0.667,
+    "near_campus_4": 0.333,
+    "early_bird_1": 0.833,
+    "early_bird_5": 1.0,
+    "athlete_3": 0.778,
+    "athlete_6": 1.0,
+    "carer_5": 0.667,
+    "carer_8": 0.833,
+    "other_5": 0.833,
+    "other_8": 0.556
+   },
+   "accuracy_two_cares": 0.813953488372093
+  },
+  {
+   "model": "随机森林",
+   "params": {
+    "n_estimators": 300,
+    "max_depth": 8,
+    "min_samples_leaf": 1
+   },
+   "cv_accuracy": 0.9374579433928034,
+   "pairwise_accuracy": 0.9236842105263158,
+   "ci95": [
+    0.8610949612403102,
+    0.9734765553731071
+   ],
+   "accuracy_by_label_source": {
+    "model": 0.8599033816425121,
+    "program_dominance": 1.0
+   },
+   "top3_hit": 0.7416666666666666,
+   "top3_ceiling": 0.9083333333333334,
+   "best_in_top3": 0.7833333333333333,
+   "ms_per_student": 15.896600419655442,
+   "per_persona_top3": {
+    "commuter_2": 0.667,
+    "commuter_5": 0.667,
+    "worker_4": 0.333,
+    "worker_8": 0.667,
+    "parent_6": 0.667,
+    "parent_8": 0.667,
+    "night_owl_2": 1.0,
+    "night_owl_8": 0.833,
+    "intern_5": 0.778,
+    "intern_8": 0.833,
+    "near_campus_3": 0.667,
+    "near_campus_4": 0.667,
+    "early_bird_1": 0.833,
+    "early_bird_5": 1.0,
+    "athlete_3": 0.778,
+    "athlete_6": 0.667,
+    "carer_5": 0.667,
+    "carer_8": 0.833,
+    "other_5": 0.833,
+    "other_8": 0.778
+   }
+  },
+  {
+   "model": "小型神经网络",
+   "params": {
+    "hidden_layer_sizes": [
+     16
+    ],
+    "alpha": 0.001
+   },
+   "cv_accuracy": 0.9385197107349527,
+   "pairwise_accuracy": 0.9263157894736842,
+   "ci95": [
+    0.8722376246478558,
+    0.9698775221000067
+   ],
+   "accuracy_by_label_source": {
+    "model": 0.8840579710144928,
+    "program_dominance": 0.976878612716763
+   },
+   "top3_hit": 0.8166666666666668,
+   "top3_ceiling": 0.9083333333333334,
+   "best_in_top3": 0.8833333333333332,
+   "ms_per_student": 0.578557918779552,
+   "per_persona_top3": {
+    "commuter_2": 0.833,
+    "commuter_5": 1.0,
+    "worker_4": 0.667,
+    "worker_8": 0.667,
+    "parent_6": 0.667,
+    "parent_8": 0.667,
+    "night_owl_2": 1.0,
+    "night_owl_8": 0.833,
+    "intern_5": 0.778,
+    "intern_8": 0.833,
+    "near_campus_3": 0.667,
+    "near_campus_4": 0.667,
+    "early_bird_1": 0.833,
+    "early_bird_5": 1.0,
+    "athlete_3": 0.778,
+    "athlete_6": 1.0,
+    "carer_5": 1.0,
+    "carer_8": 0.833,
+    "other_5": 0.833,
+    "other_8": 0.778
+   }
+  }
+ ]
+}

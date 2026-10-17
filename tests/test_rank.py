@@ -91,16 +91,30 @@ class ModelTests(unittest.TestCase):
         self.assertEqual(ranked[0]["score"], 2 * -2.0)
 
     def test_rank_returns_every_candidate_best_first(self):
-        candidates = [{"candidate_id": cid, "features": {"campus_days": d, "gap_min": g, "outside_min": o}}
-                      for cid, d, g, o in (("a", 3.0, 100.0, 0.0), ("b", 2.0, 300.0, 30.0), ("c", 4.0, 0.0, 60.0))]
+        # b saves a campus day but waits 5 hours more; a is worse than c on waiting and equal otherwise.
+        candidates = [{"candidate_id": cid, "features": {"campus_days": d, "gap_min": g, "outside_min": 0.0}}
+                      for cid, d, g in (("a", 3.0, 150.0), ("b", 2.0, 300.0), ("c", 3.0, 0.0))]
         for prefs in ({"cares": ["campus_days"]}, {"cares": ["gap"]}, {}):
             ranked = rank(candidates, prefs)
             self.assertEqual(sorted(item["candidate_id"] for item in ranked), ["a", "b", "c"])
             scores = [item["score"] for item in ranked]
             self.assertEqual(scores, sorted(scores, reverse=True))
+            self.assertEqual(ranked[-1]["candidate_id"] == "c", False)      # c is never last: it beats a
         self.assertEqual(rank(candidates, {"cares": ["campus_days"]})[0]["candidate_id"], "b")
         self.assertEqual(rank(candidates, {"cares": ["gap"]})[0]["candidate_id"], "c")
         self.assertEqual(rank([], {}), [])
+
+    def test_trained_model_file_is_sane(self):
+        spec = model.load()
+        if spec is None:
+            self.skipTest("no model.json")
+        self.assertEqual(spec["features"], list(NAMES))
+        self.assertEqual(len(spec["weights"]), len(NAMES) * (1 + len(model.STUDENT_TERMS)))
+        self.assertTrue(spec["synthetic_labels"])
+        for care, feature in (("campus_days", "campus_days"), ("gap", "gap_h"), ("outside_hours", "outside_h")):
+            weights = model.personal_weights(model.student_terms({"cares": [care]}), spec)
+            self.assertLess(weights[feature], 0)                         # the student wants less of it
+            self.assertEqual(min(weights, key=weights.get), feature)     # ...and it matters most
 
     def test_rule_fallback(self):
         candidates = [{"candidate_id": "x", "features": {"campus_days": 2.0, "gap_min": 0.0, "outside_min": 0.0}},

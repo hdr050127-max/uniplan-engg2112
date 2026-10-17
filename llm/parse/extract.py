@@ -23,8 +23,9 @@ _ONLY = re.compile(r"只|仅|才|\b(?:only|not until|no earlier)\b")
 _AVAILABLE = re.compile(r"有空|可以|能来|能上|空闲|\b(?:free|available|ok|okay|fine)\b")
 _FINISH = re.compile(r"结束|下课|走|离开|回家|离校|放学|\b(?:leave|finish\w*|done|home|out by|wrap up)\b")
 _START = re.compile(r"再|开始|上课|来学校|到学校|\b(?:start\w*|begin\w*|come in|arrive|class(?:es)? (?:after|from))\b")
-_EXCEPT_ONLY = re.compile(r"除了.*都(?:不|没)|(?:其他|其余|别的).*(?:不|没)|\bexcept\b.*\b(?:no|not|can'?t)\b"
-                          r"|(?:other days|the rest).*\b(?:no|not|can'?t|busy)\b")
+_UNFREE = r"(?:不行|不可以|不能|不方便|没空|没时间|没法|忙)"
+_EXCEPT_ONLY = re.compile(r"除了.*都" + _UNFREE + r"|(?:其他|其余|别的)[^，,。.;；]{0,8}" + _UNFREE
+                          + r"|\bexcept\b.*\b(?:no|not|can'?t)\b|(?:other days|the rest).*\b(?:no|not|can'?t|busy)\b")
 _SPAN = re.compile(r"在校|在学校|待|呆|留在|\b(?:on campus|at uni|at school|at campus|stay\w*|spend\w*|be there)\b")
 _OFF = re.compile(r"休息|空出|\b(?:off|free days?)\b")
 _HOURS = re.compile(r"(\d+(?:\.\d+)?)\s*(?:个)?\s*(半)?\s*(?:小时|钟头|hours?\b|hrs?\b|h\b)")
@@ -62,7 +63,8 @@ def _windows(text: str) -> list[Window]:
     times = find_times(text)
     parts = [part for part in find_parts(text)
              if not any(part[0] < end and start < part[1] for start, end, *_ in times)]
-    available = bool(_ONLY.search(text) or _AVAILABLE.search(text) and not _NEGATION.search(text))
+    available = bool(_ONLY.search(text) or _EXCEPT_ONLY.search(text)
+                     or _AVAILABLE.search(text) and not _NEGATION.search(text))
     items: list[tuple[int, str, list]] = [(start, "day", value) for start, _, value in days]
     items += [(start, "time", _avoid(kind, a, b, text, available)) for start, _, kind, a, b in times]
     items += [(start, "time", _complement([window]) if available else [window]) for start, _, window in parts]
@@ -126,8 +128,9 @@ def _minutes(text: str) -> int | None:
 
 
 def _preferred(text: str) -> tuple[int, int] | None:
-    windows = [window for _, _, kind, a, b in find_times(text)
-               for window in _avoid(kind, a, b, text, bool(_ONLY.search(text)))]
+    # A soft wish usually says when classes WOULD suit ("最好九点以后"), unless it is negated.
+    available = not _NEGATION.search(text) or bool(_ONLY.search(text))
+    windows = [window for _, _, kind, a, b in find_times(text) for window in _avoid(kind, a, b, text, available)]
     if not windows:
         return None
     start = max([end for start, end in windows if start == 0], default=DEFAULT_HOURS[0])

@@ -97,8 +97,8 @@ CLOCK = (r"(?:" + _MARK + r"\s*)?\d{1,2}(?:\s*[:.]\s*\d{2}|\s*点\s*(?:\d{1,2}\s
 _STRONG = re.compile(r"[:点]|am|pm|o'?clock")     # what makes a lone number a time
 _NOON = r"(?:中午|noon|midday|midnight|lunchtime)"
 _T = r"(" + CLOCK + r"|" + _NOON + r")"
-_BEFORE_WORD = r"(?:before|until|till|by|earlier than|no later than)"
-_AFTER_WORD = r"(?:after|from|later than|past|no earlier than)"
+_BEFORE_WORD = r"(?:before|until|till|by|earlier than|no later than|早于|不晚于)"
+_AFTER_WORD = r"(?:after|from|later than|past|no earlier than|晚于|不早于)"
 _TIME_PATTERNS = (
     ("range", re.compile(r"between\s*" + _T + r"\s*and\s*" + _T)),
     ("range", re.compile(_T + r"\s*(?:和|与|到|至)\s*" + _T + r"\s*之间")),
@@ -176,7 +176,7 @@ def find_times(text: str) -> list[tuple[int, int, str, int, int]]:
                                         or re.search(r"between|之间|从|from|上班|打工|work|shift", text)):
                 continue
             if kind in ("before", "after") and not (_STRONG.search(tokens[0]) or re.search(_NOON, tokens[0])
-                                                     or re.search(r"[a-z]", match.group())):
+                                                     or re.search(r"[a-z]|于", match.group())):
                 continue
             values = [clock(token, default) for token in tokens]
             if kind == "range":

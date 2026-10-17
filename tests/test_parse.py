@@ -63,6 +63,10 @@ class NumberTests(unittest.TestCase):
         self.assertEqual(block("blocked_time", "I can only come after 10am on Tuesdays"), "Tue 0:00-10:00")
         self.assertEqual(block("blocked_time", "下午三点前要走"), "Mon-Fri 15:00-24:00")
         self.assertEqual(block("blocked_time", "10点以后才有空"), "Mon-Fri 0:00-10:00")
+        self.assertEqual(block("blocked_time", "不希望早于10am上课"), "Mon-Fri 0:00-10:00")
+        self.assertEqual(block("blocked_time", "除了周二和周四的晚上，其他时间都不方便上课"),
+                         "Mon,Wed,Fri all; Tue,Thu 0:00-18:00")
+        self.assertEqual(block("blocked_time", "周三下午不行，其他时间都没问题"), "Wed 12:00-18:00")
 
     def test_counts_hours_lunch_and_soft_hours(self):
         self.assertEqual(fields("max_days", "一周最多来三天"), {"max_days_per_week": 3})
@@ -74,6 +78,9 @@ class NumberTests(unittest.TestCase):
         self.assertEqual(fields("prefer_no_early_late", "最好十点以后再上课")["preferred_hours"],
                          {"weekday": 1, "start_min": 600, "end_min": 1080})
         self.assertEqual(fields("prefer_no_early_late", "ideally finish by 4pm")["preferred_hours"]["end_min"], 960)
+        self.assertEqual(fields("prefer_no_early_late", "最好九点以后的课多一点")["preferred_hours"]["start_min"], 540)
+        self.assertEqual(fields("prefer_no_early_late", "ideally no classes before 10")["preferred_hours"]["start_min"],
+                         600)
         self.assertEqual(fields("prefer_no_early_late", "早上起不来"), {"cares": ["outside_hours"]})
 
     def test_missing_numbers_give_no_fields(self):

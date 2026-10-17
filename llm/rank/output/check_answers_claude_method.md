@@ -13,4 +13,6 @@ Rule, applied in this order:
    every other row of the table (campus days, waiting, early or late classes, longest day,
    one-class trips) and better on at least one. Otherwise answer 差不多.
 
-Result: 红 26, 蓝 25, 差不多 9.
+Result: 红 25, 蓝 25, 差不多 10.
+t007, t008, t009, t058, t059 and t060 were re-answered after their persona sentences changed
+集中 (concentrated) to 紧凑 (compact, i.e. little waiting) in commit 4b44aa3.

@@ -115,7 +115,8 @@ def facts_of(index: int, picks: list[Candidate], conditions: Conditions) -> dict
 
 
 def _cares(conditions: Conditions) -> list[str]:
-    return [care for care in FEATURE if care in (conditions.get("cares") or FEATURE)]
+    """Most important first, as the contract orders them."""
+    return [care for care in (conditions.get("cares") or FEATURE) if care in FEATURE]
 
 
 def _compare_text(facts: dict) -> str:

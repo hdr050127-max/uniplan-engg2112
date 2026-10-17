@@ -83,6 +83,14 @@ class ConditionTests(unittest.TestCase):
                          {"unavailable_windows": [{"weekday": 5, "start_min": 0, "end_min": 1439}]})
         self.assertEqual(len(clause["problems"]), 2)
 
+    def test_cares_keep_the_student_order_then_the_rest(self):
+        profile = base_profile() | {"preferred_hours": {"start_min": 540, "end_min": 1080}}
+        self.assertEqual(conditions_of(profile, ("gap", "campus_days", "outside_hours"), ["outside_hours", "gap"])["cares"],
+                         ["outside_hours", "gap", "campus_days"])
+        self.assertEqual(conditions_of(profile, ("gap", "campus_days"), ["outside_hours", "campus_days"])["cares"],
+                         ["campus_days", "gap"])
+        self.assertEqual(conditions_of(profile, ("gap", "campus_days"))["cares"], ["gap", "campus_days"])
+
     def test_merge_adds_windows_and_preferred_hours(self):
         merged = merge_conditions(base_profile(unavailable_windows=[{"weekday": 1, "start_min": 0, "end_min": 600}]), {
             "unavailable_windows": [{"weekday": 5, "start_min": 0, "end_min": 1439}], "max_days_per_week": 3,
@@ -127,6 +135,28 @@ class EndToEndTests(unittest.TestCase):
         recommendation, items = self.check_recommendation(result)
         for cid in recommendation["menus"]["gap"]["picks"]:
             self.assertNotIn("5", items[cid]["pattern"])
+
+    def test_word_order_sets_the_order_rank_receives(self):
+        """cares[0] is the student's main concern (llm/contracts.py), so word order must reach rank()."""
+        real_rank, runs = advisor.rank, []
+        for text in ("I hate long gaps between classes, and I want as few days on campus as possible",
+                     "I want as few days on campus as possible, and I hate long gaps between classes"):
+            seen = []
+
+            def spy(candidates, prefs):
+                seen.append(list(prefs["cares"]))
+                return real_rank(candidates, prefs)
+
+            with mock.patch.object(advisor, "rank", side_effect=spy):
+                result = plan_from_sentence(text, base_profile(), self.catalog, selected_groups=self.groups)
+            runs.append((seen, result["ranking_result"]["recommendation"]["menus"]["gap,campus_days"]["cares"],
+                         result["cares"]))
+        (first_calls, first_menu, first_cares), (second_calls, second_menu, second_cares) = runs
+        self.assertEqual((first_cares, second_cares), (["gap", "campus_days"], ["campus_days", "gap"]))
+        self.assertEqual((first_menu, second_menu), (["gap", "campus_days"], ["campus_days", "gap"]))
+        self.assertIn(["gap", "campus_days", "outside_hours"], first_calls)
+        self.assertIn(["campus_days", "gap", "outside_hours"], second_calls)
+        self.assertNotIn(["gap", "campus_days", "outside_hours"], second_calls)
 
     def test_explicit_limits_hold_on_every_pick(self):
         conditions = {"max_days_per_week": 4, "max_daily_minutes": 360,
@@ -303,6 +333,11 @@ class ServerTests(unittest.TestCase):
         items = result["ranking_result"]["shortlist"]["items"]
         self.assertTrue(all(cid in items for menu in recommendation["menus"].values() for cid in menu["picks"]))
         self.assertEqual(self.post("/api/prepare", {"profile": profile, "student_text": "x" * 501})[0], 400)
+        self.assertEqual(self.post("/api/prepare", {"profile": profile, "cares": ["gap", "gap"]})[0], 400)
+        _, ordered = self.post("/api/prepare", {"profile": profile, "save": False, "required_groups": groups,
+                                                "student_text": "", "cares": ["outside_hours", "gap"]})
+        self.assertEqual(ordered["ranking_result"]["recommendation"]["menus"]["gap,campus_days,outside_hours"]["cares"],
+                         ["outside_hours", "gap", "campus_days"])
 
         status, reasons = self.post("/api/explain", {"token": recommendation["explain_token"], "axes": "gap"})
         self.assertEqual(status, 200)

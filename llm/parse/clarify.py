@@ -1,7 +1,9 @@
 """Restate what parse() understood, and ask a few questions back. Rules only, standard library.
 
-The summary is built from the conditions and the unrecognised clauses by fixed phrases (no free
-model text). Questions come in this order, at most MAX_QUESTIONS per sentence:
+All text is English, following the copy rules in docs/DESIGN.md section 7, and built from the
+fields by fixed phrases (no free model text): describe_clause() is the margin note written next to
+each clause, and the summary ("Read as: ...") joins those notes. Questions come in this order, at
+most MAX_QUESTIONS per sentence:
   low_confidence  a second opinion (the plain-Python linear model) disagrees with the label; when
                   the label came from the linear model itself, its top two are closer than MARGIN;
                   Wording the boundary rules read differently from the label is asked about too
@@ -31,14 +33,19 @@ DISAGREE_MIN = 0.3    # model run time: ask when the linear model gives its othe
 MARGIN = 0.1          # linear run time: ask when its top two probabilities are closer than this; the value
                       # that interrupts about as often on validation as the model run time does
 
-_ZH_DAY = {1: "周一", 2: "周二", 3: "周三", 4: "周四", 5: "周五", 6: "周六", 7: "周日"}
-_CARE = {"campus_days": "尽量少去学校几天", "gap": "课之间尽量少等", "outside_hours": "尽量少早晚课"}
-_LABEL_TEXT = {
-    "blocked_time": "这段时间不能上课", "max_days": "每周最多来几天", "max_daily_hours": "每天最多上几小时",
-    "lunch": "要留午饭时间", "in_person_only": "只要线下课", "prefer_fewer_days": "尽量少去学校几天",
-    "prefer_less_waiting": "课之间尽量少等", "prefer_no_early_late": "最好别太早或太晚（不是一定）",
-    "other": "和排课无关，或排课管不了",
-}
+NOT_USABLE = "Not something a timetable can use"
+# What a label means for a clause that gives no number or time (an option's text).
+_OPTION = {"blocked_time": "Not available at that time", "max_days": "A limit on days a week",
+           "max_daily_hours": "A limit on hours a day", "lunch": "Time for lunch",
+           "in_person_only": "Only in-person classes", "prefer_fewer_days": "As few days on campus as possible",
+           "prefer_less_waiting": "As little waiting between classes as possible",
+           "prefer_no_early_late": "Fewer early or late classes, if possible", "other": NOT_USABLE}
+# The margin note when the label needs a number or time the clause does not give.
+_MISSING = {"blocked_time": "Busy, but no day or time given",
+            "max_days": "A limit on days a week, but no number given",
+            "max_daily_hours": "A limit on hours a day, but no number given"}
+_EARLY = re.compile(r"early|morning|8\s?am|早|上午")
+_LATE = re.compile(r"late|evening|night|晚")
 # Soft wording that is not one of the hedge words of rule 5 ("would be nice", "hoping", ...).
 _SOFT = re.compile(r"would be (?:nice|great|good|ideal|amazing|lovely)|if (?:that'?s|that is|it'?s) (?:doable|possible|ok)|"
                    r"if that works|\bhoping\b|\bi hope\b|\bhopefully\b|i'?d love|would love|nice to have|"
@@ -63,76 +70,126 @@ _LIKES = re.compile(r"可以|没问题|喜欢|想|好|\b(?:fine|ok|okay|good|gre
 
 
 def _clock(minutes: int) -> str:
-    return f"{minutes // 60}:{minutes % 60:02d}"
+    """6 pm, 9:30 am."""
+    if minutes == 1440:
+        return "midnight"
+    hour, minute = divmod(minutes, 60)
+    return f"{hour % 12 or 12}{f':{minute:02d}' if minute else ''} {'am' if hour < 12 else 'pm'}"
 
 
 def _days(days: list[int]) -> str:
+    """Tue and Thu, Mon to Thu, on weekends."""
     days = sorted(days)
-    if days == [1, 2, 3, 4, 5]:
-        return "每天"
     if days == [6, 7]:
-        return "周末"
+        return "on weekends"
     if len(days) >= 3 and days == list(range(days[0], days[-1] + 1)):
-        return f"{_ZH_DAY[days[0]]}到{_ZH_DAY[days[-1]]}"
-    return "、".join(_ZH_DAY[day] for day in days)
+        return f"{DAY_NAMES[days[0]]} to {DAY_NAMES[days[-1]]}"
+    names = [DAY_NAMES[day] for day in days]
+    return names[0] if len(names) == 1 else ", ".join(names[:-1]) + " and " + names[-1]
 
 
 def _span(start: int, end: int) -> str:
     if (start, end) == (0, 1440):
-        return "全天"
+        return ""
     if start == 0:
-        return f" {_clock(end)} 以前"
+        return f"before {_clock(end)}"
     if end == 1440:
-        return f" {_clock(start)} 以后"
-    return f" {_clock(start)}–{_clock(end)}"
+        return f"after {_clock(start)}"
+    return f"from {_clock(start)} to {_clock(end)}"
+
+
+def _not_available(windows: list[dict]) -> str:
+    by_time: dict[tuple[int, int], list[int]] = {}
+    for window in windows:
+        by_time.setdefault((window["start_min"], window["end_min"]), []).append(window["weekday"])
+    groups = []
+    for (start, end), days in sorted(by_time.items(), key=lambda item: (min(item[1]), item[0])):
+        day_text = "" if sorted(days) == [1, 2, 3, 4, 5] else _days(days)
+        groups.append(" ".join(part for part in (day_text, _span(start, end)) if part) or "Mon to Fri")
+    return "Not available " + "; ".join(groups)
 
 
 def _hours(minutes: int) -> str:
-    return f"{minutes / 60:g}"
+    hours = minutes / 60
+    return f"{hours:g} hour{'' if hours == 1 else 's'}"
 
 
-def describe(conditions: Conditions) -> list[str]:
-    """Short Chinese phrases for conditions, hard ones first."""
-    phrases = []
-    by_time: dict[tuple[int, int], list[int]] = {}
-    for window in conditions.get("unavailable_windows") or []:
-        by_time.setdefault((window["start_min"], window["end_min"]), []).append(window["weekday"])
-    for (start, end), days in sorted(by_time.items(), key=lambda item: (min(item[1]), item[0])):
-        phrases.append(f"{_days(days)}{_span(start, end)}不能上课")
-    if conditions.get("max_days_per_week"):
-        phrases.append(f"每周最多来 {conditions['max_days_per_week']} 天")
-    if conditions.get("max_daily_minutes"):
-        phrases.append(f"每天最多上 {_hours(conditions['max_daily_minutes'])} 小时课")
-    if conditions.get("max_daily_span"):
-        phrases.append(f"每天在学校最多 {_hours(conditions['max_daily_span'])} 小时")
-    if conditions.get("lunch"):
-        lunch = conditions["lunch"]
-        phrases.append(f"{_clock(lunch['start_min'])}–{_clock(lunch['end_min'])} 之间留 {lunch['minutes']} 分钟吃午饭")
-    if conditions.get("in_person_only"):
-        phrases.append("只要线下课")
-    if conditions.get("preferred_hours"):
-        hours = conditions["preferred_hours"]
-        phrases.append(f"最好在 {_clock(hours['start_min'])}–{_clock(hours['end_min'])} 之间上课")
-    phrases += [_CARE[care] for care in conditions.get("cares") or [] if care in _CARE]
-    return phrases
+def _soft_hours(start: int, end: int) -> str:
+    if start == 540 and end != 1080:
+        return f"Done by {_clock(end)}, if possible"
+    if end == 1080 and start != 540:
+        return f"No classes before {_clock(start)}, if possible"
+    return f"Classes between {_clock(start)} and {_clock(end)}, if possible"
+
+
+def _early_late(text: str) -> str:
+    norm = normalize(text)
+    early, late = bool(_EARLY.search(norm)), bool(_LATE.search(norm))
+    return f"Fewer {'early' if early and not late else 'late' if late and not early else 'early or late'} classes, if possible"
+
+
+def _phrases(found: Conditions, text: str) -> list[str]:
+    """English phrases for the fields one clause gives, in sentence case."""
+    parts = []
+    if found.get("unavailable_windows"):
+        parts.append(_not_available(found["unavailable_windows"]))
+    if found.get("max_days_per_week"):
+        days = found["max_days_per_week"]
+        parts.append(f"At most {days} day{'' if days == 1 else 's'} a week")
+    if found.get("max_daily_minutes"):
+        parts.append(f"At most {_hours(found['max_daily_minutes'])} of class a day")
+    if found.get("max_daily_span"):
+        parts.append(f"At most {_hours(found['max_daily_span'])} on campus a day")
+    if found.get("lunch"):
+        lunch = found["lunch"]
+        parts.append(f"{lunch['minutes']} min for lunch between {_clock(lunch['start_min'])} and {_clock(lunch['end_min'])}")
+    if found.get("in_person_only"):
+        parts.append("Only in-person classes")
+    cares = found.get("cares") or []
+    if found.get("preferred_hours"):
+        parts.append(_soft_hours(found["preferred_hours"]["start_min"], found["preferred_hours"]["end_min"]))
+    elif "outside_hours" in cares:
+        parts.append(_early_late(text))
+    if "campus_days" in cares:
+        parts.append("As few days on campus as possible")
+    if "gap" in cares:
+        parts.append("As little waiting between classes as possible")
+    return parts
+
+
+def _lower_first(text: str) -> str:
+    return text[:1].lower() + text[1:] if text[:1].isalpha() else text
+
+
+def _join(parts: list[str]) -> str:
+    return "; ".join([parts[0]] + [_lower_first(part) for part in parts[1:]])
+
+
+def describe_clause(clause: dict) -> str:
+    """One margin note for a clause, written next to the student's words: "Not available Tue and Thu
+    after 6 pm", "At most 5 hours of class a day", "Not something a timetable can use"."""
+    if clause["label"] == "other":
+        return NOT_USABLE
+    parts = _phrases(clause["fields"], clause["text"])
+    return _join(parts) if parts else _MISSING.get(clause["label"], _OPTION[clause["label"]])
 
 
 def summary(result: ParseResult) -> str:
-    phrases = describe(result["conditions"])
-    unread = result["unrecognised"]
-    text = "我理解为：" + "；".join(phrases) if phrases else "我没读出排课要求"
-    if unread:
-        quoted = "".join(f"“{clause}”" for clause in unread)
-        text += ("；" if phrases else "。") + f"{quoted}{'这句' if len(unread) == 1 else '这几句'}排课管不了"
-    return text + "。"
+    """"Read as: ..." from the margin notes of the clauses, then the ones a timetable cannot use."""
+    notes = list(dict.fromkeys(describe_clause(c) for c in result["clauses"] if c["label"] != "other"))
+    unread = ", ".join(f"“{clause}”" for clause in result["unrecognised"])
+    if not notes:
+        return f"{NOT_USABLE}: {unread}." if unread else "Read as: nothing a timetable can use."
+    return "Read as: " + "; ".join(_lower_first(note) for note in notes) + "." + (
+        f" {NOT_USABLE}: {unread}." if unread else "")
 
 
 def _reading(label: str, clause: str) -> str:
-    """What choosing this label would mean for this clause, in the page's words."""
-    phrases = describe(fields(label, clause))
-    if label == "prefer_no_early_late" and not any(p.startswith("最好在") for p in phrases):
-        return _LABEL_TEXT[label]
-    return "；".join(phrases) if phrases and label != "other" else _LABEL_TEXT[label]
+    """What choosing this label would mean for this clause, as an option's text."""
+    if label == "other":
+        return NOT_USABLE
+    parts = _phrases(fields(label, clause), clause)
+    return _join(parts) if parts else _OPTION[label]
 
 
 def _relabel(label: str, clause: str) -> Option:
@@ -163,7 +220,7 @@ def _which(index: int, clause: dict, other: str) -> Question:
     if ({clause["label"], other} == {"blocked_time", "prefer_no_early_late"} and not named_days(text)
             and (find_times(text) or _PERIOD.search(text))):
         return _hard_soft_question(index, clause)
-    return {"kind": "low_confidence", "clause_index": index, "text": f"“{clause['text']}”是指？",
+    return {"kind": "low_confidence", "clause_index": index, "text": "Which did you mean?",
             "options": [_relabel(clause["label"], clause["text"]), _relabel(other, clause["text"])]}
 
 
@@ -208,52 +265,50 @@ def _hard_or_soft(index: int, clause: dict) -> Question | None:
 def _hard_soft_question(index: int, clause: dict) -> Question:
     hard = {"unavailable_windows": fields("blocked_time", clause["text"]).get("unavailable_windows", [])}
     soft = fields("prefer_no_early_late", clause["text"])
-    options = {"blocked_time": {"text": "一定不能（" + "；".join(describe(hard) or ["这段时间不能上课"]) + "）",
-                                "label": "blocked_time", "fields": hard},
-               "prefer_no_early_late": {"text": "最好不要（" + "；".join(describe(soft) or ["尽量少早晚课"]) + "）",
-                                        "label": "prefer_no_early_late", "fields": soft}}
+    options = {"blocked_time": {"text": "Can't", "label": "blocked_time", "fields": hard},
+               "prefer_no_early_late": {"text": "Would rather not", "label": "prefer_no_early_late", "fields": soft}}
     first, second = clause["label"], ({"blocked_time", "prefer_no_early_late"} - {clause["label"]}).pop()
-    return {"kind": "hard_or_soft", "clause_index": index, "text": f"“{clause['text']}”：是一定不能，还是最好不要？",
+    return {"kind": "hard_or_soft", "clause_index": index, "text": "Can't, or would rather not?",
             "options": [options[first], options[second]]}
 
 
 def _missing_value(index: int, clause: dict) -> Question | None:
     label, text = clause["label"], clause["text"]
-    keep = {"text": "先这样，我在句子里补上", "label": label, "fields": {}}
+    keep = {"text": "Leave as is", "label": label, "fields": {}}
     if label == "blocked_time" and not clause["fields"].get("unavailable_windows"):
-        return {"kind": "missing_value", "clause_index": index, "text": f"“{text}”：是哪几天、几点不能上课？请在句子里写上。",
-                "options": [keep, {"text": "这句不是排课要求", "label": "other", "fields": {}}]}
+        return {"kind": "missing_value", "clause_index": index, "text": "Which days and times? Add them to the sentence.",
+                "options": [keep, {"text": "Not a timetable request", "label": "other", "fields": {}}]}
     if label == "max_days" and not clause["fields"].get("max_days_per_week"):
-        return {"kind": "missing_value", "clause_index": index, "text": f"“{text}”：每周最多来几天？",
-                "options": [keep] + [{"text": f"最多 {n} 天", "label": "max_days", "fields": {"max_days_per_week": n}}
+        return {"kind": "missing_value", "clause_index": index, "text": "How many days a week, at most?",
+                "options": [keep] + [{"text": str(n), "label": "max_days", "fields": {"max_days_per_week": n}}
                                      for n in (2, 3, 4)]
-                + [{"text": "不限天数，少去几天就行", "label": "prefer_fewer_days", "fields": {}}]}
+                + [{"text": "No limit, just fewer days", "label": "prefer_fewer_days", "fields": {}}]}
     if label == "max_daily_hours" and not (clause["fields"].get("max_daily_minutes") or clause["fields"].get("max_daily_span")):
-        return {"kind": "missing_value", "clause_index": index, "text": f"“{text}”：每天最多上几小时课？",
-                "options": [keep] + [{"text": f"最多 {n} 小时", "label": "max_daily_hours",
+        return {"kind": "missing_value", "clause_index": index, "text": "How many hours of class a day, at most?",
+                "options": [keep] + [{"text": f"{n} h", "label": "max_daily_hours",
                                       "fields": {"max_daily_minutes": n * 60}} for n in (4, 5, 6)]
-                + [{"text": "不限", "label": "other", "fields": {}}]}
+                + [{"text": "No limit", "label": "other", "fields": {}}]}
     return None
 
 
 def _offers(result: ParseResult) -> list[Question]:
     conditions, offers = result["conditions"], []
     cares = conditions.get("cares") or []
-    no = {"text": "不用", "label": None, "fields": {}}
     if "campus_days" in cares and not conditions.get("max_days_per_week"):
-        offers.append({"kind": "offer", "clause_index": None, "text": "要不要定一个每周最多来几天？",
-                       "options": [no] + [{"text": f"最多 {n} 天", "label": None, "fields": {"max_days_per_week": n}}
-                                          for n in (2, 3, 4)]})
+        offers.append({"kind": "offer", "clause_index": None, "text": "Most days on campus?",
+                       "options": [{"text": "No limit", "label": None, "fields": {}}]
+                       + [{"text": str(n), "label": None, "fields": {"max_days_per_week": n}} for n in (2, 3, 4)]})
     if not conditions.get("lunch") and ("gap" in cares or conditions.get("max_daily_minutes")
                                         or conditions.get("max_daily_span")):
-        offers.append({"kind": "offer", "clause_index": None, "text": "要不要留出午饭时间？",
-                       "options": [no, {"text": "要，11:30–14:00 之间留 30 分钟", "label": None,
-                                        "fields": {"lunch": {"start_min": 690, "end_min": 840, "minutes": 30}}}]})
+        lunch = {"start_min": 690, "end_min": 840, "minutes": 30}
+        offers.append({"kind": "offer", "clause_index": None, "text": "Lunch break?",
+                       "options": [{"text": "No", "label": None, "fields": {}},
+                                   {"text": "30 min between 11:30 am and 2 pm", "label": None, "fields": {"lunch": lunch}}]})
     if not conditions.get("in_person_only") and any(_ONLINE.search(normalize(c)) and not _LIKES.search(normalize(c))
                                                     for c in result["unrecognised"]):     # "online is confusing"
-        offers.append({"kind": "offer", "clause_index": None, "text": "要不要只排线下课？",
-                       "options": [{"text": "不用，线上也行", "label": None, "fields": {}},
-                                   {"text": "只要线下课", "label": None, "fields": {"in_person_only": True}}]})
+        offers.append({"kind": "offer", "clause_index": None, "text": "Only in-person classes?",
+                       "options": [{"text": "No, online is fine", "label": None, "fields": {}},
+                                   {"text": "Yes", "label": None, "fields": {"in_person_only": True}}]})
     return offers[:MAX_OFFERS]
 
 

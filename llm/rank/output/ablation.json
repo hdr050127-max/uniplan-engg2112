@@ -4,103 +4,103 @@
  "ablation": [
   {
    "dropped": "（不去掉，完整模型）",
-   "accuracy": 0.9052631578947369,
-   "accuracy_qwen_pairs": 0.8695652173913043,
-   "accuracy_rule_pairs": 0.9479768786127167,
-   "top3_hit": 0.7972222222222223,
-   "best_in_top3": 0.9333333333333332,
+   "accuracy": 0.8973684210526316,
+   "accuracy_qwen_pairs": 0.8454106280193237,
+   "accuracy_rule_pairs": 0.9595375722543352,
+   "top3_hit": 0.7333333333333334,
+   "best_in_top3": 0.8833333333333332,
    "delta_accuracy": 0.0,
    "delta_top3": 0.0
   },
   {
    "dropped": "三个主项（到校天数、空等、早晚课）",
-   "accuracy": 0.8552631578947368,
-   "accuracy_qwen_pairs": 0.8357487922705314,
-   "accuracy_rule_pairs": 0.8786127167630058,
-   "top3_hit": 0.7583333333333334,
-   "best_in_top3": 0.9166666666666666,
+   "accuracy": 0.8473684210526315,
+   "accuracy_qwen_pairs": 0.8309178743961353,
+   "accuracy_rule_pairs": 0.8670520231213873,
+   "top3_hit": 0.7166666666666668,
+   "best_in_top3": 0.8833333333333332,
    "delta_accuracy": -0.050000000000000044,
-   "delta_top3": -0.03888888888888886
+   "delta_top3": -0.016666666666666607
   },
   {
    "dropped": "早课和晚课的细分",
    "accuracy": 0.8947368421052632,
-   "accuracy_qwen_pairs": 0.855072463768116,
-   "accuracy_rule_pairs": 0.9421965317919075,
-   "top3_hit": 0.7722222222222223,
-   "best_in_top3": 0.9333333333333332,
-   "delta_accuracy": -0.010526315789473717,
-   "delta_top3": -0.025000000000000022
+   "accuracy_qwen_pairs": 0.8454106280193237,
+   "accuracy_rule_pairs": 0.953757225433526,
+   "top3_hit": 0.7333333333333334,
+   "best_in_top3": 0.8833333333333332,
+   "delta_accuracy": -0.0026315789473684292,
+   "delta_top3": 0.0
   },
   {
    "dropped": "最早上课和最晚下课",
    "accuracy": 0.9052631578947369,
    "accuracy_qwen_pairs": 0.8502415458937198,
    "accuracy_rule_pairs": 0.9710982658959537,
-   "top3_hit": 0.775,
+   "top3_hit": 0.7333333333333334,
    "best_in_top3": 0.8833333333333332,
-   "delta_accuracy": 0.0,
-   "delta_top3": -0.022222222222222254
+   "delta_accuracy": 0.007894736842105288,
+   "delta_top3": 0.0
   },
   {
    "dropped": "最长的一天和上课最多的一天",
-   "accuracy": 0.8947368421052632,
-   "accuracy_qwen_pairs": 0.8599033816425121,
-   "accuracy_rule_pairs": 0.9364161849710982,
-   "top3_hit": 0.7555555555555555,
+   "accuracy": 0.8973684210526316,
+   "accuracy_qwen_pairs": 0.8454106280193237,
+   "accuracy_rule_pairs": 0.9595375722543352,
+   "top3_hit": 0.6944444444444444,
    "best_in_top3": 0.9333333333333332,
-   "delta_accuracy": -0.010526315789473717,
-   "delta_top3": -0.04166666666666674
+   "delta_accuracy": 0.0,
+   "delta_top3": -0.03888888888888897
   },
   {
    "dropped": "周五不用到校",
-   "accuracy": 0.9105263157894737,
-   "accuracy_qwen_pairs": 0.8695652173913043,
-   "accuracy_rule_pairs": 0.9595375722543352,
-   "top3_hit": 0.7972222222222223,
-   "best_in_top3": 0.9333333333333332,
-   "delta_accuracy": 0.0052631578947368585,
+   "accuracy": 0.9052631578947369,
+   "accuracy_qwen_pairs": 0.8454106280193237,
+   "accuracy_rule_pairs": 0.976878612716763,
+   "top3_hit": 0.7333333333333334,
+   "best_in_top3": 0.8833333333333332,
+   "delta_accuracy": 0.007894736842105288,
    "delta_top3": 0.0
   },
   {
    "dropped": "换楼次数",
    "accuracy": 0.8947368421052632,
-   "accuracy_qwen_pairs": 0.855072463768116,
-   "accuracy_rule_pairs": 0.9421965317919075,
-   "top3_hit": 0.7805555555555556,
-   "best_in_top3": 0.9333333333333332,
-   "delta_accuracy": -0.010526315789473717,
-   "delta_top3": -0.01666666666666672
+   "accuracy_qwen_pairs": 0.8454106280193237,
+   "accuracy_rule_pairs": 0.953757225433526,
+   "top3_hit": 0.7333333333333334,
+   "best_in_top3": 0.8833333333333332,
+   "delta_accuracy": -0.0026315789473684292,
+   "delta_top3": 0.0
   },
   {
    "dropped": "只为一节课到校",
-   "accuracy": 0.8526315789473684,
-   "accuracy_qwen_pairs": 0.8357487922705314,
-   "accuracy_rule_pairs": 0.8728323699421965,
-   "top3_hit": 0.7277777777777777,
-   "best_in_top3": 0.8333333333333333,
-   "delta_accuracy": -0.052631578947368474,
-   "delta_top3": -0.06944444444444453
+   "accuracy": 0.8921052631578947,
+   "accuracy_qwen_pairs": 0.8502415458937198,
+   "accuracy_rule_pairs": 0.9421965317919075,
+   "top3_hit": 0.7555555555555555,
+   "best_in_top3": 0.9333333333333332,
+   "delta_accuracy": -0.0052631578947368585,
+   "delta_top3": 0.022222222222222143
   },
   {
    "dropped": "线上课比例",
-   "accuracy": 0.9026315789473685,
+   "accuracy": 0.9105263157894737,
    "accuracy_qwen_pairs": 0.8599033816425121,
-   "accuracy_rule_pairs": 0.953757225433526,
-   "top3_hit": 0.8083333333333333,
-   "best_in_top3": 0.9333333333333332,
-   "delta_accuracy": -0.0026315789473684292,
-   "delta_top3": 0.011111111111111072
+   "accuracy_rule_pairs": 0.9710982658959537,
+   "top3_hit": 0.7333333333333334,
+   "best_in_top3": 0.8833333333333332,
+   "delta_accuracy": 0.013157894736842146,
+   "delta_top3": 0.0
   },
   {
    "dropped": "学生交叉项（只用课表特征）",
    "accuracy": 0.7552631578947369,
    "accuracy_qwen_pairs": 0.5507246376811594,
    "accuracy_rule_pairs": 1.0,
-   "top3_hit": 0.5916666666666667,
+   "top3_hit": 0.5916666666666666,
    "best_in_top3": 0.8083333333333332,
-   "delta_accuracy": -0.15000000000000002,
-   "delta_top3": -0.2055555555555556
+   "delta_accuracy": -0.14210526315789473,
+   "delta_top3": -0.14166666666666683
   }
  ]
 }

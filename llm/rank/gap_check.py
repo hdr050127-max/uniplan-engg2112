@@ -80,8 +80,9 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--labels", type=Path, required=True)
     parser.add_argument("--out", default="gap_check.json")
+    parser.add_argument("--model", type=Path, help="a model file other than llm/rank/model.json")
     args = parser.parse_args()
-    result = check(args.labels)
+    result = check(args.labels, json.loads(args.model.read_text(encoding="utf-8")) if args.model else None)
     (OUT / args.out).write_text(json.dumps(result, ensure_ascii=False, indent=1), encoding="utf-8")
     print(json.dumps({k: v for k, v in result.items() if k != "top_two"}, ensure_ascii=False, indent=1))
     for row in result["top_two"]:

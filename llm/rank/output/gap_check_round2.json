@@ -1,0 +1,73 @@
+{
+ "note": "合成数据：测试画像里最在意空等的人；老师 = 14B 或程序规则。",
+ "gap_focused_test_personas": 7,
+ "top_two": [
+  {
+   "persona": "worker_4",
+   "extra_gap_h": 0.96,
+   "first_waits_longer": true,
+   "teacher": "second",
+   "extra_single_class_days": -0.85,
+   "extra_campus_days": -0.85
+  },
+  {
+   "persona": "worker_8",
+   "extra_gap_h": -2.0,
+   "first_waits_longer": false,
+   "teacher": "second",
+   "extra_single_class_days": 0.92,
+   "extra_campus_days": 0.0
+  },
+  {
+   "persona": "parent_8",
+   "extra_gap_h": -0.12,
+   "first_waits_longer": false,
+   "teacher": "tie",
+   "extra_single_class_days": 0.08,
+   "extra_campus_days": 0.0
+  },
+  {
+   "persona": "near_campus_3",
+   "extra_gap_h": 0.0,
+   "first_waits_longer": false,
+   "teacher": "first",
+   "extra_single_class_days": -0.23,
+   "extra_campus_days": -0.15
+  },
+  {
+   "persona": "near_campus_4",
+   "extra_gap_h": -0.15,
+   "first_waits_longer": false,
+   "teacher": "first",
+   "extra_single_class_days": -0.15,
+   "extra_campus_days": -0.08
+  },
+  {
+   "persona": "athlete_3",
+   "extra_gap_h": 0.0,
+   "first_waits_longer": false,
+   "teacher": "first",
+   "extra_single_class_days": -0.85,
+   "extra_campus_days": 0.08
+  },
+  {
+   "persona": "carer_5",
+   "extra_gap_h": 0.0,
+   "first_waits_longer": false,
+   "teacher": "first",
+   "extra_single_class_days": -0.85,
+   "extra_campus_days": 0.08
+  }
+ ],
+ "first_waits_longer": 1,
+ "teacher_on_those": {
+  "second": 1
+ },
+ "pairs_where_model_prefers_longer_wait": 41,
+ "teacher_on_those_pairs": {
+  "second": 18,
+  "first": 16,
+  "flip": 7
+ },
+ "teacher_agrees_rate": 0.471
+}

@@ -1,6 +1,6 @@
 {
  "note": "核对者是 Claude（总控窗口），不是真人；千问老师和 Claude 都是 AI。画像是合成的。",
- "answered": 210,
+ "answered": 260,
  "labels": "llm/rank/output/labels_v3d_qwen2.5_14b_corrected.jsonl",
  "test_check": {
   "pairs": 60,
@@ -119,6 +119,23 @@
     "left_out_ties": 10
    }
   },
+  "by_round": {
+   "1": {
+    "pairs": 60,
+    "teacher_vs_claude": {
+     "agree": 39,
+     "compared": 42,
+     "rate": 0.929,
+     "left_out_ties": 18
+    },
+    "qwen_answered_vs_claude": {
+     "agree": 29,
+     "compared": 32,
+     "rate": 0.906,
+     "left_out_ties": 4
+    }
+   }
+  },
   "rows": [
    {
     "pair_id": "t001",
@@ -126,7 +143,8 @@
     "qwen": "B",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t002",
@@ -134,7 +152,8 @@
     "qwen": "flip",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t003",
@@ -142,7 +161,8 @@
     "qwen": "tie",
     "source": "program",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t004",
@@ -150,7 +170,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t005",
@@ -158,7 +179,8 @@
     "qwen": "flip",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t006",
@@ -166,7 +188,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t007",
@@ -174,7 +197,8 @@
     "qwen": "A",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t008",
@@ -182,7 +206,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t009",
@@ -190,7 +215,8 @@
     "qwen": "tie",
     "source": "program",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t010",
@@ -198,7 +224,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t011",
@@ -206,7 +233,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t012",
@@ -214,7 +242,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t013",
@@ -222,7 +251,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t014",
@@ -230,7 +260,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t015",
@@ -238,7 +269,8 @@
     "qwen": "tie",
     "source": "program",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t016",
@@ -246,7 +278,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t017",
@@ -254,7 +287,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t018",
@@ -262,7 +296,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t019",
@@ -270,7 +305,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t020",
@@ -278,7 +314,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t021",
@@ -286,7 +323,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t022",
@@ -294,7 +332,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t023",
@@ -302,7 +341,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t024",
@@ -310,7 +350,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t025",
@@ -318,7 +359,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t026",
@@ -326,7 +368,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t027",
@@ -334,7 +377,8 @@
     "qwen": "tie",
     "source": "program",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t028",
@@ -342,7 +386,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t029",
@@ -350,7 +395,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t030",
@@ -358,7 +404,8 @@
     "qwen": "tie",
     "source": "program",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t031",
@@ -366,7 +413,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t032",
@@ -374,7 +422,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t033",
@@ -382,7 +431,8 @@
     "qwen": "tie",
     "source": "program",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t034",
@@ -390,7 +440,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t035",
@@ -398,7 +449,8 @@
     "qwen": "flip",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t036",
@@ -406,7 +458,8 @@
     "qwen": "tie",
     "source": "program",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t037",
@@ -414,7 +467,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t038",
@@ -422,7 +476,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t039",
@@ -430,7 +485,8 @@
     "qwen": "tie",
     "source": "program",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t040",
@@ -438,7 +494,8 @@
     "qwen": "flip",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t041",
@@ -446,7 +503,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t042",
@@ -454,7 +512,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t043",
@@ -462,7 +521,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t044",
@@ -470,7 +530,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t045",
@@ -478,7 +539,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t046",
@@ -486,7 +548,8 @@
     "qwen": "tie",
     "source": "program",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t047",
@@ -494,7 +557,8 @@
     "qwen": "tie",
     "source": "program",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t048",
@@ -502,7 +566,8 @@
     "qwen": "tie",
     "source": "program",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t049",
@@ -510,7 +575,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t050",
@@ -518,7 +584,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t051",
@@ -526,7 +593,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t052",
@@ -534,7 +602,8 @@
     "qwen": "A",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t053",
@@ -542,7 +611,8 @@
     "qwen": "B",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t054",
@@ -550,7 +620,8 @@
     "qwen": "tie",
     "source": "program",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t055",
@@ -558,7 +629,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t056",
@@ -566,7 +638,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t057",
@@ -574,7 +647,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "t058",
@@ -582,7 +656,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t059",
@@ -590,7 +665,8 @@
     "qwen": "B",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "t060",
@@ -598,40 +674,41 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    }
   ]
  },
  "teacher_audit": {
-  "pairs": 150,
+  "pairs": 200,
   "claude_answers": {
-   "A": 65,
-   "B": 85
+   "A": 93,
+   "B": 107
   },
   "qwen_labels": {
-   "A": 65,
-   "B": 85
+   "A": 93,
+   "B": 107
   },
   "teacher_vs_claude": {
-   "agree": 150,
-   "compared": 150,
+   "agree": 200,
+   "compared": 200,
    "rate": 1.0,
    "left_out_ties": 0
   },
   "by_source": {
    "model": {
-    "pairs": 123,
+    "pairs": 173,
     "teacher_labels": {
-     "A": 52,
-     "B": 71
+     "A": 80,
+     "B": 93
     },
     "claude_answers": {
-     "A": 52,
-     "B": 71
+     "A": 80,
+     "B": 93
     },
     "teacher_vs_claude": {
-     "agree": 123,
-     "compared": 123,
+     "agree": 173,
+     "compared": 173,
      "rate": 1.0,
      "left_out_ties": 0
     }
@@ -655,29 +732,29 @@
    }
   },
   "model_vs_claude": {
-   "agree": 136,
-   "compared": 150,
-   "rate": 0.907,
+   "agree": 182,
+   "compared": 200,
+   "rate": 0.91,
    "left_out_ties": 0
   },
   "model_vs_teacher": {
-   "agree": 136,
-   "compared": 150,
-   "rate": 0.907,
+   "agree": 182,
+   "compared": 200,
+   "rate": 0.91,
    "left_out_ties": 0
   },
   "main_concern_clear": {
-   "pairs": 123,
+   "pairs": 173,
    "teacher_vs_claude": {
-    "agree": 123,
-    "compared": 123,
+    "agree": 173,
+    "compared": 173,
     "rate": 1.0,
     "left_out_ties": 0
    },
    "model_vs_claude": {
-    "agree": 111,
-    "compared": 123,
-    "rate": 0.902,
+    "agree": 157,
+    "compared": 173,
+    "rate": 0.908,
     "left_out_ties": 0
    }
   },
@@ -697,6 +774,38 @@
     "left_out_ties": 0
    }
   },
+  "by_round": {
+   "1": {
+    "pairs": 150,
+    "teacher_vs_claude": {
+     "agree": 150,
+     "compared": 150,
+     "rate": 1.0,
+     "left_out_ties": 0
+    },
+    "qwen_answered_vs_claude": {
+     "agree": 123,
+     "compared": 123,
+     "rate": 1.0,
+     "left_out_ties": 0
+    }
+   },
+   "2": {
+    "pairs": 50,
+    "teacher_vs_claude": {
+     "agree": 50,
+     "compared": 50,
+     "rate": 1.0,
+     "left_out_ties": 0
+    },
+    "qwen_answered_vs_claude": {
+     "agree": 50,
+     "compared": 50,
+     "rate": 1.0,
+     "left_out_ties": 0
+    }
+   }
+  },
   "rows": [
    {
     "pair_id": "a001",
@@ -704,7 +813,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a002",
@@ -712,7 +822,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a003",
@@ -720,7 +831,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a004",
@@ -728,7 +840,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a005",
@@ -736,7 +849,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a006",
@@ -744,7 +858,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a007",
@@ -752,7 +867,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a008",
@@ -760,7 +876,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a009",
@@ -768,7 +885,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a010",
@@ -776,7 +894,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a011",
@@ -784,7 +903,8 @@
     "qwen": "B",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a012",
@@ -792,7 +912,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a013",
@@ -800,7 +921,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a014",
@@ -808,7 +930,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a015",
@@ -816,7 +939,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a016",
@@ -824,7 +948,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a017",
@@ -832,7 +957,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a018",
@@ -840,7 +966,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a019",
@@ -848,7 +975,8 @@
     "qwen": "A",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a020",
@@ -856,7 +984,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a021",
@@ -864,7 +993,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a022",
@@ -872,7 +1002,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a023",
@@ -880,7 +1011,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a024",
@@ -888,7 +1020,8 @@
     "qwen": "B",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a025",
@@ -896,7 +1029,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a026",
@@ -904,7 +1038,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a027",
@@ -912,7 +1047,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a028",
@@ -920,7 +1056,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a029",
@@ -928,7 +1065,8 @@
     "qwen": "A",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a030",
@@ -936,7 +1074,8 @@
     "qwen": "B",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a031",
@@ -944,7 +1083,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a032",
@@ -952,7 +1092,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a033",
@@ -960,7 +1101,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a034",
@@ -968,7 +1110,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a035",
@@ -976,7 +1119,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a036",
@@ -984,7 +1128,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a037",
@@ -992,7 +1137,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a038",
@@ -1000,7 +1146,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a039",
@@ -1008,7 +1155,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a040",
@@ -1016,7 +1164,8 @@
     "qwen": "A",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a041",
@@ -1024,7 +1173,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a042",
@@ -1032,7 +1182,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a043",
@@ -1040,7 +1191,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a044",
@@ -1048,7 +1200,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a045",
@@ -1056,7 +1209,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a046",
@@ -1064,7 +1218,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a047",
@@ -1072,7 +1227,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a048",
@@ -1080,7 +1236,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a049",
@@ -1088,7 +1245,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a050",
@@ -1096,7 +1254,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a051",
@@ -1104,7 +1263,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a052",
@@ -1112,7 +1272,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a053",
@@ -1120,7 +1281,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a054",
@@ -1128,7 +1290,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a055",
@@ -1136,7 +1299,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a056",
@@ -1144,7 +1308,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a057",
@@ -1152,7 +1317,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a058",
@@ -1160,7 +1326,8 @@
     "qwen": "B",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a059",
@@ -1168,7 +1335,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a060",
@@ -1176,7 +1344,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a061",
@@ -1184,7 +1353,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a062",
@@ -1192,7 +1362,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a063",
@@ -1200,7 +1371,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a064",
@@ -1208,7 +1380,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a065",
@@ -1216,7 +1389,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a066",
@@ -1224,7 +1398,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a067",
@@ -1232,7 +1407,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a068",
@@ -1240,7 +1416,8 @@
     "qwen": "B",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a069",
@@ -1248,7 +1425,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a070",
@@ -1256,7 +1434,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a071",
@@ -1264,7 +1443,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a072",
@@ -1272,7 +1452,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a073",
@@ -1280,7 +1461,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a074",
@@ -1288,7 +1470,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a075",
@@ -1296,7 +1479,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a076",
@@ -1304,7 +1488,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a077",
@@ -1312,7 +1497,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a078",
@@ -1320,7 +1506,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a079",
@@ -1328,7 +1515,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a080",
@@ -1336,7 +1524,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a081",
@@ -1344,7 +1533,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a082",
@@ -1352,7 +1542,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a083",
@@ -1360,7 +1551,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a084",
@@ -1368,7 +1560,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a085",
@@ -1376,7 +1569,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a086",
@@ -1384,7 +1578,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a087",
@@ -1392,7 +1587,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a088",
@@ -1400,7 +1596,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a089",
@@ -1408,7 +1605,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a090",
@@ -1416,7 +1614,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a091",
@@ -1424,7 +1623,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a092",
@@ -1432,7 +1632,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a093",
@@ -1440,7 +1641,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a094",
@@ -1448,7 +1650,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a095",
@@ -1456,7 +1659,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a096",
@@ -1464,7 +1668,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a097",
@@ -1472,7 +1677,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a098",
@@ -1480,7 +1686,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a099",
@@ -1488,7 +1695,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a100",
@@ -1496,7 +1704,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a101",
@@ -1504,7 +1713,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a102",
@@ -1512,7 +1722,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a103",
@@ -1520,7 +1731,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a104",
@@ -1528,7 +1740,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a105",
@@ -1536,7 +1749,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a106",
@@ -1544,7 +1758,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a107",
@@ -1552,7 +1767,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a108",
@@ -1560,7 +1776,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a109",
@@ -1568,7 +1785,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a110",
@@ -1576,7 +1794,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a111",
@@ -1584,7 +1803,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a112",
@@ -1592,7 +1812,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a113",
@@ -1600,7 +1821,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a114",
@@ -1608,7 +1830,8 @@
     "qwen": "A",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a115",
@@ -1616,7 +1839,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a116",
@@ -1624,7 +1848,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a117",
@@ -1632,7 +1857,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a118",
@@ -1640,7 +1866,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a119",
@@ -1648,7 +1875,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a120",
@@ -1656,7 +1884,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a121",
@@ -1664,7 +1893,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a122",
@@ -1672,7 +1902,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a123",
@@ -1680,7 +1911,8 @@
     "qwen": "A",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a124",
@@ -1688,7 +1920,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a125",
@@ -1696,7 +1929,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a126",
@@ -1704,7 +1938,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a127",
@@ -1712,7 +1947,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a128",
@@ -1720,7 +1956,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a129",
@@ -1728,7 +1965,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a130",
@@ -1736,7 +1974,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a131",
@@ -1744,7 +1983,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a132",
@@ -1752,7 +1992,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a133",
@@ -1760,7 +2001,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a134",
@@ -1768,7 +2010,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a135",
@@ -1776,7 +2019,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a136",
@@ -1784,7 +2028,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a137",
@@ -1792,7 +2037,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a138",
@@ -1800,7 +2046,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a139",
@@ -1808,7 +2055,8 @@
     "qwen": "A",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a140",
@@ -1816,7 +2064,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a141",
@@ -1824,7 +2073,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a142",
@@ -1832,7 +2082,8 @@
     "qwen": "A",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a143",
@@ -1840,7 +2091,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a144",
@@ -1848,7 +2100,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a145",
@@ -1856,7 +2109,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a146",
@@ -1864,7 +2118,8 @@
     "qwen": "B",
     "source": "program_dominance",
     "model": "B",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a147",
@@ -1872,7 +2127,8 @@
     "qwen": "A",
     "source": "program_dominance",
     "model": "A",
-    "near": true
+    "near": true,
+    "round": 1
    },
    {
     "pair_id": "a148",
@@ -1880,7 +2136,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a149",
@@ -1888,7 +2145,8 @@
     "qwen": "B",
     "source": "model",
     "model": "B",
-    "near": false
+    "near": false,
+    "round": 1
    },
    {
     "pair_id": "a150",
@@ -1896,7 +2154,458 @@
     "qwen": "B",
     "source": "model",
     "model": "A",
-    "near": false
+    "near": false,
+    "round": 1
+   },
+   {
+    "pair_id": "b001",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b002",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b003",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b004",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b005",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b006",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b007",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b008",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b009",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b010",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b011",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b012",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b013",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b014",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b015",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b016",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b017",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b018",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b019",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b020",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b021",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b022",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b023",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b024",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b025",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b026",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b027",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b028",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b029",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b030",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b031",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b032",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b033",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b034",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b035",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b036",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b037",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b038",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b039",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b040",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b041",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b042",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b043",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b044",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b045",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b046",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b047",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b048",
+    "claude": "A",
+    "qwen": "A",
+    "source": "model",
+    "model": "A",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b049",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
+   },
+   {
+    "pair_id": "b050",
+    "claude": "B",
+    "qwen": "B",
+    "source": "model",
+    "model": "B",
+    "near": false,
+    "round": 2
    }
   ]
  }

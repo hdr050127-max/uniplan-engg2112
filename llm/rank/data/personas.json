@@ -2837,6 +2837,33 @@
    ],
    "text": "我要陪孩子写作业，晚上六点前必须到家，最好每天下午四点半前下课；能少空等就少空等。",
    "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 2,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 3,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 4,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 5,
+      "start_min": 1080,
+      "end_min": 1440
+     }
+    ],
     "preferred_hours": {
      "weekday": 0,
      "start_min": 540,
@@ -2851,7 +2878,7 @@
    "synthetic": true,
    "split": "train",
    "round": 2,
-   "pool_size": 2518
+   "pool_size": 1117
   },
   {
    "id": "parent_14",
@@ -2863,6 +2890,13 @@
    ],
    "text": "我周末要带孩子，平时最好周五也不用来学校；除此之外我最在意课间空档少。",
    "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 1440
+     }
+    ],
     "cares": [
      "gap"
     ]
@@ -2871,7 +2905,7 @@
    "synthetic": true,
    "split": "train",
    "round": 2,
-   "pool_size": 640
+   "pool_size": 146
   },
   {
    "id": "night_owl_9",
@@ -3197,12 +3231,13 @@
    "id": "intern_13",
    "type": "intern",
    "units": [
-    "AMME2262",
-    "CIVL3206",
-    "AMME1362"
+    "ENGG2112",
+    "AMME1362",
+    "MTRX3700"
    ],
    "text": "我在科技公司实习，希望把课排在连续的两三天里，其余时间整天上班；早课晚课都无所谓。",
    "conditions": {
+    "max_days_per_week": 3,
     "cares": [
      "campus_days"
     ]
@@ -3211,7 +3246,7 @@
    "synthetic": true,
    "split": "train",
    "round": 2,
-   "pool_size": 642
+   "pool_size": 264
   },
   {
    "id": "intern_14",
@@ -3424,7 +3459,7 @@
     "AMME2262",
     "AMME1362"
    ],
-   "text": "我晚上要在家照看奶奶，最好下午四点半前下课，早上八点的课没问题；空档也尽量少。",
+   "text": "我下午容易犯困、效率很低，最好下午四点半前下课，早上八点的课没问题；空档也尽量少。",
    "conditions": {
     "preferred_hours": {
      "weekday": 0,
@@ -3619,7 +3654,7 @@
      {
       "weekday": 6,
       "start_min": 720,
-      "end_min": 1440
+      "end_min": 1080
      }
     ],
     "cares": [
@@ -3921,7 +3956,7 @@
     "AMME2301",
     "AMME2262"
    ],
-   "text": "我要照顾两个弟弟，他们下午三点半放学，所以工作日最好三点前离开学校，早上九点以后上课没问题。",
+   "text": "我身体不太好，下午三点以后就特别容易累，最好工作日三点前离开学校，早上九点以后上课没问题。",
    "conditions": {
     "preferred_hours": {
      "weekday": 0,
@@ -4042,11 +4077,33 @@
    ],
    "text": "我中午要回家喂狗，每天十二点半到一点半之间要空出一整个小时；另外希望少来几天。",
    "conditions": {
-    "lunch": {
-     "start_min": 750,
-     "end_min": 810,
-     "minutes": 60
-    },
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 750,
+      "end_min": 810
+     },
+     {
+      "weekday": 2,
+      "start_min": 750,
+      "end_min": 810
+     },
+     {
+      "weekday": 3,
+      "start_min": 750,
+      "end_min": 810
+     },
+     {
+      "weekday": 4,
+      "start_min": 750,
+      "end_min": 810
+     },
+     {
+      "weekday": 5,
+      "start_min": 750,
+      "end_min": 810
+     }
+    ],
     "cares": [
      "campus_days"
     ]

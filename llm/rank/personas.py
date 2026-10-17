@@ -299,9 +299,10 @@ SPECS_ROUND2 = [
     ("parent", L, "我家宝宝的托儿所早上八点开门、下午五点半关门，所以工作日早上九点前和下午五点后都不能有课；也希望少来几天。",
      {"unavailable_windows": block(WEEKDAYS, "0", "9") + block(WEEKDAYS, "17"), "cares": ["campus_days"]}),
     ("parent", K, "我要陪孩子写作业，晚上六点前必须到家，最好每天下午四点半前下课；能少空等就少空等。",
-     {"preferred_hours": hours("9", "16:30"), "cares": ["outside_hours", "gap"]}),
+     {"unavailable_windows": block(WEEKDAYS, "18"), "preferred_hours": hours("9", "16:30"),
+      "cares": ["outside_hours", "gap"]}),
     ("parent", G, "我周末要带孩子，平时最好周五也不用来学校；除此之外我最在意课间空档少。",
-     {"cares": ["gap"]}),
+     {"unavailable_windows": block((5,)), "cares": ["gap"]}),
 
     # ---- night owl ----
     ("night_owl", C, "我在做游戏直播，经常凌晨三点才睡，工作日中午十二点前不能有课；空档多一点没事，只要来的天数少。",
@@ -326,8 +327,8 @@ SPECS_ROUND2 = [
      {"unavailable_windows": block((4,), "9", "17"), "cares": ["campus_days", "gap"]}),
     ("intern", Q, "我在远程实习，每天下午五点要开线上例会，工作日五点以后不能有课；我最在意来学校的天数少。",
      {"unavailable_windows": block(WEEKDAYS, "17"), "cares": ["campus_days"]}),
-    ("intern", T, "我在科技公司实习，希望把课排在连续的两三天里，其余时间整天上班；早课晚课都无所谓。",
-     {"cares": ["campus_days"]}),
+    ("intern", K, "我在科技公司实习，希望把课排在连续的两三天里，其余时间整天上班；早课晚课都无所谓。",
+     {"max_days_per_week": 3, "cares": ["campus_days"]}),
     ("intern", J, "我一边实习一边准备面试，每周最多来学校三天，工作日晚上六点以后也不能有课；在这前提下空档越少越好。",
      {"max_days_per_week": 3, "unavailable_windows": block(WEEKDAYS, "18"), "cares": ["gap"]}),
 
@@ -348,7 +349,7 @@ SPECS_ROUND2 = [
     # ---- early bird / busy evenings ----
     ("early_bird", D, "我每天五点半起床晨跑，早上八点上课正好，最好下午两点前就结束，下午我想自习。",
      {"preferred_hours": hours("8", "14"), "cares": ["outside_hours"]}),
-    ("early_bird", I, "我晚上要在家照看奶奶，最好下午四点半前下课，早上八点的课没问题；空档也尽量少。",
+    ("early_bird", I, "我下午容易犯困、效率很低，最好下午四点半前下课，早上八点的课没问题；空档也尽量少。",
      {"preferred_hours": hours("8", "16:30"), "cares": ["outside_hours", "gap"]}),
     ("early_bird", L, "我晚上精力差，最好每天的课都在下午三点前结束；我也不想每天都来。",
      {"preferred_hours": hours("9", "15"), "cares": ["outside_hours", "campus_days"]}),
@@ -363,7 +364,7 @@ SPECS_ROUND2 = [
     ("athlete", I, "我是校篮球队的，周二和周五早上七点到九点训练，那两天九点前不能有课；其他我最在意空档少，其次早晚课少。",
      {"unavailable_windows": block((2, 5), "0", "9"), "cares": ["gap", "outside_hours"]}),
     ("athlete", K, "我参加龙舟队，周三和周六下午都要训练，周三中午十二点以后不能有课；希望一周来学校的天数少。",
-     {"unavailable_windows": block((3, 6), "12"), "cares": ["campus_days"]}),
+     {"unavailable_windows": block((3,), "12") + block((6,), "12", "18"), "cares": ["campus_days"]}),
     ("athlete", G, "我在攀岩队，每周一和周四晚上六点后训练，那两晚不能有课；每天在学校也不能超过八个小时，空档少一点更好。",
      {"unavailable_windows": block((1, 4), "18"), "max_daily_span": h("8"), "cares": ["gap"]}),
     ("athlete", C, "我是校足球队守门员，每周一、二、四下午四点半以后要训练，那几天四点半后不能有课；能少来几天最好。",
@@ -385,7 +386,7 @@ SPECS_ROUND2 = [
      {"max_daily_span": h("6"), "max_days_per_week": 4, "cares": ["gap"]}),
     ("carer", I, "我刚做完手术在恢复期，走路不方便，希望少来几天，来的那天课和课之间也别空太久。",
      {"cares": ["campus_days", "gap"]}),
-    ("carer", G, "我要照顾两个弟弟，他们下午三点半放学，所以工作日最好三点前离开学校，早上九点以后上课没问题。",
+    ("carer", G, "我身体不太好，下午三点以后就特别容易累，最好工作日三点前离开学校，早上九点以后上课没问题。",
      {"preferred_hours": hours("9", "15"), "cares": ["outside_hours"]}),
 
     # ---- other needs ----
@@ -398,7 +399,7 @@ SPECS_ROUND2 = [
     ("other", I, "我是研究生助教，每周二下午一点到五点要带辅导课，这段时间不能有自己的课；其余时间早晚课越少越好。",
      {"unavailable_windows": block((2,), "13", "17"), "cares": ["outside_hours"]}),
     ("other", B, "我中午要回家喂狗，每天十二点半到一点半之间要空出一整个小时；另外希望少来几天。",
-     {"lunch": lunch("12:30", "13:30", 60), "cares": ["campus_days"]}),
+     {"unavailable_windows": block(WEEKDAYS, "12:30", "13:30"), "cares": ["campus_days"]}),
     ("other", L, "我同时在读一个线上证书课，每周一和周四上午九点到十二点有直播，这段时间不能有课；其余时间空档越少越好，其次早晚课少一点。",
      {"unavailable_windows": block((1, 4), "9", "12"), "cares": ["gap", "outside_hours"]}),
 ]

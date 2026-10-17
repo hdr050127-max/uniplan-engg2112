@@ -29,7 +29,9 @@
 - 只用 Python 标准库写 `uniplan/`。`llm/` 里需要的额外包装在 `/Users/handongrui/Desktop/ENGG2112/.venv-llm`（已有 `mlx-lm`）；要装新包先问用户。
 - 本地模型通过 Ollama 调用，统一用 `llm/ollama.py`。已下载：`qwen2.5:0.5b`、`1.5b`、`3b`、`7b`。服务地址由环境变量 `UNIPLAN_OLLAMA_URL` 决定，默认本机，也可以指向局域网里的另一台电脑。
 - **算力分工**：用户另有一台 Windows 笔记本（RTX 4090 Laptop，16GB 显存），在局域网里跑 Ollama，专门承担大模型批量推理（7B/14B 打标签、批量评估）。地址由总控窗口写在 `~/.config/uniplan/ollama_url`，`llm/ollama.py` 会自动读取；连不上时自动退回本机并打印提示，这时要告诉用户。`python3 -m llm.ollama` 可以查看当前用的是哪台机器、有哪些模型。大活一律通过 `llm/ollama.py` 调用，不要自己写死 127.0.0.1。
-- 这台 Mac 只有一块 GPU、16GB 内存。凡是在 Mac 上跑的大活（本机 7B 批量推理、MLX LoRA 微调）都要套上锁，排队执行：`python3 -m llm.gpu_lock -- <命令>`。
+- **GPU 排队**：每台机器的 GPU 同一时间只跑一个大活。凡是批量调用大模型（超过 20 次请求）都要套锁：`python3 -m llm.gpu_lock -- <命令>`，它会自动锁住 `llm/ollama.py` 当前使用的那台机器。Mac 上的 MLX 训练用 `--target mac`。`python3 -m llm.gpu_lock --status` 可以查看谁在用。
+- **Windows 上的 LoRA 训练和换模型测速由总控排时间**：要用之前先告诉总控，总控会先让各窗口暂停。
+- **一次只用一个模型**：同一批任务里不要在 7B 和 14B 之间交替调用（两个模型同时常驻会占满 16GB 显存）。并发最多 2 路。
 - **运行时只用标准库**：网页实际调用的 `parse()`、`rank()`、`explain()` 只能依赖 Python 标准库和 Ollama 的 HTTP 接口（比如逻辑回归权重存成 JSON，用纯 Python 计算；微调后的模型导入 Ollama 再调用）。训练和评估脚本可以用 `.venv-llm` 或 `/usr/local/bin/python3`（自带 scikit-learn 1.6.1）里的包。
 - 数据要诚实：大模型生成的标签和句子必须在代码、输出和报告里注明是合成的，不能说成真实学生的数据。测试集由组员亲手写，训练之前定好，之后不改。
 - 要用到大模型的结果都可复现：写成脚本，固定随机种子，输出存到各自的 `output/` 里。

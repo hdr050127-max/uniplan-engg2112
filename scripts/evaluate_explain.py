@@ -8,6 +8,7 @@ instead of parse() so that this measures the reasons alone.
     python3 scripts/evaluate_explain.py                        # all sentences, qwen2.5:7b
     python3 scripts/evaluate_explain.py --limit 8 --model none # template only, no model calls
     python3 scripts/evaluate_explain.py --test-file llm/parse/data/test_claude_v2.csv   # another frozen set
+    python3 scripts/evaluate_explain.py --tag en --test-file llm/parse/exam/exam.csv     # English run on the exam
     python3 scripts/evaluate_explain.py --recheck output/explain/explain_eval_qwen2.5-7b_test_claude.json
         # the saved model sentences, checked again with the current rules (no model calls)
 
@@ -38,7 +39,7 @@ sys.path.insert(0, str(ROOT))
 
 from llm import explain as explainer  # noqa: E402
 from llm import ollama  # noqa: E402
-from llm.explain import allowed_values, check_reason, explain_detailed, fact_lines, facts_of  # noqa: E402
+from llm.explain import allowed_for, check_reason, explain_detailed, fact_lines, facts_of  # noqa: E402
 from llm.contracts import preferences_of  # noqa: E402
 from llm.gpu_lock import gpu_lock, target_of_ollama  # noqa: E402
 from llm.rank import contributions  # noqa: E402
@@ -52,13 +53,14 @@ OUT = ROOT / "output/explain"
 UNIT_SETS = (["ENGG2112", "AMME2301"], ["ENGG2112", "CIVL3206"], ["AMME2301", "CIVL3206", "ENGG2112"],
              ["AMME2262", "AMME2301", "CIVL3206", "ENGG2112"])
 DAYS = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-# Words that name each ranking feature (llm/rank/features.py), most specific first.
-FEATURE_WORDS = (("single_class_days", r"一节课"), ("building_changes", r"换.{0,2}楼"), ("friday_free", r"周五"),
-                 ("earliest_start", r"最早"), ("latest_end", r"最晚|下课"),
-                 ("longest_day_h", r"最久|最长的一天|在校.{0,6}一天"), ("heaviest_day_h", r"课最多的一天"),
-                 ("outside_h", r"早晚课|以外的课"), ("early_h", r"早课"), ("late_h", r"晚课"),
-                 ("gap_h", r"等|空档"), ("campus_days", r"到校|来学校|天数"), ("online_share", r"线上"))
-ROUTINE = re.compile(r"每周固定|平时不用到校")
+# Words that name each ranking feature (llm/rank/features.py) in an English reason, most specific first.
+FEATURE_WORDS = (("single_class_days", r"(?i)one class\b"), ("building_changes", r"(?i)building change"),
+                 ("friday_free", r"Friday"), ("earliest_start", r"(?i)\bstart"), ("latest_end", r"(?i)\bend\b|\bfinish"),
+                 ("longest_day_h", r"(?i)longest day"), ("heaviest_day_h", r"(?i)busiest day"),
+                 ("outside_h", r"(?i)early or late|\boutside\b"), ("early_h", r"(?i)\bearly\b"), ("late_h", r"(?i)\blate\b"),
+                 ("gap_h", r"(?i)\bwait|\bgaps?\b"), ("campus_days", r"(?i)days? on campus|campus days|\bcampus\b"),
+                 ("online_share", r"(?i)\bonline\b"))
+ROUTINE = re.compile(r"On campus (?:Mon|Tue|Wed|Thu|Fri|Sat|Sun|\d)|No campus days")
 
 
 def main_feature(text: str | None) -> str | None:
@@ -195,7 +197,7 @@ def run_one(index: int, sentence_id: str, sentence: str, rows: list[dict[str, st
         record["shown_feature"] = main_feature(written["reasons"][0])
     for position, (pick, template) in enumerate(zip(picks, menu["reasons"])):
         facts = facts_of(position, picks, confirmed, pool)
-        allowed = allowed_values([f"{facts['count']} 份", *fact_lines(facts)])
+        allowed = allowed_for(facts)
         record["picks"].append({
             "candidate_id": pick["candidate_id"], "pattern": pick["pattern"],
             "violations": hard_violations(pick["meetings"], result["profile"]),
@@ -226,7 +228,9 @@ def summary(records: list[dict], model: str | None, note: str = "", test_set: st
 
     lines = [
         f"# Reason fact-check evaluation ({model or 'template only'})", "",
-        f"Sentences: `{test_set}`, written by Claude (Opus 5.5) — **not real student data**. "
+        "Reasons, the model prompt and the checker are in English (docs/DESIGN.md); the checks are the same "
+        "ones the Chinese version made. "
+        f"Sentences: `{test_set}`, written by Claude (Opus 5.5), **not real student data**. "
         "Conditions are the file's hand-written answers (not `parse()` output); timetables come from the "
         "committed 2026 S2C snapshots. Model output was produced with temperature 0 and seed 0." + note, "",
         "| | |", "| --- | --- |",

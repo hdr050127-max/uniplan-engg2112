@@ -399,12 +399,23 @@ class FactCheckTests(unittest.TestCase):
 
     def test_templates_read_as_plain_english(self):
         reasons = explainer.explain("", {"cares": ["gap"]}, self.picks, model=None)
-        self.assertTrue(reasons[0].startswith("First because, compared with option 2, it has "), reasons[0])
-        self.assertIn("On campus Tue and Wed each week. No classes on Mon, Thu or Fri.", reasons[0])
-        self.assertTrue(reasons[1].startswith("Compared with option 1, it has ") or
-                        reasons[1].startswith("A backup to option 1: it has "), reasons[1])
+        self.assertTrue(reasons[0].startswith("Vs option 2: "), reasons[0])
+        self.assertTrue(reasons[1].startswith("Vs option 1: ") or reasons[1] == "Close to option 1.", reasons[1])
         for reason in reasons:
+            self.assertNotIn("On campus", reason)  # the days are in the title and the week view (DESIGN 10.2)
             self.assertNotRegex(reason, "[\u2013\u2014\u00b7]")  # no dashes or middle dots (docs/DESIGN.md)
+
+    def test_a_closest_timetable_says_what_it_gives_up_first(self):
+        picks = [{**pick, "watch": "Watch the recording of ENGG2112 Lecture",
+                  "broken": "Breaks 2 limits: 4 classes on Tue and Wed before 11 am; No 30 min lunch break on Tue",
+                  "breaks": [{"kind": "unavailable_windows"}, {"kind": "lunch"}]} for pick in self.picks]
+        conditions = {"cares": ["gap"], "lunch": {"start_min": 690, "end_min": 840, "minutes": 30}}
+        reasons = explainer.explain("", conditions, picks, model=None)
+        self.assertTrue(reasons[0].startswith("Watch the recording of ENGG2112 Lecture. Breaks 2 limits: "), reasons[0])
+        for index, reason in enumerate(reasons):
+            facts = explainer.facts_of(index, picks, conditions)
+            self.assertIsNone(explainer.check_reason(reason, facts, explainer.allowed_for(facts), first=index == 0), reason)
+            self.assertNotIn("lunch break fits", " ".join(explainer.fact_lines(facts)))  # it is broken here
 
 
 class RegistryTests(unittest.TestCase):

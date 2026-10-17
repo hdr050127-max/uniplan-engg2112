@@ -11,6 +11,9 @@ in llm/parse/output/test_v2/DECISION.md. If the server does not answer (or takes
 classify.ollama_classifier), clauses fall back to the plain-Python linear model in output/linear_model.json (the
 round-1 model, chosen on the validation set), and to keyword rules if that file is missing.
 UNIPLAN_PARSE_RUNTIME overrides RUNTIME, e.g. "linear" for offline runs. Standard library only.
+
+The result also restates what was understood and asks a few questions back (llm/parse/clarify.py);
+parse(text, overrides={index: label}) reads it again after the student answers.
 """
 from __future__ import annotations
 
@@ -20,6 +23,7 @@ import time
 from typing import Callable
 
 from llm.contracts import Clause, ParseResult
+from llm.parse.clarify import clarify as _clarify
 from llm.parse.extract import fields, merge
 from llm.parse.keywords import keyword_label
 from llm.parse.labels import HEDGES
@@ -40,22 +44,26 @@ def _fallback(text: str) -> str:
         return keyword_label(text)
 
 
-def _runtime(text: str) -> str:
+def _runtime_labelled(text: str) -> tuple[str, bool]:
+    """The run-time label, and whether it came from RUNTIME itself (False: from the fallback)."""
     global _down_since
-    if not RUNTIME.startswith("ollama"):
-        from llm.parse.classify import by_name
-        return by_name(RUNTIME)(text)
-    if _down_since is not None and time.monotonic() - _down_since < _RETRY_AFTER:
-        return _fallback(text)
     from llm.parse.classify import by_name
+    if not RUNTIME.startswith("ollama"):
+        return by_name(RUNTIME)(text), RUNTIME != "linear"
+    if _down_since is not None and time.monotonic() - _down_since < _RETRY_AFTER:
+        return _fallback(text), False
     try:
         label = by_name(RUNTIME)(text)
         _down_since = None
-        return label
+        return label, True
     except OSError as error:            # server down, timed out, or model missing
         print(f"[llm.parse] {RUNTIME} unavailable ({error}); using the fallback classifier", file=sys.stderr)
         _down_since = time.monotonic()
-        return _fallback(text)
+        return _fallback(text), False
+
+
+def _runtime(text: str) -> str:
+    return _runtime_labelled(text)[0]
 
 
 def guarded(label: str, text: str) -> str:
@@ -69,14 +77,22 @@ def guarded(label: str, text: str) -> str:
     return label
 
 
-def parse(text: str, classify: Callable[[str], str] | None = None, guard: bool | None = None) -> ParseResult:
-    label_of = classify or _runtime
+def parse(text: str, classify: Callable[[str], str] | None = None, guard: bool | None = None,
+          overrides: dict[int, str] | None = None) -> ParseResult:
+    """overrides: {clause index: label} the student chose by answering a question; those clauses are
+    read again under the chosen label and not asked about again."""
     guard = GUARD if guard is None else guard
+    overrides = overrides or {}
     clauses: list[Clause] = []
-    for piece in split_clauses(text):
-        label = label_of(piece)
+    from_model: list[bool] = []
+    for index, piece in enumerate(split_clauses(text)):
+        label, by_model = (classify(piece), True) if classify else _runtime_labelled(piece)
         if guard:
             label = guarded(label, piece)
+        if index in overrides:
+            label = overrides[index]
         clauses.append({"text": piece, "label": label, "fields": fields(label, piece)})
-    return {"clauses": clauses, "conditions": merge(clauses),
-            "unrecognised": [clause["text"] for clause in clauses if clause["label"] == "other"]}
+        from_model.append(by_model)
+    result: ParseResult = {"clauses": clauses, "conditions": merge(clauses),
+                           "unrecognised": [clause["text"] for clause in clauses if clause["label"] == "other"]}
+    return _clarify(result, from_model, confirmed=set(overrides))

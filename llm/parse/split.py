@@ -2,7 +2,8 @@
 
 Rules only. The text is cut at sentence punctuation and at joining words (而且, but,
 and ...); then pieces that cannot stand alone are glued back:
-- a piece that is only weekdays or times ("Wed", "周三也是") joins the piece before it;
+- a piece that is only weekdays or times ("Wed", "周三也是"), or only a hedge ("if possible"),
+  joins the piece before it;
 - a piece starting with a reason or condition (因为, if ...) joins the piece after it;
 - a piece starting with a back-reference (所以, 那天, so ...) joins the piece before it.
 Clause text is always an exact substring of the input.
@@ -26,6 +27,9 @@ _FORWARD = re.compile(r"(?:因为|由于|如果|要是|假如|if\b|because\b|sin
 _BACKWARD = re.compile(r"(?:所以|因此|那天|那几天|那两天|这几天|这天|那时|这样|其他|其余|别的|so\b|then\b|that day|those days|"
                        r"which\b|other days|the rest)",
                        re.IGNORECASE)
+_HEDGE_ONLY = re.compile(r"(?:如果可以的话|如果可以|如果可能的话|如果可能|可以的话|能的话|最好是?|尽量|if possible|if i can|"
+                         r"if you can|ideally|preferably|where possible|when possible)[\s!！。.?？]*", re.IGNORECASE)
+_DAY_START = re.compile(r"(?:周|星期|礼拜)[一二三四五六日天]|(?:mon|tue|wed|thu|fri|sat|sun)[a-z]*\b|\d", re.IGNORECASE)
 _FILLER = re.compile(r"\s|[、,，/.。]|和|及|与|跟|或|还有|也是|也一样|也不行|同样|也|都"
                      r"|\b(?:and|or|too|as well|also|on|the|every|each|in|at)\b", re.IGNORECASE)
 _PLEASANTRY = re.compile(r"(?:谢谢|多谢|thanks?|thank you|please|pls|hi|hello|你好|嗯|ok|okay|好的)[\s!！。.]*",
@@ -49,6 +53,8 @@ def _spans(text: str) -> list[tuple[int, int]]:
     for match in _CUT.finditer(text):
         if any(start < match.end() and match.start() < end for start, end in keep):
             continue
+        if match.group().strip().lower() == "and" and _DAY_START.match(text, match.end()):
+            continue                      # "Tues and Thurs 'cos ...", "9 and 11"
         spans.append((cursor, match.start()))
         cursor = match.end()
     spans.append((cursor, len(text)))
@@ -68,7 +74,7 @@ def split_clauses(text: str) -> list[str]:
         piece = text[start:end]
         if carry is not None:
             start, carry = carry, None
-        elif merged and (_BACKWARD.match(piece) or _only_days_or_times(piece)):
+        elif merged and (_BACKWARD.match(piece) or _only_days_or_times(piece) or _HEDGE_ONLY.fullmatch(piece)):
             merged[-1] = (merged[-1][0], end)
             continue
         if _FORWARD.match(piece) or len(piece) <= 1:

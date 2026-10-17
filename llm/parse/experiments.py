@@ -3,7 +3,7 @@
     /usr/local/bin/python3 -m llm.parse.experiments
 
 Models: TF-IDF + logistic regression, TF-IDF + naive Bayes, TF-IDF + a small neural network.
-Hyper-parameters are picked on the SYNTHETIC validation split only (the team's test set is
+Hyper-parameters are picked on the SYNTHETIC validation split only (the test set is
 never read here). The chosen logistic regression is refitted on train + val and exported to
 output/linear_model.json, which llm/parse/linear.py scores in plain Python at run time.
 Predictions go to output/predictions/ for llm/parse/evaluate.py to score with the others.

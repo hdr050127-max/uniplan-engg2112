@@ -1,8 +1,8 @@
 """The condition types a student's statement can be mapped to.
 
 Each clause of a student's description gets exactly one label. The definitions
-and the ordered boundary rules below are the labelling guide for everyone: the
-team members writing the test set, the synthetic-data generator, and the model
+and the ordered boundary rules below are the labelling guide for everyone:
+whoever writes test sentences, the synthetic-data generator, and the model
 prompt all use these same words.
 
 One principle settles most hard-vs-soft questions: the label depends on WHAT

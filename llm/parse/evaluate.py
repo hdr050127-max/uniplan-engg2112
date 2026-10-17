@@ -2,13 +2,14 @@
 
     python3 -m llm.parse.evaluate --models keywords linear ollama:qwen2.5:7b
     python3 -m llm.parse.evaluate --report-only          # rebuild the table from saved predictions
-    python3 -m llm.parse.evaluate --models ... --test    # ONLY once the team's test set is final
+    python3 -m llm.parse.evaluate --models ... --test    # final runs only: also score the test set
 
 Data sets:
 - val: the held-out SYNTHETIC clauses (llm/parse/output/synthetic_clauses.jsonl, split == "val"),
   plus sentences made by joining 2-3 of them, to measure splitting + classifying together;
 - examples: the 10 example sentences in data/test_template.csv (written by Claude, NOT a test set);
-- test: data/test.csv written by team members, read only with --test.
+- test: data/test_claude.csv, 142 English sentences written by Claude (the coordinator session) at the
+  user's request (see data/TEST_SOURCES.md); read only with --test, never used for tuning.
 
 Every model predicts every text it needs once; predictions are saved in output/predictions/<model>.json
 with the time each took, so models trained elsewhere (scikit-learn, LoRA) can be scored the same way.
@@ -34,12 +35,18 @@ OUTPUT = HERE / "output"
 PREDICTIONS = OUTPUT / "predictions"
 SYNTHETIC = OUTPUT / "synthetic_clauses.jsonl"
 TEMPLATE = HERE / "data" / "test_template.csv"
-TEST = HERE / "data" / "test.csv"
+TEST = HERE / "data" / "test_claude.csv"
 SEED = 2112
 
 
+def training_file() -> Path:
+    """The latest graded round (Claude's labels where graded), else the raw generated clauses."""
+    rounds = sorted(OUTPUT.glob("train_round*.jsonl"), key=lambda p: int(p.stem.removeprefix("train_round")))
+    return rounds[-1] if rounds else SYNTHETIC
+
+
 def synthetic(split: str) -> list[dict]:
-    with open(SYNTHETIC, encoding="utf-8") as handle:
+    with open(training_file(), encoding="utf-8") as handle:
         return [row for row in map(json.loads, handle) if row["split"] == split]
 
 
@@ -114,12 +121,12 @@ def score(saved: dict, sets: dict) -> dict:
                                           [label_of(c["text"]) for c in data["clauses"]])
             sentences = data["sentences"]
             if all(t in preds for s in sentences for t in split_clauses(s["sentence"])):
-                right = 0
-                for s in sentences:
-                    pieces = split_clauses(s["sentence"])
-                    right += ([clause_key(p) for p in pieces] == [clause_key(c["text"]) for c in s["clauses"]]
-                              and [label_of(p) for p in pieces] == [c["label"] for c in s["clauses"]])
-                result[name]["sentence_all_right"] = right / len(sentences)
+                # The joins are artificial, so a sentence counts as right when the pipeline finds exactly
+                # the condition types it holds ("other" pieces and extra cuts of one condition are harmless).
+                found = lambda labels: set(labels) - {"other"}      # noqa: E731
+                result[name]["sentence_all_right"] = sum(
+                    found(label_of(p) for p in split_clauses(s["sentence"])) == found(c["label"] for c in s["clauses"])
+                    for s in sentences) / len(sentences)
         if "gold" in data:
             gold = data["gold"]
             needed = {t for s in gold for t in split_clauses(s["sentence"]) + [c["text"] for c in s["clauses"]]}
@@ -149,16 +156,20 @@ def markdown(results: list[dict], sets: dict) -> str:
         "",
         f"生成于 {time.strftime('%Y-%m-%d %H:%M')}，脚本 `python3 -m llm.parse.evaluate`。",
         "",
-        f"- **验证集（val）**：{len(val['clauses'])} 个**合成**短句（千问 7B 按类别生成，不是真实学生数据），"
+        f"- **验证集（val）**：{len(val['clauses'])} 个短句，来自 `{training_file().name}`。都不是真实学生数据："
+        "大部分由千问 7B 按类别生成，标签是生成时的类别，凡被 Claude 判过卷的改用 Claude 的标签；"
+        "`train_round*` 里还有 Claude 写的难题（source = claude_train）。"
         f"按生成请求划分，与训练集不重叠；另把 2–3 个短句拼成 {len(val['sentences'])} 句，测"
-        "「切句 + 分类」整句全对率。",
+        "「切句 + 分类」整句全对率：整句找出的条件类别（不算 other）和原短句的类别完全一致才算对。",
         "- **示例（examples）**：`data/test_template.csv` 的 10 句格式示例，由 Claude 编写，**不是测试集**，"
         "只用来检查整条流程能跑通；数字仅供参考。",
     ]
     if "test" in sets:
-        lines.append(f"- **测试集（test）**：组员手写的 {len(sets['test']['gold'])} 句。")
+        lines.append(f"- **测试集（test）**：`data/test_claude.csv`，{len(sets['test']['gold'])} 句英文，"
+                     "由 Claude（总控窗口）按用户要求撰写（见 `data/TEST_SOURCES.md`），不是真实学生数据；"
+                     "与训练数据的生成模型（千问）不是同一家。只在最后评估时读，没有用来调参。")
     else:
-        lines.append("- **测试集（test）**：组员手写，尚未到位，还没有用过。")
+        lines.append("- **测试集（test）**：`data/test_claude.csv`（Claude 撰写），这次没有读。")
     lines += ["", "## 短句分类（验证集）", "",
               "| 模型 | 准确率 | 宏平均 F1 | 整句全对率 | 每句耗时 (ms) | 模型大小 (MB) | 运行机器 | 备注 |",
               "| --- | ---: | ---: | ---: | ---: | ---: | --- | --- |"]
@@ -174,7 +185,7 @@ def markdown(results: list[dict], sets: dict) -> str:
         if r.get("val"):
             lines.append(f"| {r['model']} | " + " | ".join(f"{r['val']['per_label'][label]['f1']:.2f}"
                                                          for label in LABEL_ORDER) + " |")
-    for set_name, title in (("examples", "10 句示例（不是测试集）"), ("test", "测试集")):
+    for set_name, title in (("examples", "10 句示例（不是测试集）"), ("test", "测试集（Claude 撰写，142 句英文）")):
         rows = [r for r in results if r.get(set_name)]
         if not rows:
             continue
@@ -199,7 +210,7 @@ def main(argv: list[str] | None = None) -> int:
     from llm.parse.classify import by_name
     parser = argparse.ArgumentParser(description="Compare clause classifiers.")
     parser.add_argument("--models", nargs="*", default=[])
-    parser.add_argument("--test", action="store_true", help="also score the team's test set (final runs only)")
+    parser.add_argument("--test", action="store_true", help="also score test_claude.csv (final runs only)")
     parser.add_argument("--report-only", action="store_true")
     parser.add_argument("--machine", default=None, help="where the model ran, for the table")
     parser.add_argument("--size-mb", type=float, default=None)

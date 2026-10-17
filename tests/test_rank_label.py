@@ -75,10 +75,12 @@ class ResumeTests(unittest.TestCase):
                 return {"persona": persona["id"], "a_id": a["candidate_id"], "b_id": b["candidate_id"],
                         "label": "A", "source": "model"}
 
-            with mock.patch.object(label, "STOP", stop), mock.patch.object(label, "judge", fake_judge):
+            with mock.patch.object(label, "STOP", stop), mock.patch.object(label, "judge", fake_judge), \
+                    mock.patch.object(label.ollama, "unload") as unload:
                 with self.assertRaises(SystemExit) as stopped:
                     label.run_jobs("m", jobs, out, workers=1)
                 self.assertEqual(stopped.exception.code, 3)
+                unload.assert_called_once_with("m")
                 self.assertEqual(len(out.read_text().splitlines()), 2)    # pair 2 finished and was saved
                 with out.open("a") as handle:
                     handle.write('{"persona": "commuter_x", "a_id": "a2"')   # a line cut by a hard kill

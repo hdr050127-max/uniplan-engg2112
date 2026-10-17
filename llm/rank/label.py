@@ -242,7 +242,11 @@ def run_jobs(model: str, jobs: list[tuple[dict, dict, dict]], path: Path, worker
     with ThreadPoolExecutor(max_workers=workers) as pool:
         list(pool.map(work, todo))
     if stop.is_set():
-        print(f"stopped after {finished[0]} new pairs ({len(done)} saved in {path.name}); "
+        try:
+            ollama.unload(model)              # leave the GPU free for whoever asked us to stop
+        except OSError:
+            pass
+        print(f"stopped after {finished[0]} new pairs ({len(done)} saved in {path.name}); {model} unloaded; "
               f"delete {STOP.name} and run the same command again to continue", flush=True)
         raise SystemExit(3)
     return [done[(p["id"], a["candidate_id"], b["candidate_id"])] for p, a, b in jobs]

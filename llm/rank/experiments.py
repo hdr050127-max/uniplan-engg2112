@@ -1,9 +1,9 @@
 """Two follow-up experiments on the final ranker (CPU only; SYNTHETIC labels, see train.py).
 
-- Learning curve: train on 10%, 25%, 50% and 100% of the training personas (sampled by
-  persona, fixed seeds, 5 draws per size) and score the same 20 test personas. Answers
-  "are there enough labels, would more help?". Run twice: with the free program pairs of
-  the sampled personas (as shipped) and with the teacher labels alone.
+- Learning curve: train on 6, 15, 30, 60, 90 and all training personas (sampled by persona
+  from rounds 1 and 2, fixed seeds, 5 draws per size), plus "round 1 only", and score the
+  same 20 test personas. Answers "are there enough labels, would more help?". Run twice:
+  with the free program pairs of the sampled personas (as shipped) and teacher labels alone.
 - Feature ablation: drop one group of features (or the student terms) and retrain.
 
 Both use the shipped setting (pairwise logistic regression with student terms, C from
@@ -31,7 +31,7 @@ from llm.rank.train import (OUT, PairwiseLR, decided, load_rows, pairwise_accura
                             spec_from, top3_metrics)
 
 SEED = 2112
-FRACTIONS = (0.1, 0.25, 0.5, 1.0)
+COUNTS = (6, 15, 30, 60, 90, 120)
 DRAWS = 5
 GROUPS = {
     "三个主项（到校天数、空等、早晚课）": ("campus_days", "gap_h", "outside_h"),
@@ -78,24 +78,27 @@ def main() -> int:
     free = decided(program_pairs(rows, sets, personas, strict_focus=True))
     train_ids = sorted({r["persona"] for r in teacher})
 
+    round_one = sorted(pid for pid in train_ids if personas[pid].get("round", 1) == 1)
     curve = {"with_program_pairs": [], "teacher_labels_only": []}
-    for fraction in FRACTIONS:
-        draws = 1 if fraction == 1.0 else DRAWS
+    sizes = [count for count in COUNTS if count < len(train_ids)] + [len(train_ids), "round 1"]
+    for size in sizes:
+        count = len(round_one) if size == "round 1" else size
+        draws = 1 if size in (len(train_ids), "round 1") else DRAWS
         for variant in curve:
             runs = []
             for draw in range(draws):
-                chosen = set(random.Random(f"{SEED}:{fraction}:{draw}").sample(
-                    train_ids, max(1, round(fraction * len(train_ids)))))
+                chosen = (set(round_one) if size == "round 1" else
+                          set(random.Random(f"{SEED}:{count}:{draw}").sample(train_ids, count)))
                 subset = [r for r in teacher if r["persona"] in chosen]
                 if variant == "with_program_pairs":
                     subset += [r for r in free if r["persona"] in chosen]
                 result = evaluate(fit(subset, C), test, sets, personas)
                 runs.append({**result, "train_pairs": len(decided(subset)),
                              "teacher_pairs": len(decided([r for r in subset if r["source"] != "program_extra"]))})
-            summary = {"fraction": fraction, "personas": max(1, round(fraction * len(train_ids))), "draws": draws,
-                       **mean_sd(runs)}
+            summary = {"personas": count, "sample": "round 1 only" if size == "round 1" else "random",
+                       "draws": draws, **mean_sd(runs)}
             curve[variant].append(summary)
-            print(f"{variant:20s} {fraction:4.0%} personas={summary['personas']:2d} "
+            print(f"{variant:20s} {summary['sample']:12s} personas={count:3d} "
                   f"teacher pairs={summary['teacher_pairs']['mean']:5.0f} "
                   f"acc={summary['accuracy']['mean']:.3f}±{summary['accuracy']['sd']:.3f} "
                   f"qwen={summary['accuracy_qwen_pairs']['mean']:.3f} rule={summary['accuracy_rule_pairs']['mean']:.3f} "

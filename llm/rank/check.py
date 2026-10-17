@@ -15,6 +15,7 @@ Claude writes check_answers_claude.jsonl: one {"pair_id": ..., "choice": "红" |
 
     python3 -m llm.rank.check prepare                                  # the 60 test_check pairs
     python3 -m llm.rank.check audit --labels output/labels_v3_X.jsonl  # add 150 teacher_audit pairs
+    python3 -m llm.rank.check audit --labels ... --round 2 --size 50   # 50 more, round-2 personas only
     python3 -m llm.rank.check score --labels output/labels_v3_X.jsonl  # agreement report
     python3 -m llm.rank.check corrected --labels output/labels_v3_X.jsonl   # -> labels_v3_X_corrected.jsonl
 """
@@ -101,26 +102,31 @@ def prepare() -> None:
     print(f"wrote {len(rows)} test_check pairs to {PAIRS.relative_to(ROOT)}")
 
 
-def audit(labels: Path) -> None:
-    """Add 150 random teacher-decided pairs (A or B) from the full run."""
+def audit(labels: Path, persona_round: int = 1, size: int = AUDIT_SIZE) -> None:
+    """Add random teacher-decided pairs (A or B) from one round of personas.
+
+    Round 1 adds a001-a150 (all round-1 personas); round 2 adds b001-... from the round-2
+    training personas only. Each round can be drawn once."""
     rows, key = read_jsonl(PAIRS), json.loads(KEY.read_text(encoding="utf-8"))
-    if any(k["purpose"] == "teacher_audit" for k in key.values()):
-        raise SystemExit("teacher_audit pairs already exist.")
+    prefix = "a" if persona_round == 1 else "b"
+    if any(k["purpose"] == "teacher_audit" and k.get("round", 1) == persona_round for k in key.values()):
+        raise SystemExit(f"round {persona_round} teacher_audit pairs already exist.")
+    rounds = {p["id"]: p.get("round", 1) for p in load()}
     jobs, _ = full_jobs()
     candidates = {(p["id"], a["candidate_id"], b["candidate_id"]): (p, a, b) for p, a, b in jobs}
     used = {(k["persona"], k["a_id"], k["b_id"]) for k in key.values()}
     decided = [r for r in read_jsonl(labels) if r["label"] in ("A", "B")
-               and (r["persona"], r["a_id"], r["b_id"]) not in used]
-    rng = random.Random(SEED + ":audit")
+               and (r["persona"], r["a_id"], r["b_id"]) not in used and rounds[r["persona"]] == persona_round]
+    rng = random.Random(SEED + ":audit" + ("" if persona_round == 1 else f":round{persona_round}"))
     new = []
-    for r in rng.sample(decided, min(AUDIT_SIZE, len(decided))):
+    for r in rng.sample(decided, min(size, len(decided))):
         persona, a, b = candidates[(r["persona"], r["a_id"], r["b_id"])]
-        pair_id = f"a{len(new) + 1:03d}"
+        pair_id = f"{prefix}{len(new) + 1:03d}"
         red_is_a = rng.random() < 0.5
         red, blue = (a, b) if red_is_a else (b, a)
         new.append(question_row(pair_id, "teacher_audit", persona, red, blue))
-        key[pair_id] = {"purpose": "teacher_audit", "persona": r["persona"], "a_id": r["a_id"],
-                        "b_id": r["b_id"], "red": "A" if red_is_a else "B",
+        key[pair_id] = {"purpose": "teacher_audit", "round": persona_round, "persona": r["persona"],
+                        "a_id": r["a_id"], "b_id": r["b_id"], "red": "A" if red_is_a else "B",
                         "near_equal_focus": program_tie(persona, a, b)}
     rng.shuffle(new)
     write(rows + new, key)
@@ -181,7 +187,7 @@ def score(labels: Path) -> dict:
             persona = personas[info["persona"]]
             mine = model_choice(spec, persona, xs[(info["persona"], info["a_id"])], xs[(info["persona"], info["b_id"])])
             rows.append({"pair_id": pair_id, "claude": answers[pair_id], "qwen": qwen, "source": source,
-                         "model": mine, "near": info["near_equal_focus"]})
+                         "model": mine, "near": info["near_equal_focus"], "round": info.get("round", 1)})
         clear = [r for r in rows if not r["near"]]
         near = [r for r in rows if r["near"]]
         report[purpose] = {
@@ -205,6 +211,11 @@ def score(labels: Path) -> dict:
                                         "claude_said_tie": sum(r["claude"] == "tie" for r in near),
                                         "teacher_vs_claude": agreement([(r["qwen"], r["claude"]) for r in near]),
                                         "model_vs_claude": agreement([(r["model"], r["claude"]) for r in near])},
+            "by_round": {str(n): {"pairs": sum(r["round"] == n for r in rows),
+                                  "teacher_vs_claude": agreement([(r["qwen"], r["claude"]) for r in rows if r["round"] == n]),
+                                  "qwen_answered_vs_claude": agreement([(r["qwen"], r["claude"]) for r in rows
+                                                                        if r["round"] == n and r["source"] == "model"])}
+                         for n in sorted({r["round"] for r in rows})},
             "rows": rows,
         }
     (OUT / "check_report.json").write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
@@ -233,13 +244,15 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("mode", choices=("prepare", "audit", "score", "corrected"))
     parser.add_argument("--labels", type=Path)
+    parser.add_argument("--round", type=int, default=1, help="audit: which round of personas to draw from")
+    parser.add_argument("--size", type=int, default=AUDIT_SIZE, help="audit: how many pairs")
     args = parser.parse_args()
     if args.mode == "prepare":
         prepare()
     elif args.labels is None:
         parser.error("--labels is required")
     elif args.mode == "audit":
-        audit(args.labels)
+        audit(args.labels, args.round, args.size)
     elif args.mode == "score":
         report = score(args.labels)
         print(json.dumps({k: ({kk: vv for kk, vv in v.items() if kk != "rows"} if isinstance(v, dict) else v)

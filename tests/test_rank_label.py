@@ -60,6 +60,36 @@ class LabelRuleTests(unittest.TestCase):
         self.assertIn("学生情况：我住得远", text)
 
 
+class ResumeTests(unittest.TestCase):
+    def test_stop_file_pauses_after_the_pair_in_progress_and_a_rerun_continues(self):
+        jobs = [(PERSONA, candidate(f"a{i}", campus_days=2.0), candidate(f"b{i}", campus_days=4.0)) for i in range(4)]
+        with tempfile.TemporaryDirectory() as folder:
+            folder = Path(folder)
+            out, stop = folder / "labels.jsonl", folder / "STOP"
+            calls = []
+
+            def fake_judge(model, persona, a, b, ties):
+                calls.append(a["candidate_id"])
+                if len(calls) == 2:
+                    stop.touch()                     # someone asks to pause while pair 2 runs
+                return {"persona": persona["id"], "a_id": a["candidate_id"], "b_id": b["candidate_id"],
+                        "label": "A", "source": "model"}
+
+            with mock.patch.object(label, "STOP", stop), mock.patch.object(label, "judge", fake_judge), \
+                    mock.patch.object(label.ollama, "unload") as unload:
+                with self.assertRaises(SystemExit) as stopped:
+                    label.run_jobs("m", jobs, out, workers=1)
+                self.assertEqual(stopped.exception.code, 3)
+                unload.assert_called_once_with("m")
+                self.assertEqual(len(out.read_text().splitlines()), 2)    # pair 2 finished and was saved
+                with out.open("a") as handle:
+                    handle.write('{"persona": "commuter_x", "a_id": "a2"')   # a line cut by a hard kill
+                stop.unlink()
+                rows = label.run_jobs("m", jobs, out, workers=1)
+            self.assertEqual(calls, ["a0", "a1", "a2", "a3"])               # nothing done twice
+            self.assertEqual([row["a_id"] for row in rows], ["a0", "a1", "a2", "a3"])
+
+
 class CheckTests(unittest.TestCase):
     def test_answers_map_back_and_corrections_replace_qwen(self):
         with tempfile.TemporaryDirectory() as folder:

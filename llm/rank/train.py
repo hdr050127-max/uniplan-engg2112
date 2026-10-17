@@ -312,6 +312,8 @@ def main() -> int:
                              "winner is not worse on the main concern either)")
     parser.add_argument("--out", default="model_comparison.json")
     parser.add_argument("--test-labels", help="evaluate on this file's test pairs instead (same personas)")
+    parser.add_argument("--export-to", type=Path, default=runtime.PATH,
+                        help="where to write the exported model (default: llm/rank/model.json, used by rank())")
     parser.add_argument("--export", choices=("lr_focus", "lr_nofocus"), default="lr_focus",
                         help="which logistic regression goes to model.json for rank()")
     args = parser.parse_args()
@@ -388,8 +390,8 @@ def main() -> int:
         export = {**best.export(), "variant": args.export, "program_share": share,
                   "trained_on": args.labels, "synthetic_labels": True,
                   "note": "成对逻辑回归权重；训练标签是合成的（大模型扮演合成画像）。由 llm/rank/train.py 生成。"}
-        runtime.PATH.write_text(json.dumps(export, ensure_ascii=False, indent=1), encoding="utf-8")
-        print(f"wrote {runtime.PATH.relative_to(ROOT)}")
+        args.export_to.write_text(json.dumps(export, ensure_ascii=False, indent=1), encoding="utf-8")
+        print(f"wrote {args.export_to}")
     return 0
 
 

@@ -29,6 +29,7 @@ import argparse
 import itertools
 import json
 import random
+import signal
 import sys
 import threading
 import time
@@ -45,6 +46,7 @@ from llm.rank.features import hours_of, routine_bounds, teaching_weeks, timetabl
 from llm.rank.personas import PILOT_IDS, load  # noqa: E402
 
 OUT = ROOT / "llm" / "rank" / "output"
+STOP = OUT / "STOP"      # create this file to stop after the pair in progress; rerun to continue
 PROMPT_VERSION = 3
 SEED = 2112
 DAYS = "一二三四五六日"
@@ -200,18 +202,32 @@ def free_other_models(model: str) -> None:
 
 def run_jobs(model: str, jobs: list[tuple[dict, dict, dict]], path: Path, workers: int,
              ties: str = "dominance") -> list[dict]:
-    """Judge every (persona, a, b), appending each result to ``path`` as it finishes (resumable)."""
+    """Judge every (persona, a, b), appending each result to ``path`` as it finishes.
+
+    Resumable: pairs already in ``path`` are skipped. To pause, create llm/rank/output/STOP
+    (or send SIGTERM): the pair in progress finishes and is saved, then the run exits with
+    code 3; delete STOP and run the same command again to continue.
+    """
     done = {}
     if path.exists():
         for line in path.read_text(encoding="utf-8").splitlines():
-            row = json.loads(line)
+            try:
+                row = json.loads(line)
+            except json.JSONDecodeError:      # a line cut short by a hard kill: that pair is redone
+                continue
             done[(row["persona"], row["a_id"], row["b_id"])] = row
     todo = [job for job in jobs if (job[0]["id"], job[1]["candidate_id"], job[2]["candidate_id"]) not in done]
     print(f"{len(jobs)} pairs, {len(jobs) - len(todo)} already labelled, model {model} at {ollama.base_url()}",
           flush=True)
     lock, started, finished = threading.Lock(), time.time(), [0]
+    stop = threading.Event()
+    if threading.current_thread() is threading.main_thread():
+        signal.signal(signal.SIGTERM, lambda *_: stop.set())
 
     def work(job):
+        if stop.is_set() or STOP.exists():
+            stop.set()
+            return
         row = judge(model, *job, ties=ties)
         with lock:
             with path.open("a", encoding="utf-8") as handle:
@@ -225,6 +241,14 @@ def run_jobs(model: str, jobs: list[tuple[dict, dict, dict]], path: Path, worker
 
     with ThreadPoolExecutor(max_workers=workers) as pool:
         list(pool.map(work, todo))
+    if stop.is_set():
+        try:
+            ollama.unload(model)              # leave the GPU free for whoever asked us to stop
+        except OSError:
+            pass
+        print(f"stopped after {finished[0]} new pairs ({len(done)} saved in {path.name}); {model} unloaded; "
+              f"delete {STOP.name} and run the same command again to continue", flush=True)
+        raise SystemExit(3)
     return [done[(p["id"], a["candidate_id"], b["candidate_id"])] for p, a, b in jobs]
 
 

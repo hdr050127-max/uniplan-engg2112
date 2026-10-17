@@ -1,0 +1,31 @@
+{
+ "note": "合成标签（SYNTHETIC）：由大模型扮演合成画像给出，不是真实学生的选择。",
+ "model": "qwen2.5:14b",
+ "server": "http://192.168.1.120:11434",
+ "prompt_version": 3,
+ "ties": "dominance",
+ "tie_thresholds": {
+  "campus_days": 0.25,
+  "gap": 0.5,
+  "outside_hours": 0.5
+ },
+ "pairs": 1512,
+ "program_ties": 174,
+ "program_dominance": 199,
+ "asked_model": 1139,
+ "consistent_all": "1390/1512",
+ "consistent_rate_all": 0.919,
+ "consistent_rate_asked": 0.893,
+ "answers_by_position": {
+  "red(first)": 1211,
+  "blue(second)": 1067
+ },
+ "focus_correct": "1640/2278",
+ "draw_hint_pairs": "0/0 consistent",
+ "by_focus": {
+  "campus_days": "499/512",
+  "gap": "431/516",
+  "outside_hours": "460/484"
+ },
+ "seconds_per_asked_pair": 4.54
+}

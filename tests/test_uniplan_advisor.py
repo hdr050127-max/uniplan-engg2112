@@ -180,6 +180,13 @@ class FactCheckTests(unittest.TestCase):
         self.assertIsNone(self.check("每周只要周二、周三到校，周五没课，课之间基本不用等。"))
         self.assertIsNone(self.check("这 2 份里空等最少，最早 10:00 上课。"))
         self.assertIsNone(self.check("比第 1 份每周多等 4.5 小时，多到校 1.0 天。", index=1))
+        self.assertIsNone(self.check("10:00 前没课，12:00 以后也没课。"))
+
+    def test_sameness_and_more_need_the_numbers(self):
+        facts = {**self.facts[1], "versus_first": (["每周少等 1.0 小时"], [])}  # only the waiting differs
+        allowed = explainer.allowed_values([f"{facts['count']} 份", *explainer.fact_lines(facts)])
+        self.assertIsNone(explainer.check_reason("比第 1 份每周少等 1.0 小时，早晚课一样。", facts, allowed, False))
+        self.assertEqual(explainer.check_reason("比第 1 份早晚课更充裕。", facts, allowed, False), "comparison")
 
     def test_false_sentences_are_rejected(self):
         cases = {  # text: (pick index, why)
@@ -194,6 +201,10 @@ class FactCheckTests(unittest.TestCase):
             "课都在 9:00–18:00 之内。": (1, "hours"),
             "空等时间很短。": (1, "direction"),
             "很适合你。": (1, "opinion"),
+            "每天都要到校。": (0, "weekday"),
+            "上午 11 点前没课。": (0, "time"),
+            "课外活动时间 0 分钟。": (0, "topic"),
+            "比第 1 份多等 4.5 小时，早晚课一样。": (1, "comparison"),  # pick 2 has 60 more minutes
         }
         for text, (index, why) in cases.items():
             with self.subTest(text=text):

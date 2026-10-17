@@ -50,9 +50,12 @@ SUBTYPES = {
         "a soft wish with a NUMBER of days per week (ideally 3 days, 最好一周三天); never name a weekday",
     ),
     "max_daily_hours": (
-        "at most a given NUMBER of hours of class per day",
-        "at most a given NUMBER of hours on campus per day, from the first class to the last",
-        "a soft wish with a NUMBER of hours per day",
+        "a daily UPPER LIMIT on class time: no more than N hours of class in one day (N is a number such as "
+        "3, 4, 5 or 6). It is a maximum, not a wish to have N hours; no weekday, no clock time",
+        "a daily UPPER LIMIT on time spent on campus: no more than N hours at uni in one day, from the first "
+        "class to the last (N is a number). It is a maximum; no weekday, no clock time",
+        "a softly worded daily UPPER LIMIT with a number of hours (ideally no more than N hours a day, "
+        "最好每天不超过 N 小时); no weekday, no clock time",
     ),
     "lunch": (
         "needing a break to eat lunch, with no time given",
@@ -185,6 +188,8 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--count", type=int, default=8, help="clauses per request")
     parser.add_argument("--val-share", type=float, default=0.15)
     parser.add_argument("--limit", type=int, default=0, help="only the first N requests (a dry run)")
+    parser.add_argument("--labels", nargs="*", default=None, help="only these labels (a top-up batch)")
+    parser.add_argument("--name", default="synthetic", help="output file stem, e.g. synthetic_round2")
     args = parser.parse_args(argv)
 
     server = ollama.base_url()
@@ -193,7 +198,8 @@ def main(argv: list[str] | None = None) -> int:
         return 1
     print(f"generating with {args.model} on {server}", file=sys.stderr)
     OUTPUT.mkdir(exist_ok=True)
-    plan = jobs(args.per_label, args.count)[: args.limit or None]
+    plan = [job for job in jobs(args.per_label, args.count) if not args.labels or job["label"] in args.labels]
+    plan = plan[: args.limit or None]
     rows, seen, dropped, rejected = [], set(), Counter(), []
     started = time.time()
     for number, job in enumerate(plan, 1):
@@ -233,10 +239,10 @@ def main(argv: list[str] | None = None) -> int:
     for row in rows:
         row["split"] = "val" if row["request"] in val else "train"
 
-    with open(OUTPUT / "synthetic_clauses.jsonl", "w", encoding="utf-8") as handle:
+    with open(OUTPUT / f"{args.name}_clauses.jsonl", "w", encoding="utf-8") as handle:
         for row in rows:
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
-    with open(OUTPUT / "synthetic_dropped.jsonl", "w", encoding="utf-8") as handle:
+    with open(OUTPUT / f"{args.name}_dropped.jsonl", "w", encoding="utf-8") as handle:
         for row in rejected:
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
     meta = {
@@ -251,7 +257,7 @@ def main(argv: list[str] | None = None) -> int:
         "seconds": round(time.time() - started),
         "date": time.strftime("%Y-%m-%d"),
     }
-    (OUTPUT / "synthetic_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n")
+    (OUTPUT / f"{args.name}_meta.json").write_text(json.dumps(meta, ensure_ascii=False, indent=2) + "\n")
     print(json.dumps(meta, ensure_ascii=False, indent=2))
     return 0
 

@@ -1,0 +1,4162 @@
+[
+ {
+  "model": "keywords",
+  "size_mb": null,
+  "machine": "arm64 Mac CPU",
+  "note": "",
+  "ms_per_clause": 0.02,
+  "val": {
+   "n": 279,
+   "accuracy": 0.7168458781362007,
+   "macro_f1": 0.7234118351786593,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.49295774647887325,
+     "recall": 0.9459459459459459,
+     "f1": 0.6481481481481483,
+     "support": 37
+    },
+    "max_days": {
+     "precision": 0.8918918918918919,
+     "recall": 0.868421052631579,
+     "f1": 0.88,
+     "support": 38
+    },
+    "max_daily_hours": {
+     "precision": 0.75,
+     "recall": 0.75,
+     "f1": 0.75,
+     "support": 20
+    },
+    "lunch": {
+     "precision": 0.96,
+     "recall": 1.0,
+     "f1": 0.9795918367346939,
+     "support": 24
+    },
+    "in_person_only": {
+     "precision": 0.9333333333333333,
+     "recall": 1.0,
+     "f1": 0.9655172413793104,
+     "support": 28
+    },
+    "prefer_fewer_days": {
+     "precision": 0.9166666666666666,
+     "recall": 0.3235294117647059,
+     "f1": 0.4782608695652174,
+     "support": 34
+    },
+    "prefer_less_waiting": {
+     "precision": 0.9375,
+     "recall": 0.40540540540540543,
+     "f1": 0.5660377358490566,
+     "support": 37
+    },
+    "prefer_no_early_late": {
+     "precision": 0.8076923076923077,
+     "recall": 0.7,
+     "f1": 0.75,
+     "support": 30
+    },
+    "other": {
+     "precision": 0.42857142857142855,
+     "recall": 0.5806451612903226,
+     "f1": 0.4931506849315069,
+     "support": 31
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 35,
+     "max_days": 0,
+     "max_daily_hours": 1,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 1,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 5,
+     "max_days": 33,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 4,
+     "max_daily_hours": 15,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 24,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 28,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 10,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 11,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 13
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 9,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 15,
+     "prefer_no_early_late": 4,
+     "other": 6
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 3,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 1,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 21,
+     "other": 5
+    },
+    "other": {
+     "blocked_time": 9,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 0,
+     "other": 18
+    }
+   },
+   "sentence_all_right": 0.4563106796116505
+  },
+  "examples": {
+   "n": 19,
+   "accuracy": 0.9473684210526315,
+   "macro_f1": 0.9407407407407408,
+   "per_label": {
+    "blocked_time": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 5
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "max_daily_hours": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_fewer_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_less_waiting": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "prefer_no_early_late": {
+     "precision": 1.0,
+     "recall": 0.6666666666666666,
+     "f1": 0.8,
+     "support": 3
+    },
+    "other": {
+     "precision": 0.5,
+     "recall": 1.0,
+     "f1": 0.6666666666666666,
+     "support": 1
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 5,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 2,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 2,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 2,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 2,
+     "other": 1
+    },
+    "other": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    }
+   },
+   "split_right": 1.0,
+   "sentence_all_right": 0.9,
+   "fields": {
+    "unavailable_windows": 1.0,
+    "max_days_per_week": 1.0,
+    "max_daily_minutes": 1.0,
+    "max_daily_span": 1.0,
+    "lunch": 1.0,
+    "in_person_only": 1.0,
+    "preferred_hours": 1.0,
+    "cares": 0.9
+   },
+   "ms_per_sentence": 0.032
+  },
+  "test": {
+   "n": 146,
+   "accuracy": 0.7945205479452054,
+   "macro_f1": 0.752525124938918,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.9,
+     "recall": 0.9642857142857143,
+     "f1": 0.9310344827586207,
+     "support": 56
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 0.4,
+     "f1": 0.5714285714285715,
+     "support": 10
+    },
+    "max_daily_hours": {
+     "precision": 0.8333333333333334,
+     "recall": 1.0,
+     "f1": 0.9090909090909091,
+     "support": 10
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 10
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 0.8571428571428571,
+     "f1": 0.923076923076923,
+     "support": 7
+    },
+    "prefer_fewer_days": {
+     "precision": 0.8,
+     "recall": 0.4444444444444444,
+     "f1": 0.5714285714285714,
+     "support": 9
+    },
+    "prefer_less_waiting": {
+     "precision": 0.625,
+     "recall": 0.5,
+     "f1": 0.5555555555555556,
+     "support": 10
+    },
+    "prefer_no_early_late": {
+     "precision": 0.8125,
+     "recall": 0.9285714285714286,
+     "f1": 0.8666666666666666,
+     "support": 14
+    },
+    "other": {
+     "precision": 0.4,
+     "recall": 0.5,
+     "f1": 0.4444444444444445,
+     "support": 20
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 54,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 2
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 4,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 5
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 10,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 10,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 6,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 4,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 5
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 5,
+     "prefer_no_early_late": 1,
+     "other": 2
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 1,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 13,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 5,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 3,
+     "prefer_no_early_late": 2,
+     "other": 10
+    }
+   },
+   "split_right": 0.6984126984126984,
+   "sentence_all_right": 0.6507936507936508,
+   "fields": {
+    "unavailable_windows": 0.8492063492063492,
+    "max_days_per_week": 0.9523809523809523,
+    "max_daily_minutes": 0.9682539682539683,
+    "max_daily_span": 0.9920634920634921,
+    "lunch": 1.0,
+    "in_person_only": 0.9920634920634921,
+    "preferred_hours": 0.9841269841269841,
+    "cares": 0.8650793650793651
+   },
+   "ms_per_sentence": 0.05238095238095238
+  }
+ },
+ {
+  "model": "linear",
+  "size_mb": 1.17,
+  "machine": "arm64 Mac CPU",
+  "note": "TF-IDF char n-gram (1, 4), min_df 2, C=10; plain-Python scorer, trained on train only",
+  "ms_per_clause": 0.04,
+  "val": {
+   "n": 279,
+   "accuracy": 0.8924731182795699,
+   "macro_f1": 0.8839659999562115,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.7659574468085106,
+     "recall": 0.972972972972973,
+     "f1": 0.8571428571428571,
+     "support": 37
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 0.9736842105263158,
+     "f1": 0.9866666666666666,
+     "support": 38
+    },
+    "max_daily_hours": {
+     "precision": 0.8,
+     "recall": 1.0,
+     "f1": 0.888888888888889,
+     "support": 20
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 24
+    },
+    "in_person_only": {
+     "precision": 0.9642857142857143,
+     "recall": 0.9642857142857143,
+     "f1": 0.9642857142857143,
+     "support": 28
+    },
+    "prefer_fewer_days": {
+     "precision": 0.9117647058823529,
+     "recall": 0.9117647058823529,
+     "f1": 0.9117647058823528,
+     "support": 34
+    },
+    "prefer_less_waiting": {
+     "precision": 0.8974358974358975,
+     "recall": 0.9459459459459459,
+     "f1": 0.9210526315789475,
+     "support": 37
+    },
+    "prefer_no_early_late": {
+     "precision": 0.9310344827586207,
+     "recall": 0.9,
+     "f1": 0.9152542372881356,
+     "support": 30
+    },
+    "other": {
+     "precision": 0.75,
+     "recall": 0.3870967741935484,
+     "f1": 0.5106382978723403,
+     "support": 31
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 36,
+     "max_days": 0,
+     "max_daily_hours": 1,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 37,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 20,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 24,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 27,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 1,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 31,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 2
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 1,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 35,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 2,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 27,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 9,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 2,
+     "prefer_less_waiting": 3,
+     "prefer_no_early_late": 2,
+     "other": 12
+    }
+   },
+   "sentence_all_right": 0.5339805825242718
+  },
+  "examples": {
+   "n": 19,
+   "accuracy": 0.9473684210526315,
+   "macro_f1": 0.9676767676767677,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.8333333333333334,
+     "recall": 1.0,
+     "f1": 0.9090909090909091,
+     "support": 5
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "max_daily_hours": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_fewer_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_less_waiting": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "prefer_no_early_late": {
+     "precision": 1.0,
+     "recall": 0.6666666666666666,
+     "f1": 0.8,
+     "support": 3
+    },
+    "other": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 5,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 2,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 2,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 2,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 1,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 2,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    }
+   },
+   "split_right": 1.0,
+   "sentence_all_right": 0.9,
+   "fields": {
+    "unavailable_windows": 0.9,
+    "max_days_per_week": 1.0,
+    "max_daily_minutes": 1.0,
+    "max_daily_span": 1.0,
+    "lunch": 1.0,
+    "in_person_only": 1.0,
+    "preferred_hours": 0.9,
+    "cares": 1.0
+   },
+   "ms_per_sentence": 0.071
+  },
+  "test": {
+   "n": 146,
+   "accuracy": 0.8013698630136986,
+   "macro_f1": 0.7661711607367362,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.9090909090909091,
+     "recall": 0.8928571428571429,
+     "f1": 0.9009009009009009,
+     "support": 56
+    },
+    "max_days": {
+     "precision": 0.8888888888888888,
+     "recall": 0.8,
+     "f1": 0.8421052631578948,
+     "support": 10
+    },
+    "max_daily_hours": {
+     "precision": 0.75,
+     "recall": 0.9,
+     "f1": 0.8181818181818182,
+     "support": 10
+    },
+    "lunch": {
+     "precision": 0.9,
+     "recall": 0.9,
+     "f1": 0.9,
+     "support": 10
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 0.7142857142857143,
+     "f1": 0.8333333333333333,
+     "support": 7
+    },
+    "prefer_fewer_days": {
+     "precision": 0.5714285714285714,
+     "recall": 0.4444444444444444,
+     "f1": 0.5,
+     "support": 9
+    },
+    "prefer_less_waiting": {
+     "precision": 0.8571428571428571,
+     "recall": 0.6,
+     "f1": 0.7058823529411764,
+     "support": 10
+    },
+    "prefer_no_early_late": {
+     "precision": 0.7142857142857143,
+     "recall": 0.7142857142857143,
+     "f1": 0.7142857142857143,
+     "support": 14
+    },
+    "other": {
+     "precision": 0.5925925925925926,
+     "recall": 0.8,
+     "f1": 0.6808510638297872,
+     "support": 20
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 50,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 1,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 2,
+     "other": 3
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 8,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 2,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 1,
+     "max_daily_hours": 9,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 9,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 5,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 2
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 2,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 4,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 3
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 1,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 6,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 2,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 10,
+     "other": 1
+    },
+    "other": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 1,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 2,
+     "other": 16
+    }
+   },
+   "split_right": 0.6984126984126984,
+   "sentence_all_right": 0.5793650793650794,
+   "fields": {
+    "unavailable_windows": 0.8174603174603174,
+    "max_days_per_week": 0.9523809523809523,
+    "max_daily_minutes": 0.9523809523809523,
+    "max_daily_span": 0.9841269841269841,
+    "lunch": 0.9841269841269841,
+    "in_person_only": 0.9841269841269841,
+    "preferred_hours": 0.9603174603174603,
+    "cares": 0.8174603174603174
+   },
+   "ms_per_sentence": 0.10642857142857143
+  }
+ },
+ {
+  "model": "keywords + 护栏",
+  "size_mb": null,
+  "machine": "arm64 Mac CPU",
+  "note": "",
+  "ms_per_clause": 0.02,
+  "val": {
+   "n": 279,
+   "accuracy": 0.7168458781362007,
+   "macro_f1": 0.7234118351786593,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.49295774647887325,
+     "recall": 0.9459459459459459,
+     "f1": 0.6481481481481483,
+     "support": 37
+    },
+    "max_days": {
+     "precision": 0.8918918918918919,
+     "recall": 0.868421052631579,
+     "f1": 0.88,
+     "support": 38
+    },
+    "max_daily_hours": {
+     "precision": 0.75,
+     "recall": 0.75,
+     "f1": 0.75,
+     "support": 20
+    },
+    "lunch": {
+     "precision": 0.96,
+     "recall": 1.0,
+     "f1": 0.9795918367346939,
+     "support": 24
+    },
+    "in_person_only": {
+     "precision": 0.9333333333333333,
+     "recall": 1.0,
+     "f1": 0.9655172413793104,
+     "support": 28
+    },
+    "prefer_fewer_days": {
+     "precision": 0.9166666666666666,
+     "recall": 0.3235294117647059,
+     "f1": 0.4782608695652174,
+     "support": 34
+    },
+    "prefer_less_waiting": {
+     "precision": 0.9375,
+     "recall": 0.40540540540540543,
+     "f1": 0.5660377358490566,
+     "support": 37
+    },
+    "prefer_no_early_late": {
+     "precision": 0.8076923076923077,
+     "recall": 0.7,
+     "f1": 0.75,
+     "support": 30
+    },
+    "other": {
+     "precision": 0.42857142857142855,
+     "recall": 0.5806451612903226,
+     "f1": 0.4931506849315069,
+     "support": 31
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 35,
+     "max_days": 0,
+     "max_daily_hours": 1,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 1,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 5,
+     "max_days": 33,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 4,
+     "max_daily_hours": 15,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 24,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 28,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 10,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 11,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 13
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 9,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 15,
+     "prefer_no_early_late": 4,
+     "other": 6
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 3,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 1,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 21,
+     "other": 5
+    },
+    "other": {
+     "blocked_time": 9,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 0,
+     "other": 18
+    }
+   },
+   "sentence_all_right": 0.4563106796116505
+  },
+  "examples": {
+   "n": 19,
+   "accuracy": 0.9473684210526315,
+   "macro_f1": 0.9407407407407408,
+   "per_label": {
+    "blocked_time": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 5
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "max_daily_hours": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_fewer_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_less_waiting": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "prefer_no_early_late": {
+     "precision": 1.0,
+     "recall": 0.6666666666666666,
+     "f1": 0.8,
+     "support": 3
+    },
+    "other": {
+     "precision": 0.5,
+     "recall": 1.0,
+     "f1": 0.6666666666666666,
+     "support": 1
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 5,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 2,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 2,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 2,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 2,
+     "other": 1
+    },
+    "other": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    }
+   },
+   "split_right": 1.0,
+   "sentence_all_right": 0.9,
+   "fields": {
+    "unavailable_windows": 1.0,
+    "max_days_per_week": 1.0,
+    "max_daily_minutes": 1.0,
+    "max_daily_span": 1.0,
+    "lunch": 1.0,
+    "in_person_only": 1.0,
+    "preferred_hours": 1.0,
+    "cares": 0.9
+   },
+   "ms_per_sentence": 0.032
+  },
+  "test": {
+   "n": 146,
+   "accuracy": 0.7945205479452054,
+   "macro_f1": 0.752525124938918,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.9,
+     "recall": 0.9642857142857143,
+     "f1": 0.9310344827586207,
+     "support": 56
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 0.4,
+     "f1": 0.5714285714285715,
+     "support": 10
+    },
+    "max_daily_hours": {
+     "precision": 0.8333333333333334,
+     "recall": 1.0,
+     "f1": 0.9090909090909091,
+     "support": 10
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 10
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 0.8571428571428571,
+     "f1": 0.923076923076923,
+     "support": 7
+    },
+    "prefer_fewer_days": {
+     "precision": 0.8,
+     "recall": 0.4444444444444444,
+     "f1": 0.5714285714285714,
+     "support": 9
+    },
+    "prefer_less_waiting": {
+     "precision": 0.625,
+     "recall": 0.5,
+     "f1": 0.5555555555555556,
+     "support": 10
+    },
+    "prefer_no_early_late": {
+     "precision": 0.8125,
+     "recall": 0.9285714285714286,
+     "f1": 0.8666666666666666,
+     "support": 14
+    },
+    "other": {
+     "precision": 0.4,
+     "recall": 0.5,
+     "f1": 0.4444444444444445,
+     "support": 20
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 54,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 2
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 4,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 5
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 10,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 10,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 6,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 4,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 5
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 5,
+     "prefer_no_early_late": 1,
+     "other": 2
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 1,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 13,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 5,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 3,
+     "prefer_no_early_late": 2,
+     "other": 10
+    }
+   },
+   "split_right": 0.6984126984126984,
+   "sentence_all_right": 0.6507936507936508,
+   "fields": {
+    "unavailable_windows": 0.8492063492063492,
+    "max_days_per_week": 0.9523809523809523,
+    "max_daily_minutes": 0.9682539682539683,
+    "max_daily_span": 0.9920634920634921,
+    "lunch": 1.0,
+    "in_person_only": 0.9920634920634921,
+    "preferred_hours": 0.9841269841269841,
+    "cares": 0.8650793650793651
+   },
+   "ms_per_sentence": 0.05238095238095238
+  }
+ },
+ {
+  "model": "linear + 护栏",
+  "size_mb": 1.17,
+  "machine": "arm64 Mac CPU",
+  "note": "TF-IDF char n-gram (1, 4), min_df 2, C=10; plain-Python scorer, trained on train only",
+  "ms_per_clause": 0.04,
+  "val": {
+   "n": 279,
+   "accuracy": 0.8924731182795699,
+   "macro_f1": 0.8845989123847714,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.75,
+     "recall": 0.972972972972973,
+     "f1": 0.8470588235294119,
+     "support": 37
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 0.9736842105263158,
+     "f1": 0.9866666666666666,
+     "support": 38
+    },
+    "max_daily_hours": {
+     "precision": 0.8,
+     "recall": 1.0,
+     "f1": 0.888888888888889,
+     "support": 20
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 24
+    },
+    "in_person_only": {
+     "precision": 0.9642857142857143,
+     "recall": 0.9642857142857143,
+     "f1": 0.9642857142857143,
+     "support": 28
+    },
+    "prefer_fewer_days": {
+     "precision": 0.9117647058823529,
+     "recall": 0.9117647058823529,
+     "f1": 0.9117647058823528,
+     "support": 34
+    },
+    "prefer_less_waiting": {
+     "precision": 0.8974358974358975,
+     "recall": 0.9459459459459459,
+     "f1": 0.9210526315789475,
+     "support": 37
+    },
+    "prefer_no_early_late": {
+     "precision": 0.9642857142857143,
+     "recall": 0.9,
+     "f1": 0.9310344827586207,
+     "support": 30
+    },
+    "other": {
+     "precision": 0.75,
+     "recall": 0.3870967741935484,
+     "f1": 0.5106382978723403,
+     "support": 31
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 36,
+     "max_days": 0,
+     "max_daily_hours": 1,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 37,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 20,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 24,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 27,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 1,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 31,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 2
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 1,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 35,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 2,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 27,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 10,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 2,
+     "prefer_less_waiting": 3,
+     "prefer_no_early_late": 1,
+     "other": 12
+    }
+   },
+   "sentence_all_right": 0.5339805825242718
+  },
+  "examples": {
+   "n": 19,
+   "accuracy": 0.9473684210526315,
+   "macro_f1": 0.9676767676767677,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.8333333333333334,
+     "recall": 1.0,
+     "f1": 0.9090909090909091,
+     "support": 5
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "max_daily_hours": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_fewer_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_less_waiting": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "prefer_no_early_late": {
+     "precision": 1.0,
+     "recall": 0.6666666666666666,
+     "f1": 0.8,
+     "support": 3
+    },
+    "other": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 5,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 2,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 2,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 2,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 1,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 2,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    }
+   },
+   "split_right": 1.0,
+   "sentence_all_right": 0.9,
+   "fields": {
+    "unavailable_windows": 0.9,
+    "max_days_per_week": 1.0,
+    "max_daily_minutes": 1.0,
+    "max_daily_span": 1.0,
+    "lunch": 1.0,
+    "in_person_only": 1.0,
+    "preferred_hours": 0.9,
+    "cares": 1.0
+   },
+   "ms_per_sentence": 0.071
+  },
+  "test": {
+   "n": 146,
+   "accuracy": 0.815068493150685,
+   "macro_f1": 0.7744376203306294,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.9122807017543859,
+     "recall": 0.9285714285714286,
+     "f1": 0.9203539823008849,
+     "support": 56
+    },
+    "max_days": {
+     "precision": 0.8888888888888888,
+     "recall": 0.8,
+     "f1": 0.8421052631578948,
+     "support": 10
+    },
+    "max_daily_hours": {
+     "precision": 0.75,
+     "recall": 0.9,
+     "f1": 0.8181818181818182,
+     "support": 10
+    },
+    "lunch": {
+     "precision": 0.9,
+     "recall": 0.9,
+     "f1": 0.9,
+     "support": 10
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 0.7142857142857143,
+     "f1": 0.8333333333333333,
+     "support": 7
+    },
+    "prefer_fewer_days": {
+     "precision": 0.5714285714285714,
+     "recall": 0.4444444444444444,
+     "f1": 0.5,
+     "support": 9
+    },
+    "prefer_less_waiting": {
+     "precision": 0.8571428571428571,
+     "recall": 0.6,
+     "f1": 0.7058823529411764,
+     "support": 10
+    },
+    "prefer_no_early_late": {
+     "precision": 0.8333333333333334,
+     "recall": 0.7142857142857143,
+     "f1": 0.7692307692307692,
+     "support": 14
+    },
+    "other": {
+     "precision": 0.5925925925925926,
+     "recall": 0.8,
+     "f1": 0.6808510638297872,
+     "support": 20
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 52,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 1,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 3
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 8,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 2,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 1,
+     "max_daily_hours": 9,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 9,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 5,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 2
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 2,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 4,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 3
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 1,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 6,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 2,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 10,
+     "other": 1
+    },
+    "other": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 1,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 2,
+     "other": 16
+    }
+   },
+   "split_right": 0.6984126984126984,
+   "sentence_all_right": 0.5952380952380952,
+   "fields": {
+    "unavailable_windows": 0.8333333333333334,
+    "max_days_per_week": 0.9523809523809523,
+    "max_daily_minutes": 0.9523809523809523,
+    "max_daily_span": 0.9841269841269841,
+    "lunch": 0.9841269841269841,
+    "in_person_only": 0.9841269841269841,
+    "preferred_hours": 0.9761904761904762,
+    "cares": 0.8333333333333334
+   },
+   "ms_per_sentence": 0.10642857142857143
+  }
+ },
+ {
+  "model": "ollama-short:uniplan-parse-7b",
+  "size_mb": null,
+  "machine": "http://192.168.1.120:11434",
+  "note": "",
+  "ms_per_clause": 272.44,
+  "val": {
+   "n": 279,
+   "accuracy": 0.956989247311828,
+   "macro_f1": 0.9578110818021864,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.9428571428571428,
+     "recall": 0.8918918918918919,
+     "f1": 0.9166666666666667,
+     "support": 37
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 38
+    },
+    "max_daily_hours": {
+     "precision": 1.0,
+     "recall": 0.9,
+     "f1": 0.9473684210526316,
+     "support": 20
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 24
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 28
+    },
+    "prefer_fewer_days": {
+     "precision": 0.9696969696969697,
+     "recall": 0.9411764705882353,
+     "f1": 0.955223880597015,
+     "support": 34
+    },
+    "prefer_less_waiting": {
+     "precision": 0.9487179487179487,
+     "recall": 1.0,
+     "f1": 0.9736842105263158,
+     "support": 37
+    },
+    "prefer_no_early_late": {
+     "precision": 0.967741935483871,
+     "recall": 1.0,
+     "f1": 0.9836065573770492,
+     "support": 30
+    },
+    "other": {
+     "precision": 0.8181818181818182,
+     "recall": 0.8709677419354839,
+     "f1": 0.84375,
+     "support": 31
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 33,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 4
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 38,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 18,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 24,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 28,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 32,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 37,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 30,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 2,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 1,
+     "other": 27
+    }
+   },
+   "sentence_all_right": 0.7669902912621359
+  },
+  "examples": {
+   "n": 19,
+   "accuracy": 0.9473684210526315,
+   "macro_f1": 0.965432098765432,
+   "per_label": {
+    "blocked_time": {
+     "precision": 1.0,
+     "recall": 0.8,
+     "f1": 0.888888888888889,
+     "support": 5
+    },
+    "max_days": {
+     "precision": 0.6666666666666666,
+     "recall": 1.0,
+     "f1": 0.8,
+     "support": 2
+    },
+    "max_daily_hours": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_fewer_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_less_waiting": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "prefer_no_early_late": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 3
+    },
+    "other": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 4,
+     "max_days": 1,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 2,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 2,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 2,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 3,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    }
+   },
+   "split_right": 1.0,
+   "sentence_all_right": 0.9,
+   "fields": {
+    "unavailable_windows": 0.9,
+    "max_days_per_week": 1.0,
+    "max_daily_minutes": 1.0,
+    "max_daily_span": 1.0,
+    "lunch": 1.0,
+    "in_person_only": 1.0,
+    "preferred_hours": 1.0,
+    "cares": 1.0
+   },
+   "ms_per_sentence": 495.236
+  },
+  "test": {
+   "n": 146,
+   "accuracy": 0.9178082191780822,
+   "macro_f1": 0.9325221656291265,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.9795918367346939,
+     "recall": 0.8571428571428571,
+     "f1": 0.9142857142857143,
+     "support": 56
+    },
+    "max_days": {
+     "precision": 0.7142857142857143,
+     "recall": 1.0,
+     "f1": 0.8333333333333333,
+     "support": 10
+    },
+    "max_daily_hours": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 10
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 10
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 7
+    },
+    "prefer_fewer_days": {
+     "precision": 0.9,
+     "recall": 1.0,
+     "f1": 0.9473684210526316,
+     "support": 9
+    },
+    "prefer_less_waiting": {
+     "precision": 0.9090909090909091,
+     "recall": 1.0,
+     "f1": 0.9523809523809523,
+     "support": 10
+    },
+    "prefer_no_early_late": {
+     "precision": 0.8235294117647058,
+     "recall": 1.0,
+     "f1": 0.9032258064516129,
+     "support": 14
+    },
+    "other": {
+     "precision": 0.8888888888888888,
+     "recall": 0.8,
+     "f1": 0.8421052631578948,
+     "support": 20
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 48,
+     "max_days": 4,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 2,
+     "other": 2
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 10,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 10,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 10,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 7,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 9,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 10,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 14,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 1,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 1,
+     "other": 16
+    }
+   },
+   "split_right": 0.6984126984126984,
+   "sentence_all_right": 0.6746031746031746,
+   "fields": {
+    "unavailable_windows": 0.8333333333333334,
+    "max_days_per_week": 0.9523809523809523,
+    "max_daily_minutes": 0.9761904761904762,
+    "max_daily_span": 0.9920634920634921,
+    "lunch": 0.9920634920634921,
+    "in_person_only": 1.0,
+    "preferred_hours": 0.9761904761904762,
+    "cares": 0.9047619047619048
+   },
+   "ms_per_sentence": 354.2938095238095
+  }
+ },
+ {
+  "model": "ollama-short:uniplan-parse-7b + 护栏",
+  "size_mb": null,
+  "machine": "http://192.168.1.120:11434",
+  "note": "",
+  "ms_per_clause": 272.44,
+  "val": {
+   "n": 279,
+   "accuracy": 0.956989247311828,
+   "macro_f1": 0.9578110818021864,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.9428571428571428,
+     "recall": 0.8918918918918919,
+     "f1": 0.9166666666666667,
+     "support": 37
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 38
+    },
+    "max_daily_hours": {
+     "precision": 1.0,
+     "recall": 0.9,
+     "f1": 0.9473684210526316,
+     "support": 20
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 24
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 28
+    },
+    "prefer_fewer_days": {
+     "precision": 0.9696969696969697,
+     "recall": 0.9411764705882353,
+     "f1": 0.955223880597015,
+     "support": 34
+    },
+    "prefer_less_waiting": {
+     "precision": 0.9487179487179487,
+     "recall": 1.0,
+     "f1": 0.9736842105263158,
+     "support": 37
+    },
+    "prefer_no_early_late": {
+     "precision": 0.967741935483871,
+     "recall": 1.0,
+     "f1": 0.9836065573770492,
+     "support": 30
+    },
+    "other": {
+     "precision": 0.8181818181818182,
+     "recall": 0.8709677419354839,
+     "f1": 0.84375,
+     "support": 31
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 33,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 4
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 38,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 18,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 24,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 28,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 32,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 0,
+     "other": 1
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 37,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 30,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 2,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 1,
+     "other": 27
+    }
+   },
+   "sentence_all_right": 0.7475728155339806
+  },
+  "examples": {
+   "n": 19,
+   "accuracy": 0.9473684210526315,
+   "macro_f1": 0.965432098765432,
+   "per_label": {
+    "blocked_time": {
+     "precision": 1.0,
+     "recall": 0.8,
+     "f1": 0.888888888888889,
+     "support": 5
+    },
+    "max_days": {
+     "precision": 0.6666666666666666,
+     "recall": 1.0,
+     "f1": 0.8,
+     "support": 2
+    },
+    "max_daily_hours": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_fewer_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_less_waiting": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "prefer_no_early_late": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 3
+    },
+    "other": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 4,
+     "max_days": 1,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 2,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 2,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 2,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 3,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    }
+   },
+   "split_right": 1.0,
+   "sentence_all_right": 0.9,
+   "fields": {
+    "unavailable_windows": 0.9,
+    "max_days_per_week": 1.0,
+    "max_daily_minutes": 1.0,
+    "max_daily_span": 1.0,
+    "lunch": 1.0,
+    "in_person_only": 1.0,
+    "preferred_hours": 1.0,
+    "cares": 1.0
+   },
+   "ms_per_sentence": 495.236
+  },
+  "test": {
+   "n": 146,
+   "accuracy": 0.9246575342465754,
+   "macro_f1": 0.939509125060925,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.9433962264150944,
+     "recall": 0.8928571428571429,
+     "f1": 0.9174311926605505,
+     "support": 56
+    },
+    "max_days": {
+     "precision": 0.7142857142857143,
+     "recall": 1.0,
+     "f1": 0.8333333333333333,
+     "support": 10
+    },
+    "max_daily_hours": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 10
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 10
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 7
+    },
+    "prefer_fewer_days": {
+     "precision": 0.9,
+     "recall": 1.0,
+     "f1": 0.9473684210526316,
+     "support": 9
+    },
+    "prefer_less_waiting": {
+     "precision": 0.9090909090909091,
+     "recall": 1.0,
+     "f1": 0.9523809523809523,
+     "support": 10
+    },
+    "prefer_no_early_late": {
+     "precision": 1.0,
+     "recall": 0.9285714285714286,
+     "f1": 0.962962962962963,
+     "support": 14
+    },
+    "other": {
+     "precision": 0.8888888888888888,
+     "recall": 0.8,
+     "f1": 0.8421052631578948,
+     "support": 20
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 50,
+     "max_days": 4,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 2
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 10,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 10,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 10,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 7,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 9,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 10,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 1,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 13,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 2,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 0,
+     "other": 16
+    }
+   },
+   "split_right": 0.6984126984126984,
+   "sentence_all_right": 0.6825396825396826,
+   "fields": {
+    "unavailable_windows": 0.8333333333333334,
+    "max_days_per_week": 0.9523809523809523,
+    "max_daily_minutes": 0.9761904761904762,
+    "max_daily_span": 0.9920634920634921,
+    "lunch": 0.9920634920634921,
+    "in_person_only": 1.0,
+    "preferred_hours": 0.9841269841269841,
+    "cares": 0.9206349206349206
+   },
+   "ms_per_sentence": 354.2938095238095
+  }
+ },
+ {
+  "model": "ollama:qwen2.5:7b",
+  "size_mb": null,
+  "machine": "http://192.168.1.120:11434",
+  "note": "no training, full prompt with rules, constrained to the 9 labels",
+  "ms_per_clause": 191.04,
+  "val": {
+   "n": 279,
+   "accuracy": 0.9283154121863799,
+   "macro_f1": 0.9236727866401117,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.8809523809523809,
+     "recall": 1.0,
+     "f1": 0.9367088607594937,
+     "support": 37
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 0.9473684210526315,
+     "f1": 0.972972972972973,
+     "support": 38
+    },
+    "max_daily_hours": {
+     "precision": 0.9523809523809523,
+     "recall": 1.0,
+     "f1": 0.975609756097561,
+     "support": 20
+    },
+    "lunch": {
+     "precision": 0.9230769230769231,
+     "recall": 1.0,
+     "f1": 0.9600000000000001,
+     "support": 24
+    },
+    "in_person_only": {
+     "precision": 0.9,
+     "recall": 0.9642857142857143,
+     "f1": 0.9310344827586207,
+     "support": 28
+    },
+    "prefer_fewer_days": {
+     "precision": 0.8947368421052632,
+     "recall": 1.0,
+     "f1": 0.9444444444444444,
+     "support": 34
+    },
+    "prefer_less_waiting": {
+     "precision": 0.925,
+     "recall": 1.0,
+     "f1": 0.961038961038961,
+     "support": 37
+    },
+    "prefer_no_early_late": {
+     "precision": 0.9285714285714286,
+     "recall": 0.8666666666666667,
+     "f1": 0.896551724137931,
+     "support": 30
+    },
+    "other": {
+     "precision": 1.0,
+     "recall": 0.5806451612903226,
+     "f1": 0.7346938775510204,
+     "support": 31
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 37,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 36,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 2,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 20,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 24,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 1,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 27,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 34,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 37,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 1,
+     "lunch": 2,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 26,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 4,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 3,
+     "prefer_fewer_days": 2,
+     "prefer_less_waiting": 2,
+     "prefer_no_early_late": 2,
+     "other": 18
+    }
+   },
+   "sentence_all_right": 0.6407766990291263
+  },
+  "examples": {
+   "n": 19,
+   "accuracy": 1.0,
+   "macro_f1": 1.0,
+   "per_label": {
+    "blocked_time": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 5
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "max_daily_hours": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_fewer_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_less_waiting": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "prefer_no_early_late": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 3
+    },
+    "other": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 5,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 2,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 2,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 2,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 3,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    }
+   },
+   "split_right": 1.0,
+   "sentence_all_right": 1.0,
+   "fields": {
+    "unavailable_windows": 1.0,
+    "max_days_per_week": 1.0,
+    "max_daily_minutes": 1.0,
+    "max_daily_span": 1.0,
+    "lunch": 1.0,
+    "in_person_only": 1.0,
+    "preferred_hours": 1.0,
+    "cares": 1.0
+   },
+   "ms_per_sentence": 367.457
+  },
+  "test": {
+   "n": 146,
+   "accuracy": 0.8561643835616438,
+   "macro_f1": 0.8406902623441412,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.9444444444444444,
+     "recall": 0.9107142857142857,
+     "f1": 0.9272727272727271,
+     "support": 56
+    },
+    "max_days": {
+     "precision": 0.875,
+     "recall": 0.7,
+     "f1": 0.7777777777777777,
+     "support": 10
+    },
+    "max_daily_hours": {
+     "precision": 0.7692307692307693,
+     "recall": 1.0,
+     "f1": 0.8695652173913044,
+     "support": 10
+    },
+    "lunch": {
+     "precision": 0.9090909090909091,
+     "recall": 1.0,
+     "f1": 0.9523809523809523,
+     "support": 10
+    },
+    "in_person_only": {
+     "precision": 0.875,
+     "recall": 1.0,
+     "f1": 0.9333333333333333,
+     "support": 7
+    },
+    "prefer_fewer_days": {
+     "precision": 0.8181818181818182,
+     "recall": 1.0,
+     "f1": 0.9,
+     "support": 9
+    },
+    "prefer_less_waiting": {
+     "precision": 0.7142857142857143,
+     "recall": 1.0,
+     "f1": 0.8333333333333333,
+     "support": 10
+    },
+    "prefer_no_early_late": {
+     "precision": 0.6923076923076923,
+     "recall": 0.6428571428571429,
+     "f1": 0.6666666666666666,
+     "support": 14
+    },
+    "other": {
+     "precision": 0.8571428571428571,
+     "recall": 0.6,
+     "f1": 0.7058823529411764,
+     "support": 20
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 51,
+     "max_days": 1,
+     "max_daily_hours": 1,
+     "lunch": 1,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 2,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 1,
+     "max_days": 7,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 2,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 10,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 10,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 7,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 9,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 10,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 1,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 9,
+     "other": 2
+    },
+    "other": {
+     "blocked_time": 1,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 4,
+     "prefer_no_early_late": 2,
+     "other": 12
+    }
+   },
+   "split_right": 0.6984126984126984,
+   "sentence_all_right": 0.6587301587301587,
+   "fields": {
+    "unavailable_windows": 0.8333333333333334,
+    "max_days_per_week": 0.9523809523809523,
+    "max_daily_minutes": 0.9761904761904762,
+    "max_daily_span": 0.9920634920634921,
+    "lunch": 1.0,
+    "in_person_only": 0.9920634920634921,
+    "preferred_hours": 0.9444444444444444,
+    "cares": 0.8650793650793651
+   },
+   "ms_per_sentence": 262.47190476190474
+  }
+ },
+ {
+  "model": "ollama:qwen2.5:7b + 护栏",
+  "size_mb": null,
+  "machine": "http://192.168.1.120:11434",
+  "note": "no training, full prompt with rules, constrained to the 9 labels",
+  "ms_per_clause": 191.04,
+  "val": {
+   "n": 279,
+   "accuracy": 0.9283154121863799,
+   "macro_f1": 0.9241194662908853,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.8604651162790697,
+     "recall": 1.0,
+     "f1": 0.9249999999999999,
+     "support": 37
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 0.9473684210526315,
+     "f1": 0.972972972972973,
+     "support": 38
+    },
+    "max_daily_hours": {
+     "precision": 0.9523809523809523,
+     "recall": 1.0,
+     "f1": 0.975609756097561,
+     "support": 20
+    },
+    "lunch": {
+     "precision": 0.9230769230769231,
+     "recall": 1.0,
+     "f1": 0.9600000000000001,
+     "support": 24
+    },
+    "in_person_only": {
+     "precision": 0.9,
+     "recall": 0.9642857142857143,
+     "f1": 0.9310344827586207,
+     "support": 28
+    },
+    "prefer_fewer_days": {
+     "precision": 0.8947368421052632,
+     "recall": 1.0,
+     "f1": 0.9444444444444444,
+     "support": 34
+    },
+    "prefer_less_waiting": {
+     "precision": 0.925,
+     "recall": 1.0,
+     "f1": 0.961038961038961,
+     "support": 37
+    },
+    "prefer_no_early_late": {
+     "precision": 0.9629629629629629,
+     "recall": 0.8666666666666667,
+     "f1": 0.912280701754386,
+     "support": 30
+    },
+    "other": {
+     "precision": 1.0,
+     "recall": 0.5806451612903226,
+     "f1": 0.7346938775510204,
+     "support": 31
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 37,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 36,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 2,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 20,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 24,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 1,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 27,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 34,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 37,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 1,
+     "lunch": 2,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 1,
+     "prefer_no_early_late": 26,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 5,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 3,
+     "prefer_fewer_days": 2,
+     "prefer_less_waiting": 2,
+     "prefer_no_early_late": 1,
+     "other": 18
+    }
+   },
+   "sentence_all_right": 0.6213592233009708
+  },
+  "examples": {
+   "n": 19,
+   "accuracy": 1.0,
+   "macro_f1": 1.0,
+   "per_label": {
+    "blocked_time": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 5
+    },
+    "max_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "max_daily_hours": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "lunch": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "in_person_only": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_fewer_days": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    },
+    "prefer_less_waiting": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 2
+    },
+    "prefer_no_early_late": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 3
+    },
+    "other": {
+     "precision": 1.0,
+     "recall": 1.0,
+     "f1": 1.0,
+     "support": 1
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 5,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 0,
+     "max_days": 2,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 2,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 1,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 2,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 3,
+     "other": 0
+    },
+    "other": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 1
+    }
+   },
+   "split_right": 1.0,
+   "sentence_all_right": 1.0,
+   "fields": {
+    "unavailable_windows": 1.0,
+    "max_days_per_week": 1.0,
+    "max_daily_minutes": 1.0,
+    "max_daily_span": 1.0,
+    "lunch": 1.0,
+    "in_person_only": 1.0,
+    "preferred_hours": 1.0,
+    "cares": 1.0
+   },
+   "ms_per_sentence": 367.457
+  },
+  "test": {
+   "n": 146,
+   "accuracy": 0.863013698630137,
+   "macro_f1": 0.8441944113860477,
+   "per_label": {
+    "blocked_time": {
+     "precision": 0.9137931034482759,
+     "recall": 0.9464285714285714,
+     "f1": 0.9298245614035087,
+     "support": 56
+    },
+    "max_days": {
+     "precision": 0.875,
+     "recall": 0.7,
+     "f1": 0.7777777777777777,
+     "support": 10
+    },
+    "max_daily_hours": {
+     "precision": 0.7692307692307693,
+     "recall": 1.0,
+     "f1": 0.8695652173913044,
+     "support": 10
+    },
+    "lunch": {
+     "precision": 0.9090909090909091,
+     "recall": 1.0,
+     "f1": 0.9523809523809523,
+     "support": 10
+    },
+    "in_person_only": {
+     "precision": 0.875,
+     "recall": 1.0,
+     "f1": 0.9333333333333333,
+     "support": 7
+    },
+    "prefer_fewer_days": {
+     "precision": 0.8181818181818182,
+     "recall": 1.0,
+     "f1": 0.9,
+     "support": 9
+    },
+    "prefer_less_waiting": {
+     "precision": 0.7142857142857143,
+     "recall": 1.0,
+     "f1": 0.8333333333333333,
+     "support": 10
+    },
+    "prefer_no_early_late": {
+     "precision": 0.8888888888888888,
+     "recall": 0.5714285714285714,
+     "f1": 0.6956521739130435,
+     "support": 14
+    },
+    "other": {
+     "precision": 0.8571428571428571,
+     "recall": 0.6,
+     "f1": 0.7058823529411764,
+     "support": 20
+    }
+   },
+   "confusion": {
+    "blocked_time": {
+     "blocked_time": 53,
+     "max_days": 1,
+     "max_daily_hours": 1,
+     "lunch": 1,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_days": {
+     "blocked_time": 1,
+     "max_days": 7,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 2,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "max_daily_hours": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 10,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "lunch": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 10,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "in_person_only": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 7,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_fewer_days": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 9,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_less_waiting": {
+     "blocked_time": 0,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 10,
+     "prefer_no_early_late": 0,
+     "other": 0
+    },
+    "prefer_no_early_late": {
+     "blocked_time": 2,
+     "max_days": 0,
+     "max_daily_hours": 2,
+     "lunch": 0,
+     "in_person_only": 0,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 0,
+     "prefer_no_early_late": 8,
+     "other": 2
+    },
+    "other": {
+     "blocked_time": 2,
+     "max_days": 0,
+     "max_daily_hours": 0,
+     "lunch": 0,
+     "in_person_only": 1,
+     "prefer_fewer_days": 0,
+     "prefer_less_waiting": 4,
+     "prefer_no_early_late": 1,
+     "other": 12
+    }
+   },
+   "split_right": 0.6984126984126984,
+   "sentence_all_right": 0.6666666666666666,
+   "fields": {
+    "unavailable_windows": 0.8333333333333334,
+    "max_days_per_week": 0.9523809523809523,
+    "max_daily_minutes": 0.9761904761904762,
+    "max_daily_span": 0.9920634920634921,
+    "lunch": 1.0,
+    "in_person_only": 0.9920634920634921,
+    "preferred_hours": 0.9603174603174603,
+    "cares": 0.8888888888888888
+   },
+   "ms_per_sentence": 262.47190476190474
+  }
+ }
+]

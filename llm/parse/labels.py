@@ -83,8 +83,17 @@ SYSTEM = ("Classify one clause a university student wrote about their timetable 
           + "\nAnswer with the label only.")
 
 
+# Fine-tuned models learn the rules from examples, so they get a short prompt (faster, fewer tokens).
+SHORT_SYSTEM = ("Label one clause a student wrote about their timetable with one of: " + ", ".join(LABELS)
+                + ". Answer with the label only.")
+
+
 def messages(text: str) -> list[dict]:
     return [{"role": "system", "content": SYSTEM}, {"role": "user", "content": text}]
+
+
+def short_messages(text: str) -> list[dict]:
+    return [{"role": "system", "content": SHORT_SYSTEM}, {"role": "user", "content": text}]
 
 
 def parse_label(output: str) -> str:

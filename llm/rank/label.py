@@ -60,7 +60,8 @@ SYSTEM = ("你要扮演一位大学生，根据他自己的情况，从“红”
           "表格里的早晚课已经按这位学生自己方便的时段算好，直接用表里的数字。")
 SCHEMA = {"type": "object", "properties": {
     "focus": {"type": "string", "enum": list(ROWS)},
-    "reason": {"type": "string"}, "choice": {"type": "string", "enum": ["红", "蓝"]}},
+    # The cap stops a model that keeps writing inside the string (14B looped there without it).
+    "reason": {"type": "string", "maxLength": 150}, "choice": {"type": "string", "enum": ["红", "蓝"]}},
     "required": ["focus", "reason", "choice"]}
 TRAIN_PAIRS, TEST_SET = 16, 8   # pairs per training persona; candidates per test persona (all 28 pairs)
 
@@ -119,16 +120,24 @@ def all_near(a: dict, b: dict) -> bool:
     return all(abs(a["x"][key] - b["x"][key]) < threshold for key, threshold in NEAR.items())
 
 
-def ask(model: str, persona: dict, red: dict, blue: dict, draw: bool = False) -> dict:
+def table_text(persona: dict, red: dict, blue: dict) -> str:
     labels = row_labels(hours_of(persona["conditions"]))
-    table = "\n".join(f"| {labels[row]} | {red['table'][row]} | {blue['table'][row]} |" for row in ROWS)
+    rows = "\n".join(f"| {labels[row]} | {red['table'][row]} | {blue['table'][row]} |" for row in ROWS)
+    return f"| 项目 | 红 | 蓝 |\n| --- | --- | --- |\n{rows}"
+
+
+def question(persona: dict, red: dict, blue: dict, draw: bool = False) -> str:
+    """Exactly what the model is shown about one pair."""
     row = FOCUS_ROW[persona["focus"]]
     note = (f"\n\n注意：两份课表的“{row}”几乎一样（红 {red['table'][row]}，蓝 {blue['table'][row]}），"
             f"这一项分不出高下。请根据这位学生的其他情况和表里的其他项来选，focus 填你据以决定的那一项。"
             if draw else "")
-    user = (f"学生情况：{persona['text']}\n\n| 项目 | 红 | 蓝 |\n| --- | --- | --- |\n{table}{note}\n\n"
+    return (f"学生情况：{persona['text']}\n\n{table_text(persona, red, blue)}{note}\n\n"
             f"红课表（每周固定的课）：\n{red['text']}\n\n蓝课表（每周固定的课）：\n{blue['text']}")
-    messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}]
+
+
+def ask(model: str, persona: dict, red: dict, blue: dict, draw: bool = False) -> dict:
+    messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": question(persona, red, blue, draw)}]
     for limit in (500, 1200):   # a long reason can hit the token limit and cut the JSON short
         try:
             return json.loads(ollama.chat(model, messages, schema=SCHEMA,

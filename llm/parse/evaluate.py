@@ -4,6 +4,15 @@
     python3 -m llm.parse.evaluate --report-only          # rebuild the table from saved predictions
     python3 -m llm.parse.evaluate --models ... --test    # final runs only: also score the test set
 
+Final exam (llm/parse/exam/exam.csv): copy output/predictions to output/exam/predictions first, so the
+validation predictions are reused and the main cache is untouched, then
+    python3 -m llm.gpu_lock -- python3 -m llm.parse.evaluate --models keywords linear-r1 ollama:qwen2.5:7b \
+        ollama-v2:qwen2.5:7b ollama-short:uniplan-parse-7b ollama-short:uniplan-parse-7b-r2 --test \
+        --test-file llm/parse/exam/exam.csv --test-source "<who wrote it>" \
+        --report-dir llm/parse/output/exam --predictions-dir llm/parse/output/exam/predictions
+Use linear-r1, not linear: its cached validation predictions come from the model fitted on the
+training split only, while "linear" (the run-time file) was refitted on train + val.
+
 Data sets:
 - val: the held-out SYNTHETIC clauses (llm/parse/output/synthetic_clauses.jsonl, split == "val"),
   plus sentences made by joining 2-3 of them, to measure splitting + classifying together;
@@ -72,12 +81,20 @@ def joined_sentences(rows: list[dict], count: int = 120) -> list[dict]:
     return sentences
 
 
-def data_sets(with_test: bool, test_file: Path = TEST) -> dict:
+TEST_SOURCE = "由 Claude（总控窗口）按用户要求撰写（见 `data/TEST_SOURCES.md`）"
+
+
+def _shown(path: Path) -> str:
+    path = Path(path).resolve()
+    return str(path.relative_to(HERE)) if path.is_relative_to(HERE) else path.name
+
+
+def data_sets(with_test: bool, test_file: Path = TEST, test_source: str = TEST_SOURCE) -> dict:
     sets = {"val": {"clauses": [{"text": r["text"], "label": r["label"]} for r in synthetic("val")]}}
     sets["val"]["sentences"] = joined_sentences(synthetic("val"))
     sets["examples"] = {"gold": load(TEMPLATE)}
     if with_test:
-        sets["test"] = {"gold": load(test_file), "file": Path(test_file).name}
+        sets["test"] = {"gold": load(test_file), "file": _shown(test_file), "source": test_source}
     return sets
 
 
@@ -90,13 +107,13 @@ def texts_needed(sets: dict) -> list[str]:
     return list(dict.fromkeys(texts))
 
 
-def predict(name: str, classify, texts: list[str], meta: dict) -> dict:
+def predict(name: str, classify, texts: list[str], meta: dict, folder: Path = PREDICTIONS) -> dict:
     """Run one classifier over the texts it has not seen yet and save everything."""
-    path = PREDICTIONS / f"{name.replace(':', '_').replace('/', '_')}.json"
+    path = folder / f"{name.replace(':', '_').replace('/', '_')}.json"
     saved = json.loads(path.read_text()) if path.exists() else {"model": name, "predictions": {}}
     todo = [text for text in texts if text not in saved["predictions"]]
     saved.update({key: value for key, value in meta.items() if value is not None})
-    PREDICTIONS.mkdir(parents=True, exist_ok=True)
+    folder.mkdir(parents=True, exist_ok=True)
     if todo:
         classify(todo[0])                                     # warm up (model load) outside the timing
     for number, text in enumerate(todo, 1):
@@ -176,9 +193,8 @@ def markdown(results: list[dict], sets: dict) -> str:
     ]
     if "test" in sets:
         gold = sets["test"]["gold"]
-        lines.append(f"- **测试集（test）**：`data/{sets['test']['file']}`，{len(gold)} 句、"
-                     f"{sum(len(s['clauses']) for s in gold)} 个短句，由 Claude（总控窗口）按用户要求撰写"
-                     "（见 `data/TEST_SOURCES.md`），不是真实学生数据；与训练数据的生成模型（千问）不是同一家。"
+        lines.append(f"- **测试集（test）**：`{sets['test']['file']}`，{len(gold)} 句、"
+                     f"{sum(len(s['clauses']) for s in gold)} 个短句，{sets['test']['source']}，不是真实学生数据。"
                      "只在最后评估时读，没有用来调参。")
     else:
         lines.append("- **测试集（test）**：Claude 撰写（见 `data/TEST_SOURCES.md`），这次没有读。")
@@ -197,7 +213,7 @@ def markdown(results: list[dict], sets: dict) -> str:
         if r.get("val"):
             lines.append(f"| {r['model']} | " + " | ".join(f"{r['val']['per_label'][label]['f1']:.2f}"
                                                          for label in LABEL_ORDER) + " |")
-    test_title = f"测试集 {sets['test']['file']}（Claude 撰写）" if "test" in sets else ""
+    test_title = f"测试集 {sets['test']['file']}" if "test" in sets else ""
     for set_name, title in (("examples", "10 句示例（不是测试集）"), ("test", test_title)):
         rows = [r for r in results if r.get(set_name)]
         if not rows:
@@ -244,6 +260,11 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--test", action="store_true", help="also score the test file (final runs only)")
     parser.add_argument("--test-file", type=Path, default=TEST, help="which test set --test reads")
     parser.add_argument("--guard", action="store_true", help="also report every model with the rule-5 guard on")
+    parser.add_argument("--test-source", default=TEST_SOURCE, help="who wrote the test file, for the report")
+    parser.add_argument("--report-dir", type=Path, default=OUTPUT,
+                        help="where parse_results.md/json go (e.g. output/exam for the final exam)")
+    parser.add_argument("--predictions-dir", type=Path, default=PREDICTIONS,
+                        help="prediction cache; only models with a file here are scored")
     parser.add_argument("--report-only", action="store_true")
     parser.add_argument("--machine", default=None, help="where the model ran, for the table")
     parser.add_argument("--size-mb", type=float, default=None)
@@ -252,7 +273,7 @@ def main(argv: list[str] | None = None) -> int:
     if args.test and not args.test_file.exists():
         print(f"{args.test_file} does not exist yet", file=sys.stderr)
         return 1
-    sets = data_sets(args.test, args.test_file)
+    sets = data_sets(args.test, args.test_file, args.test_source)
     texts = texts_needed(sets)
     if not args.report_only:
         from llm import ollama
@@ -265,14 +286,16 @@ def main(argv: list[str] | None = None) -> int:
                 if loaded and loaded != model:
                     ollama.unload(loaded)
                 loaded = model
-            predict(name, by_name(name), texts, {"machine": machine, "size_mb": args.size_mb, "note": args.note})
-    saved = [json.loads(path.read_text()) for path in sorted(PREDICTIONS.glob("*.json"))]
+            predict(name, by_name(name), texts, {"machine": machine, "size_mb": args.size_mb, "note": args.note},
+                    args.predictions_dir)
+    saved = [json.loads(path.read_text()) for path in sorted(args.predictions_dir.glob("*.json"))]
     results = [score(item, sets) for item in saved] + ([score(item, sets, guard=True) for item in saved]
                                                        if args.guard else [])
     order = {name: index for index, name in enumerate(["keywords", "linear"])}
     results.sort(key=lambda r: (order.get(r["model"], 2), r["model"]))
-    (OUTPUT / "parse_results.md").write_text(markdown(results, sets), encoding="utf-8")
-    (OUTPUT / "parse_results.json").write_text(json.dumps(results, ensure_ascii=False, indent=1))
+    args.report_dir.mkdir(parents=True, exist_ok=True)
+    (args.report_dir / "parse_results.md").write_text(markdown(results, sets), encoding="utf-8")
+    (args.report_dir / "parse_results.json").write_text(json.dumps(results, ensure_ascii=False, indent=1))
     for r in results:
         v = r.get("val") or {}
         print(f"{r['model']:<28} val acc {_pct(v.get('accuracy')):>6}  macro-F1 {_pct(v.get('macro_f1')):>6}  "

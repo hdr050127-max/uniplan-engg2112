@@ -1,0 +1,462 @@
+sentence_id,sentence,clause,label,block,max_days,max_class_hours,max_campus_hours,lunch,prefer_hours,note
+e001,"I look after my mum on Tuesdays, I can't do anything past 4 on the other days, and only in-person classes please",I look after my mum on Tuesdays,blocked_time,Tue all,,,,,,
+,,I can't do anything past 4 on the other days,blocked_time,"Mon,Wed-Fri 16:00-24:00",,,,,,
+,,only in-person classes please,in_person_only,,,,,,,
+e002,I work at Woolies every Friday so I can't do anything that day,I work at Woolies every Friday so I can't do anything that day,blocked_time,Fri all,,,,,,back-reference 'that day' stays in the clause
+e003,"I don't mind early starts, 8am is totally fine","I don't mind early starts, 8am is totally fine",other,,,,,,,likes early starts; a clock time that is fine is not a block
+e004,"I don't wanna do more than 6 hours of class on any one day, but I don't mind if I'm on campus till late",I don't wanna do more than 6 hours of class on any one day,max_daily_hours,,,6,,,,
+,,I don't mind if I'm on campus till late,other,,,,,,,fine with late; no request
+e005,"Need a proper lunch break, at least 45 min, sometime between 12 and 2","Need a proper lunch break, at least 45 min, sometime between 12 and 2",lunch,,,,,12:00-14:00 45,,
+e006,No 8ams no 6pms,No 8ams,blocked_time,Mon-Fri 0:00-9:00,,,,,,
+,,no 6pms,blocked_time,Mon-Fri 18:00-24:00,,,,,,
+e007,I'm international and my visa lets me work 48 hours a fortnight so I need my classes squished into 3 days,I'm international and my visa lets me work 48 hours a fortnight so I need my classes squished into 3 days,max_days,,3,,,,,48 hours a fortnight is a distractor
+e008,Please make sure my lab and tute aren't on different campuses,Please make sure my lab and tute aren't on different campuses,other,,,,,,,location
+e009,i need a lunch brake around 12-1,i need a lunch brake around 12-1,lunch,,,,,12:00-13:00 60,,typo 'brake'
+e010,"Honestly I don't care about the days, just don't put me in anything that starts before 9:30 and give me an hour for lunch",Honestly I don't care about the days,other,,,,,,,
+,,just don't put me in anything that starts before 9:30,blocked_time,Mon-Fri 0:00-9:30,,,,,,
+,,give me an hour for lunch,lunch,,,,,11:30-14:00 60,,
+e011,Basically I need Thursdays free for my research assistant job and nothing after 5 on the other days,Basically I need Thursdays free for my research assistant job,blocked_time,Thu all,,,,,,
+,,nothing after 5 on the other days,blocked_time,"Mon-Wed,Fri 17:00-24:00",,,,,,
+e012,No more than 5 hours of class a day or my brain melts,No more than 5 hours of class a day or my brain melts,max_daily_hours,,,5,,,,
+e013,"I can only realistically come in 3 days, my sister needs the car the other days","I can only realistically come in 3 days, my sister needs the car the other days",max_days,,3,,,,,
+e014,I'm a mum of two (4 and 7) and I drop them at school at 8:45,I'm a mum of two (4 and 7) and I drop them at school at 8:45,blocked_time,Mon-Fri 0:00-9:45,,,,,,one morning clock -> 0:00-(X+1); the kids' ages are distractors
+e015,ok so basically i work at a cafe on tuesday and thursday mornings until 11 and i also have a toddler so i need to be home by 5 and i dont want more than 3 days,ok so basically i work at a cafe on tuesday and thursday mornings until 11,blocked_time,"Tue,Thu 0:00-11:00",,,,,,
+,,i also have a toddler so i need to be home by 5,blocked_time,Mon-Fri 17:00-24:00,,,,,,
+,,i dont want more than 3 days,max_days,,3,,,,,
+e016,"I'm on antidepressants that knock me out, so early starts are rough","I'm on antidepressants that knock me out, so early starts are rough",prefer_no_early_late,,,,,,,
+e017,Im not a morning person at all lol,Im not a morning person at all lol,prefer_no_early_late,,,,,,,
+e018,"I'm doing a TAFE course on Tuesday nights and work Saturdays, otherwise I'm flexible",I'm doing a TAFE course on Tuesday nights,blocked_time,Tue 18:00-24:00,,,,,,
+,,work Saturdays,blocked_time,Sat all,,,,,,
+,,otherwise I'm flexible,other,,,,,,,
+e019,Prefer online for lectures so I can rewatch them,Prefer online for lectures so I can rewatch them,other,,,,,,,wants online classes
+e020,I'm hoping to get the tutor who speaks Mandarin,I'm hoping to get the tutor who speaks Mandarin,other,,,,,,,
+e021,No more than 4 hours of classes on any day and no more than 3 days a week,No more than 4 hours of classes on any day,max_daily_hours,,,4,,,,
+,,no more than 3 days a week,max_days,,3,,,,,
+e022,"I really don't like waiting around, and I really don't like mornings",I really don't like waiting around,prefer_less_waiting,,,,,,,
+,,I really don't like mornings,prefer_no_early_late,,,,,,,"feeling about mornings, no request"
+e023,"first class to last class shouldn't be longer than 8 hrs, and I need a 30 min feed somewhere in the middle",first class to last class shouldn't be longer than 8 hrs,max_daily_hours,,,,8,,,
+,,I need a 30 min feed somewhere in the middle,lunch,,,,,11:30-14:00 30,,'feed' = a meal; no clock time
+e024,"At most 6 hours of class a day, at most 9 hours on campus, and ideally start after 10",At most 6 hours of class a day,max_daily_hours,,,6,,,,
+,,at most 9 hours on campus,max_daily_hours,,,,9,,,
+,,ideally start after 10,prefer_no_early_late,,,,,,10:00-18:00,
+e025,"Could you make sure I'm not stuck on campus for more than 7 hours, first class to last","Could you make sure I'm not stuck on campus for more than 7 hours, first class to last",max_daily_hours,,,,7,,,
+e026,I'd prefer my day to start at 10 at the earliest,I'd prefer my day to start at 10 at the earliest,prefer_no_early_late,,,,,,10:00-18:00,
+e027,"Keep my mornings free if you can, I've got swim squad","Keep my mornings free if you can, I've got swim squad",blocked_time,Mon-Fri 0:00-10:00,,,,,,part-of-day word + request; the hedge does not apply
+e028,"Fewer days and shorter gaps, that's all I ask",Fewer days,prefer_fewer_days,,,,,,,
+,,"shorter gaps, that's all I ask",prefer_less_waiting,,,,,,,
+e029,"Don't mind gaps, do mind 8am classes",Don't mind gaps,other,,,,,,,
+,,do mind 8am classes,blocked_time,Mon-Fri 0:00-9:00,,,,,,
+e030,in person only and I want Dr Patel's tute if possible,in person only,in_person_only,,,,,,,
+,,I want Dr Patel's tute if possible,other,,,,,,,
+e031,Keep me under 20 contact hours a week,Keep me under 20 contact hours a week,other,,,,,,,"hours per week, not per day"
+e032,"Can I get into a tute with other international students, and I'm happy with gaps",Can I get into a tute with other international students,other,,,,,,,
+,,I'm happy with gaps,other,,,,,,,gaps are fine; no request
+e033,"I hate having one tiny class on a day by itself, I'd rather the days were full","I hate having one tiny class on a day by itself, I'd rather the days were full",prefer_fewer_days,,,,,,,wants classes packed into fewer days; no count
+e034,"Start times don't matter to me, but I've got a bad knee so I'd like my classes in buildings close to each other",Start times don't matter to me,other,,,,,,,
+,,I've got a bad knee so I'd like my classes in buildings close to each other,other,,,,,,,buildings
+e035,breaks between classes shouldnt be more than like 30 mins,breaks between classes shouldnt be more than like 30 mins,prefer_less_waiting,,,,,,,30 mins is a gap length
+e036,"Cluster everything into as few days as possible, but no Wednesdays",Cluster everything into as few days as possible,prefer_fewer_days,,,,,,,
+,,no Wednesdays,blocked_time,Wed all,,,,,,
+e037,"I'm doing a combined degree with law so I'll have some law classes too, can you check for clashes","I'm doing a combined degree with law so I'll have some law classes too, can you check for clashes",other,,,,,,,
+e038,Can my classes be squeezed into fewer days? and no big gaps pls,Can my classes be squeezed into fewer days,prefer_fewer_days,,,,,,,
+,,no big gaps pls,prefer_less_waiting,,,,,,,
+e039,"Nothing too late in the day please, I'm on the Central Coast","Nothing too late in the day please, I'm on the Central Coast",prefer_no_early_late,,,,,,,vague 'too late'
+e040,"Hi! I'm a mature age student with a full time job, so I can only do Monday and Wednesday evenings, thanks","I'm a mature age student with a full time job, so I can only do Monday and Wednesday evenings",blocked_time,"Mon,Wed 0:00-18:00; Tue,Thu,Fri all",,,,,,only these times: everything else on weekdays is blocked; greetings dropped
+e041,I'm a single mum so I can only do classes between 9:30 and 2:30,I'm a single mum so I can only do classes between 9:30 and 2:30,blocked_time,Mon-Fri 0:00-9:30; Mon-Fri 14:30-24:00,,,,,,
+e042,"pack my classes into the smallest number of days possible, gaps are fine",pack my classes into the smallest number of days possible,prefer_fewer_days,,,,,,,
+,,gaps are fine,other,,,,,,,
+e043,"keep tuesday free, keep thursday arvo free, keep it in person",keep tuesday free,blocked_time,Tue all,,,,,,
+,,keep thursday arvo free,blocked_time,Thu 12:00-18:00,,,,,,
+,,keep it in person,in_person_only,,,,,,,
+e044,I'd prefer not to have anything before 10 but Mondays I literally can't before 12,I'd prefer not to have anything before 10,prefer_no_early_late,,,,,,10:00-18:00,
+,,Mondays I literally can't before 12,blocked_time,Mon 0:00-12:00,,,,,,
+e045,I'd love to be in the same tute as my cousin and we both can't do Thursdays,I'd love to be in the same tute as my cousin,other,,,,,,,
+,,we both can't do Thursdays,blocked_time,Thu all,,,,,,
+e046,"I'm autistic and unstructured time on campus is really hard for me, so back-to-back classes are best","I'm autistic and unstructured time on campus is really hard for me, so back-to-back classes are best",prefer_less_waiting,,,,,,,
+e047,my anxiety is worse on long days so cap it at 6 hours on campus and give me a lunch break,my anxiety is worse on long days so cap it at 6 hours on campus,max_daily_hours,,,,6,,,
+,,give me a lunch break,lunch,,,,,11:30-14:00 30,,
+e048,"Condense my week pls, and no lectures after 5",Condense my week pls,prefer_fewer_days,,,,,,,
+,,no lectures after 5,blocked_time,Mon-Fri 17:00-24:00,,,,,,
+e049,"can u keep tuesday and thursday arvos free, I coach under 12s soccer","can u keep tuesday and thursday arvos free, I coach under 12s soccer",blocked_time,"Tue,Thu 12:00-18:00",,,,,,reason kept with the request; '12s' is an age group
+e050,no long waits between classes and I'd like an hour for lunch,no long waits between classes,prefer_less_waiting,,,,,,,
+,,I'd like an hour for lunch,lunch,,,,,11:30-14:00 60,,
+e051,I want the same tute as my flatmate so I actually know someone,I want the same tute as my flatmate so I actually know someone,other,,,,,,,
+e052,max 3 hrs of lectures and tutes per day pls my attention span is cooked,max 3 hrs of lectures and tutes per day pls my attention span is cooked,max_daily_hours,,,3,,,,
+e053,"pls leave 1-2pm free on tues and thurs, I've got a standing zoom with my supervisor","pls leave 1-2pm free on tues and thurs, I've got a standing zoom with my supervisor",blocked_time,"Tue,Thu 13:00-14:00",,,,,,"'zoom' here is a meeting, not online classes"
+e054,Can I be in the same lab as my lab partner from last sem,Can I be in the same lab as my lab partner from last sem,other,,,,,,,
+e055,"I'd like to be in the same tute as my best mate Liam, and I'd prefer to start after 10",I'd like to be in the same tute as my best mate Liam,other,,,,,,,
+,,I'd prefer to start after 10,prefer_no_early_late,,,,,,10:00-18:00,
+e056,"I don't want long gaps between classes, I'd rather just go home","I don't want long gaps between classes, I'd rather just go home",prefer_less_waiting,,,,,,,
+e057,I cant be there tuesday at all and thursday i have to leave by 1,I cant be there tuesday at all,blocked_time,Tue all,,,,,,
+,,thursday i have to leave by 1,blocked_time,Thu 13:00-24:00,,,,,,
+e058,"pls no more than 4 days, I work the rest","pls no more than 4 days, I work the rest",max_days,,4,,,,,
+e059,the less I have to come in the better tbh,the less I have to come in the better tbh,prefer_fewer_days,,,,,,,
+e060,"Gaps make me procrastinate, so stack everything up together, and 3 days max","Gaps make me procrastinate, so stack everything up together",prefer_less_waiting,,,,,,,
+,,3 days max,max_days,,3,,,,,
+e061,Early morning lectures are a nightmare on the M5,Early morning lectures are a nightmare on the M5,prefer_no_early_late,,,,,,,'early morning' is a modified part-of-day
+e062,"I'm a shocker at getting up early, so the later the better","I'm a shocker at getting up early, so the later the better",prefer_no_early_late,,,,,,,
+e063,"I want to minimise the days I travel in, petrol is so expensive","I want to minimise the days I travel in, petrol is so expensive",prefer_fewer_days,,,,,,,
+e064,"I'm a caretaker at my church Tuesday and Thursday 6 to 8am, so on those days I'd prefer nothing before 10","I'm a caretaker at my church Tuesday and Thursday 6 to 8am, so on those days I'd prefer nothing before 10",blocked_time,"Tue,Thu 0:00-10:00",,,,,,"'those days' points back to Tue/Thu and the job, so the hedge does not apply"
+e065,"classes close together, home by 4, no Fridays",classes close together,prefer_less_waiting,,,,,,,
+,,home by 4,blocked_time,Mon-Fri 16:00-24:00,,,,,,
+,,no Fridays,blocked_time,Fri all,,,,,,
+e066,"I'm deaf and need an Auslan interpreter so in-person classes only, interpreters don't do Zoom well","I'm deaf and need an Auslan interpreter so in-person classes only, interpreters don't do Zoom well",in_person_only,,,,,,,
+e067,"No preference on days or times, just want a good tutor","No preference on days or times, just want a good tutor",other,,,,,,,
+e068,I'm a third year mech eng student doing my thesis this year,I'm a third year mech eng student doing my thesis this year,other,,,,,,,
+e069,late classes make me miserable,late classes make me miserable,prefer_no_early_late,,,,,,,
+e070,"My dog walking business runs 7 to 9am weekdays, and I'd like an hour for lunch, fewer days is better too",My dog walking business runs 7 to 9am weekdays,blocked_time,Mon-Fri 7:00-9:00,,,,,,
+,,I'd like an hour for lunch,lunch,,,,,11:30-14:00 60,,
+,,fewer days is better too,prefer_fewer_days,,,,,,,
+e071,I work at a pub Thursday Friday and Saturday nights,I work at a pub Thursday Friday and Saturday nights,blocked_time,Thu-Sat 18:00-24:00,,,,,,
+e072,I want classes in the morning because I'm sharpest then,I want classes in the morning because I'm sharpest then,other,,,,,,,wants mornings; no restriction
+e073,"I go to Jumu'ah at the mosque on Fridays from 1 to 2, so keep that hour clear","I go to Jumu'ah at the mosque on Fridays from 1 to 2, so keep that hour clear",blocked_time,Fri 13:00-14:00,,,,,,
+e074,I'd rather not have classes in the evenings because I'm scared walking to the station at night,I'd rather not have classes in the evenings because I'm scared walking to the station at night,blocked_time,Mon-Fri 18:00-24:00,,,,,,part-of-day word + request; the hedge does not apply
+e075,"No more than 3 uni days, keep Mondays free and I'd prefer to finish by 5",No more than 3 uni days,max_days,,3,,,,,
+,,keep Mondays free,blocked_time,Mon all,,,,,,
+,,I'd prefer to finish by 5,prefer_no_early_late,,,,,,9:00-17:00,
+e076,Can I have all my classes on as few days as possible,Can I have all my classes on as few days as possible,prefer_fewer_days,,,,,,,
+e077,"I'm pregnant and due in week 9, so I might need to switch to online later in the sem","I'm pregnant and due in week 9, so I might need to switch to online later in the sem",other,,,,,,,wants online; week 9 is not a weekday
+e078,I pick up my daughter from daycare at 3:30 so nothing after that,I pick up my daughter from daycare at 3:30 so nothing after that,blocked_time,Mon-Fri 15:30-24:00,,,,,,
+e079,Every day I need to be home by 6:30 to cook for my kids,Every day I need to be home by 6:30 to cook for my kids,blocked_time,Mon-Fri 18:30-24:00,,,,,,"dinner, not lunch"
+e080,"I struggle with long days so 5 hrs of class max, and don't spread me over the whole week",I struggle with long days so 5 hrs of class max,max_daily_hours,,,5,,,,
+,,don't spread me over the whole week,prefer_fewer_days,,,,,,,
+e081,"4 days max, 3 if you can manage it","4 days max, 3 if you can manage it",max_days,,4,,,,,real limit is the larger number
+e082,I want to finish my degree in 3 years so I'm doing 5 units this sem,I want to finish my degree in 3 years so I'm doing 5 units this sem,other,,,,,,,
+e083,I'm at uni anyway on Wednesdays so stick as many classes there as you like,I'm at uni anyway on Wednesdays so stick as many classes there as you like,other,,,,,,,only says a day is good; no request
+e084,"I have to eat lunch with my meds at 12:30, half an hour","I have to eat lunch with my meds at 12:30, half an hour",lunch,,,,,12:30-13:00 30,,
+e085,"Max 3 days on campus a week, my commute is like 90 mins each way","Max 3 days on campus a week, my commute is like 90 mins each way",max_days,,3,,,,,"commute minutes are the reason, kept with the request"
+e086,"Face to face only pls, I can't focus on Zoom","Face to face only pls, I can't focus on Zoom",in_person_only,,,,,,,
+e087,I hate early starts and I hate gaps even more,I hate early starts,prefer_no_early_late,,,,,,,
+,,I hate gaps even more,prefer_less_waiting,,,,,,,
+e088,I'm usually wrecked by the end of the day so late arvo classes aren't great,I'm usually wrecked by the end of the day so late arvo classes aren't great,prefer_no_early_late,,,,,,,
+e089,Fewer days is my top priority but I also don't want to sit around between classes,Fewer days is my top priority,prefer_fewer_days,,,,,,,
+,,I also don't want to sit around between classes,prefer_less_waiting,,,,,,,
+e090,I want to be done by 2:30 every day and no classes Monday,I want to be done by 2:30 every day,blocked_time,Mon-Fri 14:30-24:00,,,,,,
+,,no classes Monday,blocked_time,Mon all,,,,,,
+e091,I'd prefer to finish by 5 on Wednesdays,I'd prefer to finish by 5 on Wednesdays,blocked_time,Wed 17:00-24:00,,,,,,weekday named: the hedge does not apply
+e092,I don't want to trek out to the Cumberland campus,I don't want to trek out to the Cumberland campus,other,,,,,,,location
+e093,no gaps no mornings no online,no gaps,prefer_less_waiting,,,,,,,
+,,no mornings,blocked_time,Mon-Fri 0:00-10:00,,,,,,
+,,no online,in_person_only,,,,,,,
+e094,"I'm a mature age student, 38, coming back after a long break","I'm a mature age student, 38, coming back after a long break",other,,,,,,,38 is an age
+e095,"Online lectures yes, online tutes no",Online lectures yes,other,,,,,,,
+,,online tutes no,in_person_only,,,,,,,
+e096,less days on campus pls and no 8am's,less days on campus pls,prefer_fewer_days,,,,,,,
+,,no 8am's,blocked_time,Mon-Fri 0:00-9:00,,,,,,
+e097,"I've got a part time job at JB Hi-Fi on Wednesday and Saturday, I'd rather not be on campus more than 8 hours a day, and I'm happy with any lecturer",I've got a part time job at JB Hi-Fi on Wednesday and Saturday,blocked_time,"Wed,Sat all",,,,,,
+,,I'd rather not be on campus more than 8 hours a day,max_daily_hours,,,,8,,,
+,,I'm happy with any lecturer,other,,,,,,,
+e098,"My mornings are for my baby so 11am at the earliest, and I'd like lunch around 1 to 2",My mornings are for my baby so 11am at the earliest,blocked_time,Mon-Fri 0:00-11:00,,,,,,
+,,I'd like lunch around 1 to 2,lunch,,,,,13:00-14:00 60,,
+e099,Ideally nothing before 9 on any day and Wednesdays off for my placement,Ideally nothing before 9 on any day,prefer_no_early_late,,,,,,9:00-18:00,'any day' is not a named weekday
+,,Wednesdays off for my placement,blocked_time,Wed all,,,,,,
+e100,"Face to face only, max 3 days, and nothing after 4pm",Face to face only,in_person_only,,,,,,,
+,,max 3 days,max_days,,3,,,,,
+,,nothing after 4pm,blocked_time,Mon-Fri 16:00-24:00,,,,,,
+e101,I've got driving lessons Friday arvo and I see my psych Tuesday at 10am,I've got driving lessons Friday arvo,blocked_time,Fri 12:00-18:00,,,,,,
+,,I see my psych Tuesday at 10am,blocked_time,Tue 0:00-11:00,,,,,,one morning clock -> 0:00-(X+1)
+e102,My partner works nights so I'm home with the kids from 5,My partner works nights so I'm home with the kids from 5,blocked_time,Mon-Fri 17:00-24:00,,,,,,the partner's nights are a reason; the block is from 5
+e103,"Nothing in the arvo on Thursdays, nothing in the morning on Mondays",Nothing in the arvo on Thursdays,blocked_time,Thu 12:00-18:00,,,,,,
+,,nothing in the morning on Mondays,blocked_time,Mon 0:00-10:00,,,,,,
+e104,"I need a meal break somewhere in the day, I'm on a 4 hour feeding schedule for my health","I need a meal break somewhere in the day, I'm on a 4 hour feeding schedule for my health",lunch,,,,,11:30-14:00 30,,"4 hour schedule is a distractor, not hours per day"
+e105,I like having my classes in the morning so the arvo's free for work,I like having my classes in the morning so the arvo's free for work,blocked_time,Mon-Fri 12:00-18:00,,,,,,afternoon kept free for work
+e106,"The 8:05 bus is the only one that gets me there, so 9am classes are the earliest I can do","The 8:05 bus is the only one that gets me there, so 9am classes are the earliest I can do",blocked_time,Mon-Fri 0:00-9:00,,,,,,9am is the earliest start; the bus time is a distractor
+e107,nothing after 5 and no 2hr breaks pls,nothing after 5,blocked_time,Mon-Fri 17:00-24:00,,,,,,
+,,no 2hr breaks pls,prefer_less_waiting,,,,,,,2hr is a gap length
+e108,I'm partially sighted and screens wreck my eyes so no more than 4 hours of class a day and nothing online,I'm partially sighted and screens wreck my eyes so no more than 4 hours of class a day,max_daily_hours,,,4,,,,
+,,nothing online,in_person_only,,,,,,,
+e109,I'm happy to start early but I want to finish by 2,I'm happy to start early,other,,,,,,,
+,,I want to finish by 2,blocked_time,Mon-Fri 14:00-24:00,,,,,,'want' is not a hedge
+e110,No classes 12-1 so I can eat,No classes 12-1 so I can eat,lunch,,,,,12:00-13:00 60,,eating -> lunch (rule 1)
+e111,"two days a week ideally, three at a push","two days a week ideally, three at a push",max_days,,3,,,,,real limit is the larger number
+e112,"I'd rather have everything in person, and keep my days to 6 hours of class max",I'd rather have everything in person,in_person_only,,,,,,,
+,,keep my days to 6 hours of class max,max_daily_hours,,,6,,,,
+e113,i'm an early bird so mornings are actually great for me,i'm an early bird so mornings are actually great for me,other,,,,,,,likes mornings; no request
+e114,Assignments are due Fridays so I'd like Thursday free to finish them,Assignments are due Fridays so I'd like Thursday free to finish them,blocked_time,Thu all,,,,,,the assignment is the reason; the request names a weekday
+e115,"I volunteer at Lifeline on Monday nights and Thursday nights, and I'd prefer to start after 10",I volunteer at Lifeline on Monday nights and Thursday nights,blocked_time,"Mon,Thu 18:00-24:00",,,,,,
+,,I'd prefer to start after 10,prefer_no_early_late,,,,,,10:00-18:00,
+e116,I'd like to keep the same tutor I had in first year,I'd like to keep the same tutor I had in first year,other,,,,,,,
+e117,"I need at least one weekday totally off, so 4 days max","I need at least one weekday totally off, so 4 days max",max_days,,4,,,,,
+e118,"I don't drive, so any time is fine as long as there's a bus","I don't drive, so any time is fine as long as there's a bus",other,,,,,,,
+e119,"I'm a single dad, school drop off is 8:30 and pick up is 3","I'm a single dad, school drop off is 8:30",blocked_time,Mon-Fri 0:00-9:30,,,,,,one morning clock -> 0:00-(X+1)
+,,pick up is 3,blocked_time,Mon-Fri 15:00-24:00,,,,,,
+e120,Can I have at most 5 hrs of class per day and get home before dark,Can I have at most 5 hrs of class per day,max_daily_hours,,,5,,,,
+,,get home before dark,prefer_no_early_late,,,,,,,vague; no clock time or part-of-day word
+e121,"no 9ams please, and I'd like to be finished by 4 if possible",no 9ams please,blocked_time,Mon-Fri 0:00-10:00,,,,,,a 9am class runs to 10
+,,I'd like to be finished by 4 if possible,prefer_no_early_late,,,,,,9:00-16:00,"hedged clock time, no day, no commitment"
+e122,During Ramadan I'd rather avoid evening classes,During Ramadan I'd rather avoid evening classes,blocked_time,Mon-Fri 18:00-24:00,,,,,,part-of-day word + request; the hedge does not apply
+e123,"I don't really care about gaps or early classes, just put me with my friend Mei in the labs",I don't really care about gaps or early classes,other,,,,,,,
+,,just put me with my friend Mei in the labs,other,,,,,,,
+e124,"I'd rather have all my contact hours on fewer days, even if they're long, and I need lunch","I'd rather have all my contact hours on fewer days, even if they're long",prefer_fewer_days,,,,,,,
+,,I need lunch,lunch,,,,,11:30-14:00 30,,
+e125,"mornings and arvos r fine, just not fridays",mornings and arvos r fine,other,,,,,,,
+,,just not fridays,blocked_time,Fri all,,,,,,
+e126,Uni is 2 hours away by train so I'd prefer to come in less often,Uni is 2 hours away by train so I'd prefer to come in less often,prefer_fewer_days,,,,,,,2 hours is the commute
+e127,id rather start after 10am if thats possible,id rather start after 10am if thats possible,prefer_no_early_late,,,,,,10:00-18:00,
+e128,"No more than 2 days, I've got a newborn","No more than 2 days, I've got a newborn",max_days,,2,,,,,
+e129,I want to grab lunch with my friends between 1 and 2 every day,I want to grab lunch with my friends between 1 and 2 every day,lunch,,,,,13:00-14:00 60,,eating comes first (rule 1); friends do not make it other
+e130,"lunch break pls, 20 mins is enough","lunch break pls, 20 mins is enough",lunch,,,,,11:30-14:00 20,,
+e131,I'd rather not come in on Fridays,I'd rather not come in on Fridays,blocked_time,Fri all,,,,,,a hedge does not soften a weekday
+e132,"No 7pm classes, no Monday classes, no online classes",No 7pm classes,blocked_time,Mon-Fri 19:00-24:00,,,,,,
+,,no Monday classes,blocked_time,Mon all,,,,,,
+,,no online classes,in_person_only,,,,,,,
+e133,If I could avoid late arvo classes that'd be great,If I could avoid late arvo classes that'd be great,prefer_no_early_late,,,,,,,'late arvo' is a modified part-of-day
+e134,"please put me in the in-person tutes, not the online ones","please put me in the in-person tutes, not the online ones",in_person_only,,,,,,,
+e135,"Compact week, decent lunch break, no Friday",Compact week,prefer_fewer_days,,,,,,,
+,,decent lunch break,lunch,,,,,11:30-14:00 30,,
+,,no Friday,blocked_time,Fri all,,,,,,
+e136,"Not too early, not too late, no gaps",Not too early,prefer_no_early_late,,,,,,,
+,,not too late,prefer_no_early_late,,,,,,,
+,,no gaps,prefer_less_waiting,,,,,,,
+e137,"I'm on the uni rowing team so mornings are gone, and I want max 4 days",I'm on the uni rowing team so mornings are gone,blocked_time,Mon-Fri 0:00-10:00,,,,,,
+,,I want max 4 days,max_days,,4,,,,,
+e138,"When I have a free period I just end up going home and not coming back lol, so minimal gaps","When I have a free period I just end up going home and not coming back lol, so minimal gaps",prefer_less_waiting,,,,,,,
+e139,I'm slow in the mornings so ideally no 9ams,I'm slow in the mornings so ideally no 9ams,prefer_no_early_late,,,,,,10:00-18:00,"hedged clock; a 9am class runs to 10, so classes from 10"
+e140,Every Wednesday lunchtime I run a prayer group from 12 to 1,Every Wednesday lunchtime I run a prayer group from 12 to 1,blocked_time,Wed 12:00-13:00,,,,,,lunchtime but no eating -> blocked_time
+e141,"3 days max, nothing before 10, lunch break needed, in person only",3 days max,max_days,,3,,,,,
+,,nothing before 10,blocked_time,Mon-Fri 0:00-10:00,,,,,,
+,,lunch break needed,lunch,,,,,11:30-14:00 30,,
+,,in person only,in_person_only,,,,,,,
+e142,my lunch needs to be 1 to 1:45,my lunch needs to be 1 to 1:45,lunch,,,,,13:00-13:45 45,,
+e143,"I'm a second year doing engineering and commerce, and I'd rather not have 8am tutes",I'm a second year doing engineering and commerce,other,,,,,,,
+,,I'd rather not have 8am tutes,prefer_no_early_late,,,,,,9:00-18:00,"hedged clock, no day, no commitment; an 8am class runs to 9"
+e144,"No Mondays (work), no Wednesdays (uni netball), and nothing after 6 any day",No Mondays (work),blocked_time,Mon all,,,,,,
+,,no Wednesdays (uni netball),blocked_time,Wed all,,,,,,
+,,nothing after 6 any day,blocked_time,Mon-Fri 18:00-24:00,,,,,,
+e145,"I want my tutorials to come after the lectures each week, and I can only do 3 days",I want my tutorials to come after the lectures each week,other,,,,,,,
+,,I can only do 3 days,max_days,,3,,,,,
+e146,"I'm 19, first year, living on res, pretty flexible","I'm 19, first year, living on res, pretty flexible",other,,,,,,,
+e147,"Long breaks are actually good for me, I need time to rest and pray","Long breaks are actually good for me, I need time to rest and pray",other,,,,,,,wants gaps; the opposite of less waiting
+e148,early classes are a struggle with my meds,early classes are a struggle with my meds,prefer_no_early_late,,,,,,,
+e149,Wednesdays I'm free all day btw,Wednesdays I'm free all day btw,other,,,,,,,only says a day is free
+e150,"Max 2 days, no online, no 8ams, and an hour lunch",Max 2 days,max_days,,2,,,,,
+,,no online,in_person_only,,,,,,,
+,,no 8ams,blocked_time,Mon-Fri 0:00-9:00,,,,,,
+,,an hour lunch,lunch,,,,,11:30-14:00 60,,
+e151,No classes before 10 except Wednesday when I can do 9,No classes before 10 except Wednesday when I can do 9,blocked_time,"Mon,Tue,Thu,Fri 0:00-10:00; Wed 0:00-9:00",,,,,,
+e152,"Tuesdays are a write-off because of my internship, and keep it to 6 hours of classes max the other days",Tuesdays are a write-off because of my internship,blocked_time,Tue all,,,,,,
+,,keep it to 6 hours of classes max the other days,max_daily_hours,,,6,,,,
+e153,a 1 hour break is fine but anything over 2 is too much,a 1 hour break is fine but anything over 2 is too much,prefer_less_waiting,,,,,,,"gap lengths, not hours per day"
+e154,"I have dialysis three times a week, Mon Wed Fri mornings","I have dialysis three times a week, Mon Wed Fri mornings",blocked_time,"Mon,Wed,Fri 0:00-10:00",,,,,,'three times' is a distractor
+e155,"Short days please, like 5 hours on campus max, and back to back where possible","Short days please, like 5 hours on campus max",max_daily_hours,,,,5,,,
+,,back to back where possible,prefer_less_waiting,,,,,,,
+e156,"Only free on Mon, Tue and Fri this sem, and I'd like it in person","Only free on Mon, Tue and Fri this sem",blocked_time,"Wed,Thu all",,,,,,
+,,I'd like it in person,in_person_only,,,,,,,
+e157,"Work Mon Tue 9-3, gym Thu 6am, and I want 4 hours of class max per day",Work Mon Tue 9-3,blocked_time,"Mon,Tue 9:00-15:00",,,,,,
+,,gym Thu 6am,blocked_time,Thu 0:00-7:00,,,,,,one morning clock -> 0:00-(X+1)
+,,I want 4 hours of class max per day,max_daily_hours,,,4,,,,
+e158,"Not too early please, I live out in Penrith","Not too early please, I live out in Penrith",prefer_no_early_late,,,,,,,vague 'too early'
+e159,"Not a fan of gaps, not a fan of 8ams either",Not a fan of gaps,prefer_less_waiting,,,,,,,
+,,not a fan of 8ams either,blocked_time,Mon-Fri 0:00-9:00,,,,,,clock time -> blocked_time even as a feeling
+e160,no zoom pls,no zoom pls,in_person_only,,,,,,,
+e161,"I'm a carer for my brother, he comes home at 3:15 so I need to be gone by 2:30, and I can do max 3 days","I'm a carer for my brother, he comes home at 3:15 so I need to be gone by 2:30",blocked_time,Mon-Fri 14:30-24:00,,,,,,
+,,I can do max 3 days,max_days,,3,,,,,
+e162,"I commute from the Blue Mountains, about 2 hrs each way, so ideally just 2 days, nothing before 10","I commute from the Blue Mountains, about 2 hrs each way, so ideally just 2 days",max_days,,2,,,,,
+,,nothing before 10,blocked_time,Mon-Fri 0:00-10:00,,,,,,
+e163,Prefer 3 days but my main thing is no classes after 5,Prefer 3 days,max_days,,3,,,,,
+,,my main thing is no classes after 5,blocked_time,Mon-Fri 17:00-24:00,,,,,,
+e164,I'm doing a 20 hour a week internship so I need classes capped at 4 hours a day,I'm doing a 20 hour a week internship so I need classes capped at 4 hours a day,max_daily_hours,,,4,,,,20 hours a week is a distractor
+e165,"No online stuff, no 8:30 starts, and keep Friday free",No online stuff,in_person_only,,,,,,,
+,,no 8:30 starts,blocked_time,Mon-Fri 0:00-9:30,,,,,,a class starting at 8:30 runs to 9:30
+,,keep Friday free,blocked_time,Fri all,,,,,,
+e166,I really struggle to function in the mornings,I really struggle to function in the mornings,prefer_no_early_late,,,,,,,"ability, no request"
+e167,My church youth group is Friday nights and Sunday is church all day,My church youth group is Friday nights,blocked_time,Fri 18:00-24:00,,,,,,
+,,Sunday is church all day,blocked_time,Sun all,,,,,,
+e168,"I can only get there after 10, and Wednesdays are a no",I can only get there after 10,blocked_time,Mon-Fri 0:00-10:00,,,,,,
+,,Wednesdays are a no,blocked_time,Wed all,,,,,,
+e169,I want my exams as early as possible in the exam period so I can fly home to Shanghai,I want my exams as early as possible in the exam period so I can fly home to Shanghai,other,,,,,,,exams
+e170,Hopefully I can be finished by 4pm most days,Hopefully I can be finished by 4pm most days,prefer_no_early_late,,,,,,9:00-16:00,'hopefully' is a hedge (labels.HEDGES)
+e171,I've got a Pilates class Tues 7:30am and I'm free all day Wed if that helps,I've got a Pilates class Tues 7:30am,blocked_time,Tue 0:00-8:30,,,,,,
+,,I'm free all day Wed if that helps,other,,,,,,,
+e172,"Not a morning person so ideally nothing before 11, and I'd like my classes packed into as few days as possible",Not a morning person so ideally nothing before 11,prefer_no_early_late,,,,,,11:00-18:00,feeling + hedged clock: prefer_hours from the clock
+,,I'd like my classes packed into as few days as possible,prefer_fewer_days,,,,,,,
+e173,"Monday arvo, Wednesday arvo and all of Friday are blocked for work","Monday arvo, Wednesday arvo and all of Friday are blocked for work",blocked_time,"Mon,Wed 12:00-18:00; Fri all",,,,,,
+e174,"Not fussed about who teaches me, I just don't do well with early starts",Not fussed about who teaches me,other,,,,,,,
+,,I just don't do well with early starts,prefer_no_early_late,,,,,,,
+e175,"my bf and I want the same tutes, we both work Fridays",my bf and I want the same tutes,other,,,,,,,
+,,we both work Fridays,blocked_time,Fri all,,,,,,
+e176,No more than three days on campus and ideally nothing on Monday,No more than three days on campus,max_days,,3,,,,,
+,,ideally nothing on Monday,blocked_time,Mon all,,,,,,weekday: hedge does not apply
+e177,I've got jury duty on the 14th,I've got jury duty on the 14th,other,,,,,,,"a calendar date, not a weekday or clock time"
+e178,I want at least 40 mins for lunch between 11:30 and 1:30,I want at least 40 mins for lunch between 11:30 and 1:30,lunch,,,,,11:30-13:30 40,,
+e179,I'd prefer to start no earlier than 9 and finish by 5,I'd prefer to start no earlier than 9 and finish by 5,prefer_no_early_late,,,,,,9:00-17:00,
+e180,I have rehab at 2pm on Tuesdays and Thursdays,I have rehab at 2pm on Tuesdays and Thursdays,blocked_time,"Tue,Thu 14:00-24:00",,,,,,one afternoon clock -> X-24:00
+e181,"keep my days short pls, like 4 hours of class max","keep my days short pls, like 4 hours of class max",max_daily_hours,,,4,,,,
+e182,if possible no classes after 4,if possible no classes after 4,prefer_no_early_late,,,,,,9:00-16:00,"hedged clock, no day"
+e183,I'm fine with online lectures but tutorials need to be in person,I'm fine with online lectures,other,,,,,,,
+,,tutorials need to be in person,in_person_only,,,,,,,
+e184,"I'm a postgrad with a research job Wednesdays and Fridays, and I don't want to be on campus for more than 8 hours on the other days",I'm a postgrad with a research job Wednesdays and Fridays,blocked_time,"Wed,Fri all",,,,,,
+,,I don't want to be on campus for more than 8 hours on the other days,max_daily_hours,,,,8,,,
+e185,"I have an exam clash in week 8, can u sort it","I have an exam clash in week 8, can u sort it",other,,,,,,,exams
+e186,"I work full time 9 to 5 Monday to Thursday, so classes outside those hours or on Friday","I work full time 9 to 5 Monday to Thursday, so classes outside those hours or on Friday",blocked_time,Mon-Thu 9:00-17:00,,,,,,
+e187,"I don't care about days, I care about not being on campus for 10 hour days, 7 max",I don't care about days,other,,,,,,,
+,,"I care about not being on campus for 10 hour days, 7 max",max_daily_hours,,,,7,,,10 is what they want to avoid; 7 is the limit
+e188,Theres a 40 min walk from Redfern so 8am classes are a no go,Theres a 40 min walk from Redfern so 8am classes are a no go,blocked_time,Mon-Fri 0:00-9:00,,,,,,an 8am class runs to 9; walk minutes are a distractor
+e189,"the fewer days the better, I'm a mum and childcare is booked by the day","the fewer days the better, I'm a mum and childcare is booked by the day",prefer_fewer_days,,,,,,,
+e190,I volunteer with the Rural Fire Service every second Tuesday and every Thursday night,I volunteer with the Rural Fire Service every second Tuesday and every Thursday night,blocked_time,Tue all; Thu 18:00-24:00,,,,,,alternate weeks -> whole day
+e191,"Nothing longer than a 7 hour day on campus, nothing before 9:30, and Thursdays off",Nothing longer than a 7 hour day on campus,max_daily_hours,,,,7,,,
+,,nothing before 9:30,blocked_time,Mon-Fri 0:00-9:30,,,,,,
+,,Thursdays off,blocked_time,Thu all,,,,,,
+e192,"I don't care about gaps, I study in the library between classes anyway","I don't care about gaps, I study in the library between classes anyway",other,,,,,,,gaps are fine; no request
+e193,"Gaps between classes are a killer for my anxiety, I need classes back-to-back, and no more than 4 days","Gaps between classes are a killer for my anxiety, I need classes back-to-back",prefer_less_waiting,,,,,,,
+,,no more than 4 days,max_days,,4,,,,,
+e194,Shifts at Maccas Sat Sun and Tuesday night,Shifts at Maccas Sat Sun and Tuesday night,blocked_time,"Tue 18:00-24:00; Sat,Sun all",,,,,,
+e195,I want Dr Chen's lecture stream for ENGG2112,I want Dr Chen's lecture stream for ENGG2112,other,,,,,,,lecturer
+e196,I'm hard of hearing so online classes with captions are actually easier for me,I'm hard of hearing so online classes with captions are actually easier for me,other,,,,,,,wants online classes
+e197,"I'd like Professor Wong for maths if possible, and no Tuesday classes because of work",I'd like Professor Wong for maths if possible,other,,,,,,,
+,,no Tuesday classes because of work,blocked_time,Tue all,,,,,,
+e198,No online lectures. No classes before 9 either.,No online lectures,in_person_only,,,,,,,
+,,No classes before 9 either,blocked_time,Mon-Fri 0:00-9:00,,,,,,
+e199,only tues and thurs work for me,only tues and thurs work for me,blocked_time,"Mon,Wed,Fri all",,,,,,only these days: block the other weekdays
+e200,"I want to keep my classes to 3.5 hours a day tops, I'm also a TA","I want to keep my classes to 3.5 hours a day tops, I'm also a TA",max_daily_hours,,,3.5,,,,
+e201,Preferably classes from 9:30 to 4:30,Preferably classes from 9:30 to 4:30,prefer_no_early_late,,,,,,9:30-16:30,
+e202,my job is mon wed n fri from 4 so no clases after 4 those days,my job is mon wed n fri from 4 so no clases after 4 those days,blocked_time,"Mon,Wed,Fri 16:00-24:00",,,,,,
+e203,Keep it to five hours of class a day and don't make me come in Monday,Keep it to five hours of class a day,max_daily_hours,,,5,,,,
+,,don't make me come in Monday,blocked_time,Mon all,,,,,,
+e204,I'd like my tute with Priya and Josh if that's possible,I'd like my tute with Priya and Josh if that's possible,other,,,,,,,
+e205,"Lunch has to be at least an hour, I'm diabetic and need to eat properly","Lunch has to be at least an hour, I'm diabetic and need to eat properly",lunch,,,,,11:30-14:00 60,,
+e206,Any day but Thursday,Any day but Thursday,blocked_time,Thu all,,,,,,
+e207,no classes after 4 on Thursdays if possible,no classes after 4 on Thursdays if possible,blocked_time,Thu 16:00-24:00,,,,,,"weekday named, so the hedge does not apply"
+e208,"Last sem my timetable was perfect, can I just have the same days again","Last sem my timetable was perfect, can I just have the same days again",other,,,,,,,
+e209,My shift finishes at 10 on Tuesdays so nothing before that,My shift finishes at 10 on Tuesdays so nothing before that,blocked_time,Tue 0:00-10:00,,,,,,'before that' points back to 10
+e210,max 5 hrs on campus a day and lunch from 12 to 12:30,max 5 hrs on campus a day,max_daily_hours,,,,5,,,
+,,lunch from 12 to 12:30,lunch,,,,,12:00-12:30 30,,
+e211,"I'm doing ENGG2112 and COMP2123 this sem, both have heaps of labs","I'm doing ENGG2112 and COMP2123 this sem, both have heaps of labs",other,,,,,,,
+e212,I don't want to be in a class that's in the Wentworth building,I don't want to be in a class that's in the Wentworth building,other,,,,,,,building
+e213,Pls dont make me come in 5 days a week,Pls dont make me come in 5 days a week,max_days,,4,,,,,not 5 days = at most 4
+e214,I'm an elite athlete so I need fewer days at uni and nothing on Saturday mornings,I'm an elite athlete so I need fewer days at uni,prefer_fewer_days,,,,,,,
+,,nothing on Saturday mornings,blocked_time,Sat 0:00-10:00,,,,,,
+e215,"I'd like to cut down on how many days I come in, and when I do come in, no huge breaks",I'd like to cut down on how many days I come in,prefer_fewer_days,,,,,,,
+,,"when I do come in, no huge breaks",prefer_less_waiting,,,,,,,
+e216,"I don't want to be at uni longer than 8 hours a day, including breaks","I don't want to be at uni longer than 8 hours a day, including breaks",max_daily_hours,,,,8,,,
+e217,"I need to be home by 3 on school days to pick up my twins, and I'd like a 3 day week",I need to be home by 3 on school days to pick up my twins,blocked_time,Mon-Fri 15:00-24:00,,,,,,
+,,I'd like a 3 day week,max_days,,3,,,,,
+e218,I work every arvo from 1 so no classes after 1,I work every arvo from 1 so no classes after 1,blocked_time,Mon-Fri 13:00-24:00,,,,,,
+e219,"I'd like to avoid 6 to 8pm, I'm at cricket","I'd like to avoid 6 to 8pm, I'm at cricket",blocked_time,Mon-Fri 18:00-20:00,,,,,,hedge + clock but with a commitment -> blocked_time
+e220,"The accessible bus only runs after 9:30, so nothing before 10","The accessible bus only runs after 9:30, so nothing before 10",blocked_time,Mon-Fri 0:00-10:00,,,,,,9:30 is the reason; the request is 'before 10'
+e221,A gap here and there is ok but please no gaps over 90 minutes,A gap here and there is ok,other,,,,,,,
+,,please no gaps over 90 minutes,prefer_less_waiting,,,,,,,
+e222,"My kid's daycare closes at 5:30 and it's 40 mins away, so I need to leave by 4:45","My kid's daycare closes at 5:30 and it's 40 mins away, so I need to leave by 4:45",blocked_time,Mon-Fri 16:45-24:00,,,,,,5:30 and 40 mins are the reason
+e223,I teach at Hebrew school on Sunday mornings and Shabbat starts Friday evening so nothing after 4 on Fridays,I teach at Hebrew school on Sunday mornings,blocked_time,Sun 0:00-10:00,,,,,,
+,,Shabbat starts Friday evening so nothing after 4 on Fridays,blocked_time,Fri 16:00-24:00,,,,,,
+e224,I have physio every Tuesday morning and I'd rather keep lunchtimes free to eat,I have physio every Tuesday morning,blocked_time,Tue 0:00-10:00,,,,,,
+,,I'd rather keep lunchtimes free to eat,lunch,,,,,11:30-14:00 30,,"eating, no clock time"
+e225,Thanks heaps! Max 3 days and keep my lunch free,Max 3 days,max_days,,3,,,,,
+,,keep my lunch free,lunch,,,,,11:30-14:00 30,,
+e226,"Evening classes suit me fine, honestly prefer them","Evening classes suit me fine, honestly prefer them",other,,,,,,,likes evenings; no request
+e227,"I work Mon and Thu, I want max 4 hrs of class a day, and pls no gaps longer than an hour",I work Mon and Thu,blocked_time,"Mon,Thu all",,,,,,
+,,I want max 4 hrs of class a day,max_daily_hours,,,4,,,,
+,,pls no gaps longer than an hour,prefer_less_waiting,,,,,,,
+e228,I can do 4 days max but 3 would be heaps better,I can do 4 days max but 3 would be heaps better,max_days,,4,,,,,real limit is the larger number
+e229,Class hours per day: 4 max. Days per week: 3 max. Lunch: yes pls.,Class hours per day: 4 max,max_daily_hours,,,4,,,,
+,,Days per week: 3 max,max_days,,3,,,,,
+,,Lunch: yes pls,lunch,,,,,11:30-14:00 30,,
+e230,"I want my lab in the same building as my lecture, and no classes after 6",I want my lab in the same building as my lecture,other,,,,,,,
+,,no classes after 6,blocked_time,Mon-Fri 18:00-24:00,,,,,,
+e231,Footy training Tues/Thurs 5:30 onwards and games are Saturdays,Footy training Tues/Thurs 5:30 onwards,blocked_time,"Tue,Thu 17:30-24:00",,,,,,5:30 without am/pm = 17:30
+,,games are Saturdays,blocked_time,Sat all,,,,,,
+e232,"Nothing super late in the evening pls, I'm catching two buses home","Nothing super late in the evening pls, I'm catching two buses home",prefer_no_early_late,,,,,,,'super late in the evening' is a modified part-of-day
+e233,I'd like my classes to be no more than 5 hrs per day and my time at uni no more than 8,I'd like my classes to be no more than 5 hrs per day,max_daily_hours,,,5,,,,
+,,my time at uni no more than 8,max_daily_hours,,,,8,,,
+e234,Give me a timetable where I'm not on campus longer than 6 hours and I'm not waiting between classes,Give me a timetable where I'm not on campus longer than 6 hours,max_daily_hours,,,,6,,,
+,,I'm not waiting between classes,prefer_less_waiting,,,,,,,
+e235,"I need Wednesday off for my dad's medical appointments, otherwise anything goes",I need Wednesday off for my dad's medical appointments,blocked_time,Wed all,,,,,,
+,,otherwise anything goes,other,,,,,,,
+e236,I volunteer at the hospital Thursday mornings from 8 till 12,I volunteer at the hospital Thursday mornings from 8 till 12,blocked_time,Thu 8:00-12:00,,,,,,explicit times override the 'morning' default
+e237,I'd like to keep my Mondays free for my part time job and nothing past 5pm on other days,I'd like to keep my Mondays free for my part time job,blocked_time,Mon all,,,,,,
+,,nothing past 5pm on other days,blocked_time,Tue-Fri 17:00-24:00,,,,,,'other days' = the other weekdays
+e238,"Two days on campus, maybe three if it has to be","Two days on campus, maybe three if it has to be",max_days,,3,,,,,
+e239,"I get the 7:10 train and it gets into Central at 8:25, so I can't make anything before 9","I get the 7:10 train and it gets into Central at 8:25, so I can't make anything before 9",blocked_time,Mon-Fri 0:00-9:00,,,,,,train times are the reason; the request is 'before 9'
+e240,I'm in the uni choir but rehearsal times haven't been set yet,I'm in the uni choir but rehearsal times haven't been set yet,other,,,,,,,no time given
+e241,"I'd like two days a week, no evening classes, and I want to be in the same lab group as my mate Tom",I'd like two days a week,max_days,,2,,,,,
+,,no evening classes,blocked_time,Mon-Fri 18:00-24:00,,,,,,
+,,I want to be in the same lab group as my mate Tom,other,,,,,,,
+e242,My internet at home is shocking so please no online classes,My internet at home is shocking so please no online classes,in_person_only,,,,,,,
+e243,"Footy on Tuesday and Thursday nights, work Saturday, max 4 hours of class a day and an hour for lunch",Footy on Tuesday and Thursday nights,blocked_time,"Tue,Thu 18:00-24:00",,,,,,
+,,work Saturday,blocked_time,Sat all,,,,,,
+,,max 4 hours of class a day,max_daily_hours,,,4,,,,
+,,an hour for lunch,lunch,,,,,11:30-14:00 60,,
+e244,Thursday's the only day I can come in,Thursday's the only day I can come in,blocked_time,"Mon-Wed,Fri all",,,,,,only this day
+e245,"No early mornings, no late arvos, and lunch between 1 and 2",No early mornings,prefer_no_early_late,,,,,,,
+,,no late arvos,prefer_no_early_late,,,,,,,
+,,lunch between 1 and 2,lunch,,,,,13:00-14:00 60,,
+e246,My shifts are 10am to 2pm on Mondays and 5 to 9pm Thursdays,My shifts are 10am to 2pm on Mondays and 5 to 9pm Thursdays,blocked_time,Mon 10:00-14:00; Thu 17:00-21:00,,,,,,
+e247,"I'm in a wheelchair and the lifts in some buildings are slow, so I'd like extra time between classes","I'm in a wheelchair and the lifts in some buildings are slow, so I'd like extra time between classes",other,,,,,,,wants gaps (opposite of less waiting); buildings
+e248,I hate 8ams with a passion,I hate 8ams with a passion,blocked_time,Mon-Fri 0:00-9:00,,,,,,a clock time is blocked_time even when said as a feeling (rule 4 before rule 6)
+e249,No Tues no Thurs,No Tues,blocked_time,Tue all,,,,,,
+,,no Thurs,blocked_time,Thu all,,,,,,
+e250,"Kind of a weird one but I'm a volunteer firefighter and get called out randomly, so no preference really","Kind of a weird one but I'm a volunteer firefighter and get called out randomly, so no preference really",other,,,,,,,
+e251,I'm a carer for my dad so I need to be home by 5 every day,I'm a carer for my dad so I need to be home by 5 every day,blocked_time,Mon-Fri 17:00-24:00,,,,,,home by 5 = must leave by 5
+e252,Ideally done by 2 most days,Ideally done by 2 most days,prefer_no_early_late,,,,,,9:00-14:00,hedged clock; 2 without am/pm = 14:00
+e253,2 or 3 days is ideal,2 or 3 days is ideal,max_days,,3,,,,,real limit is the larger number
+e254,Lunch from 12:30 to 1:30 and I'd like to be done by 4 if possible,Lunch from 12:30 to 1:30,lunch,,,,,12:30-13:30 60,,
+,,I'd like to be done by 4 if possible,prefer_no_early_late,,,,,,9:00-16:00,
+e255,"Online classes are fine by me, actually I'd prefer them","Online classes are fine by me, actually I'd prefer them",other,,,,,,,wants online classes
+e256,"I'm on a sports scholarship, training is 6-8am and 4-6pm every weekday, and I need lunch","I'm on a sports scholarship, training is 6-8am and 4-6pm every weekday",blocked_time,Mon-Fri 6:00-8:00; Mon-Fri 16:00-18:00,,,,,,
+,,I need lunch,lunch,,,,,11:30-14:00 30,,
+e257,"I had a 3 hour gap last sem and it sucked, pls avoid that","I had a 3 hour gap last sem and it sucked, pls avoid that",prefer_less_waiting,,,,,,,"3 hours is a gap length, not hours per day"
+e258,I can do Mon and Tue only,I can do Mon and Tue only,blocked_time,Wed-Fri all,,,,,,only these days
+e259,I don't mind which days as long as there are only 3 of them,I don't mind which days as long as there are only 3 of them,max_days,,3,,,,,
+e260,I can do any day except Tues and Thurs mornings,I can do any day except Tues and Thurs mornings,blocked_time,"Tue,Thu 0:00-10:00",,,,,,
+e261,"I'd like to do 2 days, I work 3 days a week in retail","I'd like to do 2 days, I work 3 days a week in retail",max_days,,2,,,,,3 work days is a distractor
+e262,Look I'm doing 4 units while working 30 hrs a week so I need everything in 2 days max and preferably no gaps,Look I'm doing 4 units while working 30 hrs a week so I need everything in 2 days max,max_days,,2,,,,,4 units and 30 hrs a week are distractors
+,,preferably no gaps,prefer_less_waiting,,,,,,,
+e263,cant do wensdays or thrusday mornings sry,cant do wensdays or thrusday mornings sry,blocked_time,Wed all; Thu 0:00-10:00,,,,,,typos in day names
+e264,I'd rather not start before 11 if I can help it,I'd rather not start before 11 if I can help it,prefer_no_early_late,,,,,,11:00-18:00,
+e265,I'm doing 6 units this sem which is a lot but I still don't want more than 4 days,I'm doing 6 units this sem which is a lot but I still don't want more than 4 days,max_days,,4,,,,,6 units is a distractor
+e266,Gaps longer than an hour between classes are the worst,Gaps longer than an hour between classes are the worst,prefer_less_waiting,,,,,,,'an hour' is a gap length
+e267,"I'd like to come in as little as possible, and no Monday classes since I work Mondays",I'd like to come in as little as possible,prefer_fewer_days,,,,,,,
+,,no Monday classes since I work Mondays,blocked_time,Mon all,,,,,,
+e268,Wednesday is the only day I can't come,Wednesday is the only day I can't come,blocked_time,Wed all,,,,,,'only' names the one blocked day
+e269,My only real wish is a tutor who explains things slowly,My only real wish is a tutor who explains things slowly,other,,,,,,,
+e270,I'd like my tutes straight after my lectures so I'm not killing time,I'd like my tutes straight after my lectures so I'm not killing time,prefer_less_waiting,,,,,,,
+e271,I need my exams to not be on the same day,I need my exams to not be on the same day,other,,,,,,,exams
+e272,I have a casual job and the roster changes every week so I can't really say,I have a casual job and the roster changes every week so I can't really say,other,,,,,,,
+e273,Prefer not to start before 9:30,Prefer not to start before 9:30,prefer_no_early_late,,,,,,9:30-18:00,
+e274,I have chemo every second Thursday,I have chemo every second Thursday,blocked_time,Thu all,,,,,,alternate weeks cannot be expressed: whole day
+e275,If possible I'd like to be done by 3:30,If possible I'd like to be done by 3:30,prefer_no_early_late,,,,,,9:00-15:30,
+e276,Not before 10am on Mondays and not after 3pm on Fridays,Not before 10am on Mondays,blocked_time,Mon 0:00-10:00,,,,,,
+,,not after 3pm on Fridays,blocked_time,Fri 15:00-24:00,,,,,,
+e277,I'd rather do a few long days than lots of short ones,I'd rather do a few long days than lots of short ones,prefer_fewer_days,,,,,,,
+e278,no classes before 10 no classes after 4 no classes on friday,no classes before 10,blocked_time,Mon-Fri 0:00-10:00,,,,,,
+,,no classes after 4,blocked_time,Mon-Fri 16:00-24:00,,,,,,
+,,no classes on friday,blocked_time,Fri all,,,,,,
+e279,Weekly hockey Thursday evening and a gym class at 7am Tuesdays,Weekly hockey Thursday evening,blocked_time,Thu 18:00-24:00,,,,,,
+,,a gym class at 7am Tuesdays,blocked_time,Tue 0:00-8:00,,,,,,one morning clock -> 0:00-(X+1)
+e280,No classes 12-1 cos that's when I do my shift at the uni cafe,No classes 12-1 cos that's when I do my shift at the uni cafe,blocked_time,Mon-Fri 12:00-13:00,,,,,,a lunchtime job without eating -> blocked_time
+e281,"I'm a night owl, later classes suit me way better","I'm a night owl, later classes suit me way better",prefer_no_early_late,,,,,,,"feeling, no clock time"
+e282,I'd prefer to start at 11 or later,I'd prefer to start at 11 or later,prefer_no_early_late,,,,,,11:00-18:00,
+e283,"can I have my classes between 11 and 5, I need my mornings for my baby","can I have my classes between 11 and 5, I need my mornings for my baby",blocked_time,Mon-Fri 0:00-11:00; Mon-Fri 17:00-24:00,,,,,,"commitment, so not a soft preference"
+e284,My son's therapy is Tuesday 3:30 so I have to leave uni by 2:45 that day,My son's therapy is Tuesday 3:30 so I have to leave uni by 2:45 that day,blocked_time,Tue 14:45-24:00,,,,,,the 3:30 appointment is the reason
+e285,"I just want a compact week, like not coming in every single day","I just want a compact week, like not coming in every single day",prefer_fewer_days,,,,,,,
+e286,No early mornings and no late nights,No early mornings,prefer_no_early_late,,,,,,,modified part-of-day
+,,no late nights,prefer_no_early_late,,,,,,,modified part-of-day
+e287,"Days and times don't matter, I'm just happy to be here","Days and times don't matter, I'm just happy to be here",other,,,,,,,
+e288,"I don't mind 8am starts, I just want to be home by 3",I don't mind 8am starts,other,,,,,,,
+,,I just want to be home by 3,blocked_time,Mon-Fri 15:00-24:00,,,,,,
+e289,"Mondays and Fridays I'm on placement at Westmead, and I'd like fewer days on campus overall",Mondays and Fridays I'm on placement at Westmead,blocked_time,"Mon,Fri all",,,,,,
+,,I'd like fewer days on campus overall,prefer_fewer_days,,,,,,,
+e290,"Not coming in every day would be a dream, and if I have to be in, keep the classes back to back",Not coming in every day would be a dream,prefer_fewer_days,,,,,,,
+,,"if I have to be in, keep the classes back to back",prefer_less_waiting,,,,,,,
+e291,I've got chronic fatigue so I can't be on campus more than 6 hours a day,I've got chronic fatigue so I can't be on campus more than 6 hours a day,max_daily_hours,,,,6,,,
+e292,"I need to eat at 11:30 because of my diabetes meds, give me till 12","I need to eat at 11:30 because of my diabetes meds, give me till 12",lunch,,,,,11:30-12:00 30,,
+e293,"I'd like as few days as possible, but not more than 7 hours of class on any of them",I'd like as few days as possible,prefer_fewer_days,,,,,,,
+,,not more than 7 hours of class on any of them,max_daily_hours,,,7,,,,
+e294,"honestly whatever works, I'm easy","honestly whatever works, I'm easy",other,,,,,,,
+e295,"early starts kill me, gaps kill me, Friday classes kill me",early starts kill me,prefer_no_early_late,,,,,,,
+,,gaps kill me,prefer_less_waiting,,,,,,,
+,,Friday classes kill me,blocked_time,Fri all,,,,,,named weekday -> blocked_time even as a feeling
+e296,I want to come in once a week if that's even possible,I want to come in once a week if that's even possible,max_days,,1,,,,,
+e297,"wanna be able to eat lunch at 12 for like 30 mins, and no gaps longer than 30 mins",wanna be able to eat lunch at 12 for like 30 mins,lunch,,,,,12:00-12:30 30,,
+,,no gaps longer than 30 mins,prefer_less_waiting,,,,,,,
+e298,"No more than 6 hours on campus per day, no more than 3 days a week, no gaps over an hour",No more than 6 hours on campus per day,max_daily_hours,,,,6,,,
+,,no more than 3 days a week,max_days,,3,,,,,
+,,no gaps over an hour,prefer_less_waiting,,,,,,,
+e299,I'd like half an hour for lunch somewhere between 12 and 1:30,I'd like half an hour for lunch somewhere between 12 and 1:30,lunch,,,,,12:00-13:30 30,,
+e300,Can I get everything done in 3 days? Thursday and Friday I'm at my internship,Can I get everything done in 3 days,max_days,,3,,,,,
+,,Thursday and Friday I'm at my internship,blocked_time,"Thu,Fri all",,,,,,
+e301,"Not every day pls, I have a 3 year old at home","Not every day pls, I have a 3 year old at home",prefer_fewer_days,,,,,,,'not every day' has no count; 3 year old is an age
+e302,"I'd like to not be at uni more than 10 hours on any day, it's a long trip home","I'd like to not be at uni more than 10 hours on any day, it's a long trip home",max_daily_hours,,,,10,,,
+e303,"I'm Seventh-day Adventist so no Saturday anything, and I volunteer Wednesday arvos",I'm Seventh-day Adventist so no Saturday anything,blocked_time,Sat all,,,,,,
+,,I volunteer Wednesday arvos,blocked_time,Wed 12:00-18:00,,,,,,
+e304,ideally classes between 10 and 3,ideally classes between 10 and 3,prefer_no_early_late,,,,,,10:00-15:00,

@@ -24,6 +24,7 @@ def main(
     pins: Any = None,
     excluded: Any = None,
     student_text: str | None = None,
+    cares: list[str] | None = None,
 ) -> dict[str, Any]:
     """Validate input, read a snapshot, then rank feasible schedules if ready.
 
@@ -33,7 +34,8 @@ def main(
     Explicitly selected groups may be used for a clearly marked trial plan.
     With a study registry, a feasible ranking also returns pairwise
     comparisons for preference learning (module four). With ``student_text``
-    (may be empty) a feasible ranking also carries the AI recommendation.
+    (may be empty) a feasible ranking also carries the AI recommendation, ranked with
+    ``cares`` in the student's order of importance.
     """
     result = prepare_student_profile(raw_input, snapshot_catalog)
     result["saved"] = False
@@ -82,7 +84,7 @@ def main(
                     left_out = validate_excluded(timetable.meetings, requirements, excluded)
                     ranking = arrange_timetables(
                         timetable.meetings, requirements, result["profile"], pins=pinned,
-                        excluded=left_out, student_text=student_text,
+                        excluded=left_out, student_text=student_text, cares=cares,
                     )
                     result["pinned"] = pinned
                     result["excluded"] = left_out

@@ -176,9 +176,11 @@ class AppHandler(BaseHTTPRequestHandler):
 
     def _prepare(self, request: dict) -> None:
         try:
-            student_text = request.get("student_text")
+            student_text, cares = request.get("student_text"), request.get("cares", [])
             if (not isinstance(request.get("save", False), bool) or
-                    not (student_text is None or isinstance(student_text, str) and len(student_text) <= MAX_SENTENCE)):
+                    not (student_text is None or isinstance(student_text, str) and len(student_text) <= MAX_SENTENCE) or
+                    not isinstance(cares, list) or len(set(cares)) != len(cares) or
+                    any(care not in AXES for care in cares)):
                 raise ValueError("Invalid request")
             raw_profile = request.get("profile")
             normalized, errors = normalize_student_input(raw_profile)
@@ -198,7 +200,7 @@ class AppHandler(BaseHTTPRequestHandler):
                         participant=request.get("participant") if isinstance(request.get("participant"), str) else None,
                         pins=request.get("pinned"),
                         excluded=request.get("excluded"),
-                        student_text=student_text,
+                        student_text=student_text, cares=cares,
                     )
                 result["fetch"] = fetch_result
                 ranking = result.get("ranking_result") or {}

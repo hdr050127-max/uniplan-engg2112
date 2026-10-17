@@ -447,7 +447,7 @@ def arrange_timetables(
     meetings: list[dict[str, Any]], required_groups: dict[str, list[str]],
     profile: dict[str, Any], *, max_nodes: int = 5_000_000,
     pins: dict[str, list[str]] | None = None, excluded: list[str] | None = None,
-    student_text: str | None = None,
+    student_text: str | None = None, cares: list[str] | None = None,
 ) -> dict[str, Any]:
     """Choose one whole class per required group, then rank every valid choice.
 
@@ -460,7 +460,8 @@ def arrange_timetables(
     and class options to the preference study; callers pop them before output.
 
     With ``student_text`` (may be empty) the result also holds ``recommendation``:
-    10–20 candidates, the top 3 by ``llm.rank`` and a template reason for each.
+    10–20 candidates, the top 3 by ``llm.rank`` and a template reason for each;
+    ``cares`` is the student's order of importance, passed on to the ranker.
     """
     all_groups = extract_class_options(meetings, required_groups)
     pins = pins or {}
@@ -491,7 +492,8 @@ def arrange_timetables(
             ranking["recommendation"] = recommend(
                 ranking["_pool"], profile, student_text,
                 candidate=lambda entry: candidate_dict(entry, options, profile),
-                item=lambda entry: add_item(items, entry, options, eligible, profile, weeks))
+                item=lambda entry: add_item(items, entry, options, eligible, profile, weeks),
+                cares=cares or ())
         if any(profile.get(key) for key in (
                 "unavailable_windows", "transition_min", "max_days_per_week", "max_daily_minutes",
                 "max_daily_span", "lunch", "in_person_only", "min_seats", "walk_speed")):

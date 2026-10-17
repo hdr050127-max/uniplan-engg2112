@@ -115,7 +115,8 @@ def facts_of(index: int, picks: list[Candidate], conditions: Conditions) -> dict
 
 
 def _cares(conditions: Conditions) -> list[str]:
-    return [care for care in FEATURE if care in (conditions.get("cares") or FEATURE)]
+    """Most important first, as the contract orders them."""
+    return [care for care in (conditions.get("cares") or FEATURE) if care in FEATURE]
 
 
 def _compare_text(facts: dict) -> str:
@@ -216,11 +217,12 @@ _RELATIVE = re.compile(r"(?<![最至])(?:多|少)了?(?:等|到校|来|去|上)?
 _WITHIN = re.compile(r"之内|之间|以内|内|里")
 _OUTSIDE = re.compile(r"以外|之外|外")
 # Things the fact sheet says nothing about; a sentence mentioning them cannot be checked.
-_UNKNOWN = re.compile(r"老师|教授|教室|楼|食堂|作业|成绩|难度|内容|同学|朋友|交通|天气|睡|课外|活动|上课少|上课多|(?<![早晚])课[多少]|多上|少上")
-_LUNCH = re.compile(r"吃饭|午饭|午餐|饭")
+_UNKNOWN = re.compile(r"老师|教授|教室|楼|食堂|作业|成绩|难度|内容|同学|朋友|交通|天气|睡|课外|活动|时间一样|时间相同|上课少|上课多|(?<![早晚])课[多少]|多上|少上")
+_LUNCH = re.compile(r"吃饭|午饭|午餐|午休|饭")
 _LUNCH_BAD = re.compile(r"紧|不够|赶|没时间|来不及|不能")
 _EXAM = re.compile(r"考试|测验|考")
-_EVERY_DAY = re.compile(r"每天(?:都)?(?:要|得|需要)?(到校|去学校|来学校|上课|有课)")
+_EVERY_DAY = re.compile(r"每天(?:都)?(?:要|得|需要)?(到校|去学校|来学校|在校园|在学校|在校|上课|有课)")
+_ONLY = re.compile(r"固定|只|仅")
 _NO_CLASS_BY = re.compile(r"((?:上午|早上|中午|下午|晚上)?\s*\d{1,2}(?:[:：]\d{2}|\s*点半?))\s*(之前|以前|前|之后|以后|后)"
                           r"\s*(?:都)?(?:没课|没有课|不上课|无课|不用上课)")
 _SAME = re.compile(r"一样|相同|差不多|持平|不变")
@@ -353,6 +355,9 @@ def _check_sentence(text: str, facts: dict, allowed: dict, first: bool) -> str |
                 return "weekday"
         elif not days <= set(facts["class_days"]) | set(facts["campus"]):
             return "weekday"
+        elif _ONLY.search(clause):  # "固定周二、周三到校" must name every such day
+            if days != (set(facts["campus"]) if _CAMPUS.search(clause) else set(facts["class_days"]) | set(facts["campus"])):
+                return "weekday"
     for match in _EVERY_DAY.finditer(text):
         days = set(facts["campus"]) | (set(facts["class_days"]) if match.group(1) in ("上课", "有课") else set())
         if not set(range(1, 6)) <= days:

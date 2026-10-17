@@ -51,6 +51,8 @@ const state = {
   tab: "week", enrolled: {}, friend: null, notice: "", compare: [], history: [],
   sharedPlan: null, participant: null, firstInteraction: null,
   say: null, view: "all", viewPicked: false, reasons: {},
+  // Whether the student has stated an order for "我在意" (state.cares keeps insertion order).
+  caresTouched: false,
 };
 
 function minutes(value) {
@@ -474,6 +476,7 @@ function unapplySay() {
     else setField(id, say.base.settings[id]);
   });
   state.cares = new Set(say.base.cares);
+  state.caresTouched = say.base.caresTouched;
 }
 
 function applySay() {
@@ -503,7 +506,10 @@ function applySay() {
     }
     clause.cares.forEach((care) => cares.add(care));
   });
-  if (cares.size) state.cares = cares;
+  if (cares.size) {
+    state.cares = cares; // in the order the sentence states them: the first is the main concern
+    state.caresTouched = true;
+  }
   renderBlocks();
   updateSettingsCount();
   document.querySelectorAll(".setting.said").forEach((row) => row.classList.remove("said"));
@@ -570,7 +576,7 @@ async function readSay() {
     const clauses = data.clauses;
     state.say = {
       text, clauses, on: clauses.map((clause) => Boolean(Object.keys(clause.profile_fields).length || clause.cares.length)),
-      base: { settings: settingsSnapshot(), cares: [...state.cares] },
+      base: { settings: settingsSnapshot(), cares: [...state.cares], caresTouched: state.caresTouched },
     };
     applySay();
     renderSay();
@@ -667,7 +673,8 @@ async function plan(profile, { groups = null, pinned = {}, excluded = [], notice
       groups = defaultGroups(data);
       state.history = [];
     }
-    const body = { profile, save: $("consent").checked, required_groups: groups, student_text: sayText() };
+    const body = { profile, save: $("consent").checked, required_groups: groups, student_text: sayText(),
+      cares: state.caresTouched ? [...state.cares] : [] };
     if (Object.keys(pinned).length) body.pinned = pinned;
     if (excluded.length) body.excluded = excluded;
     if (state.participant) body.participant = state.participant;
@@ -964,6 +971,11 @@ function renderPlans() {
   const ranking = state.result.ranking_result;
   const rec = state.view === "recommend" ? recommendation() : null;
   if (state.view === "recommend" && !rec) state.view = "all";
+  if (rec && state.caresTouched && rec.menu.cares && rec.menu.cares.join() !== [...state.cares].join() && !state.busy) {
+    // The picks were ranked for another order of importance (e.g. a care ticked off and on again).
+    replan("已按你在意的先后重新排序");
+    return;
+  }
   const plans = rec ? rec.menu.picks.map((id) => ranking.shortlist.items[id]).filter(Boolean) : menu();
   pickSharedPlan(plans);
   if (!state.selected || !plans.some((item) => item.candidate_id === state.selected)) {
@@ -1015,7 +1027,9 @@ function renderPlans() {
         toast("至少保留一项");
         return;
       }
+      // A Set keeps its order: the rest stay as they were and a newly ticked one goes last.
       if (state.cares.has(axis)) state.cares.delete(axis); else state.cares.add(axis);
+      state.caresTouched = true;
       writeShareHash();
       renderPlans();
     });
@@ -2330,6 +2344,7 @@ function restoreShare(shared) {
   restoreSettings(shared.settings);
   if (Array.isArray(shared.cares) && shared.cares.length) state.cares = new Set(shared.cares.filter((axis) => AXES.includes(axis)));
   if (!state.cares.size) state.cares = new Set(AXES);
+  state.caresTouched = Array.isArray(shared.cares) && shared.cares.length > 0;
   state.sharedPlan = Array.isArray(shared.plan) ? shared.plan : null;
   state.say = null;
   $("sayText").value = "";

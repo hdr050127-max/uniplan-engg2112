@@ -106,29 +106,34 @@ def rank_candidates(candidates: list[dict[str, Any]], prefs: dict[str, Any]) -> 
 
 def recommend(pool: list[dict[str, Any]], profile: dict[str, Any], student_text: str, *,
               candidate: Callable[[dict[str, Any]], dict[str, Any]],
-              item: Callable[[dict[str, Any]], dict[str, Any]]) -> dict[str, Any]:
+              item: Callable[[dict[str, Any]], dict[str, Any]],
+              cares: tuple[str, ...] | list[str] = ()) -> dict[str, Any]:
     """Top 3 for every choice of cared-about features, like the shortlist menus.
 
     ``candidate`` turns a pool entry into an ``llm.contracts.Candidate``; ``item``
     adds a pick to the shortlist items (meetings, backups, weekday variants), so the
-    page can show a pick exactly like any other plan.
+    page can show a pick exactly like any other plan. ``cares`` is the student's own
+    order, most important first; each menu keeps it (see ``conditions_of``) and says
+    which order it used.
     """
     by_id = {entry["candidate_id"]: entry for entry in pool}
     built: dict[str, dict[str, Any]] = {}
     menus, sources = {}, set()
     for axes in AXIS_SETS:
-        chosen, from_front = select_candidates(pool, axes)
+        conditions = conditions_of(profile, axes, cares)
+        ordered = tuple(conditions["cares"])
+        chosen, from_front = select_candidates(pool, ordered)
         for entry in chosen:
             if entry["candidate_id"] not in built:  # each timetable's meetings are built once
                 built[entry["candidate_id"]] = candidate(entry)
         candidates = [built[entry["candidate_id"]] for entry in chosen]
-        conditions = conditions_of(profile, axes)
         order, scores, source = rank_candidates(candidates, preferences_of(conditions, student_text))
         sources.add(source)
         # Near-identical timetables help nobody: keep the ranker's order, minus near-copies,
         # even if that leaves fewer than three.
         picks = [item(entry) for entry in distinct_first([by_id[cid] for cid in order], PICKS, axes, copies=False)]
         menus[axes_name(axes)] = {
+            "cares": list(ordered),
             "candidates": [entry["candidate_id"] for entry in chosen], "from_front": from_front,
             "picks": [pick["candidate_id"] for pick in picks],
             "scores": [scores.get(pick["candidate_id"]) for pick in picks],
@@ -138,13 +143,19 @@ def recommend(pool: list[dict[str, Any]], profile: dict[str, Any], student_text:
             "candidate_range": [CANDIDATE_MIN, CANDIDATE_MAX]}
 
 
-def conditions_of(profile: dict[str, Any], cares: tuple[str, ...] | list[str]) -> Conditions:
-    """The confirmed conditions as the scheduler holds them, in the contract's shape."""
+def conditions_of(profile: dict[str, Any], axes: tuple[str, ...] | list[str],
+                  order: tuple[str, ...] | list[str] = ()) -> Conditions:
+    """The confirmed conditions as the scheduler holds them, in the contract's shape.
+
+    ``cares`` holds the features in ``axes``, most important first: those the student
+    ranked (``order``) in their order, then the rest in the usual order.
+    """
     conditions: Conditions = {key: profile[key] for key in (
         "unavailable_windows", "max_days_per_week", "max_daily_minutes", "max_daily_span", "lunch",
         "in_person_only") if profile.get(key) not in (None, False, [])}
     conditions["preferred_hours"] = {"weekday": 1, **profile["preferred_hours"]}
-    conditions["cares"] = [care for care in CARES if care in cares]
+    conditions["cares"] = ([care for care in order if care in axes] +
+                           [care for care in CARES if care in axes and care not in order])
     return conditions
 
 
@@ -177,9 +188,10 @@ def plan_from_sentence(text: str, raw_profile: dict[str, Any], snapshot_catalog:
     conditions = parse(text)["conditions"]
     fields, _ = check_condition_fields(to_profile_fields(conditions))
     profile = merge_conditions(raw_profile, {**fields, "cares": conditions.get("cares", [])})
-    result = main(profile, snapshot_catalog, student_text=text, **options)
+    cares = list(conditions.get("cares") or [])
+    result = main(profile, snapshot_catalog, student_text=text, cares=cares, **options)
     result["conditions"] = conditions
-    result["cares"] = [care for care in CARES if care in (conditions.get("cares") or CARES)]
+    result["cares"] = cares or list(CARES)
     return result
 
 
@@ -245,9 +257,10 @@ class ExplainRegistry:
             items: dict[str, dict[str, Any]]) -> str:
         token = secrets.token_hex(12)
         picks = {axes: [items[cid] for cid in menu["picks"]] for axes, menu in recommendation["menus"].items()}
+        cares = {axes: menu.get("cares") or axes.split(",") for axes, menu in recommendation["menus"].items()}
         with self._lock:
             self._items[token] = {"student_text": student_text, "profile": profile, "picks": picks,
-                                  "done": {}, "locks": {}}
+                                  "cares": cares, "done": {}, "locks": {}}
             while len(self._items) > self._limit:
                 self._items.popitem(last=False)
         return token
@@ -262,6 +275,7 @@ class ExplainRegistry:
         with menu_lock:
             if axes not in context["done"]:
                 context["done"][axes] = explain_detailed(
-                    context["student_text"], conditions_of(context["profile"], axes.split(",")),
+                    context["student_text"],
+                    conditions_of(context["profile"], context["cares"][axes], context["cares"][axes]),
                     context["picks"][axes])
             return context["done"][axes]

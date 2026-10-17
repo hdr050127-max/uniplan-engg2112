@@ -58,6 +58,28 @@ def load_rows(path: Path) -> list[dict]:
     return rows
 
 
+def program_pairs(rows: list[dict], sets: dict, personas: dict) -> list[dict]:
+    """Free labels for training personas: every other pair in their candidate list whose main
+    concern is near-equal, decided by the same program rule as in labelling (dominance or tie).
+    No model is asked. Test personas are left alone."""
+    from llm.rank.label import dominates, program_tie
+    seen = {(r["persona"], frozenset((r["a_id"], r["b_id"]))) for r in rows}
+    extra = []
+    for pid, candidates in sets.items():
+        persona = personas[pid]
+        if persona["split"] != "train":
+            continue
+        prefs = {"cares": persona["conditions"]["cares"], "preferred_hours": persona["conditions"].get("preferred_hours")}
+        for a, b in itertools.combinations(candidates, 2):
+            if (pid, frozenset((a["candidate_id"], b["candidate_id"]))) in seen or not program_tie(persona, a, b):
+                continue
+            label = "A" if dominates(a, b) else "B" if dominates(b, a) else "tie"
+            extra.append({"persona": pid, "split": "train", "focus": persona["focus"], "a_id": a["candidate_id"],
+                          "b_id": b["candidate_id"], "a_x": a["x"], "b_x": b["x"], "label": label,
+                          "source": "program_extra", "prefs": prefs, "s": runtime.student_terms(prefs)})
+    return extra
+
+
 def decided(rows: list[dict]) -> list[dict]:
     return [row for row in rows if row["label"] in ("A", "B")]
 
@@ -261,6 +283,9 @@ def main() -> int:
     parser.add_argument("--labels", required=True)
     parser.add_argument("--direct", nargs="*", default=[], help="direct.py outputs to include")
     parser.add_argument("--no-export", action="store_true")
+    parser.add_argument("--program-pairs", action="store_true",
+                        help="add the free program-decided pairs of training personas to training")
+    parser.add_argument("--out", default="model_comparison.json")
     args = parser.parse_args()
     rows = load_rows(Path(args.labels))
     personas = {p["id"]: p for p in load_personas()}
@@ -268,6 +293,10 @@ def main() -> int:
             json.loads((OUT / "candidate_sets.json").read_text(encoding="utf-8"))["sets"].items()}
     train = [r for r in rows if r["split"] == "train"]
     test = [r for r in rows if r["split"] == "test"]
+    if args.program_pairs:
+        extra = program_pairs(rows, sets, personas)
+        print(f"added {len(decided(extra))} program-decided training pairs ({len(extra)} incl. ties)")
+        train += extra
     spec = spec_from(train)
     print(f"train: {len(decided(train))} decided pairs from {len({r['persona'] for r in train})} personas; "
           f"test: {len(decided(test))} decided of {len(test)} pairs from {len({r['persona'] for r in test})} personas")
@@ -288,25 +317,30 @@ def main() -> int:
         params, cv = choose(make, grid, train) if len(grid) > 1 else (grid[0], None)
         model = make(**params).fit(decided(train), spec)
         accuracy, hits = pairwise_accuracy(model, test, sets)
+        by_source = {source: pairwise_accuracy(model, [r for r in test if r["source"] == source], sets)[0]
+                     for source in ("model", "program_dominance")}
         low, high = bootstrap(hits)
         top = top3_metrics(model, test, sets, personas)
         results.append({"model": model.name, "params": params, "cv_accuracy": cv, "pairwise_accuracy": accuracy,
-                        "ci95": [low, high], "top3_hit": top["top3_hit"], "top3_ceiling": top["top3_ceiling"],
+                        "ci95": [low, high], "accuracy_by_label_source": by_source,
+                        "top3_hit": top["top3_hit"], "top3_ceiling": top["top3_ceiling"],
                         "best_in_top3": top["best_in_top3"],
                         "ms_per_student": timing(model, {k: sets[k] for k in sorted(sets)[:20]}, personas),
                         "per_persona_top3": top["per_persona"]})
         fitted[model.name] = model
         print(f"{model.name:22s} cv={cv if cv is None else round(cv, 3)} acc={accuracy:.3f} [{low:.3f},{high:.3f}] "
+              f"qwen={by_source['model']:.3f} rule={by_source['program_dominance']:.3f} "
               f"top3={top['top3_hit']:.3f}/{top['top3_ceiling']:.3f} best@3={top['best_in_top3']:.3f} {params}",
               flush=True)
     for path in args.direct:
         results.append(direct_result(Path(path), test))
     random_top3 = 3 / 8
     report = {"note": "合成数据：训练和测试标签都来自大模型扮演的合成画像，不是真实学生。",
-              "labels": args.labels, "train_pairs": len(decided(train)), "test_pairs": len(decided(test)),
+              "labels": args.labels, "program_pairs_added": args.program_pairs,
+              "train_pairs": len(decided(train)), "test_pairs": len(decided(test)),
               "test_personas": len({r["persona"] for r in test}), "random_baseline": {
                   "pairwise_accuracy": 0.5, "top3_hit": random_top3}, "results": results}
-    (OUT / "model_comparison.json").write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
+    (OUT / args.out).write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
     if not args.no_export:
         best = fitted["成对逻辑回归 + 学生交叉项"]
         export = {**best.export(), "trained_on": args.labels, "synthetic_labels": True,

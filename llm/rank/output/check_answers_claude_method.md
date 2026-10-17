@@ -16,3 +16,12 @@ Rule, applied in this order:
 Result: 红 25, 蓝 25, 差不多 10.
 t007, t008, t009, t058, t059 and t060 were re-answered after their persona sentences changed
 集中 (concentrated) to 紧凑 (compact, i.e. little waiting) in commit 4b44aa3.
+
+## The 150 teacher-audit pairs (a001–a150)
+
+Answered the same way on 2026-10-17, again without seeing any model answer. Two clarifications:
+- "Dislikes many classes in one day" (讨厌一天上很多课) was read through the "longest day" row,
+  the table's closest measure. Hard limits in a persona ("at most 6 hours of class") were already
+  satisfied by both timetables, so they did not decide anything.
+- Differences below the thresholds count as equal in the dominance check. The latest finish
+  time and earliest start rows were not used on their own; the early/late minutes row covers them.

@@ -19,6 +19,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 172
   },
   {
@@ -43,6 +44,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 1383
   },
   {
@@ -62,6 +64,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 83
   },
   {
@@ -80,6 +83,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1509
   },
   {
@@ -100,6 +104,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 640
   },
   {
@@ -145,6 +150,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 745
   },
   {
@@ -175,6 +181,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 347
   },
   {
@@ -195,6 +202,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 383
   },
   {
@@ -220,6 +228,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 120
   },
   {
@@ -250,6 +259,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 245
   },
   {
@@ -285,6 +295,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 282
   },
   {
@@ -321,6 +332,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 917
   },
   {
@@ -366,6 +378,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 464
   },
   {
@@ -397,6 +410,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 411
   },
   {
@@ -427,6 +441,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 85
   },
   {
@@ -473,6 +488,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 569
   },
   {
@@ -523,6 +539,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 106
   },
   {
@@ -568,6 +585,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 147
   },
   {
@@ -592,6 +610,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 3949
   },
   {
@@ -617,6 +636,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 115
   },
   {
@@ -662,6 +682,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 194
   },
   {
@@ -685,6 +706,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 2309
   },
   {
@@ -736,6 +758,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 2905
   },
   {
@@ -766,6 +789,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 125
   },
   {
@@ -789,6 +813,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 283
   },
   {
@@ -812,6 +837,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 1872
   },
   {
@@ -837,6 +863,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 935
   },
   {
@@ -882,6 +909,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 464
   },
   {
@@ -906,6 +934,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 2319
   },
   {
@@ -931,6 +960,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 2407
   },
   {
@@ -954,6 +984,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 5316
   },
   {
@@ -978,6 +1009,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 1610
   },
   {
@@ -997,6 +1029,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 59
   },
   {
@@ -1027,6 +1060,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 33
   },
   {
@@ -1046,6 +1080,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 83
   },
   {
@@ -1076,6 +1111,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 840
   },
   {
@@ -1096,6 +1132,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 31
   },
   {
@@ -1116,6 +1153,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1457
   },
   {
@@ -1146,6 +1184,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 830
   },
   {
@@ -1166,6 +1205,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 628
   },
   {
@@ -1185,6 +1225,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 59
   },
   {
@@ -1203,6 +1244,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1295
   },
   {
@@ -1222,6 +1264,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 1509
   },
   {
@@ -1241,6 +1284,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 155
   },
   {
@@ -1265,6 +1309,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 612
   },
   {
@@ -1285,6 +1330,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 587
   },
   {
@@ -1304,6 +1350,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1359
   },
   {
@@ -1323,6 +1370,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1177
   },
   {
@@ -1346,6 +1394,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 2518
   },
   {
@@ -1369,6 +1418,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1425
   },
   {
@@ -1394,6 +1444,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 3364
   },
   {
@@ -1434,6 +1485,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 137
   },
   {
@@ -1458,6 +1510,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 1653
   },
   {
@@ -1483,6 +1536,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 4052
   },
   {
@@ -1514,6 +1568,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 352
   },
   {
@@ -1538,6 +1593,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 435
   },
   {
@@ -1574,6 +1630,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1359
   },
   {
@@ -1604,6 +1661,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 137
   },
   {
@@ -1649,6 +1707,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 1509
   },
   {
@@ -1674,6 +1733,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1199
   },
   {
@@ -1704,6 +1764,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 494
   },
   {
@@ -1735,6 +1796,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 712
   },
   {
@@ -1780,6 +1842,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 147
   },
   {
@@ -1806,6 +1869,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 765
   },
   {
@@ -1825,6 +1889,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 735
   },
   {
@@ -1844,6 +1909,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 57
   },
   {
@@ -1872,6 +1938,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1465
   },
   {
@@ -1892,6 +1959,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 76
   },
   {
@@ -1917,6 +1985,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 979
   },
   {
@@ -1962,6 +2031,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 106
   },
   {
@@ -1981,6 +2051,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1359
   },
   {
@@ -2005,6 +2076,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 1950
   },
   {
@@ -2024,6 +2096,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 76
   },
   {
@@ -2044,6 +2117,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 349
   },
   {
@@ -2068,6 +2142,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1950
   },
   {
@@ -2098,6 +2173,7 @@
    "focus": "gap",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1132
   },
   {
@@ -2117,6 +2193,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 585
   },
   {
@@ -2141,6 +2218,7 @@
    "focus": "campus_days",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 1032
   },
   {
@@ -2167,6 +2245,7 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "train",
+   "round": 1,
    "pool_size": 146
   },
   {
@@ -2191,7 +2270,1825 @@
    "focus": "outside_hours",
    "synthetic": true,
    "split": "test",
+   "round": 1,
    "pool_size": 1290
+  },
+  {
+   "id": "commuter_9",
+   "type": "commuter",
+   "units": [
+    "AMME2301",
+    "AMME1362",
+    "MTRX1705"
+   ],
+   "text": "我坐两个小时的长途大巴来学校，车票按次算钱，所以最在意来的次数少；早上九点前我赶不到，九点前没法上课。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 0,
+      "end_min": 540
+     },
+     {
+      "weekday": 2,
+      "start_min": 0,
+      "end_min": 540
+     },
+     {
+      "weekday": 3,
+      "start_min": 0,
+      "end_min": 540
+     },
+     {
+      "weekday": 4,
+      "start_min": 0,
+      "end_min": 540
+     },
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 540
+     }
+    ],
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1253
+  },
+  {
+   "id": "commuter_10",
+   "type": "commuter",
+   "units": [
+    "AMME1362",
+    "MTRX1705"
+   ],
+   "text": "我住在蓝山，每周最多只能来两天，两天里课多一点没关系，但别在学校干等太久。",
+   "conditions": {
+    "max_days_per_week": 2,
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 86
+  },
+  {
+   "id": "commuter_11",
+   "type": "commuter",
+   "units": [
+    "ENGG2112",
+    "AMME2262",
+    "AMME1362"
+   ],
+   "text": "我开车上学，停车费一天三十块，想少来几天省钱，其次希望早晚课少一点，避开上下班堵车。",
+   "conditions": {
+    "cares": [
+     "campus_days",
+     "outside_hours"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1950
+  },
+  {
+   "id": "commuter_12",
+   "type": "commuter",
+   "units": [
+    "ENGG2112",
+    "CIVL3206",
+    "AMME1362"
+   ],
+   "text": "我平时住在离学校一小时车程的亲戚家，来的天数和课间空等我都在意，天数更重要一些。",
+   "conditions": {
+    "cares": [
+     "campus_days",
+     "gap"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1177
+  },
+  {
+   "id": "commuter_13",
+   "type": "commuter",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "AMME1362"
+   ],
+   "text": "我每天要换三趟车来学校，最怕来了只上一节课就走，希望来的天数越少越好。",
+   "conditions": {
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1457
+  },
+  {
+   "id": "commuter_14",
+   "type": "commuter",
+   "units": [
+    "AMME2262",
+    "AMME1362",
+    "MTRX1705"
+   ],
+   "text": "我住在机场附近，早高峰的火车特别挤，最好十点以后再上课；能少来几天当然更好。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 600,
+     "end_min": 1080
+    },
+    "cares": [
+     "outside_hours",
+     "campus_days"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1057
+  },
+  {
+   "id": "worker_9",
+   "type": "worker",
+   "units": [
+    "AMME2301",
+    "AMME1362"
+   ],
+   "text": "我在超市做夜班理货，早上六点才下班，工作日中午十二点前都不能有课；课和课之间别空太久。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 0,
+      "end_min": 720
+     },
+     {
+      "weekday": 2,
+      "start_min": 0,
+      "end_min": 720
+     },
+     {
+      "weekday": 3,
+      "start_min": 0,
+      "end_min": 720
+     },
+     {
+      "weekday": 4,
+      "start_min": 0,
+      "end_min": 720
+     },
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 720
+     }
+    ],
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 168
+  },
+  {
+   "id": "worker_10",
+   "type": "worker",
+   "units": [
+    "AMME2301",
+    "AMME1362"
+   ],
+   "text": "我在快递站做分拣，周一、周三、周五下午一点到六点上班，那三天这段时间不能有课；希望一周来的天数少一些。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 780,
+      "end_min": 1080
+     },
+     {
+      "weekday": 3,
+      "start_min": 780,
+      "end_min": 1080
+     },
+     {
+      "weekday": 5,
+      "start_min": 780,
+      "end_min": 1080
+     }
+    ],
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 139
+  },
+  {
+   "id": "worker_11",
+   "type": "worker",
+   "units": [
+    "ENGG2112",
+    "AMME1362",
+    "MTRX3700"
+   ],
+   "text": "我在餐馆当服务员，周四和周五下午五点以后要上班，那两天五点后不能排课；空档和早晚课我都不喜欢，空档更烦。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 4,
+      "start_min": 1020,
+      "end_min": 1440
+     },
+     {
+      "weekday": 5,
+      "start_min": 1020,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "gap",
+     "outside_hours"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 405
+  },
+  {
+   "id": "worker_12",
+   "type": "worker",
+   "units": [
+    "AMME2262",
+    "AMME1362"
+   ],
+   "text": "我在健身房前台兼职，每周一全天上班，周一不能来学校；其余日子希望课排紧凑、少空等。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 0,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 220
+  },
+  {
+   "id": "worker_13",
+   "type": "worker",
+   "units": [
+    "ENGG2112",
+    "AMME2262"
+   ],
+   "text": "我做外卖骑手，工作日中午十一点到下午两点是送餐高峰，这段时间不能上课；也别让我一周来太多天。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 660,
+      "end_min": 840
+     },
+     {
+      "weekday": 2,
+      "start_min": 660,
+      "end_min": 840
+     },
+     {
+      "weekday": 3,
+      "start_min": 660,
+      "end_min": 840
+     },
+     {
+      "weekday": 4,
+      "start_min": 660,
+      "end_min": 840
+     },
+     {
+      "weekday": 5,
+      "start_min": 660,
+      "end_min": 840
+     }
+    ],
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 24
+  },
+  {
+   "id": "worker_14",
+   "type": "worker",
+   "units": [
+    "AMME2262",
+    "CIVL3206",
+    "AMME1362"
+   ],
+   "text": "我周末在药店做收银，平时想早点回家休息，最好每天下午五点前下课，其次空档少一点。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 6,
+      "start_min": 0,
+      "end_min": 1440
+     },
+     {
+      "weekday": 7,
+      "start_min": 0,
+      "end_min": 1440
+     }
+    ],
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 540,
+     "end_min": 1020
+    },
+    "cares": [
+     "outside_hours",
+     "gap"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1911
+  },
+  {
+   "id": "parent_9",
+   "type": "parent",
+   "units": [
+    "AMME2301",
+    "AMME1362"
+   ],
+   "text": "我两个孩子在两所学校，早上要送两趟，十点前到不了学校；下午三点以后的课也最好少一点。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 0,
+      "end_min": 600
+     },
+     {
+      "weekday": 2,
+      "start_min": 0,
+      "end_min": 600
+     },
+     {
+      "weekday": 3,
+      "start_min": 0,
+      "end_min": 600
+     },
+     {
+      "weekday": 4,
+      "start_min": 0,
+      "end_min": 600
+     },
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 600
+     }
+    ],
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 600,
+     "end_min": 900
+    },
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 2194
+  },
+  {
+   "id": "parent_10",
+   "type": "parent",
+   "units": [
+    "ENGG2112",
+    "AMME1362"
+   ],
+   "text": "我怀孕七个月了，容易累，一天在学校最多待五个小时，也希望少来几天。",
+   "conditions": {
+    "max_daily_span": 300,
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 551
+  },
+  {
+   "id": "parent_11",
+   "type": "parent",
+   "units": [
+    "ENGG2112",
+    "AMME1362"
+   ],
+   "text": "我是单亲爸爸，每周二和周四要自己接孩子，那两天下午三点以后不能有课；别的日子希望少空等。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 2,
+      "start_min": 900,
+      "end_min": 1440
+     },
+     {
+      "weekday": 4,
+      "start_min": 900,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 245
+  },
+  {
+   "id": "parent_12",
+   "type": "parent",
+   "units": [
+    "AMME2301",
+    "AMME1362",
+    "MTRX1705"
+   ],
+   "text": "我家宝宝的托儿所早上八点开门、下午五点半关门，所以工作日早上九点前和下午五点后都不能有课；也希望少来几天。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 0,
+      "end_min": 540
+     },
+     {
+      "weekday": 2,
+      "start_min": 0,
+      "end_min": 540
+     },
+     {
+      "weekday": 3,
+      "start_min": 0,
+      "end_min": 540
+     },
+     {
+      "weekday": 4,
+      "start_min": 0,
+      "end_min": 540
+     },
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 540
+     },
+     {
+      "weekday": 1,
+      "start_min": 1020,
+      "end_min": 1440
+     },
+     {
+      "weekday": 2,
+      "start_min": 1020,
+      "end_min": 1440
+     },
+     {
+      "weekday": 3,
+      "start_min": 1020,
+      "end_min": 1440
+     },
+     {
+      "weekday": 4,
+      "start_min": 1020,
+      "end_min": 1440
+     },
+     {
+      "weekday": 5,
+      "start_min": 1020,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 499
+  },
+  {
+   "id": "parent_13",
+   "type": "parent",
+   "units": [
+    "ENGG2112",
+    "AMME1362",
+    "MTRX3700"
+   ],
+   "text": "我要陪孩子写作业，晚上六点前必须到家，最好每天下午四点半前下课；能少空等就少空等。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 540,
+     "end_min": 990
+    },
+    "cares": [
+     "outside_hours",
+     "gap"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 2518
+  },
+  {
+   "id": "parent_14",
+   "type": "parent",
+   "units": [
+    "ENGG2112",
+    "AMME2301",
+    "AMME2262"
+   ],
+   "text": "我周末要带孩子，平时最好周五也不用来学校；除此之外我最在意课间空档少。",
+   "conditions": {
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 640
+  },
+  {
+   "id": "night_owl_9",
+   "type": "night_owl",
+   "units": [
+    "AMME2301",
+    "AMME1362"
+   ],
+   "text": "我在做游戏直播，经常凌晨三点才睡，工作日中午十二点前不能有课；空档多一点没事，只要来的天数少。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 0,
+      "end_min": 720
+     },
+     {
+      "weekday": 2,
+      "start_min": 0,
+      "end_min": 720
+     },
+     {
+      "weekday": 3,
+      "start_min": 0,
+      "end_min": 720
+     },
+     {
+      "weekday": 4,
+      "start_min": 0,
+      "end_min": 720
+     },
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 720
+     }
+    ],
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 168
+  },
+  {
+   "id": "night_owl_10",
+   "type": "night_owl",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "AMME1362"
+   ],
+   "text": "我晚上在实验室做项目到很晚，第二天最好十一点以后再上课，晚上七点前下课都行，其次空等少一点。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 660,
+     "end_min": 1140
+    },
+    "cares": [
+     "outside_hours",
+     "gap"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 4607
+  },
+  {
+   "id": "night_owl_11",
+   "type": "night_owl",
+   "units": [
+    "AMME2262",
+    "AMME1362"
+   ],
+   "text": "九点的课我一定迟到，最好十点以后开始，晚上八点前下课就好；来几天无所谓。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 600,
+     "end_min": 1200
+    },
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 702
+  },
+  {
+   "id": "night_owl_12",
+   "type": "night_owl",
+   "units": [
+    "CIVL3206",
+    "AMME1362"
+   ],
+   "text": "我上午效率很低，最好每天的第一节课都在下午一点以后，晚到八点下课也可以。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 780,
+     "end_min": 1200
+    },
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 671
+  },
+  {
+   "id": "night_owl_13",
+   "type": "night_owl",
+   "units": [
+    "ENGG2112",
+    "AMME1362",
+    "MTRX3700"
+   ],
+   "text": "我习惯熬夜，早上十点前没法上课；另外我讨厌课间空等，空等比多来一天更让我难受。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 0,
+      "end_min": 600
+     },
+     {
+      "weekday": 2,
+      "start_min": 0,
+      "end_min": 600
+     },
+     {
+      "weekday": 3,
+      "start_min": 0,
+      "end_min": 600
+     },
+     {
+      "weekday": 4,
+      "start_min": 0,
+      "end_min": 600
+     },
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 600
+     }
+    ],
+    "cares": [
+     "gap",
+     "campus_days"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 569
+  },
+  {
+   "id": "night_owl_14",
+   "type": "night_owl",
+   "units": [
+    "AMME2301",
+    "AMME1362",
+    "MTRX1705"
+   ],
+   "text": "我睡得很晚，早上能睡到十点最好，最好别有十点前的课，也别让我每周来太多天。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 600,
+     "end_min": 1080
+    },
+    "cares": [
+     "outside_hours",
+     "campus_days"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 4285
+  },
+  {
+   "id": "intern_9",
+   "type": "intern",
+   "units": [
+    "ENGG2112",
+    "AMME1362"
+   ],
+   "text": "我在会计事务所实习，每周三和周五全天上班，那两天不能有课；剩下几天最在意课间别空太久，其次少来一天也好。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 3,
+      "start_min": 0,
+      "end_min": 1440
+     },
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "gap",
+     "campus_days"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 380
+  },
+  {
+   "id": "intern_10",
+   "type": "intern",
+   "units": [
+    "ENGG2112",
+    "AMME1362"
+   ],
+   "text": "我在建筑公司实习，公司要我每周至少上三天班，所以我每周最多来学校两天，来的那两天早晚课越少越好。",
+   "conditions": {
+    "max_days_per_week": 2,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 354
+  },
+  {
+   "id": "intern_11",
+   "type": "intern",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "text": "我在政府部门实习，每周四上午九点到下午五点要上班，这段时间不能有课；其他时候希望少来几天，空档也少一点。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 4,
+      "start_min": 540,
+      "end_min": 1020
+     }
+    ],
+    "cares": [
+     "campus_days",
+     "gap"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 129
+  },
+  {
+   "id": "intern_12",
+   "type": "intern",
+   "units": [
+    "AMME2262",
+    "AMME1362",
+    "MTRX1705"
+   ],
+   "text": "我在远程实习，每天下午五点要开线上例会，工作日五点以后不能有课；我最在意来学校的天数少。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 1020,
+      "end_min": 1440
+     },
+     {
+      "weekday": 2,
+      "start_min": 1020,
+      "end_min": 1440
+     },
+     {
+      "weekday": 3,
+      "start_min": 1020,
+      "end_min": 1440
+     },
+     {
+      "weekday": 4,
+      "start_min": 1020,
+      "end_min": 1440
+     },
+     {
+      "weekday": 5,
+      "start_min": 1020,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 220
+  },
+  {
+   "id": "intern_13",
+   "type": "intern",
+   "units": [
+    "AMME2262",
+    "CIVL3206",
+    "AMME1362"
+   ],
+   "text": "我在科技公司实习，希望把课排在连续的两三天里，其余时间整天上班；早课晚课都无所谓。",
+   "conditions": {
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 642
+  },
+  {
+   "id": "intern_14",
+   "type": "intern",
+   "units": [
+    "ENGG2112",
+    "CIVL3206",
+    "AMME1362"
+   ],
+   "text": "我一边实习一边准备面试，每周最多来学校三天，工作日晚上六点以后也不能有课；在这前提下空档越少越好。",
+   "conditions": {
+    "max_days_per_week": 3,
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 2,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 3,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 4,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 5,
+      "start_min": 1080,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 61
+  },
+  {
+   "id": "near_campus_9",
+   "type": "near_campus",
+   "units": [
+    "ENGG2112",
+    "AMME2262",
+    "AMME1362"
+   ],
+   "text": "我住在学校的研究生公寓，走两分钟就到教室，天天来都行，但不想早上一节、傍晚一节，中间空一大段。",
+   "conditions": {
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1950
+  },
+  {
+   "id": "near_campus_10",
+   "type": "near_campus",
+   "units": [
+    "ENGG2112",
+    "AMME2301",
+    "AMME2262"
+   ],
+   "text": "我在学校附近合租，空档我不怕，可以去图书馆；我最在意的是别有早上九点前和晚上六点后的课。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 540,
+     "end_min": 1080
+    },
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 640
+  },
+  {
+   "id": "near_campus_11",
+   "type": "near_campus",
+   "units": [
+    "AMME2301",
+    "AMME1362"
+   ],
+   "text": "我住在 Glebe，走路十五分钟，希望课间空等少，而且一天上课不能超过五个小时。",
+   "conditions": {
+    "max_daily_minutes": 300,
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1455
+  },
+  {
+   "id": "near_campus_12",
+   "type": "near_campus",
+   "units": [
+    "ENGG2112",
+    "AMME1362"
+   ],
+   "text": "我住在学校旁边，下午想去健身，最好每天下午四点前下课；空档少一点也好。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 540,
+     "end_min": 960
+    },
+    "cares": [
+     "outside_hours",
+     "gap"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1793
+  },
+  {
+   "id": "near_campus_13",
+   "type": "near_campus",
+   "units": [
+    "AMME2301",
+    "AMME1362",
+    "MTRX1705"
+   ],
+   "text": "我住学校宿舍，来几天都行，只是讨厌在两栋楼之间赶来赶去，课间也别空太久。",
+   "conditions": {
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1891
+  },
+  {
+   "id": "near_campus_14",
+   "type": "near_campus",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "AMME1362"
+   ],
+   "text": "我家离学校骑车五分钟，空档我可以回家，所以空等无所谓；我最在意每周来的天数少，其次别有太早或太晚的课。",
+   "conditions": {
+    "cares": [
+     "campus_days",
+     "outside_hours"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1457
+  },
+  {
+   "id": "early_bird_9",
+   "type": "early_bird",
+   "units": [
+    "AMME2262",
+    "AMME1362"
+   ],
+   "text": "我每天五点半起床晨跑，早上八点上课正好，最好下午两点前就结束，下午我想自习。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 480,
+     "end_min": 840
+    },
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1684
+  },
+  {
+   "id": "early_bird_10",
+   "type": "early_bird",
+   "units": [
+    "ENGG2112",
+    "AMME2262",
+    "AMME1362"
+   ],
+   "text": "我晚上要在家照看奶奶，最好下午四点半前下课，早上八点的课没问题；空档也尽量少。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 480,
+     "end_min": 990
+    },
+    "cares": [
+     "outside_hours",
+     "gap"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 5046
+  },
+  {
+   "id": "early_bird_11",
+   "type": "early_bird",
+   "units": [
+    "AMME2301",
+    "AMME1362",
+    "MTRX1705"
+   ],
+   "text": "我晚上精力差，最好每天的课都在下午三点前结束；我也不想每天都来。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 540,
+     "end_min": 900
+    },
+    "cares": [
+     "outside_hours",
+     "campus_days"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 4178
+  },
+  {
+   "id": "early_bird_12",
+   "type": "early_bird",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "AMME1362"
+   ],
+   "text": "我周一到周四晚上要上驾校课，那几天下午五点半以后不能有课；其他我只在意空档少。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 1050,
+      "end_min": 1440
+     },
+     {
+      "weekday": 2,
+      "start_min": 1050,
+      "end_min": 1440
+     },
+     {
+      "weekday": 3,
+      "start_min": 1050,
+      "end_min": 1440
+     },
+     {
+      "weekday": 4,
+      "start_min": 1050,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 860
+  },
+  {
+   "id": "early_bird_13",
+   "type": "early_bird",
+   "units": [
+    "ENGG2112",
+    "CIVL3206",
+    "AMME1362"
+   ],
+   "text": "我早上学习效率最高，最好课都在早上八点到中午十二点之间，下午的课越少越好，但更重要的是别让我一周来太多天。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 480,
+     "end_min": 720
+    },
+    "cares": [
+     "campus_days",
+     "outside_hours"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1800
+  },
+  {
+   "id": "early_bird_14",
+   "type": "early_bird",
+   "units": [
+    "AMME2301",
+    "AMME1362"
+   ],
+   "text": "我每周一和周三下午三点要去校外的语言学校，那两天三点以后不能排课；希望来学校的天数少。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 900,
+      "end_min": 1440
+     },
+     {
+      "weekday": 3,
+      "start_min": 900,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 717
+  },
+  {
+   "id": "athlete_9",
+   "type": "athlete",
+   "units": [
+    "ENGG2112",
+    "AMME2262",
+    "AMME1362"
+   ],
+   "text": "我是校篮球队的，周二和周五早上七点到九点训练，那两天九点前不能有课；其他我最在意空档少，其次早晚课少。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 2,
+      "start_min": 0,
+      "end_min": 540
+     },
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 540
+     }
+    ],
+    "cares": [
+     "gap",
+     "outside_hours"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1950
+  },
+  {
+   "id": "athlete_10",
+   "type": "athlete",
+   "units": [
+    "ENGG2112",
+    "AMME1362",
+    "MTRX3700"
+   ],
+   "text": "我参加龙舟队，周三和周六下午都要训练，周三中午十二点以后不能有课；希望一周来学校的天数少。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 3,
+      "start_min": 720,
+      "end_min": 1440
+     },
+     {
+      "weekday": 6,
+      "start_min": 720,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 889
+  },
+  {
+   "id": "athlete_11",
+   "type": "athlete",
+   "units": [
+    "ENGG2112",
+    "AMME2301",
+    "AMME2262"
+   ],
+   "text": "我在攀岩队，每周一和周四晚上六点后训练，那两晚不能有课；每天在学校也不能超过八个小时，空档少一点更好。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 1080,
+      "end_min": 1440
+     },
+     {
+      "weekday": 4,
+      "start_min": 1080,
+      "end_min": 1440
+     }
+    ],
+    "max_daily_span": 480,
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 162
+  },
+  {
+   "id": "athlete_12",
+   "type": "athlete",
+   "units": [
+    "AMME2301",
+    "AMME1362"
+   ],
+   "text": "我是校足球队守门员，每周一、二、四下午四点半以后要训练，那几天四点半后不能有课；能少来几天最好。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 990,
+      "end_min": 1440
+     },
+     {
+      "weekday": 2,
+      "start_min": 990,
+      "end_min": 1440
+     },
+     {
+      "weekday": 4,
+      "start_min": 990,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 885
+  },
+  {
+   "id": "athlete_13",
+   "type": "athlete",
+   "units": [
+    "AMME1362",
+    "MTRX1705"
+   ],
+   "text": "我练跆拳道，每周三全天在外面集训，周三不能来学校；其余日子我更在意早晚课少，其次空档少。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 3,
+      "start_min": 0,
+      "end_min": 1440
+     }
+    ],
+    "cares": [
+     "outside_hours",
+     "gap"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 242
+  },
+  {
+   "id": "athlete_14",
+   "type": "athlete",
+   "units": [
+    "ENGG2112",
+    "CIVL3206",
+    "AMME1362"
+   ],
+   "text": "我是游泳队的，早上训练完很累，下午只想早点回宿舍，最好下午三点半前下课，九点以后开始上课。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 540,
+     "end_min": 930
+    },
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 2160
+  },
+  {
+   "id": "carer_9",
+   "type": "carer",
+   "units": [
+    "ENGG2112",
+    "AMME2262"
+   ],
+   "text": "我每天下午两点到四点要去养老院陪爷爷，工作日这段时间不能有课；其他时间希望少来几天。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 840,
+      "end_min": 960
+     },
+     {
+      "weekday": 2,
+      "start_min": 840,
+      "end_min": 960
+     },
+     {
+      "weekday": 3,
+      "start_min": 840,
+      "end_min": 960
+     },
+     {
+      "weekday": 4,
+      "start_min": 840,
+      "end_min": 960
+     },
+     {
+      "weekday": 5,
+      "start_min": 840,
+      "end_min": 960
+     }
+    ],
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 24
+  },
+  {
+   "id": "carer_10",
+   "type": "carer",
+   "units": [
+    "ENGG2112",
+    "AMME1362",
+    "MTRX3700"
+   ],
+   "text": "我有哮喘，换季时容易犯病，一天上课最多四个小时，最好课间空档也少一点。",
+   "conditions": {
+    "max_daily_minutes": 240,
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 765
+  },
+  {
+   "id": "carer_11",
+   "type": "carer",
+   "units": [
+    "AMME2301",
+    "AMME1362"
+   ],
+   "text": "我每天早上要帮坐轮椅的妈妈起床，十点前到不了学校；下午还要回家做饭，最好五点前下课。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 0,
+      "end_min": 600
+     },
+     {
+      "weekday": 2,
+      "start_min": 0,
+      "end_min": 600
+     },
+     {
+      "weekday": 3,
+      "start_min": 0,
+      "end_min": 600
+     },
+     {
+      "weekday": 4,
+      "start_min": 0,
+      "end_min": 600
+     },
+     {
+      "weekday": 5,
+      "start_min": 0,
+      "end_min": 600
+     }
+    ],
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 600,
+     "end_min": 1020
+    },
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1311
+  },
+  {
+   "id": "carer_12",
+   "type": "carer",
+   "units": [
+    "AMME2301",
+    "AMME1362"
+   ],
+   "text": "我有偏头痛，在学校待久了会发作，每天在校不能超过六个小时，每周最多来四天；在这前提下课间空等越少越好。",
+   "conditions": {
+    "max_daily_span": 360,
+    "max_days_per_week": 4,
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 536
+  },
+  {
+   "id": "carer_13",
+   "type": "carer",
+   "units": [
+    "ENGG2112",
+    "AMME2262",
+    "AMME1362"
+   ],
+   "text": "我刚做完手术在恢复期，走路不方便，希望少来几天，来的那天课和课之间也别空太久。",
+   "conditions": {
+    "cares": [
+     "campus_days",
+     "gap"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1950
+  },
+  {
+   "id": "carer_14",
+   "type": "carer",
+   "units": [
+    "ENGG2112",
+    "AMME2301",
+    "AMME2262"
+   ],
+   "text": "我要照顾两个弟弟，他们下午三点半放学，所以工作日最好三点前离开学校，早上九点以后上课没问题。",
+   "conditions": {
+    "preferred_hours": {
+     "weekday": 0,
+     "start_min": 540,
+     "end_min": 900
+    },
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1490
+  },
+  {
+   "id": "other_9",
+   "type": "other",
+   "units": [
+    "ENGG2112",
+    "AMME1362"
+   ],
+   "text": "我是转专业的学生，想多和老师面对面交流，只要线下课，不要线上的；课间空档少一点最好。",
+   "conditions": {
+    "in_person_only": true,
+    "cares": [
+     "gap"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 369
+  },
+  {
+   "id": "other_10",
+   "type": "other",
+   "units": [
+    "ENGG2112",
+    "AMME1362",
+    "MTRX3700"
+   ],
+   "text": "我是穆斯林，每周五中午十二点到两点要去做礼拜，这段时间不能有课；我最在意的是少来几天。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 5,
+      "start_min": 720,
+      "end_min": 840
+     }
+    ],
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1329
+  },
+  {
+   "id": "other_11",
+   "type": "other",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "AMME1362"
+   ],
+   "text": "我坐轮椅，在楼之间移动比较慢，最在意课间别空太久，其次来的天数少一点。",
+   "conditions": {
+    "cares": [
+     "gap",
+     "campus_days"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 1457
+  },
+  {
+   "id": "other_12",
+   "type": "other",
+   "units": [
+    "ENGG2112",
+    "AMME2262",
+    "AMME1362"
+   ],
+   "text": "我是研究生助教，每周二下午一点到五点要带辅导课，这段时间不能有自己的课；其余时间早晚课越少越好。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 2,
+      "start_min": 780,
+      "end_min": 1020
+     }
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "focus": "outside_hours",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 772
+  },
+  {
+   "id": "other_13",
+   "type": "other",
+   "units": [
+    "ENGG2112",
+    "AMME1362"
+   ],
+   "text": "我中午要回家喂狗，每天十二点半到一点半之间要空出一整个小时；另外希望少来几天。",
+   "conditions": {
+    "lunch": {
+     "start_min": 750,
+     "end_min": 810,
+     "minutes": 60
+    },
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "focus": "campus_days",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 321
+  },
+  {
+   "id": "other_14",
+   "type": "other",
+   "units": [
+    "AMME2301",
+    "AMME1362",
+    "MTRX1705"
+   ],
+   "text": "我同时在读一个线上证书课，每周一和周四上午九点到十二点有直播，这段时间不能有课；其余时间空档越少越好，其次早晚课少一点。",
+   "conditions": {
+    "unavailable_windows": [
+     {
+      "weekday": 1,
+      "start_min": 540,
+      "end_min": 720
+     },
+     {
+      "weekday": 4,
+      "start_min": 540,
+      "end_min": 720
+     }
+    ],
+    "cares": [
+     "gap",
+     "outside_hours"
+    ]
+   },
+   "focus": "gap",
+   "synthetic": true,
+   "split": "train",
+   "round": 2,
+   "pool_size": 181
   }
  ]
 }

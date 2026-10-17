@@ -216,10 +216,14 @@ _RELATIVE = re.compile(r"(?<![最至])(?:多|少)了?(?:等|到校|来|去|上)?
 _WITHIN = re.compile(r"之内|之间|以内|内|里")
 _OUTSIDE = re.compile(r"以外|之外|外")
 # Things the fact sheet says nothing about; a sentence mentioning them cannot be checked.
-_UNKNOWN = re.compile(r"老师|教授|教室|楼|食堂|作业|成绩|难度|内容|同学|朋友|交通|天气|睡|上课少|上课多|(?<![早晚])课[多少]|多上|少上")
+_UNKNOWN = re.compile(r"老师|教授|教室|楼|食堂|作业|成绩|难度|内容|同学|朋友|交通|天气|睡|课外|活动|上课少|上课多|(?<![早晚])课[多少]|多上|少上")
 _LUNCH = re.compile(r"吃饭|午饭|午餐|饭")
 _LUNCH_BAD = re.compile(r"紧|不够|赶|没时间|来不及|不能")
 _EXAM = re.compile(r"考试|测验|考")
+_EVERY_DAY = re.compile(r"每天(?:都)?(?:要|得|需要)?(到校|去学校|来学校|上课|有课)")
+_NO_CLASS_BY = re.compile(r"((?:上午|早上|中午|下午|晚上)?\s*\d{1,2}(?:[:：]\d{2}|\s*点半?))\s*(之前|以前|前|之后|以后|后)"
+                          r"\s*(?:都)?(?:没课|没有课|不上课|无课|不用上课)")
+_SAME = re.compile(r"一样|相同|差不多|持平|不变")
 _UNIT = re.compile(r"[A-Z]{4}\d{4}")
 
 
@@ -349,6 +353,16 @@ def _check_sentence(text: str, facts: dict, allowed: dict, first: bool) -> str |
                 return "weekday"
         elif not days <= set(facts["class_days"]) | set(facts["campus"]):
             return "weekday"
+    for match in _EVERY_DAY.finditer(text):
+        days = set(facts["campus"]) | (set(facts["class_days"]) if match.group(1) in ("上课", "有课") else set())
+        if not set(range(1, 6)) <= days:
+            return "weekday"
+    for match in _NO_CLASS_BY.finditer(text):
+        clock = _times(match.group(1))[0][0]
+        before = match.group(2) in ("之前", "以前", "前")
+        bound = facts["earliest"] if before else facts["latest"]
+        if bound is not None and (bound < clock if before else bound > clock):
+            return "time"
     for match in _SUPER.finditer(text):
         word = match.group(1)
         if word in _OPINION_WORDS:
@@ -381,6 +395,14 @@ def _check_directions(text: str, facts: dict, against_first: bool) -> str | None
         topics = [care for care, pattern in _TOPIC if pattern.search(part)]
         if not topics or _SUPER.search(part):
             continue
+        if against_first:
+            differs = [care for care in topics if any(words[care] in entry for entry in better + worse)]
+            if _SAME.search(part):  # "到校天数一样": only if the numbers do not differ
+                if differs:
+                    return "comparison"
+                continue
+            if "更" in part and len(differs) < len(topics):  # "空等更充裕" needs a real difference
+                return "comparison"
         is_good = bool(_GOOD.search(part))
         is_bad = bool(_BAD.search(_GOOD.sub("", part)))
         if is_good and is_bad:

@@ -1,0 +1,9801 @@
+{
+ "classifier": "keyword rules (llm/parse/output/linear_model.json is missing, so parse() falls back)",
+ "ranker": "rule: minus the sum of z-scores of the cared-about features (llm/rank/model.json is missing)",
+ "test_set": "llm/parse/data/test_claude.csv",
+ "data_note": "Sentences written by Claude; not real student data.",
+ "records": [
+  {
+   "sentence_id": "c001",
+   "sentence": "i work at woolies every tuesday and thursday night so those nights are out",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      2,
+      1080,
+      1440
+     ],
+     [
+      4,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      2,
+      1080,
+      1440
+     ],
+     [
+      4,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0006,
+   "total_seconds": 0.087,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ]
+  },
+  {
+   "sentence_id": "c002",
+   "sentence": "Fridays are a no-go, I've got a standing shift at the cafe.",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0006,
+   "total_seconds": 0.016,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c003",
+   "sentence": "I drop my daughter at daycare at 8:30 every morning. Long gaps between classes would kill me tbh",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time",
+    "prefer_less_waiting"
+   ],
+   "gold_labels": [
+    "blocked_time",
+    "prefer_less_waiting"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      570
+     ],
+     [
+      2,
+      0,
+      570
+     ],
+     [
+      3,
+      0,
+      570
+     ],
+     [
+      4,
+      0,
+      570
+     ],
+     [
+      5,
+      0,
+      570
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      600
+     ],
+     [
+      2,
+      0,
+      600
+     ],
+     [
+      3,
+      0,
+      600
+     ],
+     [
+      4,
+      0,
+      600
+     ],
+     [
+      5,
+      0,
+      600
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.001,
+   "total_seconds": 0.026,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c004",
+   "sentence": "max 3 days on campus a week, ideally less",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_days",
+    "other"
+   ],
+   "gold_labels": [
+    "max_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.096,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c005",
+   "sentence": "I commute 90 mins each way from Campbelltown so the fewer days I have to come in the better",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "prefer_fewer_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.087,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "a7ba338e9dfb0e4a",
+    "0ec99b16c3e6a0ca",
+    "e475821aefa0c7fe"
+   ]
+  },
+  {
+   "sentence_id": "c006",
+   "sentence": "no online tutes please, I literally cannot focus on zoom",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "in_person_only",
+    "in_person_only"
+   ],
+   "gold_labels": [
+    "in_person_only"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c007",
+   "sentence": "Could I get a proper lunch break? Like 45 mins",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "lunch",
+    "other"
+   ],
+   "gold_labels": [
+    "lunch"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     45
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "lunch"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.139,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "da2e29cad07809f5",
+    "4ec8760719ef2848",
+    "6896c3378066b7f1"
+   ]
+  },
+  {
+   "sentence_id": "c008",
+   "sentence": "I'm not a morning person at all and I'd rather finish early than start early",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_no_early_late",
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "prefer_no_early_late",
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.142,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "3b673870f5232691",
+    "172407811557084b",
+    "616916d1a3e92260"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "3b673870f5232691",
+    "172407811557084b",
+    "616916d1a3e92260"
+   ]
+  },
+  {
+   "sentence_id": "c009",
+   "sentence": "wednesdays I have netball from 4 till 6, everything else is flexible",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time",
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      3,
+      960,
+      1080
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      3,
+      960,
+      1080
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0005,
+   "total_seconds": 0.088,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "80c0b7e3fe07a21a"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "80c0b7e3fe07a21a"
+   ]
+  },
+  {
+   "sentence_id": "c010",
+   "sentence": "I don't mind early starts but please no classes after 6pm, I have to catch the last bus to Wollongong",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "prefer_no_early_late",
+    "blocked_time",
+    "other"
+   ],
+   "gold_labels": [
+    "other",
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      1080,
+      1440
+     ],
+     [
+      2,
+      1080,
+      1440
+     ],
+     [
+      3,
+      1080,
+      1440
+     ],
+     [
+      4,
+      1080,
+      1440
+     ],
+     [
+      5,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      1080,
+      1440
+     ],
+     [
+      2,
+      1080,
+      1440
+     ],
+     [
+      3,
+      1080,
+      1440
+     ],
+     [
+      4,
+      1080,
+      1440
+     ],
+     [
+      5,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1",
+    "94389aa9a2ef3d45"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c011",
+   "sentence": "Keep my Mondays free if you can, I volunteer at the hospital",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.107,
+   "status_parsed": "ready",
+   "status_gold": "no_feasible",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [
+     "class in avoided time on 2026-08-03",
+     "class in avoided time on 2026-08-03",
+     "class in avoided time on 2026-08-10"
+    ],
+    [
+     "class in avoided time on 2026-08-03",
+     "class in avoided time on 2026-08-03",
+     "class in avoided time on 2026-08-10"
+    ],
+    [
+     "class in avoided time on 2026-08-03",
+     "class in avoided time on 2026-08-03",
+     "class in avoided time on 2026-08-10"
+    ]
+   ]
+  },
+  {
+   "sentence_id": "c012",
+   "sentence": "ideally nothing before 10am",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     600,
+     1080
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     600,
+     1080
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.146,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "3b673870f5232691",
+    "172407811557084b",
+    "616916d1a3e92260"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "3b673870f5232691",
+    "172407811557084b",
+    "616916d1a3e92260"
+   ]
+  },
+  {
+   "sentence_id": "c013",
+   "sentence": "Nothing before 10am. I work the breakfast shift at Maccas",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      600
+     ],
+     [
+      2,
+      0,
+      600
+     ],
+     [
+      3,
+      0,
+      600
+     ],
+     [
+      4,
+      0,
+      600
+     ],
+     [
+      5,
+      0,
+      600
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      600
+     ],
+     [
+      2,
+      0,
+      600
+     ],
+     [
+      3,
+      0,
+      600
+     ],
+     [
+      4,
+      0,
+      600
+     ],
+     [
+      5,
+      0,
+      600
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.081,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "f3e9322a3f2b0e88",
+    "532233b4dcf36e8b",
+    "bf3bcbbac3b21777"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "f3e9322a3f2b0e88",
+    "532233b4dcf36e8b",
+    "bf3bcbbac3b21777"
+   ]
+  },
+  {
+   "sentence_id": "c014",
+   "sentence": "I want to be in the same prac group as my friend Priya",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c015",
+   "sentence": "Honestly anything works for me.",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.104,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ]
+  },
+  {
+   "sentence_id": "c016",
+   "sentence": "no more than 5 hours of actual class per day",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_daily_hours"
+   ],
+   "gold_labels": [
+    "max_daily_hours"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": 300,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": 300,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.155,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c017",
+   "sentence": "I don't wanna be stuck at uni longer than 8 hours on any day",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "max_daily_hours"
+   ],
+   "gold_labels": [
+    "max_daily_hours"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": 480,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": 480,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.098,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ]
+  },
+  {
+   "sentence_id": "c018",
+   "sentence": "Tues and Thurs mornings I'm at physio until 11",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      2,
+      0,
+      660
+     ],
+     [
+      4,
+      0,
+      660
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      2,
+      0,
+      660
+     ],
+     [
+      4,
+      0,
+      660
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.018,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "82f6121c3f7bc3ae"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "82f6121c3f7bc3ae"
+   ]
+  },
+  {
+   "sentence_id": "c019",
+   "sentence": "I can only come in Monday, Wednesday and Friday because of my job",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      2,
+      0,
+      1440
+     ],
+     [
+      4,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      2,
+      0,
+      1440
+     ],
+     [
+      3,
+      0,
+      1440
+     ],
+     [
+      4,
+      0,
+      1440
+     ],
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.008,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c020",
+   "sentence": "would love it if my classes were bunched together on as few days as possible",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_fewer_days"
+   ],
+   "gold_labels": [
+    "prefer_fewer_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.142,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "3b673870f5232691",
+    "b5b80eb1ee0b854f"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "3b673870f5232691",
+    "b5b80eb1ee0b854f"
+   ]
+  },
+  {
+   "sentence_id": "c021",
+   "sentence": "I need to pick up my son from school at 3 so I gotta leave by 2:30",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      870,
+      1440
+     ],
+     [
+      2,
+      870,
+      1440
+     ],
+     [
+      3,
+      870,
+      1440
+     ],
+     [
+      4,
+      870,
+      1440
+     ],
+     [
+      5,
+      870,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      870,
+      1440
+     ],
+     [
+      2,
+      870,
+      1440
+     ],
+     [
+      3,
+      870,
+      1440
+     ],
+     [
+      4,
+      870,
+      1440
+     ],
+     [
+      5,
+      870,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.013,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c022",
+   "sentence": "lunch between 12 and 1 is a must for me",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "lunch"
+   ],
+   "gold_labels": [
+    "lunch"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     720,
+     780,
+     60
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     720,
+     780,
+     60
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.022,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c023",
+   "sentence": "please don't give me 3 hour gaps again like last sem, back to back is fine",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_daily_hours",
+    "prefer_less_waiting"
+   ],
+   "gold_labels": [
+    "prefer_less_waiting",
+    "prefer_less_waiting"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": 180,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "max_daily_minutes"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.053,
+   "status_parsed": "no_feasible",
+   "status_gold": "ready",
+   "picks_gold": [
+    "f0ef7d722a6b4dbc",
+    "ade9864592ebe198",
+    "6896c3378066b7f1"
+   ]
+  },
+  {
+   "sentence_id": "c024",
+   "sentence": "I'm doing an internship 3 days a week so I can only do 2 days at uni",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_days"
+   ],
+   "gold_labels": [
+    "max_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 2,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "max_days_per_week"
+   ],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.105,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c025",
+   "sentence": "I have a standing appointment every thursday arvo",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      4,
+      720,
+      1080
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      4,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.065,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "d9647886e983ce59",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ]
+  },
+  {
+   "sentence_id": "c026",
+   "sentence": "I play in a band and we rehearse monday nights from 7",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "other",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      1140,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.018,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c027",
+   "sentence": "evening lectures are the worst for me",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.106,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "380a9e7629dc9142",
+    "06e07700fbf0352d",
+    "930f3b081160c9ad"
+   ]
+  },
+  {
+   "sentence_id": "c028",
+   "sentence": "face to face only, I learn nothing from recordings",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "in_person_only",
+    "other"
+   ],
+   "gold_labels": [
+    "in_person_only"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.147,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ]
+  },
+  {
+   "sentence_id": "c029",
+   "sentence": "I actually prefer online tutorials when they're available",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.09,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ]
+  },
+  {
+   "sentence_id": "c030",
+   "sentence": "my partner and I share one car and she needs it Wednesdays, so no wednesday classes",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "other",
+    "other",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      3,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      3,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.004,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c031",
+   "sentence": "4 days max, and I need Friday off for work",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_days",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "max_days",
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": 4,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": 4,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.085,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "ee9eea4801b20e8e",
+    "0c82fb3c3433dce2",
+    "8778b313c9dfd8cf"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "ee9eea4801b20e8e",
+    "0c82fb3c3433dce2",
+    "8778b313c9dfd8cf"
+   ]
+  },
+  {
+   "sentence_id": "c032",
+   "sentence": "if at all possible I'd like to start no earlier than 9",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     540,
+     1080
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "preferred_hours"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.142,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "3b673870f5232691",
+    "172407811557084b",
+    "616916d1a3e92260"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "3b673870f5232691",
+    "172407811557084b",
+    "616916d1a3e92260"
+   ]
+  },
+  {
+   "sentence_id": "c033",
+   "sentence": "i get really tired if i have more than 6 hrs of lectures and tuts in one day",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "max_daily_hours",
+    "max_days"
+   ],
+   "gold_labels": [
+    "max_daily_hours"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": 360,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": 1,
+    "max_daily_minutes": 360,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "max_days_per_week"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.028,
+   "status_parsed": "no_feasible",
+   "status_gold": "ready",
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ]
+  },
+  {
+   "sentence_id": "c034",
+   "sentence": "Mondays I teach swimming from 3:30, Thursdays I tutor kids all evening",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      930,
+      1440
+     ],
+     [
+      4,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      930,
+      1440
+     ],
+     [
+      4,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.004,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c035",
+   "sentence": "Need at least half an hour to eat lunch",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "lunch"
+   ],
+   "gold_labels": [
+    "lunch"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.14,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ]
+  },
+  {
+   "sentence_id": "c036",
+   "sentence": "I'm a carer for my grandad so I can't do anything before 11 or after 3",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      660
+     ],
+     [
+      1,
+      900,
+      1440
+     ],
+     [
+      2,
+      0,
+      660
+     ],
+     [
+      2,
+      900,
+      1440
+     ],
+     [
+      3,
+      0,
+      660
+     ],
+     [
+      3,
+      900,
+      1440
+     ],
+     [
+      4,
+      0,
+      660
+     ],
+     [
+      4,
+      900,
+      1440
+     ],
+     [
+      5,
+      0,
+      660
+     ],
+     [
+      5,
+      900,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      660
+     ],
+     [
+      1,
+      900,
+      1440
+     ],
+     [
+      2,
+      0,
+      660
+     ],
+     [
+      2,
+      900,
+      1440
+     ],
+     [
+      3,
+      0,
+      660
+     ],
+     [
+      3,
+      900,
+      1440
+     ],
+     [
+      4,
+      0,
+      660
+     ],
+     [
+      4,
+      900,
+      1440
+     ],
+     [
+      5,
+      0,
+      660
+     ],
+     [
+      5,
+      900,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.025,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c037",
+   "sentence": "I don't care about gaps, I just want as few days in as possible",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "prefer_less_waiting",
+    "prefer_fewer_days"
+   ],
+   "gold_labels": [
+    "other",
+    "prefer_fewer_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap",
+     "campus_days"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.084,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "e475821aefa0c7fe"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "a7ba338e9dfb0e4a",
+    "0ec99b16c3e6a0ca",
+    "e475821aefa0c7fe"
+   ]
+  },
+  {
+   "sentence_id": "c038",
+   "sentence": "can we not have anything on fri afternoon? footy training",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      5,
+      720,
+      1080
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      5,
+      720,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.015,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c039",
+   "sentence": "Ideally I'd finish by 4 most days",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     540,
+     960
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     540,
+     960
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.119,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "380a9e7629dc9142",
+    "06e07700fbf0352d",
+    "4ec8760719ef2848"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "380a9e7629dc9142",
+    "06e07700fbf0352d",
+    "4ec8760719ef2848"
+   ]
+  },
+  {
+   "sentence_id": "c040",
+   "sentence": "I have to be home by 5 to cook for my siblings",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      1020,
+      1440
+     ],
+     [
+      2,
+      1020,
+      1440
+     ],
+     [
+      3,
+      1020,
+      1440
+     ],
+     [
+      4,
+      1020,
+      1440
+     ],
+     [
+      5,
+      1020,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      1020,
+      1440
+     ],
+     [
+      2,
+      1020,
+      1440
+     ],
+     [
+      3,
+      1020,
+      1440
+     ],
+     [
+      4,
+      1020,
+      1440
+     ],
+     [
+      5,
+      1020,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.039,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c041",
+   "sentence": "weekends I work full time so obviously no weekend classes",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      6,
+      0,
+      1440
+     ],
+     [
+      7,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      6,
+      0,
+      1440
+     ],
+     [
+      7,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.094,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ]
+  },
+  {
+   "sentence_id": "c042",
+   "sentence": "I really dont want to waste time sitting around between classes, my commute is long enough already",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "prefer_less_waiting",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "prefer_less_waiting"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "6169ddf2955bc4b1",
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "6169ddf2955bc4b1",
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7"
+   ]
+  },
+  {
+   "sentence_id": "c043",
+   "sentence": "only want to come to uni twice a week",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "max_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 2,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "max_days_per_week"
+   ],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.11,
+   "status_parsed": "ready",
+   "status_gold": "no_feasible",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [
+     "too many campus days in a week"
+    ],
+    [
+     "too many campus days in a week"
+    ],
+    [
+     "too many campus days in a week"
+    ]
+   ]
+  },
+  {
+   "sentence_id": "c044",
+   "sentence": "Is it possible to have all my classes on Tuesday and Wednesday?",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      1440
+     ],
+     [
+      4,
+      0,
+      1440
+     ],
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      2,
+      0,
+      1440
+     ],
+     [
+      3,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.023,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c045",
+   "sentence": "I'd love a decent lunch break, and no online stuff",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "lunch",
+    "in_person_only"
+   ],
+   "gold_labels": [
+    "lunch",
+    "in_person_only"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     30
+    ],
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     30
+    ],
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.094,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "80c0b7e3fe07a21a",
+    "4dbb889e2bdafd02",
+    "78f9ba3fa874c793"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "80c0b7e3fe07a21a",
+    "4dbb889e2bdafd02",
+    "78f9ba3fa874c793"
+   ]
+  },
+  {
+   "sentence_id": "c046",
+   "sentence": "I start my shift at 6pm on weekdays and it's 40 min away",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time",
+    "other"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      1080,
+      1440
+     ],
+     [
+      2,
+      1080,
+      1440
+     ],
+     [
+      3,
+      1080,
+      1440
+     ],
+     [
+      4,
+      1080,
+      1440
+     ],
+     [
+      5,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      1080,
+      1440
+     ],
+     [
+      2,
+      1080,
+      1440
+     ],
+     [
+      3,
+      1080,
+      1440
+     ],
+     [
+      4,
+      1080,
+      1440
+     ],
+     [
+      5,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c047",
+   "sentence": "early classes = death lol",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.106,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "380a9e7629dc9142",
+    "06e07700fbf0352d",
+    "930f3b081160c9ad"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "380a9e7629dc9142",
+    "06e07700fbf0352d",
+    "930f3b081160c9ad"
+   ]
+  },
+  {
+   "sentence_id": "c048",
+   "sentence": "Uni is 2 hours away by train so 3 days max",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_days"
+   ],
+   "gold_labels": [
+    "max_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.102,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c049",
+   "sentence": "pls no more than four and a half hours of class a day",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "other",
+    "other"
+   ],
+   "gold_labels": [
+    "max_daily_hours"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": 270,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "max_daily_minutes"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.086,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [],
+    [],
+    [
+     "too many class minutes on 2026-10-13"
+    ]
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "0e244e940cc26fec"
+   ]
+  },
+  {
+   "sentence_id": "c050",
+   "sentence": "My mum's chemo is every Tuesday so I need that day off",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      2,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      2,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "82f6121c3f7bc3ae"
+   ],
+   "violations": [
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "82f6121c3f7bc3ae"
+   ]
+  },
+  {
+   "sentence_id": "c051",
+   "sentence": "i hate mornings",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.106,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "380a9e7629dc9142",
+    "06e07700fbf0352d",
+    "930f3b081160c9ad"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "380a9e7629dc9142",
+    "06e07700fbf0352d",
+    "930f3b081160c9ad"
+   ]
+  },
+  {
+   "sentence_id": "c052",
+   "sentence": "Classes after 7pm are a no from me, I don't feel safe walking to Redfern station late",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time",
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      1140,
+      1440
+     ],
+     [
+      2,
+      1140,
+      1440
+     ],
+     [
+      3,
+      1140,
+      1440
+     ],
+     [
+      4,
+      1140,
+      1440
+     ],
+     [
+      5,
+      1140,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      1140,
+      1440
+     ],
+     [
+      2,
+      1140,
+      1440
+     ],
+     [
+      3,
+      1140,
+      1440
+     ],
+     [
+      4,
+      1140,
+      1440
+     ],
+     [
+      5,
+      1140,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.289,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "3b673870f5232691",
+    "172407811557084b",
+    "616916d1a3e92260"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ]
+  },
+  {
+   "sentence_id": "c053",
+   "sentence": "Prefer not to have classes before 9:30 if possible but it's not a big deal",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "prefer_no_early_late",
+    "other"
+   ],
+   "gold_labels": [
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     570,
+     1080
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     570,
+     1080
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.1,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "532233b4dcf36e8b",
+    "18fa9ccdc9aad7d7",
+    "4f857f318b79a74e"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "532233b4dcf36e8b",
+    "18fa9ccdc9aad7d7",
+    "4f857f318b79a74e"
+   ]
+  },
+  {
+   "sentence_id": "c054",
+   "sentence": "Could all my labs be in the same week pattern as Sarah's? we carpool",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "other",
+    "other"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c055",
+   "sentence": "I work Mon Wed Fri 9-3 at a childcare centre",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      540,
+      900
+     ],
+     [
+      3,
+      540,
+      900
+     ],
+     [
+      5,
+      540,
+      900
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      540,
+      900
+     ],
+     [
+      3,
+      540,
+      900
+     ],
+     [
+      5,
+      540,
+      900
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.016,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c056",
+   "sentence": "tuesday is my only day off work so I'd like all my classes that day if possible lol",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      1440
+     ],
+     [
+      3,
+      0,
+      1440
+     ],
+     [
+      4,
+      0,
+      1440
+     ],
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      2,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.04,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c057",
+   "sentence": "no classes on thursdays or fridays, and I want lunch from 1 to 1:30",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time",
+    "lunch"
+   ],
+   "gold_labels": [
+    "blocked_time",
+    "lunch"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      4,
+      0,
+      1440
+     ],
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     780,
+     810,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      4,
+      0,
+      1440
+     ],
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     780,
+     810,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.043,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "532233b4dcf36e8b",
+    "6cc86406aa5f793c",
+    "78f9ba3fa874c793"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "532233b4dcf36e8b",
+    "6cc86406aa5f793c",
+    "78f9ba3fa874c793"
+   ]
+  },
+  {
+   "sentence_id": "c058",
+   "sentence": "Max 6 hours on campus each day including breaks",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "max_daily_hours"
+   ],
+   "gold_labels": [
+    "max_daily_hours"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": 360,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": 360,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.02,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "48d54d80458f3a9a",
+    "9cd015191bbe204c"
+   ],
+   "violations": [
+    [],
+    []
+   ],
+   "picks_gold": [
+    "48d54d80458f3a9a",
+    "9cd015191bbe204c"
+   ]
+  },
+  {
+   "sentence_id": "c059",
+   "sentence": "long breaks between lectures are fine for me since I study in the library anyway",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_less_waiting"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.109,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "f0ef7d722a6b4dbc",
+    "ade9864592ebe198",
+    "6896c3378066b7f1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ]
+  },
+  {
+   "sentence_id": "c060",
+   "sentence": "Coming in every single day last sem was exhausting, fewer days this time please",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other",
+    "prefer_fewer_days"
+   ],
+   "gold_labels": [
+    "prefer_fewer_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.145,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "3b673870f5232691",
+    "b5b80eb1ee0b854f"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "3b673870f5232691",
+    "b5b80eb1ee0b854f"
+   ]
+  },
+  {
+   "sentence_id": "c061",
+   "sentence": "I have Islamic studies on Friday from 12 to 2 so I can't do classes then",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      5,
+      720,
+      840
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      5,
+      720,
+      840
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.084,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ]
+  },
+  {
+   "sentence_id": "c062",
+   "sentence": "Can't do mornings Mon to Wed, I'm doing early shifts at the hospital",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time",
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      600
+     ],
+     [
+      2,
+      0,
+      600
+     ],
+     [
+      3,
+      0,
+      600
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      600
+     ],
+     [
+      2,
+      0,
+      600
+     ],
+     [
+      3,
+      0,
+      600
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.005,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c063",
+   "sentence": "I'd prefer my classes between 10 and 4 ideally",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     600,
+     960
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     600,
+     960
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.119,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "d35a1b0e23ab0720",
+    "0c82fb3c3433dce2",
+    "ba54464891bfe1dd"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "d35a1b0e23ab0720",
+    "0c82fb3c3433dce2",
+    "ba54464891bfe1dd"
+   ]
+  },
+  {
+   "sentence_id": "c064",
+   "sentence": "i really need my wednesday afternoons free for my research assistant job and I'd like no gaps longer than an hour",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time",
+    "prefer_less_waiting"
+   ],
+   "gold_labels": [
+    "blocked_time",
+    "prefer_less_waiting"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      3,
+      720,
+      1080
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      3,
+      0,
+      720
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0005,
+   "total_seconds": 0.059,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c065",
+   "sentence": "pls dont put me in any online classes",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "in_person_only"
+   ],
+   "gold_labels": [
+    "in_person_only"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.077,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "80c0b7e3fe07a21a",
+    "4dbb889e2bdafd02",
+    "78f9ba3fa874c793"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "80c0b7e3fe07a21a",
+    "4dbb889e2bdafd02",
+    "78f9ba3fa874c793"
+   ]
+  },
+  {
+   "sentence_id": "c066",
+   "sentence": "Is there any way to have Fridays off? Three-day weekends would help my mental health a lot",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      5,
+      0,
+      1440
+     ],
+     [
+      6,
+      0,
+      1440
+     ],
+     [
+      7,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c067",
+   "sentence": "I have a 1 hour commute so I'd rather do long days than come in every day",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_daily_hours"
+   ],
+   "gold_labels": [
+    "prefer_fewer_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": 60,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "max_daily_minutes",
+    "cares"
+   ],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.027,
+   "status_parsed": "no_feasible",
+   "status_gold": "ready",
+   "picks_gold": [
+    "ee9eea4801b20e8e",
+    "ca227444f2588588",
+    "eae916fe5c5fed93"
+   ]
+  },
+  {
+   "sentence_id": "c068",
+   "sentence": "lunch: any time between 11 and 2 is fine, just need 40 minutes",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "lunch",
+    "other"
+   ],
+   "gold_labels": [
+    "lunch"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     660,
+     840,
+     40
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     660,
+     840,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "lunch"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.205,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ]
+  },
+  {
+   "sentence_id": "c069",
+   "sentence": "I need to leave campus by 4 on Tuesdays and Thursdays to get to my second job",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      2,
+      960,
+      1440
+     ],
+     [
+      4,
+      960,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      2,
+      960,
+      1440
+     ],
+     [
+      4,
+      960,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.088,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ]
+  },
+  {
+   "sentence_id": "c070",
+   "sentence": "Early morning classes are fine but I really want nothing after 5 if possible",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "prefer_no_early_late",
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "other",
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     540,
+     1020
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     540,
+     1020
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.018,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1",
+    "82f6121c3f7bc3ae"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1",
+    "82f6121c3f7bc3ae"
+   ]
+  },
+  {
+   "sentence_id": "c071",
+   "sentence": "Please keep it to 4 hours of classes max per day, I have ADHD and can't concentrate longer",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_daily_hours",
+    "other",
+    "other"
+   ],
+   "gold_labels": [
+    "max_daily_hours"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": 240,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": 240,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.049,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c072",
+   "sentence": "I have choir every Wednesday 6-8pm",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      3,
+      1080,
+      1200
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      3,
+      1080,
+      1200
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.178,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ]
+  },
+  {
+   "sentence_id": "c073",
+   "sentence": "as few days as possible, and when I'm there, back to back please",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "prefer_fewer_days",
+    "other",
+    "prefer_less_waiting"
+   ],
+   "gold_labels": [
+    "prefer_fewer_days",
+    "prefer_less_waiting"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days",
+     "gap"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days",
+     "gap"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.087,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "e475821aefa0c7fe"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "e475821aefa0c7fe"
+   ]
+  },
+  {
+   "sentence_id": "c074",
+   "sentence": "I'd love to sleep in so nothing too early pls",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1",
+    "94389aa9a2ef3d45"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1",
+    "94389aa9a2ef3d45"
+   ]
+  },
+  {
+   "sentence_id": "c075",
+   "sentence": "Thursday I'm at the TAFE all day for my other course",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      4,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      4,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.014,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c076",
+   "sentence": "idc about which tutor I get but I want a tute with lots of other international students",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "other",
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.144,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ]
+  },
+  {
+   "sentence_id": "c077",
+   "sentence": "I can only be on campus after 12 on Mondays because I have a morning job",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      720
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.011,
+   "status_parsed": "no_feasible",
+   "status_gold": "ready",
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ]
+  },
+  {
+   "sentence_id": "c078",
+   "sentence": "No more than 2 days a week at uni please, I'm working full time",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "max_days",
+    "other"
+   ],
+   "gold_labels": [
+    "max_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 2,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": 2,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.011,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c079",
+   "sentence": "I get migraines if I'm in class all day so maybe cap it at five hours of class",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_daily_hours"
+   ],
+   "gold_labels": [
+    "max_daily_hours"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": 300,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": 300,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.13,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "7a3b488b38f3f5d6",
+    "174943ac960c0089",
+    "bf3bffb3737bbcbc"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "7a3b488b38f3f5d6",
+    "174943ac960c0089",
+    "bf3bffb3737bbcbc"
+   ]
+  },
+  {
+   "sentence_id": "c080",
+   "sentence": "Lunch needs to be at least an hour because I go home to eat",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "lunch"
+   ],
+   "gold_labels": [
+    "lunch"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     60
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     60
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.175,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "34ee05dab3585b77"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "34ee05dab3585b77"
+   ]
+  },
+  {
+   "sentence_id": "c081",
+   "sentence": "I don't want to be on campus more than 3 days and I'd rather not have classes before 10",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "max_days",
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "max_days",
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     600,
+     1080
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     600,
+     1080
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.126,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "532233b4dcf36e8b",
+    "18fa9ccdc9aad7d7",
+    "aa42cfa44355d5f2"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "532233b4dcf36e8b",
+    "18fa9ccdc9aad7d7",
+    "aa42cfa44355d5f2"
+   ]
+  },
+  {
+   "sentence_id": "c082",
+   "sentence": "monday tuesday wednesday i have placement at a hospital until 3pm",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      900
+     ],
+     [
+      2,
+      0,
+      900
+     ],
+     [
+      3,
+      0,
+      900
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      900
+     ],
+     [
+      2,
+      0,
+      900
+     ],
+     [
+      3,
+      0,
+      900
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.005,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c083",
+   "sentence": "Zoom classes don't work for me with my home internet, so on campus only",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "in_person_only"
+   ],
+   "gold_labels": [
+    "in_person_only"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.111,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ]
+  },
+  {
+   "sentence_id": "c084",
+   "sentence": "I want to go to the gym between classes so a couple of small gaps is actually good",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.143,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ]
+  },
+  {
+   "sentence_id": "c085",
+   "sentence": "Please put all my classes in the afternoon, I'm useless before noon",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      720
+     ],
+     [
+      2,
+      0,
+      720
+     ],
+     [
+      3,
+      0,
+      720
+     ],
+     [
+      4,
+      0,
+      720
+     ],
+     [
+      5,
+      0,
+      720
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      1440
+     ],
+     [
+      2,
+      0,
+      1440
+     ],
+     [
+      3,
+      0,
+      1440
+     ],
+     [
+      4,
+      0,
+      1440
+     ],
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.005,
+   "status_parsed": "no_feasible",
+   "status_gold": "ready",
+   "picks_gold": [
+    "c4f5c954a081b19b",
+    "4f857f318b79a74e",
+    "3f1696a305c78a64"
+   ]
+  },
+  {
+   "sentence_id": "c086",
+   "sentence": "I'm fine with any day except Friday",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c087",
+   "sentence": "My visa only lets me work 24 hours a fortnight, I do those shifts Saturday and Sunday",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_daily_hours",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      6,
+      0,
+      1440
+     ],
+     [
+      7,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      6,
+      0,
+      1440
+     ],
+     [
+      7,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": 720,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "max_daily_minutes"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.161,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ]
+  },
+  {
+   "sentence_id": "c088",
+   "sentence": "pls no tutes on monday morning, I have a standing doctor's appt at 9",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time",
+    "other"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      600
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      600
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.062,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c089",
+   "sentence": "I'm hoping to keep my timetable to three days a week",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "max_days"
+   ],
+   "gold_labels": [
+    "max_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.127,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "532233b4dcf36e8b",
+    "0ec99b16c3e6a0ca",
+    "6cc86406aa5f793c"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "532233b4dcf36e8b",
+    "0ec99b16c3e6a0ca",
+    "6cc86406aa5f793c"
+   ]
+  },
+  {
+   "sentence_id": "c090",
+   "sentence": "Every second Friday I visit my dad in Newcastle",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c091",
+   "sentence": "I'm pretty flexible tbh. maybe avoid late classes",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other",
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "other",
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.113,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "380a9e7629dc9142",
+    "06e07700fbf0352d",
+    "930f3b081160c9ad"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "380a9e7629dc9142",
+    "06e07700fbf0352d",
+    "930f3b081160c9ad"
+   ]
+  },
+  {
+   "sentence_id": "c092",
+   "sentence": "I need gaps to be under 2 hours, and nothing on wednesday arvo",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_daily_hours",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "prefer_less_waiting",
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      3,
+      720,
+      1080
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      3,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": 120,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows",
+    "max_daily_minutes",
+    "cares"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.036,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c093",
+   "sentence": "on tuesdays i finish work at 1 so i can only come in after 2",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      2,
+      0,
+      840
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      2,
+      0,
+      840
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.077,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "80c0b7e3fe07a21a",
+    "5856a8e22474fc60"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "80c0b7e3fe07a21a",
+    "5856a8e22474fc60"
+   ]
+  },
+  {
+   "sentence_id": "c094",
+   "sentence": "Saturday classes would actually be great for me",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      6,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.018,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c095",
+   "sentence": "I want to keep lunch free from 12:30 to 1:30 for my prayer and meal",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "lunch",
+    "lunch"
+   ],
+   "gold_labels": [
+    "lunch"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     750,
+     810,
+     60
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "lunch"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.146,
+   "status_parsed": "ready",
+   "status_gold": "no_feasible",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [
+     "no lunch break on 2026-08-04",
+     "no lunch break on 2026-08-05",
+     "no lunch break on 2026-08-11"
+    ],
+    [
+     "no lunch break on 2026-08-05",
+     "no lunch break on 2026-08-12",
+     "no lunch break on 2026-08-19"
+    ],
+    [
+     "no lunch break on 2026-08-05",
+     "no lunch break on 2026-08-12",
+     "no lunch break on 2026-08-19"
+    ]
+   ]
+  },
+  {
+   "sentence_id": "c096",
+   "sentence": "five hours on campus is my limit",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_daily_hours"
+   ],
+   "gold_labels": [
+    "max_daily_hours"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": 300,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": 300,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.085,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c097",
+   "sentence": "I'm a single parent so classes need to be between 9:30 and 2:30",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      570
+     ],
+     [
+      1,
+      870,
+      1440
+     ],
+     [
+      2,
+      0,
+      570
+     ],
+     [
+      2,
+      870,
+      1440
+     ],
+     [
+      3,
+      0,
+      570
+     ],
+     [
+      3,
+      870,
+      1440
+     ],
+     [
+      4,
+      0,
+      570
+     ],
+     [
+      4,
+      870,
+      1440
+     ],
+     [
+      5,
+      0,
+      570
+     ],
+     [
+      5,
+      870,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      570,
+      870
+     ],
+     [
+      2,
+      570,
+      870
+     ],
+     [
+      3,
+      570,
+      870
+     ],
+     [
+      4,
+      570,
+      870
+     ],
+     [
+      5,
+      570,
+      870
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.009,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c098",
+   "sentence": "I hate having one lecture and then going home, it's a waste of a trip",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "other",
+    "other"
+   ],
+   "gold_labels": [
+    "prefer_fewer_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "82f6121c3f7bc3ae",
+    "6b3b7346390015d7"
+   ]
+  },
+  {
+   "sentence_id": "c099",
+   "sentence": "I'll be fasting for Ramadan so no late afternoon classes would be nice",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      720,
+      1440
+     ],
+     [
+      2,
+      720,
+      1440
+     ],
+     [
+      3,
+      720,
+      1440
+     ],
+     [
+      4,
+      720,
+      1440
+     ],
+     [
+      5,
+      720,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows",
+    "cares"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.013,
+   "status_parsed": "no_feasible",
+   "status_gold": "ready",
+   "picks_gold": [
+    "380a9e7629dc9142",
+    "06e07700fbf0352d",
+    "930f3b081160c9ad"
+   ]
+  },
+  {
+   "sentence_id": "c100",
+   "sentence": "tutes on the same day as the lecture would be ideal",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.144,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ]
+  },
+  {
+   "sentence_id": "c101",
+   "sentence": "Mon and Thu nights I play futsal, Tue I'm at work from 4",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      1080,
+      1440
+     ],
+     [
+      2,
+      960,
+      1440
+     ],
+     [
+      4,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      1080,
+      1440
+     ],
+     [
+      2,
+      960,
+      1440
+     ],
+     [
+      4,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.094,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ]
+  },
+  {
+   "sentence_id": "c102",
+   "sentence": "I don't mind long days as long as it's only twice a week",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "max_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 2,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "max_days_per_week"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.021,
+   "status_parsed": "ready",
+   "status_gold": "no_feasible",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [
+     "too many campus days in a week"
+    ],
+    [
+     "too many campus days in a week"
+    ],
+    [
+     "too many campus days in a week"
+    ]
+   ]
+  },
+  {
+   "sentence_id": "c103",
+   "sentence": "no in person stuff please i'm immunocompromised",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "in_person_only"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "in_person_only"
+   ],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.108,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ]
+  },
+  {
+   "sentence_id": "c104",
+   "sentence": "I'd like at least 30 min between classes in different buildings because I use a wheelchair",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_less_waiting"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.145,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "fa00fedaa884ba35",
+    "d3918a43a75d766d"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ]
+  },
+  {
+   "sentence_id": "c105",
+   "sentence": "Need Wednesday morning free for my weekly therapy session at 10",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      3,
+      0,
+      660
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.086,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [
+     "class in avoided time on 2026-08-05",
+     "class in avoided time on 2026-08-12",
+     "class in avoided time on 2026-08-19"
+    ],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "b26a2bfc4e41565a",
+    "532233b4dcf36e8b",
+    "82ff007fb00391fc"
+   ]
+  },
+  {
+   "sentence_id": "c106",
+   "sentence": "i'd prefer not to have classes on more than 4 days",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "max_days"
+   ],
+   "gold_labels": [
+    "max_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 4,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": 4,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.023,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c107",
+   "sentence": "Gaps are ok if they're short, like under 30 min",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_less_waiting",
+    "other"
+   ],
+   "gold_labels": [
+    "prefer_less_waiting"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.11,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "f0ef7d722a6b4dbc",
+    "ade9864592ebe198",
+    "6896c3378066b7f1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "f0ef7d722a6b4dbc",
+    "ade9864592ebe198",
+    "6896c3378066b7f1"
+   ]
+  },
+  {
+   "sentence_id": "c108",
+   "sentence": "Can I avoid Monday 9am lectures? It takes me ages to get in after the weekend",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      600
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      600
+     ],
+     [
+      6,
+      0,
+      1440
+     ],
+     [
+      7,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.076,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c109",
+   "sentence": "After 3pm I'm free, before that I'm at my apprenticeship every Thursday",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      4,
+      0,
+      900
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      900
+     ],
+     [
+      2,
+      0,
+      900
+     ],
+     [
+      3,
+      0,
+      900
+     ],
+     [
+      4,
+      0,
+      1440
+     ],
+     [
+      5,
+      0,
+      900
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.009,
+   "status_parsed": "no_feasible",
+   "status_gold": "ready",
+   "picks_gold": [
+    "d9647886e983ce59",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ]
+  },
+  {
+   "sentence_id": "c110",
+   "sentence": "Would really appreciate a lunch break and no classes later than 6",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "lunch",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "lunch",
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      1080,
+      1440
+     ],
+     [
+      2,
+      1080,
+      1440
+     ],
+     [
+      3,
+      1080,
+      1440
+     ],
+     [
+      4,
+      1080,
+      1440
+     ],
+     [
+      5,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      1080,
+      1440
+     ],
+     [
+      2,
+      1080,
+      1440
+     ],
+     [
+      3,
+      1080,
+      1440
+     ],
+     [
+      4,
+      1080,
+      1440
+     ],
+     [
+      5,
+      1080,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.021,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c111",
+   "sentence": "I'm only allowed on campus 3 days because of my scholarship placement hours",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "max_days"
+   ],
+   "gold_labels": [
+    "max_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0001,
+   "total_seconds": 0.05,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c112",
+   "sentence": "i'd rather 5 short days than 3 super long ones",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.146,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ]
+  },
+  {
+   "sentence_id": "c113",
+   "sentence": "Nothing on Fridays and nothing before 11 on Mondays",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      660
+     ],
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      660
+     ],
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.054,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "532233b4dcf36e8b",
+    "80c0b7e3fe07a21a"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "532233b4dcf36e8b",
+    "80c0b7e3fe07a21a"
+   ]
+  },
+  {
+   "sentence_id": "c114",
+   "sentence": "Love a sleep-in, love a long weekend",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "other",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "prefer_no_early_late",
+    "prefer_fewer_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours",
+     "campus_days"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      6,
+      0,
+      1440
+     ],
+     [
+      7,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows",
+    "cares"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.018,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c115",
+   "sentence": "I work 3-11pm at the casino on Saturdays and Sundays",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      6,
+      900,
+      1380
+     ],
+     [
+      7,
+      900,
+      1380
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      6,
+      900,
+      1380
+     ],
+     [
+      7,
+      900,
+      1380
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.127,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ]
+  },
+  {
+   "sentence_id": "c116",
+   "sentence": "Please make sure I'm not in any class past 4:30 on Wednesday, I have to collect my kids",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      3,
+      990,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      3,
+      990,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.119,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "d1eb508a08fa8652",
+    "b8ea8912154c9bba",
+    "3b673870f5232691"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "d1eb508a08fa8652",
+    "b8ea8912154c9bba",
+    "3b673870f5232691"
+   ]
+  },
+  {
+   "sentence_id": "c117",
+   "sentence": "Ideally only 2 days on campus but 3 is ok",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "max_days",
+    "other"
+   ],
+   "gold_labels": [
+    "max_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": 2,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "max_days_per_week"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.044,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "a7ba338e9dfb0e4a",
+    "8e02e94ac5b37be4"
+   ],
+   "violations": [
+    [],
+    []
+   ],
+   "picks_gold": [
+    "532233b4dcf36e8b",
+    "0ec99b16c3e6a0ca",
+    "6cc86406aa5f793c"
+   ]
+  },
+  {
+   "sentence_id": "c118",
+   "sentence": "I'd like to be done by 3 so I can beat the traffic",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "prefer_no_early_late"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      900,
+      1440
+     ],
+     [
+      2,
+      900,
+      1440
+     ],
+     [
+      3,
+      900,
+      1440
+     ],
+     [
+      4,
+      900,
+      1440
+     ],
+     [
+      5,
+      900,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     540,
+     900
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows",
+    "preferred_hours",
+    "cares"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.024,
+   "status_parsed": "ready",
+   "status_gold": "no_feasible",
+   "picks_parsed": [
+    "4f61e582ad4bbbed",
+    "a9e650f8e432e400",
+    "74c41a8f02038070"
+   ],
+   "violations": [
+    [
+     "class in avoided time on 2026-08-03",
+     "class in avoided time on 2026-08-05",
+     "class in avoided time on 2026-08-10"
+    ],
+    [
+     "class in avoided time on 2026-08-03",
+     "class in avoided time on 2026-08-05",
+     "class in avoided time on 2026-08-10"
+    ],
+    [
+     "class in avoided time on 2026-08-03",
+     "class in avoided time on 2026-08-05",
+     "class in avoided time on 2026-08-07"
+    ]
+   ]
+  },
+  {
+   "sentence_id": "c119",
+   "sentence": "ugh no 9ams again pls, and keep thursday free for my part time job",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time",
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      600
+     ],
+     [
+      2,
+      0,
+      600
+     ],
+     [
+      3,
+      0,
+      600
+     ],
+     [
+      4,
+      0,
+      1440
+     ],
+     [
+      5,
+      0,
+      600
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      600
+     ],
+     [
+      2,
+      0,
+      600
+     ],
+     [
+      3,
+      0,
+      600
+     ],
+     [
+      4,
+      0,
+      1440
+     ],
+     [
+      5,
+      0,
+      600
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.018,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c120",
+   "sentence": "I live on campus so I don't mind coming in every day",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      1440
+     ],
+     [
+      2,
+      0,
+      1440
+     ],
+     [
+      3,
+      0,
+      1440
+     ],
+     [
+      4,
+      0,
+      1440
+     ],
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.01,
+   "status_parsed": "no_feasible",
+   "status_gold": "ready",
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ]
+  },
+  {
+   "sentence_id": "c121",
+   "sentence": "Max 7 hrs at uni per day, max 3 days a week",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "max_daily_hours",
+    "max_days"
+   ],
+   "gold_labels": [
+    "max_daily_hours",
+    "max_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": 420,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": null,
+    "max_daily_span": 420,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.085,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "532233b4dcf36e8b",
+    "0ec99b16c3e6a0ca",
+    "18fa9ccdc9aad7d7"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "532233b4dcf36e8b",
+    "0ec99b16c3e6a0ca",
+    "18fa9ccdc9aad7d7"
+   ]
+  },
+  {
+   "sentence_id": "c122",
+   "sentence": "I'm in the rowing squad, training is 5:30-7:30am every weekday",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "other",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      330,
+      450
+     ],
+     [
+      2,
+      330,
+      450
+     ],
+     [
+      3,
+      330,
+      450
+     ],
+     [
+      4,
+      330,
+      450
+     ],
+     [
+      5,
+      330,
+      450
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      510
+     ],
+     [
+      1,
+      1050,
+      1440
+     ],
+     [
+      2,
+      0,
+      510
+     ],
+     [
+      2,
+      1050,
+      1440
+     ],
+     [
+      3,
+      0,
+      510
+     ],
+     [
+      3,
+      1050,
+      1440
+     ],
+     [
+      4,
+      0,
+      510
+     ],
+     [
+      4,
+      1050,
+      1440
+     ],
+     [
+      5,
+      0,
+      510
+     ],
+     [
+      5,
+      1050,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.009,
+   "status_parsed": "no_feasible",
+   "status_gold": "ready",
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c123",
+   "sentence": "If I could avoid having labs on the same day as my lectures that'd be good",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.112,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ]
+  },
+  {
+   "sentence_id": "c124",
+   "sentence": "My bus only comes once an hour so long gaps don't bother me but please no classes before 9",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_less_waiting",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "other",
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      540
+     ],
+     [
+      2,
+      0,
+      540
+     ],
+     [
+      3,
+      0,
+      540
+     ],
+     [
+      4,
+      0,
+      540
+     ],
+     [
+      5,
+      0,
+      540
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      540
+     ],
+     [
+      2,
+      0,
+      540
+     ],
+     [
+      3,
+      0,
+      540
+     ],
+     [
+      4,
+      0,
+      540
+     ],
+     [
+      5,
+      0,
+      540
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.057,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c125",
+   "sentence": "I'm taking care of my newborn so I'd honestly like as few days as possible, maybe 2",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "prefer_fewer_days",
+    "other"
+   ],
+   "gold_labels": [
+    "max_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 2,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "max_days_per_week",
+    "cares"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.089,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "a7ba338e9dfb0e4a",
+    "0ec99b16c3e6a0ca",
+    "e475821aefa0c7fe"
+   ],
+   "violations": [
+    [],
+    [
+     "too many campus days in a week"
+    ],
+    [
+     "too many campus days in a week"
+    ]
+   ],
+   "picks_gold": [
+    "a7ba338e9dfb0e4a",
+    "8e02e94ac5b37be4"
+   ]
+  },
+  {
+   "sentence_id": "c126",
+   "sentence": "Tue/Thu are my work days",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      2,
+      0,
+      1440
+     ],
+     [
+      4,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      2,
+      0,
+      1440
+     ],
+     [
+      4,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.003,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c127",
+   "sentence": "i dont mind gaps but i dont want to be there past 5",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_less_waiting",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "other",
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      1020,
+      1440
+     ],
+     [
+      2,
+      1020,
+      1440
+     ],
+     [
+      3,
+      1020,
+      1440
+     ],
+     [
+      4,
+      1020,
+      1440
+     ],
+     [
+      5,
+      1020,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      1020,
+      1440
+     ],
+     [
+      2,
+      1020,
+      1440
+     ],
+     [
+      3,
+      1020,
+      1440
+     ],
+     [
+      4,
+      1020,
+      1440
+     ],
+     [
+      5,
+      1020,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.024,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c128",
+   "sentence": "Could my tutorial be with Dr Nguyen? I heard she explains things really well",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other",
+    "other"
+   ],
+   "gold_labels": [
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.147,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ]
+  },
+  {
+   "sentence_id": "c129",
+   "sentence": "I need a 30 min lunch somewhere between 11:30 and 1:30, and I'd like to avoid back-to-back 3 hour labs",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "lunch",
+    "max_daily_hours"
+   ],
+   "gold_labels": [
+    "lunch",
+    "other"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     810,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": 180,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     810,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "max_daily_minutes"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.094,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "80c0b7e3fe07a21a",
+    "e475821aefa0c7fe"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ]
+  },
+  {
+   "sentence_id": "c130",
+   "sentence": "not on campus fridays, max 4 hrs class a day, and keep mornings free if u can",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "blocked_time",
+    "max_daily_hours",
+    "other"
+   ],
+   "gold_labels": [
+    "blocked_time",
+    "max_daily_hours",
+    "blocked_time"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      600
+     ],
+     [
+      2,
+      0,
+      600
+     ],
+     [
+      3,
+      0,
+      600
+     ],
+     [
+      4,
+      0,
+      600
+     ],
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": 240,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      5,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": 240,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows"
+   ],
+   "parse_seconds": 0.0004,
+   "total_seconds": 0.01,
+   "status_parsed": "no_feasible",
+   "status_gold": "no_feasible"
+  },
+  {
+   "sentence_id": "c131",
+   "sentence": "All good with whatever, just no more online-only units pls",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other",
+    "in_person_only"
+   ],
+   "gold_labels": [
+    "other",
+    "in_person_only"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.111,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ]
+  },
+  {
+   "sentence_id": "c132",
+   "sentence": "I'm a morning person so early classes are perfect, I'd love to be done by lunch",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "prefer_no_early_late",
+    "lunch"
+   ],
+   "gold_labels": [
+    "other",
+    "prefer_no_early_late"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": [
+     540,
+     720
+    ],
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "outside_hours"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "lunch",
+    "preferred_hours"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.209,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "172407811557084b",
+    "7a047cb8488ecb74"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "3b673870f5232691",
+    "3583550ad087ab13",
+    "ed59f7f23a34189c"
+   ]
+  },
+  {
+   "sentence_id": "c133",
+   "sentence": "Thurs is out bc of my volunteering at the food bank, and I hate waiting around for hours",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "lunch",
+    "prefer_less_waiting"
+   ],
+   "gold_labels": [
+    "blocked_time",
+    "prefer_less_waiting"
+   ],
+   "gold": {
+    "unavailable_windows": [
+     [
+      4,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": [
+     690,
+     840,
+     30
+    ],
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows",
+    "lunch"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.107,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "d440772ad6f6cedb",
+    "db72b8f972737cb9",
+    "944d5d2c758c3ab3"
+   ],
+   "violations": [
+    [
+     "class in avoided time on 2026-08-13",
+     "class in avoided time on 2026-08-20",
+     "class in avoided time on 2026-08-27"
+    ],
+    [
+     "class in avoided time on 2026-08-13",
+     "class in avoided time on 2026-08-20",
+     "class in avoided time on 2026-08-27"
+    ],
+    []
+   ],
+   "picks_gold": [
+    "3725942c741d435d",
+    "082886886a815841",
+    "469b772682bade71"
+   ]
+  },
+  {
+   "sentence_id": "c134",
+   "sentence": "max three days a week and no more than 6 hours of class on any of them",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "max_days",
+    "max_daily_hours"
+   ],
+   "gold_labels": [
+    "max_days",
+    "max_daily_hours"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": 360,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": 3,
+    "max_daily_minutes": 360,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.02,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "82f6121c3f7bc3ae"
+   ],
+   "violations": [
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "82f6121c3f7bc3ae"
+   ]
+  },
+  {
+   "sentence_id": "c135",
+   "sentence": "I really want in-person tutorials, the online ones last year were useless",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "in_person_only",
+    "other"
+   ],
+   "gold_labels": [
+    "in_person_only"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.114,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "da2e29cad07809f5",
+    "930f3b081160c9ad",
+    "380a9e7629dc9142"
+   ]
+  },
+  {
+   "sentence_id": "c136",
+   "sentence": "on campus classes only pls, I don't have a decent laptop at home",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other",
+    "other"
+   ],
+   "gold_labels": [
+    "in_person_only"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "in_person_only"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.146,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ]
+  },
+  {
+   "sentence_id": "c137",
+   "sentence": "can u make sure none of my labs are online? I need the hands-on stuff",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "other",
+    "other"
+   ],
+   "gold_labels": [
+    "in_person_only"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "in_person_only"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.094,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "80c0b7e3fe07a21a",
+    "4dbb889e2bdafd02",
+    "78f9ba3fa874c793"
+   ]
+  },
+  {
+   "sentence_id": "c138",
+   "sentence": "hybrid is ok I guess but I'd much prefer everything face-to-face",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "other",
+    "in_person_only"
+   ],
+   "gold_labels": [
+    "in_person_only"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": true,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": true,
+   "fields_wrong": [],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.019,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ]
+  },
+  {
+   "sentence_id": "c139",
+   "sentence": "Hate the 2-hour dead time between my lecture and tute on Mondays",
+   "units": [
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other",
+    "blocked_time"
+   ],
+   "gold_labels": [
+    "prefer_less_waiting"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [
+     [
+      1,
+      0,
+      1440
+     ]
+    ],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "unavailable_windows",
+    "cares"
+   ],
+   "parse_seconds": 0.0003,
+   "total_seconds": 0.024,
+   "status_parsed": "no_feasible",
+   "status_gold": "ready",
+   "picks_gold": [
+    "f0ef7d722a6b4dbc",
+    "ade9864592ebe198",
+    "6896c3378066b7f1"
+   ]
+  },
+  {
+   "sentence_id": "c140",
+   "sentence": "please keep my classes close together in the day with no big breaks",
+   "units": [
+    "AMME2262",
+    "AMME2301",
+    "CIVL3206",
+    "ENGG2112"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "prefer_less_waiting"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "gap"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.167,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "616916d1a3e92260",
+    "e023df7c27d64e8d",
+    "d1eb508a08fa8652"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "616916d1a3e92260",
+    "fa00fedaa884ba35",
+    "d3918a43a75d766d"
+   ]
+  },
+  {
+   "sentence_id": "c141",
+   "sentence": "I want a couple of completely free weekdays",
+   "units": [
+    "ENGG2112",
+    "AMME2301"
+   ],
+   "labels": [
+    "other"
+   ],
+   "gold_labels": [
+    "prefer_fewer_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.088,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "0ec99b16c3e6a0ca",
+    "944d5d2c758c3ab3",
+    "532233b4dcf36e8b"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "a7ba338e9dfb0e4a",
+    "0ec99b16c3e6a0ca",
+    "e475821aefa0c7fe"
+   ]
+  },
+  {
+   "sentence_id": "c142",
+   "sentence": "fewer, longer days suit me better",
+   "units": [
+    "ENGG2112",
+    "CIVL3206"
+   ],
+   "labels": [
+    "other",
+    "other"
+   ],
+   "gold_labels": [
+    "prefer_fewer_days"
+   ],
+   "gold": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": [
+     "campus_days"
+    ]
+   },
+   "parsed": {
+    "unavailable_windows": [],
+    "max_days_per_week": null,
+    "max_daily_minutes": null,
+    "max_daily_span": null,
+    "lunch": null,
+    "in_person_only": false,
+    "preferred_hours": null,
+    "cares": []
+   },
+   "dropped_by_form_rules": 0,
+   "exact": false,
+   "fields_wrong": [
+    "cares"
+   ],
+   "parse_seconds": 0.0002,
+   "total_seconds": 0.017,
+   "status_parsed": "ready",
+   "status_gold": "ready",
+   "picks_parsed": [
+    "94389aa9a2ef3d45",
+    "6b3b7346390015d7",
+    "6169ddf2955bc4b1"
+   ],
+   "violations": [
+    [],
+    [],
+    []
+   ],
+   "picks_gold": [
+    "94389aa9a2ef3d45",
+    "82f6121c3f7bc3ae",
+    "6b3b7346390015d7"
+   ]
+  }
+ ]
+}

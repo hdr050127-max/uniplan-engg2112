@@ -1,0 +1,6154 @@
+{
+ "model": "ollama-short:uniplan-parse-7b-r2",
+ "predictions": {
+  "周一不能上课，有兼职。": {
+   "label": "blocked_time",
+   "ms": 189.82
+  },
+  "周二、周四下午六点到八点有兼职。": {
+   "label": "blocked_time",
+   "ms": 227.63
+  },
+  "周三、周五早上十点之前没有课，兼职时间灵活。": {
+   "label": "blocked_time",
+   "ms": 274.22
+  },
+  "周四晚上七点到九点不能上课，有兼职。": {
+   "label": "blocked_time",
+   "ms": 249.22
+  },
+  "周五下午没有课程，下午两点到五点有兼职。": {
+   "label": "blocked_time",
+   "ms": 218.57
+  },
+  "周一晚上六点到八点兼职，没有课程。": {
+   "label": "blocked_time",
+   "ms": 308.1
+  },
+  "周二早上八点之前不能上课，有兼职。": {
+   "label": "blocked_time",
+   "ms": 340.16
+  },
+  "周四晚上八点以后没有课，可以兼职到晚上十点": {
+   "label": "blocked_time",
+   "ms": 409.41
+  },
+  "Can't do anything on Tuesdays 'cos I've got a 9am shift at the café.": {
+   "label": "blocked_time",
+   "ms": 200.49
+  },
+  "No lectures on Thursdays 'cos I work nights until 3am.": {
+   "label": "blocked_time",
+   "ms": 190.24
+  },
+  "Not on Mondays as I get to uni at 7am and have to be at work by 8am.": {
+   "label": "blocked_time",
+   "ms": 226.5
+  },
+  "No class before 10am on Wednesdays 'cos I have a 9-5 job.": {
+   "label": "blocked_time",
+   "ms": 297.11
+  },
+  "Can't do anything on Fridays 'cos I do 2pm to 10pm shifts.": {
+   "label": "blocked_time",
+   "ms": 194.54
+  },
+  "No lectures before 4pm on Mondays 'cos I'm working from 12pm to 4pm.": {
+   "label": "blocked_time",
+   "ms": 238.36
+  },
+  "Not on Wednesdays 'cos I've got a 3-11pm shift at the supermarket.": {
+   "label": "blocked_time",
+   "ms": 290.28
+  },
+  "Can't do anything on Tues and Thurs 'cos I have a 4-12pm shift in the library.": {
+   "label": "blocked_time",
+   "ms": 236.54
+  },
+  "周二晚上7点有排练，不能上课": {
+   "label": "blocked_time",
+   "ms": 225.87
+  },
+  "礼拜天早上9点有宗教服务，不能上": {
+   "label": "blocked_time",
+   "ms": 293.98
+  },
+  "下午5点到6点都有排练，这段时间都不能上课": {
+   "label": "blocked_time",
+   "ms": 268.17
+  },
+  "周一早上8点到9点不能上课，因为有宗教活动": {
+   "label": "blocked_time",
+   "ms": 259.14
+  },
+  "晚上7点到9点不能上课，这段时间都有排练": {
+   "label": "blocked_time",
+   "ms": 221.17
+  },
+  "周一不上课": {
+   "label": "blocked_time",
+   "ms": 301.31
+  },
+  "周三下午没时间": {
+   "label": "blocked_time",
+   "ms": 263.05
+  },
+  "周五不用上课": {
+   "label": "blocked_time",
+   "ms": 259.62
+  },
+  "周日晚上工作": {
+   "label": "blocked_time",
+   "ms": 248.23
+  },
+  "周一到周五都不行": {
+   "label": "blocked_time",
+   "ms": 278.3
+  },
+  "每天下午都有事": {
+   "label": "blocked_time",
+   "ms": 207.25
+  },
+  "周三和周五不能": {
+   "label": "blocked_time",
+   "ms": 338.51
+  },
+  "周二晚上有事": {
+   "label": "blocked_time",
+   "ms": 258.79
+  },
+  "每周最多三天在校": {
+   "label": "max_days",
+   "ms": 263.06
+  },
+  "希望每周有不多于三天在校园": {
+   "label": "max_days",
+   "ms": 257.91
+  },
+  "每星期在校时间最多四天": {
+   "label": "max_days",
+   "ms": 269.27
+  },
+  "最好每周不超过三天上课": {
+   "label": "max_days",
+   "ms": 293.45
+  },
+  "希望每周在校时间不超过三天": {
+   "label": "max_days",
+   "ms": 260.87
+  },
+  "每周最多三天不要超过校园": {
+   "label": "max_days",
+   "ms": 267.36
+  },
+  "在校时间希望每周不超过三天": {
+   "label": "max_days",
+   "ms": 253.95
+  },
+  "最多三天每周在校上课": {
+   "label": "max_days",
+   "ms": 318.58
+  },
+  "每周最多三天在校就好了，这样可以吗？": {
+   "label": "max_days",
+   "ms": 288.89
+  },
+  "每天在校的时间已经够了，三天就够了。": {
+   "label": "max_days",
+   "ms": 390.16
+  },
+  "希望每周在校只有两天时间，这样更好。": {
+   "label": "max_days",
+   "ms": 281.57
+  },
+  "每天都上学真的太辛苦了，每周三天就足够了。": {
+   "label": "max_days",
+   "ms": 269.08
+  },
+  "不想每天都挤公交，三天在校时间已经很充裕了。": {
+   "label": "max_days",
+   "ms": 261.91
+  },
+  "我只能承受每周三天在校，希望可以满足。": {
+   "label": "max_days",
+   "ms": 299.44
+  },
+  "为了节约时间，每周三天在校已经足够了。": {
+   "label": "max_days",
+   "ms": 340.11
+  },
+  "每天上学太累了，每周只有三天在校就很好了。": {
+   "label": "max_days",
+   "ms": 295.89
+  },
+  "每周最多两天即可，一天Mon下午的tutorial，另一天是Fri晚上的lab。": {
+   "label": "max_days",
+   "ms": 348.94
+  },
+  "不想每天都来，每周两到三天，通常是下午的tutorial和lab。": {
+   "label": "max_days",
+   "ms": 336.32
+  },
+  "每周上课两天就够了，一次是Mon晚上的lab，一次是Fri的tutorial。": {
+   "label": "max_days",
+   "ms": 206.26
+  },
+  "Would be sick if I had to do anything more than three days on campus": {
+   "label": "max_days",
+   "ms": 257.98
+  },
+  "Could only manage two days a week tops": {
+   "label": "max_days",
+   "ms": 284.84
+  },
+  "Three days on campus is pushing it for me": {
+   "label": "max_days",
+   "ms": 380.37
+  },
+  "Would prefer to keep it to just two days a week": {
+   "label": "max_days",
+   "ms": 353.11
+  },
+  "Could only really manage three days max on campus": {
+   "label": "max_days",
+   "ms": 321.98
+  },
+  "Not sure I could handle more than two days a week": {
+   "label": "max_days",
+   "ms": 479.88
+  },
+  "Three days on campus is about my limit": {
+   "label": "max_days",
+   "ms": 283.42
+  },
+  "Two days a week is all I can handle for now": {
+   "label": "max_days",
+   "ms": 264.03
+  },
+  "一周最多2天上校区": {
+   "label": "max_days",
+   "ms": 256.47
+  },
+  "我最多3天上校园": {
+   "label": "max_days",
+   "ms": 264.91
+  },
+  "每周我只能在2天上实体课": {
+   "label": "max_days",
+   "ms": 284.41
+  },
+  "最多4天上校园": {
+   "label": "max_days",
+   "ms": 270.66
+  },
+  "我最多只希望3天在校区": {
+   "label": "max_days",
+   "ms": 291.51
+  },
+  "只在最多2天上实体课": {
+   "label": "max_days",
+   "ms": 307.72
+  },
+  "最多允许我在3天上学校": {
+   "label": "max_days",
+   "ms": 298.98
+  },
+  "每周最多只能来2天上课": {
+   "label": "max_days",
+   "ms": 279.09
+  },
+  "希望能够每天有4个小时在校园里，其中最多2个小时是面授课程。": {
+   "label": "max_daily_hours",
+   "ms": 387.75
+  },
+  "希望能够在上午9点到11点之间安排2个小时的志愿服务。": {
+   "label": "blocked_time",
+   "ms": 162.8
+  },
+  "尽量避免连续两天超过4个小时的校内活动安排。": {
+   "label": "prefer_less_waiting",
+   "ms": 317.94
+  },
+  "希望每周能有1个小时的实验室时间来补充理论知识。": {
+   "label": "other",
+   "ms": 239.09
+  },
+  "希望能够每天有至少2个小时用于复习和自学的时间。": {
+   "label": "max_daily_hours",
+   "ms": 284.44
+  },
+  "希望周五下午能够安排1个小时的研讨会，这样可以更好地为周末做准备。": {
+   "label": "other",
+   "ms": 240.8
+  },
+  "上课时间不要超过8个小时": {
+   "label": "max_daily_hours",
+   "ms": 286.14
+  },
+  "一天最多只能有3个小时的课": {
+   "label": "max_daily_hours",
+   "ms": 296.23
+  },
+  "最多只能有6个小时的课程时间": {
+   "label": "max_daily_hours",
+   "ms": 2678.51
+  },
+  "每天最多只能待4个小时在大学": {
+   "label": "max_daily_hours",
+   "ms": 313.55
+  },
+  "上课时间不能超过5个小时": {
+   "label": "max_daily_hours",
+   "ms": 380.0
+  },
+  "每天最多只能有2个小时的课程": {
+   "label": "max_daily_hours",
+   "ms": 307.18
+  },
+  "一天不要超过7个小时的课堂时间": {
+   "label": "max_daily_hours",
+   "ms": 292.1
+  },
+  "周一到周五最多4小时课堂": {
+   "label": "max_daily_hours",
+   "ms": 268.05
+  },
+  "不在学校超过8小时": {
+   "label": "max_daily_hours",
+   "ms": 301.61
+  },
+  "每天最多四个小时在校园，因为我需要预留时间回家。": {
+   "label": "max_daily_hours",
+   "ms": 304.73
+  },
+  "一周五天我最多只能在校园待四个小时，因为要留时间通勤。": {
+   "label": "max_daily_hours",
+   "ms": 344.43
+  },
+  "每天最多只能在大学待八个小时，因为来回要花90分钟。": {
+   "label": "max_daily_hours",
+   "ms": 316.16
+  },
+  "尽量不要超过四个小时的课堂时间，因为回家还有家务。": {
+   "label": "max_daily_hours",
+   "ms": 489.33
+  },
+  "工作日最多在校园待四个小时，留时间上下班。": {
+   "label": "max_daily_hours",
+   "ms": 407.05
+  },
+  "每天尽量不要超过八小时在校园，不然通勤会很累。": {
+   "label": "max_daily_hours",
+   "ms": 234.88
+  },
+  "最多只能在大学待四个小时，因为需要留足够时间回家。": {
+   "label": "max_daily_hours",
+   "ms": 289.58
+  },
+  "通勤需要时间，所以我每周只能在校园待20个小时，也就是每天最多四个小时。": {
+   "label": "max_daily_hours",
+   "ms": 264.97
+  },
+  "周一和周五下午2点到3点需要一个吃饭的空档": {
+   "label": "lunch",
+   "ms": 285.79
+  },
+  "需要在12点左右有个吃饭的时间，最好在实验室的中间": {
+   "label": "lunch",
+   "ms": 423.94
+  },
+  "周五的上午11点到12点之间需要一个吃饭的空隙": {
+   "label": "lunch",
+   "ms": 293.51
+  },
+  "因为有家人的事情，需要在下午3点之前安排一个吃饭的时间": {
+   "label": "lunch",
+   "ms": 323.65
+  },
+  "每周五上午10点到11点之间需要一个吃饭的空档": {
+   "label": "lunch",
+   "ms": 377.95
+  },
+  "需要在下午4点到5点之间有一个吃饭的时间段，因为要看家": {
+   "label": "lunch",
+   "ms": 320.44
+  },
+  "希望在上午10点半到11点半之间能有一个吃饭的空闲时间": {
+   "label": "lunch",
+   "ms": 311.52
+  },
+  "中午12点要吃饭": {
+   "label": "lunch",
+   "ms": 311.43
+  },
+  "11点半到12点之间必须要吃午餐": {
+   "label": "lunch",
+   "ms": 347.51
+  },
+  "今天下午1点留15分钟吃饭": {
+   "label": "lunch",
+   "ms": 367.62
+  },
+  "明天中午12点半吃饭": {
+   "label": "lunch",
+   "ms": 322.31
+  },
+  "每天中午11点50到12点必须吃饭": {
+   "label": "lunch",
+   "ms": 409.31
+  },
+  "12点到12点半中间要吃午餐": {
+   "label": "lunch",
+   "ms": 324.91
+  },
+  "今天早上11点半吃午餐": {
+   "label": "lunch",
+   "ms": 390.46
+  },
+  "明天中午12点10分吃饭": {
+   "label": "lunch",
+   "ms": 319.26
+  },
+  "下午一点吃饭": {
+   "label": "lunch",
+   "ms": 306.49
+  },
+  "12点吃饭需要": {
+   "label": "lunch",
+   "ms": 398.13
+  },
+  "午饭时间": {
+   "label": "lunch",
+   "ms": 305.32
+  },
+  "下午12点吃午餐": {
+   "label": "lunch",
+   "ms": 326.12
+  },
+  "中午1点吃饭": {
+   "label": "lunch",
+   "ms": 323.71
+  },
+  "Mon 8am-10am need break for lunch": {
+   "label": "lunch",
+   "ms": 297.93
+  },
+  "Tue 12pm-2pm no time to eat": {
+   "label": "lunch",
+   "ms": 283.28
+  },
+  "need break for lunch sometime in the day": {
+   "label": "lunch",
+   "ms": 341.01
+  },
+  "不想选线上课程，方便接送孩子上下学。": {
+   "label": "in_person_only",
+   "ms": 286.65
+  },
+  "只选校内的课程，不想在线上课，方便照顾孩子。": {
+   "label": "in_person_only",
+   "ms": 261.99
+  },
+  "只选现场上课的课程，避免网上课影响看顾孩子。": {
+   "label": "in_person_only",
+   "ms": 263.99
+  },
+  "周一到周五只有实体课程可以，不要线上或录播的": {
+   "label": "in_person_only",
+   "ms": 280.49
+  },
+  "上午9点到下午4点之间只有实体课程可以，不要任何形式的线上课": {
+   "label": "in_person_only",
+   "ms": 256.09
+  },
+  "除了实验课和辅导课外，所有课程都必须是实体的，不能有线上课程": {
+   "label": "in_person_only",
+   "ms": 287.57
+  },
+  "从周一到周五，只有实体课程可以，没有任何线上课程": {
+   "label": "in_person_only",
+   "ms": 278.51
+  },
+  "希望所有的课都是实体课程，特别是辅导课和实验课，不接受任何线上课程": {
+   "label": "in_person_only",
+   "ms": 285.42
+  },
+  "从9点到5点之间，我希望都是实体课程，不要任何形式的线上课程": {
+   "label": "in_person_only",
+   "ms": 324.67
+  },
+  "除实验和辅导课外，其他课程必须是实体课程，不要任何线上或录播课": {
+   "label": "in_person_only",
+   "ms": 373.56
+  },
+  "希望每天都有实体课程，不要有任何在线课程，包括上午9点到下午4点之间的课程": {
+   "label": "in_person_only",
+   "ms": 262.28
+  },
+  "不要任何线上课，也不要zoom课，更不要录播课": {
+   "label": "in_person_only",
+   "ms": 285.78
+  },
+  "必须面对面上课，不要任何线上选项": {
+   "label": "in_person_only",
+   "ms": 289.33
+  },
+  "除了在教室上课，我不要任何形式的线上课": {
+   "label": "in_person_only",
+   "ms": 286.76
+  },
+  "每周四和周五的课必须是实地上课，不要任何形式的线上课": {
+   "label": "in_person_only",
+   "ms": 279.71
+  },
+  "不要在线上上理论课，所有课程必须是面对面的": {
+   "label": "in_person_only",
+   "ms": 447.29
+  },
+  "上课时间必须是在校园内，不要任何形式的Zoom或录播课": {
+   "label": "in_person_only",
+   "ms": 207.19
+  },
+  "除了实验室，其他的课都必须在校园内上，不要线上": {
+   "label": "in_person_only",
+   "ms": 286.08
+  },
+  "不允许有任何线上课程，尤其是录播课，必须都是实地上课": {
+   "label": "in_person_only",
+   "ms": 287.79
+  },
+  "need all classes on campus no online": {
+   "label": "in_person_only",
+   "ms": 236.29
+  },
+  "only want face-to-face classes": {
+   "label": "in_person_only",
+   "ms": 340.97
+  },
+  "no online cos i play sport": {
+   "label": "in_person_only",
+   "ms": 261.31
+  },
+  "require in-person classes only": {
+   "label": "in_person_only",
+   "ms": 354.1
+  },
+  "avoid online classes": {
+   "label": "in_person_only",
+   "ms": 350.0
+  },
+  "must be on campus not online": {
+   "label": "in_person_only",
+   "ms": 266.28
+  },
+  "不想每天都来学校，尽量能少来几次。": {
+   "label": "prefer_fewer_days",
+   "ms": 407.73
+  },
+  "上课尽量能扎堆点，不想天天都跑来跑去。": {
+   "label": "prefer_fewer_days",
+   "ms": 318.56
+  },
+  "尽量把课安排在一起，不想天天都来学校。": {
+   "label": "prefer_fewer_days",
+   "ms": 322.02
+  },
+  "不想天天都来，能不能把课排在一起。": {
+   "label": "prefer_fewer_days",
+   "ms": 382.78
+  },
+  "能不能多安排些连堂课，不想天天都得来。": {
+   "label": "prefer_less_waiting",
+   "ms": 294.64
+  },
+  "不想每天来学校上课，能不能把课程集中起来。": {
+   "label": "prefer_fewer_days",
+   "ms": 371.56
+  },
+  "can we do less days on campus plz": {
+   "label": "prefer_fewer_days",
+   "ms": 278.47
+  },
+  "fewer days would be rad": {
+   "label": "prefer_fewer_days",
+   "ms": 317.18
+  },
+  "can i hit campus less often": {
+   "label": "prefer_fewer_days",
+   "ms": 462.99
+  },
+  "all my classes r crap i wanna do less days": {
+   "label": "prefer_fewer_days",
+   "ms": 280.27
+  },
+  "prefer less days with more hours each": {
+   "label": "prefer_fewer_days",
+   "ms": 300.55
+  },
+  "wanna hit campus less": {
+   "label": "prefer_fewer_days",
+   "ms": 275.07
+  },
+  "fewer days on campus would be cool": {
+   "label": "prefer_fewer_days",
+   "ms": 306.87
+  },
+  "can i fit classes together": {
+   "label": "prefer_less_waiting",
+   "ms": 399.83
+  },
+  "less campus days plz": {
+   "label": "prefer_fewer_days",
+   "ms": 284.59
+  },
+  "class days on campus want to be minimum": {
+   "label": "prefer_fewer_days",
+   "ms": 285.74
+  },
+  "fewer weekdays hit": {
+   "label": "prefer_fewer_days",
+   "ms": 277.51
+  },
+  "hit campus less if possible": {
+   "label": "prefer_fewer_days",
+   "ms": 276.39
+  },
+  "like to pack classes so hit campus less": {
+   "label": "prefer_fewer_days",
+   "ms": 297.03
+  },
+  "Could I come in less often, maybe split my subjects up somehow?": {
+   "label": "prefer_fewer_days",
+   "ms": 281.38
+  },
+  "Can I hit campus less but maybe pack more into each trip?": {
+   "label": "prefer_fewer_days",
+   "ms": 288.05
+  },
+  "Trying to cut down on campus visits, but pack in the classes when I do come in.": {
+   "label": "prefer_fewer_days",
+   "ms": 299.29
+  },
+  "I'm good with fewer days, just try to get as much done as possible when I am here.": {
+   "label": "prefer_fewer_days",
+   "ms": 360.08
+  },
+  "Would be awesome if I could come in for fewer days but still get everything covered.": {
+   "label": "prefer_fewer_days",
+   "ms": 285.73
+  },
+  "Fewer days on campus would be great, but need to make them count.": {
+   "label": "prefer_fewer_days",
+   "ms": 310.19
+  },
+  "Looking to cut down on campus time, but still pack a punch when I do come in.": {
+   "label": "prefer_fewer_days",
+   "ms": 325.66
+  },
+  "Could do with fewer campus days, but need to cram in the classes when I am there.": {
+   "label": "prefer_fewer_days",
+   "ms": 399.8
+  },
+  "希望课程能压缩在少几天，别搞那么散。": {
+   "label": "prefer_fewer_days",
+   "ms": 314.31
+  },
+  "不想每天都来来回回的，能一起上的课尽量安排在一起。": {
+   "label": "prefer_fewer_days",
+   "ms": 275.5
+  },
+  "每天的课能不能多一点，这样少跑几次。": {
+   "label": "prefer_fewer_days",
+   "ms": 353.8
+  },
+  "上课时间能尽量集中，减少来回跑的次数。": {
+   "label": "prefer_fewer_days",
+   "ms": 325.34
+  },
+  "别让课拉得太开，集中一点好点。": {
+   "label": "prefer_fewer_days",
+   "ms": 378.89
+  },
+  "课尽量压缩到几天，这样能省点路途": {
+   "label": "prefer_fewer_days",
+   "ms": 316.8
+  },
+  "Can we avoid big breaks between my kid's morning classes? Prefer them to be back-to-back if possible.": {
+   "label": "prefer_less_waiting",
+   "ms": 348.35
+  },
+  "Is it possible to have less downtime between my kid's midday subjects? They'd prefer them straight after each other.": {
+   "label": "prefer_less_waiting",
+   "ms": 271.49
+  },
+  "Could you make sure there are no huge gaps between the afternoon classes? My kid wants to keep them back-to-back.": {
+   "label": "prefer_less_waiting",
+   "ms": 310.63
+  },
+  "Can you reduce the break between classes in the late afternoon? Prefer it if they're right after each other.": {
+   "label": "prefer_less_waiting",
+   "ms": 264.97
+  },
+  "Trying to minimize the time between my kid's last morning sessions. Prefer them to be back-to-back to keep her focused.": {
+   "label": "prefer_less_waiting",
+   "ms": 276.03
+  },
+  "Is it possible to have no downtime between the morning classes? Prefer it if they're right one after the other.": {
+   "label": "prefer_less_waiting",
+   "ms": 273.99
+  },
+  "Would it be possible to reduce the gap between classes in the afternoon? My kid likes them to be back-to-back.": {
+   "label": "prefer_less_waiting",
+   "ms": 275.27
+  },
+  "Can you keep my kid's late afternoon classes back-to-back? Don't like too much waiting between them.": {
+   "label": "prefer_less_waiting",
+   "ms": 266.46
+  },
+  "篮球训练后上晚上的课，不要中间有空档！": {
+   "label": "prefer_less_waiting",
+   "ms": 294.59
+  },
+  "上午的tutorial和下午的lab不要有空档！": {
+   "label": "prefer_less_waiting",
+   "ms": 392.62
+  },
+  "早上8点半的课和9点的课希望可以连上，不要中间有间隔！": {
+   "label": "prefer_less_waiting",
+   "ms": 292.92
+  },
+  "不喜欢课间有空档": {
+   "label": "prefer_less_waiting",
+   "ms": 275.84
+  },
+  "上午课不要有空档": {
+   "label": "prefer_less_waiting",
+   "ms": 338.17
+  },
+  "下午课尽量连着上": {
+   "label": "prefer_less_waiting",
+   "ms": 409.9
+  },
+  "不要安排课间歇": {
+   "label": "prefer_less_waiting",
+   "ms": 269.28
+  },
+  "连续上课不要超过两节": {
+   "label": "max_daily_hours",
+   "ms": 320.63
+  },
+  "早课不要空档": {
+   "label": "prefer_less_waiting",
+   "ms": 304.36
+  },
+  "课间不要超过半小时": {
+   "label": "prefer_less_waiting",
+   "ms": 412.76
+  },
+  "每节课连着上": {
+   "label": "prefer_less_waiting",
+   "ms": 305.15
+  },
+  "尽量不要有大段空档，尤其是Fri下午。": {
+   "label": "prefer_less_waiting",
+   "ms": 275.57
+  },
+  "不要给我排有大空档的课表，特别是Mon早上9am之后。": {
+   "label": "prefer_less_waiting",
+   "ms": 266.19
+  },
+  "早上连堂别留空档，9am和10am的课不能分开。": {
+   "label": "prefer_less_waiting",
+   "ms": 271.4
+  },
+  "下午的课也一样，不要有空档，最好连在一起。": {
+   "label": "prefer_less_waiting",
+   "ms": 305.1
+  },
+  "尽量不要留任何空档，特别是家有急事的时候。": {
+   "label": "prefer_less_waiting",
+   "ms": 307.05
+  },
+  "上课时间不要有空档，尤其是连续的tutorial和lab。": {
+   "label": "prefer_less_waiting",
+   "ms": 270.57
+  },
+  "上午的课尽量不要空着，9am和10am的课要连在一起上。": {
+   "label": "prefer_less_waiting",
+   "ms": 396.15
+  },
+  "下午的空档也不要留，尤其是Fri下午。": {
+   "label": "prefer_less_waiting",
+   "ms": 305.81
+  },
+  "上课不想中间有空隙": {
+   "label": "prefer_less_waiting",
+   "ms": 293.76
+  },
+  "希望连续上课不要间隔": {
+   "label": "prefer_less_waiting",
+   "ms": 269.66
+  },
+  "最好没有空档": {
+   "label": "prefer_less_waiting",
+   "ms": 269.53
+  },
+  "连堂课最好连续": {
+   "label": "prefer_less_waiting",
+   "ms": 379.18
+  },
+  "不要中间休息": {
+   "label": "prefer_less_waiting",
+   "ms": 292.07
+  },
+  "不想中间有课间": {
+   "label": "prefer_less_waiting",
+   "ms": 321.69
+  },
+  "连上不想有空": {
+   "label": "prefer_less_waiting",
+   "ms": 270.83
+  },
+  "希望不隔课": {
+   "label": "prefer_less_waiting",
+   "ms": 269.71
+  },
+  "尽量不选早课": {
+   "label": "prefer_no_early_late",
+   "ms": 334.95
+  },
+  "早上课真的不想上": {
+   "label": "prefer_no_early_late",
+   "ms": 361.37
+  },
+  "尽量晚一点上课这样能多睡会": {
+   "label": "prefer_no_early_late",
+   "ms": 400.27
+  },
+  "Got a gig early, so let's avoid having anything too early, like morning classes.": {
+   "label": "prefer_no_early_late",
+   "ms": 311.47
+  },
+  "ideally after lunch": {
+   "label": "prefer_no_early_late",
+   "ms": 332.76
+  },
+  "prefers midday": {
+   "label": "prefer_no_early_late",
+   "ms": 288.45
+  },
+  "hates night classes": {
+   "label": "prefer_no_early_late",
+   "ms": 295.4
+  },
+  "morning is good": {
+   "label": "prefer_no_early_late",
+   "ms": 306.72
+  },
+  "nope too early": {
+   "label": "prefer_no_early_late",
+   "ms": 294.01
+  },
+  "morning classes are rough": {
+   "label": "prefer_no_early_late",
+   "ms": 387.55
+  },
+  "尽量晚一点的课比较好，比如在下午的tutorial，因为小孩需要照顾。": {
+   "label": "prefer_no_early_late",
+   "ms": 343.04
+  },
+  "不喜欢很早开始的课，因为早上要照顾小孩很辛苦。": {
+   "label": "prefer_no_early_late",
+   "ms": 330.69
+  },
+  "最好十点以后的课比较好": {
+   "label": "prefer_no_early_late",
+   "ms": 376.34
+  },
+  "尽量在九点之后上课": {
+   "label": "prefer_no_early_late",
+   "ms": 419.22
+  },
+  "如果可以的话，希望不要早于十点的课程": {
+   "label": "prefer_no_early_late",
+   "ms": 330.02
+  },
+  "最好是十点半以后开始上课": {
+   "label": "prefer_no_early_late",
+   "ms": 336.95
+  },
+  "如果可以的话，希望课程在十点之后开始": {
+   "label": "prefer_no_early_late",
+   "ms": 357.29
+  },
+  "最好是早上十点以后的课程": {
+   "label": "prefer_no_early_late",
+   "ms": 338.5
+  },
+  "上午课太早了": {
+   "label": "prefer_no_early_late",
+   "ms": 326.86
+  },
+  "早晨课太多真的不行": {
+   "label": "prefer_no_early_late",
+   "ms": 316.45
+  },
+  "避免早上早课": {
+   "label": "prefer_no_early_late",
+   "ms": 321.9
+  },
+  "If possible, keep me away from 7am starts, bro.": {
+   "label": "prefer_no_early_late",
+   "ms": 292.31
+  },
+  "Ideally, no classes before 9am for me, can we do that?": {
+   "label": "prefer_no_early_late",
+   "ms": 326.25
+  },
+  "尽量十点以后上课，别早了。": {
+   "label": "prefer_no_early_late",
+   "ms": 330.5
+  },
+  "No 8am classes, if possible, got any way we can fix that?": {
+   "label": "prefer_no_early_late",
+   "ms": 321.4
+  },
+  "尽量避开早上上课，10点以后更好。": {
+   "label": "prefer_no_early_late",
+   "ms": 333.79
+  },
+  "No early mornings, ideally after 10am for me.": {
+   "label": "prefer_no_early_late",
+   "ms": 368.73
+  },
+  "Trying to stay away from the online class on Wednesday evenings because the WiFi at home is flaky.": {
+   "label": "in_person_only",
+   "ms": 269.57
+  },
+  "Cannot be in room 202 as it's too noisy for me to focus on Friday mornings.": {
+   "label": "other",
+   "ms": 149.74
+  },
+  "任何课程都行，只要能方便照顾家里的老人。": {
+   "label": "other",
+   "ms": 183.79
+  },
+  "周二晚上想选直播课，离线的我怕来不及复习。": {
+   "label": "other",
+   "ms": 145.01
+  },
+  "不用固定时间，能上网课就行，家里还得带小孩。": {
+   "label": "other",
+   "ms": 305.94
+  },
+  "希望周四不用早起，家里事情有点忙。": {
+   "label": "blocked_time",
+   "ms": 330.11
+  },
+  "在线课程最好，家里的事情我得抽空做。": {
+   "label": "other",
+   "ms": 300.62
+  },
+  "I don't really care about the specific times, just that it all works out.": {
+   "label": "other",
+   "ms": 179.9
+  },
+  "The degree type doesn't matter, anything will do.": {
+   "label": "other",
+   "ms": 237.09
+  },
+  "Hi there, just letting you know I'm good with anything.": {
+   "label": "other",
+   "ms": 240.33
+  },
+  "Uni is pretty fine by me, just need the schedule sorted.": {
+   "label": "other",
+   "ms": 177.59
+  },
+  "The room it's in doesn't matter to me at all.": {
+   "label": "other",
+   "ms": 184.94
+  },
+  "Hello! Anything works for me, really.": {
+   "label": "other",
+   "ms": 242.02
+  },
+  "Course number is irrelevant to me, just need it done.": {
+   "label": "other",
+   "ms": 237.55
+  },
+  "Not a fussy person, anything is totally fine by me.": {
+   "label": "other",
+   "ms": 176.32
+  },
+  "周一可以": {
+   "label": "other",
+   "ms": 202.51
+  },
+  "周二随便": {
+   "label": "other",
+   "ms": 177.84
+  },
+  "周三任何时间都可以": {
+   "label": "other",
+   "ms": 171.56
+  },
+  "周四晚上没问题": {
+   "label": "other",
+   "ms": 279.36
+  },
+  "周五下午没有冲突": {
+   "label": "blocked_time",
+   "ms": 247.43
+  },
+  "双休日都可以": {
+   "label": "other",
+   "ms": 180.69
+  },
+  "晚上七点以后都可以": {
+   "label": "blocked_time",
+   "ms": 275.91
+  },
+  "周末没事": {
+   "label": "blocked_time",
+   "ms": 243.27
+  },
+  "Can't stay past 5:30 any day, I pick my brother up from after-school care": {
+   "label": "blocked_time",
+   "ms": 417.28
+  },
+  "pls avoid wed, it's my only day with my kids": {
+   "label": "blocked_time",
+   "ms": 313.55
+  },
+  "keep friday clear if possible, I have a casual job": {
+   "label": "blocked_time",
+   "ms": 271.36
+  },
+  "I'd like to be out by 4 to get to my netball game": {
+   "label": "blocked_time",
+   "ms": 293.03
+  },
+  "ideally between 11 and 5": {
+   "label": "prefer_no_early_late",
+   "ms": 229.07
+  },
+  "I'd prefer to wrap up before 6 where possible": {
+   "label": "prefer_no_early_late",
+   "ms": 322.92
+  },
+  "no more than three days a week on campus": {
+   "label": "max_days",
+   "ms": 348.31
+  },
+  "just two days a week please": {
+   "label": "max_days",
+   "ms": 273.8
+  },
+  "travelling in is expensive so minimise my campus days": {
+   "label": "prefer_fewer_days",
+   "ms": 280.1
+  },
+  "I want my classes back to back": {
+   "label": "prefer_less_waiting",
+   "ms": 300.52
+  },
+  "I don't want to sit in the library for 4 hours waiting for my next tute": {
+   "label": "prefer_less_waiting",
+   "ms": 311.83
+  },
+  "please leave me a lunch break": {
+   "label": "lunch",
+   "ms": 290.02
+  },
+  "no remote classes please": {
+   "label": "in_person_only",
+   "ms": 319.41
+  },
+  "face-to-face tutes only": {
+   "label": "in_person_only",
+   "ms": 410.09
+  },
+  "a long gap in the middle of the day would actually be nice for the gym": {
+   "label": "prefer_less_waiting",
+   "ms": 512.72
+  },
+  "Mondays are good for me": {
+   "label": "other",
+   "ms": 179.92
+  },
+  "I need a 15 min break between buildings because I walk slowly": {
+   "label": "prefer_less_waiting",
+   "ms": 279.54
+  },
+  "If labs could be in the morning that'd be great": {
+   "label": "prefer_no_early_late",
+   "ms": 195.42
+  },
+  "Monday's a write-off, I'm at TAFE": {
+   "label": "blocked_time",
+   "ms": 216.26
+  },
+  "Otherwise I don't mind": {
+   "label": "other",
+   "ms": 182.67
+  },
+  "Ideally 3 days on campus": {
+   "label": "max_days",
+   "ms": 450.32
+  },
+  "with classes clustered so there's little waiting": {
+   "label": "prefer_less_waiting",
+   "ms": 311.23
+  },
+  "I work Mon and Wed mornings and Thu all day": {
+   "label": "blocked_time",
+   "ms": 218.95
+  },
+  "Happy with online lectures": {
+   "label": "other",
+   "ms": 180.69
+  },
+  "tutorials have to be face to face": {
+   "label": "in_person_only",
+   "ms": 329.07
+  },
+  "No early mornings": {
+   "label": "prefer_no_early_late",
+   "ms": 300.35
+  },
+  "ideally after 10am for me": {
+   "label": "prefer_no_early_late",
+   "ms": 327.52
+  },
+  "No early mornings, ideally after 10am for me": {
+   "label": "prefer_no_early_late",
+   "ms": 324.9
+  },
+  "Can I hit campus less": {
+   "label": "prefer_fewer_days",
+   "ms": 372.03
+  },
+  "maybe pack more into each trip": {
+   "label": "prefer_less_waiting",
+   "ms": 313.72
+  },
+  "Could I come in less often, maybe split my subjects up somehow": {
+   "label": "prefer_fewer_days",
+   "ms": 282.99
+  },
+  "Not on Wednesdays 'cos I've got a 3-11pm shift at the supermarket": {
+   "label": "blocked_time",
+   "ms": 219.0
+  },
+  "尽量避开早上上课": {
+   "label": "prefer_no_early_late",
+   "ms": 510.5
+  },
+  "10点以后更好": {
+   "label": "prefer_no_early_late",
+   "ms": 342.51
+  },
+  "尽量避开早上上课，10点以后更好": {
+   "label": "prefer_no_early_late",
+   "ms": 400.98
+  },
+  "Can we avoid big breaks between my kid's morning classes": {
+   "label": "prefer_less_waiting",
+   "ms": 275.41
+  },
+  "Prefer them to be back-to-back if possible": {
+   "label": "prefer_less_waiting",
+   "ms": 258.76
+  },
+  "Can't do anything on Fridays 'cos I do 2pm to 10pm shifts": {
+   "label": "blocked_time",
+   "ms": 265.25
+  },
+  "Can we avoid big breaks between my kid's morning classes? Prefer them to be back-to-back if possible": {
+   "label": "prefer_less_waiting",
+   "ms": 326.64
+  },
+  "Trying to stay away from the online class on Wednesday evenings because the WiFi at home is flaky": {
+   "label": "in_person_only",
+   "ms": 265.18
+  },
+  "Is it possible to have less downtime between my kid's midday subjects": {
+   "label": "prefer_less_waiting",
+   "ms": 273.18
+  },
+  "They'd prefer them straight after each other": {
+   "label": "prefer_less_waiting",
+   "ms": 302.09
+  },
+  "Is it possible to have less downtime between my kid's midday subjects? They'd prefer them straight after each other": {
+   "label": "prefer_less_waiting",
+   "ms": 274.42
+  },
+  "Would be awesome if I could come in for fewer days but still get everything covered": {
+   "label": "prefer_fewer_days",
+   "ms": 291.17
+  },
+  "The degree type doesn't matter, anything will do": {
+   "label": "other",
+   "ms": 242.1
+  },
+  "No 8am classes, if possible, got any way we can fix that": {
+   "label": "prefer_no_early_late",
+   "ms": 399.28
+  },
+  "pls avoid wed, it's my only day with my kids, If possible": {
+   "label": "blocked_time",
+   "ms": 247.13
+  },
+  "keep me away from 7am starts, bro": {
+   "label": "prefer_no_early_late",
+   "ms": 233.88
+  },
+  "If possible, keep me away from 7am starts, bro": {
+   "label": "prefer_no_early_late",
+   "ms": 330.82
+  },
+  "No lectures before 4pm on Mondays 'cos I'm working from 12pm to 4pm": {
+   "label": "blocked_time",
+   "ms": 311.54
+  },
+  "Can you reduce the break between classes in the late afternoon": {
+   "label": "prefer_less_waiting",
+   "ms": 272.09
+  },
+  "Prefer it if they're right after each other": {
+   "label": "prefer_less_waiting",
+   "ms": 265.71
+  },
+  "Can you reduce the break between classes in the late afternoon? Prefer it if they're right after each other": {
+   "label": "prefer_less_waiting",
+   "ms": 262.07
+  },
+  "I'm good with fewer days": {
+   "label": "prefer_fewer_days",
+   "ms": 311.96
+  },
+  "just try to get as much done as possible when I am here": {
+   "label": "prefer_less_waiting",
+   "ms": 195.92
+  },
+  "No class before 10am on Wednesdays 'cos I have a 9-5 job": {
+   "label": "blocked_time",
+   "ms": 283.37
+  },
+  "I'm good with fewer days, just try to get as much done as possible when I am here": {
+   "label": "prefer_fewer_days",
+   "ms": 311.22
+  },
+  "Would it be possible to reduce the gap between classes in the afternoon? My kid likes them to be back-to-back": {
+   "label": "prefer_less_waiting",
+   "ms": 260.8
+  },
+  "Cannot be in room 202 as it's too noisy for me to focus on Friday mornings": {
+   "label": "blocked_time",
+   "ms": 257.48
+  },
+  "Can you keep my kid's late afternoon classes back-to-back": {
+   "label": "prefer_less_waiting",
+   "ms": 266.88
+  },
+  "Don't like too much waiting between them": {
+   "label": "prefer_less_waiting",
+   "ms": 384.66
+  },
+  "Can you keep my kid's late afternoon classes back-to-back? Don't like too much waiting between them": {
+   "label": "prefer_less_waiting",
+   "ms": 270.55
+  },
+  "Not on Mondays as I get to uni at 7am and have to be at work by 8am": {
+   "label": "blocked_time",
+   "ms": 258.89
+  },
+  "Trying to minimize the time between my kid's last morning sessions": {
+   "label": "prefer_less_waiting",
+   "ms": 259.19
+  },
+  "Prefer them to be back-to-back to keep her focused": {
+   "label": "prefer_less_waiting",
+   "ms": 257.77
+  },
+  "Trying to minimize the time between my kid's last morning sessions. Prefer them to be back-to-back to keep her focused": {
+   "label": "prefer_less_waiting",
+   "ms": 270.58
+  },
+  "Can't do anything on Tues and Thurs 'cos I have a 4-12pm shift in the library": {
+   "label": "blocked_time",
+   "ms": 191.15
+  },
+  "Uni is pretty fine by me": {
+   "label": "other",
+   "ms": 186.64
+  },
+  "just need the schedule sorted": {
+   "label": "other",
+   "ms": 184.87
+  },
+  "Uni is pretty fine by me, just need the schedule sorted": {
+   "label": "other",
+   "ms": 180.0
+  },
+  "Is it possible to have no downtime between the morning classes": {
+   "label": "prefer_less_waiting",
+   "ms": 305.93
+  },
+  "Prefer it if they're right one after the other": {
+   "label": "prefer_less_waiting",
+   "ms": 298.47
+  },
+  "Could do with fewer campus days": {
+   "label": "prefer_fewer_days",
+   "ms": 278.45
+  },
+  "need to cram in the classes when I am there": {
+   "label": "prefer_less_waiting",
+   "ms": 318.21
+  },
+  "Is it possible to have no downtime between the morning classes? Prefer it if they're right one after the other": {
+   "label": "prefer_less_waiting",
+   "ms": 266.61
+  },
+  "Could do with fewer campus days, but need to cram in the classes when I am there": {
+   "label": "prefer_fewer_days",
+   "ms": 387.57
+  },
+  "尽量十点以后上课": {
+   "label": "prefer_no_early_late",
+   "ms": 332.01
+  },
+  "别早了": {
+   "label": "prefer_no_early_late",
+   "ms": 361.43
+  },
+  "尽量十点以后上课，别早了": {
+   "label": "prefer_no_early_late",
+   "ms": 353.29
+  },
+  "Could you make sure there are no huge gaps between the afternoon classes": {
+   "label": "prefer_less_waiting",
+   "ms": 277.75
+  },
+  "My kid wants to keep them back-to-back": {
+   "label": "prefer_less_waiting",
+   "ms": 275.19
+  },
+  "Could you make sure there are no huge gaps between the afternoon classes? My kid wants to keep them back-to-back": {
+   "label": "prefer_less_waiting",
+   "ms": 322.4
+  },
+  "Got a gig early, so let's avoid having anything too early": {
+   "label": "prefer_no_early_late",
+   "ms": 287.58
+  },
+  "like morning classes": {
+   "label": "prefer_no_early_late",
+   "ms": 291.06
+  },
+  "Got a gig early, so let's avoid having anything too early, like morning classes": {
+   "label": "prefer_no_early_late",
+   "ms": 343.25
+  },
+  "No lectures on Thursdays 'cos I work nights until 3am": {
+   "label": "blocked_time",
+   "ms": 198.29
+  },
+  "Anything works for me, really, Would be sick if I had to do anything more than three days on campus, Course number is irrelevant to me": {
+   "label": "max_days",
+   "ms": 313.55
+  },
+  "just need it done": {
+   "label": "other",
+   "ms": 183.97
+  },
+  "Hello! Anything works for me, really": {
+   "label": "other",
+   "ms": 345.08
+  },
+  "Course number is irrelevant to me, just need it done": {
+   "label": "other",
+   "ms": 307.83
+  },
+  "Fewer days on campus would be great": {
+   "label": "prefer_fewer_days",
+   "ms": 316.37
+  },
+  "need to make them count, Looking to cut down on campus time, but still pack a punch when I do come in, If labs could be in the morning that'd be great": {
+   "label": "prefer_fewer_days",
+   "ms": 328.32
+  },
+  "Fewer days on campus would be great, but need to make them count": {
+   "label": "prefer_fewer_days",
+   "ms": 403.64
+  },
+  "Looking to cut down on campus time, but still pack a punch when I do come in": {
+   "label": "prefer_fewer_days",
+   "ms": 338.46
+  },
+  "Not a fussy person": {
+   "label": "other",
+   "ms": 187.29
+  },
+  "anything is totally fine by me": {
+   "label": "other",
+   "ms": 184.24
+  },
+  "Not a fussy person, anything is totally fine by me": {
+   "label": "other",
+   "ms": 175.76
+  },
+  "Hi there, just letting you know I'm good with anything": {
+   "label": "other",
+   "ms": 240.86
+  },
+  "I don't really care about the specific times": {
+   "label": "other",
+   "ms": 186.45
+  },
+  "just that it all works out": {
+   "label": "other",
+   "ms": 256.62
+  },
+  "I don't really care about the specific times, just that it all works out": {
+   "label": "other",
+   "ms": 184.88
+  },
+  "Three days on campus is pushing it for me, Ideally": {
+   "label": "max_days",
+   "ms": 351.2
+  },
+  "no classes before 9am for me, can we do that": {
+   "label": "blocked_time",
+   "ms": 308.87
+  },
+  "travelling in is expensive so minimise my campus days, Trying to cut down on campus visits, but pack in the classes when I do come in": {
+   "label": "prefer_fewer_days",
+   "ms": 311.64
+  },
+  "Trying to cut down on campus visits, but pack in the classes when I do come in": {
+   "label": "prefer_fewer_days",
+   "ms": 300.92
+  },
+  "The room it's in doesn't matter to me at all": {
+   "label": "other",
+   "ms": 267.13
+  },
+  "Can't do anything on Tuesdays 'cos I've got a 9am shift at the café": {
+   "label": "blocked_time",
+   "ms": 451.56
+  },
+  "尽量不要有大段空档": {
+   "label": "prefer_less_waiting",
+   "ms": 304.77
+  },
+  "尤其是Fri下午": {
+   "label": "blocked_time",
+   "ms": 254.99
+  },
+  "尽量不要有大段空档，尤其是Fri下午": {
+   "label": "prefer_less_waiting",
+   "ms": 461.88
+  },
+  "尽量晚一点的课比较好": {
+   "label": "prefer_no_early_late",
+   "ms": 512.61
+  },
+  "比如在下午的tutorial，因为小孩需要照顾": {
+   "label": "blocked_time",
+   "ms": 306.25
+  },
+  "尽量避免连续两天超过4个小时的校内活动安排": {
+   "label": "prefer_less_waiting",
+   "ms": 309.36
+  },
+  "下午的空档也不要留": {
+   "label": "prefer_less_waiting",
+   "ms": 305.77
+  },
+  "尽量晚一点的课比较好，比如在下午的tutorial，因为小孩需要照顾": {
+   "label": "prefer_no_early_late",
+   "ms": 424.94
+  },
+  "下午的空档也不要留，尤其是Fri下午": {
+   "label": "prefer_less_waiting",
+   "ms": 302.31
+  },
+  "篮球训练后上晚上的课": {
+   "label": "blocked_time",
+   "ms": 199.46
+  },
+  "不要中间有空档": {
+   "label": "prefer_less_waiting",
+   "ms": 283.75
+  },
+  "希望能够每天有至少2个小时用于复习和自学的时间": {
+   "label": "max_daily_hours",
+   "ms": 283.53
+  },
+  "上午的tutorial和下午的lab不要有空档": {
+   "label": "prefer_less_waiting",
+   "ms": 323.43
+  },
+  "篮球训练后上晚上的课，不要中间有空档": {
+   "label": "prefer_less_waiting",
+   "ms": 366.37
+  },
+  "周一到周五只有实体课程可以": {
+   "label": "in_person_only",
+   "ms": 287.28
+  },
+  "不要线上或录播的": {
+   "label": "in_person_only",
+   "ms": 287.79
+  },
+  "希望周五下午能够安排1个小时的研讨会，这样可以更好地为周末做准备": {
+   "label": "other",
+   "ms": 312.45
+  },
+  "除实验和辅导课外，其他课程必须是实体课程": {
+   "label": "in_person_only",
+   "ms": 290.52
+  },
+  "不要任何线上或录播课": {
+   "label": "in_person_only",
+   "ms": 427.75
+  },
+  "希望所有的课都是实体课程": {
+   "label": "in_person_only",
+   "ms": 268.4
+  },
+  "特别是辅导课和实验课": {
+   "label": "other",
+   "ms": 234.67
+  },
+  "不接受任何线上课程": {
+   "label": "in_person_only",
+   "ms": 286.54
+  },
+  "除了在教室上课": {
+   "label": "other",
+   "ms": 226.03
+  },
+  "我不要任何形式的线上课": {
+   "label": "in_person_only",
+   "ms": 279.31
+  },
+  "早上8点半的课和9点的课希望可以连上": {
+   "label": "prefer_less_waiting",
+   "ms": 310.15
+  },
+  "不要中间有间隔": {
+   "label": "prefer_less_waiting",
+   "ms": 339.32
+  },
+  "从周一到周五": {
+   "label": "other",
+   "ms": 149.96
+  },
+  "只有实体课程可以": {
+   "label": "in_person_only",
+   "ms": 362.11
+  },
+  "没有任何线上课程": {
+   "label": "in_person_only",
+   "ms": 259.18
+  },
+  "早上8点半的课和9点的课希望可以连上，不要中间有间隔": {
+   "label": "prefer_less_waiting",
+   "ms": 431.44
+  },
+  "下午的课也一样": {
+   "label": "other",
+   "ms": 148.72
+  },
+  "不要有空档": {
+   "label": "prefer_less_waiting",
+   "ms": 389.42
+  },
+  "最好连在一起，除了实验室，其他的课都必须在校园内上": {
+   "label": "prefer_fewer_days",
+   "ms": 306.31
+  },
+  "不要线上": {
+   "label": "in_person_only",
+   "ms": 258.95
+  },
+  "下午的课也一样，不要有空档，最好连在一起": {
+   "label": "prefer_less_waiting",
+   "ms": 303.29
+  },
+  "不要在线上上理论课": {
+   "label": "in_person_only",
+   "ms": 359.92
+  },
+  "所有课程必须是面对面的": {
+   "label": "in_person_only",
+   "ms": 295.77
+  },
+  "上课时间不要有空档，尤其是连续的tutorial和lab": {
+   "label": "prefer_less_waiting",
+   "ms": 318.91
+  },
+  "不喜欢很早开始的课": {
+   "label": "prefer_no_early_late",
+   "ms": 332.32
+  },
+  "因为早上要照顾小孩很辛苦，上午的课尽量不要空着": {
+   "label": "prefer_less_waiting",
+   "ms": 397.43
+  },
+  "9am和10am的课要连在一起上": {
+   "label": "prefer_less_waiting",
+   "ms": 304.12
+  },
+  "不喜欢很早开始的课，因为早上要照顾小孩很辛苦": {
+   "label": "prefer_no_early_late",
+   "ms": 301.95
+  },
+  "上午的课尽量不要空着，9am和10am的课要连在一起上": {
+   "label": "prefer_less_waiting",
+   "ms": 270.56
+  },
+  "除了实验课和辅导课外": {
+   "label": "other",
+   "ms": 256.77
+  },
+  "所有课程都必须是实体的": {
+   "label": "in_person_only",
+   "ms": 284.44
+  },
+  "不能有线上课程": {
+   "label": "in_person_only",
+   "ms": 266.4
+  },
+  "从9点到5点之间": {
+   "label": "blocked_time",
+   "ms": 190.9
+  },
+  "我希望都是实体课程": {
+   "label": "in_person_only",
+   "ms": 275.71
+  },
+  "不要任何形式的线上课程": {
+   "label": "in_person_only",
+   "ms": 285.88
+  },
+  "希望能够在上午9点到11点之间安排2个小时的志愿服务": {
+   "label": "blocked_time",
+   "ms": 221.77
+  },
+  "每周最多两天即可": {
+   "label": "max_days",
+   "ms": 267.2
+  },
+  "一天Mon下午的tutorial": {
+   "label": "other",
+   "ms": 217.68
+  },
+  "另一天是Fri晚上的lab": {
+   "label": "blocked_time",
+   "ms": 193.14
+  },
+  "希望能够每天有4个小时在校园里": {
+   "label": "max_daily_hours",
+   "ms": 334.51
+  },
+  "其中最多2个小时是面授课程": {
+   "label": "max_daily_hours",
+   "ms": 312.51
+  },
+  "每周最多两天即可，一天Mon下午的tutorial，另一天是Fri晚上的lab": {
+   "label": "max_days",
+   "ms": 274.2
+  },
+  "希望能够每天有4个小时在校园里，其中最多2个小时是面授课程": {
+   "label": "max_daily_hours",
+   "ms": 335.01
+  },
+  "尽量不要留任何空档": {
+   "label": "prefer_less_waiting",
+   "ms": 308.58
+  },
+  "特别是家有急事的时候": {
+   "label": "other",
+   "ms": 175.96
+  },
+  "尽量不要留任何空档，特别是家有急事的时候": {
+   "label": "prefer_less_waiting",
+   "ms": 334.37
+  },
+  "早上连堂别留空档": {
+   "label": "prefer_less_waiting",
+   "ms": 353.66
+  },
+  "9am和10am的课不能分开": {
+   "label": "prefer_less_waiting",
+   "ms": 321.55
+  },
+  "不要给我排有大空档的课表": {
+   "label": "prefer_less_waiting",
+   "ms": 277.72
+  },
+  "特别是Mon早上9am之后": {
+   "label": "prefer_no_early_late",
+   "ms": 234.45
+  },
+  "早上连堂别留空档，9am和10am的课不能分开": {
+   "label": "prefer_less_waiting",
+   "ms": 267.9
+  },
+  "不要给我排有大空档的课表，特别是Mon早上9am之后": {
+   "label": "prefer_less_waiting",
+   "ms": 266.11
+  },
+  "不想每天都来": {
+   "label": "prefer_fewer_days",
+   "ms": 278.51
+  },
+  "每周两到三天": {
+   "label": "max_days",
+   "ms": 257.29
+  },
+  "通常是下午的tutorial和lab": {
+   "label": "prefer_no_early_late",
+   "ms": 227.3
+  },
+  "不允许有任何线上课程": {
+   "label": "in_person_only",
+   "ms": 279.9
+  },
+  "尤其是录播课": {
+   "label": "other",
+   "ms": 237.97
+  },
+  "必须都是实地上课": {
+   "label": "in_person_only",
+   "ms": 328.23
+  },
+  "不想每天都来，每周两到三天，通常是下午的tutorial和lab": {
+   "label": "max_days",
+   "ms": 275.08
+  },
+  "不要任何线上课": {
+   "label": "in_person_only",
+   "ms": 256.96
+  },
+  "也不要zoom课": {
+   "label": "in_person_only",
+   "ms": 256.77
+  },
+  "更不要录播课": {
+   "label": "in_person_only",
+   "ms": 428.43
+  },
+  "上课时间必须是在校园内": {
+   "label": "other",
+   "ms": 151.31
+  },
+  "不要任何形式的Zoom或录播课": {
+   "label": "in_person_only",
+   "ms": 278.77
+  },
+  "需要在12点左右有个吃饭的时间": {
+   "label": "lunch",
+   "ms": 411.11
+  },
+  "最好在实验室的中间": {
+   "label": "other",
+   "ms": 206.43
+  },
+  "每周四和周五的课必须是实地上课": {
+   "label": "in_person_only",
+   "ms": 289.31
+  },
+  "不要任何形式的线上课": {
+   "label": "in_person_only",
+   "ms": 292.14
+  },
+  "希望每天都有实体课程": {
+   "label": "in_person_only",
+   "ms": 273.77
+  },
+  "不要有任何在线课程": {
+   "label": "in_person_only",
+   "ms": 285.07
+  },
+  "包括上午9点到下午4点之间的课程": {
+   "label": "blocked_time",
+   "ms": 190.39
+  },
+  "希望每周能有1个小时的实验室时间来补充理论知识": {
+   "label": "other",
+   "ms": 241.61
+  },
+  "必须面对面上课": {
+   "label": "in_person_only",
+   "ms": 261.89
+  },
+  "不要任何线上选项": {
+   "label": "in_person_only",
+   "ms": 263.29
+  },
+  "每周上课两天就够了": {
+   "label": "max_days",
+   "ms": 279.03
+  },
+  "一次是Mon晚上的lab": {
+   "label": "other",
+   "ms": 245.58
+  },
+  "一次是Fri的tutorial": {
+   "label": "blocked_time",
+   "ms": 191.64
+  },
+  "每周上课两天就够了，一次是Mon晚上的lab，一次是Fri的tutorial": {
+   "label": "max_days",
+   "ms": 210.82
+  },
+  "上午9点到下午4点之间只有实体课程可以": {
+   "label": "in_person_only",
+   "ms": 281.09
+  },
+  "Mon 8am-10am need break for lunch，因为有家人的事情": {
+   "label": "lunch",
+   "ms": 363.3
+  },
+  "需要在下午3点之前安排一个吃饭的时间": {
+   "label": "lunch",
+   "ms": 317.27
+  },
+  "不想每天都来学校": {
+   "label": "prefer_fewer_days",
+   "ms": 278.7
+  },
+  "尽量能少来几次": {
+   "label": "prefer_fewer_days",
+   "ms": 277.45
+  },
+  "不想每天都来学校，尽量能少来几次": {
+   "label": "prefer_fewer_days",
+   "ms": 279.07
+  },
+  "不想每天来学校上课": {
+   "label": "prefer_fewer_days",
+   "ms": 419.21
+  },
+  "能不能把课程集中起来": {
+   "label": "prefer_fewer_days",
+   "ms": 285.03
+  },
+  "不想每天来学校上课，能不能把课程集中起来": {
+   "label": "prefer_fewer_days",
+   "ms": 283.99
+  },
+  "上课尽量能扎堆点": {
+   "label": "prefer_fewer_days",
+   "ms": 367.63
+  },
+  "不想天天都跑来跑去，通勤需要时间，所以我每周只能在校园待20个小时": {
+   "label": "max_daily_hours",
+   "ms": 295.68
+  },
+  "也就是每天最多四个小时": {
+   "label": "max_daily_hours",
+   "ms": 340.04
+  },
+  "上课尽量能扎堆点，不想天天都跑来跑去": {
+   "label": "prefer_fewer_days",
+   "ms": 276.3
+  },
+  "通勤需要时间，所以我每周只能在校园待20个小时，也就是每天最多四个小时": {
+   "label": "max_daily_hours",
+   "ms": 269.59
+  },
+  "不想每天都挤公交": {
+   "label": "prefer_fewer_days",
+   "ms": 353.48
+  },
+  "三天在校时间已经很充裕了": {
+   "label": "max_days",
+   "ms": 419.23
+  },
+  "不想每天都挤公交，三天在校时间已经很充裕了": {
+   "label": "max_days",
+   "ms": 256.36
+  },
+  "连堂课最好连续，如果可以的话": {
+   "label": "prefer_less_waiting",
+   "ms": 294.59
+  },
+  "希望课程在十点之后开始": {
+   "label": "prefer_no_early_late",
+   "ms": 334.32
+  },
+  "在线课程最好": {
+   "label": "other",
+   "ms": 307.18
+  },
+  "家里的事情我得抽空做": {
+   "label": "other",
+   "ms": 177.23
+  },
+  "在线课程最好，家里的事情我得抽空做": {
+   "label": "other",
+   "ms": 362.19
+  },
+  "不用固定时间": {
+   "label": "other",
+   "ms": 266.0
+  },
+  "能上网课就行，家里还得带小孩": {
+   "label": "other",
+   "ms": 238.22
+  },
+  "不用固定时间，能上网课就行，家里还得带小孩": {
+   "label": "other",
+   "ms": 302.69
+  },
+  "每天都上学真的太辛苦了": {
+   "label": "prefer_fewer_days",
+   "ms": 352.23
+  },
+  "每周三天就足够了": {
+   "label": "max_days",
+   "ms": 273.41
+  },
+  "每天都上学真的太辛苦了，每周三天就足够了": {
+   "label": "max_days",
+   "ms": 259.09
+  },
+  "任何课程都行": {
+   "label": "other",
+   "ms": 176.71
+  },
+  "只要能方便照顾家里的老人": {
+   "label": "other",
+   "ms": 179.89
+  },
+  "任何课程都行，只要能方便照顾家里的老人": {
+   "label": "other",
+   "ms": 177.23
+  },
+  "每天上学太累了": {
+   "label": "prefer_fewer_days",
+   "ms": 352.55
+  },
+  "每周只有三天在校就很好了": {
+   "label": "max_days",
+   "ms": 264.04
+  },
+  "上课时间能尽量集中": {
+   "label": "prefer_fewer_days",
+   "ms": 278.98
+  },
+  "减少来回跑的次数": {
+   "label": "prefer_fewer_days",
+   "ms": 274.79
+  },
+  "每天上学太累了，每周只有三天在校就很好了": {
+   "label": "max_days",
+   "ms": 259.4
+  },
+  "上课时间能尽量集中，减少来回跑的次数": {
+   "label": "prefer_fewer_days",
+   "ms": 312.86
+  },
+  "每天最多只能在大学待八个小时": {
+   "label": "max_daily_hours",
+   "ms": 320.19
+  },
+  "因为来回要花90分钟，周四晚上七点到九点不能上课，有兼职": {
+   "label": "blocked_time",
+   "ms": 216.59
+  },
+  "每天最多只能在大学待八个小时，因为来回要花90分钟": {
+   "label": "max_daily_hours",
+   "ms": 325.02
+  },
+  "周四晚上七点到九点不能上课，有兼职": {
+   "label": "blocked_time",
+   "ms": 217.15
+  },
+  "希望周四不用早起，家里事情有点忙": {
+   "label": "blocked_time",
+   "ms": 291.76
+  },
+  "周一晚上六点到八点兼职": {
+   "label": "blocked_time",
+   "ms": 187.09
+  },
+  "没有课程": {
+   "label": "blocked_time",
+   "ms": 387.33
+  },
+  "周一晚上六点到八点兼职，没有课程": {
+   "label": "blocked_time",
+   "ms": 231.17
+  },
+  "不想天天都来": {
+   "label": "prefer_fewer_days",
+   "ms": 283.89
+  },
+  "能不能把课排在一起": {
+   "label": "prefer_fewer_days",
+   "ms": 280.12
+  },
+  "别让课拉得太开": {
+   "label": "prefer_fewer_days",
+   "ms": 303.85
+  },
+  "集中一点好点": {
+   "label": "prefer_fewer_days",
+   "ms": 279.22
+  },
+  "希望每周在校只有两天时间，这样更好": {
+   "label": "max_days",
+   "ms": 245.06
+  },
+  "不想天天都来，能不能把课排在一起": {
+   "label": "prefer_fewer_days",
+   "ms": 325.03
+  },
+  "别让课拉得太开，集中一点好点": {
+   "label": "prefer_fewer_days",
+   "ms": 429.16
+  },
+  "周二早上八点之前不能上课，有兼职": {
+   "label": "blocked_time",
+   "ms": 270.55
+  },
+  "只选校内的课程": {
+   "label": "other",
+   "ms": 183.05
+  },
+  "不想在线上课，方便照顾孩子": {
+   "label": "in_person_only",
+   "ms": 280.33
+  },
+  "只选校内的课程，不想在线上课，方便照顾孩子": {
+   "label": "in_person_only",
+   "ms": 290.78
+  },
+  "希望课程能压缩在少几天": {
+   "label": "prefer_fewer_days",
+   "ms": 312.42
+  },
+  "别搞那么散": {
+   "label": "prefer_fewer_days",
+   "ms": 425.72
+  },
+  "周二晚上想选直播课": {
+   "label": "other",
+   "ms": 219.12
+  },
+  "离线的我怕来不及复习": {
+   "label": "other",
+   "ms": 304.86
+  },
+  "希望课程能压缩在少几天，别搞那么散": {
+   "label": "prefer_fewer_days",
+   "ms": 375.52
+  },
+  "周二晚上想选直播课，离线的我怕来不及复习": {
+   "label": "other",
+   "ms": 148.75
+  },
+  "每周最多三天在校就好了，这样可以吗": {
+   "label": "max_days",
+   "ms": 363.47
+  },
+  "不想选线上课程，方便接送孩子上下学": {
+   "label": "in_person_only",
+   "ms": 280.76
+  },
+  "我只能承受每周三天在校": {
+   "label": "max_days",
+   "ms": 258.36
+  },
+  "希望可以满足": {
+   "label": "other",
+   "ms": 178.53
+  },
+  "我只能承受每周三天在校，希望可以满足": {
+   "label": "max_days",
+   "ms": 306.27
+  },
+  "双休日都可以，每周我只能在2天上实体课": {
+   "label": "max_days",
+   "ms": 265.95
+  },
+  "周二晚上7点有排练": {
+   "label": "blocked_time",
+   "ms": 214.03
+  },
+  "不能上课": {
+   "label": "blocked_time",
+   "ms": 229.25
+  },
+  "周四晚上八点以后没有课": {
+   "label": "blocked_time",
+   "ms": 274.98
+  },
+  "可以兼职到晚上十点": {
+   "label": "blocked_time",
+   "ms": 249.82
+  },
+  "周三、周五早上十点之前没有课，兼职时间灵活": {
+   "label": "blocked_time",
+   "ms": 268.8
+  },
+  "尽量不要超过四个小时的课堂时间，因为回家还有家务": {
+   "label": "max_daily_hours",
+   "ms": 306.23
+  },
+  "能不能多安排些连堂课": {
+   "label": "prefer_less_waiting",
+   "ms": 270.83
+  },
+  "不想天天都得来": {
+   "label": "prefer_fewer_days",
+   "ms": 291.74
+  },
+  "能不能多安排些连堂课，不想天天都得来": {
+   "label": "prefer_less_waiting",
+   "ms": 290.52
+  },
+  "周一不能上课，有兼职": {
+   "label": "blocked_time",
+   "ms": 188.99
+  },
+  "每天最多四个小时在校园，因为我需要预留时间回家": {
+   "label": "max_daily_hours",
+   "ms": 318.9
+  },
+  "每天尽量不要超过八小时在校园": {
+   "label": "max_daily_hours",
+   "ms": 267.73
+  },
+  "不然通勤会很累": {
+   "label": "prefer_fewer_days",
+   "ms": 305.95
+  },
+  "每天尽量不要超过八小时在校园，不然通勤会很累": {
+   "label": "max_daily_hours",
+   "ms": 273.92
+  },
+  "一周五天我最多只能在校园待四个小时，因为要留时间通勤": {
+   "label": "max_daily_hours",
+   "ms": 363.33
+  },
+  "每天在校的时间已经够了": {
+   "label": "other",
+   "ms": 284.26
+  },
+  "三天就够了": {
+   "label": "max_days",
+   "ms": 240.63
+  },
+  "每天在校的时间已经够了，三天就够了": {
+   "label": "max_days",
+   "ms": 280.66
+  },
+  "我周二和周四晚上要打工，所以那两天晚上不能上课": {
+   "label": "blocked_time",
+   "ms": 240.99
+  },
+  "I have to pick up my son at 3pm every day": {
+   "label": "blocked_time",
+   "ms": 215.84
+  },
+  "I'd rather not have gaps between classes": {
+   "label": "prefer_less_waiting",
+   "ms": 309.07
+  },
+  "一周最多去学校三天": {
+   "label": "max_days",
+   "ms": 259.28
+  },
+  "每天上课不超过5小时": {
+   "label": "max_daily_hours",
+   "ms": 284.07
+  },
+  "中午留半个小时吃饭": {
+   "label": "lunch",
+   "ms": 306.87
+  },
+  "不要网课": {
+   "label": "in_person_only",
+   "ms": 256.16
+  },
+  "I'm not a morning person": {
+   "label": "prefer_no_early_late",
+   "ms": 291.62
+  },
+  "ideally no classes before 11am": {
+   "label": "prefer_no_early_late",
+   "ms": 330.87
+  },
+  "周五下午有篮球训练": {
+   "label": "blocked_time",
+   "ms": 195.36
+  },
+  "课最好集中在几天里": {
+   "label": "prefer_fewer_days",
+   "ms": 282.92
+  },
+  "I can't be on campus more than 8 hours a day": {
+   "label": "max_daily_hours",
+   "ms": 271.26
+  },
+  "只想周一周三周四来学校": {
+   "label": "max_days",
+   "ms": 187.2
+  },
+  "上午的课最好少一点": {
+   "label": "prefer_no_early_late",
+   "ms": 386.42
+  },
+  "希望能和室友在同一个 lab": {
+   "label": "other",
+   "ms": 271.74
+  },
+  "课之间别等太久": {
+   "label": "prefer_less_waiting",
+   "ms": 346.72
+  },
+  "周一 morning 要上班": {
+   "label": "blocked_time",
+   "ms": 267.15
+  },
+  "max 4 days a week": {
+   "label": "max_days",
+   "ms": 254.22
+  },
+  "午饭 at least 45 min": {
+   "label": "lunch",
+   "ms": 284.2
+  },
+  "I coach under-12s soccer Tuesday and Thursday from 4": {
+   "label": "blocked_time",
+   "ms": 239.34
+  },
+  "can't be on campus Mondays at all, that's my shift at Bunnings": {
+   "label": "blocked_time",
+   "ms": 188.48
+  },
+  "I'd really prefer not to start before 10, but if it has to happen it has to happen": {
+   "label": "prefer_no_early_late",
+   "ms": 343.47
+  },
+  "No classes before 8:30": {
+   "label": "blocked_time",
+   "ms": 191.36
+  },
+  "my train doesn't get in until 8:20": {
+   "label": "blocked_time",
+   "ms": 213.99
+  },
+  "No classes before 8:30, my train doesn't get in until 8:20": {
+   "label": "blocked_time",
+   "ms": 214.84
+  },
+  "3 days on campus is the most I can manage": {
+   "label": "max_days",
+   "ms": 262.87
+  },
+  "I want my uni days kept to a minimum since I live in the Blue Mountains": {
+   "label": "prefer_fewer_days",
+   "ms": 287.88
+  },
+  "I volunteer with the SES on Wednesday nights and every second weekend": {
+   "label": "blocked_time",
+   "ms": 212.41
+  },
+  "Honestly I'm not fussed about gaps or days": {
+   "label": "other",
+   "ms": 181.74
+  },
+  "just want decent tutors": {
+   "label": "other",
+   "ms": 185.27
+  },
+  "nothing after 4:30 on Fridays pls": {
+   "label": "blocked_time",
+   "ms": 359.73
+  },
+  "I head home to Orange for the weekend": {
+   "label": "other",
+   "ms": 157.05
+  },
+  "nothing after 4:30 on Fridays pls, I head home to Orange for the weekend": {
+   "label": "blocked_time",
+   "ms": 354.81
+  },
+  "keep my class time under 5 hours a day": {
+   "label": "max_daily_hours",
+   "ms": 275.87
+  },
+  "I don't want to be at uni for more than 9 hours on any day": {
+   "label": "max_daily_hours",
+   "ms": 278.8
+  },
+  "it's too draining": {
+   "label": "prefer_no_early_late",
+   "ms": 331.6
+  },
+  "I don't want to be at uni for more than 9 hours on any day, it's too draining": {
+   "label": "max_daily_hours",
+   "ms": 275.19
+  },
+  "I need an hour for lunch somewhere in the middle of the day": {
+   "label": "lunch",
+   "ms": 426.68
+  },
+  "online classes are a hard no for me": {
+   "label": "in_person_only",
+   "ms": 262.49
+  },
+  "I'd like a tutorial in the same week as my mate Josh so we can study together": {
+   "label": "other",
+   "ms": 238.66
+  },
+  "prefer to finish by 5 if possible": {
+   "label": "prefer_no_early_late",
+   "ms": 293.64
+  },
+  "finish by 5 or I miss the only bus back to Kurri Kurri": {
+   "label": "blocked_time",
+   "ms": 272.63
+  },
+  "fridays off would be amazing": {
+   "label": "blocked_time",
+   "ms": 312.84
+  },
+  "I hate sitting around campus between classes for hours": {
+   "label": "prefer_less_waiting",
+   "ms": 291.87
+  },
+  "I'm fine with gaps, I use them to catch up on readings": {
+   "label": "other",
+   "ms": 180.46
+  },
+  "I have dialysis Monday, Wednesday and Friday mornings until 11:30": {
+   "label": "blocked_time",
+   "ms": 220.77
+  },
+  "I'm a full-time nurse, so two campus days is all I've got": {
+   "label": "max_days",
+   "ms": 284.09
+  },
+  "I'm an early riser so 8am starts suit me fine": {
+   "label": "prefer_no_early_late",
+   "ms": 240.72
+  },
+  "lunch from 1 to 2 please, it's when my study group meets": {
+   "label": "lunch",
+   "ms": 249.13
+  },
+  "my kids are in school 9 to 3 so that's my window for classes": {
+   "label": "blocked_time",
+   "ms": 274.52
+  },
+  "my sweet spot would be 11 till 5, if possible": {
+   "label": "blocked_time",
+   "ms": 307.17
+  },
+  "I don't want more than four days at uni": {
+   "label": "max_days",
+   "ms": 256.7
+  },
+  "I'd love more days off": {
+   "label": "prefer_fewer_days",
+   "ms": 315.73
+  },
+  "Tuesday arvos I take my nan to her appointments": {
+   "label": "blocked_time",
+   "ms": 223.37
+  },
+  "don't stick me with online tutes": {
+   "label": "in_person_only",
+   "ms": 264.77
+  },
+  "I need to be in the room to learn": {
+   "label": "in_person_only",
+   "ms": 223.97
+  },
+  "don't stick me with online tutes, I need to be in the room to learn": {
+   "label": "in_person_only",
+   "ms": 353.34
+  },
+  "I'm happy doing labs online if that's an option": {
+   "label": "other",
+   "ms": 183.25
+  },
+  "please don't make me come in for just one class on a day": {
+   "label": "prefer_fewer_days",
+   "ms": 339.26
+  },
+  "I start work at 5:30pm every weekday in the city": {
+   "label": "blocked_time",
+   "ms": 265.41
+  },
+  "no more than 6 hours of contact time per day": {
+   "label": "max_daily_hours",
+   "ms": 270.7
+  },
+  "lunch at some point": {
+   "label": "lunch",
+   "ms": 252.0
+  },
+  "I'm doing my driving lessons Thursday mornings at 9": {
+   "label": "blocked_time",
+   "ms": 197.33
+  },
+  "nothing on weekends please": {
+   "label": "blocked_time",
+   "ms": 252.94
+  },
+  "it'd be nice to not have anything super early": {
+   "label": "prefer_no_early_late",
+   "ms": 330.67
+  },
+  "late classes are tough for me because I live an hour and a half away": {
+   "label": "prefer_no_early_late",
+   "ms": 317.05
+  },
+  "I can do Mondays and Tuesdays only": {
+   "label": "blocked_time",
+   "ms": 189.78
+  },
+  "my only free days are Wednesday and Thursday so everything needs to be on those": {
+   "label": "blocked_time",
+   "ms": 213.81
+  },
+  "I really want everything crammed into as few days as possible": {
+   "label": "prefer_fewer_days",
+   "ms": 358.11
+  },
+  "three at most": {
+   "label": "max_days",
+   "ms": 307.26
+  },
+  "I really want everything crammed into as few days as possible, three at most": {
+   "label": "max_days",
+   "ms": 217.41
+  },
+  "I'd like to keep my uni days to two, maybe three": {
+   "label": "max_days",
+   "ms": 258.15
+  },
+  "I don't care how many days I come in": {
+   "label": "other",
+   "ms": 179.44
+  },
+  "rather have more days with shorter hours": {
+   "label": "prefer_fewer_days",
+   "ms": 297.63
+  },
+  "keep the gaps between my classes short, an hour tops": {
+   "label": "prefer_less_waiting",
+   "ms": 268.37
+  },
+  "I want my classes one after the other so I can go home early": {
+   "label": "prefer_less_waiting",
+   "ms": 273.02
+  },
+  "I'm free all week except Thursday evenings, when I have Bible study": {
+   "label": "blocked_time",
+   "ms": 218.31
+  },
+  "Please avoid Monday and Friday": {
+   "label": "blocked_time",
+   "ms": 252.57
+  },
+  "I fly in and out for FIFO work": {
+   "label": "other",
+   "ms": 183.45
+  },
+  "Please avoid Monday and Friday, I fly in and out for FIFO work": {
+   "label": "blocked_time",
+   "ms": 289.53
+  },
+  "I'm at the hospital for my clinical placement until 1pm every day": {
+   "label": "blocked_time",
+   "ms": 215.05
+  },
+  "I'd prefer face-to-face labs, the virtual ones are pointless": {
+   "label": "in_person_only",
+   "ms": 316.62
+  },
+  "20 minutes to grab lunch between 12 and 1 is all I need": {
+   "label": "lunch",
+   "ms": 298.91
+  },
+  "8am classes are not happening for me": {
+   "label": "blocked_time",
+   "ms": 216.67
+  },
+  "I'd rather avoid 8am classes if I can": {
+   "label": "prefer_no_early_late",
+   "ms": 339.56
+  },
+  "I'm at TAFE on Tuesdays from 9 till 3": {
+   "label": "blocked_time",
+   "ms": 221.44
+  },
+  "I need to be off campus by 3:15 on Mondays for school pick-up": {
+   "label": "blocked_time",
+   "ms": 279.93
+  },
+  "max 5 hrs on campus a day": {
+   "label": "max_daily_hours",
+   "ms": 283.26
+  },
+  "I'd like a 45 minute lunch break between 11 and 2": {
+   "label": "lunch",
+   "ms": 288.54
+  },
+  "everything in person please, I'm an exchange student": {
+   "label": "in_person_only",
+   "ms": 257.78
+  },
+  "want the full experience": {
+   "label": "other",
+   "ms": 182.72
+  },
+  "everything in person please, I'm an exchange student and want the full experience": {
+   "label": "in_person_only",
+   "ms": 260.01
+  },
+  "Can my classes all be in the same building": {
+   "label": "other",
+   "ms": 183.0
+  },
+  "I have a bad knee": {
+   "label": "other",
+   "ms": 180.4
+  },
+  "Can my classes all be in the same building? I have a bad knee": {
+   "label": "other",
+   "ms": 180.03
+  },
+  "i work every saturday so no sat classes obviously": {
+   "label": "blocked_time",
+   "ms": 195.36
+  },
+  "i have church sunday mornings": {
+   "label": "blocked_time",
+   "ms": 192.79
+  },
+  "long days are fine if it means fewer trips into the city": {
+   "label": "prefer_fewer_days",
+   "ms": 299.93
+  },
+  "I'd like at most 2 hours between classes": {
+   "label": "prefer_less_waiting",
+   "ms": 338.28
+  },
+  "a few long breaks are good for me": {
+   "label": "other",
+   "ms": 313.41
+  },
+  "I like to nap in the library": {
+   "label": "other",
+   "ms": 198.01
+  },
+  "a few long breaks are good for me, I like to nap in the library": {
+   "label": "other",
+   "ms": 308.92
+  },
+  "I'm a night owl": {
+   "label": "prefer_no_early_late",
+   "ms": 249.08
+  },
+  "mornings are a write-off": {
+   "label": "blocked_time",
+   "ms": 272.6
+  },
+  "I'm a night owl, mornings are a write-off": {
+   "label": "prefer_no_early_late",
+   "ms": 253.64
+  },
+  "Wednesday is my day for my second job so please leave it empty": {
+   "label": "blocked_time",
+   "ms": 349.16
+  },
+  "I can only get to uni after 11 because I drop my brother at primary school then take two buses": {
+   "label": "blocked_time",
+   "ms": 219.27
+  },
+  "Hoping to have no classes after 6 if that's doable": {
+   "label": "prefer_no_early_late",
+   "ms": 329.17
+  },
+  "no labs on thursday afternoons": {
+   "label": "blocked_time",
+   "ms": 272.6
+  },
+  "I have a standing tutoring gig": {
+   "label": "blocked_time",
+   "ms": 180.7
+  },
+  "no labs on thursday afternoons, I have a standing tutoring gig": {
+   "label": "blocked_time",
+   "ms": 213.79
+  },
+  "my uni days need to be Monday, Tuesday and Thursday": {
+   "label": "blocked_time",
+   "ms": 189.62
+  },
+  "I need Friday afternoon off for Jummah prayers": {
+   "label": "blocked_time",
+   "ms": 192.3
+  },
+  "four campus days or fewer, if you can": {
+   "label": "prefer_fewer_days",
+   "ms": 309.14
+  },
+  "I don't want my tutorials to be with the same people as my lab": {
+   "label": "other",
+   "ms": 180.94
+  },
+  "it's important I have time to eat, I'm diabetic": {
+   "label": "lunch",
+   "ms": 244.66
+  },
+  "can you keep my classes from 12 to 6": {
+   "label": "blocked_time",
+   "ms": 281.97
+  },
+  "I do deliveries in the morning": {
+   "label": "blocked_time",
+   "ms": 200.8
+  },
+  "can you keep my classes from 12 to 6, I do deliveries in the morning": {
+   "label": "blocked_time",
+   "ms": 220.11
+  },
+  "I'm a mum of three so I really can't have classes past 3 on any day": {
+   "label": "blocked_time",
+   "ms": 272.92
+  },
+  "I like being home by dark, so nothing late please": {
+   "label": "prefer_no_early_late",
+   "ms": 299.18
+  },
+  "Mondays work best for me, any time": {
+   "label": "other",
+   "ms": 199.95
+  },
+  "lab partners: I'd like to be with Mei again": {
+   "label": "other",
+   "ms": 186.35
+  },
+  "I can't do Tuesday or Wednesday before 2, I work at the bakery": {
+   "label": "blocked_time",
+   "ms": 215.17
+  },
+  "Thursdays I'm out from 12 to 3 for a weekly hospital appointment": {
+   "label": "blocked_time",
+   "ms": 195.92
+  },
+  "Shorter days please": {
+   "label": "prefer_fewer_days",
+   "ms": 276.85
+  },
+  "max 6 hours of class": {
+   "label": "max_daily_hours",
+   "ms": 271.11
+  },
+  "Shorter days please, max 6 hours of class": {
+   "label": "max_daily_hours",
+   "ms": 471.67
+  },
+  "I'd love to be on campus no more than 7 hours each day": {
+   "label": "max_daily_hours",
+   "ms": 305.88
+  },
+  "if possible I'd like no online classes at all": {
+   "label": "in_person_only",
+   "ms": 262.78
+  },
+  "don't care when lunch is, just give me half an hour": {
+   "label": "lunch",
+   "ms": 454.97
+  },
+  "I'd like big gaps so I can work at the library cafe between classes": {
+   "label": "prefer_less_waiting",
+   "ms": 339.03
+  },
+  "Ideally my day would run 10:30 to 4:30": {
+   "label": "blocked_time",
+   "ms": 217.21
+  },
+  "Wednesday mornings are when I see my psychologist, 9 to 10": {
+   "label": "blocked_time",
+   "ms": 263.15
+  },
+  "I'd rather not be on campus Fridays": {
+   "label": "blocked_time",
+   "ms": 256.09
+  },
+  "it's not essential": {
+   "label": "other",
+   "ms": 292.79
+  },
+  "I'd rather not be on campus Fridays but it's not essential": {
+   "label": "blocked_time",
+   "ms": 318.17
+  },
+  "As long as I'm done by 2 on Thursdays I'm happy": {
+   "label": "blocked_time",
+   "ms": 272.76
+  },
+  "I'm the one who does dinner for my little brothers so I'm out the door at 5": {
+   "label": "blocked_time",
+   "ms": 270.56
+  },
+  "pls bunch my classes together": {
+   "label": "prefer_fewer_days",
+   "ms": 283.76
+  },
+  "I hate dead time": {
+   "label": "prefer_less_waiting",
+   "ms": 358.59
+  },
+  "pls bunch my classes together, I hate dead time": {
+   "label": "prefer_less_waiting",
+   "ms": 304.4
+  },
+  "three uni days at the very most": {
+   "label": "max_days",
+   "ms": 255.15
+  },
+  "none of them on a Monday": {
+   "label": "blocked_time",
+   "ms": 248.86
+  },
+  "I teach piano in the evenings from 5:30 so I need to leave by 5": {
+   "label": "blocked_time",
+   "ms": 326.57
+  },
+  "Weekdays I'm free from 10, before that I'm at the gym with my PT": {
+   "label": "blocked_time",
+   "ms": 212.11
+  },
+  "I can come in any day but only for a maximum of 5 hours": {
+   "label": "max_daily_hours",
+   "ms": 272.65
+  },
+  "my classes can't clash with my Tuesday 2-4 shift at the library": {
+   "label": "blocked_time",
+   "ms": 215.77
+  },
+  "I'd like fewer days on campus this sem": {
+   "label": "prefer_fewer_days",
+   "ms": 280.6
+  },
+  "I don't mind if a day is long": {
+   "label": "other",
+   "ms": 233.24
+  },
+  "I'd like fewer days on campus this sem but I don't mind if a day is long": {
+   "label": "prefer_fewer_days",
+   "ms": 319.07
+  },
+  "I'm in a wheelchair and the lifts in Carslaw are slow, so 10 min between classes isn't enough": {
+   "label": "prefer_less_waiting",
+   "ms": 301.17
+  },
+  "Avoid early starts if you can": {
+   "label": "prefer_no_early_late",
+   "ms": 332.39
+  },
+  "my meds make me drowsy in the morning": {
+   "label": "prefer_no_early_late",
+   "ms": 354.85
+  },
+  "Avoid early starts if you can, my meds make me drowsy in the morning": {
+   "label": "prefer_no_early_late",
+   "ms": 330.93
+  },
+  "I hate 5 hour days with one class at 9 and one at 2": {
+   "label": "prefer_less_waiting",
+   "ms": 324.78
+  },
+  "Monday and Wednesday are gym days": {
+   "label": "blocked_time",
+   "ms": 187.33
+  },
+  "I can come in after 1": {
+   "label": "blocked_time",
+   "ms": 191.61
+  },
+  "Monday and Wednesday are gym days, but I can come in after 1": {
+   "label": "blocked_time",
+   "ms": 280.19
+  },
+  "Fridays are off limits": {
+   "label": "blocked_time",
+   "ms": 247.1
+  },
+  "cap my classes at 4 hours a day, and give me an hour to eat": {
+   "label": "max_daily_hours",
+   "ms": 277.13
+  },
+  "cap my classes at 4 hours a day": {
+   "label": "max_daily_hours",
+   "ms": 269.67
+  },
+  "give me an hour to eat": {
+   "label": "lunch",
+   "ms": 336.26
+  },
+  "Early starts don't worry me": {
+   "label": "prefer_no_early_late",
+   "ms": 291.07
+  },
+  "I need to be gone by 3 on Tuesdays and Thursdays for my kids": {
+   "label": "blocked_time",
+   "ms": 265.24
+  },
+  "I'll do 4 campus days max": {
+   "label": "max_days",
+   "ms": 295.23
+  },
+  "gaps longer than an hour drive me nuts": {
+   "label": "prefer_less_waiting",
+   "ms": 300.98
+  },
+  "Real classrooms only": {
+   "label": "in_person_only",
+   "ms": 334.0
+  },
+  "I'd like to be done by 4 ideally": {
+   "label": "prefer_no_early_late",
+   "ms": 389.18
+  },
+  "Tuesdays are out for work": {
+   "label": "blocked_time",
+   "ms": 254.23
+  },
+  "I'd prefer to come in on the fewest days I can": {
+   "label": "prefer_fewer_days",
+   "ms": 309.75
+  },
+  "please no online labs": {
+   "label": "in_person_only",
+   "ms": 460.38
+  },
+  "I hate waiting around between lectures": {
+   "label": "prefer_less_waiting",
+   "ms": 313.91
+  },
+  "long days don't bother me": {
+   "label": "other",
+   "ms": 183.46
+  },
+  "Mornings and I don't get along": {
+   "label": "prefer_no_early_late",
+   "ms": 245.54
+  },
+  "also I need lunch between 12:30 and 1": {
+   "label": "lunch",
+   "ms": 486.06
+  },
+  "Two days a week tops": {
+   "label": "max_days",
+   "ms": 260.29
+  },
+  "I can't be there before 9:30 because of the school run": {
+   "label": "blocked_time",
+   "ms": 243.1
+  },
+  "I'm happy with any times, though Thursday nights I have rugby": {
+   "label": "blocked_time",
+   "ms": 232.81
+  },
+  "I'm happy with any times": {
+   "label": "other",
+   "ms": 180.13
+  },
+  "though Thursday nights I have rugby": {
+   "label": "blocked_time",
+   "ms": 301.02
+  },
+  "no 9am classes on Mondays": {
+   "label": "blocked_time",
+   "ms": 421.12
+  },
+  "no classes after 5 on Fridays": {
+   "label": "blocked_time",
+   "ms": 265.63
+  },
+  "I don't want more than 8 hours on campus": {
+   "label": "max_daily_hours",
+   "ms": 274.8
+  },
+  "I want a proper lunch": {
+   "label": "lunch",
+   "ms": 483.56
+  },
+  "three days a week would be ideal": {
+   "label": "max_days",
+   "ms": 284.73
+  },
+  "all my classes stacked one after another": {
+   "label": "prefer_less_waiting",
+   "ms": 277.0
+  },
+  "I work weekends and Wednesday nights": {
+   "label": "blocked_time",
+   "ms": 272.72
+  },
+  "I'd prefer no long gaps": {
+   "label": "prefer_less_waiting",
+   "ms": 341.65
+  },
+  "I'd prefer late starts": {
+   "label": "prefer_no_early_late",
+   "ms": 333.93
+  },
+  "I can't do Wednesdays at all because of my placement": {
+   "label": "blocked_time",
+   "ms": 194.38
+  },
+  "I cannot do anything between 12 and 2 on weekdays": {
+   "label": "blocked_time",
+   "ms": 342.92
+  },
+  "I'm a lunchtime lifeguard": {
+   "label": "lunch",
+   "ms": 308.74
+  },
+  "I cannot do anything between 12 and 2 on weekdays, I'm a lunchtime lifeguard": {
+   "label": "lunch",
+   "ms": 271.46
+  },
+  "I'd like 4 hours of class a day max but if it's 5 that's ok": {
+   "label": "max_daily_hours",
+   "ms": 265.07
+  },
+  "the Opal fares are killing me so I want to come in as little as possible": {
+   "label": "prefer_fewer_days",
+   "ms": 299.23
+  },
+  "classes in the afternoon only please": {
+   "label": "blocked_time",
+   "ms": 291.22
+  },
+  "I work mornings at a cafe": {
+   "label": "blocked_time",
+   "ms": 188.88
+  },
+  "classes in the afternoon only please, I work mornings at a cafe": {
+   "label": "blocked_time",
+   "ms": 211.66
+  },
+  "I can stay late on Mondays": {
+   "label": "other",
+   "ms": 249.6
+  },
+  "other days I have to be gone by 4": {
+   "label": "blocked_time",
+   "ms": 269.88
+  },
+  "I can stay late on Mondays but other days I have to be gone by 4": {
+   "label": "blocked_time",
+   "ms": 276.66
+  },
+  "I'd like my week compressed into as few days as I can get": {
+   "label": "prefer_fewer_days",
+   "ms": 314.74
+  },
+  "squeeze everything into fewer days, even if they're long": {
+   "label": "prefer_fewer_days",
+   "ms": 279.71
+  },
+  "Can I be in the 2pm Thursday lab? my friends are in it": {
+   "label": "other",
+   "ms": 178.15
+  },
+  "I'll take whatever's left, I enrolled late": {
+   "label": "other",
+   "ms": 252.33
+  },
+  "can only make it in on tues n thurs": {
+   "label": "blocked_time",
+   "ms": 200.95
+  },
+  "nothing past 6 thx": {
+   "label": "blocked_time",
+   "ms": 339.34
+  },
+  "i'm a carer on weekday mornings till 10:30, after that i'm all yours": {
+   "label": "blocked_time",
+   "ms": 224.89
+  },
+  "i work at woolies every tuesday and thursday night so those nights are out": {
+   "label": "blocked_time",
+   "ms": 241.53
+  },
+  "Fridays are a no-go, I've got a standing shift at the cafe": {
+   "label": "blocked_time",
+   "ms": 236.15
+  },
+  "I drop my daughter at daycare at 8:30 every morning": {
+   "label": "blocked_time",
+   "ms": 263.21
+  },
+  "Long gaps between classes would kill me tbh": {
+   "label": "prefer_less_waiting",
+   "ms": 303.6
+  },
+  "max 3 days on campus a week": {
+   "label": "max_days",
+   "ms": 285.32
+  },
+  "ideally less": {
+   "label": "prefer_fewer_days",
+   "ms": 387.26
+  },
+  "max 3 days on campus a week, ideally less": {
+   "label": "max_days",
+   "ms": 287.45
+  },
+  "I commute 90 mins each way from Campbelltown so the fewer days I have to come in the better": {
+   "label": "prefer_fewer_days",
+   "ms": 309.58
+  },
+  "no online tutes please": {
+   "label": "in_person_only",
+   "ms": 268.86
+  },
+  "I literally cannot focus on zoom": {
+   "label": "in_person_only",
+   "ms": 413.75
+  },
+  "no online tutes please, I literally cannot focus on zoom": {
+   "label": "in_person_only",
+   "ms": 267.9
+  },
+  "Could I get a proper lunch break": {
+   "label": "lunch",
+   "ms": 344.4
+  },
+  "Like 45 mins": {
+   "label": "other",
+   "ms": 252.52
+  },
+  "Could I get a proper lunch break? Like 45 mins": {
+   "label": "lunch",
+   "ms": 319.38
+  },
+  "I'm not a morning person at all": {
+   "label": "prefer_no_early_late",
+   "ms": 389.09
+  },
+  "I'd rather finish early than start early": {
+   "label": "prefer_no_early_late",
+   "ms": 373.26
+  },
+  "wednesdays I have netball from 4 till 6, everything else is flexible": {
+   "label": "blocked_time",
+   "ms": 222.65
+  },
+  "wednesdays I have netball from 4 till 6": {
+   "label": "blocked_time",
+   "ms": 219.75
+  },
+  "everything else is flexible": {
+   "label": "other",
+   "ms": 232.5
+  },
+  "I don't mind early starts": {
+   "label": "other",
+   "ms": 194.33
+  },
+  "please no classes after 6pm": {
+   "label": "blocked_time",
+   "ms": 329.41
+  },
+  "I have to catch the last bus to Wollongong": {
+   "label": "blocked_time",
+   "ms": 273.58
+  },
+  "please no classes after 6pm, I have to catch the last bus to Wollongong": {
+   "label": "blocked_time",
+   "ms": 374.87
+  },
+  "Keep my Mondays free if you can, I volunteer at the hospital": {
+   "label": "blocked_time",
+   "ms": 227.57
+  },
+  "ideally nothing before 10am": {
+   "label": "prefer_no_early_late",
+   "ms": 331.53
+  },
+  "Nothing before 10am. I work the breakfast shift at Maccas": {
+   "label": "blocked_time",
+   "ms": 230.57
+  },
+  "I want to be in the same prac group as my friend Priya": {
+   "label": "other",
+   "ms": 188.96
+  },
+  "Honestly anything works for me": {
+   "label": "other",
+   "ms": 250.59
+  },
+  "no more than 5 hours of actual class per day": {
+   "label": "max_daily_hours",
+   "ms": 282.4
+  },
+  "I don't wanna be stuck at uni longer than 8 hours on any day": {
+   "label": "max_daily_hours",
+   "ms": 294.12
+  },
+  "Tues and Thurs mornings I'm at physio until 11": {
+   "label": "blocked_time",
+   "ms": 196.4
+  },
+  "I can only come in Monday": {
+   "label": "blocked_time",
+   "ms": 199.85
+  },
+  "Wednesday and Friday because of my job": {
+   "label": "blocked_time",
+   "ms": 206.74
+  },
+  "I can only come in Monday, Wednesday and Friday because of my job": {
+   "label": "blocked_time",
+   "ms": 295.3
+  },
+  "would love it if my classes were bunched together on as few days as possible": {
+   "label": "prefer_fewer_days",
+   "ms": 317.34
+  },
+  "I need to pick up my son from school at 3 so I gotta leave by 2:30": {
+   "label": "blocked_time",
+   "ms": 229.18
+  },
+  "lunch between 12 and 1 is a must for me": {
+   "label": "lunch",
+   "ms": 295.17
+  },
+  "please don't give me 3 hour gaps again like last sem": {
+   "label": "prefer_less_waiting",
+   "ms": 320.66
+  },
+  "back to back is fine": {
+   "label": "prefer_less_waiting",
+   "ms": 204.11
+  },
+  "I'm doing an internship 3 days a week so I can only do 2 days at uni": {
+   "label": "max_days",
+   "ms": 309.75
+  },
+  "I have a standing appointment every thursday arvo": {
+   "label": "blocked_time",
+   "ms": 214.87
+  },
+  "I play in a band and we rehearse monday nights from 7": {
+   "label": "blocked_time",
+   "ms": 231.28
+  },
+  "evening lectures are the worst for me": {
+   "label": "prefer_no_early_late",
+   "ms": 316.64
+  },
+  "face to face only": {
+   "label": "in_person_only",
+   "ms": 261.88
+  },
+  "I learn nothing from recordings": {
+   "label": "in_person_only",
+   "ms": 294.91
+  },
+  "face to face only, I learn nothing from recordings": {
+   "label": "in_person_only",
+   "ms": 303.49
+  },
+  "I actually prefer online tutorials when they're available": {
+   "label": "other",
+   "ms": 194.41
+  },
+  "my partner and I share one car and she needs it Wednesdays, so no wednesday classes": {
+   "label": "blocked_time",
+   "ms": 228.86
+  },
+  "4 days max": {
+   "label": "max_days",
+   "ms": 269.93
+  },
+  "I need Friday off for work": {
+   "label": "blocked_time",
+   "ms": 256.3
+  },
+  "if at all possible I'd like to start no earlier than 9": {
+   "label": "prefer_no_early_late",
+   "ms": 340.33
+  },
+  "i get really tired if i have more than 6 hrs of lectures and tuts in one day": {
+   "label": "max_daily_hours",
+   "ms": 246.13
+  },
+  "Mondays I teach swimming from 3:30": {
+   "label": "blocked_time",
+   "ms": 231.24
+  },
+  "Thursdays I tutor kids all evening": {
+   "label": "blocked_time",
+   "ms": 199.48
+  },
+  "Need at least half an hour to eat lunch": {
+   "label": "lunch",
+   "ms": 306.97
+  },
+  "I'm a carer for my grandad so I can't do anything before 11 or after 3": {
+   "label": "blocked_time",
+   "ms": 226.45
+  },
+  "I don't care about gaps": {
+   "label": "other",
+   "ms": 184.74
+  },
+  "I just want as few days in as possible": {
+   "label": "prefer_fewer_days",
+   "ms": 412.58
+  },
+  "can we not have anything on fri afternoon? footy training": {
+   "label": "blocked_time",
+   "ms": 238.15
+  },
+  "Ideally I'd finish by 4 most days": {
+   "label": "prefer_no_early_late",
+   "ms": 318.7
+  },
+  "I have to be home by 5 to cook for my siblings": {
+   "label": "blocked_time",
+   "ms": 279.07
+  },
+  "weekends I work full time so obviously no weekend classes": {
+   "label": "blocked_time",
+   "ms": 273.84
+  },
+  "I really dont want to waste time sitting around between classes, my commute is long enough already": {
+   "label": "prefer_less_waiting",
+   "ms": 326.69
+  },
+  "only want to come to uni twice a week": {
+   "label": "max_days",
+   "ms": 344.72
+  },
+  "Is it possible to have all my classes on Tuesday and Wednesday": {
+   "label": "max_days",
+   "ms": 207.55
+  },
+  "I'd love a decent lunch break": {
+   "label": "lunch",
+   "ms": 316.7
+  },
+  "no online stuff": {
+   "label": "in_person_only",
+   "ms": 272.48
+  },
+  "I start my shift at 6pm on weekdays": {
+   "label": "blocked_time",
+   "ms": 253.85
+  },
+  "it's 40 min away": {
+   "label": "other",
+   "ms": 188.83
+  },
+  "I start my shift at 6pm on weekdays and it's 40 min away": {
+   "label": "blocked_time",
+   "ms": 231.91
+  },
+  "early classes = death lol": {
+   "label": "prefer_no_early_late",
+   "ms": 323.15
+  },
+  "Uni is 2 hours away by train so 3 days max": {
+   "label": "max_days",
+   "ms": 303.72
+  },
+  "pls no more than four and a half hours of class a day": {
+   "label": "max_daily_hours",
+   "ms": 284.14
+  },
+  "My mum's chemo is every Tuesday so I need that day off": {
+   "label": "blocked_time",
+   "ms": 238.53
+  },
+  "i hate mornings": {
+   "label": "prefer_no_early_late",
+   "ms": 302.68
+  },
+  "Classes after 7pm are a no from me": {
+   "label": "blocked_time",
+   "ms": 256.6
+  },
+  "I don't feel safe walking to Redfern station late": {
+   "label": "other",
+   "ms": 195.08
+  },
+  "Classes after 7pm are a no from me, I don't feel safe walking to Redfern station late": {
+   "label": "blocked_time",
+   "ms": 294.74
+  },
+  "Prefer not to have classes before 9:30 if possible": {
+   "label": "prefer_no_early_late",
+   "ms": 310.58
+  },
+  "it's not a big deal": {
+   "label": "other",
+   "ms": 272.99
+  },
+  "Prefer not to have classes before 9:30 if possible but it's not a big deal": {
+   "label": "prefer_no_early_late",
+   "ms": 343.79
+  },
+  "Could all my labs be in the same week pattern as Sarah's? we carpool": {
+   "label": "other",
+   "ms": 187.03
+  },
+  "I work Mon Wed Fri 9-3 at a childcare centre": {
+   "label": "blocked_time",
+   "ms": 224.94
+  },
+  "tuesday is my only day off work so I'd like all my classes that day if possible lol": {
+   "label": "blocked_time",
+   "ms": 233.2
+  },
+  "no classes on thursdays or fridays": {
+   "label": "blocked_time",
+   "ms": 266.63
+  },
+  "I want lunch from 1 to 1:30": {
+   "label": "lunch",
+   "ms": 307.34
+  },
+  "Max 6 hours on campus each day including breaks": {
+   "label": "max_daily_hours",
+   "ms": 306.98
+  },
+  "long breaks between lectures are fine for me since I study in the library anyway": {
+   "label": "prefer_less_waiting",
+   "ms": 348.33
+  },
+  "Coming in every single day last sem was exhausting, fewer days this time please": {
+   "label": "prefer_fewer_days",
+   "ms": 344.64
+  },
+  "I have Islamic studies on Friday from 12 to 2 so I can't do classes then": {
+   "label": "blocked_time",
+   "ms": 275.57
+  },
+  "Can't do mornings Mon to Wed": {
+   "label": "blocked_time",
+   "ms": 247.73
+  },
+  "I'm doing early shifts at the hospital": {
+   "label": "blocked_time",
+   "ms": 191.73
+  },
+  "Can't do mornings Mon to Wed, I'm doing early shifts at the hospital": {
+   "label": "blocked_time",
+   "ms": 229.62
+  },
+  "I'd prefer my classes between 10 and 4 ideally": {
+   "label": "prefer_no_early_late",
+   "ms": 226.72
+  },
+  "i really need my wednesday afternoons free for my research assistant job": {
+   "label": "blocked_time",
+   "ms": 252.85
+  },
+  "I'd like no gaps longer than an hour": {
+   "label": "prefer_less_waiting",
+   "ms": 294.17
+  },
+  "pls dont put me in any online classes": {
+   "label": "in_person_only",
+   "ms": 260.36
+  },
+  "Is there any way to have Fridays off": {
+   "label": "blocked_time",
+   "ms": 270.05
+  },
+  "Three-day weekends would help my mental health a lot": {
+   "label": "max_days",
+   "ms": 219.67
+  },
+  "Is there any way to have Fridays off? Three-day weekends would help my mental health a lot": {
+   "label": "blocked_time",
+   "ms": 199.13
+  },
+  "I have a 1 hour commute so I'd rather do long days than come in every day": {
+   "label": "prefer_fewer_days",
+   "ms": 359.13
+  },
+  "lunch: any time between 11 and 2 is fine": {
+   "label": "lunch",
+   "ms": 302.26
+  },
+  "just need 40 minutes": {
+   "label": "lunch",
+   "ms": 364.88
+  },
+  "lunch: any time between 11 and 2 is fine, just need 40 minutes": {
+   "label": "lunch",
+   "ms": 305.59
+  },
+  "I need to leave campus by 4 on Tuesdays and Thursdays to get to my second job": {
+   "label": "blocked_time",
+   "ms": 298.42
+  },
+  "Early morning classes are fine": {
+   "label": "prefer_no_early_late",
+   "ms": 237.73
+  },
+  "I really want nothing after 5 if possible": {
+   "label": "prefer_no_early_late",
+   "ms": 305.22
+  },
+  "Please keep it to 4 hours of classes max per day, I have ADHD": {
+   "label": "max_daily_hours",
+   "ms": 277.39
+  },
+  "can't concentrate longer": {
+   "label": "prefer_less_waiting",
+   "ms": 386.54
+  },
+  "Please keep it to 4 hours of classes max per day, I have ADHD and can't concentrate longer": {
+   "label": "max_daily_hours",
+   "ms": 291.02
+  },
+  "I have choir every Wednesday 6-8pm": {
+   "label": "blocked_time",
+   "ms": 223.65
+  },
+  "as few days as possible, and when I'm there": {
+   "label": "prefer_fewer_days",
+   "ms": 291.35
+  },
+  "back to back please": {
+   "label": "prefer_less_waiting",
+   "ms": 277.91
+  },
+  "as few days as possible": {
+   "label": "prefer_fewer_days",
+   "ms": 317.92
+  },
+  "when I'm there, back to back please": {
+   "label": "prefer_less_waiting",
+   "ms": 281.12
+  },
+  "I'd love to sleep in so nothing too early pls": {
+   "label": "prefer_no_early_late",
+   "ms": 343.64
+  },
+  "Thursday I'm at the TAFE all day for my other course": {
+   "label": "blocked_time",
+   "ms": 232.58
+  },
+  "idc about which tutor I get": {
+   "label": "other",
+   "ms": 287.46
+  },
+  "I want a tute with lots of other international students": {
+   "label": "other",
+   "ms": 186.94
+  },
+  "I can only be on campus after 12 on Mondays because I have a morning job": {
+   "label": "blocked_time",
+   "ms": 220.35
+  },
+  "No more than 2 days a week at uni please, I'm working full time": {
+   "label": "max_days",
+   "ms": 281.97
+  },
+  "I get migraines if I'm in class all day so maybe cap it at five hours of class": {
+   "label": "max_daily_hours",
+   "ms": 273.96
+  },
+  "Lunch needs to be at least an hour because I go home to eat": {
+   "label": "lunch",
+   "ms": 302.56
+  },
+  "I don't want to be on campus more than 3 days": {
+   "label": "max_days",
+   "ms": 284.4
+  },
+  "I'd rather not have classes before 10": {
+   "label": "prefer_no_early_late",
+   "ms": 353.26
+  },
+  "monday tuesday wednesday i have placement at a hospital until 3pm": {
+   "label": "blocked_time",
+   "ms": 229.64
+  },
+  "Zoom classes don't work for me with my home internet, so on campus only": {
+   "label": "in_person_only",
+   "ms": 294.44
+  },
+  "I want to go to the gym between classes so a couple of small gaps is actually good": {
+   "label": "prefer_less_waiting",
+   "ms": 332.48
+  },
+  "Please put all my classes in the afternoon": {
+   "label": "prefer_no_early_late",
+   "ms": 261.04
+  },
+  "I'm useless before noon": {
+   "label": "prefer_no_early_late",
+   "ms": 237.7
+  },
+  "Please put all my classes in the afternoon, I'm useless before noon": {
+   "label": "prefer_no_early_late",
+   "ms": 265.44
+  },
+  "I'm fine with any day except Friday": {
+   "label": "other",
+   "ms": 191.25
+  },
+  "My visa only lets me work 24 hours a fortnight": {
+   "label": "max_daily_hours",
+   "ms": 284.88
+  },
+  "I do those shifts Saturday and Sunday": {
+   "label": "blocked_time",
+   "ms": 197.4
+  },
+  "My visa only lets me work 24 hours a fortnight, I do those shifts Saturday and Sunday": {
+   "label": "blocked_time",
+   "ms": 193.84
+  },
+  "pls no tutes on monday morning": {
+   "label": "blocked_time",
+   "ms": 333.92
+  },
+  "I have a standing doctor's appt at 9": {
+   "label": "blocked_time",
+   "ms": 203.79
+  },
+  "pls no tutes on monday morning, I have a standing doctor's appt at 9": {
+   "label": "blocked_time",
+   "ms": 233.23
+  },
+  "I'm hoping to keep my timetable to three days a week": {
+   "label": "max_days",
+   "ms": 289.72
+  },
+  "Every second Friday I visit my dad in Newcastle": {
+   "label": "blocked_time",
+   "ms": 198.55
+  },
+  "I'm pretty flexible tbh. maybe avoid late classes": {
+   "label": "prefer_no_early_late",
+   "ms": 297.7
+  },
+  "I'm pretty flexible tbh": {
+   "label": "other",
+   "ms": 187.62
+  },
+  "maybe avoid late classes": {
+   "label": "prefer_no_early_late",
+   "ms": 313.98
+  },
+  "I need gaps to be under 2 hours": {
+   "label": "prefer_less_waiting",
+   "ms": 320.55
+  },
+  "nothing on wednesday arvo": {
+   "label": "blocked_time",
+   "ms": 265.54
+  },
+  "on tuesdays i finish work at 1 so i can only come in after 2": {
+   "label": "blocked_time",
+   "ms": 226.66
+  },
+  "Saturday classes would actually be great for me": {
+   "label": "other",
+   "ms": 189.34
+  },
+  "I want to keep lunch free from 12:30 to 1:30 for my prayer and meal": {
+   "label": "lunch",
+   "ms": 313.56
+  },
+  "five hours on campus is my limit": {
+   "label": "max_daily_hours",
+   "ms": 289.93
+  },
+  "I'm a single parent so classes need to be between 9:30 and 2:30": {
+   "label": "blocked_time",
+   "ms": 191.9
+  },
+  "I hate having one lecture and then going home, it's a waste of a trip": {
+   "label": "prefer_less_waiting",
+   "ms": 336.11
+  },
+  "I'll be fasting for Ramadan so no late afternoon classes would be nice": {
+   "label": "prefer_no_early_late",
+   "ms": 302.6
+  },
+  "tutes on the same day as the lecture would be ideal": {
+   "label": "other",
+   "ms": 355.55
+  },
+  "Mon and Thu nights I play futsal": {
+   "label": "blocked_time",
+   "ms": 195.99
+  },
+  "Tue I'm at work from 4": {
+   "label": "blocked_time",
+   "ms": 196.95
+  },
+  "I don't mind long days as long as it's only twice a week": {
+   "label": "max_days",
+   "ms": 293.62
+  },
+  "no in person stuff please i'm immunocompromised": {
+   "label": "other",
+   "ms": 187.62
+  },
+  "I'd like at least 30 min between classes in different buildings because I use a wheelchair": {
+   "label": "other",
+   "ms": 173.9
+  },
+  "Need Wednesday morning free for my weekly therapy session at 10": {
+   "label": "blocked_time",
+   "ms": 198.1
+  },
+  "i'd prefer not to have classes on more than 4 days": {
+   "label": "max_days",
+   "ms": 326.84
+  },
+  "Gaps are ok if they're short": {
+   "label": "prefer_less_waiting",
+   "ms": 308.31
+  },
+  "like under 30 min": {
+   "label": "prefer_less_waiting",
+   "ms": 265.19
+  },
+  "Gaps are ok if they're short, like under 30 min": {
+   "label": "prefer_less_waiting",
+   "ms": 312.36
+  },
+  "Can I avoid Monday 9am lectures": {
+   "label": "blocked_time",
+   "ms": 346.12
+  },
+  "It takes me ages to get in after the weekend": {
+   "label": "prefer_fewer_days",
+   "ms": 338.44
+  },
+  "Can I avoid Monday 9am lectures? It takes me ages to get in after the weekend": {
+   "label": "blocked_time",
+   "ms": 285.04
+  },
+  "After 3pm I'm free, before that I'm at my apprenticeship every Thursday": {
+   "label": "blocked_time",
+   "ms": 239.28
+  },
+  "Would really appreciate a lunch break": {
+   "label": "lunch",
+   "ms": 299.11
+  },
+  "no classes later than 6": {
+   "label": "prefer_no_early_late",
+   "ms": 318.37
+  },
+  "I'm only allowed on campus 3 days because of my scholarship placement hours": {
+   "label": "max_days",
+   "ms": 196.19
+  },
+  "i'd rather 5 short days than 3 super long ones": {
+   "label": "prefer_fewer_days",
+   "ms": 284.82
+  },
+  "Nothing on Fridays": {
+   "label": "blocked_time",
+   "ms": 258.34
+  },
+  "nothing before 11 on Mondays": {
+   "label": "blocked_time",
+   "ms": 283.43
+  },
+  "Love a sleep-in": {
+   "label": "prefer_no_early_late",
+   "ms": 310.2
+  },
+  "love a long weekend": {
+   "label": "prefer_fewer_days",
+   "ms": 334.98
+  },
+  "I work 3-11pm at the casino on Saturdays and Sundays": {
+   "label": "blocked_time",
+   "ms": 236.43
+  },
+  "Please make sure I'm not in any class past 4:30 on Wednesday": {
+   "label": "blocked_time",
+   "ms": 262.55
+  },
+  "I have to collect my kids": {
+   "label": "blocked_time",
+   "ms": 220.26
+  },
+  "Please make sure I'm not in any class past 4:30 on Wednesday, I have to collect my kids": {
+   "label": "blocked_time",
+   "ms": 317.72
+  },
+  "Ideally only 2 days on campus but 3 is ok": {
+   "label": "max_days",
+   "ms": 349.71
+  },
+  "I'd like to be done by 3 so I can beat the traffic": {
+   "label": "blocked_time",
+   "ms": 268.35
+  },
+  "ugh no 9ams again pls": {
+   "label": "prefer_no_early_late",
+   "ms": 334.81
+  },
+  "keep thursday free for my part time job": {
+   "label": "blocked_time",
+   "ms": 254.69
+  },
+  "I live on campus so I don't mind coming in every day": {
+   "label": "other",
+   "ms": 189.36
+  },
+  "Max 7 hrs at uni per day": {
+   "label": "max_daily_hours",
+   "ms": 272.26
+  },
+  "max 3 days a week": {
+   "label": "max_days",
+   "ms": 251.86
+  },
+  "I'm in the rowing squad, training is 5:30-7:30am every weekday": {
+   "label": "blocked_time",
+   "ms": 227.13
+  },
+  "If I could avoid having labs on the same day as my lectures that'd be good": {
+   "label": "other",
+   "ms": 322.76
+  },
+  "My bus only comes once an hour so long gaps don't bother me": {
+   "label": "prefer_less_waiting",
+   "ms": 353.47
+  },
+  "please no classes before 9": {
+   "label": "prefer_no_early_late",
+   "ms": 229.77
+  },
+  "I'm taking care of my newborn so I'd honestly like as few days as possible, maybe 2": {
+   "label": "max_days",
+   "ms": 304.65
+  },
+  "Tue/Thu are my work days": {
+   "label": "blocked_time",
+   "ms": 261.82
+  },
+  "i dont mind gaps": {
+   "label": "other",
+   "ms": 203.51
+  },
+  "i dont want to be there past 5": {
+   "label": "prefer_no_early_late",
+   "ms": 329.09
+  },
+  "Could my tutorial be with Dr Nguyen? I heard she explains things really well": {
+   "label": "other",
+   "ms": 390.34
+  },
+  "I need a 30 min lunch somewhere between 11:30 and 1:30": {
+   "label": "lunch",
+   "ms": 302.25
+  },
+  "I'd like to avoid back-to-back 3 hour labs": {
+   "label": "prefer_less_waiting",
+   "ms": 328.29
+  },
+  "not on campus fridays": {
+   "label": "blocked_time",
+   "ms": 258.19
+  },
+  "max 4 hrs class a day": {
+   "label": "max_daily_hours",
+   "ms": 270.39
+  },
+  "keep mornings free if u can": {
+   "label": "blocked_time",
+   "ms": 281.38
+  },
+  "All good with whatever": {
+   "label": "other",
+   "ms": 198.29
+  },
+  "just no more online-only units pls": {
+   "label": "in_person_only",
+   "ms": 291.21
+  },
+  "I'm a morning person so early classes are perfect": {
+   "label": "prefer_no_early_late",
+   "ms": 262.82
+  },
+  "I'd love to be done by lunch": {
+   "label": "lunch",
+   "ms": 424.18
+  },
+  "Thurs is out bc of my volunteering at the food bank": {
+   "label": "blocked_time",
+   "ms": 198.49
+  },
+  "I hate waiting around for hours": {
+   "label": "prefer_less_waiting",
+   "ms": 325.64
+  },
+  "max three days a week": {
+   "label": "max_days",
+   "ms": 271.08
+  },
+  "no more than 6 hours of class on any of them": {
+   "label": "max_daily_hours",
+   "ms": 276.59
+  },
+  "I really want in-person tutorials": {
+   "label": "in_person_only",
+   "ms": 265.3
+  },
+  "the online ones last year were useless": {
+   "label": "other",
+   "ms": 319.0
+  },
+  "I really want in-person tutorials, the online ones last year were useless": {
+   "label": "in_person_only",
+   "ms": 277.77
+  },
+  "on campus classes only pls": {
+   "label": "in_person_only",
+   "ms": 272.53
+  },
+  "I don't have a decent laptop at home": {
+   "label": "other",
+   "ms": 187.42
+  },
+  "on campus classes only pls, I don't have a decent laptop at home": {
+   "label": "in_person_only",
+   "ms": 269.01
+  },
+  "can u make sure none of my labs are online": {
+   "label": "in_person_only",
+   "ms": 267.55
+  },
+  "I need the hands-on stuff": {
+   "label": "other",
+   "ms": 215.67
+  },
+  "can u make sure none of my labs are online? I need the hands-on stuff": {
+   "label": "in_person_only",
+   "ms": 268.47
+  },
+  "hybrid is ok I guess": {
+   "label": "other",
+   "ms": 320.45
+  },
+  "I'd much prefer everything face-to-face": {
+   "label": "in_person_only",
+   "ms": 268.77
+  },
+  "hybrid is ok I guess but I'd much prefer everything face-to-face": {
+   "label": "in_person_only",
+   "ms": 267.91
+  },
+  "Hate the 2-hour dead time between my lecture and tute on Mondays": {
+   "label": "prefer_less_waiting",
+   "ms": 286.01
+  },
+  "please keep my classes close together in the day with no big breaks": {
+   "label": "prefer_less_waiting",
+   "ms": 299.2
+  },
+  "I want a couple of completely free weekdays": {
+   "label": "blocked_time",
+   "ms": 202.22
+  },
+  "fewer, longer days suit me better": {
+   "label": "prefer_fewer_days",
+   "ms": 336.58
+  },
+  "I look after my mum on Tuesdays": {
+   "label": "blocked_time",
+   "ms": 198.48
+  },
+  "I can't do anything past 4 on the other days": {
+   "label": "blocked_time",
+   "ms": 345.81
+  },
+  "only in-person classes please": {
+   "label": "in_person_only",
+   "ms": 276.6
+  },
+  "I work at Woolies every Friday so I can't do anything that day": {
+   "label": "blocked_time",
+   "ms": 200.34
+  },
+  "8am is totally fine": {
+   "label": "prefer_no_early_late",
+   "ms": 229.12
+  },
+  "I don't mind early starts, 8am is totally fine": {
+   "label": "prefer_no_early_late",
+   "ms": 317.61
+  },
+  "I don't wanna do more than 6 hours of class on any one day": {
+   "label": "max_daily_hours",
+   "ms": 306.07
+  },
+  "I don't mind if I'm on campus till late": {
+   "label": "other",
+   "ms": 191.23
+  },
+  "Need a proper lunch break": {
+   "label": "lunch",
+   "ms": 310.12
+  },
+  "at least 45 min": {
+   "label": "lunch",
+   "ms": 318.15
+  },
+  "sometime between 12 and 2": {
+   "label": "lunch",
+   "ms": 396.78
+  },
+  "Need a proper lunch break, at least 45 min, sometime between 12 and 2": {
+   "label": "lunch",
+   "ms": 320.53
+  },
+  "No 8ams no 6pms": {
+   "label": "blocked_time",
+   "ms": 307.23
+  },
+  "No 8ams": {
+   "label": "blocked_time",
+   "ms": 197.85
+  },
+  "no 6pms": {
+   "label": "blocked_time",
+   "ms": 263.49
+  },
+  "I'm international and my visa lets me work 48 hours a fortnight so I need my classes squished into 3 days": {
+   "label": "max_days",
+   "ms": 254.53
+  },
+  "Please make sure my lab and tute aren't on different campuses": {
+   "label": "other",
+   "ms": 215.31
+  },
+  "i need a lunch brake around 12-1": {
+   "label": "lunch",
+   "ms": 399.84
+  },
+  "Honestly I don't care about the days": {
+   "label": "other",
+   "ms": 196.74
+  },
+  "just don't put me in anything that starts before 9:30 and give me an hour for lunch": {
+   "label": "blocked_time",
+   "ms": 313.9
+  },
+  "just don't put me in anything that starts before 9:30": {
+   "label": "blocked_time",
+   "ms": 227.46
+  },
+  "give me an hour for lunch": {
+   "label": "lunch",
+   "ms": 388.41
+  },
+  "Basically I need Thursdays free for my research assistant job": {
+   "label": "blocked_time",
+   "ms": 409.87
+  },
+  "nothing after 5 on the other days": {
+   "label": "blocked_time",
+   "ms": 305.86
+  },
+  "No more than 5 hours of class a day or my brain melts": {
+   "label": "max_daily_hours",
+   "ms": 308.61
+  },
+  "I can only realistically come in 3 days, my sister needs the car the other days": {
+   "label": "max_days",
+   "ms": 306.68
+  },
+  "I'm a mum of two (4 and 7)": {
+   "label": "other",
+   "ms": 191.53
+  },
+  "I drop them at school at 8:45": {
+   "label": "blocked_time",
+   "ms": 320.3
+  },
+  "I'm a mum of two (4 and 7) and I drop them at school at 8:45": {
+   "label": "blocked_time",
+   "ms": 227.06
+  },
+  "ok so basically i work at a cafe on tuesday and thursday mornings until 11": {
+   "label": "blocked_time",
+   "ms": 227.52
+  },
+  "i also have a toddler so i need to be home by 5": {
+   "label": "blocked_time",
+   "ms": 366.07
+  },
+  "i dont want more than 3 days": {
+   "label": "max_days",
+   "ms": 306.04
+  },
+  "I'm on antidepressants that knock me out, so early starts are rough": {
+   "label": "prefer_no_early_late",
+   "ms": 270.21
+  },
+  "Im not a morning person at all lol": {
+   "label": "prefer_no_early_late",
+   "ms": 335.84
+  },
+  "I'm doing a TAFE course on Tuesday nights and work Saturdays, otherwise I'm flexible": {
+   "label": "blocked_time",
+   "ms": 237.45
+  },
+  "I'm doing a TAFE course on Tuesday nights": {
+   "label": "blocked_time",
+   "ms": 184.37
+  },
+  "work Saturdays": {
+   "label": "blocked_time",
+   "ms": 197.99
+  },
+  "otherwise I'm flexible": {
+   "label": "other",
+   "ms": 185.13
+  },
+  "Prefer online for lectures so I can rewatch them": {
+   "label": "other",
+   "ms": 188.54
+  },
+  "I'm hoping to get the tutor who speaks Mandarin": {
+   "label": "other",
+   "ms": 193.22
+  },
+  "No more than 4 hours of classes on any day": {
+   "label": "max_daily_hours",
+   "ms": 290.98
+  },
+  "no more than 3 days a week": {
+   "label": "max_days",
+   "ms": 270.4
+  },
+  "I really don't like waiting around": {
+   "label": "prefer_less_waiting",
+   "ms": 410.15
+  },
+  "I really don't like mornings": {
+   "label": "prefer_no_early_late",
+   "ms": 346.97
+  },
+  "first class to last class shouldn't be longer than 8 hrs": {
+   "label": "max_daily_hours",
+   "ms": 279.55
+  },
+  "I need a 30 min feed somewhere in the middle": {
+   "label": "lunch",
+   "ms": 397.53
+  },
+  "At most 6 hours of class a day": {
+   "label": "max_daily_hours",
+   "ms": 306.05
+  },
+  "at most 9 hours on campus": {
+   "label": "max_daily_hours",
+   "ms": 277.94
+  },
+  "ideally start after 10": {
+   "label": "prefer_no_early_late",
+   "ms": 337.46
+  },
+  "Could you make sure I'm not stuck on campus for more than 7 hours": {
+   "label": "max_daily_hours",
+   "ms": 306.37
+  },
+  "first class to last": {
+   "label": "other",
+   "ms": 186.6
+  },
+  "Could you make sure I'm not stuck on campus for more than 7 hours, first class to last": {
+   "label": "max_daily_hours",
+   "ms": 247.41
+  },
+  "I'd prefer my day to start at 10 at the earliest": {
+   "label": "prefer_no_early_late",
+   "ms": 381.21
+  },
+  "Keep my mornings free if you can, I've got swim squad": {
+   "label": "blocked_time",
+   "ms": 307.26
+  },
+  "Fewer days": {
+   "label": "prefer_fewer_days",
+   "ms": 291.11
+  },
+  "shorter gaps, that's all I ask": {
+   "label": "prefer_less_waiting",
+   "ms": 322.53
+  },
+  "Don't mind gaps": {
+   "label": "other",
+   "ms": 185.35
+  },
+  "do mind 8am classes": {
+   "label": "prefer_no_early_late",
+   "ms": 326.64
+  },
+  "in person only": {
+   "label": "in_person_only",
+   "ms": 268.15
+  },
+  "I want Dr Patel's tute if possible": {
+   "label": "other",
+   "ms": 186.12
+  },
+  "Keep me under 20 contact hours a week": {
+   "label": "max_daily_hours",
+   "ms": 364.91
+  },
+  "Can I get into a tute with other international students": {
+   "label": "other",
+   "ms": 195.54
+  },
+  "I'm happy with gaps": {
+   "label": "other",
+   "ms": 201.93
+  },
+  "I hate having one tiny class on a day by itself": {
+   "label": "prefer_fewer_days",
+   "ms": 423.33
+  },
+  "I'd rather the days were full": {
+   "label": "prefer_less_waiting",
+   "ms": 408.86
+  },
+  "I hate having one tiny class on a day by itself, I'd rather the days were full": {
+   "label": "prefer_fewer_days",
+   "ms": 409.58
+  },
+  "Start times don't matter to me": {
+   "label": "other",
+   "ms": 307.37
+  },
+  "I've got a bad knee so I'd like my classes in buildings close to each other": {
+   "label": "other",
+   "ms": 191.82
+  },
+  "breaks between classes shouldnt be more than like 30 mins": {
+   "label": "prefer_less_waiting",
+   "ms": 288.89
+  },
+  "Cluster everything into as few days as possible": {
+   "label": "prefer_fewer_days",
+   "ms": 293.46
+  },
+  "no Wednesdays": {
+   "label": "blocked_time",
+   "ms": 352.83
+  },
+  "I'm doing a combined degree with law so I'll have some law classes too, can you check for clashes": {
+   "label": "other",
+   "ms": 220.58
+  },
+  "Can my classes be squeezed into fewer days": {
+   "label": "prefer_fewer_days",
+   "ms": 291.95
+  },
+  "no big gaps pls": {
+   "label": "prefer_less_waiting",
+   "ms": 285.36
+  },
+  "Nothing too late in the day please, I'm on the Central Coast": {
+   "label": "prefer_no_early_late",
+   "ms": 429.29
+  },
+  "I'm a mature age student with a full time job, so I can only do Monday and Wednesday evenings": {
+   "label": "blocked_time",
+   "ms": 192.43
+  },
+  "I'm a single mum so I can only do classes between 9:30 and 2:30": {
+   "label": "blocked_time",
+   "ms": 227.85
+  },
+  "pack my classes into the smallest number of days possible": {
+   "label": "prefer_fewer_days",
+   "ms": 399.77
+  },
+  "gaps are fine": {
+   "label": "other",
+   "ms": 306.88
+  },
+  "keep tuesday free": {
+   "label": "blocked_time",
+   "ms": 298.03
+  },
+  "keep thursday arvo free": {
+   "label": "blocked_time",
+   "ms": 265.32
+  },
+  "keep it in person": {
+   "label": "in_person_only",
+   "ms": 358.6
+  },
+  "I'd prefer not to have anything before 10": {
+   "label": "prefer_no_early_late",
+   "ms": 408.68
+  },
+  "Mondays I literally can't before 12": {
+   "label": "blocked_time",
+   "ms": 410.26
+  },
+  "I'd love to be in the same tute as my cousin and we both can't do Thursdays": {
+   "label": "blocked_time",
+   "ms": 308.65
+  },
+  "I'd love to be in the same tute as my cousin": {
+   "label": "other",
+   "ms": 191.37
+  },
+  "we both can't do Thursdays": {
+   "label": "blocked_time",
+   "ms": 203.93
+  },
+  "I'm autistic and unstructured time on campus is really hard for me, so back-to-back classes are best": {
+   "label": "prefer_less_waiting",
+   "ms": 309.01
+  },
+  "my anxiety is worse on long days so cap it at 6 hours on campus and give me a lunch break": {
+   "label": "max_daily_hours",
+   "ms": 318.62
+  },
+  "my anxiety is worse on long days so cap it at 6 hours on campus": {
+   "label": "max_daily_hours",
+   "ms": 306.23
+  },
+  "give me a lunch break": {
+   "label": "lunch",
+   "ms": 409.23
+  },
+  "Condense my week pls": {
+   "label": "prefer_fewer_days",
+   "ms": 308.43
+  },
+  "no lectures after 5": {
+   "label": "blocked_time",
+   "ms": 308.4
+  },
+  "can u keep tuesday and thursday arvos free": {
+   "label": "blocked_time",
+   "ms": 305.53
+  },
+  "I coach under 12s soccer": {
+   "label": "other",
+   "ms": 194.23
+  },
+  "can u keep tuesday and thursday arvos free, I coach under 12s soccer": {
+   "label": "blocked_time",
+   "ms": 315.97
+  },
+  "no long waits between classes and I'd like an hour for lunch": {
+   "label": "lunch",
+   "ms": 307.15
+  },
+  "no long waits between classes": {
+   "label": "prefer_less_waiting",
+   "ms": 330.06
+  },
+  "I'd like an hour for lunch": {
+   "label": "lunch",
+   "ms": 295.32
+  },
+  "I want the same tute as my flatmate so I actually know someone": {
+   "label": "other",
+   "ms": 322.14
+  },
+  "max 3 hrs of lectures and tutes per day pls my attention span is cooked": {
+   "label": "max_daily_hours",
+   "ms": 379.52
+  },
+  "pls leave 1-2pm free on tues and thurs": {
+   "label": "blocked_time",
+   "ms": 281.86
+  },
+  "I've got a standing zoom with my supervisor": {
+   "label": "blocked_time",
+   "ms": 209.15
+  },
+  "pls leave 1-2pm free on tues and thurs, I've got a standing zoom with my supervisor": {
+   "label": "blocked_time",
+   "ms": 225.77
+  },
+  "Can I be in the same lab as my lab partner from last sem": {
+   "label": "other",
+   "ms": 189.49
+  },
+  "I'd like to be in the same tute as my best mate Liam": {
+   "label": "other",
+   "ms": 186.39
+  },
+  "I'd prefer to start after 10": {
+   "label": "prefer_no_early_late",
+   "ms": 340.66
+  },
+  "I don't want long gaps between classes": {
+   "label": "prefer_less_waiting",
+   "ms": 306.65
+  },
+  "I'd rather just go home": {
+   "label": "prefer_fewer_days",
+   "ms": 410.6
+  },
+  "I don't want long gaps between classes, I'd rather just go home": {
+   "label": "prefer_less_waiting",
+   "ms": 307.02
+  },
+  "I cant be there tuesday at all and thursday i have to leave by 1": {
+   "label": "blocked_time",
+   "ms": 221.3
+  },
+  "I cant be there tuesday at all": {
+   "label": "blocked_time",
+   "ms": 254.37
+  },
+  "thursday i have to leave by 1": {
+   "label": "blocked_time",
+   "ms": 343.7
+  },
+  "pls no more than 4 days, I work the rest": {
+   "label": "max_days",
+   "ms": 267.44
+  },
+  "the less I have to come in the better tbh": {
+   "label": "prefer_fewer_days",
+   "ms": 366.99
+  },
+  "Gaps make me procrastinate, so stack everything up together": {
+   "label": "prefer_less_waiting",
+   "ms": 389.26
+  },
+  "3 days max": {
+   "label": "max_days",
+   "ms": 306.69
+  },
+  "Early morning lectures are a nightmare on the M5": {
+   "label": "prefer_no_early_late",
+   "ms": 234.79
+  },
+  "I'm a shocker at getting up early, so the later the better": {
+   "label": "prefer_no_early_late",
+   "ms": 302.65
+  },
+  "I want to minimise the days I travel in, petrol is so expensive": {
+   "label": "prefer_fewer_days",
+   "ms": 289.41
+  },
+  "I'm a caretaker at my church Tuesday and Thursday 6 to 8am, so on those days I'd prefer nothing before 10": {
+   "label": "blocked_time",
+   "ms": 328.69
+  },
+  "classes close together": {
+   "label": "prefer_less_waiting",
+   "ms": 381.42
+  },
+  "home by 4": {
+   "label": "blocked_time",
+   "ms": 307.52
+  },
+  "no Fridays": {
+   "label": "blocked_time",
+   "ms": 258.83
+  },
+  "I'm deaf and need an Auslan interpreter so in-person classes only": {
+   "label": "in_person_only",
+   "ms": 210.71
+  },
+  "interpreters don't do Zoom well": {
+   "label": "in_person_only",
+   "ms": 348.2
+  },
+  "I'm deaf and need an Auslan interpreter so in-person classes only, interpreters don't do Zoom well": {
+   "label": "in_person_only",
+   "ms": 234.9
+  },
+  "No preference on days or times": {
+   "label": "other",
+   "ms": 188.2
+  },
+  "just want a good tutor": {
+   "label": "other",
+   "ms": 396.7
+  },
+  "No preference on days or times, just want a good tutor": {
+   "label": "other",
+   "ms": 188.29
+  },
+  "I'm a third year mech eng student doing my thesis this year": {
+   "label": "other",
+   "ms": 323.19
+  },
+  "late classes make me miserable": {
+   "label": "prefer_no_early_late",
+   "ms": 342.13
+  },
+  "My dog walking business runs 7 to 9am weekdays": {
+   "label": "blocked_time",
+   "ms": 272.53
+  },
+  "fewer days is better too": {
+   "label": "prefer_fewer_days",
+   "ms": 409.87
+  },
+  "I work at a pub Thursday Friday and Saturday nights": {
+   "label": "blocked_time",
+   "ms": 227.22
+  },
+  "I want classes in the morning because I'm sharpest then": {
+   "label": "prefer_no_early_late",
+   "ms": 351.27
+  },
+  "I go to Jumu'ah at the mosque on Fridays from 1 to 2, so keep that hour clear": {
+   "label": "blocked_time",
+   "ms": 225.5
+  },
+  "I'd rather not have classes in the evenings because I'm scared walking to the station at night": {
+   "label": "blocked_time",
+   "ms": 424.46
+  },
+  "No more than 3 uni days": {
+   "label": "max_days",
+   "ms": 307.17
+  },
+  "keep Mondays free": {
+   "label": "blocked_time",
+   "ms": 305.93
+  },
+  "I'd prefer to finish by 5": {
+   "label": "prefer_no_early_late",
+   "ms": 410.85
+  },
+  "Can I have all my classes on as few days as possible": {
+   "label": "prefer_fewer_days",
+   "ms": 409.27
+  },
+  "I'm pregnant and due in week 9, so I might need to switch to online later in the sem": {
+   "label": "other",
+   "ms": 157.48
+  },
+  "I pick up my daughter from daycare at 3:30 so nothing after that": {
+   "label": "blocked_time",
+   "ms": 355.37
+  },
+  "Every day I need to be home by 6:30 to cook for my kids": {
+   "label": "blocked_time",
+   "ms": 283.84
+  },
+  "I struggle with long days so 5 hrs of class max": {
+   "label": "max_daily_hours",
+   "ms": 279.35
+  },
+  "don't spread me over the whole week": {
+   "label": "prefer_fewer_days",
+   "ms": 357.11
+  },
+  "3 if you can manage it": {
+   "label": "prefer_fewer_days",
+   "ms": 401.76
+  },
+  "4 days max, 3 if you can manage it": {
+   "label": "max_days",
+   "ms": 315.54
+  },
+  "I want to finish my degree in 3 years so I'm doing 5 units this sem": {
+   "label": "other",
+   "ms": 185.13
+  },
+  "I'm at uni anyway on Wednesdays so stick as many classes there as you like": {
+   "label": "other",
+   "ms": 193.04
+  },
+  "I have to eat lunch with my meds at 12:30, half an hour": {
+   "label": "lunch",
+   "ms": 298.56
+  },
+  "Max 3 days on campus a week": {
+   "label": "max_days",
+   "ms": 342.55
+  },
+  "my commute is like 90 mins each way": {
+   "label": "other",
+   "ms": 305.64
+  },
+  "Max 3 days on campus a week, my commute is like 90 mins each way": {
+   "label": "max_days",
+   "ms": 307.94
+  },
+  "Face to face only pls": {
+   "label": "in_person_only",
+   "ms": 306.39
+  },
+  "I can't focus on Zoom": {
+   "label": "in_person_only",
+   "ms": 410.7
+  },
+  "Face to face only pls, I can't focus on Zoom": {
+   "label": "in_person_only",
+   "ms": 307.38
+  },
+  "I hate early starts": {
+   "label": "prefer_no_early_late",
+   "ms": 338.49
+  },
+  "I hate gaps even more": {
+   "label": "prefer_less_waiting",
+   "ms": 377.86
+  },
+  "I'm usually wrecked by the end of the day so late arvo classes aren't great": {
+   "label": "prefer_no_early_late",
+   "ms": 411.25
+  },
+  "Fewer days is my top priority": {
+   "label": "prefer_fewer_days",
+   "ms": 408.03
+  },
+  "I also don't want to sit around between classes": {
+   "label": "prefer_less_waiting",
+   "ms": 411.82
+  },
+  "I want to be done by 2:30 every day": {
+   "label": "blocked_time",
+   "ms": 407.23
+  },
+  "no classes Monday": {
+   "label": "blocked_time",
+   "ms": 257.55
+  },
+  "I'd prefer to finish by 5 on Wednesdays": {
+   "label": "prefer_no_early_late",
+   "ms": 351.58
+  },
+  "I don't want to trek out to the Cumberland campus": {
+   "label": "other",
+   "ms": 186.28
+  },
+  "no gaps no mornings no online": {
+   "label": "prefer_less_waiting",
+   "ms": 330.61
+  },
+  "no gaps": {
+   "label": "prefer_less_waiting",
+   "ms": 273.1
+  },
+  "no mornings": {
+   "label": "blocked_time",
+   "ms": 207.94
+  },
+  "no online": {
+   "label": "in_person_only",
+   "ms": 338.56
+  },
+  "I'm a mature age student, 38": {
+   "label": "other",
+   "ms": 189.22
+  },
+  "coming back after a long break": {
+   "label": "other",
+   "ms": 188.34
+  },
+  "I'm a mature age student, 38, coming back after a long break": {
+   "label": "other",
+   "ms": 246.61
+  },
+  "Online lectures yes": {
+   "label": "other",
+   "ms": 186.13
+  },
+  "online tutes no": {
+   "label": "in_person_only",
+   "ms": 267.12
+  },
+  "less days on campus pls": {
+   "label": "prefer_fewer_days",
+   "ms": 291.82
+  },
+  "no 8am's": {
+   "label": "blocked_time",
+   "ms": 225.16
+  },
+  "I've got a part time job at JB Hi-Fi on Wednesday and Saturday": {
+   "label": "blocked_time",
+   "ms": 224.83
+  },
+  "I'd rather not be on campus more than 8 hours a day, and I'm happy with any lecturer": {
+   "label": "max_daily_hours",
+   "ms": 312.92
+  },
+  "I'd rather not be on campus more than 8 hours a day": {
+   "label": "max_daily_hours",
+   "ms": 326.17
+  },
+  "I'm happy with any lecturer": {
+   "label": "other",
+   "ms": 189.07
+  },
+  "My mornings are for my baby so 11am at the earliest": {
+   "label": "blocked_time",
+   "ms": 322.32
+  },
+  "I'd like lunch around 1 to 2": {
+   "label": "lunch",
+   "ms": 409.31
+  },
+  "Ideally nothing before 9 on any day and Wednesdays off for my placement": {
+   "label": "blocked_time",
+   "ms": 296.37
+  },
+  "Ideally nothing before 9 on any day": {
+   "label": "prefer_no_early_late",
+   "ms": 420.28
+  },
+  "Wednesdays off for my placement": {
+   "label": "blocked_time",
+   "ms": 307.21
+  },
+  "Face to face only": {
+   "label": "in_person_only",
+   "ms": 282.22
+  },
+  "max 3 days": {
+   "label": "max_days",
+   "ms": 331.87
+  },
+  "nothing after 4pm": {
+   "label": "blocked_time",
+   "ms": 307.38
+  },
+  "I've got driving lessons Friday arvo": {
+   "label": "blocked_time",
+   "ms": 194.44
+  },
+  "I see my psych Tuesday at 10am": {
+   "label": "blocked_time",
+   "ms": 221.05
+  },
+  "My partner works nights so I'm home with the kids from 5": {
+   "label": "blocked_time",
+   "ms": 300.47
+  },
+  "Nothing in the arvo on Thursdays": {
+   "label": "blocked_time",
+   "ms": 307.52
+  },
+  "nothing in the morning on Mondays": {
+   "label": "blocked_time",
+   "ms": 307.03
+  },
+  "I need a meal break somewhere in the day": {
+   "label": "lunch",
+   "ms": 301.16
+  },
+  "I'm on a 4 hour feeding schedule for my health": {
+   "label": "lunch",
+   "ms": 313.65
+  },
+  "I need a meal break somewhere in the day, I'm on a 4 hour feeding schedule for my health": {
+   "label": "lunch",
+   "ms": 308.51
+  },
+  "I like having my classes in the morning so the arvo's free for work": {
+   "label": "prefer_no_early_late",
+   "ms": 375.09
+  },
+  "The 8:05 bus is the only one that gets me there, so 9am classes are the earliest I can do": {
+   "label": "blocked_time",
+   "ms": 237.35
+  },
+  "nothing after 5": {
+   "label": "blocked_time",
+   "ms": 300.8
+  },
+  "no 2hr breaks pls": {
+   "label": "prefer_less_waiting",
+   "ms": 319.53
+  },
+  "I'm partially sighted and screens wreck my eyes so no more than 4 hours of class a day": {
+   "label": "max_daily_hours",
+   "ms": 295.98
+  },
+  "nothing online": {
+   "label": "in_person_only",
+   "ms": 305.93
+  },
+  "I'm happy to start early": {
+   "label": "prefer_no_early_late",
+   "ms": 242.25
+  },
+  "I want to finish by 2": {
+   "label": "blocked_time",
+   "ms": 382.04
+  },
+  "No classes 12-1 so I can eat": {
+   "label": "lunch",
+   "ms": 401.06
+  },
+  "two days a week ideally, three at a push": {
+   "label": "max_days",
+   "ms": 306.56
+  },
+  "I'd rather have everything in person": {
+   "label": "in_person_only",
+   "ms": 266.98
+  },
+  "keep my days to 6 hours of class max": {
+   "label": "max_daily_hours",
+   "ms": 348.43
+  },
+  "i'm an early bird so mornings are actually great for me": {
+   "label": "prefer_no_early_late",
+   "ms": 308.31
+  },
+  "Assignments are due Fridays so I'd like Thursday free to finish them": {
+   "label": "blocked_time",
+   "ms": 300.01
+  },
+  "I volunteer at Lifeline on Monday nights and Thursday nights": {
+   "label": "blocked_time",
+   "ms": 312.54
+  },
+  "I'd like to keep the same tutor I had in first year": {
+   "label": "other",
+   "ms": 291.04
+  },
+  "I need at least one weekday totally off, so 4 days max": {
+   "label": "max_days",
+   "ms": 323.65
+  },
+  "I don't drive, so any time is fine as long as there's a bus": {
+   "label": "other",
+   "ms": 190.49
+  },
+  "I'm a single dad, school drop off is 8:30 and pick up is 3": {
+   "label": "blocked_time",
+   "ms": 321.41
+  },
+  "I'm a single dad, school drop off is 8:30": {
+   "label": "blocked_time",
+   "ms": 307.94
+  },
+  "pick up is 3": {
+   "label": "blocked_time",
+   "ms": 149.57
+  },
+  "Can I have at most 5 hrs of class per day and get home before dark": {
+   "label": "max_daily_hours",
+   "ms": 361.29
+  },
+  "Can I have at most 5 hrs of class per day": {
+   "label": "max_daily_hours",
+   "ms": 277.89
+  },
+  "get home before dark": {
+   "label": "blocked_time",
+   "ms": 161.07
+  },
+  "no 9ams please": {
+   "label": "prefer_no_early_late",
+   "ms": 380.36
+  },
+  "I'd like to be finished by 4 if possible": {
+   "label": "prefer_no_early_late",
+   "ms": 301.42
+  },
+  "During Ramadan I'd rather avoid evening classes": {
+   "label": "prefer_no_early_late",
+   "ms": 207.53
+  },
+  "I don't really care about gaps or early classes": {
+   "label": "other",
+   "ms": 184.5
+  },
+  "just put me with my friend Mei in the labs": {
+   "label": "other",
+   "ms": 188.39
+  },
+  "I'd rather have all my contact hours on fewer days, even if they're long": {
+   "label": "prefer_fewer_days",
+   "ms": 286.67
+  },
+  "I need lunch": {
+   "label": "lunch",
+   "ms": 367.78
+  },
+  "mornings and arvos r fine": {
+   "label": "prefer_no_early_late",
+   "ms": 240.17
+  },
+  "just not fridays": {
+   "label": "blocked_time",
+   "ms": 270.74
+  },
+  "Uni is 2 hours away by train so I'd prefer to come in less often": {
+   "label": "prefer_fewer_days",
+   "ms": 307.2
+  },
+  "id rather start after 10am if thats possible": {
+   "label": "prefer_no_early_late",
+   "ms": 308.43
+  },
+  "No more than 2 days, I've got a newborn": {
+   "label": "max_days",
+   "ms": 305.79
+  },
+  "I want to grab lunch with my friends between 1 and 2 every day": {
+   "label": "lunch",
+   "ms": 351.08
+  },
+  "lunch break pls": {
+   "label": "lunch",
+   "ms": 268.05
+  },
+  "20 mins is enough": {
+   "label": "lunch",
+   "ms": 405.75
+  },
+  "lunch break pls, 20 mins is enough": {
+   "label": "lunch",
+   "ms": 307.1
+  },
+  "I'd rather not come in on Fridays": {
+   "label": "blocked_time",
+   "ms": 409.59
+  },
+  "No 7pm classes": {
+   "label": "blocked_time",
+   "ms": 199.63
+  },
+  "no Monday classes": {
+   "label": "blocked_time",
+   "ms": 264.72
+  },
+  "no online classes": {
+   "label": "in_person_only",
+   "ms": 267.64
+  },
+  "If I could avoid late arvo classes that'd be great": {
+   "label": "prefer_no_early_late",
+   "ms": 338.34
+  },
+  "please put me in the in-person tutes": {
+   "label": "in_person_only",
+   "ms": 363.37
+  },
+  "not the online ones": {
+   "label": "in_person_only",
+   "ms": 307.38
+  },
+  "please put me in the in-person tutes, not the online ones": {
+   "label": "in_person_only",
+   "ms": 306.4
+  },
+  "Compact week, decent lunch break": {
+   "label": "lunch",
+   "ms": 410.14
+  },
+  "no Friday": {
+   "label": "blocked_time",
+   "ms": 307.35
+  },
+  "Compact week": {
+   "label": "prefer_fewer_days",
+   "ms": 290.88
+  },
+  "decent lunch break": {
+   "label": "lunch",
+   "ms": 298.03
+  },
+  "Not too early": {
+   "label": "prefer_no_early_late",
+   "ms": 326.58
+  },
+  "not too late": {
+   "label": "prefer_no_early_late",
+   "ms": 306.49
+  },
+  "I'm on the uni rowing team so mornings are gone": {
+   "label": "blocked_time",
+   "ms": 291.08
+  },
+  "I want max 4 days": {
+   "label": "max_days",
+   "ms": 273.3
+  },
+  "When I have a free period I just end up going home": {
+   "label": "blocked_time",
+   "ms": 390.98
+  },
+  "not coming back lol, so minimal gaps": {
+   "label": "prefer_less_waiting",
+   "ms": 376.34
+  },
+  "When I have a free period I just end up going home and not coming back lol, so minimal gaps": {
+   "label": "prefer_less_waiting",
+   "ms": 307.45
+  },
+  "I'm slow in the mornings so ideally no 9ams": {
+   "label": "prefer_no_early_late",
+   "ms": 312.79
+  },
+  "Every Wednesday lunchtime I run a prayer group from 12 to 1": {
+   "label": "lunch",
+   "ms": 403.82
+  },
+  "nothing before 10": {
+   "label": "blocked_time",
+   "ms": 306.16
+  },
+  "lunch break needed": {
+   "label": "lunch",
+   "ms": 307.49
+  },
+  "my lunch needs to be 1 to 1:45": {
+   "label": "lunch",
+   "ms": 308.45
+  },
+  "I'm a second year doing engineering and commerce, and I'd rather not have 8am tutes": {
+   "label": "prefer_no_early_late",
+   "ms": 409.09
+  },
+  "I'm a second year doing engineering and commerce": {
+   "label": "other",
+   "ms": 185.48
+  },
+  "I'd rather not have 8am tutes": {
+   "label": "prefer_no_early_late",
+   "ms": 326.45
+  },
+  "No Mondays (work)": {
+   "label": "blocked_time",
+   "ms": 306.45
+  },
+  "no Wednesdays (uni netball)": {
+   "label": "blocked_time",
+   "ms": 205.4
+  },
+  "nothing after 6 any day": {
+   "label": "blocked_time",
+   "ms": 254.87
+  },
+  "I want my tutorials to come after the lectures each week": {
+   "label": "other",
+   "ms": 153.84
+  },
+  "I can only do 3 days": {
+   "label": "max_days",
+   "ms": 307.0
+  },
+  "I'm 19, first year, living on res, pretty flexible": {
+   "label": "other",
+   "ms": 191.61
+  },
+  "Long breaks are actually good for me": {
+   "label": "other",
+   "ms": 321.18
+  },
+  "I need time to rest and pray": {
+   "label": "other",
+   "ms": 218.56
+  },
+  "Long breaks are actually good for me, I need time to rest and pray": {
+   "label": "other",
+   "ms": 396.05
+  },
+  "early classes are a struggle with my meds": {
+   "label": "prefer_no_early_late",
+   "ms": 306.16
+  },
+  "Wednesdays I'm free all day btw": {
+   "label": "other",
+   "ms": 186.89
+  },
+  "Max 2 days": {
+   "label": "max_days",
+   "ms": 273.35
+  },
+  "no 8ams": {
+   "label": "blocked_time",
+   "ms": 256.99
+  },
+  "an hour lunch": {
+   "label": "lunch",
+   "ms": 307.06
+  },
+  "No classes before 10 except Wednesday when I can do 9": {
+   "label": "blocked_time",
+   "ms": 215.78
+  },
+  "Tuesdays are a write-off because of my internship": {
+   "label": "blocked_time",
+   "ms": 193.7
+  },
+  "keep it to 6 hours of classes max the other days": {
+   "label": "max_daily_hours",
+   "ms": 307.97
+  },
+  "a 1 hour break is fine": {
+   "label": "other",
+   "ms": 409.6
+  },
+  "anything over 2 is too much": {
+   "label": "max_daily_hours",
+   "ms": 410.86
+  },
+  "a 1 hour break is fine but anything over 2 is too much": {
+   "label": "max_daily_hours",
+   "ms": 408.34
+  },
+  "I have dialysis three times a week, Mon Wed Fri mornings": {
+   "label": "blocked_time",
+   "ms": 257.53
+  },
+  "Short days please": {
+   "label": "prefer_fewer_days",
+   "ms": 290.58
+  },
+  "like 5 hours on campus max": {
+   "label": "max_daily_hours",
+   "ms": 373.58
+  },
+  "back to back where possible": {
+   "label": "prefer_less_waiting",
+   "ms": 409.8
+  },
+  "Short days please, like 5 hours on campus max": {
+   "label": "max_daily_hours",
+   "ms": 307.61
+  },
+  "Only free on Mon": {
+   "label": "blocked_time",
+   "ms": 305.83
+  },
+  "Tue and Fri this sem": {
+   "label": "blocked_time",
+   "ms": 194.68
+  },
+  "I'd like it in person": {
+   "label": "in_person_only",
+   "ms": 265.77
+  },
+  "Only free on Mon, Tue and Fri this sem": {
+   "label": "blocked_time",
+   "ms": 236.53
+  },
+  "Work Mon Tue 9-3": {
+   "label": "blocked_time",
+   "ms": 200.72
+  },
+  "gym Thu 6am": {
+   "label": "blocked_time",
+   "ms": 331.52
+  },
+  "I want 4 hours of class max per day": {
+   "label": "max_daily_hours",
+   "ms": 307.38
+  },
+  "Not too early please": {
+   "label": "prefer_no_early_late",
+   "ms": 409.5
+  },
+  "I live out in Penrith": {
+   "label": "other",
+   "ms": 186.11
+  },
+  "Not too early please, I live out in Penrith": {
+   "label": "prefer_no_early_late",
+   "ms": 428.28
+  },
+  "Not a fan of gaps": {
+   "label": "prefer_less_waiting",
+   "ms": 300.42
+  },
+  "not a fan of 8ams either": {
+   "label": "prefer_no_early_late",
+   "ms": 270.11
+  },
+  "no zoom pls": {
+   "label": "in_person_only",
+   "ms": 344.73
+  },
+  "I'm a carer for my brother, he comes home at 3:15 so I need to be gone by 2:30": {
+   "label": "blocked_time",
+   "ms": 307.87
+  },
+  "I can do max 3 days": {
+   "label": "max_days",
+   "ms": 306.02
+  },
+  "I commute from the Blue Mountains, about 2 hrs each way, so ideally just 2 days": {
+   "label": "max_days",
+   "ms": 410.19
+  },
+  "Prefer 3 days": {
+   "label": "max_days",
+   "ms": 308.82
+  },
+  "my main thing is no classes after 5": {
+   "label": "blocked_time",
+   "ms": 305.68
+  },
+  "I'm doing a 20 hour a week internship so I need classes capped at 4 hours a day": {
+   "label": "max_daily_hours",
+   "ms": 305.85
+  },
+  "No online stuff": {
+   "label": "in_person_only",
+   "ms": 308.12
+  },
+  "no 8:30 starts": {
+   "label": "blocked_time",
+   "ms": 207.96
+  },
+  "keep Friday free": {
+   "label": "blocked_time",
+   "ms": 303.75
+  },
+  "I really struggle to function in the mornings": {
+   "label": "prefer_no_early_late",
+   "ms": 307.08
+  },
+  "My church youth group is Friday nights and Sunday is church all day": {
+   "label": "blocked_time",
+   "ms": 231.32
+  },
+  "My church youth group is Friday nights": {
+   "label": "blocked_time",
+   "ms": 222.93
+  },
+  "Sunday is church all day": {
+   "label": "blocked_time",
+   "ms": 195.61
+  },
+  "I can only get there after 10": {
+   "label": "blocked_time",
+   "ms": 272.17
+  },
+  "Wednesdays are a no": {
+   "label": "blocked_time",
+   "ms": 308.21
+  },
+  "I want my exams as early as possible in the exam period so I can fly home to Shanghai": {
+   "label": "other",
+   "ms": 306.47
+  },
+  "Hopefully I can be finished by 4pm most days": {
+   "label": "prefer_no_early_late",
+   "ms": 409.04
+  },
+  "I've got a Pilates class Tues 7:30am": {
+   "label": "blocked_time",
+   "ms": 307.06
+  },
+  "I'm free all day Wed if that helps": {
+   "label": "other",
+   "ms": 186.31
+  },
+  "Not a morning person so ideally nothing before 11": {
+   "label": "prefer_no_early_late",
+   "ms": 428.19
+  },
+  "I'd like my classes packed into as few days as possible": {
+   "label": "prefer_fewer_days",
+   "ms": 410.04
+  },
+  "Monday arvo, Wednesday arvo and all of Friday are blocked for work": {
+   "label": "blocked_time",
+   "ms": 198.97
+  },
+  "Not fussed about who teaches me": {
+   "label": "other",
+   "ms": 311.65
+  },
+  "I just don't do well with early starts": {
+   "label": "prefer_no_early_late",
+   "ms": 325.31
+  },
+  "my bf and I want the same tutes": {
+   "label": "other",
+   "ms": 326.89
+  },
+  "we both work Fridays": {
+   "label": "blocked_time",
+   "ms": 196.38
+  },
+  "No more than three days on campus": {
+   "label": "max_days",
+   "ms": 279.45
+  },
+  "ideally nothing on Monday": {
+   "label": "blocked_time",
+   "ms": 255.02
+  },
+  "I've got jury duty on the 14th": {
+   "label": "blocked_time",
+   "ms": 257.16
+  },
+  "I want at least 40 mins for lunch between 11:30 and 1:30": {
+   "label": "lunch",
+   "ms": 408.6
+  },
+  "I'd prefer to start no earlier than 9 and finish by 5": {
+   "label": "prefer_no_early_late",
+   "ms": 306.3
+  },
+  "I have rehab at 2pm on Tuesdays and Thursdays": {
+   "label": "blocked_time",
+   "ms": 234.8
+  },
+  "keep my days short pls": {
+   "label": "prefer_fewer_days",
+   "ms": 288.6
+  },
+  "like 4 hours of class max": {
+   "label": "max_daily_hours",
+   "ms": 296.43
+  },
+  "keep my days short pls, like 4 hours of class max": {
+   "label": "max_daily_hours",
+   "ms": 307.33
+  },
+  "if possible no classes after 4": {
+   "label": "prefer_no_early_late",
+   "ms": 409.72
+  },
+  "I'm fine with online lectures": {
+   "label": "other",
+   "ms": 188.3
+  },
+  "tutorials need to be in person": {
+   "label": "in_person_only",
+   "ms": 324.06
+  },
+  "I'm a postgrad with a research job Wednesdays and Fridays": {
+   "label": "blocked_time",
+   "ms": 308.77
+  },
+  "I don't want to be on campus for more than 8 hours on the other days": {
+   "label": "max_daily_hours",
+   "ms": 304.24
+  },
+  "I have an exam clash in week 8, can u sort it": {
+   "label": "blocked_time",
+   "ms": 232.17
+  },
+  "I work full time 9 to 5 Monday to Thursday, so classes outside those hours or on Friday": {
+   "label": "blocked_time",
+   "ms": 383.84
+  },
+  "I don't care about days": {
+   "label": "other",
+   "ms": 199.06
+  },
+  "I care about not being on campus for 10 hour days": {
+   "label": "max_daily_hours",
+   "ms": 313.66
+  },
+  "7 max": {
+   "label": "max_daily_hours",
+   "ms": 305.49
+  },
+  "I care about not being on campus for 10 hour days, 7 max": {
+   "label": "max_daily_hours",
+   "ms": 308.54
+  },
+  "Theres a 40 min walk from Redfern so 8am classes are a no go": {
+   "label": "blocked_time",
+   "ms": 305.19
+  },
+  "the fewer days the better, I'm a mum and childcare is booked by the day": {
+   "label": "prefer_fewer_days",
+   "ms": 403.8
+  },
+  "I volunteer with the Rural Fire Service every second Tuesday and every Thursday night": {
+   "label": "blocked_time",
+   "ms": 309.07
+  },
+  "Nothing longer than a 7 hour day on campus": {
+   "label": "max_daily_hours",
+   "ms": 289.67
+  },
+  "nothing before 9:30": {
+   "label": "blocked_time",
+   "ms": 323.55
+  },
+  "Thursdays off": {
+   "label": "blocked_time",
+   "ms": 264.29
+  },
+  "I study in the library between classes anyway": {
+   "label": "other",
+   "ms": 184.05
+  },
+  "I don't care about gaps, I study in the library between classes anyway": {
+   "label": "other",
+   "ms": 199.69
+  },
+  "Gaps between classes are a killer for my anxiety": {
+   "label": "prefer_less_waiting",
+   "ms": 377.23
+  },
+  "I need classes back-to-back": {
+   "label": "prefer_less_waiting",
+   "ms": 285.58
+  },
+  "no more than 4 days": {
+   "label": "max_days",
+   "ms": 327.04
+  },
+  "Gaps between classes are a killer for my anxiety, I need classes back-to-back": {
+   "label": "prefer_less_waiting",
+   "ms": 306.4
+  },
+  "Shifts at Maccas Sat Sun and Tuesday night": {
+   "label": "blocked_time",
+   "ms": 307.13
+  },
+  "I want Dr Chen's lecture stream for ENGG2112": {
+   "label": "other",
+   "ms": 189.68
+  },
+  "I'm hard of hearing so online classes with captions are actually easier for me": {
+   "label": "other",
+   "ms": 217.42
+  },
+  "I'd like Professor Wong for maths if possible": {
+   "label": "other",
+   "ms": 192.54
+  },
+  "no Tuesday classes because of work": {
+   "label": "blocked_time",
+   "ms": 323.34
+  },
+  "No online lectures": {
+   "label": "in_person_only",
+   "ms": 307.73
+  },
+  "No classes before 9 either": {
+   "label": "blocked_time",
+   "ms": 305.26
+  },
+  "only tues and thurs work for me": {
+   "label": "max_days",
+   "ms": 201.11
+  },
+  "I want to keep my classes to 3.5 hours a day tops, I'm also a TA": {
+   "label": "max_daily_hours",
+   "ms": 310.91
+  },
+  "Preferably classes from 9:30 to 4:30": {
+   "label": "prefer_no_early_late",
+   "ms": 231.7
+  },
+  "my job is mon wed n fri from 4 so no clases after 4 those days": {
+   "label": "blocked_time",
+   "ms": 280.04
+  },
+  "Keep it to five hours of class a day": {
+   "label": "max_daily_hours",
+   "ms": 307.39
+  },
+  "don't make me come in Monday": {
+   "label": "blocked_time",
+   "ms": 307.21
+  },
+  "I'd like my tute with Priya and Josh if that's possible": {
+   "label": "other",
+   "ms": 182.7
+  },
+  "Lunch has to be at least an hour, I'm diabetic": {
+   "label": "lunch",
+   "ms": 329.71
+  },
+  "need to eat properly": {
+   "label": "lunch",
+   "ms": 358.24
+  },
+  "Lunch has to be at least an hour, I'm diabetic and need to eat properly": {
+   "label": "lunch",
+   "ms": 266.51
+  },
+  "Any day but Thursday": {
+   "label": "blocked_time",
+   "ms": 255.61
+  },
+  "no classes after 4 on Thursdays if possible": {
+   "label": "blocked_time",
+   "ms": 255.14
+  },
+  "Last sem my timetable was perfect, can I just have the same days again": {
+   "label": "other",
+   "ms": 183.65
+  },
+  "My shift finishes at 10 on Tuesdays so nothing before that": {
+   "label": "blocked_time",
+   "ms": 321.55
+  },
+  "lunch from 12 to 12:30": {
+   "label": "lunch",
+   "ms": 261.27
+  },
+  "I'm doing ENGG2112 and COMP2123 this sem": {
+   "label": "other",
+   "ms": 186.69
+  },
+  "both have heaps of labs": {
+   "label": "other",
+   "ms": 192.97
+  },
+  "I'm doing ENGG2112 and COMP2123 this sem, both have heaps of labs": {
+   "label": "other",
+   "ms": 194.55
+  },
+  "I don't want to be in a class that's in the Wentworth building": {
+   "label": "other",
+   "ms": 187.61
+  },
+  "Pls dont make me come in 5 days a week": {
+   "label": "max_days",
+   "ms": 306.07
+  },
+  "I'm an elite athlete so I need fewer days at uni": {
+   "label": "prefer_fewer_days",
+   "ms": 305.84
+  },
+  "nothing on Saturday mornings": {
+   "label": "blocked_time",
+   "ms": 258.42
+  },
+  "I'd like to cut down on how many days I come in, and when I do come in": {
+   "label": "prefer_fewer_days",
+   "ms": 356.95
+  },
+  "no huge breaks": {
+   "label": "prefer_less_waiting",
+   "ms": 307.71
+  },
+  "I'd like to cut down on how many days I come in": {
+   "label": "prefer_fewer_days",
+   "ms": 306.33
+  },
+  "when I do come in, no huge breaks": {
+   "label": "prefer_less_waiting",
+   "ms": 307.56
+  },
+  "I don't want to be at uni longer than 8 hours a day": {
+   "label": "max_daily_hours",
+   "ms": 274.22
+  },
+  "including breaks": {
+   "label": "other",
+   "ms": 340.42
+  },
+  "I don't want to be at uni longer than 8 hours a day, including breaks": {
+   "label": "max_daily_hours",
+   "ms": 308.72
+  },
+  "I need to be home by 3 on school days to pick up my twins": {
+   "label": "blocked_time",
+   "ms": 304.72
+  },
+  "I'd like a 3 day week": {
+   "label": "max_days",
+   "ms": 306.97
+  },
+  "I work every arvo from 1 so no classes after 1": {
+   "label": "blocked_time",
+   "ms": 307.55
+  },
+  "I'd like to avoid 6 to 8pm, I'm at cricket": {
+   "label": "blocked_time",
+   "ms": 403.53
+  },
+  "The accessible bus only runs after 9:30, so nothing before 10": {
+   "label": "blocked_time",
+   "ms": 307.45
+  },
+  "A gap here": {
+   "label": "prefer_less_waiting",
+   "ms": 306.26
+  },
+  "there is ok": {
+   "label": "other",
+   "ms": 188.96
+  },
+  "please no gaps over 90 minutes": {
+   "label": "prefer_less_waiting",
+   "ms": 323.83
+  },
+  "A gap here and there is ok": {
+   "label": "prefer_less_waiting",
+   "ms": 383.11
+  },
+  "My kid's daycare closes at 5:30": {
+   "label": "blocked_time",
+   "ms": 437.59
+  },
+  "it's 40 mins away, so I need to leave by 4:45": {
+   "label": "blocked_time",
+   "ms": 408.34
+  },
+  "My kid's daycare closes at 5:30 and it's 40 mins away, so I need to leave by 4:45": {
+   "label": "blocked_time",
+   "ms": 307.54
+  },
+  "I teach at Hebrew school on Sunday mornings and Shabbat starts Friday evening so nothing after 4 on Fridays": {
+   "label": "blocked_time",
+   "ms": 305.81
+  },
+  "I teach at Hebrew school on Sunday mornings": {
+   "label": "blocked_time",
+   "ms": 196.55
+  },
+  "Shabbat starts Friday evening so nothing after 4 on Fridays": {
+   "label": "blocked_time",
+   "ms": 316.34
+  },
+  "I have physio every Tuesday morning": {
+   "label": "blocked_time",
+   "ms": 208.35
+  },
+  "I'd rather keep lunchtimes free to eat": {
+   "label": "lunch",
+   "ms": 405.97
+  },
+  "Thanks heaps! Max 3 days": {
+   "label": "max_days",
+   "ms": 306.32
+  },
+  "keep my lunch free": {
+   "label": "lunch",
+   "ms": 307.35
+  },
+  "Max 3 days": {
+   "label": "max_days",
+   "ms": 307.24
+  },
+  "Evening classes suit me fine": {
+   "label": "other",
+   "ms": 191.67
+  },
+  "honestly prefer them": {
+   "label": "prefer_fewer_days",
+   "ms": 321.05
+  },
+  "Evening classes suit me fine, honestly prefer them": {
+   "label": "prefer_no_early_late",
+   "ms": 229.0
+  },
+  "I work Mon and Thu": {
+   "label": "blocked_time",
+   "ms": 193.62
+  },
+  "I want max 4 hrs of class a day": {
+   "label": "max_daily_hours",
+   "ms": 396.85
+  },
+  "pls no gaps longer than an hour": {
+   "label": "prefer_less_waiting",
+   "ms": 307.54
+  },
+  "I can do 4 days max": {
+   "label": "max_days",
+   "ms": 305.55
+  },
+  "3 would be heaps better": {
+   "label": "prefer_fewer_days",
+   "ms": 219.84
+  },
+  "I can do 4 days max but 3 would be heaps better": {
+   "label": "max_days",
+   "ms": 292.11
+  },
+  "Class hours per day: 4 max": {
+   "label": "max_daily_hours",
+   "ms": 268.06
+  },
+  "Days per week: 3 max": {
+   "label": "max_days",
+   "ms": 347.37
+  },
+  "Lunch: yes pls": {
+   "label": "lunch",
+   "ms": 306.16
+  },
+  "I want my lab in the same building as my lecture": {
+   "label": "other",
+   "ms": 188.39
+  },
+  "no classes after 6": {
+   "label": "blocked_time",
+   "ms": 325.75
+  },
+  "Footy training Tues/Thurs 5:30 onwards and games are Saturdays": {
+   "label": "blocked_time",
+   "ms": 253.08
+  },
+  "Footy training Tues/Thurs 5:30 onwards": {
+   "label": "blocked_time",
+   "ms": 228.08
+  },
+  "games are Saturdays": {
+   "label": "blocked_time",
+   "ms": 336.97
+  },
+  "Nothing super late in the evening pls": {
+   "label": "prefer_no_early_late",
+   "ms": 334.63
+  },
+  "I'm catching two buses home": {
+   "label": "other",
+   "ms": 183.8
+  },
+  "Nothing super late in the evening pls, I'm catching two buses home": {
+   "label": "prefer_no_early_late",
+   "ms": 402.7
+  },
+  "I'd like my classes to be no more than 5 hrs per day and my time at uni no more than 8": {
+   "label": "max_daily_hours",
+   "ms": 285.95
+  },
+  "I'd like my classes to be no more than 5 hrs per day": {
+   "label": "max_daily_hours",
+   "ms": 264.01
+  },
+  "my time at uni no more than 8": {
+   "label": "max_daily_hours",
+   "ms": 272.45
+  },
+  "Give me a timetable where I'm not on campus longer than 6 hours": {
+   "label": "max_daily_hours",
+   "ms": 314.46
+  },
+  "I'm not waiting between classes": {
+   "label": "prefer_less_waiting",
+   "ms": 399.19
+  },
+  "I need Wednesday off for my dad's medical appointments, otherwise anything goes": {
+   "label": "blocked_time",
+   "ms": 196.95
+  },
+  "I need Wednesday off for my dad's medical appointments": {
+   "label": "blocked_time",
+   "ms": 200.6
+  },
+  "otherwise anything goes": {
+   "label": "other",
+   "ms": 189.37
+  },
+  "I volunteer at the hospital Thursday mornings from 8 till 12": {
+   "label": "blocked_time",
+   "ms": 233.09
+  },
+  "I'd like to keep my Mondays free for my part time job": {
+   "label": "blocked_time",
+   "ms": 305.39
+  },
+  "nothing past 5pm on other days": {
+   "label": "blocked_time",
+   "ms": 293.51
+  },
+  "Two days on campus": {
+   "label": "max_days",
+   "ms": 288.02
+  },
+  "maybe three if it has to be": {
+   "label": "max_days",
+   "ms": 443.93
+  },
+  "Two days on campus, maybe three if it has to be": {
+   "label": "max_days",
+   "ms": 401.66
+  },
+  "I get the 7:10 train": {
+   "label": "blocked_time",
+   "ms": 308.49
+  },
+  "it gets into Central at 8:25, so I can't make anything before 9": {
+   "label": "blocked_time",
+   "ms": 305.31
+  },
+  "I get the 7:10 train and it gets into Central at 8:25, so I can't make anything before 9": {
+   "label": "blocked_time",
+   "ms": 307.41
+  },
+  "I'm in the uni choir but rehearsal times haven't been set yet": {
+   "label": "other",
+   "ms": 307.82
+  },
+  "I'd like two days a week": {
+   "label": "max_days",
+   "ms": 307.16
+  },
+  "no evening classes": {
+   "label": "blocked_time",
+   "ms": 248.73
+  },
+  "I want to be in the same lab group as my mate Tom": {
+   "label": "other",
+   "ms": 365.59
+  },
+  "My internet at home is shocking so please no online classes": {
+   "label": "in_person_only",
+   "ms": 307.23
+  },
+  "Footy on Tuesday and Thursday nights": {
+   "label": "blocked_time",
+   "ms": 196.63
+  },
+  "work Saturday": {
+   "label": "blocked_time",
+   "ms": 200.15
+  },
+  "max 4 hours of class a day and an hour for lunch": {
+   "label": "max_daily_hours",
+   "ms": 328.28
+  },
+  "max 4 hours of class a day": {
+   "label": "max_daily_hours",
+   "ms": 298.14
+  },
+  "an hour for lunch": {
+   "label": "lunch",
+   "ms": 410.31
+  },
+  "Thursday's the only day I can come in": {
+   "label": "blocked_time",
+   "ms": 195.29
+  },
+  "no late arvos": {
+   "label": "prefer_no_early_late",
+   "ms": 317.63
+  },
+  "lunch between 1 and 2": {
+   "label": "lunch",
+   "ms": 307.0
+  },
+  "My shifts are 10am to 2pm on Mondays and 5 to 9pm Thursdays": {
+   "label": "blocked_time",
+   "ms": 305.48
+  },
+  "I'm in a wheelchair and the lifts in some buildings are slow, so I'd like extra time between classes": {
+   "label": "other",
+   "ms": 214.04
+  },
+  "I hate 8ams with a passion": {
+   "label": "prefer_no_early_late",
+   "ms": 401.4
+  },
+  "No Tues no Thurs": {
+   "label": "blocked_time",
+   "ms": 307.02
+  },
+  "No Tues": {
+   "label": "blocked_time",
+   "ms": 306.18
+  },
+  "no Thurs": {
+   "label": "blocked_time",
+   "ms": 307.12
+  },
+  "Kind of a weird one": {
+   "label": "other",
+   "ms": 262.35
+  },
+  "I'm a volunteer firefighter and get called out randomly, so no preference really": {
+   "label": "other",
+   "ms": 190.59
+  },
+  "Kind of a weird one but I'm a volunteer firefighter and get called out randomly, so no preference really": {
+   "label": "other",
+   "ms": 264.37
+  },
+  "I'm a carer for my dad so I need to be home by 5 every day": {
+   "label": "blocked_time",
+   "ms": 306.92
+  },
+  "Ideally done by 2 most days": {
+   "label": "max_days",
+   "ms": 306.64
+  },
+  "2 or 3 days is ideal": {
+   "label": "max_days",
+   "ms": 307.63
+  },
+  "Lunch from 12:30 to 1:30": {
+   "label": "lunch",
+   "ms": 410.51
+  },
+  "I'd like to be done by 4 if possible": {
+   "label": "prefer_no_early_late",
+   "ms": 409.44
+  },
+  "Online classes are fine by me": {
+   "label": "other",
+   "ms": 193.78
+  },
+  "actually I'd prefer them": {
+   "label": "prefer_fewer_days",
+   "ms": 318.99
+  },
+  "Online classes are fine by me, actually I'd prefer them": {
+   "label": "other",
+   "ms": 184.49
+  },
+  "I'm on a sports scholarship, training is 6-8am and 4-6pm every weekday": {
+   "label": "blocked_time",
+   "ms": 227.76
+  },
+  "I had a 3 hour gap last sem and it sucked": {
+   "label": "prefer_less_waiting",
+   "ms": 405.75
+  },
+  "pls avoid that": {
+   "label": "prefer_no_early_late",
+   "ms": 410.42
+  },
+  "I had a 3 hour gap last sem and it sucked, pls avoid that": {
+   "label": "prefer_less_waiting",
+   "ms": 281.06
+  },
+  "I can do Mon and Tue only": {
+   "label": "blocked_time",
+   "ms": 193.61
+  },
+  "I don't mind which days as long as there are only 3 of them": {
+   "label": "max_days",
+   "ms": 345.61
+  },
+  "I can do any day except Tues and Thurs mornings": {
+   "label": "blocked_time",
+   "ms": 305.82
+  },
+  "I'd like to do 2 days": {
+   "label": "max_days",
+   "ms": 307.05
+  },
+  "I work 3 days a week in retail": {
+   "label": "blocked_time",
+   "ms": 199.9
+  },
+  "I'd like to do 2 days, I work 3 days a week in retail": {
+   "label": "max_days",
+   "ms": 311.59
+  },
+  "Look I'm doing 4 units while working 30 hrs a week so I need everything in 2 days max": {
+   "label": "max_days",
+   "ms": 306.93
+  },
+  "preferably no gaps": {
+   "label": "prefer_less_waiting",
+   "ms": 301.01
+  },
+  "cant do wensdays or thrusday mornings sry": {
+   "label": "blocked_time",
+   "ms": 226.89
+  },
+  "I'd rather not start before 11 if I can help it": {
+   "label": "prefer_no_early_late",
+   "ms": 341.83
+  },
+  "I'm doing 6 units this sem which is a lot": {
+   "label": "other",
+   "ms": 362.15
+  },
+  "I still don't want more than 4 days": {
+   "label": "max_days",
+   "ms": 305.46
+  },
+  "I'm doing 6 units this sem which is a lot but I still don't want more than 4 days": {
+   "label": "max_days",
+   "ms": 298.72
+  },
+  "Gaps longer than an hour between classes are the worst": {
+   "label": "prefer_less_waiting",
+   "ms": 307.18
+  },
+  "I'd like to come in as little as possible": {
+   "label": "prefer_fewer_days",
+   "ms": 307.18
+  },
+  "no Monday classes since I work Mondays": {
+   "label": "blocked_time",
+   "ms": 199.85
+  },
+  "Wednesday is the only day I can't come": {
+   "label": "blocked_time",
+   "ms": 312.9
+  },
+  "My only real wish is a tutor who explains things slowly": {
+   "label": "other",
+   "ms": 191.89
+  },
+  "I'd like my tutes straight after my lectures so I'm not killing time": {
+   "label": "prefer_less_waiting",
+   "ms": 319.3
+  },
+  "I need my exams to not be on the same day": {
+   "label": "other",
+   "ms": 193.55
+  },
+  "I have a casual job and the roster changes every week so I can't really say": {
+   "label": "blocked_time",
+   "ms": 319.08
+  },
+  "Prefer not to start before 9:30": {
+   "label": "prefer_no_early_late",
+   "ms": 306.79
+  },
+  "I have chemo every second Thursday": {
+   "label": "blocked_time",
+   "ms": 205.51
+  },
+  "If possible I'd like to be done by 3:30": {
+   "label": "prefer_no_early_late",
+   "ms": 409.33
+  },
+  "Not before 10am on Mondays": {
+   "label": "blocked_time",
+   "ms": 307.1
+  },
+  "not after 3pm on Fridays": {
+   "label": "blocked_time",
+   "ms": 306.34
+  },
+  "I'd rather do a few long days than lots of short ones": {
+   "label": "prefer_fewer_days",
+   "ms": 307.49
+  },
+  "no classes before 10 no classes after 4 no classes on friday": {
+   "label": "blocked_time",
+   "ms": 307.53
+  },
+  "no classes before 10": {
+   "label": "blocked_time",
+   "ms": 306.67
+  },
+  "no classes after 4": {
+   "label": "blocked_time",
+   "ms": 308.62
+  },
+  "no classes on friday": {
+   "label": "blocked_time",
+   "ms": 306.32
+  },
+  "Weekly hockey Thursday evening and a gym class at 7am Tuesdays": {
+   "label": "blocked_time",
+   "ms": 230.5
+  },
+  "Weekly hockey Thursday evening": {
+   "label": "blocked_time",
+   "ms": 209.31
+  },
+  "a gym class at 7am Tuesdays": {
+   "label": "blocked_time",
+   "ms": 278.99
+  },
+  "No classes 12-1 cos that's when I do my shift at the uni cafe": {
+   "label": "blocked_time",
+   "ms": 202.16
+  },
+  "later classes suit me way better": {
+   "label": "prefer_no_early_late",
+   "ms": 410.29
+  },
+  "I'm a night owl, later classes suit me way better": {
+   "label": "prefer_no_early_late",
+   "ms": 344.21
+  },
+  "I'd prefer to start at 11 or later": {
+   "label": "prefer_no_early_late",
+   "ms": 372.59
+  },
+  "can I have my classes between 11 and 5": {
+   "label": "blocked_time",
+   "ms": 216.58
+  },
+  "I need my mornings for my baby": {
+   "label": "blocked_time",
+   "ms": 190.33
+  },
+  "can I have my classes between 11 and 5, I need my mornings for my baby": {
+   "label": "blocked_time",
+   "ms": 311.2
+  },
+  "My son's therapy is Tuesday 3:30 so I have to leave uni by 2:45 that day": {
+   "label": "blocked_time",
+   "ms": 305.43
+  },
+  "I just want a compact week": {
+   "label": "prefer_fewer_days",
+   "ms": 307.52
+  },
+  "like not coming in every single day": {
+   "label": "prefer_fewer_days",
+   "ms": 293.05
+  },
+  "I just want a compact week, like not coming in every single day": {
+   "label": "prefer_fewer_days",
+   "ms": 315.51
+  },
+  "no late nights": {
+   "label": "prefer_no_early_late",
+   "ms": 313.07
+  },
+  "Days and times don't matter, I'm just happy to be here": {
+   "label": "other",
+   "ms": 192.35
+  },
+  "I don't mind 8am starts": {
+   "label": "other",
+   "ms": 188.21
+  },
+  "I just want to be home by 3": {
+   "label": "blocked_time",
+   "ms": 275.11
+  },
+  "Mondays and Fridays I'm on placement at Westmead": {
+   "label": "blocked_time",
+   "ms": 222.57
+  },
+  "I'd like fewer days on campus overall": {
+   "label": "prefer_fewer_days",
+   "ms": 350.5
+  },
+  "Not coming in every day would be a dream": {
+   "label": "prefer_fewer_days",
+   "ms": 308.66
+  },
+  "if I have to be in, keep the classes back to back": {
+   "label": "prefer_less_waiting",
+   "ms": 304.98
+  },
+  "I've got chronic fatigue so I can't be on campus more than 6 hours a day": {
+   "label": "max_daily_hours",
+   "ms": 246.22
+  },
+  "I need to eat at 11:30 because of my diabetes meds": {
+   "label": "lunch",
+   "ms": 252.27
+  },
+  "give me till 12": {
+   "label": "blocked_time",
+   "ms": 222.62
+  },
+  "I need to eat at 11:30 because of my diabetes meds, give me till 12": {
+   "label": "lunch",
+   "ms": 304.55
+  },
+  "I'd like as few days as possible": {
+   "label": "prefer_fewer_days",
+   "ms": 408.66
+  },
+  "not more than 7 hours of class on any of them": {
+   "label": "max_daily_hours",
+   "ms": 308.17
+  },
+  "honestly whatever works, I'm easy": {
+   "label": "other",
+   "ms": 209.0
+  },
+  "early starts kill me": {
+   "label": "prefer_no_early_late",
+   "ms": 404.34
+  },
+  "gaps kill me": {
+   "label": "prefer_less_waiting",
+   "ms": 307.74
+  },
+  "Friday classes kill me": {
+   "label": "prefer_fewer_days",
+   "ms": 402.75
+  },
+  "I want to come in once a week if that's even possible": {
+   "label": "max_days",
+   "ms": 409.65
+  },
+  "wanna be able to eat lunch at 12 for like 30 mins": {
+   "label": "lunch",
+   "ms": 409.55
+  },
+  "no gaps longer than 30 mins": {
+   "label": "prefer_less_waiting",
+   "ms": 307.08
+  },
+  "No more than 6 hours on campus per day": {
+   "label": "max_daily_hours",
+   "ms": 306.32
+  },
+  "no gaps over an hour": {
+   "label": "prefer_less_waiting",
+   "ms": 309.07
+  },
+  "I'd like half an hour for lunch somewhere between 12 and 1:30": {
+   "label": "lunch",
+   "ms": 408.49
+  },
+  "Can I get everything done in 3 days": {
+   "label": "max_days",
+   "ms": 197.14
+  },
+  "Thursday and Friday I'm at my internship": {
+   "label": "blocked_time",
+   "ms": 314.73
+  },
+  "Not every day pls": {
+   "label": "prefer_fewer_days",
+   "ms": 306.77
+  },
+  "I have a 3 year old at home": {
+   "label": "other",
+   "ms": 155.09
+  },
+  "Not every day pls, I have a 3 year old at home": {
+   "label": "prefer_fewer_days",
+   "ms": 357.68
+  },
+  "I'd like to not be at uni more than 10 hours on any day, it's a long trip home": {
+   "label": "max_daily_hours",
+   "ms": 308.0
+  },
+  "I'm Seventh-day Adventist so no Saturday anything": {
+   "label": "blocked_time",
+   "ms": 228.12
+  },
+  "I volunteer Wednesday arvos": {
+   "label": "blocked_time",
+   "ms": 282.2
+  },
+  "ideally classes between 10 and 3": {
+   "label": "prefer_no_early_late",
+   "ms": 231.96
+  }
+ },
+ "machine": "http://192.168.1.120:11434"
+}

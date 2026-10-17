@@ -33,6 +33,32 @@ class SplitTests(unittest.TestCase):
         self.assertEqual(split_clauses("我周五打工，所以那天不行"), ["我周五打工，所以那天不行"])
         self.assertEqual(split_clauses("最好十点以后上课，如果可以的话"), ["最好十点以后上课，如果可以的话"])
 
+    def test_and_only_cuts_before_a_new_clause(self):
+        for text in ("I work Monday, Wednesday and Friday", "no more than six hours of lectures and tuts a day",
+                     "four and a half hours a day is my limit", "my partner and I both work on Fridays"):
+            self.assertEqual(split_clauses(text), [text])
+        self.assertEqual(split_clauses("I want online tutorials and as few campus days as possible"),
+                         ["I want online tutorials", "as few campus days as possible"])
+
+    def test_number_add_ons_stay_with_their_clause(self):
+        for text in ("as few days as possible, maybe 2", "Ideally only 2 days, but 3 is ok",
+                     "only one day would be a dream but realistically two", "an hour gap is fine but no more"):
+            self.assertEqual(split_clauses(text), [text])
+        self.assertEqual(split_clauses("No mornings Tue/Thu, max 3 days"), ["No mornings Tue/Thu", "max 3 days"])
+
+    def test_back_references_and_lone_words(self):
+        for text in ("fewer, longer days please", "After 3pm I'm free, before that I'm at work",
+                     "the less I have to come in, the happier I am", "Monday is my kids' day, I have them all day"):
+            self.assertEqual(split_clauses(text), [text])
+        self.assertEqual(split_clauses("Wednesdays I'm free, other days I work from 3"),
+                         ["Wednesdays I'm free", "other days I work from 3"])
+
+    def test_reasons_stay_with_their_request(self):
+        for text in ("Fridays are a no-go, I've got a shift", "pls avoid wed, it's my only day with my kids",
+                     "I'm in the uni orchestra, rehearsals are Thursday 5 to 8", "周一不能上课，有兼职"):
+            self.assertEqual(split_clauses(text), [text])
+        self.assertEqual(split_clauses("I work Fridays, I hate gaps"), ["I work Fridays", "I hate gaps"])
+
     def test_drops_pleasantries_and_empty_text(self):
         self.assertEqual(split_clauses("一周最多三天，谢谢！"), ["一周最多三天"])
         self.assertEqual(split_clauses("  "), [])

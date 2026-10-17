@@ -1,0 +1,16 @@
+{
+  "round": 1,
+  "pool": 1918,
+  "to_grade": 476,
+  "agree_sample": 180,
+  "disagree": 296,
+  "by_source": {
+    "qwen_synth": 449,
+    "claude_train": 27
+  },
+  "agree_sample_share": 0.1,
+  "sample_seed": 2113,
+  "zero_shot_accuracy_vs_gen_label": {
+    "qwen2.5:7b": 0.8457
+  }
+}

@@ -1,0 +1,476 @@
+{"id": "syn-0000", "clause": "周一不能上课，有兼职。", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0014", "clause": "Not on Wednesdays 'cos I've got a 3-11pm shift at the supermarket.", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0018", "clause": "每天中午有在线课程", "gen_label": "blocked_time", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0024", "clause": "周一晚上8点之前没有课程", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0025", "clause": "上午10点之前不能有课程", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0027", "clause": "下午3点到5点之间没有课", "gen_label": "blocked_time", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0028", "clause": "晚上7点到9点之间没有课", "gen_label": "blocked_time", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0030", "clause": "下午4点到6点之间没有课", "gen_label": "blocked_time", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0031", "clause": "晚上8点到10点之间没有课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0043", "clause": "10点前没课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0045", "clause": "9am线上课冲突", "gen_label": "blocked_time", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0048", "clause": "周二晚上7点有排练，不能上课", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0051", "clause": "周一早上8点到9点不能上课，因为有宗教活动", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0053", "clause": "Can't do any classes on Wednesdays 'cause I've got a morning karate training.", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0055", "clause": "Nope, not on Fridays, I've got a religious service downtown.", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0060", "clause": "No classes after 5pm on Wednesdays, got a sports practice in town.", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0061", "clause": "周六下午三点到五点有音乐排练，请不要安排课程", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0063", "clause": "周二和周四晚上不能上线下课，只能上线上课", "gen_label": "blocked_time", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0067", "clause": "每天早上六点半到八点都有早读时间，最好避开这个时间段", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0070", "clause": "不太想晚上7点之后上课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0071", "clause": "不太想周一早上9点之前有课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0072", "clause": "不太想周四上午10点之前有课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0073", "clause": "不太想下午3点到5点之间有课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0074", "clause": "不太想周二早上8点之前有课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0075", "clause": "不太想周三晚上6点之后有课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0076", "clause": "不太想晚上9点之后有课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0080", "clause": "no early morning classes before 9am", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0081", "clause": "no classes between 3pm and 6pm", "gen_label": "blocked_time", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0093", "clause": "不想要周五上课", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0095", "clause": "晚上7点以后不来上课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0097", "clause": "工作日不想要早课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0106", "clause": "only on wednesdays", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0107", "clause": "no early morning classes", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0108", "clause": "每天早上8点前不在线", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0110", "clause": "周三课太多", "gen_label": "blocked_time", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0111", "clause": "没有lab在9am", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0112", "clause": "不想要周二晚上", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0113", "clause": "避开10am前的课程", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0116", "clause": "不允许早上八点前上课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0119", "clause": "6点前不能有课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0121", "clause": "不能早于10点上课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0125", "clause": "no early morning classes, way too early for me", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0129", "clause": "no late-night classes, way past my bedtime", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0132", "clause": "9am前无课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0133", "clause": "10am后无课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0134", "clause": "12pm到2pm无课", "gen_label": "blocked_time", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0143", "clause": "Can't do anything on Mondays, got kid's soccer practice in the afternoon", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0146", "clause": "Can't make it before 5pm on Tuesdays, pick up the kids from daycare", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0148", "clause": "Can't be in class before 10am on Tuesdays, need to drop my son at school", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0155", "clause": "周末需要上半天班，所以周六和周日白天的时间都不方便上课", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0156", "clause": "周五晚上有网课，所以晚上七点到十点这段时间无法参加课程", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0159", "clause": "周一不用课", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0176", "clause": "9am前不在线", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0178", "clause": "周一不用早课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0179", "clause": "3pm后别有课", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0182", "clause": "10am前不参加课堂", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0187", "clause": "10点前没空", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0200", "clause": "No more than 4 days on campus to avoid the 90min commute grind, you know what I mean?", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0208", "clause": "希望最多2天在校园上课,因为那几天有重要的音乐演出", "gen_label": "max_days", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0217", "clause": "Try 3 days", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0221", "clause": "希望能有两天可以做练习", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0222", "clause": "每周能有一天线上课程", "gen_label": "max_days", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0228", "clause": "最多2天在 campus", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0238", "clause": "一周上两次课就够了，因为要照顾小孩。", "gen_label": "max_days", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0239", "clause": "一周上两天课挺好，这样还能回家做饭。", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0240", "clause": "三天里两天上课就足够了，这样可以平衡工作和家庭。", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0241", "clause": "因为有小孩要照顾，我希望一周上两次课。", "gen_label": "max_days", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0242", "clause": "一周里三天上课太密集，两天就挺好。", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0243", "clause": "我希望一周能上两天课，这样可以多陪陪小孩。", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0244", "clause": "希望一周三天上课最好", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0245", "clause": "上课时间最好是三天搞定", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0247", "clause": "希望最多三天才上", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0249", "clause": "上三天课就好想三天", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0250", "clause": "三天才上课", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0253", "clause": "希望每周可以有一天时间去学校，最好是下午的课，需要照顾家里的人。", "gen_label": "max_days", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0255", "clause": "希望能有一次每周的全天时间可以在学校，最好是上午的课，下午可以去处理家里的一些事情。", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0256", "clause": "Only 3 days max on campus for sure, no more than that each week.", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0268", "clause": "希望每周只有一天到校上课，最好是上午的课", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0282", "clause": "最好一周三天能安排在晚上，课业太多白天没时间。", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0283", "clause": "尽量多给我点上课时间，最好两天足矣", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0284", "clause": "希望有空能上下午的课，最好能三天", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0294", "clause": "每周最多4天在校园内上课以确保训练，训练时间安排在Mon和Fri下午。", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0295", "clause": "每周最多3天到教室上课以便有时间做体能训练，体能训练安排在Tue和Thu晚上。", "gen_label": "max_days", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0296", "clause": "每周最多2天到教室上课以保证有足够时间参加体育队的训练，训练时间安排在Mon和Fri下午。", "gen_label": "max_days", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0300", "clause": "两天足够了，不想每天都来。", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0303", "clause": "两天就可以，不想每天都去学校。", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0304", "clause": "只需要两天，其他的都可以在家完成。", "gen_label": "max_days", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0306", "clause": "两天上课真的可以吗？不需要每天都来。", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0309", "clause": "Only hit the campus 2 times a week, that's fine.", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0328", "clause": "希望每周在校只有两天时间，这样更好。", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0330", "clause": "不想每天都挤公交，三天在校时间已经很充裕了。", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0333", "clause": "每天上学太累了，每周只有三天在校就很好了。", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0334", "clause": "希望每周只来两次，通常是9am的tutorial和lab，其余时间在线上课。", "gen_label": "max_days", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0335", "clause": "每周最多两天即可，一天Mon下午的tutorial，另一天是Fri晚上的lab。", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0338", "clause": "不想经常来学校，每周只需一次下午的tutorial，其余时间在线。", "gen_label": "max_days", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0344", "clause": "Not sure I could handle more than two days a week", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0346", "clause": "Two days a week is all I can handle for now", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0351", "clause": "我最多只希望3天在校区", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0357", "clause": "try to keep it to 4 days max so I can earn more", "gen_label": "max_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0368", "clause": "尽量不要安排我在学校上课超过2天", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0371", "clause": "不想天天来平时一天就好", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0372", "clause": "平时两天足夠不想多来", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0373", "clause": "平时只两天不想天天都来", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0384", "clause": "一天最多8小时上课啦", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0385", "clause": "no more than 3 hours of class any day", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0387", "clause": "can't be more than 8 hours at uni", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0395", "clause": "不能连续两天都有 4 个小时的课堂，需要一天的间隔去调整状态。", "gen_label": "max_daily_hours", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0396", "clause": "除了周末，我每周最多只能有 6 个小时的 face-to-face 课程，其余时间是在线课程。", "gen_label": "max_daily_hours", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0397", "clause": "周五下午没有课，方便我参加志愿者活动，所以这一天最多 4 个小时的课堂。", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0399", "clause": "白天最多8小时在校园，因为还有很多家务要做。", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0410", "clause": "At most 3 hours in classes daily, from 9 AM to 12 PM, to help out with the early morning stuff.", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0411", "clause": "No more than 5 hours on campus, from 10 AM to 3 PM, so I can look after the kids in the afternoon.", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0413", "clause": "Keep it to 3 hours of classes daily, from 10 AM to 1 PM, to fit in the kids' morning drop-off.", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0416", "clause": "wed thu 9am-2pm lab 2hours", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0417", "clause": "friday 8hours campus include tutorial", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0419", "clause": "monday 3pm-7pm 4hours campus", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0429", "clause": "希望能有2个小时在校园", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0433", "clause": "need around 3 hours on fri", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0435", "clause": "prefer 3 hours on tues", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0438", "clause": "希望每周一和周五分别能有2个小时的志愿服务时间。", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0439", "clause": "尽量每天留出3个小时来进行线上学习和讨论。", "gen_label": "max_daily_hours", "pred_7b": "other", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0440", "clause": "希望能够在上午9点到11点之间安排2个小时的志愿服务。", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0442", "clause": "希望每周能有1个小时的实验室时间来补充理论知识。", "gen_label": "max_daily_hours", "pred_7b": "other", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0444", "clause": "希望周五下午能够安排1个小时的研讨会，这样可以更好地为周末做准备。", "gen_label": "max_daily_hours", "pred_7b": "other", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0452", "clause": "Could you make sure I have no more than 3 hours of classes on Wednesdays?", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0463", "clause": "每天参加课程和实验最多4个小时，其他时间用来自习", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0469", "clause": "除了周末，每天在校园时间不超过四小时，从早上十点到下午四点。", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0471", "clause": "工作日下午最多在校区四小时，从下午一点的第一节课到五点的最后一下课。", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0476", "clause": "Limit to 2.5 hours of classes on Wednesday, around lunchtime", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0480", "clause": "Not more than 4 hours of classes on Monday and Tuesday combined", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0482", "clause": "mon thu 6h class", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0483", "clause": "fri 4h campus", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0484", "clause": "sun 2h lab", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0489", "clause": "sat 2h gap", "gen_label": "max_daily_hours", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0490", "clause": "希望每天能在学校待不超过6个小时，因为小孩早上需要我去接他去托儿所。", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0495", "clause": "wouldnt mind 2 hours wed-fri but not on mon", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0496", "clause": "could use 3 hours campus time tues only", "gen_label": "max_daily_hours", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0498", "clause": "need 3 hours uni time thurs only", "gen_label": "max_daily_hours", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0501", "clause": "周一和周五希望有4个小时的课程时间，其余时间可以用来做兼职", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0502", "clause": "希望每天能有3个小时用来做在线课程，上午9点到11点之间最好", "gen_label": "max_daily_hours", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0503", "clause": "希望每天能留出3个小时来参加实验室课程，最好是晚上6点到8点", "gen_label": "max_daily_hours", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0505", "clause": "希望每天能有4个小时待在学校，最好是下午的时段，能让我兼顾下工作", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0506", "clause": "希望能每天有2个小时用于课程，最好是晚上7点到9点，这样能多陪陪家人", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0512", "clause": "上课时间不能超过5个小时", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0518", "clause": "At most 3 hours of lectures a day, can't miss my vocal practice", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0521", "clause": "Can't have more than 2 hours of classes, got a performance in the evening", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0523", "clause": "周一到周五最多4小时课堂", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0546", "clause": "Wed, at most 2 hours on campus, from 10am-12pm, online afternoon", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0547", "clause": "Fri, no more than 4 hours on campus, 2 classes, from 9am-1pm, no labs", "gen_label": "max_daily_hours", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0552", "clause": "希望能分配到每天4个小时的课程时间。", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0557", "clause": "需要中午休息吃午餐", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0561", "clause": "需要中午吃饭时间", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0572", "clause": "90 min commute, need lunch break", "gen_label": "lunch", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0579", "clause": "周二下午2点到3点之间如果有课程，希望能在这期间安排一个吃饭的空档", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0580", "clause": "希望在下午4点到5点之间可以有一个休息时间来吃午饭，最好是在线课程结束之后", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0590", "clause": "Lunch at 12:30 on MWF, but can swap with study if no food", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0593", "clause": "12:45 to 13:15 for lunch on MWF, it's my med time", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0607", "clause": "午饭时间需要休息", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0612", "clause": "could use a break for lunch on fri around midday", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0614", "clause": "need 2 hours for lunch thurs", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0622", "clause": "周二和周四的课后需要一个吃饭的时间段，大概在6点左右", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0637", "clause": "lunch time wed at 1230 for 1 hr", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0652", "clause": "下午12点吃午餐", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0656", "clause": "Need a bit of time to grab lunch on Weds", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0664", "clause": "Fri 9am-11am lab, can't do lunch then", "gen_label": "lunch", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0674", "clause": "Got a bit of a meeting on Tue, need a free 30 mins for lunch around 12:15 to catch up with mates", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0679", "clause": "Can use my 15-minute slot at 11:30 on Wed for a quickie lunch", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0687", "clause": "实验室后1小时吃饭", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0693", "clause": "想要一个中午吃饭的空档", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0704", "clause": "周三下午的tutorial之后需要吃饭", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0715", "clause": "下午12:15到12:45给我安排个午餐时间", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0725", "clause": "每周一和周五需要在12:30开始有45分钟的吃饭时间。", "gen_label": "lunch", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0758", "clause": "不想上录播课，只想要面对面上课，尤其是那些音乐课太需要即时反馈了。", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0762", "clause": "不喜欢录播课，希望在课堂上学习，特别是音乐欣赏课需要现场讲解。", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0763", "clause": "不喜欢在线上课，只想要实体课，特别是音乐分析课需要老师即时纠正。", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0774", "clause": "周一和周五的面授一定要有，不要线上。", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0776", "clause": "9点的课必须是实体课，不接受Zoom。", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0779", "clause": "不想有任何线上作业或测试，面对面的就好。", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0782", "clause": "上课时间我希望都是实体课程，不要在线的。", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0793", "clause": "req 3 in person classes mon thu 2-4", "gen_label": "in_person_only", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0798", "clause": "周一9点的面授课程", "gen_label": "in_person_only", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0799", "clause": "周三的tutorial必须是线下", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0806", "clause": "只想要实体课堂，不要网上和录播的课程。", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0820", "clause": "除了在教室上课，我不要任何形式的线上课", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0821", "clause": "每周四和周五的课必须是实地上课，不要任何形式的线上课", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0825", "clause": "不允许有任何线上课程，尤其是录播课，必须都是实地上课", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0833", "clause": "no online cos i play sport", "gen_label": "in_person_only", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0839", "clause": "不要线上课也不要录影", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0854", "clause": "In-person every day except Sat & Sun.", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0856", "clause": "Prefer in-person, hate Zoom classes.", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0871", "clause": "Not up for any online classes, needs to be on campus only.", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0875", "clause": "周一到周五必须都是面对面课堂，不允许有线上课程", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0888", "clause": "实体课一定要，不想有任何线上或录播课。", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0889", "clause": "从周一到周五只能上实体课，避免任何线上课。", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0914", "clause": "尽量把课安排在一起，不想天天都来学校。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0916", "clause": "能不能多安排些连堂课，不想天天都得来。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-0925", "clause": "尽量希望能在家里完成在线课程，减少来到校上课的日子。", "gen_label": "prefer_fewer_days", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0927", "clause": "能和导师商量是否可以把面授的tutorial安排在一起，减少来校天数。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0935", "clause": "希望课程可以连在一起，因为每天通勤很辛苦。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0940", "clause": "上课别太频繁", "gen_label": "prefer_fewer_days", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0941", "clause": "能网上上就网上", "gen_label": "prefer_fewer_days", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0942", "clause": "能不出校就不出", "gen_label": "prefer_fewer_days", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0944", "clause": "上课时间能集中些", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0945", "clause": "多用网上课", "gen_label": "prefer_fewer_days", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0947", "clause": "Need less campus days", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0954", "clause": "More online, less campus", "gen_label": "prefer_fewer_days", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0955", "clause": "尽量网上上课", "gen_label": "prefer_fewer_days", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0956", "clause": "课程能连续上", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0957", "clause": "希望有连着的课", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0959", "clause": "希望避开晚上", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0960", "clause": "多一些连堂课", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0964", "clause": "希望多课连着", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0976", "clause": "多亏课连在一起", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0977", "clause": "希望有空档在线", "gen_label": "prefer_fewer_days", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0978", "clause": "避免分散在多天", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0979", "clause": "希望晚上连上", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0984", "clause": "希望可以把课程集中在一些日子，这样我可以在其他时间练习。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-0996", "clause": "like to pack classes so hit campus less", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1000", "clause": "上课时间尽量错开，可以将课程安排在同一时间，减少频繁跑学校。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1001", "clause": "希望能有几天可以不上学校，其他时间在线上课。", "gen_label": "prefer_fewer_days", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1002", "clause": "希望每天上课", "gen_label": "prefer_fewer_days", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1006", "clause": "课程安排紧凑些", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1007", "clause": "连续上课好些", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1009", "clause": "希望能连着上", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1015", "clause": "Could you see if you can bunch my classes into fewer days to reduce the time I spend commuting?", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1020", "clause": "希望一周内能集中上课，减少每天通勤的次数。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1021", "clause": "希望可以把上午9点和下午的课一起安排，中间不空课，减少通勤。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1030", "clause": "Need fewer campus days.", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1031", "clause": "Can't do too many days.", "gen_label": "prefer_fewer_days", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1034", "clause": "Want more online classes.", "gen_label": "prefer_fewer_days", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1035", "clause": "Less face-to-face time needed.", "gen_label": "prefer_fewer_days", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1060", "clause": "希望可以灵活调整课程，这样可以减少不必要的来校次数。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1067", "clause": "Looking to cut down on campus time, but still pack a punch when I do come in.", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1068", "clause": "Could do with fewer campus days, but need to cram in the classes when I am there.", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1074", "clause": "尽量把课安排在连续的几天内，以减少每日往返学校的时间。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1077", "clause": "尽量安排连着的课", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1078", "clause": "上课尽量少来几天", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1079", "clause": "希望课程能连在一起", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1081", "clause": "连着几天上满课", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1086", "clause": "class timetable should be squeezed into min days", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1094", "clause": "课程尽量挨着上。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1097", "clause": "希望课程连续。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1098", "clause": "能少来几次更好。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1099", "clause": "Can we fit all my sports training in so I don't have to come to campus more than I have to?", "gen_label": "prefer_fewer_days", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1103", "clause": "Is there any chance of getting my classes clustered so I can avoid coming in as often as possible?", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1104", "clause": "Could you possibly arrange my schedule so I can limit my campus visits?", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1111", "clause": "能尽量减少在学校的时间，因为晚上需要打工。", "gen_label": "prefer_fewer_days", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1124", "clause": "最好能把课程安排在有线上课的日子，这样可以减少通勤的次数。", "gen_label": "prefer_fewer_days", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1125", "clause": "尽可能减少在校园的时间，尤其是早上上课的时候。", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1129", "clause": "Can I come in later and do less days?", "gen_label": "prefer_fewer_days", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1131", "clause": "Is it possible to do most stuff remotely to free up days?", "gen_label": "prefer_fewer_days", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1133", "clause": "I can handle most of it online to save on days of commuting.", "gen_label": "prefer_fewer_days", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1134", "clause": "I'd love to do as much as possible online so I can hit the books in less days", "gen_label": "prefer_fewer_days", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1141", "clause": "希望连堂上", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1150", "clause": "Can you keep my kid's late afternoon classes back-to-back? Don't like too much waiting between them.", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1152", "clause": "希望每天9am和11am都有课不要空档", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1189", "clause": "no break between my 3pm and 4pm classes", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1194", "clause": "need classes 4 and 5 stuck together", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1200", "clause": "上午课不要有空档", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1203", "clause": "连续上课不要超过两节", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1205", "clause": "课间不要超过半小时", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1208", "clause": "No way I'm dealing with a 30-minute break between 10am and 12pm, let's make those classes back to back.", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1211", "clause": "Absolutely no time for gaps between 11am and 1pm, better to have those classes right after the other.", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1212", "clause": "Can't handle the 1.5-hour break between 3pm and 5pm, need those classes back-to-back instead.", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1213", "clause": "Dislike the 2-hour gap between my morning and afternoon classes, need them joined up.", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1225", "clause": "Don't split up that morning stuff", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1234", "clause": "我不喜欢第一节课和第二节课之间有太大的空档，因为这样会导致我有太多的等待时间。", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1235", "clause": "我不想两门课之间有超过30分钟的空档，因为我觉得这样会很浪费时间。", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1242", "clause": "No breaks between lectures, please", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1244", "clause": "Back-to-back classes, not gaps", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1245", "clause": "Avoid big gaps, get me straight through", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1254", "clause": "连堂最好上午9am到11am连上", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1255", "clause": "不喜欢隔天上课之间有空档", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1270", "clause": "希望把上午11点的线上课和下午1点的研讨会连续排，中间不要有任何空档。", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1275", "clause": "希望课程紧凑点不要有空隙", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1292", "clause": "上课时间不要有空档，尤其是连续的tutorial和lab。", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1295", "clause": "My guitar lessons and jam session need to be back to back Thurs 11 am to 1 pm. No gaps allowed.", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1296", "clause": "My drumming class and band practice need to be back to back Thurs 3 to 5 pm, no time in between.", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1297", "clause": "不想两节课之间有太多空隙，最好是连上的。", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1321", "clause": "希望不隔课", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1326", "clause": "Classes need to be back to back, no gaps.", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1333", "clause": "每次课之间都不要有太长的等待时间。", "gen_label": "prefer_less_waiting", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1352", "clause": "Preferring classes to start around midday, as I need to get some training in the mornings.", "gen_label": "prefer_no_early_late", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1358", "clause": "晚上的课太折磨人了", "gen_label": "prefer_no_early_late", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1363", "clause": "晚上课太晚了", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1368", "clause": "晚上课希望少些", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1380", "clause": "Hopefully, we can keep our classes past 10am, you know, whenever possible.", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1397", "clause": "ideally after lunch", "gen_label": "prefer_no_early_late", "pred_7b": "lunch", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1398", "clause": "prefers midday", "gen_label": "prefer_no_early_late", "pred_7b": "lunch", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1399", "clause": "hates night classes", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1405", "clause": "白天的课程最佳，特别是没有lab和tutorial的课，可以多陪陪孩子。", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1406", "clause": "希望课程安排在下午，尤其是没有online作业的时候，方便带孩子。", "gen_label": "prefer_no_early_late", "pred_7b": "other", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1407", "clause": "喜欢下午的课程，特别是没有作业的时候，可以早点回家带小孩。", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1408", "clause": "最好九点以后才有课", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1410", "clause": "最好是十一点开始", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1412", "clause": "如果可以九点之后上课", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1413", "clause": "Ideally, if possible, my morning classes would be after 10am. I need to look after my grandma in the morning.", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1415", "clause": "If possible, I'd prefer my classes start after 9am. My mum needs help with breakfast in the morning.", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1416", "clause": "Ideally after 10am would suit me. My sister needs my help to get ready for school.", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1418", "clause": "If possible, I'd love my classes to start after 9:30am. My brother needs me to help him with his homework.", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1433", "clause": "平时课多几点好", "gen_label": "prefer_no_early_late", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1439", "clause": "希望下午上课的时间少一些，因为晚上需要陪孩子。", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1442", "clause": "喜欢白天课", "gen_label": "prefer_no_early_late", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1443", "clause": "希望线上课多些", "gen_label": "prefer_no_early_late", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1445", "clause": "希望有间隙", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1448", "clause": "如果可以的话，希望课程安排在上午十点以后，这样我能多睡会。", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1456", "clause": "最好九点以后", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1458", "clause": "尽量十点过后", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1465", "clause": "最好是上午十点后", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1469", "clause": "Morning classes are a no, I've got to be at the hospital in the morning for my grandpa.", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1470", "clause": "I'd really appreciate classes later, my grandpa is in the hospital early.", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1471", "clause": "Can't do early, got to pick up my niece before class.", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1473", "clause": "早上上课太早，家里有事需要帮忙.", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1475", "clause": "早上的课不想上，因为要回去帮忙做饭.", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1476", "clause": "早上课程不太想上，因为晚上还要陪家人.", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1478", "clause": "晚上课太耽误时间，能省就省", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1479", "clause": "晚上的课我都不想上，别考虑", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1487", "clause": "Absolutely no evening stuff.", "gen_label": "prefer_no_early_late", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1494", "clause": "如果课程安排在晚上，我宁愿选择在线学习。", "gen_label": "prefer_no_early_late", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1500", "clause": "最好是十点半以后开始上课", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1505", "clause": "尽量11点以后", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1514", "clause": "尽量不要安排早上课程，太早了不想起。", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1517", "clause": "如果不是特别重要的课程，尽量不要排在早上。", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1522", "clause": "不喜欢上晚课", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1527", "clause": "晚上课我拒绝", "gen_label": "prefer_no_early_late", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1531", "clause": "Hates evening study", "gen_label": "prefer_no_early_late", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1533", "clause": "Can't handle early starts", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1535", "clause": "不喜欢晚上课堂", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1537", "clause": "晚课想少点", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1547", "clause": "Ideally, no classes before 9am for me, can we do that?", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1555", "clause": "如果可以尽量选十点以后的课", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1564", "clause": "宁愿下午", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1574", "clause": "早上课太多，希望晚一点开始", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1575", "clause": "晚上课程太多了，希望能调整一下", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1580", "clause": "loves midday", "gen_label": "prefer_no_early_late", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1583", "clause": "希望所有的课都在城市校园内上，这样就不用来回奔波了。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1587", "clause": "最好是让课排在周五大下午四点，这样我可以早点回家。", "gen_label": "other", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1589", "clause": "Need to avoid lecture with Prof Johnson as they're teaching the class I help my grandpa with on Monday afternoons.", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1590", "clause": "Can't be in the Arts building for my Tuesday morning classes, my sister is sick there.", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1592", "clause": "Have to be in Building X for Thursday's classes, that's where the medical equipment is for my mum's class.", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1594", "clause": "Have to be on the Camperdown campus for my Saturday afternoon classes, mum is there running a club.", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1595", "clause": "Can't have my Psychology class with Dr Smith on Tuesday nights, it makes me anxious.", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1596", "clause": "Got to avoid the North Sydney campus on Wednesdays as my uncle is having an operation.", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1597", "clause": "能给我找个Mon 9am的志愿者课，最好是那个张老师教的，他在文三馆挺不错的。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1598", "clause": "周五下午没课的话能不能帮我排个tutorial，最好是能去图书馆的，那里环境好。", "gen_label": "other", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1599", "clause": "希望周六上午能给我排个在线的课程，因为我那个教授是美国来的，就只能线上上。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1600", "clause": "希望周二是空的，因为我要约个同学一起做实验室，最好是在B栋。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1601", "clause": "周三是我空的时间，能不能给我排个3个小时的空档，好和朋友出去吃饭。", "gen_label": "other", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1604", "clause": "希望能排一个周五晚上六点到八点的空课，因为我有个讲座要参加。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1605", "clause": "不想跟那个朋友分到不同班。", "gen_label": "other", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1610", "clause": "上课的时候不要被分开了。", "gen_label": "other", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1613", "clause": "SAME CLASS TUES & THURS", "gen_label": "other", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1615", "clause": "CLASS WITH HER FRI", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1616", "clause": "SAME SECTION SATURDAYS", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1622", "clause": "如果可以的话，希望能和朋友一起上下午的lab课，最好是周二和周四下午3点。", "gen_label": "other", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1623", "clause": "希望能和同学一起上晚上的tutorial课，尽量安排在周三和周五晚上6点。", "gen_label": "other", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1624", "clause": "希望能和搭档一起选在周一、周三晚上8点的课程。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1627", "clause": "希望能和同学一起上下午1点的课，最好是周二和周四。", "gen_label": "other", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1629", "clause": "尽量选线上或录播的课程吧，课多的时候更方便。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1630", "clause": "上课的时候最好能选录播课程，这样可以回放复习。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1631", "clause": "如果可以的话，多给我安排一些线上课程，这样我可以根据自己的时间安排听。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1632", "clause": "尽量安排线上课程，实体课太多了，做练习时间不够。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1633", "clause": "线上课程对我来说更合适一些，实体课的话太占时间。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1634", "clause": "希望线上或录播课程多一些，实体课太占用时间了。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1635", "clause": "尽量多给我一些线上或录播的课程，实体课的话不太好兼顾。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1636", "clause": "能给我多安排一些线上课程就更好了，实体课时间感觉有点紧张。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1637", "clause": "Got any online or recorded options? Prefer them, mate.", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1638", "clause": "If there's an online class available, that'd be a lifesaver, thanks.", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1641", "clause": "Trying to avoid the library rush, any online classes this semester would be a big help.", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1645", "clause": "优先线上课", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1646", "clause": "周二线上", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1647", "clause": "不要实体课", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1648", "clause": "6点后线上", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1651", "clause": "周一线上课程", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1652", "clause": "晚上线上", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1654", "clause": "周三下午的课随便，家人身体不太舒服。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1655", "clause": "周二晚上想选直播课，离线的我怕来不及复习。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1656", "clause": "不用固定时间，能上网课就行，家里还得带小孩。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1657", "clause": "任何课时段都可以，家里的事情需要我去。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1658", "clause": "希望周四不用早起，家里事情有点忙。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1660", "clause": "周一和周五的课都无所谓，家里有点小事情要处理。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1669", "clause": "Fri night anything is fine because I have my music ensemble practice", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1670", "clause": "Mon 9am tutorial no issue as I'm preparing my performance piece", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1671", "clause": "Tuesdays I'm free for any time, just need a bit of music practice", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1672", "clause": "Wed I have to be at the music lab for recording, so any time is okay elsewhere", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1673", "clause": "Sun I'm available for online classes as I’m planning to rehearse with my band", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1674", "clause": "Fri afternoons are great for me, as I need to catch up with my homework", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1675", "clause": "Thurs I prefer afternoons, I need to focus on my music theory", "gen_label": "other", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1676", "clause": "Gaps in my schedule are welcome, I need to fit in some personal time for my band", "gen_label": "other", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1678", "clause": "作业啥的，不用每天都有，一周三四个就行。", "gen_label": "other", "pred_7b": "max_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1679", "clause": "考试别安排在周三晚上和周五晚上。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1680", "clause": "周一上午最好不要安排考试，我有早课。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1681", "clause": "作业太多白天做不完，晚上留点时间给我。", "gen_label": "other", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1682", "clause": "尽量把课程安排在下午，我下午精神好。", "gen_label": "other", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1684", "clause": "周一和周五上午最好别有考试，太早起精神不好。", "gen_label": "other", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1685", "clause": "Need to fit in 3 units by the end of next week, can't have anything on Monday morning.", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1686", "clause": "Can't have more than 2 exams in the same week because I have a big social event on Thursday night.", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1688", "clause": "I need a block of free time during Friday afternoon for volunteering work.", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1689", "clause": "Got to fit in 5 hours of study on Saturday morning or I fall behind.", "gen_label": "other", "pred_7b": "max_daily_hours", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1690", "clause": "2 hours of exam prep on Tuesday night is a must, can't move that.", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1691", "clause": "Can't have any units on Wednesday because I have a sports training session.", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1692", "clause": "Need a full day off on Sunday, that's my only chance to catch up on admin stuff.", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1693", "clause": "尽量不要有太多的线上课程，因为我要照顾小孩。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1694", "clause": "周一和周五晚上最好没有课，我需要陪小孩睡觉。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1695", "clause": "希望有至少一节tutorial的gap时间，方便我带小孩出去散步。", "gen_label": "other", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1696", "clause": "上午9点到11点最好没有课，我打算教小孩做家务。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1697", "clause": "下午3点到5点最好不要有课，我通常在这个时间去接小孩放学。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1698", "clause": "希望周末没有课，可以带小孩去公园。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1699", "clause": "最好能有点空闲时间用于陪伴小孩，比如晚上8点到10点。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1700", "clause": "希望能有充足的作业时间，晚上7点到9点最好不要安排课程。", "gen_label": "other", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1701", "clause": "周一可以", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1702", "clause": "周二随便", "gen_label": "other", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1704", "clause": "周四晚上没问题", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1705", "clause": "周五下午没有冲突", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1706", "clause": "双休日都可以", "gen_label": "other", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1707", "clause": "晚上七点以后都可以", "gen_label": "other", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "val"}
+{"id": "syn-1711", "clause": "tuesday anytime is good", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1713", "clause": "friday afternoons are fine", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1715", "clause": "mornings are no probs", "gen_label": "other", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1717", "clause": "Mon morning fine, no issue with 8am slot", "gen_label": "other", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1718", "clause": "Fri afternoon works, any time after 2pm", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1720", "clause": "can do any time after 7pm, Mon to Fri", "gen_label": "other", "pred_7b": "prefer_no_early_late", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1721", "clause": "Mon evening good, after 6pm is fine", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1722", "clause": "weekdays work, just no 5pm", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1723", "clause": "Fri morning no problem, 9am or later", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1727", "clause": "希望在星期三上下午的课，因为那天我有时间照顾家人。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1731", "clause": "希望在星期五下午有课，因为那天我有空可以陪我妹妹学画画。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1734", "clause": "in the bio building", "gen_label": "other", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1736", "clause": "only in city campus", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1738", "clause": "lect by dr smith on mon", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1740", "clause": "must be in the new lecture hall", "gen_label": "other", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1745", "clause": "尽量不要和我的兼职时间冲突，谢谢。", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1746", "clause": "希望周一上午9点到11点的课程能安排在线上，方便我上班。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1747", "clause": "如果有空课时段，请尽量安排在周四下午，谢谢。", "gen_label": "other", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1748", "clause": "希望有实验课的安排能在实验室进行，谢谢老师。", "gen_label": "other", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1753", "clause": "能不能安排我和朋友的课程一样，课后可以一起吃午饭。", "gen_label": "other", "pred_7b": "lunch", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1757", "clause": "got ta stay with my bro in calc", "gen_label": "other", "pred_7b": "blocked_time", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1760", "clause": "needs to be with mate in chem", "gen_label": "other", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1763", "clause": "in da one wif jack for econ", "gen_label": "other", "pred_7b": "other", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1768", "clause": "不介意每天的课都在一起，尤其是和我好朋友同班的同学。", "gen_label": "other", "pred_7b": "prefer_fewer_days", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1772", "clause": "尽量在9am的课和我同学一起上，因为这样我们课后可以一起吃早餐讨论功课。", "gen_label": "other", "pred_7b": "prefer_less_waiting", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1773", "clause": "尽量想上线上课或者录播课，因为上网课比较灵活，可以边工作边学习。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1774", "clause": "尽量安排线上或者录播课，白天我还要工作，没办法去教室上课。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1775", "clause": "如果可以的话，我更倾向于线上或者录播课，可以让我有时间自己调整。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1776", "clause": "如果课程可以是线上或者录播课的话，那我就不用为了上课来回奔波了。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1777", "clause": "希望可以优先安排线上或者录播课，我白天要打工，不方便去教室。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1778", "clause": "尽可能选择线上或者录播课吧，白天我还要兼职，所以不方便去现场上课。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1779", "clause": "如果可以的话，希望线上或者录播课优先，这样我就能一边工作一边学习。", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "syn-1780", "clause": "如果可能的话，希望可以优先选择线上或者录播课，因为白天我需要上班", "gen_label": "other", "pred_7b": "in_person_only", "source": "qwen_synth", "split": "train"}
+{"id": "cl-k004-1", "clause": "classes before 9 are impossible, the train from Penrith doesn't get in till 9:15", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "claude_train", "split": "train"}
+{"id": "cl-k009-1", "clause": "only available Tue, Wed, Thu", "gen_label": "blocked_time", "pred_7b": "max_days", "source": "claude_train", "split": "train"}
+{"id": "cl-k019-1", "clause": "Sundays I work", "gen_label": "blocked_time", "pred_7b": "blocked_time", "source": "claude_train", "split": "train"}
+{"id": "cl-k019-2", "clause": "Saturdays I'm free", "gen_label": "other", "pred_7b": "blocked_time", "source": "claude_train", "split": "train"}
+{"id": "cl-k034-1", "clause": "If possible nothing past 5", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_no_early_late", "source": "claude_train", "split": "train"}
+{"id": "cl-k038-1", "clause": "preferably my day ends by 3:30", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_less_waiting", "source": "claude_train", "split": "train"}
+{"id": "cl-k040-1", "clause": "ideally between 11 and 5", "gen_label": "prefer_no_early_late", "pred_7b": "max_daily_hours", "source": "claude_train", "split": "val"}
+{"id": "cl-k042-1", "clause": "I'd prefer to wrap up before 6 where possible", "gen_label": "prefer_no_early_late", "pred_7b": "prefer_less_waiting", "source": "claude_train", "split": "val"}
+{"id": "cl-k049-1", "clause": "could I keep it to 4 days or fewer?", "gen_label": "max_days", "pred_7b": "prefer_fewer_days", "source": "claude_train", "split": "train"}
+{"id": "cl-k054-1", "clause": "big chunks of free days would be amazing", "gen_label": "prefer_fewer_days", "pred_7b": "other", "source": "claude_train", "split": "train"}
+{"id": "cl-k066-1", "clause": "I can't concentrate for more than 4 hours of lectures in a day", "gen_label": "max_daily_hours", "pred_7b": "max_daily_hours", "source": "claude_train", "split": "train"}
+{"id": "cl-k078-1", "clause": "I want to be physically in class for everything", "gen_label": "in_person_only", "pred_7b": "in_person_only", "source": "claude_train", "split": "train"}
+{"id": "cl-k082-1", "clause": "I'd like the online version of the lectures if there is one", "gen_label": "other", "pred_7b": "in_person_only", "source": "claude_train", "split": "train"}
+{"id": "cl-k083-1", "clause": "gaps don't bother me, I can study in between", "gen_label": "other", "pred_7b": "prefer_less_waiting", "source": "claude_train", "split": "train"}
+{"id": "cl-k088-1", "clause": "I'm fine with 8am classes", "gen_label": "other", "pred_7b": "prefer_no_early_late", "source": "claude_train", "split": "train"}
+{"id": "cl-k094-1", "clause": "Mondays are good for me", "gen_label": "other", "pred_7b": "blocked_time", "source": "claude_train", "split": "val"}
+{"id": "cl-k095-1", "clause": "I need a 15 min break between buildings because I walk slowly", "gen_label": "other", "pred_7b": "prefer_less_waiting", "source": "claude_train", "split": "val"}
+{"id": "cl-k096-1", "clause": "If labs could be in the morning that'd be great", "gen_label": "other", "pred_7b": "prefer_no_early_late", "source": "claude_train", "split": "val"}
+{"id": "cl-k097-3", "clause": "I'd like an hour for lunch", "gen_label": "lunch", "pred_7b": "lunch", "source": "claude_train", "split": "train"}
+{"id": "cl-k098-1", "clause": "gaps are fine", "gen_label": "other", "pred_7b": "prefer_less_waiting", "source": "claude_train", "split": "train"}
+{"id": "cl-k104-1", "clause": "Wednesdays I'm free", "gen_label": "other", "pred_7b": "blocked_time", "source": "claude_train", "split": "train"}
+{"id": "cl-k105-1", "clause": "I want online tutorials", "gen_label": "other", "pred_7b": "in_person_only", "source": "claude_train", "split": "train"}
+{"id": "cl-k107-1", "clause": "I'd like lunch at 12 for 45 minutes", "gen_label": "lunch", "pred_7b": "lunch", "source": "claude_train", "split": "train"}
+{"id": "cl-k108-1", "clause": "I don't care about early classes", "gen_label": "other", "pred_7b": "prefer_no_early_late", "source": "claude_train", "split": "train"}
+{"id": "cl-k115-2", "clause": "nothing before 10", "gen_label": "blocked_time", "pred_7b": "prefer_no_early_late", "source": "claude_train", "split": "train"}
+{"id": "cl-k116-1", "clause": "Happy with online lectures", "gen_label": "other", "pred_7b": "in_person_only", "source": "claude_train", "split": "val"}
+{"id": "cl-k117-2", "clause": "preferably all in the afternoon", "gen_label": "prefer_no_early_late", "pred_7b": "other", "source": "claude_train", "split": "train"}

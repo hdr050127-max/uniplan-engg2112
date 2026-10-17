@@ -1,0 +1,617 @@
+{"text": "10月10日那天有体育训练，不能上课", "label": "blocked_time", "reason": "no day or time", "request": "blocked_time/2/zh/6"}
+{"text": "6月15日那天有志愿者活动，不能上课", "label": "blocked_time", "reason": "no day or time", "request": "blocked_time/2/zh/6"}
+{"text": "11月11日那天有乐队排练，不能上课", "label": "blocked_time", "reason": "no day or time", "request": "blocked_time/2/zh/6"}
+{"text": "通勤日不能上课", "label": "blocked_time", "reason": "no day or time", "request": "blocked_time/4/zh/12"}
+{"text": "上班不能有课", "label": "blocked_time", "reason": "no day or time", "request": "blocked_time/5/zh/15"}
+{"text": "工作时间无课", "label": "blocked_time", "reason": "no day or time", "request": "blocked_time/5/mix/17"}
+{"text": "上下班高峰无课", "label": "blocked_time", "reason": "no day or time", "request": "blocked_time/5/mix/17"}
+{"text": "线上课外不能上课", "label": "blocked_time", "reason": "no day or time", "request": "blocked_time/5/mix/17"}
+{"text": "希望周五不超过1天在校园上课因为有排练", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/2"}
+{"text": "周三不允许超过1天在校园因为要上乐队排练", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/2"}
+{"text": "只有在周末,即周六和周日才可以超过1天来校上课", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/2"}
+{"text": "希望最多2天在校园,因为我通常在周二和周四有乐队活动", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/2"}
+{"text": "最多1天在校园上课因为周三和周四都有乐队练习", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/2"}
+{"text": "只想周135上课。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/3"}
+{"text": "每周24次课就足够。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/3"}
+{"text": "只需要周四和周日。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/3"}
+{"text": "只在周二和周五。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/3"}
+{"text": "周一和周三可以。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/3"}
+{"text": "周一、周三、周五。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/3"}
+{"text": "I'm good with just two days a week, maybe Wed and Fri.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/4"}
+{"text": "I can manage with just three days this week, how's Mon, Wed, and Fri sound?", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/4"}
+{"text": "How about if I can only pop in for two days? Preferably Tues and Thurs.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/4"}
+{"text": "I only need two days a week, maybe Thurs and Sat are doable.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/4"}
+{"text": "Three days a week is fine for me, say Mon, Wed, and Fri.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/4"}
+{"text": "Can I just stick around for two days, Thurs and Fri would work great.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/4"}
+{"text": "Two days should be enough, maybe Fri and Sat could work for me.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/4"}
+{"text": "I'm cool with three days, could be any three, like Mon, Wed, and Fri.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/4"}
+{"text": "Only want to come Mon and Fri, that's enough for me.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/5"}
+{"text": "Wed is too busy for me, need to do tutorial on other days.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/5"}
+{"text": "Can only spare time for Mon, Fri, and online classes on rest.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/5"}
+{"text": "Not available on Tues and Thurs due to lab, only Mon and Fri are fine.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/5"}
+{"text": "Got a part-time job on Wed, only Mon, Fri need to come on campus.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/5"}
+{"text": "Only need to come on Mon and Fri, online classes on rest are fine.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/5"}
+{"text": "Only want to do lab on Tues, need to be flexible on other days.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/5"}
+{"text": "Got Friday evening tutorials, can only manage Mon and Fri on campus.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/5"}
+{"text": "希望每周有三天可以在校园上课，最好是周二、三和四。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/6"}
+{"text": "最好是每周有两天在校园上课，周三和周五应该可以。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/6"}
+{"text": "希望能够有三天在学校上课，最好是周三、四和五。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/6"}
+{"text": "每周最好有三天在校园上课，最好是周一、三和五。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/6"}
+{"text": "希望可以有三天的上课时间，最好是周三、四和五。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/6"}
+{"text": "最好是每周在校园上课三天，可能是周二、四和六。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/6"}
+{"text": "每周最好有三天在校园上课，最好是周一、二和五。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/6"}
+{"text": "希望能够有三天的上课时间，最好是周三、四和六。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/6"}
+{"text": "希望有两天安排在周二和周四", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/8"}
+{"text": "希望有一整天的时间自由", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/8"}
+{"text": "希望周五有下午的空闲", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/8"}
+{"text": "Only do 3 days max on campus to fit in training, preferably wed, thurs and fri", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/10"}
+{"text": "Try to cap it at 2 days a week max, maybe tues and wed", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/10"}
+{"text": "Max 4 days on campus, ideally mon, tues, wed and thurs to fit around practice", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/10"}
+{"text": "Only need 3 max, would be good if they are tues, wed and thurs", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/10"}
+{"text": "No more than 2 days on campus per week, pref tues and wed", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/10"}
+{"text": "Cap it at 3 days max, mon, tues and wed would work", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/10"}
+{"text": "Can only do 2 days, try to get mon and tues", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/10"}
+{"text": "Max 3 days on campus, wed, thurs and fri would fit around training", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/10"}
+{"text": "周五晚上在线课", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/11"}
+{"text": "周一和周三不能在", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/11"}
+{"text": "每天最多1节tutorial", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/11"}
+{"text": "我只在周二和周四有时间上课，因为要照看小孩。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/12"}
+{"text": "只在周三和周五两天上课最合适，这样家庭和学业都能兼顾。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/12"}
+{"text": "Only wants Wed and Fri to be on campus, that's enough for now.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/13"}
+{"text": "Only needs Mon and Thurs, that covers it for me.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/13"}
+{"text": "Wants Tues and Fri, that's all I need.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/13"}
+{"text": "Just needs Tues and Thurs, those days are fine.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/13"}
+{"text": "Only wants Mon and Wed, those days fit my schedule.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/13"}
+{"text": "Wants just Thurs and Fri, that's it for me.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/13"}
+{"text": "Only needs Mon and Fri, that's sufficient.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/13"}
+{"text": "Wants Tues and Wed, those are the only days.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/13"}
+{"text": "只周三和周五在线上课就够了", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/14"}
+{"text": "只需周四下午的课", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/14"}
+{"text": "每周只来两次，周三和周五", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/14"}
+{"text": "只周五需要到场，其他时间在线", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/14"}
+{"text": "周一和周三的面授课程就可以", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/14"}
+{"text": "不用每天都来，周五和周日就行", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/14"}
+{"text": "每周只需周四晚上上实验课", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/14"}
+{"text": "不用每天都到场，只周五下午有课", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/14"}
+{"text": "Could it maybe have Wed, Fri and Sat? Just 3 days a week, please.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/16"}
+{"text": "I'd love it if it could be Mon, Thu and Sat - 3 days only.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/16"}
+{"text": "Is there any chance of having Tues, Thurs and Sun? Only 3 days.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/16"}
+{"text": "How about having Sun, Mon and Thurs? Two days a week would be perfect.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/16"}
+{"text": "Could it possibly be Tues, Fri and Sun? I'd prefer 3 days.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/16"}
+{"text": "Any chance of Wed, Fri and Sat? Preferably just 3 days.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/16"}
+{"text": "Could I have Tues, Thu and Sat? 3 days max, please.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/16"}
+{"text": "How about Mon, Wed and Fri? I can handle 3 days a week.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/16"}
+{"text": "最好每周Tue和Thu可以在学校，上午有点重要的家庭事务需要处理。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/17"}
+{"text": "希望每周Fri能够安排在校园上课，上午有一些线上课程，下午可以兼顾家里。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/17"}
+{"text": "建议每周三可以在学校，上午上完课后能够帮助家里处理些事情。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/17"}
+{"text": "最好每周Sun可以在学校，上午有两节必修课，下午可以利用时间做些家务。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/17"}
+{"text": "每周最多4天在校园，因为周五晚上有兼职。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/zh/18"}
+{"text": "最多3天在校园，因为我周六需要上早班。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/zh/18"}
+{"text": "尽量每周最多2天来学校，因为周日要早起做兼职。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/zh/18"}
+{"text": "每周去校园最多3天，这样可以处理周一的课程。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/zh/18"}
+{"text": "最多2天在校园，因为周三晚上有兼职。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/zh/18"}
+{"text": "每周最多4天在校园，周五晚上我有兼职。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/zh/18"}
+{"text": "最多3天在校园，因为我要在周六上午做兼职。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/zh/18"}
+{"text": "每周最多3天在校园，因为周日我要早起工作", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/zh/18"}
+{"text": "最好是只在周一、周三和周五到校，这样安排比较合适。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/21"}
+{"text": "平时能多在家学习，只希望在周二和周四到校就行了。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/21"}
+{"text": "每周到校2天对我来说已经足够，最好是周二和周四。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/21"}
+{"text": "我希望只在周二和周四来学校，其余时间在家自学。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/21"}
+{"text": "只在周一和周三到校对我来说是最佳选择。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/21"}
+{"text": "一周能到校2天已经足够了，最好是周三和周五去上课。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/21"}
+{"text": "I only need Wednesday and Friday.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/22"}
+{"text": "Only Monday and Thursday work for me.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/22"}
+{"text": "Good with only Tues and Thurs.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/22"}
+{"text": "Not on Mondays, 2 days ok.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/22"}
+{"text": "Just Wednesday and Friday, 2 days.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/22"}
+{"text": "only want to come on campus twice a week", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/23"}
+{"text": "prefer to do tutorials and labs on Wed and Thur", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/23"}
+{"text": "only want to come for my tutorials on Tues and Thurs", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/23"}
+{"text": "prefer the flex to come in only for tutorial on Mon and Fri", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/23"}
+{"text": "希望可以安排在两天，比如周二和周五，方便上课。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/24"}
+{"text": "希望能有两天的时间去图书馆，最近的地铁站在周三和周日。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/24"}
+{"text": "最好是能安排两天，周一和周四，这样可以早点回家。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/24"}
+{"text": "希望在周末安排两天，可以早点结束课程早点复习。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/24"}
+{"text": "最好是能安排两天，周二和周五，这样可以早点回家。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/24"}
+{"text": "希望能在两天内完成学习任务，比如周三和周六，这样可以调整一下生物钟。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/24"}
+{"text": "I'd love it if I could have Thursday, Friday, and Saturday off from classes since I work on Wednesdays.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/25"}
+{"text": "It would be great to get Monday, Wednesday, and Friday to study and catch up on work.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/25"}
+{"text": "Could I possibly get Tuesday, Thursday, and Friday so I can do my part-time shift on Wednesdays?", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/25"}
+{"text": "Having Wednesday, Friday, and Sunday would be perfect as I have a gig on Thursdays.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/25"}
+{"text": "Ideally, I'd get Monday, Tuesday, and Thursday to balance my studies and work.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/25"}
+{"text": "I'd prefer to have Tuesday, Thursday, and Saturday since my job is every other day.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/25"}
+{"text": "It'd be awesome to have Tuesday, Wednesday, and Friday off so I can focus on my part-time job on Thursdays.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/25"}
+{"text": "Getting Wednesday, Friday, and Sunday would be great as it allows me to work on Tuesdays.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/25"}
+{"text": "希望周一和周五能不冲突，最好一周三天", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/26"}
+{"text": "有空教室最好能安排在周三和周六，不想每天都累", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/26"}
+{"text": "尽量安排周二和周四，不想每天都待在学校", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/26"}
+{"text": "最好能让我周二和周五有空，一天半就够了", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/26"}
+{"text": "希望周三和周五能排得上，不想每天都累着", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/26"}
+{"text": "周二和周四最好能安排满，不想每天都上", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/26"}
+{"text": "除了周日其他都可以", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/zh/27"}
+{"text": "只有周二和周四", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/zh/27"}
+{"text": "除了周六和周日", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/zh/27"}
+{"text": "除了周三和周四", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/zh/27"}
+{"text": "not more than 3", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/28"}
+{"text": "only 3 sessions", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/28"}
+{"text": "max 2 weekdays", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/28"}
+{"text": "每周最多3天要来校上课，其余时间用来准备每周二和周四的训练。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/29"}
+{"text": "每周最多4天亲自到校上课，剩余时间用于周五和周六的训练。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/29"}
+{"text": "每周到校上课最多4天，这样能够参与周三和周六的训练。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/29"}
+{"text": "Two is all I really need, got it covered.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/31"}
+{"text": "只周五下午和晚上的tutorial就行，其他时间在线上课可以", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/32"}
+{"text": "不需要周一和周三，只在周二和周四的实验室课程", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/32"}
+{"text": "只需要周四晚上的讨论课，其他都在线", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/32"}
+{"text": "一周只需要周五上午的课程，其他都在线完成", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/32"}
+{"text": "周二晚上的lab和周四早上的tutorial就好，其他不用来", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/32"}
+{"text": "不需要周一和周三，只在周五的lab", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/32"}
+{"text": "只有周三下午的lab需要来，其他时间都在家上课", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/32"}
+{"text": "只周五下午的lab，其他时间请在线学习", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/32"}
+{"text": "希望周一、周三和周五", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/33"}
+{"text": "周二和周四可以", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/33"}
+{"text": "周五下午上课", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/33"}
+{"text": "周一和周三早课", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/33"}
+{"text": "希望周四和周日", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/33"}
+{"text": "周二、周四下午有空", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/33"}
+{"text": "周三和周五晚上", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/33"}
+{"text": "周日可以", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/33"}
+{"text": "Would love to have some days on campus, maybe two or three days a week would work for me, especially not on Mondays and Fridays", "label": "max_days", "reason": "length", "request": "max_days/2/en/34"}
+{"text": "Could use some flexibility, ideally just a couple of days a week, not too many like four or five", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/34"}
+{"text": "Would prefer a weekday or two, perhaps Tuesday and Wednesday would fit well, and maybe add a Thursday", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/34"}
+{"text": "If possible, two days a week would be great, might be Wednesdays and Thursdays", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/34"}
+{"text": "Could really use some weekdays, not sure about the exact days, but a couple like two or three would be awesome", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/34"}
+{"text": "Would be happy with a couple of days, not too many, maybe Tuesdays and Thursdays", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/34"}
+{"text": "Could manage two or three days, maybe a bit more, but not too much, perhaps including Wednesdays", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/34"}
+{"text": "It would be good to have a few days, say two or three, that work well, like maybe Monday and Wednesday", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/en/34"}
+{"text": "希望星期二、四有空，这样可以兼顾训练和课程", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/35"}
+{"text": "每周最好两天在校园，大概周三和周五，方便训练和上课", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/35"}
+{"text": "希望能有两天时间在教室上课，最好是周二和周四，能更好地安排训练", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/35"}
+{"text": "每周大概需要两天时间在校园，希望能是周三和周五，方便参加训练", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/35"}
+{"text": "每周希望有两天时间能去教室上课，最好是周二和周四，这样能平衡训练和学习", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/35"}
+{"text": "希望每周大概两天时间在校园，可以是周三和周五，以便兼顾训练和课程", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/35"}
+{"text": "希望每周能有两个时间在教室上课，最好是周二和周四，可以更好地安排训练", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/35"}
+{"text": "每周希望有两天时间可以安排课程和训练，最好是周三和周五，在校上课比较方便", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/35"}
+{"text": "no more than 3 campus days", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/37"}
+{"text": "max 4 campus days", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/37"}
+{"text": "not more than 2 campus visits", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/37"}
+{"text": "only hit campus twice", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/37"}
+{"text": "no more than 2 on campus", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/37"}
+{"text": "limit to 3 campus days", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/en/37"}
+{"text": "no more 2", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/38"}
+{"text": "just Fri online", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/38"}
+{"text": "Mon, 9am tutorial", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/38"}
+{"text": "Sat lab ok", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/38"}
+{"text": "Wed only if needed", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/38"}
+{"text": "Fridays free", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/0/mix/38"}
+{"text": "Would only need the app to let me come in for 2 days a week, like maybe Monday and Wednesday to fit around the kids.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/40"}
+{"text": "Could use something that lets me only be on campus for 2 days a week, preferably Tuesday and Thursday.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/40"}
+{"text": "Just need a way to only go in 2 days a week, ideally Wednesday and Friday.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/40"}
+{"text": "Perfect if the app allows me to only do 2 days on campus, say Thursday and Friday.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/40"}
+{"text": "Could manage with just 2 days a week, like Monday and Thursday, to keep things simple.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/40"}
+{"text": "Would be happy with the app that lets me only come in for 2 days a week, preferably Tuesday and Wednesday.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/40"}
+{"text": "Needing the option to only be on campus 2 days a week, likely Wednesday and Thursday, would work for me.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/40"}
+{"text": "It's okay if the app can just have me coming in 2 days a week, like Monday and Tuesday, to fit my schedule.", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/40"}
+{"text": "每周只需要两天，一天是周二晚上的lab，另一天是周四的tutorial。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/41"}
+{"text": "每天都不想来学校，只在需要的时候来，比如周二和周四。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/41"}
+{"text": "每周最多两天，一次是周三上午的tutorial，另一次是周五下午的lab。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/mix/41"}
+{"text": "一周最好三天上课，周二周四最好", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/42"}
+{"text": "每周最多两天在校园，不要周一", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/42"}
+{"text": "希望一周上课三天，最好是周三和周五", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/42"}
+{"text": "一周只希望三天在校园，尽量周四和周五", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/42"}
+{"text": "最好一周三天，就是周二和周三", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/42"}
+{"text": "一周内最多两天，不要周三和周五", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/42"}
+{"text": "一周三天最好，就是周四和周六", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/42"}
+{"text": "希望一周三天，就是周一和周三", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/zh/42"}
+{"text": "希望能周一和周三都安排课程，因为我这两个晚上的志愿者活动比较多。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/44"}
+{"text": "希望周四和周五能安排线上课程，因为这段时间要参加实验室工作。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/44"}
+{"text": "希望周三和周五能留出时间做志愿者，因为这两天刚好没有其他课程。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/44"}
+{"text": "希望能周二安排半天的课程，上午有我的专业研讨会。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/44"}
+{"text": "希望可以保证每周五上午都有课，因为我那个时间段没有其他事情。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/44"}
+{"text": "希望能周中安排课程，因为周末我要负责组织社区活动。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/44"}
+{"text": "希望周末能有空，因为要参加一个长期的志愿者项目。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/44"}
+{"text": "希望周三和周五能安排课程，因为这两天的下午我会参与学校俱乐部活动。", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/2/mix/44"}
+{"text": "周末来够了不想平日来", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/48"}
+{"text": "平时一天足夠周末不用", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/48"}
+{"text": "只周末两天不想天天来", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/48"}
+{"text": "平时三天太多周末两天足夠", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/48"}
+{"text": "周末两天足夠不想天天都来", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/zh/48"}
+{"text": "Mondays and wednesdays should be enough", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/49"}
+{"text": "skip Fridays i only need 2 days", "label": "max_days", "reason": "no day count, or names a weekday", "request": "max_days/1/en/49"}
+{"text": "一天最多上4节课哈", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/zh/0"}
+{"text": "最多4节班就行啦", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/zh/0"}
+{"text": "一天4节课就够啦", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/zh/0"}
+{"text": "limit to 2 classes per day", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/en/1"}
+{"text": "除考试周外，每周最多 3 个晚上的 9am 到 11pm 的课程，确保我能有时间准备线上课程。", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/mix/2"}
+{"text": "每周最多 2 个全天的 tutorial，其余时间只能是实验室或在线课程。", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/mix/2"}
+{"text": "hope for 2-3 on thursdays", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/2/en/7"}
+{"text": "一天最多四节课，不要再多了！", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/zh/9"}
+{"text": "要求每天最多四节课，不能再多了。", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/zh/9"}
+{"text": "Trying to help out with a family member, so could you keep class hours at 3 on Thursdays?", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/en/10"}
+{"text": "上课时间尽量安排在上午，每天不要超过4节课，方便我在家里照看小孩。", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/2/zh/15"}
+{"text": "希望周一和周三的课程时间尽量安排在下午，因为这两天我下午有空。", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/2/zh/15"}
+{"text": "希望每天课程不要超过3节，上午一节，下午两节，这样我有时间准备晚饭。", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/2/zh/15"}
+{"text": "希望每天能有两节课程在早上，下午一节，这样我可以早一点回家做饭。", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/2/zh/15"}
+{"text": "希望每天课程时间不要太早，最好在9点以后开始，这样我可以先把早饭做好。", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/2/zh/15"}
+{"text": "希望每天课程时间不要太晚，最好在下午5点前结束，我好早点接小孩放学回家。", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/2/zh/15"}
+{"text": "每天最多4节课", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/zh/18"}
+{"text": "每天最多3节tutorial", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/mix/20"}
+{"text": "上午10点之前没有课", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/mix/20"}
+{"text": "除了lab其他时间都不在", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/mix/20"}
+{"text": "周五晚上没有课", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/mix/20"}
+{"text": "上午9点之前都不上课", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/mix/20"}
+{"text": "每天最多两节lab", "label": "max_daily_hours", "reason": "no hour count", "request": "max_daily_hours/0/mix/20"}
+{"text": "12:00 是我的午休时间。", "label": "lunch", "reason": "no meal word", "request": "lunch/1/zh/3"}
+{"text": "Need a 30-minute break around 12:00 on MWF, can be flexible", "label": "lunch", "reason": "no meal word", "request": "lunch/1/en/4"}
+{"text": "need a break some time in the middle of wed", "label": "lunch", "reason": "no meal word", "request": "lunch/0/en/7"}
+{"text": "周五下午5点40分之前需要有15分钟的用餐时间", "label": "lunch", "reason": "no meal word", "request": "lunch/1/mix/11"}
+{"text": "需要午休时间", "label": "lunch", "reason": "no meal word", "request": "lunch/0/zh/12"}
+{"text": "中午十二点半", "label": "lunch", "reason": "no meal word", "request": "lunch/0/zh/12"}
+{"text": "需要中午休息时间", "label": "lunch", "reason": "no meal word", "request": "lunch/0/zh/12"}
+{"text": "Wed tutorial 2pm-4pm can't skip", "label": "lunch", "reason": "no meal word", "request": "lunch/0/mix/14"}
+{"text": "Thu 11am-1pm part-time job, need break", "label": "lunch", "reason": "no meal word", "request": "lunch/0/mix/14"}
+{"text": "Sat online class 3pm-5pm need free time", "label": "lunch", "reason": "no meal word", "request": "lunch/0/mix/14"}
+{"text": "Sun 4pm-6pm part-time, need break", "label": "lunch", "reason": "no meal word", "request": "lunch/0/mix/14"}
+{"text": "周三11:30到12:30", "label": "lunch", "reason": "no meal word", "request": "lunch/1/mix/17"}
+{"text": "周四下午一点至一点半", "label": "lunch", "reason": "no meal word", "request": "lunch/1/mix/17"}
+{"text": "midday break needed", "label": "lunch", "reason": "no meal word", "request": "lunch/0/en/19"}
+{"text": "Got 1 hour midday on Tues,Thurs", "label": "lunch", "reason": "no meal word", "request": "lunch/1/en/22"}
+{"text": "Need 45 mins at 12:00 on Wed", "label": "lunch", "reason": "no meal word", "request": "lunch/1/en/22"}
+{"text": "30 mins at 12:45 on Tues", "label": "lunch", "reason": "no meal word", "request": "lunch/1/en/22"}
+{"text": "需要在11点到12点之间留出1.5小时的空档，因为我的课程结束较晚。", "label": "lunch", "reason": "no meal word", "request": "lunch/1/mix/23"}
+{"text": "只选校内的课，不去网上上课，因为要照顾孩子。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/0"}
+{"text": "课程一定要在校园内，不要有网上课，可以随时陪孩子。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/0"}
+{"text": "只选实体课堂，不要网上课，方便接孩子放学。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/0"}
+{"text": "课程只能是实体课堂，不要网上课，方便带孩子。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/0"}
+{"text": "只选校园内的课程，不考虑网上课，方便接孩子。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/0"}
+{"text": "不想录课，只希望上实体课，特别是和声课需要即时的指导。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/1/zh/3"}
+{"text": "每天都希望是实体课程，这样我可以直接去上课。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/6"}
+{"text": "因为要往返90分钟，所以只选实体课程。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/6"}
+{"text": "Please stick to in-person classes. I find Zoom and recorded lectures hard to follow, especially with my athletic commitments.", "label": "in_person_only", "reason": "length", "request": "in_person_only/1/en/10"}
+{"text": "只想要实体教室里的课，不考虑网上课程。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/12"}
+{"text": "只接受真实在课堂上课，谢绝任何形式的网上教学。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/12"}
+{"text": "只想要实体课堂上的课程，不要任何形式的网络课程。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/12"}
+{"text": "want classes on campus", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/en/13"}
+{"text": "no virtual classes please", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/en/13"}
+{"text": "不想有录影课程", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/mix/14"}
+{"text": "只想要实体教室", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/mix/14"}
+{"text": "不想上網課想上課室見老師", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/18"}
+{"text": "每天晚上都不要線上課程", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/18"}
+{"text": "只想要線下面對面的課", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/18"}
+{"text": "周末也不要線上", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/18"}
+{"text": "周一到周五都不要線上的", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/18"}
+{"text": "只想要實體教室的課", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/18"}
+{"text": "上課都希望是實體的", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/18"}
+{"text": "不要放著錄影好的課", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/18"}
+{"text": "除特殊安排外，所有课程必须都是在校园内", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/mix/20"}
+{"text": "不要网上授课，我只需要实体课堂。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/24"}
+{"text": "不要网上上课，只选实体课堂。", "label": "in_person_only", "reason": "no online/in-person word", "request": "in_person_only/0/zh/24"}
+{"text": "尽量把课程安排在同一天，不想每天都跑。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/zh/0"}
+{"text": "尽量能把课程安排在同一天，不想天天都跑来。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/zh/0"}
+{"text": "try to pack everything into 2 days", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/en/1"}
+{"text": "2 days instead of 3 if possible", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/en/1"}
+{"text": "3 days max on campus if u can", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/en/1"}
+{"text": "尽可能把需要来校的课程安排在同一天，减少出行次数。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/2"}
+{"text": "如果可能，希望能将实验课和理论课安排在同一天，减少奔波。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/2"}
+{"text": "尽量希望把上午和下午的课程安排在同一工作日，减少一天两次来校的情况。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/2"}
+{"text": "不想每天来不想每天来上课课想两天凑一起上课课", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/3"}
+{"text": "希望可以三天凑一起上课课减少来回麻烦麻烦", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/3"}
+{"text": "一个星期三天上课课够了不想每天都来来", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/3"}
+{"text": "三天上课课就行了不想天天来回奔波奔波", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/3"}
+{"text": "希望可以安排得一周三天上课课", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/3"}
+{"text": "不想每天都来上课课三天两天都可以", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/3"}
+{"text": "三天内上完课就好不想每天都跑", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/3"}
+{"text": "希望三天能上完课减少往返次数次", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/3"}
+{"text": "Would really appreciate it if the classes could be packed into as few days as possible to cut down on the commute time with the kids at home.", "label": "prefer_fewer_days", "reason": "length", "request": "prefer_fewer_days/1/en/4"}
+{"text": "Could you try and schedule my classes to minimize the days I need to come in, to save on the long commute with my young ones at home.", "label": "prefer_fewer_days", "reason": "length", "request": "prefer_fewer_days/1/en/4"}
+{"text": "Could you fit all my classes into fewer days to reduce the commuting time, please? I have a couple of young ones at home who make each trip harder.", "label": "prefer_fewer_days", "reason": "length", "request": "prefer_fewer_days/1/en/4"}
+{"text": "Would love to have my class schedule condensed into as few days as possible to lessen the daily commute time with my little ones at home.", "label": "prefer_fewer_days", "reason": "length", "request": "prefer_fewer_days/1/en/4"}
+{"text": "I'm hoping you can fit all my classes into as few days as possible, to cut down on the long commute time with my kids at home.", "label": "prefer_fewer_days", "reason": "length", "request": "prefer_fewer_days/1/en/4"}
+{"text": "希望周末能休息", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/8"}
+{"text": "周一和周五不要", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/8"}
+{"text": "希望两天上满", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/9"}
+{"text": "Can I get all my classes crammed into just 2 days to reduce those long commutes?", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/10"}
+{"text": "Wants to pack everything into 3 days tops; hate that long drive.", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/10"}
+{"text": "All my classes in just 2 days max; sick of the long travel.", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/10"}
+{"text": "希望可以将课程安排得一周去一两天，其他时间上网课。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/14"}
+{"text": "尽可能把课程安排在同一天，减少来回学校的时间。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/14"}
+{"text": "希望能把课程安排得密集一些，一周去一两次学校。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/14"}
+{"text": "It would be great if you could try to fit my classes into as few days as possible to make the long commute less of an issue.", "label": "prefer_fewer_days", "reason": "length", "request": "prefer_fewer_days/1/en/16"}
+{"text": "尽量把课安排在同一天，减少通勤时间。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/17"}
+{"text": "希望可以把周一和周五的课放在同一天，减少往返学校的时间。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/17"}
+{"text": "希望把理论课和实践课安排在同一天，这样可以减少往返学校的时间。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/17"}
+{"text": "希望周末不要来学校，但上课时间必须在线下", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/20"}
+{"text": "希望能多挤在同一天上课这样来回车程少点", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/21"}
+{"text": "最好能把课都排在同一天这样来回少些", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/21"}
+{"text": "课程尽量都排在同一天这样省点路", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/21"}
+{"text": "尽量把课都排在同一天这样减少往返", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/21"}
+{"text": "Need all classes crammed into 2 days", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/22"}
+{"text": "More classes on Wed, fewer on Fri", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/22"}
+{"text": "Lects on Mon & Wed, rest on Fri", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/22"}
+{"text": "Tight schedule Mon and Thurs", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/22"}
+{"text": "Lessons Tues & Thurs, not Fri", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/22"}
+{"text": "Commuting Tues and Thurs", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/22"}
+{"text": "Pile on Mon and Wed, rest Fri", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/22"}
+{"text": "Most classes Mon and Fri", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/22"}
+{"text": "希望课程能集中在一两天内完成，尽量减少来校次数，因为通勤时间较长。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/23"}
+{"text": "希望课程能够连续排在一天或两天内，减少来回学校的频次，因为通勤时间过长。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/23"}
+{"text": "尽量把课排满一天或者两天，以减少需要来学校的次数，因通勤时间较长。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/23"}
+{"text": "能否将课程尽可能安排在连续的两天内，以减少通勤次数，因为每次往返都挺耗时间。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/23"}
+{"text": "尽量把一些课都放在周一或周五，减少通勤的麻烦。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/26"}
+{"text": "希望可以把一些理论课和实践课安排在同一天，减少通勤次数。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/26"}
+{"text": "all classes on one day if possible saves time", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/28"}
+{"text": "prefers 2 days instead of 3 for classes", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/28"}
+{"text": "would go for 4 classes one day over 2 days", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/28"}
+{"text": "can handle all classes on wed or fri", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/en/28"}
+{"text": "希望课程尽量集中在同一天，以减少往返学校的时间。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/29"}
+{"text": "因为通勤时间较长，请尽量把课程安排在同一天。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/29"}
+{"text": "尽量把课程集中在同一两天里，减少往返学校的交通时间。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/29"}
+{"text": "希望能减少来校次数，因为周末有兼职工作。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/32"}
+{"text": "尽量减少在校园上课的次数，因为周末需要打工。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/mix/32"}
+{"text": "课程尽量安排在一天搞定，不然来回跑太烦。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/33"}
+{"text": "最好能把课都排在同一天，少折腾。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/zh/33"}
+{"text": "Need to pack all my classes into as few days as possible 'cos the commute is a pain and I've gotta look after my grandma.", "label": "prefer_fewer_days", "reason": "length", "request": "prefer_fewer_days/1/en/34"}
+{"text": "Could do with all my classes crammed into just a few days 'cause I can't afford to spend all day on public transport supporting my family.", "label": "prefer_fewer_days", "reason": "length", "request": "prefer_fewer_days/1/en/34"}
+{"text": "Trying to fit everything into as few days as I can so I can spend less time on the bus and more time helping out at home.", "label": "prefer_fewer_days", "reason": "length", "request": "prefer_fewer_days/1/en/34"}
+{"text": "Would love to have my schedule condensed into fewer days 'cos I’ve got to pick up my sibling from school when I get out late.", "label": "prefer_fewer_days", "reason": "length", "request": "prefer_fewer_days/1/en/34"}
+{"text": "Trying to fit as many lectures as possible into as few days as I can 'cos I need to be home early to help out with cooking.", "label": "prefer_fewer_days", "reason": "length", "request": "prefer_fewer_days/1/en/34"}
+{"text": "Got to fit my classes into fewer days to reduce the time on the bus 'cos I’ve been helping my brother with his homework this week.", "label": "prefer_fewer_days", "reason": "length", "request": "prefer_fewer_days/1/en/34"}
+{"text": "最好可以把周一和周五的课程安排在一起，这样可以减少来回学校的次数。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/35"}
+{"text": "如果可以把上午的课和下午的课都安排在同一天，我也能省点路途时间。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/35"}
+{"text": "能否尽量把lab和tutorial安排在同一天，以减少往返学校的频率？", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/35"}
+{"text": "如果能将所有的课堂都安排在一天，那我会很开心，因为这样可以大大减少通勤时间。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/1/mix/35"}
+{"text": "希望课程能够集中在一两天，减少我的校园出勤天数。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/zh/36"}
+{"text": "能够把课程安排在同一两天最好，这样方便我照顾家里的事情。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/zh/36"}
+{"text": "希望可以把课程集中在一两天完成，这样可以早点回家。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/zh/36"}
+{"text": "希望能把课程安排在同一天，这样可以早点结束学习回家。", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/zh/36"}
+{"text": "Can I hit up all my classes on three days instead of five?", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/en/37"}
+{"text": "Could I do my block of classes on two days rather than spread it out?", "label": "prefer_fewer_days", "reason": "names a weekday or a day count", "request": "prefer_fewer_days/0/en/37"}
+{"text": "希望周五回到back to back", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/2"}
+{"text": "周一早上要连续上课不想有gap", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/2"}
+{"text": "不想中间有空档，最好周一早上9点的课接着上下午的tutorial。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/5"}
+{"text": "周五的两节lab一定要连着，不能有空隙。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/5"}
+{"text": "尽量让周三的两节3点的课连着上，不要有空隙。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/5"}
+{"text": "周一早上8点到9点的课我希望连着上，不要中间有空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/zh/6"}
+{"text": "Can't stand those huge breaks between classes, especially on Weds at 10 AM. Need them closer together to stay focused and not get distracted by practice sessions.", "label": "prefer_less_waiting", "reason": "length", "request": "prefer_less_waiting/0/en/7"}
+{"text": "Hate waiting around after my 3 PM class. Please put the next one right after to avoid getting sidetracked by music rehearsals.", "label": "prefer_less_waiting", "reason": "length", "request": "prefer_less_waiting/0/en/7"}
+{"text": "Super annoying when there's a big gap after my 5 PM class. Need something straight after so I don't get sidetracked with band practice.", "label": "prefer_less_waiting", "reason": "length", "request": "prefer_less_waiting/0/en/7"}
+{"text": "Those long breaks are killing me, especially between my 11 AM and 1 PM classes. I just wanna keep studying without any breaks.", "label": "prefer_less_waiting", "reason": "length", "request": "prefer_less_waiting/0/en/7"}
+{"text": "Dreading the 2-hour break between my 4 PM and 6 PM classes. Want them next to each other to avoid getting all fuzzy and lost in thought.", "label": "prefer_less_waiting", "reason": "length", "request": "prefer_less_waiting/0/en/7"}
+{"text": "Absolutely hate those long gaps between 2 PM and 4 PM. Need to keep classes back-to-back so I don't get all music heady and off-topic.", "label": "prefer_less_waiting", "reason": "length", "request": "prefer_less_waiting/0/en/7"}
+{"text": "周一的课希望紧凑一些", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/8"}
+{"text": "周五的lab和tutorial希望无缝连接", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/8"}
+{"text": "希望周三的课能连着上，上午9点到11点之间没有空档时间。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/9"}
+{"text": "尽量把周四的课安排连在一起，下午2点到5点不要有空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/9"}
+{"text": "能否把周五的课程排得紧凑一些，早上8点到10点之间不空着。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/9"}
+{"text": "希望周六的课能连续，上午10点到下午2点之间没有空隙。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/9"}
+{"text": "能否把周一上午的课排连在一起，9点到12点之间没有空隙。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/9"}
+{"text": "请把周二下午的课安排得紧凑一点，2点到5点之间不要空着。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/9"}
+{"text": "希望把周三晚上的课安排得连着上，5点到7点之间没有空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/9"}
+{"text": "能不能把周四上午的课排得紧凑一点，8点到11点之间没有空隙。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/9"}
+{"text": "周一早上9点的课和9点半的课连上，别有间隔时间！", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/11"}
+{"text": "希望周四的课紧挨着上，不要有空档！", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/11"}
+{"text": "想让周五的线上课连上，不要中间有空档！", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/11"}
+{"text": "不想周二的两门课之间有空档时间，要连上！", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/11"}
+{"text": "想把周三下午的两门课连起来，不要中间有空档！", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/11"}
+{"text": "不喜欢课程之间有太长的空档时间，希望周一早上9点的课能直接接上下午2点的tutorial。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/14"}
+{"text": "尽量不要安排周五下午2点到6点之间的空档时间，希望这期间的gap能尽量短。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/14"}
+{"text": "希望周三晚上6点到8点之间没有空档时间，最好是能连上当晚8点的lab。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/14"}
+{"text": "希望周四晚上8点到10点之间不要有空档时间，最好是能直接连上10点的lab。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/14"}
+{"text": "希望周末上午11点到下午2点之间没有空档时间，最好是能直接连上下午2点的课程。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/14"}
+{"text": "上星期五下午3点到4点，4点到5点的课要连上，不要插课。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/15"}
+{"text": "周二上午8点和9点的课要连上，不能插空。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/15"}
+{"text": "下周一上午10点到11点的课不要中间停，要连上", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/15"}
+{"text": "Monday 9am 的 tutorial 不想和 Fri 1pm 的 lab 之间有 gap", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/17"}
+{"text": "不想让 Mon 8am 的 online class 和 9am 的 tutorial 之间有空档", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/17"}
+{"text": "周三的 11am 和 12pm 两节课要连续，不想有空档", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/17"}
+{"text": "不想让周五 2pm 的 class 和 3pm 的 tutorial 之间有间隔", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/17"}
+{"text": "希望周三 10am 和 11am 的两节 lecture 连续上，不要有空隙", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/17"}
+{"text": "不想让周二 1pm 和 2pm 的两节 lab 之间有等待时间", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/17"}
+{"text": "周一到周五最好别留空隙", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/20"}
+{"text": "No break between 9 and 11am Monday", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/en/22"}
+{"text": "Back to back on Friday 2-4", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/en/22"}
+{"text": "No break Tues 1-3pm", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/en/22"}
+{"text": "希望周一上午9点的课程和上午10点的课程能够连续，中间不要有任何空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/23"}
+{"text": "能否让周五的线上tutorial和下午1点的lab直接连上，不要有空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/23"}
+{"text": "希望能把周二上午9点的讲座和上午10点的讨论课安排在一起，中间没有空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/23"}
+{"text": "希望把周三下午2点的lab和下午3点的研讨会排在一起，不要有空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/23"}
+{"text": "能否将周四上午9点的线上课程和上午10点的实验室直接安排在一起，中间没有空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/23"}
+{"text": "能否将周五上午9点的小组讨论和上午10点的讲座直接安排在一起，中间没有空档？", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/23"}
+{"text": "希望周一早上8点到9点的课不要有空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/27"}
+{"text": "请不要安排周三晚上7点到8点之间有任何空闲时间。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/27"}
+{"text": "能不能让周四的10点到11点和11点到12点的课连在一起？", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/27"}
+{"text": "希望周五下午2点到3点和3点到4点的课不要隔开。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/27"}
+{"text": "请把周二下午4点到5点和5点到6点的课程连起来。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/27"}
+{"text": "能否把周六上午9点到10点的课跟10点到11点的课连在一起？", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/27"}
+{"text": "请把周日下午1点到2点跟2点到3点的课合并一下。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/27"}
+{"text": "能否让周日晚上6点到7点的课跟7点到8点的课连在一起？", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/zh/27"}
+{"text": "I really need those jazz band rehearsals to be back to back on Wednesdays from 3 to 5 pm, no breaks.", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/en/28"}
+{"text": "Can't have any time in between my flute lesson and choir practice on Fridays. They're back to back from 4 to 6 pm.", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/en/28"}
+{"text": "I've got a tight schedule with my violin class and ensemble slot. Need them straight after each other, Tues 2 to 4 pm.", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/en/28"}
+{"text": "I want my music theory and composition classes to be back to back. No breaks Wed 10 am to 12 pm.", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/en/28"}
+{"text": "For my music history lecture and recital, please keep them back to back, Mon 1 to 3 pm.", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/en/28"}
+{"text": "I need my choir practice and orchestral rehearsal back to back, Weds 2 to 4 pm. No breaks.", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/en/28"}
+{"text": "我希望周一早上9点的课和10点的课能连上，中间不要有空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/29"}
+{"text": "尽量让周四的课连在一起，不要有空档时间。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/29"}
+{"text": "希望能把周五的理论课和之后的实验课安排连在一起，不要有空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/29"}
+{"text": "如果可以的话，让周三早上9点的线上课和10点的课连上，不要有空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/29"}
+{"text": "能否将第一周的周五上午10点和11点的课安排在一起，中间不要有空档？", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/29"}
+{"text": "希望可以在周二早上9点安排一整天的课程，中间不要有任何空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/29"}
+{"text": "能否把第三周周五的9点和10点的课排在一起，中间没有空档时间？", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/29"}
+{"text": "想让下周一的线上tutorial和10点的课连在一起，不要有空档时间。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/29"}
+{"text": "Could you maybe try and schedule my lects closer together, especially on Tuesday? I hate those big breaks between classes.", "label": "prefer_less_waiting", "reason": "length", "request": "prefer_less_waiting/0/en/31"}
+{"text": "Is it possible to have back-to-back classes every Wednesday afternoon? Hate those gaps between my econ and accounting classes.", "label": "prefer_less_waiting", "reason": "length", "request": "prefer_less_waiting/0/en/31"}
+{"text": "Hey, can you try and arrange my classes so there's no gap between the end of one and the start of the next? Like, I don't like those breaks.", "label": "prefer_less_waiting", "reason": "length", "request": "prefer_less_waiting/0/en/31"}
+{"text": "Can you avoid putting a break between my final morning class and my first afternoon class? Those gaps are driving me mad.", "label": "prefer_less_waiting", "reason": "length", "request": "prefer_less_waiting/0/en/31"}
+{"text": "周四的lab和理论课之间不能有空档。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/32"}
+{"text": "不想在周五下午有空档，浪费时间。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/32"}
+{"text": "周一到周三的课不想有空档，直接连起来。", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/0/mix/32"}
+{"text": "Mon 9am-11am tutorial no gap", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/35"}
+{"text": "Fri 3pm-5pm lab continuous", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/35"}
+{"text": "Mon 5pm-7pm online class no break", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/35"}
+{"text": "Wed 10am-12pm tutorial straight up", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/35"}
+{"text": "Thu 1pm-3pm class don't need a gap", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/35"}
+{"text": "Fri 9am-11am class back to back", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/35"}
+{"text": "Wed 2pm-4pm lab no gap", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/35"}
+{"text": "Sun 4pm-6pm class straight without gap", "label": "prefer_less_waiting", "reason": "names a weekday", "request": "prefer_less_waiting/1/mix/35"}
+{"text": "最好十点以后的课比较好", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/0"}
+{"text": "最好是九点以后上课", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/0"}
+{"text": "希望课程能从十点开始", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/0"}
+{"text": "Would prefer my lectures to kick off after 10 am, as I have an early practice session in the mornings.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/1"}
+{"text": "My body clock prefers the morning to start around 11 am, so I can get a bit of a head start on my day.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/1"}
+{"text": "Would be great if my classes didn't start too early in the day, say after 10 am would be perfect.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/1"}
+{"text": "My ideal class time is around 11 am, as I have a morning training session and like to get a bit of breakfast first.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/1"}
+{"text": "Best if my classes begin after 10 am, as I need some time for my morning routine and training.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/1"}
+{"text": "Hate mornings, so my classes should definitely start around 11 am.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/1"}
+{"text": "最好十点以后的课都行", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/2"}
+{"text": "上午十点以后最好", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/2"}
+{"text": "课最好安排在上午十点后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/2"}
+{"text": "不想上早课特别是早上八九点", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/2"}
+{"text": "上午十点以后的课都行", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/2"}
+{"text": "最好十点以后上课，别那么早", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/3"}
+{"text": "8点以后的课我真的不想上", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/3"}
+{"text": "8点以前的课我都不想选", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/3"}
+{"text": "课最好在上午十点以后，别早上那么早", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/3"}
+{"text": "Hates doing morning classes, so ideally after 10am for me please.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/4"}
+{"text": "Absolutely not a fan of late nights, best to stick to afternoon sessions.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/4"}
+{"text": "Really struggle with 8am starts, so no earlier than 10am for me.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/4"}
+{"text": "Late classes are a no for me, ideally after 9am.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/4"}
+{"text": "My practice conflicts with early mornings, so please schedule me after 11am.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/4"}
+{"text": "Early classes are a nightmare for me, definitely after 10am.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/4"}
+{"text": "Would much rather have classes in the afternoon, ideally after 12pm.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/4"}
+{"text": "尽量晚一点上课", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/zh/6"}
+{"text": "Would be sick if we could start our classes a little later, like, maybe 10:30am on, you know, most days.", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/en/7"}
+{"text": "If we can manage it, let's try to get classes going after 10am, especially if we can.", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/en/7"}
+{"text": "尽量避开早晨的课，尤其是我工作结束之后的早上。", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/mix/8"}
+{"text": "尽量不要早于十点上课，尤其是周五的早课。", "label": "prefer_no_early_late", "reason": "names a weekday", "request": "prefer_no_early_late/2/mix/8"}
+{"text": "最好十点以后上课", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/9"}
+{"text": "喜欢上午十点后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/9"}
+{"text": "早上八点之前不喜欢", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/9"}
+{"text": "十点以后再上课", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/9"}
+{"text": "Would love to avoid those early bird classes, especially if it's before lunchtime.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/10"}
+{"text": "Ideally, my classes should kick in after the morning rush, like 10 or 11 am.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/10"}
+{"text": "Hate those 8am starts - way too early for me, let's aim for something after 10.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/10"}
+{"text": "Been there, done that, 9am is a no-go. Could we have classes starting after 10am?", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/10"}
+{"text": "Those 8am classes? I'd rather not. Can we align with the day's later hours?", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/10"}
+{"text": "Don't really love the idea of starting the day so early. Post-10am is better.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/10"}
+{"text": "尽量不要早于上午十点的课，以免耽误早上的学习计划。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/11"}
+{"text": "最好十点以后有课，这样能更好地利用早上的时间处理个人事务。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/11"}
+{"text": "希望课程安排在上午十点之后，这样可以避免路途的疲惫。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/11"}
+{"text": "如果可以，尽量避免早上九点以前的课程，以便充足地准备。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/11"}
+{"text": "上课时间最好是十点之后，这样可以充分利用早上时间进行准备。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/11"}
+{"text": "如果课程能在上午十点以后开始就好了，这样能保证充足的睡眠。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/11"}
+{"text": "希望上课时间不要早于上午十点，这样可以多睡会儿。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/11"}
+{"text": "最好上午十点之后有课程，这样可以节省早上的时间去图书馆学习。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/11"}
+{"text": "尽量不要早课，我最好十点以后上课", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/12"}
+{"text": "早上课我完全不在意，最好是十点以后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/12"}
+{"text": "早上八点之前的课我都拒绝", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/12"}
+{"text": "我完全不想早上上课，最好是十点以后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/12"}
+{"text": "早上早课对我来说太折磨了，最好是十点以后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/12"}
+{"text": "best afternoons", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/13"}
+{"text": "after 10 would be great", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/13"}
+{"text": "最好十点以后开始的课，因为那时候我比较清醒可以更好地参与。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/mix/14"}
+{"text": "尽量避免早上8点以前的课程，那样太早了，家里孩子还在睡觉。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/mix/14"}
+{"text": "尽量安排在下午两点之后，那时候我可以更专注学习，也方便接小孩放学。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/mix/14"}
+{"text": "如果可以十一二上课", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/zh/15"}
+{"text": "希望下午才开始比较好", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/zh/15"}
+{"text": "尽量能避开早上好", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/zh/15"}
+{"text": "尽量避开早上", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/mix/17"}
+{"text": "如果可以，午后来上课", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/mix/17"}
+{"text": "理想情况下，下午才上课", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/mix/17"}
+{"text": "如果可以，避开早课", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/mix/17"}
+{"text": "最好九点以后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/18"}
+{"text": "十点前不想上课", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/18"}
+{"text": "宁愿十点后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/18"}
+{"text": "尽量九点后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/18"}
+{"text": "Ideally after 10am, really can't handle the early mornings", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/19"}
+{"text": "Would really appreciate starting after 9am, can't face 8am", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/19"}
+{"text": "Hates early mornings, would prefer sessions after 10am", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/19"}
+{"text": "Best to start after 9am, really can't handle the early mornings", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/19"}
+{"text": "Would much rather classes started after 10am, early mornings are a no-go", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/19"}
+{"text": "Ideally, classes could start after 9am, early mornings are rough", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/19"}
+{"text": "最好十点以后上课", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/20"}
+{"text": "希望8点后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/20"}
+{"text": "避免8点", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/20"}
+{"text": "希望10点后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/20"}
+{"text": "尽量不8点前上课", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/20"}
+{"text": "最好是上午十点以后上课，这样孩子也能按时吃饭。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/21"}
+{"text": "上午十点以后的课程最好，这样我才能准备早饭。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/21"}
+{"text": "Absolutely hates early morning stuff, ideally after 10am", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/22"}
+{"text": "Late classes are the worst, never wanna do anything after 7pm", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/22"}
+{"text": "8am starts are a no, seriously hate that time", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/22"}
+{"text": "Would prefer class to start at 11am or later, really don't get up early", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/22"}
+{"text": "Dread 9am classes, need the sleep", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/22"}
+{"text": "No way I'm doing anything before 10am, too early for me", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/22"}
+{"text": "Deadset against 6pm classes, too late to be productive", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/22"}
+{"text": "Morning classes are tough, way prefer afternoons", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/22"}
+{"text": "不喜周末课", "label": "prefer_no_early_late", "reason": "names a weekday", "request": "prefer_no_early_late/1/mix/23"}
+{"text": "尽量课程不要安排在早上，如果不是必须的话。", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/zh/24"}
+{"text": "if can, after 7", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/en/25"}
+{"text": "如果可以晚一点上课", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/mix/26"}
+{"text": "最好十点以后上课，不喜欢早起", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/27"}
+{"text": "早上七点以前的课都pass了", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/27"}
+{"text": "早点课不想上，尽量安排十点后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/27"}
+{"text": "建议上课时间安排在十点以后，真的不喜欢早起", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/27"}
+{"text": "早上七点前的课我都不想选", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/27"}
+{"text": "早点课我真的是没兴趣，尽量安排十点以后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/27"}
+{"text": "早上七点前的课完全不适合我", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/27"}
+{"text": "Ideally after 10am, I've got to look after my grandma in the mornings.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/28"}
+{"text": "Can't start before 9am, got a family thing in the morning.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/28"}
+{"text": "Would prefer classes after 10am, my sister needs me early.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/28"}
+{"text": "Hate 8am starts, my family needs me before I head to uni.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/28"}
+{"text": "Preferring classes after 10am, there's a family event early.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/28"}
+{"text": "最好十点以后才有课，现在得抽时间辅导家人.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/29"}
+{"text": "早上八点前的课都不喜欢，因为需要早上陪家人.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/29"}
+{"text": "最好安排在上午十点以后的课程，因为早上需要陪家人.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/29"}
+{"text": "最好十点以后上课，别早起", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/30"}
+{"text": "Ideally after midday.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/31"}
+{"text": "Please, only after lunchtime.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/31"}
+{"text": "最好十点以后才开始课程，这样才不会影响到我的训练。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/mix/32"}
+{"text": "理想情况下，避免早上八点的课程", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/zh/33"}
+{"text": "尽量晚一些上课会比较好", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/zh/33"}
+{"text": "preferably after lunch", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/en/34"}
+{"text": "尽量避开早上班", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/en/34"}
+{"text": "如果可以的话，晚一点上课", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/en/34"}
+{"text": "如果可以的话，尽量让周一和周五的课都晚一点。", "label": "prefer_no_early_late", "reason": "names a weekday", "request": "prefer_no_early_late/2/mix/35"}
+{"text": "尽可能让上午的课都在十点以后开始。", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/mix/35"}
+{"text": "最好十点以后上课，不喜欢早起。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/36"}
+{"text": "上午课程能推后一点最好，特别不喜欢八点之前上课。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/36"}
+{"text": "早晨起不来，能安排在十点以后的课最好。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/36"}
+{"text": "早上起不来，最好是十点之后的课。", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/36"}
+{"text": "I'd really prefer classes to start after the morning dew has dried, ideally after 10am, to give me some extra sleep.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/37"}
+{"text": "I know my body works better later, so ideally, my classes should start after the sun has been up for a while.", "label": "prefer_no_early_late", "reason": "names a weekday", "request": "prefer_no_early_late/0/en/37"}
+{"text": "Considering I have to help look after my sibling, I'd much rather my classes kick in after 10am, when I'm more alert.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/37"}
+{"text": "After taking care of my family member, I find I have more energy later in the day, so I really want my classes to start after lunch.", "label": "prefer_no_early_late", "reason": "length", "request": "prefer_no_early_late/0/en/37"}
+{"text": "I prefer classes to start later, around 11am, when I'm not so groggy from waking up so early.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/37"}
+{"text": "Given my early morning duties at home, I'd much prefer my classes to start after the sun has risen, ideally around 10am.", "label": "prefer_no_early_late", "reason": "names a weekday", "request": "prefer_no_early_late/0/en/37"}
+{"text": "I'd prefer to be teaching or learning after the morning chaos has settled, around 10am, when I'm more awake and alert.", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/37"}
+{"text": "Taking care of my family member means I'm more alert and productive after the morning hustle, so I'd prefer to start classes after 10am, when my brain is firing on all cylinders.", "label": "prefer_no_early_late", "reason": "length", "request": "prefer_no_early_late/0/en/37"}
+{"text": "最好十点以后上课", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/38"}
+{"text": "不想八点早课", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/38"}
+{"text": "上课时间最好是上午十点以后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/38"}
+{"text": "不喜欢早上八点之前上课", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/38"}
+{"text": "Ideally afternoons", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/40"}
+{"text": "Class before 9am too early", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/40"}
+{"text": "Best after 10am", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/40"}
+{"text": "最好十点以后上课", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/mix/41"}
+{"text": "周一和周五晚课不爽", "label": "prefer_no_early_late", "reason": "names a weekday", "request": "prefer_no_early_late/1/mix/41"}
+{"text": "理想状态下十点后", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/zh/42"}
+{"text": "If we could have classes after 10am, that'd be awesome.", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/en/43"}
+{"text": "Hates 8am starts, best if classes are after 10am.", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/en/43"}
+{"text": "如果可以尽量避开早上课", "label": "prefer_no_early_late", "reason": "no hedged clock time", "request": "prefer_no_early_late/2/mix/44"}
+{"text": "最好十点以后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/zh/45"}
+{"text": "Ideally after 9am", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/46"}
+{"text": "Avoid if possible, 8am", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/46"}
+{"text": "Better not before 10am", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/en/46"}
+{"text": "最好上课都在noon之后，别让我那么早起", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/47"}
+{"text": "除了晚上9点以后的课，其它都不行", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/47"}
+{"text": "早上十点之后才开始上课，否则别想我起那么早", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/47"}
+{"text": "早上课程太扎堆了，最好上午十点之后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/47"}
+{"text": "早上八点之前的课我都pass掉", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/0/mix/47"}
+{"text": "周一到周五早上课少点，最好上午十点之后", "label": "prefer_no_early_late", "reason": "names a weekday", "request": "prefer_no_early_late/0/mix/47"}
+{"text": "最好课程安排在上午10点以后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/48"}
+{"text": "希望课程时间不要太早，最好在上午10点之后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/48"}
+{"text": "不喜欢在早上8点开始上课", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/48"}
+{"text": "上课时间不要太早，最好是在上午10点之后", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/zh/48"}
+{"text": "ideally after 10", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/49"}
+{"text": "best late afternoon", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/49"}
+{"text": "afternoons r good", "label": "prefer_no_early_late", "reason": "has a clock time", "request": "prefer_no_early_late/1/en/49"}

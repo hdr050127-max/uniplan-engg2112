@@ -98,6 +98,32 @@ ollama run uniplan-parse-7b "I can't do Fridays, I work"
 
 第 1 轮导入的结果：`uniplan-parse-7b:latest`，Q4_K_M，4.36 GB，适配器 154.1 MB。训练日志在 `llm/parse/output/lora_train_log_7b.json`。
 
+## 第 2 轮（同样的超参数和种子，只换训练数据）
+
+把新的 `data\train.jsonl`、`data\valid.jsonl` 拷过去覆盖旧的（验证集和第 1 轮一样，只按改动清单改了几条标签），然后：
+
+```powershell
+cd D:\uniplan-lora\windows
+.venv\Scripts\activate
+$env:HF_HOME = "D:\hf-cache"
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:11434/api/generate -ContentType application/json -Body '{"model": "uniplan-parse-7b", "keep_alive": 0}'
+python train_lora.py --out out-7b-r2
+```
+
+合并时内存不够就 `python merge_adapter.py --out out-7b-r2`。转换和导入同第 4 步，把路径里的 `out-7b` 换成 `out-7b-r2`，模型名用 `uniplan-parse-7b-r2`：
+
+```powershell
+$base = (Get-ChildItem "D:\hf-cache\hub\models--Qwen--Qwen2.5-7B-Instruct\snapshots" | Select-Object -First 1).FullName
+Copy-Item "$base\tokenizer.json", "$base\tokenizer_config.json", "$base\vocab.json", "$base\merges.txt" out-7b-r2\merged -Force
+.venv-convert\Scripts\python.exe llama.cpp\convert_hf_to_gguf.py out-7b-r2\merged --outfile out-7b-r2\model-f16.gguf --outtype f16
+& "$env:LOCALAPPDATA\Programs\Ollama\lib\ollama\llama-quantize.exe" out-7b-r2\model-f16.gguf out-7b-r2\model-q4_K_M.gguf Q4_K_M
+cd out-7b-r2
+(Get-Content Modelfile) -replace '^FROM .*', 'FROM ./model-q4_K_M.gguf' | Set-Content Modelfile.q4
+ollama create uniplan-parse-7b-r2 -f Modelfile.q4
+```
+
+训练日志拷回 Mac，存成 `llm/parse/output/lora_train_log_7b_r2.json`。第 1 轮的 `uniplan-parse-7b` 留着，对比要用。
+
 ## 5. 告诉 Claude
 
 把 `out-7b\train_log.json` 拷回 Mac，放到 `llm/parse/output/lora_train_log_7b.json`，然后在需求解析窗口说一声"微调好了"。Claude 会用 `python3 -m llm.ollama` 确认 Windows 上有 `uniplan-parse-7b`，再跑评估。

@@ -4,6 +4,7 @@
     python3 -m llm.gpu_lock -- python3 -m llm.parse.review answer          # qwen2.5:7b, untrained
     python3 -m llm.parse.review sheet --round 1      # output/review_round1.jsonl for Claude to grade
     python3 -m llm.parse.review apply --round 1      # Claude's labels -> training data + round stats
+    python3 -m llm.parse.review round2               # round 1 + part-of-day relabels + Claude's round-2 clauses
 
 The pool is the SYNTHETIC clauses written by qwen2.5:7b (source qwen_synth, label = the label they
 were generated for) plus Claude's hard training clauses in data/train_claude.csv (source claude_train).
@@ -182,9 +183,50 @@ def apply(round_number: int) -> None:
     print(json.dumps(stats["applied"], indent=2))
 
 
+TRAIN_CLAUDE_R2 = HERE / "data" / "train_claude_round2.csv"
+RELABELS_R2 = OUTPUT / "round2_relabels.jsonl"
+
+
+def round2() -> None:
+    """Round-2 training data: round 1, with the part-of-day relabels (output/round2_relabels.jsonl,
+    validation included) and Claude's round-2 clauses (data/train_claude_round2.csv) added to the
+    training split only, so the validation set stays comparable with round 1."""
+    rows = _read(OUTPUT / "train_round1.jsonl")
+    changes = {row["id"]: row for row in _read(RELABELS_R2)}
+    result, counts = [], Counter()
+    for row in rows:
+        change = changes.get(row["id"])
+        if change is None:
+            result.append(row)
+        elif not change["keep"]:
+            counts[f"dropped_{row['split']}"] += 1
+        else:
+            counts[f"relabelled_{row['split']}"] += 1
+            result.append({**row, "label": change["new_label"], "label_from": "claude_round2"})
+    added = [{"text": clause["text"], "label": clause["label"], "label_from": "claude", "source": "claude_train_r2",
+              "language": "zh" if any("\u4e00" <= ch <= "\u9fff" for ch in clause["text"]) else "en",
+              "split": "train", "id": f"{sentence['id']}-{number}"}
+             for sentence in load(TRAIN_CLAUDE_R2) for number, clause in enumerate(sentence["clauses"], 1)]
+    result += added
+    _write(OUTPUT / "train_round2.jsonl", result)
+    LORA_DATA.mkdir(parents=True, exist_ok=True)
+    for split, name in (("train", "train"), ("val", "valid")):
+        _write(LORA_DATA / f"{name}.jsonl", [
+            {"messages": short_messages(r["text"]) + [{"role": "assistant", "content": r["label"]}]}
+            for r in result if r["split"] == split])
+    stats = {"round": 2, "from": "train_round1.jsonl", "relabels": len(changes), **dict(counts),
+             "claude_round2_clauses_added": len(added),
+             "added_by_label": dict(Counter(r["label"] for r in added)),
+             "training_rows": len(result), "by_split": dict(Counter(r["split"] for r in result)),
+             "by_source": dict(Counter(r["source"] for r in result)),
+             "label_from": dict(Counter(r["label_from"] for r in result))}
+    (OUTPUT / "review_round2_stats.json").write_text(json.dumps(stats, indent=2) + "\n")
+    print(json.dumps(stats, indent=2))
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Teacher-student review rounds.")
-    parser.add_argument("step", choices=("pool", "answer", "sheet", "apply"))
+    parser.add_argument("step", choices=("pool", "answer", "sheet", "apply", "round2"))
     parser.add_argument("models", nargs="*", default=["qwen2.5:7b"])
     parser.add_argument("--round", type=int, default=1)
     args = parser.parse_args(argv)
@@ -194,8 +236,10 @@ def main(argv: list[str] | None = None) -> int:
         answer(args.models)
     elif args.step == "sheet":
         sheet(args.round, args.models)
-    else:
+    elif args.step == "apply":
         apply(args.round)
+    else:
+        round2()
     return 0
 
 

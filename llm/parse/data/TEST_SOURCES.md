@@ -3,7 +3,6 @@
 | File | Written by | Sentences / clauses | Language |
 | --- | --- | --- | --- |
 | `test_claude.csv` | Claude (Opus 5.5, the coordinator session), at the user's request on 2026-10-17 | 142 / 174 | English |
-| `test_team.csv` | Team members, by hand (to be added) | target 30+ | any |
 
 - `test_claude.csv` was written by a different model family from the one that generated the
   training clauses (Qwen 2.5 7B), so its sentences do not share the generator's phrasing. It is
@@ -15,5 +14,5 @@
   and reasons split from requests across a full stop.
 - The answers follow the conventions in `README.md` in this folder. Rows whose reading is not
   obvious carry a note in the `note` column.
-- Both files are frozen test sets: never train or tune on them. Report each file separately and
-  combined. If the scores on the two differ a lot, say so in the report.
+- No team member writes test data (decided 2026-10-17), so this is the only parsing test set.
+  It is frozen: never train or tune on it. The report must state that it is Claude-written.

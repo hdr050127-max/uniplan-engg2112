@@ -12,6 +12,7 @@ import time
 from dataclasses import replace
 from datetime import date
 
+from .advisor import recommend
 from .ranking import (AXIS_SETS, axes_name, common_teaching_weeks, dated_meetings,
                       extract_schedule_features, feature_key, pareto_front, pool_from_search,
                       rank_pool, scaled_features, weekday_pattern)
@@ -158,6 +159,15 @@ def equivalent_swaps(
 MAX_VARIANTS = 6
 
 
+def candidate_dict(entry: dict[str, Any], options: dict[str, ClassOption],
+                   profile: dict[str, Any]) -> dict[str, Any]:
+    """A pool profile in the llm.contracts.Candidate shape (no backups; cheap enough for 20)."""
+    candidate = candidate_from_ids(entry["candidate_id"], entry["option_ids"], options)
+    return {"candidate_id": entry["candidate_id"], "option_ids": list(entry["option_ids"]),
+            "features": entry["features"], "pattern": weekday_pattern(candidate),
+            "meetings": dated_meetings(candidate, profile)}
+
+
 def candidate_from_ids(candidate_id: str, option_ids: tuple[str, ...] | list[str],
                        options: dict[str, ClassOption]) -> Candidate:
     """Rebuild a schedule from its class options (the pool keeps only ids)."""
@@ -179,6 +189,29 @@ def _materialize(candidate_id: str, option_ids: tuple[str, ...], features: dict[
     return attach_alternatives(item, eligible, options, profile, weeks)
 
 
+def add_item(items: dict[str, dict[str, Any]], entry: dict[str, Any], options: dict[str, ClassOption],
+             eligible: dict[str, tuple[ClassOption, ...]], profile: dict[str, Any],
+             weeks: tuple[date, ...]) -> dict[str, Any]:
+    """Put one pool profile into ``items`` once, with a schedule per distinct set of weekdays."""
+    if entry["candidate_id"] in items and "variants" in items[entry["candidate_id"]]:
+        return items[entry["candidate_id"]]
+    variants = sorted(entry["patterns"].items(),
+                      key=lambda pair: (-pair[1]["count"], pair[0]))[:MAX_VARIANTS]
+    item = items.get(entry["candidate_id"]) or _materialize(
+        entry["candidate_id"], entry["option_ids"], entry["features"], entry["count"],
+        options, eligible, profile, weeks)
+    item["variants"] = [{"pattern": pattern, "count": variant["count"],
+                         "candidate_id": variant["candidate_id"]}
+                        for pattern, variant in variants]
+    items[entry["candidate_id"]] = item
+    for _, variant in variants:
+        if variant["candidate_id"] not in items:
+            items[variant["candidate_id"]] = _materialize(
+                variant["candidate_id"], variant["option_ids"], entry["features"],
+                variant["count"], options, eligible, profile, weeks)
+    return item
+
+
 def build_shortlist(pool: list[dict[str, Any]], options: dict[str, ClassOption],
                     eligible: dict[str, tuple[ClassOption, ...]], profile: dict[str, Any],
                     weeks: tuple[date, ...]) -> dict[str, Any]:
@@ -194,22 +227,7 @@ def build_shortlist(pool: list[dict[str, Any]], options: dict[str, ClassOption],
         front = pareto_front(pool, axes)
         menus[axes_name(axes)] = [entry["candidate_id"] for entry in front]
         for entry in front:
-            if entry["candidate_id"] in items and "variants" in items[entry["candidate_id"]]:
-                continue
-            variants = sorted(entry["patterns"].items(),
-                              key=lambda pair: (-pair[1]["count"], pair[0]))[:MAX_VARIANTS]
-            item = items.get(entry["candidate_id"]) or _materialize(
-                entry["candidate_id"], entry["option_ids"], entry["features"], entry["count"],
-                options, eligible, profile, weeks)
-            item["variants"] = [{"pattern": pattern, "count": variant["count"],
-                                 "candidate_id": variant["candidate_id"]}
-                                for pattern, variant in variants]
-            items[entry["candidate_id"]] = item
-            for _, variant in variants:
-                if variant["candidate_id"] not in items:
-                    items[variant["candidate_id"]] = _materialize(
-                        variant["candidate_id"], variant["option_ids"], entry["features"],
-                        variant["count"], options, eligible, profile, weeks)
+            add_item(items, entry, options, eligible, profile, weeks)
     full = menus[axes_name(AXIS_SETS[0])]
     return {"menus": menus, "items": items, "default_axes": axes_name(AXIS_SETS[0]),
             "dominated_profiles": len(pool) - len(full),
@@ -422,6 +440,7 @@ def arrange_timetables(
     meetings: list[dict[str, Any]], required_groups: dict[str, list[str]],
     profile: dict[str, Any], *, max_nodes: int = 5_000_000,
     pins: dict[str, list[str]] | None = None, excluded: list[str] | None = None,
+    student_text: str | None = None,
 ) -> dict[str, Any]:
     """Choose one whole class per required group, then rank every valid choice.
 
@@ -432,6 +451,9 @@ def arrange_timetables(
 
     Private keys ``_pool`` and ``_options`` carry the distinct feature profiles
     and class options to the preference study; callers pop them before output.
+
+    With ``student_text`` (may be empty) the result also holds ``recommendation``:
+    10–20 candidates, the top 3 by ``llm.rank`` and a template reason for each.
     """
     all_groups = extract_class_options(meetings, required_groups)
     pins = pins or {}
@@ -457,6 +479,12 @@ def arrange_timetables(
     ranking["_options"] = options
     if ranking["feasible_count"]:
         ranking["shortlist"] = build_shortlist(ranking["_pool"], options, eligible, profile, weeks)
+        if student_text is not None:
+            items = ranking["shortlist"]["items"]
+            ranking["recommendation"] = recommend(
+                ranking["_pool"], profile, student_text,
+                candidate=lambda entry: candidate_dict(entry, options, profile),
+                item=lambda entry: add_item(items, entry, options, eligible, profile, weeks))
         if any(profile.get(key) for key in (
                 "unavailable_windows", "transition_min", "max_days_per_week", "max_daily_minutes",
                 "max_daily_span", "lunch", "in_person_only", "min_seats", "walk_speed")):

@@ -115,6 +115,7 @@ i.dot { display: inline-block; width: 8px; height: 8px; background: var(--c, var
 .say-box .button { margin-bottom: 6px; }
 .say-result { margin-top: 10px; }
 .say-head { font-size: 12px; color: var(--muted); margin: 0 0 2px; }
+.say-note { font-size: 13px; color: var(--warn); margin: 4px 0; padding-left: 8px; border-left: 2px solid var(--warn); }
 .say-row { display: flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; padding: 5px 0; border-bottom: 1px solid var(--grid); }
 .say-row .quote { color: var(--faint); font-size: 12px; }
 .say-row.note { color: var(--muted); font-size: 13px; }
@@ -173,6 +174,7 @@ i.dot { display: inline-block; width: 8px; height: 8px; background: var(--c, var
 .cares .cares-hint { margin-left: auto; color: var(--faint); }
 .reason { margin: 0; font-size: 13px; color: var(--ink-2); }
 .reason-source { margin: 10px 0 0; font-size: 12px; color: var(--faint); }
+.reason-source.warn { color: var(--warn); }
 
 .workspace { display: grid; gap: 24px; align-items: start; }
 @media (min-width: 960px) {

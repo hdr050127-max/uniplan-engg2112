@@ -91,6 +91,23 @@ class ConditionTests(unittest.TestCase):
                          ["campus_days", "gap"])
         self.assertEqual(conditions_of(profile, ("gap", "campus_days"))["cares"], ["gap", "campus_days"])
 
+    def test_page_is_told_when_parsing_falls_back(self):
+        """A model runtime that does not answer falls back to the linear model, and the page says so."""
+        import llm.parse as parsing
+        from llm.parse import classify
+
+        def unreachable(name):
+            def label(text):
+                raise OSError("connection refused")
+            return label
+
+        with mock.patch.object(parsing, "RUNTIME", "ollama-short:uniplan-parse-7b"), \
+                mock.patch.object(parsing, "_down_since", None), mock.patch.object(classify, "by_name", unreachable):
+            result = read_sentence("I can't do Fridays, and I hate long gaps")
+        self.assertTrue(result["mode"]["simplified"])
+        self.assertEqual([clause["label"] for clause in result["clauses"]], ["blocked_time", "prefer_less_waiting"])
+        self.assertFalse(read_sentence("I can't do Fridays")["mode"]["simplified"])  # the linear runtime itself
+
     def test_merge_adds_windows_and_preferred_hours(self):
         merged = merge_conditions(base_profile(unavailable_windows=[{"weekday": 1, "start_min": 0, "end_min": 600}]), {
             "unavailable_windows": [{"weekday": 5, "start_min": 0, "end_min": 1439}], "max_days_per_week": 3,

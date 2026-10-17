@@ -456,7 +456,10 @@ function setSegment(target, value, text) {
     const extra = el("button", "", text);
     extra.type = "button";
     extra.dataset.value = value;
-    group.append(extra);
+    // Keep the numbers in order ("不限" has no number and stays first).
+    const after = [...group.querySelectorAll("button")].find((choice) =>
+      choice.dataset.value !== "" && Number(choice.dataset.value) > Number(value));
+    group.insertBefore(extra, after || null);
   }
   $(target).value = value;
 }
@@ -527,6 +530,9 @@ function renderSay() {
     return;
   }
   box.append(el("p", "say-head", "我理解为"));
+  if (say.mode?.simplified) {
+    box.append(el("p", "say-note", "简化模式：识别用的大模型暂时连不上，改用了简单的识别方法，请仔细核对下面每一条。"));
+  }
   say.clauses.forEach((clause, index) => {
     const quote = el("span", "quote", `“${clause.text}”`);
     const row = el("div", "say-row");
@@ -543,7 +549,7 @@ function renderSay() {
       row.append(label, quote);
     } else {
       row.classList.add("note");
-      const meaning = clause.label === "other" ? "没听懂，可以在下面手动设置"
+      const meaning = clause.label === "other" ? "这句我们管不了，排课时不会考虑"
         : `听出是“${LABEL_NAME[clause.label] || clause.label}”，但没读出具体的数字或时间，可以在下面自己设置`;
       row.append(el("span", "", clause.problems.length ? "识别出的时间或数字不合理，已忽略" : meaning), quote);
     }
@@ -575,7 +581,7 @@ async function readSay() {
     unapplySay();
     const clauses = data.clauses;
     state.say = {
-      text, clauses, on: clauses.map((clause) => Boolean(Object.keys(clause.profile_fields).length || clause.cares.length)),
+      text, clauses, mode: data.mode, on: clauses.map((clause) => Boolean(Object.keys(clause.profile_fields).length || clause.cares.length)),
       base: { settings: settingsSnapshot(), cares: [...state.cares], caresTouched: state.caresTouched },
     };
     applySay();
@@ -910,16 +916,23 @@ function reasonOf(index) {
   return written?.reasons?.[index] || rec.menu.reasons[index];
 }
 
+function reasonSimplified() {
+  // The configured model server did not answer, or no model wrote the reasons.
+  const written = state.reasons[recommendation().key];
+  return Boolean(written?.fell_back) || ["unavailable", "failed"].includes(written?.status);
+}
+
 function reasonSource() {
   const written = state.reasons[recommendation().key];
   const status = written?.status;
   if (status === "pending") return "正在请本地千问把理由说得更口语…";
   if (status === "model" || status === "partial") {
-    return `理由由本地千问（${written.model}）改写，每句都和课表核对过${status === "partial" ? "；没通过核对的句子保留原样" : ""}。`;
+    const where = written.fell_back ? "大模型服务器暂时不在线（简化模式），理由由本机的" : "理由由本地";
+    return `${where}千问（${written.model}）改写，每句都和课表核对过${status === "partial" ? "；没通过核对的句子保留原样" : ""}。`;
   }
   if (status === "rejected") return "千问改写的句子没通过和课表的核对，显示按课表数据生成的原句。";
   if (status === "busy") return "显卡正在跑批量任务，这次没请千问改写，理由按课表数据生成。";
-  if (status) return "本地千问暂时不可用，理由按课表数据生成。";
+  if (status) return "简化模式：千问暂时不可用，理由按课表数据生成。";
   return "理由按课表数据生成。";
 }
 
@@ -928,7 +941,10 @@ function updateReasons() {
   if (state.view !== "recommend" || !recommendation()) return;
   document.querySelectorAll("[data-reason]").forEach((node) => { node.textContent = reasonOf(Number(node.dataset.reason)); });
   const source = document.querySelector(".reason-source");
-  if (source) source.textContent = reasonSource();
+  if (source) {
+    source.textContent = reasonSource();
+    source.classList.toggle("warn", reasonSimplified());
+  }
 }
 
 async function loadReasons() {
@@ -1041,7 +1057,7 @@ function renderPlans() {
   const workspace = el("div", "workspace");
   const list = el("div", "plan-list");
   plans.forEach((item, index) => list.append(planCard(item, index, plans)));
-  if (rec) list.append(el("p", "reason-source", reasonSource()));
+  if (rec) list.append(el("p", `reason-source${reasonSimplified() ? " warn" : ""}`, reasonSource()));
   const side = el("div", "side");
   if (state.compare.length === 2) {
     const [a, b] = state.compare.map((id) => plans.find((item) => item.candidate_id === id));

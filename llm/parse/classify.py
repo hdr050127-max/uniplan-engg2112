@@ -18,9 +18,10 @@ LABEL_SCHEMA = {"type": "object", "properties": {"label": {"type": "string", "en
                 "required": ["label"]}
 
 
-def ollama_classifier(model: str, *, constrained: bool = True, timeout: float = 30,
+def ollama_classifier(model: str, *, constrained: bool = True, timeout: float = 15,
                       prompt: Callable[[str], list[dict]] = messages) -> Classifier:
-    """Ask a model served by Ollama. With constrained=True the reply can only be one of the 9 labels."""
+    """Ask a model served by Ollama. With constrained=True the reply can only be one of the 9 labels.
+    After `timeout` seconds the call fails, so parse() can fall back instead of keeping a page waiting."""
     def classify(text: str) -> str:
         if constrained:
             reply = ollama.chat(model, prompt(text), schema=LABEL_SCHEMA,
@@ -42,8 +43,8 @@ def by_name(name: str) -> Classifier:
         return keyword_label
     if name == "linear":
         return linear_classifier()
-    if name == "linear-r1":                           # the round-1 run-time model, kept for comparison
-        return linear.load(linear.MODEL_PATH.parent / "round1" / "linear_model.json")
+    if name in ("linear-r1", "linear-r2"):            # each round's train+val model, kept for comparison
+        return linear.load(linear.MODEL_PATH.parent / f"round{name[-1]}" / "linear_model.json")
     if name.startswith("ollama:"):                # full prompt v1, as measured in round 1
         return ollama_classifier(name.removeprefix("ollama:"), prompt=lambda text: messages(text, "v1"))
     if name.startswith("ollama-v2:"):             # full prompt v2 (fixed example, part-of-day rule)

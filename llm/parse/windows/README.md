@@ -100,7 +100,7 @@ ollama run uniplan-parse-7b "I can't do Fridays, I work"
 
 ## 第 2 轮（同样的超参数和种子，只换训练数据）
 
-把新的 `data\train.jsonl`、`data\valid.jsonl` 拷过去覆盖旧的（验证集和第 1 轮一样，只按改动清单改了几条标签），然后：
+把新的 `data\train.jsonl`、`data\valid.jsonl` 拷过去覆盖旧的（第 1 轮的验证集按改动清单改了 2 条、丢了 1 条（279 → 278）），然后：
 
 ```powershell
 cd D:\uniplan-lora\windows

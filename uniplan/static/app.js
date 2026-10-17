@@ -53,7 +53,7 @@ const state = {
   busy: false, data: null, groups: null, pinned: {}, excluded: [], result: null,
   cares: new Set(AXES), selected: null, variant: {}, week: {}, routeDay: {},
   tab: "week", enrolled: {}, friend: null, notice: "", compare: [], history: [],
-  sharedPlan: null, participant: null, firstInteraction: null,
+  sharedPlan: null, participant: null, firstInteraction: null, more: false,
   say: null, view: "all", viewPicked: false, reasons: {},
   // Whether the student has stated an order for "What matters" (state.cares keeps insertion order).
   caresTouched: false,
@@ -735,6 +735,16 @@ function renderSay() {
     const mark = el("span", `mark${usable ? "" : " unread"}${usable && !used ? " left-out" : ""}`, clause.text);
     mark.style.setProperty("--i", String(index));
     said.append(mark);
+    if (usable) {
+      const toggle = button(say.on[index] ? "×" : "+", () => {
+        say.on[index] = !say.on[index];
+        say.focus = `[data-toggle="${index}"]`;
+        applySay();
+        renderSay();
+      }, { className: "leave", title: say.on[index] ? "Leave this out" : "Use this again" });
+      toggle.dataset.toggle = String(index);
+      said.append(toggle);
+    }
     const note = el("div", "note");
     note.id = `clause-note-${index}`;
     said.setAttribute("aria-describedby", note.id);
@@ -747,16 +757,6 @@ function renderSay() {
       ask.append(text, renderOptions(say, question, q, text.id));
       note.append(ask);
     });
-    if (usable) {
-      const toggle = button(say.on[index] ? "Leave this out" : "Use this again", () => {
-        say.on[index] = !say.on[index];
-        say.focus = `[data-toggle="${index}"]`;
-        applySay();
-        renderSay();
-      }, { className: "button quiet toggle" });
-      toggle.dataset.toggle = String(index);
-      note.append(toggle);
-    }
     row.append(said, note);
     list.append(row);
   });
@@ -773,10 +773,6 @@ function renderSay() {
     });
     box.append(wrap);
   }
-  const used = items.filter((item) => item.on && (Object.keys(item.profile_fields).length || item.cares.length));
-  box.append(el("p", "readback-foot", used.length
-    ? "These are filled in below, and the priorities on the results page. Change anything that is wrong, then find timetables."
-    : "Nothing in this sentence can be set for you. Use the settings below."));
   box.hidden = false;
   if (say.focus && !say.busy) {
     // Keep keyboard focus on the answer just chosen (the whole read-back was drawn again).
@@ -937,9 +933,11 @@ async function plan(profile, { groups = null, pinned = {}, excluded = [], notice
     if (enrolled) state.enrolled = enrolled;
     else if (!notice) {
       state.enrolled = {};
-      state.tab = "week";
+      state.tab = "term";
+      state.more = false;  // a fresh plan opens with More folded
     }
     writeShareHash();
+    $("dataDate").textContent = state.data?.snapshot_time ? ` ${dataBadge(state.data).textContent}.` : "";
     if (result.status === "invalid") showInvalid(result);
     else showResult(result);
   } catch (error) {
@@ -998,7 +996,7 @@ function collapseSetup(collapsed) {
   });
   const said = sayText();
   if (said) chips.append(el("span", "", `“${said.length > 32 ? `${said.slice(0, 32)}…` : said}”`));
-  state.blocks.forEach((block) => chips.append(el("span", "", `Not ${block.label}`)));
+  state.blocks.forEach((block) => chips.append(el("span", "", `Not ${block.label.replace(/^Week(days|ends)\b/, "week$1")}`)));
   const count = settingsCount();
   if (count) chips.append(el("span", "", plural(count, "setting")));
 }
@@ -1217,6 +1215,7 @@ function renderPlans() {
   const focusKey = document.activeElement?.closest?.("#result [data-key]")?.dataset.key;
   const box = resultBox();
   const ranking = state.result.ranking_result;
+  const nearest = state.result.status === "nearest";
   const rec = state.view === "recommend" ? recommendation() : null;
   if (state.view === "recommend" && !rec) state.view = "all";
   if (rec && state.caresTouched && rec.menu.cares && rec.menu.cares.join() !== [...state.cares].join() && !state.busy) {
@@ -1232,19 +1231,197 @@ function renderPlans() {
   state.compare = state.compare.filter((id) => plans.some((item) => item.candidate_id === id));
 
   const head = el("div", "result-head");
-  const fit = ranking.feasible_count.toLocaleString("en-AU");
-  if (rec) {
-    head.append(el("h2", "", `${plural(plans.length, "timetable")}, from ${fit} that fit`));
-  } else {
-    head.append(el("h2", "", plans.length === 1 ? `The best timetable, from ${fit} that fit` : `${plural(plans.length, "option")}, from ${fit} that fit`));
+  const title = rec ? plural(plans.length, nearest ? "closest timetable" : "timetable") : plural(plans.length, "option");
+  head.append(el("h2", "", title));
+  if (nearest) head.append(el("p", "visually-hidden", "No timetable meets every limit. Each one says which limit it breaks."));
+  box.append(head);
+
+  const workspace = el("div", "workspace");
+  const list = el("div", "plan-list");
+  plans.forEach((item, index) => list.append(planCard(item, index, plans)));
+  if (rec?.token) {
+    const source = el("p", "reason-source", reasonSource());
+    source.hidden = !source.textContent;
+    list.append(source);
   }
-  const meta = el("div", "result-meta");
-  if (rec) meta.append(el("span", "", `${plural(rec.menu.candidates.length, "candidate")} ranked for what matters to you`));
-  meta.append(dataBadge(state.data));
-  if (ranking.recommendation) {
-    const views = el("div", "segmented views");
+  const side = el("div", "side");
+  if (state.compare.length === 2) {
+    const [a, b] = state.compare.map((id) => plans.find((item) => item.candidate_id === id));
+    side.append(renderCompare(a, b, plans));
+  } else {
+    const current = plans.find((item) => item.candidate_id === state.selected);
+    if (current) side.append(renderDetail(current, plans));
+  }
+  workspace.append(list, side);
+  box.append(workspace);
+
+  if (nearest) {
+    // Every pick breaks a limit here, so the one-change fixes are shown, not tucked away.
+    const fixes = fixLines(ranking.strict?.what_if?.changes || []);
+    if (fixes.length) {
+      const hints = el("div", "hints");
+      hints.append(el("h3", "section-title", "Loosening one limit would help"), ...fixes);
+      box.append(hints);
+    }
+  }
+  box.append(renderAdjust(false));
+  if (STUDY_MODE && state.result.study) box.append(renderStudy(state.result.study));
+  if (focusKey) box.querySelector(`[data-key="${focusKey}"]`)?.focus();
+  if (rec) loadReasons();
+}
+
+function fixLines(changes) {
+  // When a one-step loosening works as well as dropping the limit, only offer the smaller change.
+  return changes.filter((change) => !(change.value == null && changes.some((other) =>
+    other.kind === change.kind && other.value != null && other.count === change.count))).map((change) =>
+    hintLine(`${changeLabel(change)}: ${plural(change.count, "timetable").replace(/^\d+/, change.count.toLocaleString("en-AU"))} would fit`, change));
+}
+
+function planCard(base, index, plans) {
+  // Title, three numbers and one line of reason (docs/DESIGN.md 10.2); a click shows its week.
+  const item = shownItem(base);
+  const selected = base.candidate_id === state.selected && state.compare.length < 2;
+  const compared = state.compare.includes(base.candidate_id);
+  const card = el("div", `plan${selected ? " selected" : ""}${compared ? " compared" : ""}`);
+  card.addEventListener("click", () => {
+    state.selected = base.candidate_id;
+    if (state.compare.length === 2) state.compare = [];
+    renderPlans();
+  });
+  const head = el("div", "plan-head");
+  head.append(el("span", `rank${state.view === "recommend" && index === 0 ? " first" : ""}`, planLabel(index)));
+  const show = el("button", "plan-title", daysText(item.pattern));
+  show.type = "button";
+  show.dataset.key = `plan-${base.candidate_id}`;
+  show.setAttribute("aria-pressed", String(selected));
+  show.setAttribute("aria-label", `${state.view === "recommend" ? "Pick" : "Option"} ${planLabel(index)}: ${daysText(item.pattern)}`);
+  head.append(show);
+  card.append(head, stats(base.features));
+  if (state.view === "recommend") {
+    const reason = el("p", "reason", reasonOf(index));
+    reason.dataset.reason = String(index);
+    card.append(reason);
+  } else if (item.broken) {
+    card.append(el("p", "reason", keepUnits(`${[item.watch, item.broken].filter(Boolean).join(". ")}.`)));
+  }
+  return card;
+}
+
+function daysAmount(value) {
+  const text = value.toFixed(1).replace(/\.0$/, "");
+  return `${text} day${text === "1" ? "" : "s"}`;
+}
+
+function stats(features, compareTo = null) {
+  // Three numbers; the ones the student does not care about are dimmed.
+  const box = el("ul", "stats");
+  const values = [
+    ["campus_days", daysAmount(features.campus_days), "on campus a week", "campus_days"],
+    ["gap", durationText(features.gap_min), "waiting a week", "gap_min"],
+    ["outside_hours", durationText(features.outside_min), "early or late a week", "outside_min"],
+  ];
+  values.forEach(([axis, value, label, key]) => {
+    const line = el("li", state.cares.has(axis) ? "" : "dim");
+    line.append(el("strong", "", value), el("span", "", label));
+    if (compareTo) {
+      const diff = features[key] - compareTo.features[key];
+      if (Math.abs(diff) > (key === "campus_days" ? 0.05 : 1)) {
+        const amount = key === "campus_days" ? Math.abs(diff).toFixed(1).replace(/\.0$/, "") : durationText(Math.abs(diff));
+        line.append(el("span", `delta ${diff < 0 ? "better" : "worse"}`, `${diff > 0 ? "+" : "−"}${amount}`));
+      }
+    }
+    box.append(line);
+  });
+  return box;
+}
+
+const TABS = [["term", "Semester"], ["time", "Hours"], ["enrol", "Enrolment"], ["friend", "With a friend"]];
+
+function renderDetail(base, plans) {
+  // By default: the week, Use this timetable and Download calendar. The rest is under More.
+  const item = shownItem(base);
+  const index = plans.findIndex((other) => other.candidate_id === base.candidate_id);
+  const letter = planLabel(index);
+  const detail = el("section", "detail");
+  const head = el("div", "detail-head");
+  const title = el("h3");
+  title.append(el("span", `rank${state.view === "recommend" && index === 0 ? " first" : ""}`, letter),
+    document.createTextNode(daysText(item.pattern)));
+  head.append(title);
+  detail.append(head);
+  const tools = el("div", "detail-actions");
+  const more = button(state.more ? "Less" : "More", () => {
+    state.more = !state.more;
+    renderPlans();
+  });
+  more.dataset.key = "more";
+  more.setAttribute("aria-expanded", String(Boolean(state.more)));
+  more.setAttribute("aria-controls", "more-panel");
+  tools.append(
+    button("Use this timetable", (node) => acceptPlan(item, index, plans, node), { className: "button primary" }),
+    button("Download calendar (.ics)", () => { downloadIcs(item); toast("Calendar file downloaded. Import it into Google, Apple or Outlook calendar."); }),
+    more,
+  );
+  detail.append(tools);
+  if (state.notice) {
+    const notice = el("div", "notice", state.notice);
+    if (state.history.length) notice.append(button("Undo", undo, { className: "button quiet" }));
+    detail.append(notice);
+  }
+  if (state.more) detail.append(morePanel(item, base, plans, letter));
+  detail.append(weekView(item, base));
+  return detail;
+}
+
+function morePanel(item, base, plans, letter) {
+  const panel = el("div", "more-panel");
+  panel.id = "more-panel";
+  const actions = el("div", "tool-row");
+  actions.append(
+    button("Share link", () => copyText(shareUrl(item), "Link copied. Anyone who opens it sees this timetable.")),
+    button("Save", () => { saveFavourite(item, letter); toast("Saved on this device. It is listed on the first page."); }),
+    button("Print", () => window.print()),
+  );
+  panel.append(actions);
+  const next = nextClass(item);
+  if (next) panel.append(next);
+
+  const ranking = state.result.ranking_result;
+  const cares = el("div", "more-row");
+  const caresLabel = el("span", "more-label", "What matters");
+  caresLabel.id = "caresLabel";
+  const toggles = el("div", "segmented");
+  toggles.setAttribute("role", "group");
+  toggles.setAttribute("aria-labelledby", "caresLabel");
+  AXES.forEach((axis) => {
+    const chip = el("button", "", AXIS_CHIP[axis]);
+    chip.type = "button";
+    chip.dataset.key = `care-${axis}`;
+    chip.setAttribute("aria-pressed", String(state.cares.has(axis)));
+    chip.addEventListener("click", (event) => {
+      event.stopPropagation();
+      if (state.cares.has(axis) && state.cares.size === 1) {
+        toast("Keep at least one.");
+        return;
+      }
+      // A Set keeps its order: the rest stay as they were and a newly ticked one goes last.
+      if (state.cares.has(axis)) state.cares.delete(axis); else state.cares.add(axis);
+      state.caresTouched = true;
+      writeShareHash();
+      renderPlans();
+    });
+    toggles.append(chip);
+  });
+  cares.append(caresLabel, toggles);
+  panel.append(cares);
+
+  if (ranking.recommendation && state.result.status !== "nearest") {
+    const row = el("div", "more-row");
+    const label = el("span", "more-label", "Show");
+    label.id = "viewLabel";
+    const views = el("div", "segmented");
     views.setAttribute("role", "radiogroup");
-    views.setAttribute("aria-label", "Which timetables to show");
+    views.setAttribute("aria-labelledby", "viewLabel");
     [["recommend", "Picked for you"], ["all", `All options (${menu().length})`]].forEach(([key, text]) => {
       const choice = el("button", "", text);
       choice.type = "button";
@@ -1263,187 +1440,74 @@ function renderPlans() {
       views.append(choice);
     });
     radioKeys(views);
-    meta.append(views);
-  }
-  // Otherwise the undo button sits in the notice inside the plan detail.
-  if (state.history.length && state.compare.length === 2) meta.append(button("Undo", undo));
-  head.append(meta);
-  box.append(head);
-
-  const cares = el("div", "cares");
-  const caresLabel = el("span", "cares-label", "What matters");
-  caresLabel.id = "caresLabel";
-  const toggles = el("div", "segmented");
-  toggles.setAttribute("role", "group");
-  toggles.setAttribute("aria-labelledby", "caresLabel");
-  cares.append(caresLabel, toggles);
-  AXES.forEach((axis) => {
-    const chip = el("button", "", AXIS_CHIP[axis]);
-    chip.type = "button";
-    chip.dataset.key = `care-${axis}`;
-    chip.setAttribute("aria-pressed", String(state.cares.has(axis)));
-    chip.addEventListener("click", () => {
-      if (state.cares.has(axis) && state.cares.size === 1) {
-        toast("Keep at least one.");
-        return;
-      }
-      // A Set keeps its order: the rest stay as they were and a newly ticked one goes last.
-      if (state.cares.has(axis)) state.cares.delete(axis); else state.cares.add(axis);
-      state.caresTouched = true;
-      writeShareHash();
-      renderPlans();
-    });
-    toggles.append(chip);
-  });
-  if (plans.length > 1) cares.append(el("span", "cares-hint", "Use Compare on two options to see them side by side."));
-  box.append(cares);
-
-  const workspace = el("div", "workspace");
-  const list = el("div", "plan-list");
-  plans.forEach((item, index) => list.append(planCard(item, index, plans)));
-  if (rec?.token) {
-    const source = el("p", "reason-source", reasonSource());
-    source.hidden = !source.textContent;
-    list.append(source);
-  }
-  const side = el("div", "side");
-  if (state.compare.length === 2) {
-    const [a, b] = state.compare.map((id) => plans.find((item) => item.candidate_id === id));
-    side.append(renderCompare(a, b, plans));
-  } else {
-    if (state.compare.length === 1) {
-      const bar = el("div", "compare-bar");
-      bar.append(document.createTextNode(`Option ${planLabel(plans.findIndex((item) => item.candidate_id === state.compare[0]))} chosen. Pick one more to compare.`),
-        button("Cancel", () => { state.compare = []; renderPlans(); }, { className: "button quiet" }));
-      side.append(bar);
-    }
-    const current = plans.find((item) => item.candidate_id === state.selected);
-    if (current) side.append(renderDetail(current, plans));
-  }
-  workspace.append(list, side);
-  box.append(workspace);
-
-  const hints = renderHints(ranking.constraint_costs);
-  if (hints) box.append(hints);
-  box.append(renderAdjust(false));
-  if (STUDY_MODE && state.result.study) box.append(renderStudy(state.result.study));
-  if (focusKey) box.querySelector(`[data-key="${focusKey}"]`)?.focus();
-  if (rec) loadReasons();
-}
-
-function planCard(base, index, plans) {
-  const item = shownItem(base);
-  const selected = base.candidate_id === state.selected && state.compare.length < 2;
-  const compared = state.compare.includes(base.candidate_id);
-  // The days are the button that shows this timetable; a click anywhere else on it does the same.
-  const card = el("div", `plan${selected ? " selected" : ""}${compared ? " compared" : ""}`);
-  card.addEventListener("click", (event) => {
-    if (event.target.closest(".variants, .compare-toggle")) return;
-    state.selected = base.candidate_id;
-    if (state.compare.length === 2) state.compare = [];
-    renderPlans();
-  });
-
-  const head = el("div", "plan-head");
-  head.append(el("span", `rank${state.view === "recommend" && index === 0 ? " first" : ""}`, planLabel(index)));
-  const title = el("div");
-  const show = el("button", "plan-title", daysText(item.pattern));
-  show.type = "button";
-  show.dataset.key = `plan-${base.candidate_id}`;
-  show.setAttribute("aria-pressed", String(selected));
-  show.setAttribute("aria-label", `${state.view === "recommend" ? "Pick" : "Option"} ${planLabel(index)}: ${daysText(item.pattern)}`);
-  title.append(show, el("div", "plan-sub", base.equivalent_count > 1
-    ? `${base.equivalent_count.toLocaleString("en-AU")} ways to get this same week` : "The only way to get this week"));
-  head.append(title);
-  card.append(head);
-  const best = [];
-  if (plans.length > 1) {
-    AXES.filter((axis) => state.cares.has(axis)).forEach((axis) => {
-      const key = AXIS_FEATURE[axis];
-      const values = plans.map((other) => other.features[key]);
-      const lowest = Math.min(...values);
-      if (Math.max(...values) - lowest > 1e-6 && Math.abs(base.features[key] - lowest) < 1e-6) best.push(AXIS_TAG[axis]);
-    });
-  }
-  if (best.length) card.append(el("p", "tags", capital(`${joinWords(best)} of these`)));
-  if (state.view === "recommend") {
-    const reason = el("p", "reason", reasonOf(index));
-    reason.dataset.reason = String(index);
-    card.append(reason);
+    row.append(label, views);
+    panel.append(row);
   }
 
   if (plans.length > 1) {
-    const toggle = el("button", "compare-toggle", compared ? "Comparing" : "Compare");
-    toggle.type = "button";
-    toggle.dataset.key = `compare-${base.candidate_id}`;
-    toggle.setAttribute("aria-label", `Compare option ${planLabel(index)}`);
-    toggle.setAttribute("aria-pressed", String(compared));
-    toggle.addEventListener("click", () => {
-      state.compare = compared ? state.compare.filter((id) => id !== base.candidate_id)
-        : [...state.compare, base.candidate_id].slice(-2);
-      renderPlans();
-    });
-    card.append(toggle);
-  }
-
-  card.append(stats(base.features), weekGrid(slotsOf(item.meetings), { thumb: true, pattern: item.pattern }));
-  const variants = (base.variants || []).filter((variant) => state.result.ranking_result.shortlist.items[variant.candidate_id]);
-  if (variants.length > 1) {
-    const row = el("div", "variants");
-    const label = el("span", "variants-label", "Just as good on");
-    label.id = `variants-${base.candidate_id}`;
-    const group = el("div", "segmented");
-    group.setAttribute("role", "radiogroup");
-    group.setAttribute("aria-labelledby", label.id);
-    variants.forEach((variant) => {
-      const active = (state.variant[base.candidate_id] || base.candidate_id) === variant.candidate_id;
-      const chip = el("button", "", daysText(variant.pattern));
-      chip.type = "button";
-      chip.dataset.key = `variant-${variant.candidate_id}`;
-      chip.setAttribute("role", "radio");
-      chip.setAttribute("aria-checked", String(active));
-      chip.tabIndex = active ? 0 : -1;
-      chip.addEventListener("click", () => {
-        if (active) return;
-        state.variant[base.candidate_id] = variant.candidate_id;
-        state.selected = base.candidate_id;
+    const row = el("div", "more-row");
+    row.append(el("span", "more-label", "Compare"));
+    const pairs = el("div", "tool-row");
+    plans.forEach((a, i) => plans.slice(i + 1).forEach((b) => {
+      const j = plans.indexOf(b);
+      const pair = button(`${planLabel(i)} and ${planLabel(j)}`, () => {
+        state.compare = [a.candidate_id, b.candidate_id];
         renderPlans();
-      });
-      group.append(chip);
-    });
-    radioKeys(group);
-    row.append(label, group);
-    card.append(row);
+      }, { title: `Compare options ${planLabel(i)} and ${planLabel(j)}` });
+      pair.dataset.key = `compare-${i}-${j}`;
+      pairs.append(pair);
+    }));
+    row.append(pairs);
+    panel.append(row);
   }
-  return card;
-}
 
-function daysAmount(value) {
-  const text = value.toFixed(1).replace(/\.0$/, "");
-  return `${text} day${text === "1" ? "" : "s"}`;
-}
-
-function stats(features, compareTo = null) {
-  // Three lines, as the reasons word them; the ones the student does not care about are dimmed.
-  const box = el("ul", "stats");
-  const values = [
-    ["campus_days", daysAmount(features.campus_days), "on campus a week", "campus_days"],
-    ["gap", durationText(features.gap_min), "waiting a week", "gap_min"],
-    ["outside_hours", durationText(features.outside_min), "early or late class a week", "outside_min"],
-  ];
-  values.forEach(([axis, value, label, key]) => {
-    const line = el("li", state.cares.has(axis) ? "" : "dim");
-    line.append(el("strong", "", value), document.createTextNode(` ${label}`));
-    if (compareTo) {
-      const diff = features[key] - compareTo.features[key];
-      if (Math.abs(diff) > (key === "campus_days" ? 0.05 : 1)) {
-        const amount = key === "campus_days" ? Math.abs(diff).toFixed(1).replace(/\.0$/, "") : durationText(Math.abs(diff));
-        line.append(document.createTextNode(" "), el("span", `delta ${diff < 0 ? "better" : "worse"}`, `${diff > 0 ? "+" : "−"}${amount}`));
-      }
-    }
-    box.append(line);
+  const bar = el("div", "segmented tabs");
+  bar.setAttribute("role", "tablist");
+  bar.setAttribute("aria-label", "More about this timetable");
+  const view = el("div", "tab-panel");
+  view.id = "tab-panel";
+  view.setAttribute("role", "tabpanel");
+  if (!TABS.some(([key]) => key === state.tab)) state.tab = "term";
+  TABS.forEach(([key, label]) => {
+    const tab = el("button", "tab", label);
+    tab.type = "button";
+    tab.id = `tab-${key}`;
+    tab.dataset.tab = key;
+    tab.setAttribute("role", "tab");
+    tab.setAttribute("aria-controls", view.id);
+    tab.setAttribute("aria-selected", String(state.tab === key));
+    tab.tabIndex = state.tab === key ? 0 : -1;
+    tab.addEventListener("click", () => {
+      state.tab = key;
+      bar.querySelectorAll(".tab").forEach((other) => {
+        other.setAttribute("aria-selected", String(other === tab));
+        other.tabIndex = other === tab ? 0 : -1;
+      });
+      view.setAttribute("aria-labelledby", tab.id);
+      view.replaceChildren(TAB_VIEWS[key](item, base));
+    });
+    bar.append(tab);
   });
-  return box;
+  bar.addEventListener("keydown", (event) => {
+    // Arrow keys move between tabs (the ARIA tabs pattern); Tab moves into the panel.
+    const step = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
+    if (!step) return;
+    event.preventDefault();
+    event.stopPropagation();
+    const tabs = [...bar.querySelectorAll(".tab")];
+    const next = tabs[(tabs.indexOf(document.activeElement) + step + tabs.length) % tabs.length];
+    next.focus();
+    next.click();
+  });
+  view.setAttribute("aria-labelledby", `tab-${state.tab}`);
+  view.append(TAB_VIEWS[state.tab](item, base));
+  panel.append(bar, view);
+
+  if (state.result.status !== "nearest") {
+    const hints = renderHints(ranking.constraint_costs);
+    if (hints) panel.append(hints);
+  }
+  return panel;
 }
 
 /* ===================== week grids ===================== */
@@ -1572,80 +1636,6 @@ function weekGrid(meetings, { thumb = false, dates = null, range = null, pattern
 
 /* ===================== detail ===================== */
 
-const TABS = [["week", "Week"], ["term", "Semester"], ["time", "Hours"], ["enrol", "Enrolment"], ["friend", "With a friend"]];
-
-function renderDetail(base, plans) {
-  const item = shownItem(base);
-  const index = plans.findIndex((other) => other.candidate_id === base.candidate_id);
-  const letter = planLabel(index);
-  const detail = el("section", "detail");
-
-  const head = el("div", "detail-head");
-  const title = el("h3");
-  title.append(el("span", `rank${state.view === "recommend" && index === 0 ? " first" : ""}`, letter),
-    document.createTextNode(daysText(item.pattern)));
-  head.append(title);
-  detail.append(head);
-  const tools = el("div", "detail-actions");
-  tools.append(
-    button("Use this timetable", (node) => acceptPlan(item, index, plans, node), { className: "button primary" }),
-    button("Download calendar (.ics)", () => { downloadIcs(item); toast("Calendar file downloaded. Import it into Google, Apple or Outlook calendar."); }),
-    button("Share link", () => copyText(shareUrl(item), "Link copied. Anyone who opens it sees this timetable.")),
-    button("Save", () => { saveFavourite(item, letter); toast("Saved on this device. It is listed on the first page."); }),
-    button("Print", () => window.print()),
-  );
-  detail.append(tools);
-  if (state.notice) {
-    const notice = el("div", "notice", state.notice);
-    if (state.history.length) notice.append(button("Undo", undo, { className: "button quiet" }));
-    detail.append(notice);
-  }
-  const next = nextClass(item);
-  if (next) detail.append(next);
-
-  const bar = el("div", "tabs");
-  bar.setAttribute("role", "tablist");
-  bar.setAttribute("aria-label", "Views of this timetable");
-  const panel = el("div", "tab-panel");
-  panel.id = "tab-panel";
-  panel.setAttribute("role", "tabpanel");
-  TABS.forEach(([key, label]) => {
-    const tab = el("button", "tab", label);
-    tab.type = "button";
-    tab.id = `tab-${key}`;
-    tab.dataset.tab = key;
-    tab.setAttribute("role", "tab");
-    tab.setAttribute("aria-controls", panel.id);
-    tab.setAttribute("aria-selected", String(state.tab === key));
-    tab.tabIndex = state.tab === key ? 0 : -1;
-    tab.addEventListener("click", () => {
-      state.tab = key;
-      bar.querySelectorAll(".tab").forEach((other) => {
-        other.setAttribute("aria-selected", String(other === tab));
-        other.tabIndex = other === tab ? 0 : -1;
-      });
-      panel.setAttribute("aria-labelledby", tab.id);
-      panel.replaceChildren(TAB_VIEWS[key](item, base));
-    });
-    bar.append(tab);
-  });
-  bar.addEventListener("keydown", (event) => {
-    // Arrow keys move between tabs (the ARIA tabs pattern); Tab moves into the panel.
-    const step = { ArrowRight: 1, ArrowLeft: -1 }[event.key];
-    if (!step) return;
-    event.preventDefault();
-    event.stopPropagation();
-    const tabs = [...bar.querySelectorAll(".tab")];
-    const next = tabs[(tabs.indexOf(document.activeElement) + step + tabs.length) % tabs.length];
-    next.focus();
-    next.click();
-  });
-  panel.setAttribute("aria-labelledby", `tab-${state.tab}`);
-  panel.append(TAB_VIEWS[state.tab](item, base));
-  detail.append(bar, panel);
-  return detail;
-}
-
 function nextClass(item) {
   // During the term, the next class of this plan from now on.
   const upcoming = item.meetings
@@ -1694,7 +1684,7 @@ function weekView(item, base) {
   const nowPill = el("span", "pill", "this week");
   const thisWeek = currentWeekIndex(weeks);
   const back = button("Back to this week", () => { state.week[base.candidate_id] = thisWeek; draw(); });
-  nav.append(label, nowPill, prev, next, back, el("span", "hint", "Select a day to see its route. Left and right arrow keys change the week."));
+  nav.append(label, nowPill, prev, next, back);
   const holder = el("div", "week-holder");
   const route = el("div");
   box.append(nav, holder, route);
@@ -1739,7 +1729,7 @@ function weekView(item, base) {
     key.append(swatch, document.createTextNode(unit.code));
     legend.append(key);
   });
-  legend.append(el("span", "", "Striped blocks are online"));
+  legend.append(el("span", "", "Striped: online"));
   box.append(legend);
   const transfers = tightTransfers(item.meetings);
   if (transfers.length) {

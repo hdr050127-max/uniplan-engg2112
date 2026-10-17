@@ -204,7 +204,7 @@ class AppHandler(BaseHTTPRequestHandler):
                         participant=request.get("participant") if isinstance(request.get("participant"), str) else None,
                         pins=request.get("pinned"),
                         excluded=request.get("excluded"),
-                        student_text=student_text, cares=cares,
+                        student_text=student_text, cares=cares, nearest=True,
                     )
                 result["fetch"] = fetch_result
                 ranking = result.get("ranking_result") or {}

@@ -51,7 +51,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -75,7 +75,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -99,7 +99,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -188,7 +188,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 1 h less class outside 10 am to 6 pm a week, 1 h less early class time a week"
      ],
-     "template": "First because, compared with option 2, it has 1 h less class outside 10 am to 6 pm a week and 1 h less early class time a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 1 h less class outside 10 am to 6 pm a week and 1 h less early class time a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -212,7 +212,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 1 h more class outside 10 am to 6 pm a week"
      ],
-     "template": "A backup to option 1: it has 1 h more class outside 10 am to 6 pm a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 1 h more class outside 10 am to 6 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -235,7 +235,7 @@
       "Class outside 10 am to 6 pm: 159 min a week",
       "Compared with option 1: 1 h 30 min more class outside 10 am to 6 pm a week"
      ],
-     "template": "A backup to option 1: it has 1 h 30 min more class outside 10 am to 6 pm a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 1 h 30 min more class outside 10 am to 6 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -338,7 +338,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -362,7 +362,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -386,7 +386,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -449,7 +449,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -472,7 +472,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -497,7 +497,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -575,7 +575,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -599,7 +599,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 18 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -623,7 +623,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 25 min less waiting a week, 0.9 fewer building changes a week, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 25 min less waiting a week and 0.9 fewer building changes a week, but it has 0.8 more days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 25 min less waiting a week and 0.9 fewer building changes a week; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -664,7 +664,7 @@
    "status": "ready",
    "axes": "gap,campus_days,outside_hours",
    "candidates": 10,
-   "seconds": 0.02,
+   "seconds": 0.03,
    "explain_status": "template",
    "picks": [
     {
@@ -686,7 +686,7 @@
       "Least waiting of these 3 options",
       "Compared with option 2: 37 min less waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 37 min less waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 37 min less waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -710,7 +710,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 37 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -732,7 +732,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 0.8 fewer building changes a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 0.8 fewer building changes a week, but it has 0.9 more days on campus a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 0.8 fewer building changes a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -798,7 +798,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -822,7 +822,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -846,7 +846,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -908,7 +908,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -931,7 +931,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -956,7 +956,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1020,7 +1020,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1044,7 +1044,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 18 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1068,7 +1068,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: days that usually end at 4 pm (6 pm in option 1), 1 h 2 min less on campus on its longest day, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has days that usually end at 4 pm (6 pm in option 1) and 1 h 2 min less on campus on its longest day, but it has 0.9 more days on campus a week. On campus Mon, Tue, Wed and Fri each week.",
+     "template": "Vs option 1: days that usually end at 4 pm (6 pm in option 1) and 1 h 2 min less on campus on its longest day; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1137,7 +1137,7 @@
       "Compared with option 2: 37 min less waiting a week",
       "A 60 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "First because, compared with option 2, it has 37 min less waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri. A 60 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 2: 37 min less waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1162,7 +1162,7 @@
       "Compared with option 1: 37 min more waiting a week",
       "A 60 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "A backup to option 1: it has 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri. A 60 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 1: 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1186,7 +1186,7 @@
       "Compared with option 1: 0.9 fewer building changes a week, 0.9 more days on campus a week",
       "A 60 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 0.9 more days on campus a week. On campus Mon, Tue, Wed, Thu and Fri each week. A 60 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1246,7 +1246,7 @@
       "Class outside 9 am to 6 pm: 0 min a week",
       "Compared with option 2: 2 h 51 min less on campus on its longest day, 0.6 fewer days a week with just one class"
      ],
-     "template": "First because, compared with option 2, it has 2 h 51 min less on campus on its longest day and 0.6 fewer days a week with just one class. On campus Mon, Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 2 h 51 min less on campus on its longest day and 0.6 fewer days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1270,7 +1270,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Mon, Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1294,7 +1294,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1355,7 +1355,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1378,7 +1378,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1403,7 +1403,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1472,7 +1472,7 @@
       "Least waiting of these 3 options",
       "Compared with option 2: 1.5 fewer days a week with just one class, 0.8 fewer days on campus a week, 55 min more class outside 9 am to 5 pm a week"
      ],
-     "template": "First because, compared with option 2, it has 1.5 fewer days a week with just one class and 0.8 fewer days on campus a week, but it has 55 min more class outside 9 am to 5 pm a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 1.5 fewer days a week with just one class and 0.8 fewer days on campus a week; costs 55 min more class outside 9 am to 5 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1496,7 +1496,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 55 min less class outside 9 am to 5 pm a week, 55 min less late class time a week, 1.5 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 55 min less class outside 9 am to 5 pm a week and 55 min less late class time a week, but it has 1.5 more days a week with just one class. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 55 min less class outside 9 am to 5 pm a week and 55 min less late class time a week; costs 1.5 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1520,7 +1520,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 18 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1628,7 +1628,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1652,7 +1652,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1676,7 +1676,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1739,7 +1739,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 fewer days a week with just one class, 3 h more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 2 fewer days a week with just one class, but it has 3 h more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 2 fewer days a week with just one class; costs 3 h more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1764,7 +1764,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 2 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 2 more days a week with just one class. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 2 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1788,7 +1788,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 2 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 2 more days a week with just one class. On campus Mon, Wed and Fri each week. No classes on Tue.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 2 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1850,7 +1850,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1874,7 +1874,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 18 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1898,7 +1898,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 25 min less waiting a week, 0.9 fewer building changes a week, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 25 min less waiting a week and 0.9 fewer building changes a week, but it has 0.8 more days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 25 min less waiting a week and 0.9 fewer building changes a week; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -1992,7 +1992,7 @@
       "Least early or late class time of these 2 options",
       "Compared with option 2: 2 h 14 min less waiting a week, 30 min less early class time a week, 0.8 more building changes a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 14 min less waiting a week and 30 min less early class time a week, but it has 0.8 more building changes a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 2 h 14 min less waiting a week and 30 min less early class time a week; costs 0.8 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2015,7 +2015,7 @@
       "Class outside 9 am to 6 pm: 30 min a week",
       "Compared with option 1: 0.8 fewer building changes a week, 2 h 14 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 0.8 fewer building changes a week, but it has 2 h 14 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 0.8 fewer building changes a week; costs 2 h 14 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2076,7 +2076,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2099,7 +2099,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2124,7 +2124,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2193,7 +2193,7 @@
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week",
       "A 60 min lunch break fits between 1 pm and 2 pm on every class day"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue and Wed each week. No classes on Fri. A 60 min lunch break fits between 1 pm and 2 pm on every class day.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2218,7 +2218,7 @@
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 18 min more waiting a week",
       "A 60 min lunch break fits between 1 pm and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri. A 60 min lunch break fits between 1 pm and 2 pm on every class day.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2243,7 +2243,7 @@
       "Compared with option 1: 46 min less of class on its busiest day, 0.9 fewer building changes a week, 0.9 more days on campus a week",
       "A 60 min lunch break fits between 1 pm and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has 46 min less of class on its busiest day and 0.9 fewer building changes a week, but it has 0.9 more days on campus a week. On campus Mon, Tue, Wed and Fri each week. A 60 min lunch break fits between 1 pm and 2 pm on every class day.",
+     "template": "Vs option 1: 46 min less of class on its busiest day and 0.9 fewer building changes a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2377,7 +2377,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 55 min less class outside 11 am to 5 pm a week, 2 h 32 min less waiting a week, 1.5 more days a week with just one class"
      ],
-     "template": "First because, compared with option 2, it has 55 min less class outside 11 am to 5 pm a week and 2 h 32 min less waiting a week, but it has 1.5 more days a week with just one class. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 55 min less class outside 11 am to 5 pm a week and 2 h 32 min less waiting a week; costs 1.5 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2401,7 +2401,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 1.5 fewer days a week with just one class, 0.8 fewer days on campus a week, 55 min more class outside 11 am to 5 pm a week"
      ],
-     "template": "Compared with option 1, it has 1.5 fewer days a week with just one class and 0.8 fewer days on campus a week, but it has 55 min more class outside 11 am to 5 pm a week. On campus Tue and Wed each week. No classes on Thu.",
+     "template": "Vs option 1: 1.5 fewer days a week with just one class and 0.8 fewer days on campus a week; costs 55 min more class outside 11 am to 5 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2425,7 +2425,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 55 min less on campus on its longest day, 2 h more early class time a week"
      ],
-     "template": "Compared with option 1, it has 55 min less on campus on its longest day, but it has 2 h more early class time a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 55 min less on campus on its longest day; costs 2 h more early class time a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2489,7 +2489,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2512,7 +2512,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2537,7 +2537,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2622,7 +2622,7 @@
       "Least waiting of these 3 options",
       "Compared with option 2: 37 min less waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 37 min less waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 37 min less waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2646,7 +2646,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 37 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2668,7 +2668,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 0.8 fewer building changes a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 0.8 fewer building changes a week, but it has 0.9 more days on campus a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 0.8 fewer building changes a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2728,7 +2728,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2752,7 +2752,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2776,7 +2776,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2839,7 +2839,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2862,7 +2862,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2887,7 +2887,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -2998,7 +2998,7 @@
       "Compared with option 2: 55 min less waiting a week",
       "A 30 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "First because, compared with option 2, it has 55 min less waiting a week. On campus Mon, Tue, Wed, Thu and Fri each week. A 30 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 2: 55 min less waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3023,7 +3023,7 @@
       "Compared with option 1: 55 min more waiting a week",
       "A 30 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "A backup to option 1: it has 55 min more waiting a week. On campus Mon, Tue, Wed, Thu and Fri each week. A 30 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 1: 55 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3046,7 +3046,7 @@
       "Compared with option 1: 0.5 fewer days a week with just one class, 4 h 5 min more waiting a week",
       "A 30 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has 0.5 fewer days a week with just one class, but it has 4 h 5 min more waiting a week. On campus Mon, Tue, Wed, Thu and Fri each week. A 30 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 1: 0.5 fewer days a week with just one class; costs 4 h 5 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3112,7 +3112,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3136,7 +3136,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3160,7 +3160,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3232,7 +3232,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3255,7 +3255,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3280,7 +3280,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3345,7 +3345,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less class outside 9 am to 6 pm a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less class outside 9 am to 6 pm a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less class outside 9 am to 6 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3369,7 +3369,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 18 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3393,7 +3393,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 1.5 more days a week with just one class"
      ],
-     "template": "A backup to option 1: it has 1.5 more days a week with just one class. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 1.5 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3459,7 +3459,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 1 h less class outside 9 am to 6 pm a week, 1 h less late class time a week"
      ],
-     "template": "First because, compared with option 2, it has 1 h less class outside 9 am to 6 pm a week and 1 h less late class time a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 1 h less class outside 9 am to 6 pm a week and 1 h less late class time a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3481,7 +3481,7 @@
       "Class outside 9 am to 6 pm: 134 min a week",
       "Compared with option 1: 1 h more class outside 9 am to 6 pm a week"
      ],
-     "template": "A backup to option 1: it has 1 h more class outside 9 am to 6 pm a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 1 h more class outside 9 am to 6 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3506,7 +3506,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 37 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3659,7 +3659,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3683,7 +3683,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3707,7 +3707,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3768,7 +3768,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3791,7 +3791,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3816,7 +3816,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3880,7 +3880,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 1.8 fewer days a week with just one class, 1 h less class outside 9 am to 6 pm a week, 55 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 1.8 fewer days a week with just one class and 1 h less class outside 9 am to 6 pm a week, but it has 55 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 1.8 fewer days a week with just one class and 1 h less class outside 9 am to 6 pm a week; costs 55 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3903,7 +3903,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 55 min less waiting a week, 0.9 fewer building changes a week, 1.8 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 55 min less waiting a week and 0.9 fewer building changes a week, but it has 1.8 more days a week with just one class. On campus Mon, Tue, Wed and Fri each week.",
+     "template": "Vs option 1: 55 min less waiting a week and 0.9 fewer building changes a week; costs 1.8 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3927,7 +3927,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 0.8 fewer building changes a week, 1.5 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 0.8 fewer building changes a week, but it has 1.5 more days a week with just one class. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 0.8 fewer building changes a week; costs 1.5 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -3992,7 +3992,7 @@
       "Least waiting of these 3 options",
       "Compared with option 2: 32 min less waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 32 min less waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 32 min less waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4014,7 +4014,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 32 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 32 min more waiting a week. On campus Mon, Tue, Wed and Thu each week.",
+     "template": "Vs option 1: 32 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4036,7 +4036,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 1 h 5 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 1 h 5 min more waiting a week. On campus Mon, Tue, Wed and Thu each week.",
+     "template": "Vs option 1: 1 h 5 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4102,7 +4102,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4126,7 +4126,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4150,7 +4150,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4280,7 +4280,7 @@
       "Least waiting of these 3 options",
       "Compared with option 2: 37 min less waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 37 min less waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 37 min less waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4304,7 +4304,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 37 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4326,7 +4326,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 0.8 fewer building changes a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 0.8 fewer building changes a week, but it has 0.9 more days on campus a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 0.8 fewer building changes a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4455,7 +4455,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less class outside 9 am to 6 pm a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less class outside 9 am to 6 pm a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less class outside 9 am to 6 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4479,7 +4479,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 18 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4503,7 +4503,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 1.5 more days a week with just one class"
      ],
-     "template": "A backup to option 1: it has 1.5 more days a week with just one class. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 1.5 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4607,7 +4607,7 @@
       "Least early or late class time of these 2 options",
       "Compared with option 2: days that usually end at 5 pm (7 pm in option 2), 1 h less class outside 9 am to 6 pm a week"
      ],
-     "template": "First because, compared with option 2, it has days that usually end at 5 pm (7 pm in option 2) and 1 h less class outside 9 am to 6 pm a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: days that usually end at 5 pm (7 pm in option 2) and 1 h less class outside 9 am to 6 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4631,7 +4631,7 @@
       "Fewest days on campus of these 2 options",
       "Compared with option 1: days that usually end at 7 pm (5 pm in option 1)"
      ],
-     "template": "A backup to option 1: it has days that usually end at 7 pm (5 pm in option 1). On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: days that usually end at 7 pm (5 pm in option 1).",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4699,7 +4699,7 @@
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week",
       "A 45 min lunch break fits between 11 am and 2 pm on every class day"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue and Wed each week. No classes on Fri. A 45 min lunch break fits between 11 am and 2 pm on every class day.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4724,7 +4724,7 @@
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 18 min more waiting a week",
       "A 45 min lunch break fits between 11 am and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri. A 45 min lunch break fits between 11 am and 2 pm on every class day.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4749,7 +4749,7 @@
       "Compared with option 1: 25 min less waiting a week, 0.9 fewer building changes a week, 0.8 more days on campus a week",
       "A 45 min lunch break fits between 11 am and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has 25 min less waiting a week and 0.9 fewer building changes a week, but it has 0.8 more days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri. A 45 min lunch break fits between 11 am and 2 pm on every class day.",
+     "template": "Vs option 1: 25 min less waiting a week and 0.9 fewer building changes a week; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4813,7 +4813,7 @@
       "Least waiting of these 3 options",
       "Compared with option 2: 37 min less waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 37 min less waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 37 min less waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4837,7 +4837,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 37 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4859,7 +4859,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 0.8 fewer building changes a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 0.8 fewer building changes a week, but it has 0.9 more days on campus a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 0.8 fewer building changes a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4919,7 +4919,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4943,7 +4943,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -4967,7 +4967,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5034,7 +5034,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5057,7 +5057,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5082,7 +5082,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5150,7 +5150,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5174,7 +5174,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 18 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5198,7 +5198,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 25 min less waiting a week, 0.9 fewer building changes a week, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 25 min less waiting a week and 0.9 fewer building changes a week, but it has 0.8 more days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 25 min less waiting a week and 0.9 fewer building changes a week; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5263,7 +5263,7 @@
       "Least waiting of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5285,7 +5285,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 0.9 more days on campus a week"
      ],
-     "template": "A backup to option 1: it has 0.9 more days on campus a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5309,7 +5309,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 37 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5371,7 +5371,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 1.8 fewer days a week with just one class, 1 h less class outside 9 am to 6 pm a week, 1 h 46 min more on campus on its longest day"
      ],
-     "template": "First because, compared with option 2, it has 1.8 fewer days a week with just one class and 1 h less class outside 9 am to 6 pm a week, but it has 1 h 46 min more on campus on its longest day. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 1.8 fewer days a week with just one class and 1 h less class outside 9 am to 6 pm a week; costs 1 h 46 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5394,7 +5394,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 1 h 46 min less on campus on its longest day, 46 min less waiting a week, 1.8 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 1 h 46 min less on campus on its longest day and 46 min less waiting a week, but it has 1.8 more days a week with just one class. On campus Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 1 h 46 min less on campus on its longest day and 46 min less waiting a week; costs 1.8 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5419,7 +5419,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5480,7 +5480,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5503,7 +5503,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5528,7 +5528,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5593,7 +5593,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less class outside 9 am to 6 pm a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less class outside 9 am to 6 pm a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less class outside 9 am to 6 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5617,7 +5617,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 18 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5641,7 +5641,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 1.5 more days a week with just one class"
      ],
-     "template": "A backup to option 1: it has 1.5 more days a week with just one class. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 1.5 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5750,7 +5750,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.5 fewer days a week with just one class, 2 h 32 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.5 fewer days a week with just one class, but it has 2 h 32 min more waiting a week. On campus Tue and Wed each week. No classes on Thu.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.5 fewer days a week with just one class; costs 2 h 32 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5775,7 +5775,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 2 h 32 min less waiting a week, days that usually end at 4 pm (6 pm in option 1), 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 32 min less waiting a week and days that usually end at 4 pm (6 pm in option 1), but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 32 min less waiting a week and days that usually end at 4 pm (6 pm in option 1); costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5799,7 +5799,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 32 min less waiting a week, 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 32 min less waiting a week and 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 32 min less waiting a week and 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5867,7 +5867,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 fewer days a week with just one class, 1 fewer day on campus a week, 3 h more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 2 fewer days a week with just one class and 1 fewer day on campus a week, but it has 3 h more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 2 fewer days a week with just one class and 1 fewer day on campus a week; costs 3 h more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5891,7 +5891,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 2 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 2 more days a week with just one class. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 2 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -5916,7 +5916,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 2 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 2 more days a week with just one class. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 2 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6030,7 +6030,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6054,7 +6054,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6078,7 +6078,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6140,7 +6140,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6163,7 +6163,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6188,7 +6188,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6250,7 +6250,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6274,7 +6274,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 18 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6298,7 +6298,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 25 min less waiting a week, 0.9 fewer building changes a week, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 25 min less waiting a week and 0.9 fewer building changes a week, but it has 0.8 more days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 25 min less waiting a week and 0.9 fewer building changes a week; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6344,7 +6344,7 @@
    "status": "ready",
    "axes": "gap,campus_days,outside_hours",
    "candidates": 10,
-   "seconds": 0.02,
+   "seconds": 0.03,
    "explain_status": "template",
    "picks": [
     {
@@ -6367,7 +6367,7 @@
       "Compared with option 2: 37 min less waiting a week",
       "A 30 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "First because, compared with option 2, it has 37 min less waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri. A 30 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 2: 37 min less waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6392,7 +6392,7 @@
       "Compared with option 1: 37 min more waiting a week",
       "A 30 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "A backup to option 1: it has 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri. A 30 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 1: 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6415,7 +6415,7 @@
       "Compared with option 1: 0.8 fewer building changes a week, 0.9 more days on campus a week",
       "A 30 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has 0.8 fewer building changes a week, but it has 0.9 more days on campus a week. On campus Mon, Tue, Wed, Thu and Fri each week. A 30 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 1: 0.8 fewer building changes a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6585,7 +6585,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less class outside 9 am to 6 pm a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less class outside 9 am to 6 pm a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less class outside 9 am to 6 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6609,7 +6609,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 18 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6633,7 +6633,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 1.5 more days a week with just one class"
      ],
-     "template": "A backup to option 1: it has 1.5 more days a week with just one class. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 1.5 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6696,7 +6696,7 @@
       "Least waiting of these 3 options",
       "Compared with option 2: 37 min less waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 37 min less waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 37 min less waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6720,7 +6720,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 37 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6742,7 +6742,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 0.8 fewer building changes a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 0.8 fewer building changes a week, but it has 0.9 more days on campus a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 0.8 fewer building changes a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6802,7 +6802,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6826,7 +6826,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6850,7 +6850,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6921,7 +6921,7 @@
       "Fewest days on campus of these 2 options",
       "Compared with option 2: 1 h more class outside 9 am to 6 pm a week"
      ],
-     "template": "First, with little difference from option 2. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 1 h more class outside 9 am to 6 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6946,7 +6946,7 @@
       "Least early or late class time of these 2 options",
       "Compared with option 1: 1 h less class outside 9 am to 6 pm a week, days that usually end at 6 pm (7 pm in option 1)"
      ],
-     "template": "Compared with option 1, it has 1 h less class outside 9 am to 6 pm a week and days that usually end at 6 pm (7 pm in option 1). On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 1 h less class outside 9 am to 6 pm a week and days that usually end at 6 pm (7 pm in option 1).",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -6968,8 +6968,8 @@
     ]
    ],
    "main_feature": "late_h",
-   "template_feature": null,
-   "shown_feature": null
+   "template_feature": "outside_h",
+   "shown_feature": "outside_h"
   },
   {
    "sentence_id": "v079",
@@ -7014,7 +7014,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7038,7 +7038,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 18 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7062,7 +7062,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 21 min less waiting a week, 0.9 fewer building changes a week, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 21 min less waiting a week and 0.9 fewer building changes a week, but it has 0.8 more days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 21 min less waiting a week and 0.9 fewer building changes a week; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7126,7 +7126,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 55 min less waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 55 min less waiting a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 2: 55 min less waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7150,7 +7150,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 55 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 55 min more waiting a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 55 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7172,7 +7172,7 @@
       "Class outside 9 am to 6 pm: 134 min a week",
       "Compared with option 1: 0.5 fewer days a week with just one class, 4 h 5 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 0.5 fewer days a week with just one class, but it has 4 h 5 min more waiting a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 0.5 fewer days a week with just one class; costs 4 h 5 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7234,7 +7234,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7259,7 +7259,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7282,7 +7282,7 @@
       "Class outside 9 am to 6 pm: 60 min a week",
       "Compared with option 1: 2 h 32 min less waiting a week, 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 32 min less waiting a week and 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 32 min less waiting a week and 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7344,7 +7344,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7367,7 +7367,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7392,7 +7392,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7460,7 +7460,7 @@
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week",
       "A 30 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue and Wed each week. No classes on Fri. A 30 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7485,7 +7485,7 @@
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 18 min more waiting a week",
       "A 30 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri. A 30 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7510,7 +7510,7 @@
       "Compared with option 1: 25 min less waiting a week, 0.9 fewer building changes a week, 0.8 more days on campus a week",
       "A 30 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has 25 min less waiting a week and 0.9 fewer building changes a week, but it has 0.8 more days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri. A 30 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 1: 25 min less waiting a week and 0.9 fewer building changes a week; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7573,7 +7573,7 @@
       "Least waiting of these 3 options",
       "Compared with option 2: 37 min less waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 37 min less waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 37 min less waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7597,7 +7597,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 37 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7619,7 +7619,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 0.8 fewer building changes a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 0.8 fewer building changes a week, but it has 0.9 more days on campus a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 0.8 fewer building changes a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7686,7 +7686,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 1 h 23 min less class outside 10:30 am to 4:30 pm a week, 1 h 23 min less late class time a week, 1.5 more days a week with just one class"
      ],
-     "template": "First because, compared with option 2, it has 1 h 23 min less class outside 10:30 am to 4:30 pm a week and 1 h 23 min less late class time a week, but it has 1.5 more days a week with just one class. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 1 h 23 min less class outside 10:30 am to 4:30 pm a week and 1 h 23 min less late class time a week; costs 1.5 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7710,7 +7710,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 1.5 fewer days a week with just one class, 0.8 fewer days on campus a week, 1 h 23 min more class outside 10:30 am to 4:30 pm a week"
      ],
-     "template": "Compared with option 1, it has 1.5 fewer days a week with just one class and 0.8 fewer days on campus a week, but it has 1 h 23 min more class outside 10:30 am to 4:30 pm a week. On campus Tue and Wed each week. No classes on Thu.",
+     "template": "Vs option 1: 1.5 fewer days a week with just one class and 0.8 fewer days on campus a week; costs 1 h 23 min more class outside 10:30 am to 4:30 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7733,7 +7733,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less on campus on its longest day, 55 min less waiting a week, 2 h more class outside 10:30 am to 4:30 pm a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less on campus on its longest day and 55 min less waiting a week, but it has 2 h more class outside 10:30 am to 4:30 pm a week. On campus Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 2 h 42 min less on campus on its longest day and 55 min less waiting a week; costs 2 h more class outside 10:30 am to 4:30 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7799,7 +7799,7 @@
       "Fewest days on campus of these 2 options",
       "Compared with option 2: 1 h more class outside 9 am to 6 pm a week"
      ],
-     "template": "First, with little difference from option 2. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 1 h more class outside 9 am to 6 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7824,7 +7824,7 @@
       "Least early or late class time of these 2 options",
       "Compared with option 1: 1 h less class outside 9 am to 6 pm a week, days that usually end at 6 pm (7 pm in option 1)"
      ],
-     "template": "Compared with option 1, it has 1 h less class outside 9 am to 6 pm a week and days that usually end at 6 pm (7 pm in option 1). On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 1 h less class outside 9 am to 6 pm a week and days that usually end at 6 pm (7 pm in option 1).",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7846,8 +7846,8 @@
     ]
    ],
    "main_feature": "late_h",
-   "template_feature": null,
-   "shown_feature": null
+   "template_feature": "outside_h",
+   "shown_feature": "outside_h"
   },
   {
    "sentence_id": "v087",
@@ -7893,7 +7893,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7917,7 +7917,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 18 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -7941,7 +7941,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 46 min less of class on its busiest day, 0.8 fewer building changes a week, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 46 min less of class on its busiest day and 0.8 fewer building changes a week, but it has 0.8 more days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 46 min less of class on its busiest day and 0.8 fewer building changes a week; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8066,7 +8066,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 fewer days a week with just one class, 3 h more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 2 fewer days a week with just one class, but it has 3 h more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 2 fewer days a week with just one class; costs 3 h more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8091,7 +8091,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 2 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 2 more days a week with just one class. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 2 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8115,7 +8115,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 2 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 2 more days a week with just one class. On campus Mon, Wed and Fri each week. No classes on Tue.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 2 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8266,7 +8266,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.7 fewer days a week with just one class, 2 h 32 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.7 fewer days a week with just one class, but it has 2 h 32 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.7 fewer days a week with just one class; costs 2 h 32 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8291,7 +8291,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 2 h 32 min less waiting a week, days that usually end at 4 pm (6 pm in option 1), 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 32 min less waiting a week and days that usually end at 4 pm (6 pm in option 1), but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 32 min less waiting a week and days that usually end at 4 pm (6 pm in option 1); costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8315,7 +8315,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 32 min less waiting a week, 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 32 min less waiting a week and 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 32 min less waiting a week and 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8377,7 +8377,7 @@
       "Least early or late class time of these 2 options",
       "Compared with option 2: days that usually end at 5 pm (7 pm in option 2), 1 h less class outside 9 am to 6 pm a week"
      ],
-     "template": "First because, compared with option 2, it has days that usually end at 5 pm (7 pm in option 2) and 1 h less class outside 9 am to 6 pm a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: days that usually end at 5 pm (7 pm in option 2) and 1 h less class outside 9 am to 6 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8401,7 +8401,7 @@
       "Fewest days on campus of these 2 options",
       "Compared with option 1: days that usually end at 7 pm (5 pm in option 1)"
      ],
-     "template": "A backup to option 1: it has days that usually end at 7 pm (5 pm in option 1). On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: days that usually end at 7 pm (5 pm in option 1).",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8487,7 +8487,7 @@
       "Least waiting of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8509,7 +8509,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 0.9 more days on campus a week"
      ],
-     "template": "A backup to option 1: it has 0.9 more days on campus a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8533,7 +8533,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 37 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8593,7 +8593,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8617,7 +8617,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8641,7 +8641,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8704,7 +8704,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 fewer days a week with just one class, 1 fewer day on campus a week, 3 h more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 2 fewer days a week with just one class and 1 fewer day on campus a week, but it has 3 h more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 2 fewer days a week with just one class and 1 fewer day on campus a week; costs 3 h more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8728,7 +8728,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 2 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 2 more days a week with just one class. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 2 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8753,7 +8753,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 2 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 2 more days a week with just one class. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 2 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8817,7 +8817,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 1.8 fewer days a week with just one class, 1 h less class outside 9 am to 6 pm a week, 55 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 1.8 fewer days a week with just one class and 1 h less class outside 9 am to 6 pm a week, but it has 55 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 1.8 fewer days a week with just one class and 1 h less class outside 9 am to 6 pm a week; costs 55 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8840,7 +8840,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 55 min less waiting a week, 0.9 fewer building changes a week, 1.8 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 55 min less waiting a week and 0.9 fewer building changes a week, but it has 1.8 more days a week with just one class. On campus Mon, Tue, Wed and Fri each week.",
+     "template": "Vs option 1: 55 min less waiting a week and 0.9 fewer building changes a week; costs 1.8 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8864,7 +8864,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 0.8 fewer building changes a week, 1.5 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 0.8 fewer building changes a week, but it has 1.5 more days a week with just one class. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 0.8 fewer building changes a week; costs 1.5 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8965,7 +8965,7 @@
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week",
       "A 60 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri. A 60 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -8991,7 +8991,7 @@
       "Compared with option 1: 2 h 42 min less waiting a week, 2 h less on campus on its longest day, 0.8 more days on campus a week",
       "A 60 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 2 h less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri. A 60 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 2 h less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9015,7 +9015,7 @@
       "Compared with option 1: 2 h 32 min less waiting a week, 1 h 5 min less on campus on its longest day, 0.8 more days on campus a week",
       "A 60 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has 2 h 32 min less waiting a week and 1 h 5 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri. A 60 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 1: 2 h 32 min less waiting a week and 1 h 5 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9087,7 +9087,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 1 fewer day on campus a week, 2 fewer days a week with just one class, 3 h more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 1 fewer day on campus a week and 2 fewer days a week with just one class, but it has 3 h more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 1 fewer day on campus a week and 2 fewer days a week with just one class; costs 3 h more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9112,7 +9112,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9136,7 +9136,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Wed and Fri each week. No classes on Tue.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9201,7 +9201,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 1.7 fewer days a week with just one class, 1 h less class outside 9 am to 6 pm a week, 48 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 1.7 fewer days a week with just one class and 1 h less class outside 9 am to 6 pm a week, but it has 48 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 1.7 fewer days a week with just one class and 1 h less class outside 9 am to 6 pm a week; costs 48 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9225,7 +9225,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 48 min less waiting a week, 0.9 fewer building changes a week, 1.7 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 48 min less waiting a week and 0.9 fewer building changes a week, but it has 1.7 more days a week with just one class. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 48 min less waiting a week and 0.9 fewer building changes a week; costs 1.7 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9249,7 +9249,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 0.8 fewer building changes a week, 1.5 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 0.8 fewer building changes a week, but it has 1.5 more days a week with just one class. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 0.8 fewer building changes a week; costs 1.5 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9298,7 +9298,7 @@
    "status": "ready",
    "axes": "outside_hours",
    "candidates": 10,
-   "seconds": 0.03,
+   "seconds": 0.02,
    "explain_status": "template",
    "picks": [
     {
@@ -9319,7 +9319,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 1 h 51 min less class outside 9 am to 4 pm a week, 1 h 51 min less late class time a week, 0.9 more days on campus a week"
      ],
-     "template": "First because, compared with option 2, it has 1 h 51 min less class outside 9 am to 4 pm a week and 1 h 51 min less late class time a week, but it has 0.9 more days on campus a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 2: 1 h 51 min less class outside 9 am to 4 pm a week and 1 h 51 min less late class time a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9343,7 +9343,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 0.9 fewer days on campus a week, 0.9 fewer days a week with just one class, 1 h 51 min more class outside 9 am to 4 pm a week"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer days on campus a week and 0.9 fewer days a week with just one class, but it has 1 h 51 min more class outside 9 am to 4 pm a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 0.9 fewer days on campus a week and 0.9 fewer days a week with just one class; costs 1 h 51 min more class outside 9 am to 4 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9365,7 +9365,7 @@
       "Class outside 9 am to 4 pm: 406 min a week",
       "Compared with option 1: 3 h 42 min more class outside 9 am to 4 pm a week"
      ],
-     "template": "A backup to option 1: it has 3 h 42 min more class outside 9 am to 4 pm a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 3 h 42 min more class outside 9 am to 4 pm a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9451,7 +9451,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 fewer days a week with just one class, 3 h more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 2 fewer days a week with just one class, but it has 3 h more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 2 fewer days a week with just one class; costs 3 h more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9476,7 +9476,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 2 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 2 more days a week with just one class. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 2 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9500,7 +9500,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 2 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 2 more days a week with just one class. On campus Mon, Wed and Fri each week. No classes on Tue.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 2 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9631,7 +9631,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9655,7 +9655,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9679,7 +9679,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9774,7 +9774,7 @@
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week",
       "A 30 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue and Wed each week. No classes on Fri. A 30 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9799,7 +9799,7 @@
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 18 min more waiting a week",
       "A 30 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri. A 30 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9824,7 +9824,7 @@
       "Compared with option 1: days that usually end at 4 pm (6 pm in option 1), 1 h 2 min less on campus on its longest day, 0.9 more days on campus a week",
       "A 30 min lunch break fits between 11:30 am and 2 pm on every class day"
      ],
-     "template": "Compared with option 1, it has days that usually end at 4 pm (6 pm in option 1) and 1 h 2 min less on campus on its longest day, but it has 0.9 more days on campus a week. On campus Mon, Tue, Wed and Fri each week. A 30 min lunch break fits between 11:30 am and 2 pm on every class day.",
+     "template": "Vs option 1: days that usually end at 4 pm (6 pm in option 1) and 1 h 2 min less on campus on its longest day; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9921,7 +9921,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 1.8 fewer days a week with just one class, 1 h less class outside 9 am to 6 pm a week, 1 h 46 min more on campus on its longest day"
      ],
-     "template": "First because, compared with option 2, it has 1.8 fewer days a week with just one class and 1 h less class outside 9 am to 6 pm a week, but it has 1 h 46 min more on campus on its longest day. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 1.8 fewer days a week with just one class and 1 h less class outside 9 am to 6 pm a week; costs 1 h 46 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9944,7 +9944,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 1 h 46 min less on campus on its longest day, 46 min less waiting a week, 1.8 more days a week with just one class"
      ],
-     "template": "Compared with option 1, it has 1 h 46 min less on campus on its longest day and 46 min less waiting a week, but it has 1.8 more days a week with just one class. On campus Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 1 h 46 min less on campus on its longest day and 46 min less waiting a week; costs 1.8 more days a week with just one class.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -9969,7 +9969,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10110,9 +10110,9 @@
       "Class outside 9 am to 6 pm: 0 min a week",
       "Fewest days on campus of these 3 options",
       "Least early or late class time of these 3 options",
-      "Compared with option 2: 0.9 fewer days on campus a week, 1 fewer days a week with just one class, 4 h 46 min more on campus on its longest day"
+      "Compared with option 2: 0.9 fewer days on campus a week, 1 fewer day a week with just one class, 4 h 46 min more on campus on its longest day"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1 fewer days a week with just one class, but it has 4 h 46 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1 fewer day a week with just one class; costs 4 h 46 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10136,7 +10136,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 4 h 46 min less on campus on its longest day, 3 h less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 4 h 46 min less on campus on its longest day and 3 h less waiting a week, but it has 0.9 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 4 h 46 min less on campus on its longest day and 3 h less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10159,7 +10159,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 6 h 32 min less on campus on its longest day, 3 h 46 min less waiting a week, 1.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 6 h 32 min less on campus on its longest day and 3 h 46 min less waiting a week, but it has 1.8 more days on campus a week. On campus Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 6 h 32 min less on campus on its longest day and 3 h 46 min less waiting a week; costs 1.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10283,7 +10283,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 37 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 37 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 37 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10307,7 +10307,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 37 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10327,9 +10327,9 @@
       "Earliest start 8:30 am, latest finish 6 pm",
       "Waiting between classes: about 8 h 42 min a week",
       "Class outside 9 am to 6 pm: 44 min a week",
-      "Compared with option 1: 1 fewer building changes a week, 30 min more early class time a week"
+      "Compared with option 1: 1 fewer building change a week, 30 min more early class time a week"
      ],
-     "template": "Compared with option 1, it has 1 fewer building changes a week, but it has 30 min more early class time a week. On campus Mon, Tue, Wed and Fri each week.",
+     "template": "Vs option 1: 1 fewer building change a week; costs 30 min more early class time a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10372,7 +10372,7 @@
    "status": "ready",
    "axes": "campus_days",
    "candidates": 10,
-   "seconds": 0.02,
+   "seconds": 0.03,
    "explain_status": "template",
    "picks": [
     {
@@ -10394,7 +10394,7 @@
       "Least waiting of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10416,7 +10416,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 0.9 more days on campus a week"
      ],
-     "template": "A backup to option 1: it has 0.9 more days on campus a week. On campus Mon, Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10440,7 +10440,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 37 min more waiting a week"
      ],
-     "template": "A backup to option 1: it has 37 min more waiting a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 37 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10501,9 +10501,9 @@
       "Class outside 9 am to 6 pm: 0 min a week",
       "Fewest days on campus of these 3 options",
       "Least early or late class time of these 3 options",
-      "Compared with option 2: 0.9 fewer days on campus a week, 1 fewer days a week with just one class, 4 h 46 min more on campus on its longest day"
+      "Compared with option 2: 0.9 fewer days on campus a week, 1 fewer day a week with just one class, 4 h 46 min more on campus on its longest day"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1 fewer days a week with just one class, but it has 4 h 46 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1 fewer day a week with just one class; costs 4 h 46 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10527,7 +10527,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 4 h 46 min less on campus on its longest day, 3 h less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 4 h 46 min less on campus on its longest day and 3 h less waiting a week, but it has 0.9 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 4 h 46 min less on campus on its longest day and 3 h less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10550,7 +10550,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 6 h 32 min less on campus on its longest day, 3 h 46 min less waiting a week, 1.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 6 h 32 min less on campus on its longest day and 3 h 46 min less waiting a week, but it has 1.8 more days on campus a week. On campus Tue, Wed, Thu and Fri each week.",
+     "template": "Vs option 1: 6 h 32 min less on campus on its longest day and 3 h 46 min less waiting a week; costs 1.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10611,7 +10611,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 0.9 fewer days on campus a week, 1.8 fewer days a week with just one class, 2 h 53 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class, but it has 2 h 53 min more waiting a week. On campus Mon and Wed each week. No classes on Tue or Fri.",
+     "template": "Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2 h 53 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10634,7 +10634,7 @@
       "Class outside 9 am to 6 pm: 74 min a week",
       "Compared with option 1: 2 h 53 min less waiting a week, 0.9 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 53 min less waiting a week, but it has 0.9 more days on campus a week. On campus Mon, Wed and Thu each week. No classes on Tue or Fri.",
+     "template": "Vs option 1: 2 h 53 min less waiting a week; costs 0.9 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10659,7 +10659,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 1: 3 h less waiting a week, 1 more day on campus a week"
      ],
-     "template": "Compared with option 1, it has 3 h less waiting a week, but it has 1 more day on campus a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 3 h less waiting a week; costs 1 more day on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10721,7 +10721,7 @@
       "Least early or late class time of these 3 options",
       "Compared with option 2: 2 h 18 min less waiting a week, 30 min less early class time a week, 0.9 more building changes a week"
      ],
-     "template": "First because, compared with option 2, it has 2 h 18 min less waiting a week and 30 min less early class time a week, but it has 0.9 more building changes a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 2: 2 h 18 min less waiting a week and 30 min less early class time a week; costs 0.9 more building changes a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10745,7 +10745,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 0.9 fewer building changes a week, 2 h 18 min more waiting a week"
      ],
-     "template": "Compared with option 1, it has 0.9 fewer building changes a week, but it has 2 h 18 min more waiting a week. On campus Mon, Tue and Wed each week. No classes on Fri.",
+     "template": "Vs option 1: 0.9 fewer building changes a week; costs 2 h 18 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10769,7 +10769,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 25 min less waiting a week, 0.9 fewer building changes a week, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 25 min less waiting a week and 0.9 fewer building changes a week, but it has 0.8 more days on campus a week. On campus Mon, Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 25 min less waiting a week and 0.9 fewer building changes a week; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10887,7 +10887,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 2: 0.8 fewer days on campus a week, 1.6 fewer days a week with just one class, 2 h 42 min more waiting a week"
      ],
-     "template": "First because, compared with option 2, it has 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class, but it has 2 h 42 min more waiting a week. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 2: 0.8 fewer days on campus a week and 1.6 fewer days a week with just one class; costs 2 h 42 min more waiting a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10911,7 +10911,7 @@
       "Least waiting of these 3 options",
       "Compared with option 1: 2 h 42 min less waiting a week, 1 h 55 min less on campus on its longest day, 0.8 more days on campus a week"
      ],
-     "template": "Compared with option 1, it has 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day, but it has 0.8 more days on campus a week. On campus Tue, Wed and Thu each week. No classes on Fri.",
+     "template": "Vs option 1: 2 h 42 min less waiting a week and 1 h 55 min less on campus on its longest day; costs 0.8 more days on campus a week.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,
@@ -10935,7 +10935,7 @@
       "Fewest days on campus of these 3 options",
       "Compared with option 1: 2 h 51 min more on campus on its longest day"
      ],
-     "template": "A backup to option 1: it has 2 h 51 min more on campus on its longest day. On campus Tue and Wed each week. No classes on Thu or Fri.",
+     "template": "Vs option 1: 2 h 51 min more on campus on its longest day.",
      "template_passes": true,
      "model_text": null,
      "model_passed": false,

@@ -96,3 +96,11 @@ rewrites passing the check 24 to 34% of the time, and 10 of 30 passed ones wrong
 7B is no longer asked by default (`llm.explain.rewriting_on`); it is asked only when
 `UNIPLAN_EXPLAIN_MODEL` names a model. The Chinese numbers above stay for comparison. This is a
 negative result and is reported as one.
+
+**One-line templates (2026-10-17, docs/DESIGN.md 10.2):** the template now says only how a pick
+compares ("Vs option 2: 0.9 fewer days on campus a week; costs 1 h 12 min more waiting a week."); the
+days and the week are in the card title and the week view. A closest timetable (offered when nothing
+fits) first says what it gives up ("Breaks one limit: 1 class on Wed before 9:30 am."). The checker is
+unchanged. Re-run of the template files: v1 314 / 314, v2 256 / 256, exam 571 / 571 pass; the closest
+timetables on the exam 293 / 293 (`output/pipeline/nearest_eval_exam.md`). The 7B rows above were
+measured with the earlier, longer template.

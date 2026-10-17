@@ -46,12 +46,12 @@
         </div>
 
         <div class="field">
-          <label class="field-label" for="sayText">Your week, in a sentence</label>
+          <label class="field-label" for="sayText">Your week, in a sentence (optional)</label>
           <textarea id="sayText" class="say-text" rows="2" maxlength="500"
                     placeholder="I work Tuesday and Thursday nights, no more than 5 hours of class a day, and mornings aren't great."></textarea>
           <div class="say-actions">
-            <span class="hint">Optional. Enter reads it, Shift and Enter starts a new line.</span>
-            <button type="button" class="button" id="sayRead">Read sentence</button>
+            <button type="button" class="button" id="sayRead" aria-describedby="sayKeys">Read sentence</button>
+            <span class="visually-hidden" id="sayKeys">Enter in the sentence reads it; Shift and Enter starts a new line.</span>
           </div>
           <div id="sayResult" class="readback" hidden></div>
           <p class="field-error" id="sayError" aria-live="polite"></p>
@@ -130,6 +130,12 @@
                 <input type="hidden" id="walkSpeed" value="">
               </div>
             </section>
+            <section class="setting-group" aria-labelledby="groupResearch">
+              <h2 id="groupResearch">Research</h2>
+              <div class="setting">
+                <label class="check"><input id="consent" type="checkbox"> Save your answers for UniPlan research (you can withdraw them later)</label>
+              </div>
+            </section>
             <section class="setting-group" aria-labelledby="groupClasses">
               <h2 id="groupClasses">Classes</h2>
               <div class="setting">
@@ -147,7 +153,6 @@
 
         <div class="submit-row">
           <button id="submitButton" class="button primary" type="submit">Find timetables</button>
-          <label class="consent"><input id="consent" type="checkbox"> Save your answers for UniPlan research (you can withdraw them later)</label>
         </div>
         <div id="saved" class="saved" hidden></div>
       </div>
@@ -163,7 +168,7 @@
 
   <footer class="footer">
     <p>Timetables are built and checked by a scheduler; the sentence is read by a fine-tuned language model running on our own machine. Synthetic test data only; this is a student project for ENGG2112.</p>
-    <p>Class times come from a local copy of the University of Sydney's public timetable. Check seats and times in the university's enrolment system.
+    <p>Class times come from a local copy of the University of Sydney's public timetable.<span id="dataDate"></span> Check seats and times in the university's enrolment system.
       <button type="button" class="link" id="withdrawToggle" aria-expanded="false" aria-controls="withdrawForm">Withdraw saved answers</button></p>
     <form id="withdrawForm" class="withdraw" hidden>
       <label for="withdrawCode" class="visually-hidden">Participant code</label>

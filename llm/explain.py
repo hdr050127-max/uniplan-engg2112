@@ -144,11 +144,13 @@ def _difference(name: str, pick: Candidate, rival: Candidate, x: dict, y: dict, 
     if name == "building_changes":
         if abs(diff) < 0.2:
             return None
-        return f"{_num(abs(diff))} {more_or_less(diff, count=True)} building changes a week"
+        changes = _plural(abs(diff), "building change").split(" ", 1)
+        return f"{changes[0]} {more_or_less(diff, count=True)} {changes[1]} a week"
     if name == "single_class_days":
         if abs(diff) < 0.2:
             return None
-        return f"{_num(abs(diff))} {more_or_less(diff, count=True)} days a week with just one class"
+        days = _plural(abs(diff), "day").split(" ", 1)
+        return f"{days[0]} {more_or_less(diff, count=True)} {days[1]} a week with just one class"
     if name == "online_share":
         return None if abs(diff) < 0.05 else f"{more_or_less(diff, count=True)} online classes"
     return None
@@ -237,8 +239,13 @@ def facts_of(index: int, picks: list[Candidate], conditions: Conditions,
         "count": len(picks),
         "exceptions": len({meeting["date"] for meeting in meetings if meeting.get("unavailable_exception")}),
         "units": sorted({meeting["unit_code"] for meeting in meetings}),
-        # A hard condition: the scheduler guarantees it on every ordinary class day.
+        # A hard condition: the scheduler guarantees it on every ordinary class day, unless this is
+        # one of the closest timetables offered when nothing fits (uniplan.nearest) and it breaks it.
         "lunch": conditions.get("lunch"),
+        "lunch_broken": any(item.get("kind") == "lunch" for item in pick.get("breaks") or []),
+        # Closest timetables only: the lecture watched as a recording, and the limits broken.
+        "watch": pick.get("watch") or "",
+        "broken": pick.get("broken") or "",
     }
 
 
@@ -248,40 +255,33 @@ def _cares(conditions: Conditions) -> list[str]:
 
 
 def _compare_text(facts: dict) -> str:
-    """Pick 1: why it beats pick 2 and what that costs. Others: what they offer and why they are lower."""
+    """One line against the other pick: what this one has, then what it costs.
+
+    Pick 1 is compared with pick 2, the others with pick 1 (docs/DESIGN.md 10.2: the days and
+    the week are already in the title and the week view, so they are not repeated here).
+    """
     compared = facts["versus"]
     if not compared:
         return ""
     rival, plus, minus = compared["rival"], " and ".join(compared["strengths"]), " and ".join(compared["costs"])
-    if facts["index"] == 0:
-        if not plus:
-            return f"First, with little difference from option {rival}. "
-        return f"First because, compared with option {rival}, it has {plus}" + (f", but it has {minus}. " if minus else ". ")
     if plus:
-        return f"Compared with option {rival}, it has {plus}" + (f", but it has {minus}. " if minus else ". ")
-    return f"A backup to option {rival}: it has {minus}. " if minus else f"Little difference from option {rival}. "
+        return f"Vs option {rival}: {plus}" + (f"; costs {minus}." if minus else ".")
+    return f"Vs option {rival}: {minus}." if minus else f"Close to option {rival}."
 
 
 def template_reason(facts: dict, cares: list[str]) -> str:
-    """The comparison from the ranking model first, then the weekly routine."""
-    f = facts["features"]
-    text = _compare_text(facts)
-    if not facts["has_meetings"]:
-        text += f"On campus {_num(f['campus_days'])} days a week on average."
-    elif facts["campus"]:
-        text += f"On campus {_days(facts['campus'])} each week."
-    else:
-        text += "No campus days; every class is online."
-    weekday_off = [day for day in facts["free"] if day <= 5]
-    if weekday_off:
-        text += f" No classes on {_days(weekday_off, 'or')}."
-    if facts["lunch"]:
-        text += f" {_lunch_text(facts['lunch'])}."
+    """What a closest timetable gives up first, then the comparison from the ranking model."""
+    parts = [f"{line}." for line in (facts["watch"], facts["broken"]) if line]
+    compare = _compare_text(facts)
+    if compare:
+        parts.append(compare)
+    elif not parts:
+        parts.append("No other timetable fits these settings.")
     if facts["exceptions"]:
         count = facts["exceptions"]
-        text += (f" {count} exam{'s' if count > 1 else ''} or test{'s' if count > 1 else ''} "
-                 f"{'fall' if count > 1 else 'falls'} in times you can't make.")
-    return text
+        parts.append(f"{count} exam{'s' if count > 1 else ''} or test{'s' if count > 1 else ''} "
+                     f"{'fall' if count > 1 else 'falls'} in times you can't make.")
+    return " ".join(parts)
 
 
 def _lunch_text(lunch: dict) -> str:
@@ -307,11 +307,11 @@ def fact_lines(facts: dict) -> list[str]:
     compared = facts["versus"]
     if compared and (compared["strengths"] or compared["costs"]):
         lines.append(f"Compared with option {compared['rival']}: " + ", ".join(compared["strengths"] + compared["costs"]))
-    if facts["lunch"]:
+    if facts["lunch"] and not facts["lunch_broken"]:
         lines.append(_lunch_text(facts["lunch"]))
     if facts["exceptions"]:
         lines.append(f"{facts['exceptions']} exams or tests fall in times the student can't make")
-    return lines
+    return [line for line in (facts["watch"], facts["broken"]) if line] + lines
 
 
 # ---------- checking a model sentence against the facts ----------

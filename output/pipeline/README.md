@@ -21,3 +21,29 @@ linear model), ranker `llm/rank/model.json`, template reasons; run under `llm.gp
 
 Earlier runs (round-1 linear parser, rule vs trained ranker, v1 only) are kept as
 `pipeline_eval_linear_*_test_claude.*` and the comparison file next to them.
+
+## Closest timetables when nothing fits (added after the final exam)
+
+`scripts/evaluate_nearest.py`, files `nearest_eval_exam.*`. Added on 2026-10-17 after the final exam
+(docs/DESIGN.md 10.1); it does not change any number above, because it only runs when the strict
+search finds nothing. The student's limits become soft, a real clash never does: each clash-free
+timetable is measured by how many limits it breaks, then by how much (minutes a week), and ties go to
+the ranking model. If the units clash even without the limits, one lecture is watched as a recording
+(the one missing the least class time). Exam sentences with their hand-written conditions, no model
+calls, written by Claude (not real students).
+
+| Final exam (`llm/parse/exam/exam.csv`) | |
+| --- | --- |
+| Sentences with no timetable under the strict conditions | 110 / 304 |
+| — now given the closest timetables | 110 / 110 |
+| — by watching one lecture as a recording | 0 (the exam's unit sets never clash on their own) |
+| Pick 1: limits broken, mean (1 / 2) | 1.18 (90 / 20) |
+| Pick 1: amount broken, minutes a week (median, mean) | 111, 158 |
+| Pick 1: which limits | times to avoid 103, days a week 15, hours a day 9, lunch 3 |
+| Recommended timetables with a real clash | 0 / 293 |
+| Template reasons passing the fact check | 293 / 293 |
+| Seconds for the fallback plan (median, max) | 0.34, 1.38 |
+
+The recording path is covered by `tests/test_uniplan_nearest.py` on real data (a pinned ENGG2112
+Tutorial 06 meets when AMME2301's only Lecture1 does; the plan watches AMME2301 Lecture1). A timetable
+that fits is unchanged with the fallback switched on (also locked by a test).

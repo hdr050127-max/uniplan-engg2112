@@ -10,6 +10,8 @@ from pathlib import Path
 from threading import Lock
 from urllib.parse import parse_qs, urlsplit
 
+from llm.parse.labels import LABELS
+
 from .advisor import ExplainRegistry, model_server, read_sentence
 from .auto_fetch import AutoFetcher
 from .catalog import SnapshotCatalog, load_unit_catalog, suggest_units
@@ -238,12 +240,17 @@ class AppHandler(BaseHTTPRequestHandler):
         self._json(422 if result["status"] == "invalid" else 200, result)
 
     def _parse(self, request: dict) -> None:
-        text = request.get("text")
+        text, raw = request.get("text"), request.get("overrides") or {}
         if not isinstance(text, str) or not 0 < len(text.strip()) <= MAX_SENTENCE:
             self._json(400, {"error": f"请用 1 至 {MAX_SENTENCE} 个字说说你的情况。"})
             return
+        # The student's answers: clause index (a JSON key, so a string) -> the label they chose.
+        if (not isinstance(raw, dict) or len(raw) > 20 or
+                any(not str(key).isdigit() or value not in LABELS for key, value in raw.items())):
+            self._json(400, {"error": "Invalid request"})
+            return
         try:
-            result = read_sentence(text.strip())
+            result = read_sentence(text.strip(), {int(key): value for key, value in raw.items()})
         except Exception:  # noqa: BLE001 - the parser is replaceable; the page keeps working without it
             self._json(500, {"error": "暂时无法识别这句话，可以直接在下面手动设置。"})
             return

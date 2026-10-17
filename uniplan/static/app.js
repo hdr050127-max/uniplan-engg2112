@@ -464,8 +464,35 @@ function setSegment(target, value, text) {
   $(target).value = value;
 }
 
-function sayControls(clause) {
-  return Object.keys(clause.profile_fields).flatMap((key) => SAY_CONTROLS[key] || []);
+function sayControls(item) {
+  return Object.keys(item.profile_fields).flatMap((key) => SAY_CONTROLS[key] || []);
+}
+
+function chosen(say, q) {
+  return say.questions[q].options[say.answers[q] || 0];
+}
+
+function sayItems(say) {
+  // What the sentence and the answers add: one item per clause (its own fields, overridden by the
+  // option chosen for a question about it) and one per offer the student took up.
+  const items = say.clauses.map((clause, index) => {
+    let fields = clause.profile_fields;
+    let cares = clause.cares;
+    say.questions.forEach((question, q) => {
+      if (question.kind === "offer" || question.clause_index !== index) return;
+      const option = chosen(say, q);
+      fields = { ...fields, ...option.profile_fields };
+      cares = [...cares, ...option.cares.filter((care) => !cares.includes(care))];
+    });
+    return { key: `say${index}`, clause, profile_fields: fields, cares, on: say.on[index] };
+  });
+  say.questions.forEach((question, q) => {
+    const option = chosen(say, q);
+    if (question.kind === "offer" && (Object.keys(option.profile_fields).length || option.cares.length)) {
+      items.push({ key: `sayask${q}`, profile_fields: option.profile_fields, cares: option.cares, on: true });
+    }
+  });
+  return items;
 }
 
 function unapplySay() {
@@ -473,7 +500,8 @@ function unapplySay() {
   const say = state.say;
   if (!say) return;
   state.blocks = state.blocks.filter((block) => !String(block.key || "").startsWith("say"));
-  const touched = new Set(say.clauses.flatMap(sayControls));
+  const options = say.questions.flatMap((question) => question.options);
+  const touched = new Set([...say.clauses, ...options].flatMap(sayControls));
   touched.forEach((id) => {
     if (SETTING_CHECKS.includes(id)) $(id).checked = say.base.settings[id];
     else setField(id, say.base.settings[id]);
@@ -486,11 +514,11 @@ function applySay() {
   const say = state.say;
   unapplySay();
   const cares = new Set();
-  say.clauses.forEach((clause, index) => {
-    if (!say.on[index]) return;
-    const f = clause.profile_fields;
+  const used = sayItems(say).filter((item) => item.on);
+  used.forEach((item) => {
+    const f = item.profile_fields;
     if (f.unavailable_windows) {
-      state.blocks.push({ key: `say${index}`, label: windowsLabel(f.unavailable_windows),
+      state.blocks.push({ key: item.key, label: windowsLabel(f.unavailable_windows),
         windows: f.unavailable_windows.map(({ weekday, start_min, end_min }) => ({ weekday, start_min, end_min })) });
     }
     if (f.max_days_per_week) setSegment("maxDays", String(f.max_days_per_week), `${f.max_days_per_week} 天`);
@@ -507,7 +535,7 @@ function applySay() {
       setField("preferredStart", clock(f.preferred_hours.start_min));
       setField("preferredEnd", clock(f.preferred_hours.end_min));
     }
-    clause.cares.forEach((care) => cares.add(care));
+    item.cares.forEach((care) => cares.add(care));
   });
   if (cares.size) {
     state.cares = cares; // in the order the sentence states them: the first is the main concern
@@ -516,9 +544,67 @@ function applySay() {
   renderBlocks();
   updateSettingsCount();
   document.querySelectorAll(".setting.said").forEach((row) => row.classList.remove("said"));
-  const said = say.clauses.filter((_, index) => say.on[index]).flatMap(sayControls);
+  const said = used.flatMap(sayControls);
   said.forEach((id) => $(id).closest(".setting")?.classList.add("said"));
   if (said.length) $("moreSettings").open = true;
+}
+
+async function answer(q, o) {
+  // An answer to a question about a clause re-reads that clause as the chosen type; an offer is
+  // applied like a setting. Questions stay as first asked, so any answer can be changed back.
+  const say = state.say;
+  const before = say.answers[q] || 0;
+  if (before === o || say.busy) return;
+  const question = say.questions[q];
+  say.answers[q] = o;
+  if (question.kind !== "offer") {
+    if (o) say.on[question.clause_index] = true;
+    const overrides = {};
+    say.questions.forEach((other, index) => {
+      const option = chosen(say, index);
+      // Only a different type needs the clause read again; a value answer keeps its type.
+      if (other.kind !== "offer" && option.label && option.label !== say.firstLabels[other.clause_index]) {
+        overrides[other.clause_index] = option.label;
+      }
+    });
+    if (JSON.stringify(overrides) !== JSON.stringify(say.overrides)) {
+      say.busy = true;
+      renderSay();
+      try {
+        const data = await post("/api/parse", { text: say.text, overrides });
+        if (!data.clauses || data.clauses.length !== say.clauses.length) throw new Error(data.error || "暂时无法按你的回答重新识别");
+        unapplySay();
+        Object.assign(say, { clauses: data.clauses, summary: data.summary || say.summary, mode: data.mode, overrides });
+      } catch (error) {
+        say.answers[q] = before;
+        setError("sayError", error.message);
+      } finally {
+        say.busy = false;
+      }
+    }
+  }
+  applySay();
+  renderSay();
+}
+
+function renderAsk(say, question, q) {
+  // One line: the question, then its options; the first is what was already assumed.
+  const row = el("div", "say-ask");
+  row.append(el("span", "say-ask-text", question.text));
+  const options = el("div", "segmented say-options");
+  options.setAttribute("role", "group");
+  options.setAttribute("aria-label", question.text);
+  question.options.forEach((option, o) => {
+    const on = (say.answers[q] || 0) === o;
+    const choice = el("button", on ? "on" : "", option.text);
+    choice.type = "button";
+    choice.disabled = Boolean(say.busy);
+    choice.setAttribute("aria-pressed", String(on));
+    choice.addEventListener("click", () => answer(q, o));
+    options.append(choice);
+  });
+  row.append(options);
+  return row;
 }
 
 function renderSay() {
@@ -530,13 +616,20 @@ function renderSay() {
     return;
   }
   box.append(el("p", "say-head", "我理解为"));
+  if (say.summary) {
+    const changed = Object.values(say.answers).some(Boolean);
+    box.append(el("p", "say-summary", changed ? `${say.summary}（已按你的回答调整，见下面）` : say.summary));
+  }
   if (say.mode?.simplified) {
     box.append(el("p", "say-note", "简化模式：识别用的大模型暂时连不上，改用了简单的识别方法，请仔细核对下面每一条。"));
   }
+  say.questions.forEach((question, q) => box.append(renderAsk(say, question, q)));
+  const items = sayItems(say);
   say.clauses.forEach((clause, index) => {
+    const item = items[index];
     const quote = el("span", "quote", `“${clause.text}”`);
     const row = el("div", "say-row");
-    if (Object.keys(clause.profile_fields).length || clause.cares.length) {
+    if (Object.keys(item.profile_fields).length || item.cares.length) {
       const label = el("label", "check");
       const box = el("input");
       box.type = "checkbox";
@@ -545,7 +638,7 @@ function renderSay() {
         say.on[index] = box.checked;
         applySay();
       });
-      label.append(box, document.createTextNode(clauseMeaning(clause)));
+      label.append(box, document.createTextNode(clauseMeaning(item)));
       row.append(label, quote);
     } else {
       row.classList.add("note");
@@ -555,11 +648,11 @@ function renderSay() {
     }
     box.append(row);
   });
-  const used = say.clauses.filter((_, index) => say.on[index]);
+  const used = items.filter((item) => item.on);
   const places = [];
-  if (used.some((clause) => clause.profile_fields.unavailable_windows)) places.push("“不想上课的时间”");
-  if (used.some((clause) => sayControls(clause).length)) places.push("“更多设置”里左边有竖线的几项");
-  if (used.some((clause) => clause.cares.length)) places.push("结果页的“我在意”");
+  if (used.some((item) => item.profile_fields.unavailable_windows)) places.push("“不想上课的时间”");
+  if (used.some((item) => sayControls(item).length)) places.push("“更多设置”里左边有竖线的几项");
+  if (used.some((item) => item.cares.length)) places.push("结果页的“我在意”");
   box.append(el("p", "say-foot", used.length
     ? `已填进${places.join("、")}，可以直接改；没问题就点“生成课表”。`
     : "这句话里没有能直接设置的条件。"));
@@ -581,7 +674,9 @@ async function readSay() {
     unapplySay();
     const clauses = data.clauses;
     state.say = {
-      text, clauses, mode: data.mode, on: clauses.map((clause) => Boolean(Object.keys(clause.profile_fields).length || clause.cares.length)),
+      text, clauses, mode: data.mode, summary: data.summary || "", questions: data.questions || [],
+      answers: {}, overrides: {}, busy: false, firstLabels: clauses.map((clause) => clause.label),
+      on: clauses.map((clause) => Boolean(Object.keys(clause.profile_fields).length || clause.cares.length)),
       base: { settings: settingsSnapshot(), cares: [...state.cares], caresTouched: state.caresTouched },
     };
     applySay();

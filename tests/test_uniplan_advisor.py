@@ -127,6 +127,51 @@ class ConditionTests(unittest.TestCase):
         self.assertNotIn("cares", merged)
 
 
+FRIDAY = {"weekday": 5, "start_min": 0, "end_min": 1440}
+ASKING = {  # what llm.parse.clarify may add; questions here are made up for the page's sake
+    "clauses": [{"text": "我周五要打工", "label": "blocked_time", "fields": {"unavailable_windows": [FRIDAY]}},
+                {"text": "最多来几天吧", "label": "max_days", "fields": {}}],
+    "conditions": {"unavailable_windows": [FRIDAY]}, "unrecognised": [],
+    "summary": "周五全天不上课；每周最多到校几天还没说。",
+    "questions": [
+        {"kind": "hard_or_soft", "clause_index": 0, "text": "周五是完全不能来，还是尽量不来？",
+         "options": [{"text": "完全不能", "label": "blocked_time", "fields": {}},
+                     {"text": "尽量不来", "label": "prefer_fewer_days", "fields": {"cares": ["campus_days"]}}]},
+        {"kind": "missing_value", "clause_index": 1, "text": "每周最多来几天？",
+         "options": [{"text": "先不限", "label": "max_days", "fields": {}},
+                     {"text": "3 天", "label": "max_days", "fields": {"max_days_per_week": 3}}]},
+        {"kind": "low_confidence", "clause_index": 7, "text": "这句是指……？", "options": []},
+        {"kind": "offer", "clause_index": None, "text": "要留出午饭时间吗？",
+         "options": [{"text": "留 30 分钟", "label": None,
+                      "fields": {"lunch": {"start_min": 690, "end_min": 840, "minutes": 30}}}]},
+    ],
+}
+
+
+class ClarifyTests(unittest.TestCase):
+    def test_answers_are_prepared_for_the_page(self):
+        with mock.patch.object(advisor, "parse", return_value=ASKING) as parsed:
+            result = read_sentence("我周五要打工，最多来几天吧", {0: "prefer_fewer_days"})
+        parsed.assert_called_once_with("我周五要打工，最多来几天吧", overrides={0: "prefer_fewer_days"})
+        self.assertEqual(result["summary"], ASKING["summary"])
+        self.assertEqual([q["kind"] for q in result["questions"]], ["hard_or_soft", "missing_value", "offer"])
+        hard, missing, offer = result["questions"]
+        self.assertEqual(hard["options"][1]["cares"], ["campus_days"])
+        self.assertEqual(missing["options"][1]["profile_fields"], {"max_days_per_week": 3})
+        self.assertEqual(offer["options"][0]["profile_fields"]["lunch"]["minutes"], 30)
+        self.assertEqual(offer["options"][-1]["text"], "不用")       # every offer can be declined
+        with mock.patch.object(advisor, "parse", return_value=ASKING) as parsed:
+            read_sentence("我周五要打工")
+        parsed.assert_called_once_with("我周五要打工")                # no overrides: parse() as before
+
+    def test_without_questions_the_result_is_as_before(self):
+        plain = {"clauses": ASKING["clauses"], "conditions": {}, "unrecognised": []}
+        with mock.patch.object(advisor, "parse", return_value=plain):
+            result = read_sentence("我周五要打工")
+        self.assertEqual(result["questions"], [])
+        self.assertNotIn("summary", result)
+
+
 class EndToEndTests(unittest.TestCase):
     """From a sentence to three timetables: zero conflicts and every hard condition holds."""
 
@@ -348,6 +393,16 @@ class ServerTests(unittest.TestCase):
                 return response.status, json.load(response)
         except HTTPError as error:
             return error.code, json.load(error)
+
+    def test_parse_takes_the_students_answers(self):
+        with mock.patch.object(advisor, "parse", return_value=ASKING) as parsed:
+            status, result = self.post("/api/parse", {"text": "我周五要打工，最多来几天吧",
+                                                      "overrides": {"0": "prefer_fewer_days"}})
+        self.assertEqual(status, 200)
+        parsed.assert_called_once_with("我周五要打工，最多来几天吧", overrides={0: "prefer_fewer_days"})
+        self.assertEqual(len(result["questions"]), 3)
+        self.assertEqual(self.post("/api/parse", {"text": "x", "overrides": {"0": "nonsense"}})[0], 400)
+        self.assertEqual(self.post("/api/parse", {"text": "x", "overrides": {"first": "lunch"}})[0], 400)
 
     def test_parse_prepare_and_explain(self):
         status, parsed = self.post("/api/parse", {"text": "我周五要打工，不想课之间等太久"})

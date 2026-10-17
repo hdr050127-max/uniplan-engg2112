@@ -171,19 +171,33 @@ def merge_conditions(raw_profile: dict[str, Any], conditions: Conditions) -> dic
     return {**raw_profile, **fields, "unavailable_windows": windows}
 
 
-def read_sentence(text: str) -> dict[str, Any]:
-    """``llm.parse`` plus, for each clause, the profile fields the page can apply.
+def _applicable(fields: Conditions) -> dict[str, Any]:
+    """Conditions as the page applies them: form fields the scheduler accepts, cares in order."""
+    profile_fields, problems = check_condition_fields(to_profile_fields(fields))
+    cares = [care for care in (fields.get("cares") or []) if care in CARES]
+    return {"profile_fields": profile_fields, "cares": cares, "problems": problems}
 
+
+def read_sentence(text: str, overrides: dict[int, str] | None = None) -> dict[str, Any]:
+    """``llm.parse`` plus, for each clause and each answer option, the profile fields the page can apply.
+
+    ``overrides`` relabels clauses (by index) the student answered a question about.
     Anything the scheduler would reject (a window ending before it starts, a lunch
     longer than its window...) is dropped here and listed under ``problems``.
     """
-    result = parse(text)
-    clauses = []
-    for clause in result["clauses"]:
-        fields, problems = check_condition_fields(to_profile_fields(clause["fields"]))
-        cares = [care for care in (clause["fields"].get("cares") or []) if care in CARES]
-        clauses.append({**clause, "profile_fields": fields, "cares": cares, "problems": problems})
-    return {**result, "clauses": clauses, "mode": parse_mode()}
+    result = parse(text, overrides=overrides) if overrides else parse(text)
+    clauses = [{**clause, **_applicable(clause["fields"])} for clause in result["clauses"]]
+    questions = []
+    for question in result.get("questions") or []:
+        index = question.get("clause_index")
+        if question["kind"] != "offer" and not (isinstance(index, int) and 0 <= index < len(clauses)):
+            continue  # a question about a clause that is not there cannot be answered
+        options = [{**option, **_applicable(option.get("fields") or {})} for option in question["options"]]
+        if question["kind"] == "offer" and not any(option.get("label") is None and not option["profile_fields"]
+                                                   and not option["cares"] for option in options):
+            options.append({"text": "不用", "label": None, "fields": {}, **_applicable({})})
+        questions.append({**question, "options": options})
+    return {**result, "clauses": clauses, "questions": questions, "mode": parse_mode()}
 
 
 def parse_mode() -> dict[str, Any]:

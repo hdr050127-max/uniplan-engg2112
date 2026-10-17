@@ -13,9 +13,11 @@ from datetime import date, timedelta
 from threading import Lock
 from typing import Any, Callable
 
+import llm.parse as parsing
+from llm import ollama
 from llm.contracts import Conditions, preferences_of, to_profile_fields
 from llm.explain import explain, explain_detailed
-from llm.parse import parse
+from llm.parse import linear, parse
 from llm.rank import rank
 
 from .profile import check_condition_fields
@@ -176,9 +178,28 @@ def read_sentence(text: str) -> dict[str, Any]:
     clauses = []
     for clause in result["clauses"]:
         fields, problems = check_condition_fields(to_profile_fields(clause["fields"]))
-        cares = [care for care in CARES if care in (clause["fields"].get("cares") or [])]
+        cares = [care for care in (clause["fields"].get("cares") or []) if care in CARES]
         clauses.append({**clause, "profile_fields": fields, "cares": cares, "problems": problems})
-    return {**result, "clauses": clauses}
+    return {**result, "clauses": clauses, "mode": parse_mode()}
+
+
+def parse_mode() -> dict[str, Any]:
+    """Whether parse() just ran in its simplified form, so the page can say so.
+
+    A model runtime that did not answer falls back to the linear model; the linear
+    runtime without its weights falls back to keyword rules (see llm/parse/__init__.py).
+    """
+    runtime = getattr(parsing, "RUNTIME", "")
+    if runtime.startswith("ollama"):
+        simplified = getattr(parsing, "_down_since", None) is not None
+    else:
+        simplified = not linear.MODEL_PATH.exists()
+    return {"runtime": runtime, "simplified": simplified}
+
+
+def model_server() -> dict[str, Any]:
+    """Whether model calls went to this machine because the configured server did not answer."""
+    return {"fell_back": ollama._configured() != ollama.base_url()}  # no public name for the setting
 
 
 def plan_from_sentence(text: str, raw_profile: dict[str, Any], snapshot_catalog: Any, **options: Any) -> dict[str, Any]:

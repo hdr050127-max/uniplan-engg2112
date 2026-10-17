@@ -10,7 +10,7 @@ from pathlib import Path
 from threading import Lock
 from urllib.parse import parse_qs, urlsplit
 
-from .advisor import ExplainRegistry, read_sentence
+from .advisor import ExplainRegistry, model_server, read_sentence
 from .auto_fetch import AutoFetcher
 from .catalog import SnapshotCatalog, load_unit_catalog, suggest_units
 from .main import main as run_pipeline
@@ -257,7 +257,7 @@ class AppHandler(BaseHTTPRequestHandler):
         if result is None:
             self._json(404, {"error": "推荐已过期，请重新生成。"})
             return
-        self._json(200, result)
+        self._json(200, {**result, **model_server()})
 
     def _study(self, request: dict) -> None:
         study_id = request.get("study_id")

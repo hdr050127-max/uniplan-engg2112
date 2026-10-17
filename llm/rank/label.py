@@ -185,14 +185,15 @@ def judge(model: str, persona: dict, a: dict, b: dict, ties: str = "dominance") 
 
 
 def free_other_models(model: str) -> None:
-    """One model per batch: unload any other model the server holds in GPU memory."""
+    """One model per batch: unload the other qwen2.5 models this window uses (never another
+    window's models, such as the parsing block's fine-tuned one)."""
     try:
         with urllib.request.urlopen(f"{ollama.base_url()}/api/ps", timeout=5) as response:
             loaded = [item["name"] for item in json.loads(response.read())["models"]]
     except (OSError, ValueError, KeyError):
         return
     for name in loaded:
-        if name != model:
+        if name != model and name.startswith("qwen2.5:"):
             print(f"unloading {name} to leave the GPU to {model}", flush=True)
             ollama.unload(name)
 

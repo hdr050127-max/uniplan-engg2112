@@ -225,7 +225,7 @@ def corrected(labels: Path) -> Path:
                 row = {**row, "label": fix, "qwen_label": row["label"], "corrected_by": "claude"}
                 changed += 1
             handle.write(json.dumps(row, ensure_ascii=False) + "\n")
-    print(f"{changed} of {len(fixes)} audited labels replaced by Claude's answer -> {out.relative_to(ROOT)}")
+    print(f"{changed} of {len(fixes)} audited labels replaced by Claude's answer -> {out}")
     return out
 
 

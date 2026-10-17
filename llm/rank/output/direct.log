@@ -1,0 +1,43 @@
+model qwen2.5:7b at http://192.168.1.120:11434
+  athlete_3 done
+  athlete_6 done
+  carer_5 done
+  carer_8 done
+  commuter_2 done
+  commuter_5 done
+  early_bird_1 done
+  early_bird_5 done
+  intern_5 done
+  intern_8 done
+  near_campus_3 done
+  near_campus_4 done
+  night_owl_2 done
+  night_owl_8 done
+  other_5 done
+  other_8 done
+  parent_6 done
+  parent_8 done
+  worker_4 done
+  worker_8 done
+windows GPU busy (python3 -m llm.parse.evaluate --models keywords linear ollama:qwen2.5:7b ollama- since 17:45); waiting...
+model qwen2.5:14b at http://192.168.1.120:11434
+  athlete_3 done
+  athlete_6 done
+  carer_5 done
+  carer_8 done
+  commuter_2 done
+  commuter_5 done
+  early_bird_1 done
+  early_bird_5 done
+  intern_5 done
+  intern_8 done
+  near_campus_3 done
+  near_campus_4 done
+  night_owl_2 done
+  night_owl_8 done
+  other_5 done
+  other_8 done
+  parent_6 done
+  parent_8 done
+  worker_4 done
+  worker_8 done

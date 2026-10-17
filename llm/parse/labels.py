@@ -37,6 +37,8 @@ LABELS = {
 }
 
 # Applied top to bottom; the first rule that fits decides. Kept short so people can label by hand.
+# How graders applied them in review round 1 is in data/README.md; the prompt below is left as it
+# was measured, so the untrained-model numbers stay reproducible.
 RULES = (
     "1. A clause about meals or eating at midday is lunch, even when it gives a time ('12 点到 1 点要吃饭').",
     "2. Wanting no online classes is in_person_only. Wanting online classes is other.",

@@ -122,6 +122,29 @@ def sheet(round_number: int, models: list[str]) -> None:
     print(json.dumps(stats, indent=2))
 
 
+def grading_stats(round_number: int, graded: dict) -> dict:
+    """Who was right on the graded sheet: the generation label, the untrained model, or neither."""
+    sheet = _read(OUTPUT / f"review_round{round_number}.jsonl")
+    model_keys = [key for key in sheet[0] if key.startswith("pred_")]
+    kept = [row for row in sheet if graded[row["id"]].get("keep", True)]
+    dropped = [row for row in sheet if not graded[row["id"]].get("keep", True)]
+    result = {"graded": len(sheet), "kept": len(kept), "dropped": len(dropped),
+              "dropped_by_source": dict(Counter(r["source"] for r in dropped)),
+              "graded_and_dropped_by_gen_label": {
+                  label: f"{sum(r['gen_label'] == label for r in sheet)}/{sum(r['gen_label'] == label for r in dropped)}"
+                  for label in LABELS}}
+    for key in model_keys:
+        disagree = [r for r in kept if r[key] != r["gen_label"]]
+        agree = [r for r in kept if r[key] == r["gen_label"]]
+        gen_right = sum(graded[r["id"]]["label"] == r["gen_label"] for r in disagree)
+        model_right = sum(graded[r["id"]]["label"] == r[key] for r in disagree)
+        result[key] = {"disagreements_kept": len(disagree), "generation_label_right": gen_right,
+                       "model_right": model_right, "both_wrong": len(disagree) - gen_right - model_right,
+                       "agreements_sampled_kept": len(agree),
+                       "agreements_both_right": sum(graded[r["id"]]["label"] == r["gen_label"] for r in agree)}
+    return result
+
+
 def apply(round_number: int) -> None:
     """Training data for this round: Claude's label where graded, the generation label elsewhere."""
     pool = {row["id"]: row for row in _read(POOL)}
@@ -151,6 +174,7 @@ def apply(round_number: int) -> None:
             {"messages": short_messages(r["text"]) + [{"role": "assistant", "content": r["label"]}]}
             for r in rows if r["split"] == split])
     stats = json.loads((OUTPUT / f"review_round{round_number}_stats.json").read_text())
+    stats["grading"] = grading_stats(round_number, graded)
     stats["applied"] = {"training_rows": len(rows), "by_split": dict(Counter(r["split"] for r in rows)),
                         "by_source": dict(Counter(r["source"] for r in rows)),
                         "label_from": dict(Counter(r["label_from"] for r in rows)), **dict(changes)}

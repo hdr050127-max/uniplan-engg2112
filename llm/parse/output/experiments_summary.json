@@ -1,0 +1,14 @@
+{
+  "val_accuracy": 0.8925,
+  "train": 1557,
+  "val": 279,
+  "settings": {
+    "ngram_range": [
+      1,
+      4
+    ],
+    "min_df": 2,
+    "C": 10,
+    "max_iter": 3000
+  }
+}

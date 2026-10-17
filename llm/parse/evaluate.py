@@ -142,6 +142,8 @@ def score(saved: dict, sets: dict) -> dict:
             scored["sentence_all_right"] = sum(p["conditions"] == s["conditions"]
                                                for p, s in zip(parsed, gold)) / len(gold)
             scored["fields"] = field_accuracy([s["conditions"] for s in gold], [p["conditions"] for p in parsed])
+            scored["ms_per_sentence"] = statistics.mean(
+                sum(preds[t]["ms"] for t in split_clauses(s["sentence"])) for s in gold)
             result[name] = scored
     return result
 
@@ -162,6 +164,9 @@ def markdown(results: list[dict], sets: dict) -> str:
         "`train_round*` 里还有 Claude 写的难题（source = claude_train）。"
         f"按生成请求划分，与训练集不重叠；另把 2–3 个短句拼成 {len(val['sentences'])} 句，测"
         "「切句 + 分类」整句全对率：整句找出的条件类别（不算 other）和原短句的类别完全一致才算对。",
+        "- **linear**：验证集上的数字来自只用训练集拟合的模型；测试集上用的是网页实际运行的模型"
+        "（同样的超参数，在训练集 + 验证集上重新拟合，`output/linear_model.json`）。"
+        "微调的 7B 只用训练集训练，按验证集选了第 2 轮，所以它的验证集数字略偏乐观。",
         "- **示例（examples）**：`data/test_template.csv` 的 10 句格式示例，由 Claude 编写，**不是测试集**，"
         "只用来检查整条流程能跑通；数字仅供参考。",
     ]
@@ -191,13 +196,16 @@ def markdown(results: list[dict], sets: dict) -> str:
         if not rows:
             continue
         lines += ["", f"## 整条流程：{title}", "",
-                  "| 模型 | 短句分类准确率 | 切句全对 | 条件全对（整句） | 不可上课时段 | 天数上限 | 每天上课 | 每天在校 | 午饭 | 只要线下 | 舒服时段 | 在意项 |",
-                  "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
+                  "短句分类用的是标注者切好的短句；其余各列是从原句开始跑完整条流程（切句 → 分类 → 取值 → 合并）的结果，"
+                  "各条件列是该条件整句完全正确的比例。",
+                  "",
+                  "| 模型 | 短句分类准确率 | 宏平均 F1 | 切句全对 | 条件全对（整句） | 每句耗时 (ms) | 不可上课时段 | 天数上限 | 每天上课 | 每天在校 | 午饭 | 只要线下 | 舒服时段 | 在意项 |",
+                  "| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |"]
         for r in rows:
             s = r[set_name]
             f = s["fields"]
-            lines.append(f"| {r['model']} | {_pct(s['accuracy'])} | {_pct(s['split_right'])} | "
-                         f"{_pct(s['sentence_all_right'])} | " + " | ".join(_pct(f[k]) for k in (
+            lines.append(f"| {r['model']} | {_pct(s['accuracy'])} | {_pct(s['macro_f1'])} | {_pct(s['split_right'])} | "
+                         f"{_pct(s['sentence_all_right'])} | {s['ms_per_sentence']:.1f} | " + " | ".join(_pct(f[k]) for k in (
                              "unavailable_windows", "max_days_per_week", "max_daily_minutes", "max_daily_span",
                              "lunch", "in_person_only", "preferred_hours", "cares")) + " |")
     lines += ["", "## 附：不训练的千问各尺寸（2026-10-16 在 Mac 上手工测的小样本，旧版提示词）", "",
@@ -206,10 +214,19 @@ def markdown(results: list[dict], sets: dict) -> str:
               "| 一次输出整套条件 JSON（4 句） | – | – | 1/4 | 1/4 |", "",
               "样本很小，只说明两件事：小模型不训练不够准；让模型一次写出整套条件会漏项、凭空加偏好，"
               "所以改成「短句分类 + 规则提取」。"]
-    best = max((r for r in results if r.get("val")), key=lambda r: r["val"]["accuracy"], default=None)
-    if best:
-        lines += ["", f"## 混淆矩阵（验证集，{best['model']}）", "",
-                  "行是正确类别，列是预测类别。", "", confusion_markdown(best["val"]["confusion"])]
+    if any(r.get("test") for r in results):
+        lines += ["", "## 各类 F1（测试集，标注者切好的短句）", "",
+                  "| 模型 | " + " | ".join(LABEL_ORDER) + " |", "| --- |" + " ---: |" * len(LABEL_ORDER)]
+        for r in results:
+            if r.get("test"):
+                lines.append(f"| {r['model']} | " + " | ".join(
+                    "–" if not r["test"]["per_label"][label]["support"] else f"{r['test']['per_label'][label]['f1']:.2f}"
+                    for label in LABEL_ORDER) + " |")
+    lines += ["", "## 混淆矩阵", "", "行是正确类别，列是预测类别。"]
+    for set_name, title in (("val", "验证集"), ("test", "测试集")):
+        for r in results:
+            if r.get(set_name):
+                lines += ["", f"### {r['model']}（{title}）", "", confusion_markdown(r[set_name]["confusion"])]
     return "\n".join(lines) + "\n"
 
 

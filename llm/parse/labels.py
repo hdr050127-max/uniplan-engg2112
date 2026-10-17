@@ -18,8 +18,9 @@ from __future__ import annotations
 LABELS = {
     "blocked_time": "a named weekday, a clock time, or a part of the day tied to an outside commitment "
                     "(work, childcare, sport, religion, commute, another course) when the student cannot "
-                    "or will not have class. Wording strength does not matter: 'no classes before 10am', "
-                    "'not on Mondays', 'I don't want Friday classes' are all blocked_time.",
+                    "or will not have class, or a request to keep a part of the day free. Wording strength "
+                    "does not matter: 'no classes before 10am', 'not on Mondays', 'I don't want Friday "
+                    "classes', 'keep my mornings free' are all blocked_time.",
     "max_days": "a NUMBER of days per week on campus (at most 3 days, only two days a week). If the days "
                 "themselves are named ('only Tuesday and Thursday'), it is blocked_time instead.",
     "max_daily_hours": "a NUMBER of hours per day, either hours of class or hours spent on campus "
@@ -29,7 +30,7 @@ LABELS = {
     "prefer_fewer_days": "prefers coming to campus on fewer days or packing classes together, with no "
                          "number and no named day.",
     "prefer_less_waiting": "dislikes gaps, breaks or waiting between classes; wants classes back to back.",
-    "prefer_no_early_late": "a general dislike of early or late classes (not a morning person, hates 8am "
+    "prefer_no_early_late": "a general dislike of early or late classes (not a morning person, hates early "
                             "starts) with no named weekday and no outside commitment; also a clock time "
                             "softened by a hedge word ('ideally after 10am', '最好十点以后').",
     "other": "anything else: wishes the scheduler cannot act on (teacher, room, friends, online classes, "
@@ -37,19 +38,20 @@ LABELS = {
 }
 
 # Applied top to bottom; the first rule that fits decides. Kept short so people can label by hand.
-# How graders applied them in review round 1 is in data/README.md; the prompt below is left as it
-# was measured, so the untrained-model numbers stay reproducible.
+# How graders applied them is in data/README.md.
 RULES = (
     "1. A clause about meals or eating at midday is lunch, even when it gives a time ('12 点到 1 点要吃饭').",
     "2. Wanting no online classes is in_person_only. Wanting online classes is other.",
     "3. A count of days per week is max_days; a count of hours per day is max_daily_hours. "
     "Numbers keep the label even with soft words ('最好一周三天' is max_days).",
-    "4. A named weekday, a clock time, or an outside commitment with a day or part of the day is "
-    "blocked_time, however softly it is said.",
+    "4. A named weekday, a clock time, an outside commitment with a day or part of the day, or a request "
+    "to keep a part of the day free (morning, afternoon, arvo, evening, night, 上午, 下午, 晚上: 'no morning "
+    "classes', 'keep afternoons free', '不想晚上上课') is blocked_time, however softly it is said.",
     "5. Exception to 4: a clock time with a hedge word (最好, 尽量, 如果可以, 希望, prefer, ideally, "
     "if possible, rather) and no weekday and no commitment is prefer_no_early_late.",
-    "6. Personal tiredness or sleep without a clock time ('早上起不来', 'I'm not a morning person') is "
-    "prefer_no_early_late.",
+    "6. Feelings or ability with no request ('I hate mornings', 'I'm not a morning person', '早上起不来', "
+    "'不喜欢晚上上课') and vague words ('too early', 'late classes', 'early morning', 'late afternoon', '早课') "
+    "are prefer_no_early_late.",
     "7. 'Fewer days', 'classes packed into a few days' (集中), 'not every day' without a number or named day "
     "is prefer_fewer_days.",
     "8. Gaps, waiting, free periods between classes, 'back to back' (连着, 紧凑) is prefer_less_waiting.",
@@ -78,11 +80,38 @@ EXAMPLES = (
     ("想和室友上同一个 tutorial", "other"),
 )
 
-SYSTEM = ("Classify one clause a university student wrote about their timetable into exactly one label.\n"
-          "Labels:\n" + "\n".join(f"- {name}: {meaning}" for name, meaning in LABELS.items())
-          + "\nRules, first match wins:\n" + "\n".join(RULES)
-          + "\nExamples:\n" + "\n".join(f"{text} -> {label}" for text, label in EXAMPLES)
-          + "\nAnswer with the label only.")
+# Prompt v1 (round 1, test v1) differed in three places; kept so its numbers can be reproduced.
+# v2 fixed the 'hates 8am starts' example (a clock time is blocked_time by rule 4) and wrote down
+# the part-of-day convention the graders and both test sets use.
+_V1 = {
+    "blocked_time": "a named weekday, a clock time, or a part of the day tied to an outside commitment "
+                    "(work, childcare, sport, religion, commute, another course) when the student cannot "
+                    "or will not have class. Wording strength does not matter: 'no classes before 10am', "
+                    "'not on Mondays', 'I don't want Friday classes' are all blocked_time.",
+    "prefer_no_early_late": "a general dislike of early or late classes (not a morning person, hates 8am "
+                            "starts) with no named weekday and no outside commitment; also a clock time "
+                            "softened by a hedge word ('ideally after 10am', '最好十点以后').",
+    3: "4. A named weekday, a clock time, or an outside commitment with a day or part of the day is "
+       "blocked_time, however softly it is said.",
+    5: "6. Personal tiredness or sleep without a clock time ('早上起不来', 'I'm not a morning person') is "
+       "prefer_no_early_late.",
+}
+
+
+def _system(labels: dict, rules: tuple) -> str:
+    return ("Classify one clause a university student wrote about their timetable into exactly one label.\n"
+            "Labels:\n" + "\n".join(f"- {name}: {meaning}" for name, meaning in labels.items())
+            + "\nRules, first match wins:\n" + "\n".join(rules)
+            + "\nExamples:\n" + "\n".join(f"{text} -> {label}" for text, label in EXAMPLES)
+            + "\nAnswer with the label only.")
+
+
+PROMPTS = {
+    "v1": _system({name: _V1.get(name, meaning) for name, meaning in LABELS.items()},
+                  tuple(_V1.get(index, rule) for index, rule in enumerate(RULES))),
+    "v2": _system(LABELS, RULES),
+}
+SYSTEM = PROMPTS["v2"]
 
 
 # Fine-tuned models learn the rules from examples, so they get a short prompt (faster, fewer tokens).
@@ -90,8 +119,8 @@ SHORT_SYSTEM = ("Label one clause a student wrote about their timetable with one
                 + ". Answer with the label only.")
 
 
-def messages(text: str) -> list[dict]:
-    return [{"role": "system", "content": SYSTEM}, {"role": "user", "content": text}]
+def messages(text: str, version: str = "v2") -> list[dict]:
+    return [{"role": "system", "content": PROMPTS[version]}, {"role": "user", "content": text}]
 
 
 def short_messages(text: str) -> list[dict]:

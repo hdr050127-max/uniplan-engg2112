@@ -1,0 +1,59 @@
+{
+  "base": "Qwen/Qwen2.5-7B-Instruct",
+  "method": "QLoRA (4-bit NF4 base, bf16 compute, LoRA adapters)",
+  "seed": 2112,
+  "settings": {
+    "base": "Qwen/Qwen2.5-7B-Instruct",
+    "out": "out-7b",
+    "epochs": 3,
+    "lr": 0.0002,
+    "batch": 16,
+    "rank": 16
+  },
+  "gpu": "NVIDIA GeForce RTX 4090 Laptop GPU",
+  "python": "3.11.9",
+  "torch": "2.6.0+cu124",
+  "transformers": "5.20.1",
+  "peft": "0.21.2",
+  "train_examples": 1557,
+  "valid_examples": 279,
+  "epochs": [
+    {
+      "epoch": 1,
+      "train_loss": 0.1265,
+      "val_accuracy": 0.9355,
+      "minutes": 3.7
+    },
+    {
+      "epoch": 2,
+      "train_loss": 0.0192,
+      "val_accuracy": 0.9677,
+      "minutes": 7.2
+    },
+    {
+      "epoch": 3,
+      "train_loss": 0.0046,
+      "val_accuracy": 0.9677,
+      "minutes": 10.4
+    }
+  ],
+  "data": "synthetic clauses (qwen2.5:7b) + Claude-written hard clauses; labels checked by Claude where reviewed; not real student data",
+  "best_epoch": 2,
+  "best_val_accuracy": 0.9677,
+  "peak_gpu_memory_gb": 12.1,
+  "training_minutes": 10.4,
+  "reported_on_windows": {
+    "note": "Added by hand from the Windows run (reported by the coordinator session on 2026-10-17); everything above is out-7b/train_log.json as written by train_lora.py.",
+    "nvidia_smi_peak_memory_mib": 15861,
+    "train_and_merge_time": "11 min 12 s",
+    "ollama_model": "uniplan-parse-7b:latest",
+    "quantized_model": {
+      "format": "GGUF",
+      "quantization": "Q4_K_M",
+      "size_gb": 4.36,
+      "sha256": "cc4add94c45a1d8e35f739ef1015824dedf06f4285913a53b869154663cb2ee5"
+    },
+    "adapter_size_mb": 154.1,
+    "round": 1
+  }
+}

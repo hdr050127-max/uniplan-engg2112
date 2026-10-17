@@ -59,6 +59,18 @@ class ClassifierTests(unittest.TestCase):
         self.assertEqual(result["clauses"][0]["label"], "lunch")
         fallback.assert_called_once()
 
+    def test_guard_applies_rule_five(self):
+        from llm.parse import guarded, parse
+        self.assertEqual(guarded("prefer_no_early_late", "please no classes before 9"), "blocked_time")
+        self.assertEqual(guarded("prefer_no_early_late", "no Friday arvo classes"), "blocked_time")
+        self.assertEqual(guarded("prefer_no_early_late", "ideally nothing before 9"), "prefer_no_early_late")
+        self.assertEqual(guarded("prefer_no_early_late", "I hate early starts"), "prefer_no_early_late")
+        self.assertEqual(guarded("prefer_no_early_late", "早上的课每天都不想上"), "prefer_no_early_late")
+        self.assertEqual(guarded("max_days", "no classes before 9"), "max_days")
+        soft = lambda text: "prefer_no_early_late"     # noqa: E731
+        self.assertEqual(parse("no classes later than 6", soft)["clauses"][0]["label"], "prefer_no_early_late")
+        self.assertEqual(parse("no classes later than 6", soft, guard=True)["clauses"][0]["label"], "blocked_time")
+
     def test_unknown_name_is_refused(self):
         with self.assertRaises(ValueError):
             classify.by_name("gpt")

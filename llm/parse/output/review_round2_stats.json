@@ -1,0 +1,36 @@
+{
+  "round": 2,
+  "from": "train_round1.jsonl",
+  "relabels": 28,
+  "relabelled_val": 2,
+  "relabelled_train": 24,
+  "dropped_train": 1,
+  "dropped_val": 1,
+  "claude_round2_clauses_added": 201,
+  "added_by_label": {
+    "blocked_time": 110,
+    "prefer_no_early_late": 54,
+    "max_days": 17,
+    "other": 13,
+    "max_daily_hours": 2,
+    "lunch": 2,
+    "prefer_less_waiting": 1,
+    "in_person_only": 1,
+    "prefer_fewer_days": 1
+  },
+  "training_rows": 2035,
+  "by_split": {
+    "val": 278,
+    "train": 1757
+  },
+  "by_source": {
+    "qwen_synth": 1695,
+    "claude_train": 139,
+    "claude_train_r2": 201
+  },
+  "label_from": {
+    "claude": 590,
+    "generation": 1419,
+    "claude_round2": 26
+  }
+}

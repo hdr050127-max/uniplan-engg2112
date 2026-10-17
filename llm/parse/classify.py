@@ -42,10 +42,15 @@ def by_name(name: str) -> Classifier:
         return keyword_label
     if name == "linear":
         return linear_classifier()
-    if name.startswith("ollama:"):
-        return ollama_classifier(name.removeprefix("ollama:"))
+    if name == "linear-r1":                           # the round-1 run-time model, kept for comparison
+        return linear.load(linear.MODEL_PATH.parent / "round1" / "linear_model.json")
+    if name.startswith("ollama:"):                # full prompt v1, as measured in round 1
+        return ollama_classifier(name.removeprefix("ollama:"), prompt=lambda text: messages(text, "v1"))
+    if name.startswith("ollama-v2:"):             # full prompt v2 (fixed example, part-of-day rule)
+        return ollama_classifier(name.removeprefix("ollama-v2:"), prompt=lambda text: messages(text, "v2"))
     if name.startswith("ollama-short:"):          # fine-tuned models were trained with the short prompt
         return ollama_classifier(name.removeprefix("ollama-short:"), prompt=short_messages)
     if name.startswith("ollama-free:"):
-        return ollama_classifier(name.removeprefix("ollama-free:"), constrained=False)
+        return ollama_classifier(name.removeprefix("ollama-free:"), constrained=False,
+                                 prompt=lambda text: messages(text, "v1"))
     raise ValueError(f"unknown classifier {name!r}")

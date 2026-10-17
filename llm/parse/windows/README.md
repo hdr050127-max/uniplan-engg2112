@@ -54,11 +54,11 @@ hf download Qwen/Qwen2.5-7B-Instruct
 cd D:\uniplan-lora\windows
 .venv\Scripts\activate
 $env:HF_HOME = "D:\hf-cache"
-curl.exe http://127.0.0.1:11434/api/generate -d '{\"model\": \"qwen2.5:7b\", \"keep_alive\": 0}'
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:11434/api/generate -ContentType application/json -Body '{"model": "qwen2.5:7b", "keep_alive": 0}'
 python train_lora.py
 ```
 
-`curl.exe` 那行让 Ollama 卸载常驻的 7B，空出显存。训练时每轮打印一次 `val_accuracy`，训完先存好 `out-7b\adapter` 和 `out-7b\train_log.json`，再在 CPU 上合并，生成 `out-7b\merged` 和 `out-7b\Modelfile`。
+`Invoke-RestMethod` 那行让 Ollama 卸载常驻的 7B，空出显存。不要用 `curl.exe -d`：PowerShell 5.1 会吃掉 JSON 里的引号。训练时每轮打印一次 `val_accuracy`，训完先存好 `out-7b\adapter` 和 `out-7b\train_log.json`，再在 CPU 上合并，生成 `out-7b\merged` 和 `out-7b\Modelfile`。
 
 **合并要约 16 GB 内存，这台机器平时只空闲 8–11 GB。** 开训前先关掉浏览器、游戏、IDE 等占内存的大程序。如果训练跑完了、合并时内存不够报错，适配器已经存好，不用重训：关掉程序后运行
 
@@ -76,16 +76,53 @@ python -m venv .venv-convert
 .venv-convert\Scripts\python.exe -m pip install -r llama.cpp\requirements\requirements-convert_hf_to_gguf.txt
 ```
 
-然后转换、导入、试一句：
+然后换回底模的分词器文件、转换、量化、导入、试一句：
 
 ```powershell
+$base = (Get-ChildItem "D:\hf-cache\hub\models--Qwen--Qwen2.5-7B-Instruct\snapshots" | Select-Object -First 1).FullName
+Copy-Item "$base\tokenizer.json", "$base\tokenizer_config.json", "$base\vocab.json", "$base\merges.txt" out-7b\merged -Force
 .venv-convert\Scripts\python.exe llama.cpp\convert_hf_to_gguf.py out-7b\merged --outfile out-7b\model-f16.gguf --outtype f16
+& "$env:LOCALAPPDATA\Programs\Ollama\lib\ollama\llama-quantize.exe" out-7b\model-f16.gguf out-7b\model-q4_K_M.gguf Q4_K_M
 cd out-7b
-ollama create uniplan-parse-7b -f Modelfile --quantize q4_K_M
+(Get-Content Modelfile) -replace '^FROM .*', 'FROM ./model-q4_K_M.gguf' | Set-Content Modelfile.q4
+ollama create uniplan-parse-7b -f Modelfile.q4
 ollama run uniplan-parse-7b "I can't do Fridays, I work"
 ```
 
-最后一行应只回答一个类别名（这句应是 `blocked_time`）。量化成 q4_K_M 后大小和原来的 `qwen2.5:7b` 一样，约 4.7 GB。确认能用后，`out-7b\merged` 和 `out-7b\model-f16.gguf` 可以删掉。
+最后一行应只回答一个类别名（这句应是 `blocked_time`）。确认能用后，`out-7b\merged`、`out-7b\model-f16.gguf` 可以删掉，`model-q4_K_M.gguf` 已经复制进 Ollama，也可以删。
+
+第 1 轮（2026-10-17）实际遇到的两个问题，上面的命令已经绕开：
+
+- **分词器文件读不了。** transformers 5.x 保存的 `tokenizer_config.json` 里 `extra_special_tokens` 是列表，llama.cpp 的转换脚本（依赖 transformers 4.57）读不了。训练没有改词表，token id 完全一样，所以把 `merged` 里的 `tokenizer.json`、`tokenizer_config.json`、`vocab.json`、`merges.txt` 换成底模原版即可（第 2 行）。
+- **Ollama 0.40.5 不能对 GGUF 用 `--quantize`。** 改用 Ollama 自带的 `lib\ollama\llama-quantize.exe` 先量化成 Q4_K_M（第 4 行；Ollama 装在别处的话改成实际路径），再用只改了 `FROM` 一行的 `Modelfile.q4` 导入，不加 `--quantize`。
+
+第 1 轮导入的结果：`uniplan-parse-7b:latest`，Q4_K_M，4.36 GB，适配器 154.1 MB。训练日志在 `llm/parse/output/lora_train_log_7b.json`。
+
+## 第 2 轮（同样的超参数和种子，只换训练数据）
+
+把新的 `data\train.jsonl`、`data\valid.jsonl` 拷过去覆盖旧的（验证集和第 1 轮一样，只按改动清单改了几条标签），然后：
+
+```powershell
+cd D:\uniplan-lora\windows
+.venv\Scripts\activate
+$env:HF_HOME = "D:\hf-cache"
+Invoke-RestMethod -Method Post -Uri http://127.0.0.1:11434/api/generate -ContentType application/json -Body '{"model": "uniplan-parse-7b", "keep_alive": 0}'
+python train_lora.py --out out-7b-r2
+```
+
+合并时内存不够就 `python merge_adapter.py --out out-7b-r2`。转换和导入同第 4 步，把路径里的 `out-7b` 换成 `out-7b-r2`，模型名用 `uniplan-parse-7b-r2`：
+
+```powershell
+$base = (Get-ChildItem "D:\hf-cache\hub\models--Qwen--Qwen2.5-7B-Instruct\snapshots" | Select-Object -First 1).FullName
+Copy-Item "$base\tokenizer.json", "$base\tokenizer_config.json", "$base\vocab.json", "$base\merges.txt" out-7b-r2\merged -Force
+.venv-convert\Scripts\python.exe llama.cpp\convert_hf_to_gguf.py out-7b-r2\merged --outfile out-7b-r2\model-f16.gguf --outtype f16
+& "$env:LOCALAPPDATA\Programs\Ollama\lib\ollama\llama-quantize.exe" out-7b-r2\model-f16.gguf out-7b-r2\model-q4_K_M.gguf Q4_K_M
+cd out-7b-r2
+(Get-Content Modelfile) -replace '^FROM .*', 'FROM ./model-q4_K_M.gguf' | Set-Content Modelfile.q4
+ollama create uniplan-parse-7b-r2 -f Modelfile.q4
+```
+
+训练日志拷回 Mac，存成 `llm/parse/output/lora_train_log_7b_r2.json`。第 1 轮的 `uniplan-parse-7b` 留着，对比要用。
 
 ## 5. 告诉 Claude
 

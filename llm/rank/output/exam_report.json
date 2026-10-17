@@ -1,0 +1,70 @@
+{
+ "note": "期末考卷（合成）：画像和答案由一个新的子代理撰写，不是真实学生；模型和规则都是定稿版本，没有重训或调参。",
+ "model_json_sha256": "c4d2a264b6fd0450b3554a9f6ef116e9362080ba966450253486122ef1afe42f",
+ "model_trained_on": "llm/rank/output/labels_v3d_qwen2.5_14b_corrected.jsonl",
+ "personas": 20,
+ "questions": 540,
+ "answers": {
+  "红/蓝": 485,
+  "差不多": 55
+ },
+ "random_baseline": {
+  "pairwise_accuracy": 0.5,
+  "top3_hit": 0.38392857142857145
+ },
+ "top3_ceiling": 0.9319444444444445,
+ "llm_seconds_per_call": 2.118392857142857,
+ "rerun": false,
+ "results": [
+  {
+   "method": "千问 qwen2.5:14b 直接判断（每对一次）",
+   "pairwise_accuracy": 0.6556701030927835,
+   "pairs_scored": 485,
+   "ci95": [
+    0.5926680244399185,
+    0.7193347193347194
+   ]
+  },
+  {
+   "method": "千问 qwen2.5:14b 直接挑前 3",
+   "top3_hit": 0.5875,
+   "best_in_top3": 0.8583333333333333
+  },
+  {
+   "method": "定稿模型（model.json，逻辑回归）",
+   "pairwise_accuracy": 0.8329896907216495,
+   "pairs_scored": 485,
+   "ci95": [
+    0.7556008146639511,
+    0.9021526418786693
+   ],
+   "top3_hit": 0.7916666666666666,
+   "best_in_top3": 0.9666666666666667,
+   "ms_per_student": 0.053863902576267705
+  },
+  {
+   "method": "按 cares 打分（原占位版）",
+   "pairwise_accuracy": 0.7134020618556701,
+   "pairs_scored": 485,
+   "ci95": [
+    0.6387163561076604,
+    0.7904656319290465
+   ],
+   "top3_hit": 0.525,
+   "best_in_top3": 0.6,
+   "ms_per_student": 0.053863902576267705
+  },
+  {
+   "method": "等权打分",
+   "pairwise_accuracy": 0.7814432989690722,
+   "pairs_scored": 485,
+   "ci95": [
+    0.7282157676348547,
+    0.8323108384458078
+   ],
+   "top3_hit": 0.6847222222222222,
+   "best_in_top3": 0.85,
+   "ms_per_student": 0.053863902576267705
+  }
+ ]
+}

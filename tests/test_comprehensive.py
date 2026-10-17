@@ -69,6 +69,20 @@ class SearchCollapseTests(unittest.TestCase):
         self.assertAlmostEqual(backups["backups"][1]["delta"]["campus_days"], 1.0)
         self.assertEqual(best["equivalent_swaps"], {"G2": ["B"]})
 
+    def test_roomier_swaps_and_backups_keep_the_daily_limits(self):
+        # The roomier in-person tutorial ties on every feature but keeps the student on campus 9-16.
+        weeks = ("2026-08-03", "2026-08-10", "2026-08-17")
+        rows = [meeting(f"a{w}", "G1", "A", day, 540, 600) for w, day in enumerate(weeks)]
+        rows += [meeting(f"x{w}", "G2", "X", day, 900, 960, building="Online", seats="5") for w, day in enumerate(weeks)]
+        rows += [meeting(f"y{w}", "G2", "Y", day, 900, 960, seats="50") for w, day in enumerate(weeks)]
+        ranking = arrange_timetables(rows, {"TEST1234": ["G1", "G2"]}, profile(max_daily_span=300))
+        self.assertEqual(ranking["feasible_count"], 1)
+        best = ranking["top"][0]
+        self.assertIn("X", best["option_ids"])
+        self.assertEqual(best["class_backups"]["G2"]["backups"], [])
+        for item in ranking["shortlist"]["items"].values():
+            self.assertIn("X", item["option_ids"])
+
     def test_search_limit_names_the_busiest_group(self):
         groups = extract_class_options(self.rows, {"TEST1234": ["G1", "G2"]})
         with self.assertRaises(SearchLimitError) as caught:

@@ -4,7 +4,7 @@ import sys
 import unittest
 from pathlib import Path
 
-from llm.rank import model, rank, rule_scores
+from llm.rank import contributions, model, rank, rule_scores
 from llm.rank.features import NAMES, candidate_features, timetable_features
 from llm.rank.metrics import membership, teacher_order
 
@@ -115,6 +115,24 @@ class ModelTests(unittest.TestCase):
             weights = model.personal_weights(model.student_terms({"cares": [care]}), spec)
             self.assertLess(weights[feature], 0)                         # the student wants less of it
             self.assertEqual(min(weights, key=weights.get), feature)     # ...and it matters most
+
+    def test_contributions_add_up_to_the_score_and_explain_the_winner(self):
+        candidates = [{"candidate_id": cid, "features": {"campus_days": d, "gap_min": g, "outside_min": 0.0}}
+                      for cid, d, g in (("few_days", 2.0, 0.0), ("more_days", 4.0, 0.0))]
+        prefs = {"cares": ["campus_days"]}
+        spec = self.spec()
+        scores = {item["candidate_id"]: item["score"] for item in rank(candidates, prefs, spec=spec)}
+        parts = {c["candidate_id"]: contributions(c, prefs, candidates, spec=spec) for c in candidates}
+        for cid, part in parts.items():
+            self.assertEqual(set(part), set(NAMES))
+            self.assertAlmostEqual(sum(part.values()), scores[cid])
+        gap = {name: parts["few_days"][name] - parts["more_days"][name] for name in NAMES}
+        self.assertEqual(max(gap, key=gap.get), "campus_days")
+        self.assertAlmostEqual(gap["campus_days"], 4.0)               # 2 days fewer x weight 2
+        self.assertTrue(contributions(candidates[0], prefs))          # with model.json or the rule
+        fallback = contributions(candidates[0], prefs, candidates, spec=None) if model.load() is None else None
+        if fallback is not None:
+            self.assertEqual(set(fallback), {"campus_days"})
 
     def test_rule_fallback(self):
         candidates = [{"candidate_id": "x", "features": {"campus_days": 2.0, "gap_min": 0.0, "outside_min": 0.0}},

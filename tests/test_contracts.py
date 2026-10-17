@@ -36,6 +36,13 @@ class ContractTests(unittest.TestCase):
         self.assertNotIn("cares", fields)
         self.assertEqual(preferences_of({"cares": ["gap"]}, "x")["cares"], ["gap"])
 
+    def test_cares_keep_the_order_the_student_states(self):
+        first = parse("I hate long gaps between classes, and I want as few days on campus as possible")
+        second = parse("I want as few days on campus as possible, and I hate long gaps between classes")
+        self.assertEqual(first["conditions"].get("cares"), ["gap", "campus_days"])
+        self.assertEqual(second["conditions"].get("cares"), ["campus_days", "gap"])
+        self.assertEqual(preferences_of(second["conditions"])["cares"], ["campus_days", "gap"])
+
     def test_rank_orders_every_candidate_once(self):
         ranked = rank(CANDIDATES, {"cares": ["campus_days"], "student_text": ""})
         self.assertEqual(sorted(item["candidate_id"] for item in ranked), ["a", "b", "c"])

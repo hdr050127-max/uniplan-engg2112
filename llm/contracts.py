@@ -45,7 +45,8 @@ class Conditions(TypedDict, total=False):
     in_person_only: bool
     # Soft: used only to order valid timetables.
     preferred_hours: Window          # weekday is ignored; the student's comfortable day
-    cares: list[Care]
+    cares: list[Care]                # most important first: cares[0] is what the student cares
+                                     # about most (the parser keeps the order the sentence states them)
 
 
 class Clause(TypedDict):
@@ -72,7 +73,7 @@ class Candidate(TypedDict, total=False):
 
 class Preferences(TypedDict, total=False):
     student_text: str
-    cares: list[Care]
+    cares: list[Care]                # same order as Conditions.cares; never re-sort it
     preferred_hours: Window
 
 

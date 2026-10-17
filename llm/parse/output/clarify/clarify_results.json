@@ -113,10 +113,10 @@
    },
    "sentences": {
     "sentences": 126,
-    "questions_per_sentence": 0.5793650793650794,
+    "questions_per_sentence": 0.5714285714285714,
     "clarifying_per_sentence": 0.3253968253968254,
-    "offers_per_sentence": 0.25396825396825395,
-    "sentences_with_a_question": 0.4523809523809524
+    "offers_per_sentence": 0.24603174603174602,
+    "sentences_with_a_question": 0.4444444444444444
    }
   },
   "linear run time": {
@@ -136,10 +136,10 @@
    },
    "sentences": {
     "sentences": 126,
-    "questions_per_sentence": 0.49206349206349204,
+    "questions_per_sentence": 0.48412698412698413,
     "clarifying_per_sentence": 0.2857142857142857,
-    "offers_per_sentence": 0.20634920634920634,
-    "sentences_with_a_question": 0.42857142857142855
+    "offers_per_sentence": 0.1984126984126984,
+    "sentences_with_a_question": 0.42063492063492064
    }
   }
  }

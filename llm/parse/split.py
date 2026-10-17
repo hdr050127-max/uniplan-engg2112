@@ -55,7 +55,8 @@ _REQUEST = re.compile(r"不|没|别|想|要求|希望|最好|尽量|只|最多|�
                       r"need|would|like|hate|love|please|pls|keep|max|most|less|few|fewer|more|possible|least|must|"
                       r"have to|free|clear|busy|"
                       r"fine|ok|okay|good|bad|bother\w*|mind|suit\w*|better|best|too|early|late|mornings?|evenings?|"
-                      r"nights?|arvo|afternoons?|gaps?|wait\w*|breaks?|lunch|online|person|zoom|class(?:es)?|"
+                      r"nights?|arvo|afternoons?|gaps?|wait\w*|breaks?|lunch|eat|eating|meals?|food|online|person|"
+                      r"zoom|class(?:es)?|"
                       r"lectures?|tut\w*|labs?|out)\b|n't\b|(?<!my )(?<!the )\bonly\b", re.IGNORECASE)
 _HEDGE_ONLY = re.compile(r"(?:如果可以的话|如果可以|如果可能的话|如果可能|可以的话|能的话|最好是?|尽量|if possible|if i can|"
                          r"if you can|ideally|preferably|where possible|when possible)[\s!！。.?？]*", re.IGNORECASE)

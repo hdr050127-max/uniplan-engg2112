@@ -59,6 +59,12 @@ class SplitTests(unittest.TestCase):
             self.assertEqual(split_clauses(text), [text])
         self.assertEqual(split_clauses("I work Fridays, I hate gaps"), ["I work Fridays", "I hate gaps"])
 
+    def test_a_meal_request_is_not_glued_on_as_a_reason(self):
+        self.assertEqual(split_clauses("Mondays are out, and give me half an hour for food"),
+                         ["Mondays are out", "give me half an hour for food"])
+        self.assertEqual(split_clauses("no classes after 5, leave me some time to eat"),
+                         ["no classes after 5", "leave me some time to eat"])
+
     def test_full_stop_after_a_number_ends_the_sentence(self):
         self.assertEqual(split_clauses("no 8ams, and ideally I'm done by 4. Fridays off please"),
                          ["no 8ams", "ideally I'm done by 4", "Fridays off please"])

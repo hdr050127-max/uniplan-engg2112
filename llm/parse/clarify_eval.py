@@ -114,7 +114,9 @@ def markdown(results: dict) -> str:
              f"每句最多 {clarify.MAX_QUESTIONS} 个问题，其中推荐最多 {clarify.MAX_OFFERS} 个。",
              "- 运行时是模型：标签来自 uniplan-parse-7b-r2，第二意见是第 1 轮的线性模型（验证集上用只在训练集上拟合的那份）。",
              "- 运行时是线性模型（离线后备）：标签和概率差都来自第 1 轮的线性模型。",
-             "- 短句指标用标注者切好的短句；整句指标跑完整条流程（含每句最多 3 个的上限，推荐也算问题）。", ""]
+             "- 短句指标用标注者切好的短句；整句指标跑完整条流程（含每句最多 3 个的上限，推荐也算问题）。",
+             "- **样本内**：反问的规则提示和触发条件是看过验证集、v1、v2 的错例之后定的，阈值在验证集上选，"
+             "所以这三份上的数字都是样本内的，偏乐观。样本外的数字只有期末考卷（`llm/parse/exam/`，由总控运行）。", ""]
     for mode in ("model run time", "linear run time"):
         title = "运行时是 uniplan-parse-7b-r2" if mode == "model run time" else "运行时是线性模型（离线）"
         lines += [f"## {title}", "",

@@ -7,7 +7,8 @@ Two ways, both on the 20 test personas only:
 The answers are scored against the teacher labels by llm/rank/train.py (--direct). Run it
 after llm.rank.label run, wrapped in the GPU lock:
 
-    python3 -m llm.gpu_lock -- python3 -m llm.rank.direct --model qwen2.5:7b
+    python3 -m llm.gpu_lock -- python3 -m llm.rank.direct --model qwen2.5:7b --labels <labels.jsonl>
+    python3 -m llm.gpu_lock -- python3 -m llm.rank.direct --model qwen2.5:14b --kinds listwise --labels ...
 """
 from __future__ import annotations
 
@@ -54,6 +55,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("--model", default="qwen2.5:7b")
     parser.add_argument("--labels", required=True, help="the teacher labels (labels_v3_*.jsonl)")
+    parser.add_argument("--kinds", nargs="+", choices=("listwise", "pairwise"), default=["listwise", "pairwise"])
     args = parser.parse_args()
     personas = {p["id"]: p for p in load()}
     sets = json.loads((OUT / "candidate_sets.json").read_text(encoding="utf-8"))["sets"]
@@ -68,7 +70,7 @@ def main() -> int:
         for pid in sorted({row["persona"] for row in teacher}):
             persona, candidates = personas[pid], sets[pid]
             by_id = {c["candidate_id"]: c for c in candidates}
-            if ("listwise", pid, None, None) not in done:
+            if "listwise" in args.kinds and ("listwise", pid, None, None) not in done:
                 ids = [c["candidate_id"] for c in candidates]
                 picked, seconds = listwise(args.model, persona, candidates)
                 rows = [r for r in teacher if r["persona"] == pid]
@@ -80,7 +82,7 @@ def main() -> int:
                                          "best_in_top3": sum(i in picked for i in winners) / len(winners),
                                          "seconds": round(seconds, 2), "synthetic": True}, ensure_ascii=False) + "\n")
                 handle.flush()
-            for row in teacher:
+            for row in teacher if "pairwise" in args.kinds else ():
                 if row["persona"] != pid or row["label"] not in ("A", "B") or \
                         ("pairwise", pid, row["a_id"], row["b_id"]) in done:
                     continue

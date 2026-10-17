@@ -1,8 +1,11 @@
 """The labelling rules: program ties, dominance, swapped answers and the shown table."""
+import json
+import tempfile
 import unittest
+from pathlib import Path
 from unittest import mock
 
-from llm.rank import label
+from llm.rank import check, label
 from llm.rank.features import NAMES
 
 
@@ -55,6 +58,40 @@ class LabelRuleTests(unittest.TestCase):
         text = label.question(persona, candidate("a", outside_h=1.5), candidate("b"))
         self.assertIn("早晚课：09:30 前或 16:00 后（分钟/周） | 90 | 0 |", text)
         self.assertIn("学生情况：我住得远", text)
+
+
+class CheckTests(unittest.TestCase):
+    def test_answers_map_back_and_corrections_replace_qwen(self):
+        with tempfile.TemporaryDirectory() as folder:
+            folder = Path(folder)
+            key = {"t1": {"purpose": "test_check", "persona": "p", "a_id": "x", "b_id": "y", "red": "B",
+                          "near_equal_focus": False},
+                   "a1": {"purpose": "teacher_audit", "persona": "p", "a_id": "x", "b_id": "z", "red": "A",
+                          "near_equal_focus": False},
+                   "a2": {"purpose": "teacher_audit", "persona": "p", "a_id": "y", "b_id": "z", "red": "A",
+                          "near_equal_focus": False}}
+            (folder / "key.json").write_text(json.dumps(key))
+            (folder / "answers.jsonl").write_text("\n".join(json.dumps(row, ensure_ascii=False) for row in (
+                {"pair_id": "t1", "choice": "红"}, {"pair_id": "a1", "choice": "蓝"},
+                {"pair_id": "a2", "choice": "差不多"})))
+            labels = folder / "labels.jsonl"
+            labels.write_text("\n".join(json.dumps(row) for row in (
+                {"persona": "p", "a_id": "x", "b_id": "z", "label": "A"},
+                {"persona": "p", "a_id": "y", "b_id": "z", "label": "B"},
+                {"persona": "p", "a_id": "x", "b_id": "y", "label": "B"})))
+            with mock.patch.object(check, "KEY", folder / "key.json"), \
+                    mock.patch.object(check, "ANSWERS", folder / "answers.jsonl"), \
+                    mock.patch.object(check, "ROOT", folder):
+                self.assertEqual(check.claude_answers(), {"t1": "B", "a1": "B", "a2": "tie"})
+                out = check.corrected(labels)
+            rows = [json.loads(line) for line in out.read_text().splitlines()]
+        self.assertEqual([row["label"] for row in rows], ["B", "tie", "B"])
+        self.assertEqual(rows[0]["qwen_label"], "A")
+        self.assertNotIn("corrected_by", rows[2])        # not audited: unchanged
+
+    def test_agreement_leaves_ties_out(self):
+        self.assertEqual(check.agreement([("A", "A"), ("A", "B"), ("tie", "A"), ("B", "B")]),
+                         {"agree": 2, "compared": 3, "rate": 0.667, "left_out_ties": 1})
 
 
 if __name__ == "__main__":

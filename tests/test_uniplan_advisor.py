@@ -38,45 +38,6 @@ def default_groups(catalog, profile):
             for unit in data["units"]}
 
 
-def hard_violations(meetings, profile):
-    """Independent re-check of every hard condition on the dated meetings of one timetable."""
-    problems = []
-    by_date = {}
-    for meeting in meetings:
-        by_date.setdefault(meeting["date"], []).append(meeting)
-    for day, daily in by_date.items():
-        daily = sorted(daily, key=lambda m: m["start_min"])
-        for a, b in zip(daily, daily[1:]):
-            if b["start_min"] < a["end_min"]:
-                problems.append(f"overlap on {day}: {a['unit_code']} / {b['unit_code']}")
-        ordinary = [m for m in daily if not m["is_fixed_assessment"]]
-        for m in ordinary:
-            for w in profile["unavailable_windows"]:
-                if w["weekday"] == m["weekday"] and m["start_min"] < w["end_min"] and w["start_min"] < m["end_min"]:
-                    problems.append(f"class in avoided time on {day}")
-        if profile.get("max_daily_minutes") and sum(m["end_min"] - m["start_min"] for m in ordinary) > profile["max_daily_minutes"]:
-            problems.append(f"too many class minutes on {day}")
-        lunch = profile.get("lunch")
-        if lunch and ordinary:
-            free, cursor = False, lunch["start_min"]
-            for m in sorted(ordinary, key=lambda m: m["start_min"]):
-                if m["end_min"] <= cursor or m["start_min"] >= lunch["end_min"]:
-                    continue
-                free = free or m["start_min"] - cursor >= lunch["minutes"]
-                cursor = max(cursor, m["end_min"])
-            if not (free or lunch["end_min"] - cursor >= lunch["minutes"]):
-                problems.append(f"no lunch break on {day}")
-    if profile.get("max_days_per_week"):
-        weeks = {}
-        for m in meetings:
-            if not m["is_fixed_assessment"] and not m["is_online"]:
-                day = date.fromisoformat(m["date"])
-                weeks.setdefault(day - timedelta(days=day.weekday()), set()).add(day)
-        if any(len(days) > profile["max_days_per_week"] for days in weeks.values()):
-            problems.append("too many campus days in a week")
-    return problems
-
-
 class CandidateTests(unittest.TestCase):
     def test_small_front_is_topped_up_to_ten_without_near_copies(self):
         pool = [entry("best", 0, 2, 0)] + [entry(f"e{i:02d}", 60 * i, 2 + 0.3 * (i % 3), 40 * (i % 4))
@@ -147,9 +108,9 @@ class EndToEndTests(unittest.TestCase):
             self.assertEqual(len(menu["reasons"]), len(menu["picks"]))
             for cid in menu["picks"]:
                 self.assertIn(cid, menu["candidates"])
-                self.assertEqual(hard_violations(items[cid]["meetings"], result["profile"]), [], (axes, cid))
+                self.assertEqual(advisor.hard_violations(items[cid]["meetings"], result["profile"]), [], (axes, cid))
                 for variant in items[cid]["variants"]:
-                    self.assertEqual(hard_violations(items[variant["candidate_id"]]["meetings"], result["profile"]), [])
+                    self.assertEqual(advisor.hard_violations(items[variant["candidate_id"]]["meetings"], result["profile"]), [])
         return recommendation, items
 
     def test_sentence_to_three_valid_timetables(self):
@@ -243,6 +204,31 @@ class FactCheckTests(unittest.TestCase):
         self.assertEqual(result["rejected"][1]["why"], "direction")
         with mock.patch.object(explainer, "choose_model", return_value=None):
             self.assertEqual(explainer.explain_detailed("", {}, self.picks)["status"], "unavailable")
+
+
+class RegistryTests(unittest.TestCase):
+    def test_simultaneous_requests_for_one_menu_ask_the_model_once(self):
+        registry = advisor.ExplainRegistry()
+        token = registry.add("", base_profile() | {"preferred_hours": {"start_min": 540, "end_min": 1080}},
+                             {"menus": {"gap": {"picks": ["a"]}}}, {"a": {"candidate_id": "a"}})
+        calls = []
+
+        def slow(*args):
+            calls.append(args)
+            threading.Event().wait(0.2)  # long enough for the other requests to arrive
+            return {"reasons": ["x"], "status": "model"}
+
+        with mock.patch.object(advisor, "explain_detailed", side_effect=slow):
+            results = []
+            workers = [threading.Thread(target=lambda: results.append(registry.explain(token, "gap"))) for _ in range(3)]
+            for worker in workers:
+                worker.start()
+            for worker in workers:
+                worker.join()
+        self.assertEqual(len(calls), 1)
+        self.assertEqual(results, [{"reasons": ["x"], "status": "model"}] * 3)
+        self.assertIsNone(registry.explain(token, "campus_days"))
+        self.assertIsNone(registry.explain("missing", "gap"))
 
 
 class ServerTests(unittest.TestCase):

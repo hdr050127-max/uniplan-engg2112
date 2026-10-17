@@ -18,7 +18,7 @@ from .ranking import (AXIS_SETS, axes_name, common_teaching_weeks, dated_meeting
                       rank_pool, scaled_features, weekday_pattern)
 from .schedule import (WEEKDAY_NAMES, Candidate, ClassOption, FastSearch, ScheduleDataError,
                        SearchLimitError, SearchStats, extract_class_options, find_conflict_core,
-                       linked_option_id, option_fits_with)
+                       lifestyle_allows, linked_option_id, option_fits_with)
 
 
 def validate_group_selection(
@@ -45,6 +45,15 @@ def validate_group_selection(
 MAX_BACKUPS = 4
 
 
+def swap_fits(alternative: ClassOption, others: tuple, profile: dict[str, Any]) -> bool:
+    """Whether a one-class swap passes everything the search checked.
+
+    That is clashes, avoided times and transfers, plus the daily and weekly limits of
+    the whole new timetable (a tie on G, D and O can still keep a student on campus longer).
+    """
+    return option_fits_with(alternative, others, profile) and lifestyle_allows(others + alternative.meetings, profile)
+
+
 def _seats(option: ClassOption) -> str:
     seats = {meeting.available_seats for meeting in option.meetings}
     return next(iter(seats)) if len(seats) == 1 else ""
@@ -69,8 +78,7 @@ def class_backups(
                        if position != index for meeting in other.meetings)
         backups = []
         for alternative in eligible.get(option.group_id, ()):
-            if (alternative.option_id == option.option_id or
-                    not option_fits_with(alternative, others, profile)):
+            if alternative.option_id == option.option_id or not swap_fits(alternative, others, profile):
                 continue
             features = extract_schedule_features(Candidate("", (), others + alternative.meetings),
                                                  profile, weeks)
@@ -116,8 +124,7 @@ def prefer_open_seats(option_ids: list[str], features: dict[str, float],
                        if position != index for meeting in other.meetings)
         best = option
         for alternative in eligible.get(option.group_id, ()):
-            if (_seat_count(alternative) <= _seat_count(best) or
-                    not option_fits_with(alternative, others, profile)):
+            if _seat_count(alternative) <= _seat_count(best) or not swap_fits(alternative, others, profile):
                 continue
             swapped = Candidate("", (), others + alternative.meetings)
             if (feature_key(extract_schedule_features(swapped, profile, weeks)) == key and

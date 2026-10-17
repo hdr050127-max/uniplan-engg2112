@@ -41,3 +41,19 @@ vs. hours on campus, wanting online or wanting gaps, and distracting numbers. It
 conventions. Every sentence was checked against `test_claude.csv`; the three closest (similarity
 of 0.7 or more) were rewritten. The highest that remains is 0.71, between sentences that ask for
 different things.
+
+## Decision rule for round 2 (written 2026-10-17 19:58, before the round-2 7B QLoRA was scored)
+
+At this point, round 1 had been scored on v2 and the coordinator had read the round-1 7B errors
+there, for diagnosis only. The round-2 7B (`uniplan-parse-7b-r2`) replaces round 1 as the
+run-time parser only if all three hold:
+1. On v2, it is at least as good as round 1 on clause accuracy and on sentences with every
+   condition right.
+2. No label that round 2 did not target (lunch, max_days, max_daily_hours, in_person_only,
+   prefer_fewer_days, prefer_less_waiting, other) gets clearly worse on v2, meaning a drop of
+   more than one clause. Gains on the targeted labels (blocked_time, prefer_no_early_late) must
+   not come from calling hedged clock times blocked.
+3. On the validation set, its best epoch is at least as good as round 1's.
+
+Otherwise round 1 stays. v2 will not be used to design a round 3; a round 3 would need a new
+test set (v3) written before it.

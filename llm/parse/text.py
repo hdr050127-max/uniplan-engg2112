@@ -100,10 +100,10 @@ _NOT_UNIT = r"(?!\s*(?:天|个|小时|钟头|分钟|次|节|门|周|%|days?\b|ho
 CLOCK = (r"(?:" + _MARK + r"\s*)?\d{1,2}(?:\s*[:.]\s*\d{2}|\s*点\s*(?:\d{1,2}\s*分?|半|一刻|三刻)?)?"
          r"(?:\s*(?:am|pm|o'?clock))?" + _NOT_UNIT)
 _STRONG = re.compile(r"[:点]|am|pm|o'?clock")     # what makes a lone number a time
-_NOON = r"(?:中午|noon|midday|midnight|lunchtime)"
+_NOON = r"(?:中午|\bnoon\b|\bmidday\b|\bmidnight\b|\blunchtime\b)"     # \b: "afternoon" is not "after noon"
 _T = r"(" + CLOCK + r"|" + _NOON + r")"
-_BEFORE_WORD = r"(?:before|until|till|by|earlier than|no later than|早于|不晚于)"
-_AFTER_WORD = r"(?:after|from|later than|past|no earlier than|晚于|不早于)"
+_BEFORE_WORD = r"(?:\bbefore|\buntil|\btill|\bby|\bearlier than|\bno later than|早于|不晚于)"
+_AFTER_WORD = r"(?:\bafter|\bfrom|\blater than|\bpast|\bno earlier than|晚于|不早于)"
 _TIME_PATTERNS = (
     ("range", re.compile(r"between\s*" + _T + r"\s*and\s*" + _T)),
     ("range", re.compile(_T + r"\s*(?:和|与|到|至)\s*" + _T + r"\s*之间")),
@@ -113,13 +113,16 @@ _TIME_PATTERNS = (
     ("after", re.compile(_AFTER_WORD + r"\s*" + _T)),
     ("after", re.compile(_T + r"\s*(?:之后|以后|后|起|开始|onwards|or later)")),
     ("point", re.compile(r"(?:at\s*)?(" + CLOCK + r")")),
+    ("point", re.compile(r"\bat\s+(\d{1,2}(?::\d{2})?)\b" + _NOT_UNIT)),                 # "start work at 2"
+    ("point", re.compile(r"(?:earliest|latest)[^.,;]*?\bis\s+(\d{1,2}(?::\d{2})?)\b" + _NOT_UNIT)),
 )
+_LOOSE = re.compile(r"\bat\s+\d|(?:earliest|latest)")    # point patterns where a bare number is a time
 PARTS = (   # part-of-day words with no clock time: (pattern, window)
     (re.compile(r"全天|一整天|整天|all day|whole day|full day"), (0, 1440)),
     (re.compile(r"早上|早晨|清晨|一早|早课|早八|mornings?\b|early\b"), (0, 600)),
     (re.compile(r"上午|before noon"), (0, 720)),
-    (re.compile(r"中午|noon|midday|lunchtime"), (720, 840)),
-    (re.compile(r"下午|afternoons?\b"), (720, 1080)),
+    (re.compile(r"中午|\bnoon\b|\bmidday\b|\blunchtime\b"), (720, 840)),
+    (re.compile(r"下午|afternoons?\b|\barvos?\b"), (720, 1080)),
     (re.compile(r"傍晚"), (1020, 1200)),
     (re.compile(r"晚上|夜里|夜间|晚课|evenings?\b|nights?\b|tonight|late\b"), (1080, 1440)),
 )
@@ -175,10 +178,10 @@ def find_times(text: str) -> list[tuple[int, int, str, int, int]]:
             if any(match.start() < end and start < match.end() for start, end in taken):
                 continue
             tokens = [group for group in match.groups() if group]
-            if kind == "point" and not _STRONG.search(tokens[0]):
+            if kind == "point" and not (_STRONG.search(tokens[0]) or _LOOSE.match(match.group())):
                 continue
-            if kind == "range" and not (any(_STRONG.search(t) or re.search(_NOON, t) for t in tokens)
-                                        or re.search(r"between|之间|从|from|上班|打工|work|shift", text)):
+            if kind == "range" and not all(_STRONG.search(t) or re.search(_NOON, t) or int(re.search(r"\d+", t).group()) <= 24
+                                           for t in tokens if re.search(r"\d", t)):
                 continue
             if kind in ("before", "after") and not (_STRONG.search(tokens[0]) or re.search(_NOON, tokens[0])
                                                      or re.search(r"[a-z]|于", match.group())):

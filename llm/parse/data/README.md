@@ -30,14 +30,14 @@
 
 | 类别 | 意思 | 例子 |
 | --- | --- | --- |
-| `blocked_time` | 说出了星期几、钟点，或者某段时间有事（打工、接送孩子、训练、宗教、通勤） | 周五要打工；十点前没法上课；我不想周一上课 |
+| `blocked_time` | 说出了星期几、钟点，或者某段时间有事（打工、接送孩子、训练、宗教、通勤），或者要求空出某个时段 | 周五要打工；十点前没法上课；我不想周一上课；晚上别排课 |
 | `max_days` | 说了每周到校的**天数** | 一周最多来三天 |
 | `max_daily_hours` | 说了每天的**小时数** | 每天上课别超过五小时 |
 | `lunch` | 要留时间吃午饭 | 中午要留时间吃饭 |
 | `in_person_only` | 只要线下课，不要网课 | 不要网课 |
 | `prefer_fewer_days` | 想少去几天、课排集中，但没说数字也没说哪天 | 课尽量集中 |
 | `prefer_less_waiting` | 不想课之间等太久 | 不想课之间空太久 |
-| `prefer_no_early_late` | 笼统地不喜欢早课或晚课；或者用"最好／尽量／prefer"说了个钟点 | 早上起不来；最好十点以后再上课 |
+| `prefer_no_early_late` | 只说感受，或者用含糊的词说不喜欢早课晚课；或者用"最好／尽量／prefer"说了个钟点 | 早上起不来；早课太早了；最好十点以后再上课 |
 | `other` | 排课程序管不了的，或者没提要求 | 想和室友一个 tutorial；都可以 |
 
 ## 拿不准时按这个顺序判断（先对上哪条就用哪条）
@@ -45,9 +45,9 @@
 1. 说吃饭 → `lunch`，就算带了时间（"12 点到 1 点要吃饭"）。
 2. 不要网课 → `in_person_only`；想要网课 → `other`。
 3. 说了天数 → `max_days`；说了每天小时数 → `max_daily_hours`。带"最好"也一样。
-4. 说了星期几、钟点，或"某段时间有事" → `blocked_time`，**语气软硬不影响**（"不想周一上课"也算）。
+4. 说了星期几、钟点、"某段时间有事"，或者对下表里的时段词提了要求（不能、别排、空出来、no … classes、keep … free、不想／不选 + 时段）→ `blocked_time`，**语气软硬不影响**（"不想周一上课""不想晚上上课"都算）。
 5. 例外：用"最好、尽量、如果可以、希望、prefer、ideally、if possible、rather"说了一个钟点，而且没说星期几、没说有什么事 → `prefer_no_early_late`，把时段写进 `prefer_hours`。
-6. 只说早上起不来、不是早起的人，没有钟点 → `prefer_no_early_late`，`prefer_hours` 留空。
+6. 只说感受或能力、没提要求（早上起不来、不喜欢晚上上课、I hate mornings、not a morning person），或者用的是含糊的词（太早、早课、too early、early starts、late classes、nothing late），或者带修饰的时段（early morning、late afternoon、late night）→ `prefer_no_early_late`，`prefer_hours` 留空。
 7. 想少去几天、课集中，没数字没星期 → `prefer_fewer_days`。
 8. 课之间的空档、等待、想连着上 → `prefer_less_waiting`。
 9. 其他 → `other`。
@@ -61,6 +61,13 @@
 - 只说某天有空、没提要求（"周一可以""tuesday anytime is good"）算 `other`。
 - 考试、作业、上课地点、老师、和朋友同班，都算 `other`。
 - 自己的乐队排练、志愿服务、讲座等有具体时间的事，算 `blocked_time`。
+
+### 时段词的口径（2026-10-17 第 2 轮，两份测试集都按这个标）
+
+- "时段词"指下面默认值表里有默认时段的词：morning(s)、afternoon(s)、arvo、evening(s)、night(s)、早上、上午、中午、下午、晚上。
+- 时段词 + 要求（不能、要空出来、别排课、no … classes、keep … free、不想／不选 + 时段）→ `blocked_time`。第 5 条的软化例外只管钟点、不管时段词，所以 "keep mornings free if u can" 也是 `blocked_time`。
+- 只有感受、含糊的程度词、带修饰的时段 → `prefer_no_early_late`（见第 6 条）。
+- 第 1 轮训练数据里和这条冲突的标签已改正，改动清单在 `llm/parse/output/round2_relabels.jsonl`。
 
 ## 怎么切短句
 
@@ -84,7 +91,7 @@
 | 早上／morning | `0:00-10:00` |
 | 上午 | `0:00-12:00` |
 | 中午 | `12:00-14:00` |
-| 下午／afternoon | `12:00-18:00` |
+| 下午／afternoon／arvo | `12:00-18:00` |
 | 晚上／evening／night | `18:00-24:00` |
 | X 点前不行 | `0:00-X` |
 | X 点后不行／X 点后有事 | `X-24:00` |

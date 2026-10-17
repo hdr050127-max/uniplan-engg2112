@@ -95,6 +95,35 @@ class NumberTests(unittest.TestCase):
                          "Mon,Wed,Fri all; Tue,Thu 0:00-18:00")
         self.assertEqual(block("blocked_time", "周三下午不行，其他时间都没问题"), "Wed 12:00-18:00")
 
+    def test_round_two_reading_fixes(self):
+        self.assertEqual(block("blocked_time", "please keep my afternoons clear"), "Mon-Fri 12:00-18:00")
+        self.assertEqual(block("blocked_time", "no arvo classes"), "Mon-Fri 12:00-18:00")
+        self.assertEqual(block("blocked_time", "keep everything before 11 free"), "Mon-Fri 0:00-11:00")
+        self.assertEqual(block("blocked_time", "I'd rather keep nights free"), "Mon-Fri 18:00-24:00")
+        self.assertEqual(block("blocked_time", "classes have to be over by 2:30"), "Mon-Fri 14:30-24:00")
+        self.assertEqual(block("blocked_time", "the earliest I can get there is 10"), "Mon-Fri 0:00-10:00")
+        self.assertEqual(block("blocked_time", "my shift ends at 10am every day"), "Mon-Fri 0:00-10:00")
+        self.assertEqual(block("blocked_time", "no evening classes after 6:30"), "Mon-Fri 18:30-24:00")
+        self.assertEqual(block("blocked_time", "I tutor 4-7 on Tuesdays"), "Tue 16:00-19:00")
+        self.assertEqual(block("blocked_time", "I start work at 2 on Fridays"), "Fri 14:00-24:00")
+        self.assertEqual(block("blocked_time", "Wednesday and Thursday only"), "Mon,Tue,Fri all")
+        self.assertEqual(block("blocked_time", "put all my classes on Tuesday and Wednesday"), "Mon,Thu,Fri all")
+        self.assertEqual(block("blocked_time", "课都排在周三周四吧"), "Mon,Tue,Fri all")
+        self.assertEqual(block("blocked_time", "pls avoid wed, it's my only day with my kids"), "Wed all")
+        self.assertEqual(fields("prefer_no_early_late", "I'm way more awake in the afternoon"),
+                         {"cares": ["outside_hours"]})
+
+    def test_day_counts_in_words_and_add_ons(self):
+        for text, days in (("as few days as possible, maybe 2", 2), ("a 2-day week would be amazing", 2),
+                           ("I'd love to only come in twice a week", 2),
+                           ("only one day would be a dream but realistically two", 2),
+                           ("I work 4 days so I can only do uni on the other 1", 1)):
+            self.assertEqual(fields("max_days", text), {"max_days_per_week": days}, text)
+        self.assertEqual(fields("max_daily_hours", "I'd like to leave campus within 6 hours of arriving"),
+                         {"max_daily_span": 360})
+        self.assertEqual(fields("lunch", "I'd like lunch at 12 for 45 minutes")["lunch"],
+                         {"start_min": 720, "end_min": 765, "minutes": 45})
+
     def test_counts_hours_lunch_and_soft_hours(self):
         self.assertEqual(fields("max_days", "一周最多来三天"), {"max_days_per_week": 3})
         self.assertEqual(fields("max_days", "at most four days a week"), {"max_days_per_week": 4})

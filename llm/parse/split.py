@@ -19,7 +19,7 @@ import re
 from llm.parse.text import find_days, find_parts, find_times, normalize
 
 _CUT = re.compile(
-    r"[，。；;！!？?\n]+|(?<!\d),(?!\d)|(?<![\d.])\.(?![\d.])|\s+-\s+"
+    r"[，。；;！!？?\n]+|,(?!\d{3}\b)|(?<![\d.])\.(?![\d.])|\s+-\s+"
     r"|而且|并且|但是|不过|可是|另外|此外|再加上|再就是"
     r"|\b(?:but|plus|however|although|though|as well as)\b|\s+and\s+",
     re.IGNORECASE,
@@ -103,7 +103,8 @@ def _joins_back(piece: str) -> bool:
 
 
 def _joins_forward(piece: str) -> bool:
-    return bool(_FORWARD.match(piece) or len(piece) <= 1 or re.fullmatch(r"[A-Za-z'-]+", piece) or _reason(piece))
+    return bool(_FORWARD.match(piece) or len(piece) <= 1 or re.fullmatch(r"[A-Za-z'-]+", piece) or _reason(piece)
+                or _HEDGE_ONLY.fullmatch(piece))
 
 
 def _spans(text: str) -> list[tuple[int, int]]:

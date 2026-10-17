@@ -17,7 +17,10 @@ with its hand-written conditions, and with what parse() reads from the sentence.
     python3 scripts/evaluate_pipeline.py --test-file llm/parse/data/test_claude_v2.csv
     python3 scripts/evaluate_pipeline.py --compare output/pipeline/A.json output/pipeline/B.json
 
-Runs on this Mac only: llm/ollama.py is pointed at 127.0.0.1 unless --configured-server is given.
+llm/ollama.py is pointed at this Mac unless --configured-server is given; a parse runtime served by
+Ollama needs the server that has its model, and the run should be wrapped in the GPU lock:
+    python3 -m llm.gpu_lock -- python3 scripts/evaluate_pipeline.py --configured-server --test-file …
+Each sentence records whether parse() had fallen back to its offline classifier.
 Writes output/pipeline/pipeline_eval_<classifier>_<ranker>_<test set>.json and .md.
 """
 
@@ -46,7 +49,6 @@ import llm.parse as parsing  # noqa: E402
 from evaluate_explain import TEST_SET, UNIT_SETS, base_profile, conditions_from, sentences, tracked_catalog  # noqa: E402
 from llm import ollama  # noqa: E402
 from llm.contracts import to_profile_fields  # noqa: E402
-from llm.gpu_lock import gpu_lock  # noqa: E402
 from llm.parse import linear  # noqa: E402
 from llm.rank import model as rank_model  # noqa: E402
 from uniplan.advisor import hard_violations, merge_conditions  # noqa: E402
@@ -103,6 +105,8 @@ def run_one(index: int, sentence_id: str, text: str, rows: list[dict], catalog, 
     started = time.monotonic()
     parsed_result = parsing.parse(text, classify)
     parse_seconds = time.monotonic() - started
+    # A model runtime that timed out parses with the fallback classifier for a while.
+    fell_back = classify is None and getattr(parsing, "_down_since", None) is not None
     # What the page applies: fields the form would accept, plus the cares in the sentence's order.
     fields, problems = check_condition_fields(to_profile_fields(parsed_result["conditions"]))
     parsed = {**fields, "cares": list(parsed_result["conditions"].get("cares") or [])}
@@ -117,6 +121,7 @@ def run_one(index: int, sentence_id: str, text: str, rows: list[dict], catalog, 
         "gold_labels": [row["label"] for row in rows],
         "gold": want, "parsed": got, "dropped_by_form_rules": len(problems),
         "exact": want == got, "fields_wrong": [key for key in FIELDS if want[key] != got[key]],
+        "parser_fell_back": fell_back,
         "parse_seconds": round(parse_seconds, 4), "total_seconds": round(total_seconds, 3),
         "status_parsed": from_parse["status"], "status_gold": from_gold["status"],
     }
@@ -153,6 +158,7 @@ def stats(records: list[dict]) -> dict:
         "feasibility": Counter((record["status_gold"] == "ready", record["status_parsed"] == "ready")
                                for record in records),
         "wrong_fields": Counter(field for record in records for field in record["fields_wrong"]),
+        "fell_back": sum(bool(record.get("parser_fell_back")) for record in records),
     }
 
 
@@ -178,6 +184,7 @@ def summary(records: list[dict], classifier: str, ranker: str, test_set: str) ->
         f"| — picks that break one | {rate(sum(bool(pick) for pick in picks), len(picks))} |",
         f"| 3. Same first pick (both plannable) | {rate(same_first, len(both))}; same set of picks {rate(same_set, len(both))} |",
         f"| 4. Seconds from sentence to recommendation (median, max) | {seconds[0]:.2f}, {seconds[1]:.2f} |",
+        f"| Sentences parsed while the model runtime had fallen back | {numbers['fell_back']} |",
         f"| — of which parse() (median, max) | {statistics.median(parse_seconds):.3f}, {max(parse_seconds):.3f} |",
         "", "Fields that differ (sentences): " + (", ".join(f"{field} {count}" for field, count in wrong_fields.most_common()) or "none"),
         "", "\"Breaks a hard condition\" is checked by `uniplan.advisor.hard_violations` (clashes, avoided times, "
@@ -250,6 +257,7 @@ def main_cli(argv: list[str] | None = None) -> int:
         classifier, name = f"linear model from {args.linear_from} ({commit})", "linear"
     elif parsing.RUNTIME.startswith("ollama"):
         classifier = f"{parsing.RUNTIME} via {ollama.base_url()} (linear model, then keywords, if it fails)"
+        name = parsing.RUNTIME.split(":", 1)[1]
     else:
         try:
             linear.load()
@@ -269,9 +277,7 @@ def main_cli(argv: list[str] | None = None) -> int:
     name += f"_{test_file.stem}"
     chosen = sentences(test_file)[:args.limit or None]
     records = []
-    lock = gpu_lock("scripts/evaluate_pipeline.py", "mac") if parsing.RUNTIME.startswith("ollama") and not args.linear_from \
-        else nullcontext()
-    with tempfile.TemporaryDirectory() as temp, lock, rule_only:
+    with tempfile.TemporaryDirectory() as temp, rule_only:
         catalog = tracked_catalog(Path(temp))
         groups = {}
         for units in UNIT_SETS:

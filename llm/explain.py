@@ -18,7 +18,9 @@ from datetime import date, timedelta
 from threading import Lock
 
 from llm import ollama
-from llm.contracts import Candidate, Conditions
+from llm.contracts import Candidate, Conditions, preferences_of
+from llm.rank import contributions
+from llm.rank.features import candidate_features
 from llm.gpu_lock import LOCKS, target_of_ollama
 
 DAY = "一二三四五六日"
@@ -70,21 +72,113 @@ SMALL = {"gap_min": 60.0, "campus_days": 2.2, "outside_min": 30.0}
 LARGE = {"gap_min": 300.0, "campus_days": 4.0, "outside_min": 120.0}
 
 
-def _versus_first(pick: Candidate, first: Candidate) -> tuple[list[str], list[str]]:
-    """What this pick does better and worse than the top pick, in plain words."""
-    better, worse = [], []
-    for care, key in FEATURE.items():
-        diff = pick["features"][key] - first["features"][key]
-        if abs(diff) <= TIES[key] * (2 if key == "campus_days" else 15):
-            continue
-        size = f"{abs(diff):.1f} 天" if key == "campus_days" else _amount(abs(diff))
-        words = {"campus_days": ("少到校", "多到校"), "gap_min": ("每周少等", "每周多等"),
-                 "outside_min": ("早晚课少", "早晚课多")}[key]
-        (better if diff < 0 else worse).append(f"{words[diff > 0]} {size}")
-    return better, worse
+NOTICED = 0.05  # contribution differences smaller than this do not count as a reason
 
 
-def facts_of(index: int, picks: list[Candidate], conditions: Conditions) -> dict:
+def _difference(name: str, pick: Candidate, rival: Candidate, x: dict, y: dict, rival_no: int,
+                hours: str) -> str | None:
+    """How ``pick`` differs from pick ``rival_no`` on one ranking feature, or None if a student
+    would not notice. The three page figures come from the pick's own features (as on its card);
+    the rest from llm.rank.features, the numbers the ranking model used."""
+    def more_or_less(diff: float) -> str:
+        return "多" if diff > 0 else "少"
+
+    if name in ("campus_days", "gap_h", "outside_h"):
+        key = {"campus_days": "campus_days", "gap_h": "gap_min", "outside_h": "outside_min"}[name]
+        diff = pick["features"][key] - rival["features"][key]
+        if name == "campus_days":
+            return None if abs(diff) < 0.1 else f"每周{more_or_less(diff)}到校 {abs(diff):.1f} 天"
+        if abs(diff) < 15:
+            return None
+        return (f"每周{more_or_less(diff)}等 {_amount(abs(diff))}" if name == "gap_h"
+                else f"{hours} 以外的课每周{more_or_less(diff)} {_amount(abs(diff))}")
+    if name not in x or name not in y:
+        return None
+    diff = x[name] - y[name]
+    if name in ("early_h", "late_h"):
+        minutes = abs(diff) * 60
+        return None if minutes < 15 else f"{'早课' if name == 'early_h' else '晚课'}每周{more_or_less(diff)} {_amount(minutes)}"
+    if name in ("earliest_start", "latest_end"):
+        if abs(diff) < 0.25:
+            return None
+        word, verb = ("最早", "上课") if name == "earliest_start" else ("最晚", "下课")
+        return f"平时{word} {_clock(round(x[name] * 60))} {verb}（第 {rival_no} 份 {_clock(round(y[name] * 60))}）"
+    if name in ("longest_day_h", "heaviest_day_h"):
+        what = "在校最久的那天平均" if name == "longest_day_h" else "课排得最满的那天平均"
+        return None if abs(diff) < 0.25 else f"{what}{more_or_less(diff)} {abs(diff):.1f} 小时"
+    if name == "friday_free":
+        if diff > 0.05 and x[name] >= 1:
+            return f"周五整天不用到校（第 {rival_no} 份要去）"
+        if diff < -0.05 and y[name] >= 1 and "5" in pick.get("pattern", ""):
+            return f"周五也要到校（第 {rival_no} 份不用）"
+        return None
+    if name == "building_changes":
+        return None if abs(diff) < 0.2 else f"每周{more_or_less(diff)}换 {abs(diff):.1f} 次楼"
+    if name == "single_class_days":
+        return None if abs(diff) < 0.2 else f"只上单节课的日子每周{more_or_less(diff)} {abs(diff):.1f} 天"
+    if name == "online_share":
+        return None if abs(diff) < 0.05 else f"线上课{more_or_less(diff)}一些"
+    return None
+
+
+# Features where more is better for a student; for the rest (but online_share) less is better.
+MORE_IS_BETTER = ("earliest_start", "friday_free")
+
+
+def _feels_better(name: str, pick: Candidate, rival: Candidate, x: dict, y: dict) -> bool | None:
+    """Whether this pick is better on the feature in plain terms (None: no plain direction)."""
+    page = {"campus_days": "campus_days", "gap_h": "gap_min", "outside_h": "outside_min"}
+    if name in page:
+        return pick["features"][page[name]] < rival["features"][page[name]]
+    if name == "online_share" or name not in x or name not in y:
+        return None
+    return x[name] > y[name] if name in MORE_IS_BETTER else x[name] < y[name]
+
+
+def versus(index: int, picks: list[Candidate], conditions: Conditions,
+           candidates: list[Candidate] | None = None) -> dict | None:
+    """Why pick 1 beats pick 2, or why a lower pick sits below pick 1, from llm.rank.contributions.
+
+    The ranking model's per-feature contributions are compared; the biggest positive
+    differences are the strengths (1, or 2 when the second is at least a quarter of the
+    first) and the most negative one is the cost. Only differences a student would notice
+    are named, with numbers from the timetables themselves.
+    """
+    if len(picks) < 2:
+        return None
+    rival = 1 if index == 0 else 0
+    pool = list(candidates or picks)
+    known = {candidate["candidate_id"] for candidate in pool}
+    pool += [pick for pick in picks if pick["candidate_id"] not in known]
+    prefs = preferences_of(conditions)
+    mine, theirs = (contributions(picks[i], prefs, pool) for i in (index, rival))
+    features = {candidate["candidate_id"]: f for candidate, f in zip(pool, candidate_features(pool, prefs))}
+    x, y = features[picks[index]["candidate_id"]], features[picks[rival]["candidate_id"]]
+    hours = "–".join(_clock(value) for value in _hours(conditions))
+    named = []
+    for name in sorted(mine, key=lambda name: theirs.get(name, 0) - mine[name]):
+        diff = mine[name] - theirs.get(name, 0)
+        feels = _feels_better(name, picks[index], picks[rival], x, y)
+        if abs(diff) < NOTICED or (feels is not None and feels != (diff > 0)):
+            continue  # too small, or the model's view runs against what a student would expect
+        phrase = _difference(name, picks[index], picks[rival], x, y, rival + 1, hours)
+        if phrase:
+            named.append((name, diff, phrase))
+    plus = [item for item in named if item[1] > 0]
+    minus = [item for item in reversed(named) if item[1] < 0]
+    strengths = plus[:1] + [item for item in plus[1:2] if item[1] >= 0.25 * plus[0][1]]
+    return {"rival": rival + 1, "strengths": [item[2] for item in strengths],
+            "costs": [item[2] for item in minus[:1]],
+            "main": strengths[0][0] if strengths else None}
+
+
+def _hours(conditions: Conditions) -> tuple[int, int]:
+    hours = conditions.get("preferred_hours") or DEFAULT_HOURS
+    return hours["start_min"], hours["end_min"]
+
+
+def facts_of(index: int, picks: list[Candidate], conditions: Conditions,
+             candidates: list[Candidate] | None = None) -> dict:
     """What pick ``index`` shows, in the units the page uses (weekly averages, routine weekdays)."""
     pick = picks[index]
     meetings = pick.get("meetings") or []
@@ -93,19 +187,20 @@ def facts_of(index: int, picks: list[Candidate], conditions: Conditions) -> dict
         day = date.fromisoformat(meeting["date"])
         weeks.setdefault(meeting["weekday"], set()).add(day - timedelta(days=day.weekday()))
     ordinary = [meeting for meeting in meetings if not meeting.get("is_fixed_assessment")]
-    hours = conditions.get("preferred_hours") or DEFAULT_HOURS
+    compared = versus(index, picks, conditions, candidates) if meetings else None
     return {
         "has_meetings": bool(meetings),
+        "index": index,
         "campus": sorted(int(day) for day in pick.get("pattern", "")),
         "class_days": sorted(day for day, seen in weeks.items() if len(seen) >= 3),
         "free": [day for day in range(1, 8) if day not in weeks],
         "earliest": min((meeting["start_min"] for meeting in ordinary), default=None),
         "latest": max((meeting["end_min"] for meeting in ordinary), default=None),
         "features": pick["features"],
-        "hours": (hours["start_min"], hours["end_min"]),
+        "hours": _hours(conditions),
         "best": _best(pick, picks) if len(picks) > 1 else [],
         "worst": _worst(pick, picks) if len(picks) > 1 else [],
-        "versus_first": _versus_first(pick, picks[0]) if index else ([], []),
+        "versus": compared,
         "count": len(picks),
         "exceptions": len({meeting["date"] for meeting in meetings if meeting.get("unavailable_exception")}),
         "units": sorted({meeting["unit_code"] for meeting in meetings}),
@@ -120,21 +215,24 @@ def _cares(conditions: Conditions) -> list[str]:
 
 
 def _compare_text(facts: dict) -> str:
-    better, worse = facts["versus_first"]
-    if better and worse:
-        return f"和第 1 份比，{'、'.join(better)}，但{'、'.join(worse)}。"
-    if better:
-        return f"和第 1 份比，{'、'.join(better)}。"
-    if worse:
-        return f"可作第 1 份的备选，{'、'.join(worse)}。"
-    return ""
+    """Pick 1: why it beats pick 2 and what that costs. Others: what they offer and why they are lower."""
+    compared = facts["versus"]
+    if not compared:
+        return ""
+    rival, plus, minus = compared["rival"], "、".join(compared["strengths"]), "、".join(compared["costs"])
+    if facts["index"] == 0:
+        if not plus:
+            return f"排第 1，和第 {rival} 份差别很小。"
+        return f"排第 1 是因为比第 {rival} 份{plus}" + (f"；代价是{minus}。" if minus else "。")
+    if plus:
+        return f"和第 {rival} 份比，{plus}" + (f"，但{minus}。" if minus else "。")
+    return f"可作第 {rival} 份的备选，{minus}。" if minus else f"和第 {rival} 份差别很小。"
 
 
 def template_reason(facts: dict, cares: list[str]) -> str:
-    """Best-of-the-picks first, then how it differs from the top pick, then the routine."""
-    f, hours = facts["features"], "–".join(_clock(value) for value in facts["hours"])
-    best = "、".join(BEST_NAME[care] for care in cares if care in facts["best"])
-    text = (f"这 {facts['count']} 份里{best}。" if best else "") + _compare_text(facts)
+    """The comparison from the ranking model first, then the weekly routine."""
+    f = facts["features"]
+    text = _compare_text(facts)
     if not facts["has_meetings"]:
         days = [f"平均每周到校 {f['campus_days']:.1f} 天"]
     elif facts["campus"]:
@@ -144,17 +242,11 @@ def template_reason(facts: dict, cares: list[str]) -> str:
     weekday_off = [day for day in facts["free"] if day <= 5]
     if weekday_off:
         days.append(f"{_days(weekday_off)}没课")
-    numbers = {
-        "gap": "课之间基本不用等" if f["gap_min"] < 10 else f"每周课间空等约 {_amount(f['gap_min'])}",
-        "outside_hours": (f"课都在你希望的 {hours} 之内" if f["outside_min"] < 1
-                          else f"{hours} 以外的课每周 {round(f['outside_min'])} 分钟"),
-    }
-    said = [numbers[care] for care in numbers if care in cares]
     if facts["lunch"]:
-        said.append(_lunch_text(facts["lunch"]))
-    text += "，".join(days) + (f"；{'，'.join(said)}。" if said else "。")
+        days.append(_lunch_text(facts["lunch"]))
+    text += "，".join(days) + "。"
     if facts["exceptions"]:
-        text += f"另有 {facts['exceptions']} 次考试或测验落在你不想上课的时间，这类安排改不了。"
+        text += f"另有 {facts['exceptions']} 次考试或测验落在你不想上课的时间。"
     return text
 
 
@@ -175,9 +267,9 @@ def fact_lines(facts: dict) -> list[str]:
     lines.append("课之间基本不用等" if f["gap_min"] < 10 else f"每周课间空等约 {_amount(f['gap_min'])}")
     lines.append(f"{hours} 以外的课：每周 {round(f['outside_min'])} 分钟")
     lines.extend(f"这 {facts['count']} 份里{BEST_NAME[care]}" for care in facts["best"])
-    better, worse = facts["versus_first"]
-    if better or worse:
-        lines.append("和第 1 份比：" + "，".join(better + worse))
+    compared = facts["versus"]
+    if compared and (compared["strengths"] or compared["costs"]):
+        lines.append(f"和第 {compared['rival']} 份比：" + "，".join(compared["strengths"] + compared["costs"]))
     if facts["lunch"]:
         lines.append(_lunch_text(facts["lunch"]))
     if facts["exceptions"]:
@@ -195,7 +287,7 @@ _TIME = re.compile(r"(上午|早上|中午|下午|晚上)?\s*(\d{1,2})(?:[:：](
 _AMOUNT = re.compile(r"(\d+(?:\.\d+)?)\s*(个?小时|分钟|天|份|次)")
 _SENTENCE = re.compile(r"[。！？!?\n]")
 _CLAUSE = re.compile(r"[，,。；;！!？?\n]")
-_PART = re.compile(r"[，,。；;！!？?\n]|但是|但|不过|虽然|而且|并且|同时")
+_PART = re.compile(r"[，,。；;、！!？?\n]|但是|但|不过|虽然|而且|并且|同时")
 # Words that say a day is free (not "不用等", which is about gaps).
 _OFF = re.compile(r"没课|没有课|无课|不用上|不用到|不用去|不用来|不必|不去|不来|不上课|空出|空着|空闲|休息|自由|"
                   r"打工|上班|兼职|放假|整天有空")
@@ -209,15 +301,16 @@ _TOPIC = (("gap", re.compile(r"等|空档|间隔|课间|空窗")),
           ("campus_days", re.compile(r"到校|去学校|来学校|跑学校|天数|校园|通勤")),
           ("outside_hours", re.compile(r"早晚课|早课|晚课|早上|晚上|太早|太晚|很早|很晚|早起|起早")))
 _GOOD = re.compile(r"不多|不长|不早|不晚|不用|无需|不需|没有|少|短|省|低|集中|紧凑")
-_BAD = re.compile(r"多|长|久|分散|散|高|早些|晚些")
-_FIRST = re.compile(r"第\s*1\s*份|第一份")  # "the top pick"; its 1 is not a claim
+_BAD = re.compile(r"多|(?<!最)长|(?<!最)久|分散|散|高|早些|晚些")
+_FIRST = re.compile(r"第\s*[1-3一二三](?:\s*[份名])?")  # a pick ("排第 1", "第 2 份"); not a claim
 _COMPARATIVE = re.compile(r"更|比较|较为|相对|比")
 _OPINION = re.compile(r"高效|灵活|方便|合适|适合|理想|舒服|划算|完美|很好|不错")
-_RELATIVE = re.compile(r"(?<![最至])(?:多|少)了?(?:等|到校|来|去|上)?了?\s*(\d+(?:\.\d+)?)\s*(个?小时|分钟|天)")
+# "多等 37 分钟", "少到校 0.9 天", "少换 1.0 次楼": a difference between two picks.
+_RELATIVE = re.compile(r"(?<![最至])(?:多|少)[^\d，。；、]{0,4}?\s*(\d+(?:\.\d+)?)\s*(个?小时|分钟|天|次)")
 _WITHIN = re.compile(r"之内|之间|以内|内|里")
 _OUTSIDE = re.compile(r"以外|之外|外")
 # Things the fact sheet says nothing about; a sentence mentioning them cannot be checked.
-_UNKNOWN = re.compile(r"老师|教授|教室|楼|食堂|作业|成绩|难度|内容|同学|朋友|交通|天气|睡|课外|活动|时间一样|时间相同|上课少|上课多|(?<![早晚])课[多少]|多上|少上")
+_UNKNOWN = re.compile(r"老师|教授|教室|(?<![换次])楼|食堂|作业|成绩|难度|内容|同学|朋友|交通|天气|睡|课外|活动|时间一样|时间相同|上课少|上课多|(?<![早晚])课[多少]|多上|少上")
 _LUNCH = re.compile(r"吃饭|午饭|午餐|午休|饭")
 _LUNCH_BAD = re.compile(r"紧|不够|赶|没时间|来不及|不能")
 _EXAM = re.compile(r"考试|测验|考")
@@ -289,13 +382,15 @@ def _mentioned_days(clause: str) -> set[int]:
 def allowed_values(lines: list[str]) -> dict:
     """Times, (number, unit) amounts and bare numbers that the fact lines state.
 
-    Differences from the top pick ("和第 1 份比：每周多等 37 分钟") are kept apart:
-    a sentence may only use them while saying what they are compared with.
+    Differences from another pick ("和第 2 份比：每周多等 37 分钟") are kept apart:
+    a sentence may only use them while saying what they are compared with. Clock
+    times are facts wherever they appear.
     """
     relative = [line for line in lines if _FIRST.search(line)]
-    times, rest = _times(_digits("\n".join(line for line in lines if line not in relative)))
+    times = set(_times(_digits(_FIRST.sub(" ", "\n".join(lines))))[0])
+    _, rest = _times(_digits("\n".join(line for line in lines if line not in relative)))
     amounts, rest = _amounts(rest)
-    return {"times": set(times), "amounts": set(amounts),
+    return {"times": times, "amounts": set(amounts),
             "relative": set(_amounts(_digits("\n".join(relative)))[0]),
             "numbers": [number for number, _ in amounts] + _numbers(_WEEKDAY.sub(" ", rest))}
 
@@ -397,11 +492,14 @@ def _check_sentence(text: str, facts: dict, allowed: dict, first: bool) -> str |
 def _check_directions(text: str, facts: dict, against_first: bool) -> str | None:
     """Plain-word claims such as "空等时间短" must point the way the numbers do."""
     f = facts["features"]
-    better, worse = facts["versus_first"]
+    compared = facts["versus"] or {"strengths": [], "costs": []}
+    stated = compared["strengths"] + compared["costs"]
     good = set(facts["best"]) | {care for care, key in FEATURE.items() if f[key] < SMALL[key]}
     bad = set(facts["worst"]) | {care for care, key in FEATURE.items() if f[key] >= LARGE[key]}
-    words = {"campus_days": "到校", "gap": "等", "outside_hours": "早晚课"}
+    words = {"campus_days": ("到校",), "gap": ("等",), "outside_hours": ("早晚课", "以外的课", "早课", "晚课")}
     for part in _PART.split(text):
+        if _mentioned_days(part):
+            continue  # weekday claims are checked against the routine above
         if (set(facts["hours"]) <= set(_times(part)[0]) and _WITHIN.search(part) and
                 not _OUTSIDE.search(part) and f["outside_min"] >= 1):
             return "hours"
@@ -409,7 +507,7 @@ def _check_directions(text: str, facts: dict, against_first: bool) -> str | None
         if not topics or _SUPER.search(part):
             continue
         if against_first:
-            differs = [care for care in topics if any(words[care] in entry for entry in better + worse)]
+            differs = [care for care in topics if any(word in entry for word in words[care] for entry in stated)]
             if _SAME.search(part):  # "到校天数一样": only if the numbers do not differ
                 if differs:
                     return "comparison"
@@ -423,8 +521,9 @@ def _check_directions(text: str, facts: dict, against_first: bool) -> str | None
         if not (is_good or is_bad):
             continue
         for care in topics:
-            if against_first:
-                said = [entry for entry in (better if is_good else worse) if words[care] in entry]
+            if against_first:  # the comparison must say the same feature moves the same way
+                said = [entry for entry in stated if any(word in entry for word in words[care])
+                        and ("少" if is_good else "多") in entry]
                 if not said:
                     return "direction"
             elif care not in (good if is_good else bad):
@@ -440,9 +539,10 @@ SYSTEM = (
     "1. 只能保留或删掉草稿里的信息，不能加入草稿里没有的说法。\n"
     "2. 星期、时间和数字照抄草稿，用阿拉伯数字，不要换算单位。\n"
     "3. 不要用“更”“比较”“最”，除非草稿里就有这个说法。\n"
-    "4. 第 2 份及以后的理由，如果草稿里有和第 1 份的比较，改写后要以“比第 1 份”开头。\n"
-    "5. 不要复述学生的话，不要评价“适合”“灵活”。\n"
-    "6. 每条不超过 50 个字，不要写编号。\n"
+    "4. 草稿里和别的份比较时（如“比第 2 份”“和第 1 份比”），改写后也要写明是和第几份比。\n"
+    "5. 先说草稿里排在最前面的原因，再说代价。\n"
+    "6. 不要复述学生的话，不要评价“适合”“灵活”。\n"
+    "7. 每条不超过 60 个字，不要写编号。\n"
     "按 JSON 输出：{\"reasons\": [第1份的理由, 第2份的理由, ...]}，条数和课表份数相同。"
 )
 
@@ -509,13 +609,14 @@ def ask_model(model: str, text: str, count: int, timeout: float = TIMEOUT) -> li
 
 
 def explain_detailed(student_text: str, conditions: Conditions, picks: list[Candidate], *,
-                     model: str | None = "auto", timeout: float = TIMEOUT) -> dict:
+                     model: str | None = "auto", timeout: float = TIMEOUT,
+                     candidates: list[Candidate] | None = None) -> dict:
     """Reasons plus who wrote each one ("template" or the model name) and why the model was skipped.
 
     model=None: template only (instant). model="auto": choose_model(). The model is only
     asked when every pick carries its dated meetings, since only then can it be checked.
     """
-    all_facts = [facts_of(index, picks, conditions) for index in range(len(picks))]
+    all_facts = [facts_of(index, picks, conditions, candidates) for index in range(len(picks))]
     cares = _cares(conditions)
     reasons = [template_reason(facts, cares) for facts in all_facts]
     result = {"reasons": reasons, "by": ["template"] * len(picks), "model": None, "status": "template",
@@ -547,5 +648,6 @@ def explain_detailed(student_text: str, conditions: Conditions, picks: list[Cand
 
 
 def explain(student_text: str, conditions: Conditions, picks: list[Candidate], *,
-            model: str | None = "auto") -> list[str]:
-    return explain_detailed(student_text, conditions, picks, model=model)["reasons"]
+            model: str | None = "auto", candidates: list[Candidate] | None = None) -> list[str]:
+    """``candidates``: the whole list rank() saw, so feature averages match its scores."""
+    return explain_detailed(student_text, conditions, picks, model=model, candidates=candidates)["reasons"]

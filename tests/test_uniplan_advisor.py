@@ -197,9 +197,9 @@ class EndToEndTests(unittest.TestCase):
         recommendation, items = self.check_recommendation(result)
         for axes, menu in recommendation["menus"].items():
             picks = [items[cid] for cid in menu["picks"]]
-            conditions = conditions_of(result["profile"], axes.split(","))
+            conditions = conditions_of(result["profile"], axes.split(","), menu["cares"])
             for index, reason in enumerate(menu["reasons"]):
-                facts = explainer.facts_of(index, picks, conditions)
+                facts = explainer.facts_of(index, picks, conditions, recommendation["_candidates"][axes])
                 allowed = explainer.allowed_values([f"{facts['count']} 份", *explainer.fact_lines(facts)])
                 self.assertIsNone(explainer.check_reason(reason, facts, allowed, first=index == 0), (axes, reason))
 
@@ -211,12 +211,16 @@ class FactCheckTests(unittest.TestCase):
         def pick(cid, gap, days_attended, outside, weekdays):
             meetings = [{"date": (date(2026, 8, 3) + timedelta(days=7 * week + day - 1)).isoformat(), "weekday": day,
                          "start_min": 600, "end_min": 720, "unit_code": "ENGG2112", "is_online": False,
+                         "group_id": "ENGG2112|Lecture", "building_code": "J01",
                          "is_fixed_assessment": False} for week in range(4) for day in weekdays]
             return {"candidate_id": cid, "pattern": "".join(map(str, weekdays)), "meetings": meetings,
                     "features": {"gap_min": gap, "campus_days": days_attended, "outside_min": outside}}
         self.picks = [pick("a", 30, 2, 0, [2, 3]), pick("b", 300, 3, 60, [1, 2, 3])]
         conditions = {"cares": ["gap", "campus_days"], "preferred_hours": {"weekday": 1, "start_min": 540, "end_min": 1080}}
         self.facts = [explainer.facts_of(index, self.picks, conditions) for index in range(2)]
+        # A fixed comparison of pick 2 with pick 1, as llm.rank.contributions would phrase it.
+        self.facts[1]["versus"] = {"rival": 1, "strengths": [], "main": None,
+                                   "costs": ["每周多等 4.5 小时", "每周多到校 1.0 天", "9:00–18:00 以外的课每周多 1.0 小时"]}
 
     def check(self, text, index=0):
         facts = self.facts[index]
@@ -231,7 +235,8 @@ class FactCheckTests(unittest.TestCase):
         self.assertIsNone(self.check("只要周二、周三到校。"))
 
     def test_sameness_and_more_need_the_numbers(self):
-        facts = {**self.facts[1], "versus_first": (["每周少等 1.0 小时"], [])}  # only the waiting differs
+        facts = {**self.facts[1], "versus": {"rival": 1, "strengths": ["每周少等 1.0 小时"], "costs": [],
+                                             "main": "gap_h"}}  # only the waiting differs
         allowed = explainer.allowed_values([f"{facts['count']} 份", *explainer.fact_lines(facts)])
         self.assertIsNone(explainer.check_reason("比第 1 份每周少等 1.0 小时，早晚课一样。", facts, allowed, False))
         self.assertEqual(explainer.check_reason("比第 1 份早晚课更充裕。", facts, allowed, False), "comparison")
@@ -282,7 +287,7 @@ class RegistryTests(unittest.TestCase):
                              {"menus": {"gap": {"picks": ["a"]}}}, {"a": {"candidate_id": "a"}})
         calls = []
 
-        def slow(*args):
+        def slow(*args, **kwargs):
             calls.append(args)
             threading.Event().wait(0.2)  # long enough for the other requests to arrive
             return {"reasons": ["x"], "status": "model"}

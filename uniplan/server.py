@@ -206,9 +206,10 @@ class AppHandler(BaseHTTPRequestHandler):
                 ranking = result.get("ranking_result") or {}
                 if ranking.get("recommendation"):
                     # The sentence stays in memory for the reasons request; it is never saved.
+                    candidates = ranking["recommendation"].pop("_candidates", None)
                     ranking["recommendation"]["explain_token"] = self.server.explanations.add(
                         student_text, result["profile"], ranking["recommendation"],
-                        ranking["shortlist"]["items"])
+                        ranking["shortlist"]["items"], candidates)
                 data = result.get("module_two_result")
                 if data:
                     age = snapshot_age_days(data.get("snapshot_time"))

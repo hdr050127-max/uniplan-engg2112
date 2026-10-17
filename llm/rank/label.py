@@ -11,11 +11,15 @@ Prompt version 3 (after the pilot in llm/rank/pilot.py, 22/30 consistent in vers
 - the model must pick red or blue; every pair is asked twice with the sides swapped and
   only answers that agree become labels.
 
+``--ties hint`` is a variant for comparison: a near-equal main concern is no longer a tie by
+itself. The program tells the model that this item is a draw and lets it decide on the
+rest; only when every row of the table is near-equal does the program call a tie.
+
     python3 -m llm.rank.label pilot --model qwen2.5:7b      # the pilot's 30 pairs, version 3
     python3 -m llm.rank.label run --model qwen2.5:14b       # ~1,500 pairs over 80 personas
 
-The server comes from llm.ollama (UNIPLAN_OLLAMA_URL, the shared config file, or this Mac).
-On this Mac, wrap long runs in ``python3 -m llm.gpu_lock --``.
+The server comes from llm.ollama (the shared address file, or this Mac). Wrap every batch in
+``python3 -m llm.gpu_lock --`` so batches from other windows queue on the same machine.
 """
 from __future__ import annotations
 
@@ -26,6 +30,7 @@ import random
 import sys
 import threading
 import time
+import urllib.request
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
@@ -44,6 +49,9 @@ DAYS = "一二三四五六日"
 
 # A difference smaller than this on the persona's main concern is a tie, decided by the program.
 TIE = {"campus_days": ("campus_days", 0.25), "gap": ("gap_h", 0.5), "outside_hours": ("outside_h", 0.5)}
+# "hint" mode: a pair is a program tie only if every table row is this close.
+NEAR = {"campus_days": 0.25, "gap_h": 0.5, "outside_h": 0.5, "earliest_start": 0.5, "latest_end": 0.5,
+        "longest_day_h": 0.5, "single_class_days": 0.25}
 FOCUS_ROW = {"campus_days": "到校天数", "gap": "空等", "outside_hours": "早晚课"}
 ROWS = ("到校天数", "空等", "早晚课", "最早上课", "最晚下课", "最长的一天", "只为一节课到校")
 SYSTEM = ("你要扮演一位大学生，根据他自己的情况，从“红”“蓝”两份课表里选更适合他的一份。"
@@ -107,35 +115,64 @@ def program_tie(persona: dict, a: dict, b: dict) -> bool:
     return abs(a["x"][key] - b["x"][key]) < threshold
 
 
-def ask(model: str, persona: dict, red: dict, blue: dict) -> dict:
+def all_near(a: dict, b: dict) -> bool:
+    return all(abs(a["x"][key] - b["x"][key]) < threshold for key, threshold in NEAR.items())
+
+
+def ask(model: str, persona: dict, red: dict, blue: dict, draw: bool = False) -> dict:
     labels = row_labels(hours_of(persona["conditions"]))
     table = "\n".join(f"| {labels[row]} | {red['table'][row]} | {blue['table'][row]} |" for row in ROWS)
-    user = (f"学生情况：{persona['text']}\n\n| 项目 | 红 | 蓝 |\n| --- | --- | --- |\n{table}\n\n"
+    row = FOCUS_ROW[persona["focus"]]
+    note = (f"\n\n注意：两份课表的“{row}”几乎一样（红 {red['table'][row]}，蓝 {blue['table'][row]}），"
+            f"这一项分不出高下。请根据这位学生的其他情况和表里的其他项来选，focus 填你据以决定的那一项。"
+            if draw else "")
+    user = (f"学生情况：{persona['text']}\n\n| 项目 | 红 | 蓝 |\n| --- | --- | --- |\n{table}{note}\n\n"
             f"红课表（每周固定的课）：\n{red['text']}\n\n蓝课表（每周固定的课）：\n{blue['text']}")
-    reply = ollama.chat(model, [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}],
-                        schema=SCHEMA, options={"num_predict": 300, "num_ctx": 4096})
-    return json.loads(reply)
+    messages = [{"role": "system", "content": SYSTEM}, {"role": "user", "content": user}]
+    for limit in (500, 1200):   # a long reason can hit the token limit and cut the JSON short
+        try:
+            return json.loads(ollama.chat(model, messages, schema=SCHEMA,
+                                          options={"num_predict": limit, "num_ctx": 4096}))
+        except json.JSONDecodeError:
+            continue
+    raise ValueError(f"{model} gave no complete answer for {persona['id']}")
 
 
-def judge(model: str, persona: dict, a: dict, b: dict) -> dict:
+def judge(model: str, persona: dict, a: dict, b: dict, ties: str = "strict") -> dict:
     """One labelled pair. ``label`` is A, B, tie (program) or flip (the two orders disagree)."""
     record = {"persona": persona["id"], "split": persona["split"], "focus": persona["focus"],
               "a_id": a["candidate_id"], "b_id": b["candidate_id"], "a_x": a["x"], "b_x": b["x"],
-              "model": model, "prompt_version": PROMPT_VERSION, "synthetic": True}
-    if program_tie(persona, a, b):
+              "model": model, "prompt_version": PROMPT_VERSION, "ties": ties, "synthetic": True}
+    draw = program_tie(persona, a, b)
+    if draw and (ties == "strict" or all_near(a, b)):
         return {**record, "label": "tie", "source": "program"}
     started = time.time()
-    forward = ask(model, persona, a, b)    # red = A
-    swapped = ask(model, persona, b, a)    # red = B
+    forward = ask(model, persona, a, b, draw)    # red = A
+    swapped = ask(model, persona, b, a, draw)    # red = B
     first = {"红": "A", "蓝": "B"}[forward["choice"]]
     second = {"红": "B", "蓝": "A"}[swapped["choice"]]
     return {**record, "label": first if first == second else "flip", "source": "model",
             "forward": forward, "swapped": swapped, "first": first, "second": second,
+            "draw_hint": draw,
             "focus_ok": [FOCUS_ROW[persona["focus"]] == answer["focus"] for answer in (forward, swapped)],
             "seconds": round(time.time() - started, 2)}
 
 
-def run_jobs(model: str, jobs: list[tuple[dict, dict, dict]], path: Path, workers: int) -> list[dict]:
+def free_other_models(model: str) -> None:
+    """One model per batch: unload any other model the server holds in GPU memory."""
+    try:
+        with urllib.request.urlopen(f"{ollama.base_url()}/api/ps", timeout=5) as response:
+            loaded = [item["name"] for item in json.loads(response.read())["models"]]
+    except (OSError, ValueError, KeyError):
+        return
+    for name in loaded:
+        if name != model:
+            print(f"unloading {name} to leave the GPU to {model}", flush=True)
+            ollama.unload(name)
+
+
+def run_jobs(model: str, jobs: list[tuple[dict, dict, dict]], path: Path, workers: int,
+             ties: str = "strict") -> list[dict]:
     """Judge every (persona, a, b), appending each result to ``path`` as it finishes (resumable)."""
     done = {}
     if path.exists():
@@ -148,7 +185,7 @@ def run_jobs(model: str, jobs: list[tuple[dict, dict, dict]], path: Path, worker
     lock, started, finished = threading.Lock(), time.time(), [0]
 
     def work(job):
-        row = judge(model, *job)
+        row = judge(model, *job, ties=ties)
         with lock:
             with path.open("a", encoding="utf-8") as handle:
                 handle.write(json.dumps(row, ensure_ascii=False) + "\n")
@@ -167,6 +204,7 @@ def run_jobs(model: str, jobs: list[tuple[dict, dict, dict]], path: Path, worker
 def report(rows: list[dict]) -> dict:
     asked = [row for row in rows if row["source"] == "model"]
     agree = [row for row in asked if row["label"] != "flip"]
+    plain = [row for row in asked if not row.get("draw_hint")]
     first = Counter(answer["choice"] for row in asked for answer in (row["forward"], row["swapped"]))
     return {
         "pairs": len(rows), "program_ties": len(rows) - len(asked), "asked_model": len(asked),
@@ -174,7 +212,9 @@ def report(rows: list[dict]) -> dict:
         "consistent_rate_all": round((len(rows) - len(asked) + len(agree)) / max(len(rows), 1), 3),
         "consistent_rate_asked": round(len(agree) / max(len(asked), 1), 3),
         "answers_by_position": {"red(first)": first["红"], "blue(second)": first["蓝"]},
-        "focus_correct": f"{sum(ok for row in asked for ok in row['focus_ok'])}/{2 * len(asked)}",
+        "focus_correct": f"{sum(ok for row in plain for ok in row['focus_ok'])}/{2 * len(plain)}",
+        "draw_hint_pairs": f"{sum(r['label'] != 'flip' for r in asked if r.get('draw_hint'))}/"
+                           f"{sum(bool(r.get('draw_hint')) for r in asked)} consistent",
         "by_focus": {focus: f"{sum(r['label'] != 'flip' for r in rows if r['focus'] == focus)}/"
                             f"{sum(r['focus'] == focus for r in rows)}"
                      for focus in sorted({r["focus"] for r in rows})},
@@ -236,24 +276,28 @@ def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__.splitlines()[0])
     parser.add_argument("mode", choices=("pilot", "run"))
     parser.add_argument("--model", default="qwen2.5:7b")
-    parser.add_argument("--workers", type=int, default=3, help="requests in flight at once")
+    parser.add_argument("--workers", type=int, default=1, help="requests in flight at once")
+    parser.add_argument("--ties", choices=("strict", "hint"), default="strict",
+                        help="strict: near-equal main concern is a tie; hint: tell the model and let it decide")
     parser.add_argument("--limit", type=int, default=0, help="only the first N pairs (a quick check)")
     args = parser.parse_args()
     OUT.mkdir(parents=True, exist_ok=True)
     tag = args.model.replace(":", "_")
     if args.mode == "pilot":
-        jobs, name = pilot_jobs(), f"rank_pilot_v3_{tag}"
+        jobs, name = pilot_jobs(), f"rank_pilot_v3{'h' if args.ties == 'hint' else ''}_{tag}"
     else:
         jobs, sets = full_jobs()
-        name = f"labels_v3_{tag}"
+        name = f"labels_v3{'h' if args.ties == 'hint' else ''}_{tag}"
         (OUT / "candidate_sets.json").write_text(json.dumps(
             {"note": "合成数据：80 个合成画像的候选课表（真实课表快照排出的可行课表）与特征。", "seed": SEED,
              "sets": sets}, ensure_ascii=False), encoding="utf-8")
     if args.limit:
         jobs = jobs[:args.limit]
-    rows = run_jobs(args.model, jobs, OUT / f"{name}.jsonl", args.workers)
+    free_other_models(args.model)
+    rows = run_jobs(args.model, jobs, OUT / f"{name}.jsonl", args.workers, args.ties)
     summary = {"note": "合成标签（SYNTHETIC）：由大模型扮演合成画像给出，不是真实学生的选择。",
                "model": args.model, "server": ollama.base_url(), "prompt_version": PROMPT_VERSION,
+               "ties": args.ties,
                "tie_thresholds": {k: v[1] for k, v in TIE.items()}, **report(rows)}
     if args.mode == "pilot":
         summary["by_persona"] = {p: f"{sum(r['label'] != 'flip' for r in rows if r['persona'] == p)}/"

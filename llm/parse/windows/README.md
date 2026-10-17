@@ -14,17 +14,19 @@
 - **方法**：QLoRA。底模 4 位 NF4（双重量化），计算用 bf16；LoRA r=16、alpha=32、dropout 0.05，作用于全部注意力和 MLP 投影层；梯度检查点。
 - **超参数**：AdamW，学习率 2e-4，余弦衰减，5% 预热；batch 16；3 轮；只对答案部分算损失；随机种子 2112。提示词是 `llm/parse/labels.py` 的 `SHORT_SYSTEM`，答案就是类别名。
 - **选轮**：每轮结束在验证集上算准确率，保留最好的一轮。
-- **显存和时长（估计）**：训练峰值约 9–11 GB；训练约 15–25 分钟；首次下载底模约 15 GB；合并和转 GGUF 约 15 分钟，合并时要约 16 GB 内存。实际的峰值显存、每轮损失、验证准确率和用时都记在 `out-7b/train_log.json`。
+- **显存和时长（估计）**：训练峰值约 9–11 GB；训练约 15–25 分钟；首次下载底模约 15 GB；合并和转 GGUF 约 15 分钟，合并时要约 16 GB 内存（见第 3 步）。实际的峰值显存、每轮损失、验证准确率和用时都记在 `out-7b/train_log.json`。
 - **硬盘**：底模 15 GB + 合并后 15 GB + GGUF 15 GB，约 45 GB；导入 Ollama 后后两个可以删。
 
 ## 1. 拷文件夹
 
-把 Mac 上的 `llm/parse/windows` 整个拷到 Windows，例如 `D:\uniplan-lora`。里面应有 `train_lora.py`、`README.md`、`data\train.jsonl`、`data\valid.jsonl`。
+把 Mac 上的 `llm/parse/windows` 整个拷到 Windows。压缩包自带 `windows` 这一层，解压到 `D:\uniplan-lora` 后，工作目录是 `D:\uniplan-lora\windows`，里面应有 `train_lora.py`、`merge_adapter.py`、`README.md`、`data\train.jsonl`、`data\valid.jsonl`。下面的命令都在这个目录里运行。
 
-## 2. 装环境（只做一次）
+## 2. 环境（已装好，2026-10-17）
+
+训练环境 `.venv`：torch 2.6.0+cu124、transformers 5.20.1、peft 0.21.2、bitsandbytes 0.50.2。从零装的话：
 
 ```powershell
-cd D:\uniplan-lora
+cd D:\uniplan-lora\windows
 python -m venv .venv
 .venv\Scripts\activate
 pip install torch --index-url https://download.pytorch.org/whl/cu124
@@ -34,21 +36,50 @@ python -c "import torch; print(torch.cuda.is_available(), torch.cuda.get_device_
 
 最后一行应打印 `True` 和显卡名字。打印 `False` 说明装成了 CPU 版的 torch，换一个 `cu12x` 的地址重装。
 
+底模放在 `D:\hf-cache`。每次打开新的 PowerShell 都要先设好，训练和合并都靠它找到底模：
+
+```powershell
+$env:HF_HOME = "D:\hf-cache"
+```
+
+想先把底模下好（约 15 GB），可以用新版的 `hf` 命令（旧名 `huggingface-cli` 已改名）：
+
+```powershell
+hf download Qwen/Qwen2.5-7B-Instruct
+```
+
 ## 3. 训练
 
 ```powershell
+cd D:\uniplan-lora\windows
+.venv\Scripts\activate
+$env:HF_HOME = "D:\hf-cache"
 curl.exe http://127.0.0.1:11434/api/generate -d '{\"model\": \"qwen2.5:7b\", \"keep_alive\": 0}'
 python train_lora.py
 ```
 
-第一行让 Ollama 卸载常驻的 7B，空出显存。训练时每轮打印一次 `val_accuracy`，结束后自动合并，生成 `out-7b\merged` 和 `out-7b\Modelfile`。
+`curl.exe` 那行让 Ollama 卸载常驻的 7B，空出显存。训练时每轮打印一次 `val_accuracy`，训完先存好 `out-7b\adapter` 和 `out-7b\train_log.json`，再在 CPU 上合并，生成 `out-7b\merged` 和 `out-7b\Modelfile`。
+
+**合并要约 16 GB 内存，这台机器平时只空闲 8–11 GB。** 开训前先关掉浏览器、游戏、IDE 等占内存的大程序。如果训练跑完了、合并时内存不够报错，适配器已经存好，不用重训：关掉程序后运行
+
+```powershell
+python merge_adapter.py
+```
 
 ## 4. 转成 GGUF 并导入 Ollama
 
+llama.cpp 的转换依赖写死了 CPU 版 torch，装进训练用的 `.venv` 会把 CUDA 版换掉，所以要单独建一个 `.venv-convert`（只做一次）：
+
 ```powershell
 git clone --depth 1 https://github.com/ggml-org/llama.cpp
-pip install -r llama.cpp\requirements\requirements-convert_hf_to_gguf.txt
-python llama.cpp\convert_hf_to_gguf.py out-7b\merged --outfile out-7b\model-f16.gguf --outtype f16
+python -m venv .venv-convert
+.venv-convert\Scripts\python.exe -m pip install -r llama.cpp\requirements\requirements-convert_hf_to_gguf.txt
+```
+
+然后转换、导入、试一句：
+
+```powershell
+.venv-convert\Scripts\python.exe llama.cpp\convert_hf_to_gguf.py out-7b\merged --outfile out-7b\model-f16.gguf --outtype f16
 cd out-7b
 ollama create uniplan-parse-7b -f Modelfile --quantize q4_K_M
 ollama run uniplan-parse-7b "I can't do Fridays, I work"

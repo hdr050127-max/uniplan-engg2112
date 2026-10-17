@@ -1,0 +1,77 @@
+{
+  "round": 1,
+  "pool": 1918,
+  "to_grade": 476,
+  "agree_sample": 180,
+  "disagree": 296,
+  "by_source": {
+    "qwen_synth": 449,
+    "claude_train": 27
+  },
+  "agree_sample_share": 0.1,
+  "sample_seed": 2113,
+  "zero_shot_accuracy_vs_gen_label": {
+    "qwen2.5:7b": 0.8457
+  },
+  "grading": {
+    "graded": 476,
+    "kept": 394,
+    "dropped": 82,
+    "dropped_by_source": {
+      "qwen_synth": 82
+    },
+    "graded_and_dropped_by_gen_label": {
+      "blocked_time": "61/4",
+      "max_days": "47/7",
+      "max_daily_hours": "48/28",
+      "lunch": "24/2",
+      "in_person_only": "23/2",
+      "prefer_fewer_days": "60/9",
+      "prefer_less_waiting": "29/1",
+      "prefer_no_early_late": "58/6",
+      "other": "126/23"
+    },
+    "pred_7b": {
+      "disagreements_kept": 226,
+      "generation_label_right": 159,
+      "model_right": 53,
+      "both_wrong": 14,
+      "agreements_sampled_kept": 168,
+      "agreements_both_right": 164
+    }
+  },
+  "applied": {
+    "training_rows": 1836,
+    "by_split": {
+      "val": 279,
+      "train": 1557
+    },
+    "by_source": {
+      "qwen_synth": 1697,
+      "claude_train": 139
+    },
+    "label_from": {
+      "claude": 394,
+      "generation": 1442
+    },
+    "graded_qwen_synth": 367,
+    "dropped_qwen_synth": 82,
+    "relabelled_qwen_synth": 71,
+    "blocked_time -> prefer_no_early_late": 4,
+    "blocked_time -> other": 1,
+    "max_days -> other": 1,
+    "max_daily_hours -> blocked_time": 1,
+    "max_daily_hours -> other": 2,
+    "prefer_fewer_days -> other": 12,
+    "prefer_fewer_days -> prefer_less_waiting": 13,
+    "prefer_fewer_days -> prefer_no_early_late": 1,
+    "prefer_less_waiting -> other": 1,
+    "prefer_less_waiting -> blocked_time": 2,
+    "prefer_no_early_late -> blocked_time": 10,
+    "prefer_no_early_late -> other": 3,
+    "other -> blocked_time": 17,
+    "other -> prefer_no_early_late": 2,
+    "other -> in_person_only": 1,
+    "graded_claude_train": 27
+  }
+}

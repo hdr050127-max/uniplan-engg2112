@@ -1,0 +1,45 @@
+{
+  "note": "SYNTHETIC DATA. Every clause was written by a language model from a label chosen in advance. None of it comes from real students. Use it for training and validation only, never as the test set.",
+  "model": "qwen2.5:7b",
+  "server": "http://192.168.1.120:11434",
+  "seed": 2112,
+  "per_label": 200,
+  "clauses_per_request": 8,
+  "requests": 301,
+  "kept": 1781,
+  "dropped": {
+    "no day or time": 8,
+    "duplicate": 6,
+    "no day count, or names a weekday": 210,
+    "length": 26,
+    "no hour count": 23,
+    "no meal word": 18,
+    "no online/in-person word": 26,
+    "names a weekday or a day count": 68,
+    "names a weekday": 85,
+    "has a clock time": 129,
+    "no hedged clock time": 24
+  },
+  "by_label": {
+    "blocked_time": 190,
+    "max_days": 190,
+    "max_daily_hours": 177,
+    "lunch": 182,
+    "in_person_only": 173,
+    "prefer_fewer_days": 223,
+    "prefer_less_waiting": 211,
+    "prefer_no_early_late": 235,
+    "other": 200
+  },
+  "by_language": {
+    "zh": 642,
+    "en": 596,
+    "mix": 543
+  },
+  "by_split": {
+    "val": 272,
+    "train": 1509
+  },
+  "seconds": 427,
+  "date": "2026-10-17"
+}

@@ -56,6 +56,11 @@ _DAY_PATTERNS = (
 )
 
 
+def named_days(text: str) -> bool:
+    """Whether normalised text names a weekday or the weekend (not just "every day" or "weekdays")."""
+    return any(pattern.search(text) for kind, pattern in _DAY_PATTERNS if kind != "weekdays")
+
+
 def _span(start: int, end: int) -> list[int]:
     return list(range(start, end + 1)) if start <= end else [*range(start, 8), *range(1, end + 1)]
 

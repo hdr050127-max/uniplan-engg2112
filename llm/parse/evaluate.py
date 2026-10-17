@@ -8,8 +8,9 @@ Data sets:
 - val: the held-out SYNTHETIC clauses (llm/parse/output/synthetic_clauses.jsonl, split == "val"),
   plus sentences made by joining 2-3 of them, to measure splitting + classifying together;
 - examples: the 10 example sentences in data/test_template.csv (written by Claude, NOT a test set);
-- test: data/test_claude.csv, 142 English sentences written by Claude (the coordinator session) at the
-  user's request (see data/TEST_SOURCES.md); read only with --test, never used for tuning.
+- test: data/test_claude.csv (v1, 142 English sentences) or another file given with --test-file, written
+  by Claude (the coordinator session) at the user's request (see data/TEST_SOURCES.md); read only with
+  --test, never used for tuning. --guard adds every model again with the rule-5 guard on.
 
 Every model predicts every text it needs once; predictions are saved in output/predictions/<model>.json
 with the time each took, so models trained elsewhere (scikit-learn, LoRA) can be scored the same way.
@@ -25,7 +26,7 @@ import sys
 import time
 from pathlib import Path
 
-from llm.parse import parse
+from llm.parse import guarded, parse
 from llm.parse.gold import clause_key, load
 from llm.parse.metrics import LABEL_ORDER, classification, confusion_markdown, field_accuracy
 from llm.parse.split import split_clauses
@@ -71,12 +72,12 @@ def joined_sentences(rows: list[dict], count: int = 120) -> list[dict]:
     return sentences
 
 
-def data_sets(with_test: bool) -> dict:
+def data_sets(with_test: bool, test_file: Path = TEST) -> dict:
     sets = {"val": {"clauses": [{"text": r["text"], "label": r["label"]} for r in synthetic("val")]}}
     sets["val"]["sentences"] = joined_sentences(synthetic("val"))
     sets["examples"] = {"gold": load(TEMPLATE)}
     if with_test:
-        sets["test"] = {"gold": load(TEST)}
+        sets["test"] = {"gold": load(test_file), "file": Path(test_file).name}
     return sets
 
 
@@ -109,11 +110,14 @@ def predict(name: str, classify, texts: list[str], meta: dict) -> dict:
     return saved
 
 
-def score(saved: dict, sets: dict) -> dict:
+def score(saved: dict, sets: dict, guard: bool = False) -> dict:
     preds = saved["predictions"]
-    label_of = lambda text: preds[text]["label"]     # noqa: E731
-    result = {"model": saved["model"], "size_mb": saved.get("size_mb"), "machine": saved.get("machine"),
-              "note": saved.get("note", "")}
+    if guard:
+        label_of = lambda text: guarded(preds[text]["label"], text)     # noqa: E731
+    else:
+        label_of = lambda text: preds[text]["label"]     # noqa: E731
+    result = {"model": saved["model"] + (" + 护栏" if guard else ""), "size_mb": saved.get("size_mb"),
+              "machine": saved.get("machine"), "note": saved.get("note", "")}
     ms = [preds[c["text"]]["ms"] for c in sets["val"]["clauses"] if c["text"] in preds]
     result["ms_per_clause"] = statistics.median(ms) if ms else None
     for name, data in sets.items():
@@ -135,7 +139,7 @@ def score(saved: dict, sets: dict) -> dict:
                 continue
             clauses = [c for s in gold for c in s["clauses"]]
             scored = classification([c["label"] for c in clauses], [label_of(c["text"]) for c in clauses])
-            parsed = [parse(s["sentence"], label_of) for s in gold]
+            parsed = [parse(s["sentence"], label_of, guard=False) for s in gold]
             scored["split_right"] = sum([clause_key(c["text"]) for c in p["clauses"]] ==
                                         [clause_key(c["text"]) for c in s["clauses"]]
                                         for p, s in zip(parsed, gold)) / len(gold)
@@ -171,11 +175,13 @@ def markdown(results: list[dict], sets: dict) -> str:
         "只用来检查整条流程能跑通；数字仅供参考。",
     ]
     if "test" in sets:
-        lines.append(f"- **测试集（test）**：`data/test_claude.csv`，{len(sets['test']['gold'])} 句英文，"
-                     "由 Claude（总控窗口）按用户要求撰写（见 `data/TEST_SOURCES.md`），不是真实学生数据；"
-                     "与训练数据的生成模型（千问）不是同一家。只在最后评估时读，没有用来调参。")
+        gold = sets["test"]["gold"]
+        lines.append(f"- **测试集（test）**：`data/{sets['test']['file']}`，{len(gold)} 句、"
+                     f"{sum(len(s['clauses']) for s in gold)} 个短句，由 Claude（总控窗口）按用户要求撰写"
+                     "（见 `data/TEST_SOURCES.md`），不是真实学生数据；与训练数据的生成模型（千问）不是同一家。"
+                     "只在最后评估时读，没有用来调参。")
     else:
-        lines.append("- **测试集（test）**：`data/test_claude.csv`（Claude 撰写），这次没有读。")
+        lines.append("- **测试集（test）**：Claude 撰写（见 `data/TEST_SOURCES.md`），这次没有读。")
     lines += ["", "## 短句分类（验证集）", "",
               "| 模型 | 准确率 | 宏平均 F1 | 整句全对率 | 每句耗时 (ms) | 模型大小 (MB) | 运行机器 | 备注 |",
               "| --- | ---: | ---: | ---: | ---: | ---: | --- | --- |"]
@@ -191,7 +197,8 @@ def markdown(results: list[dict], sets: dict) -> str:
         if r.get("val"):
             lines.append(f"| {r['model']} | " + " | ".join(f"{r['val']['per_label'][label]['f1']:.2f}"
                                                          for label in LABEL_ORDER) + " |")
-    for set_name, title in (("examples", "10 句示例（不是测试集）"), ("test", "测试集（Claude 撰写，142 句英文）")):
+    test_title = f"测试集 {sets['test']['file']}（Claude 撰写）" if "test" in sets else ""
+    for set_name, title in (("examples", "10 句示例（不是测试集）"), ("test", test_title)):
         rows = [r for r in results if r.get(set_name)]
         if not rows:
             continue
@@ -223,7 +230,7 @@ def markdown(results: list[dict], sets: dict) -> str:
                     "–" if not r["test"]["per_label"][label]["support"] else f"{r['test']['per_label'][label]['f1']:.2f}"
                     for label in LABEL_ORDER) + " |")
     lines += ["", "## 混淆矩阵", "", "行是正确类别，列是预测类别。"]
-    for set_name, title in (("val", "验证集"), ("test", "测试集")):
+    for set_name, title in (("val", "验证集"), ("test", test_title or "测试集")):
         for r in results:
             if r.get(set_name):
                 lines += ["", f"### {r['model']}（{title}）", "", confusion_markdown(r[set_name]["confusion"])]
@@ -234,16 +241,18 @@ def main(argv: list[str] | None = None) -> int:
     from llm.parse.classify import by_name
     parser = argparse.ArgumentParser(description="Compare clause classifiers.")
     parser.add_argument("--models", nargs="*", default=[])
-    parser.add_argument("--test", action="store_true", help="also score test_claude.csv (final runs only)")
+    parser.add_argument("--test", action="store_true", help="also score the test file (final runs only)")
+    parser.add_argument("--test-file", type=Path, default=TEST, help="which test set --test reads")
+    parser.add_argument("--guard", action="store_true", help="also report every model with the rule-5 guard on")
     parser.add_argument("--report-only", action="store_true")
     parser.add_argument("--machine", default=None, help="where the model ran, for the table")
     parser.add_argument("--size-mb", type=float, default=None)
     parser.add_argument("--note", default=None)
     args = parser.parse_args(argv)
-    if args.test and not TEST.exists():
-        print(f"{TEST} does not exist yet", file=sys.stderr)
+    if args.test and not args.test_file.exists():
+        print(f"{args.test_file} does not exist yet", file=sys.stderr)
         return 1
-    sets = data_sets(args.test)
+    sets = data_sets(args.test, args.test_file)
     texts = texts_needed(sets)
     if not args.report_only:
         from llm import ollama
@@ -257,7 +266,9 @@ def main(argv: list[str] | None = None) -> int:
                     ollama.unload(loaded)
                 loaded = model
             predict(name, by_name(name), texts, {"machine": machine, "size_mb": args.size_mb, "note": args.note})
-    results = [score(json.loads(path.read_text()), sets) for path in sorted(PREDICTIONS.glob("*.json"))]
+    saved = [json.loads(path.read_text()) for path in sorted(PREDICTIONS.glob("*.json"))]
+    results = [score(item, sets) for item in saved] + ([score(item, sets, guard=True) for item in saved]
+                                                       if args.guard else [])
     order = {name: index for index, name in enumerate(["keywords", "linear"])}
     results.sort(key=lambda r: (order.get(r["model"], 2), r["model"]))
     (OUTPUT / "parse_results.md").write_text(markdown(results, sets), encoding="utf-8")

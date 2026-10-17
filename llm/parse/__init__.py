@@ -19,9 +19,12 @@ from typing import Callable
 from llm.contracts import Clause, ParseResult
 from llm.parse.extract import fields, merge
 from llm.parse.keywords import keyword_label
+from llm.parse.labels import HEDGES
 from llm.parse.split import split_clauses
+from llm.parse.text import find_times, named_days, normalize
 
 RUNTIME = "linear"                 # or "ollama-short:<model>" for a fine-tuned model in Ollama
+GUARD = False                      # apply rule 5 after the model (see guarded); off by default
 _RETRY_AFTER = 60                  # seconds to wait before trying a server that failed again
 _down_since: float | None = None
 
@@ -51,11 +54,25 @@ def _runtime(text: str) -> str:
         return _fallback(text)
 
 
-def parse(text: str, classify: Callable[[str], str] | None = None) -> ParseResult:
+def guarded(label: str, text: str) -> str:
+    """Rule 5 of labels.RULES checked after the model: a clock time or a named weekday without a
+    hedge word is a hard condition, so prefer_no_early_late becomes blocked_time."""
+    if label != "prefer_no_early_late":
+        return label
+    norm = normalize(text)
+    if (find_times(norm) or named_days(norm)) and not any(word in norm for word in HEDGES):
+        return "blocked_time"
+    return label
+
+
+def parse(text: str, classify: Callable[[str], str] | None = None, guard: bool | None = None) -> ParseResult:
     label_of = classify or _runtime
+    guard = GUARD if guard is None else guard
     clauses: list[Clause] = []
     for piece in split_clauses(text):
         label = label_of(piece)
+        if guard:
+            label = guarded(label, piece)
         clauses.append({"text": piece, "label": label, "fields": fields(label, piece)})
     return {"clauses": clauses, "conditions": merge(clauses),
             "unrecognised": [clause["text"] for clause in clauses if clause["label"] == "other"]}

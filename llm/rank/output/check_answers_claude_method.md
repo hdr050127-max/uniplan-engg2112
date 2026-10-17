@@ -25,3 +25,12 @@ Answered the same way on 2026-10-17, again without seeing any model answer. Two 
   satisfied by both timetables, so they did not decide anything.
 - Differences below the thresholds count as equal in the dominance check. The latest finish
   time and earliest start rows were not used on their own; the early/late minutes row covers them.
+
+## The 50 round-2 teacher-audit pairs (b001–b050)
+
+Answered by the coordinator on 2026-10-17 with the same rule, without seeing any model answer.
+Concerns were taken from each persona sentence in the order it states them; a persona that names
+one-class trips first ("最怕来了只上一节课就走") was judged on that row first. Building changes are
+not in the table, so "讨厌在两栋楼之间赶来赶去" could not decide a pair; the next stated concern did.
+Every pair had a noticeable difference on some stated concern, so there is no 差不多 this time.
+Result: 红 23, 蓝 27.

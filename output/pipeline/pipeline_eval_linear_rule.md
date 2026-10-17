@@ -3,7 +3,7 @@
 Sentences: `llm/parse/data/test_claude.csv`, written by Claude (Opus 5.5) — **not real student data**. Each sentence is planned twice on the same courses: with its hand-written conditions and with what `parse()` reads. Run on this Mac only.
 
 - Clause classifier: linear model (llm/parse/output/linear_model.json)
-- Ranker: rule: minus the sum of z-scores of the cared-about features (llm/rank/model.json is missing)
+- Ranker: rule: minus the sum of z-scores of the cared-about features
 - Reasons: template (the page asks local Qwen afterwards; not timed here)
 
 | | |
@@ -14,7 +14,7 @@ Sentences: `llm/parse/data/test_claude.csv`, written by Claude (Opus 5.5) — **
 | 2. Planned from parsed conditions, some pick breaks a hand-written hard condition | 6/105 (6%) |
 | — picks that break one | 17/311 (5%) |
 | 3. Same first pick (both plannable) | 88/100 (88%); same set of picks 85/100 (85%) |
-| 4. Seconds from sentence to recommendation (median, max) | 0.09, 0.29 |
+| 4. Seconds from sentence to recommendation (median, max) | 0.07, 0.25 |
 | — of which parse() (median, max) | 0.000, 0.001 |
 
 Fields that differ (sentences): unavailable_windows 26, cares 17, max_days_per_week 5, preferred_hours 5, lunch 4, max_daily_minutes 3, in_person_only 3

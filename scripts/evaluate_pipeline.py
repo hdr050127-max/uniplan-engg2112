@@ -13,6 +13,8 @@ with its hand-written conditions, and with what parse() reads from the sentence.
     python3 scripts/evaluate_pipeline.py                                   # parse() as main runs it
     python3 scripts/evaluate_pipeline.py --linear-from claude/cool-bun-40355d
         # the plain-Python linear classifier committed on that ref, for comparison
+    python3 scripts/evaluate_pipeline.py --ranker rule   # rank() without llm/rank/model.json
+    python3 scripts/evaluate_pipeline.py --compare output/pipeline/A.json output/pipeline/B.json
 
 Runs on this Mac only: llm/ollama.py is pointed at 127.0.0.1 unless --configured-server is given.
 Writes output/pipeline/pipeline_eval_<classifier>.json and .md.
@@ -31,6 +33,7 @@ import time
 from collections import Counter
 from contextlib import nullcontext
 from pathlib import Path
+from unittest import mock
 
 if "--configured-server" not in sys.argv:
     os.environ["UNIPLAN_OLLAMA_URL"] = "http://127.0.0.1:11434"  # before llm.ollama reads it
@@ -128,22 +131,35 @@ def run_one(index: int, sentence_id: str, text: str, rows: list[dict], catalog, 
     return record
 
 
-def summary(records: list[dict], classifier: str, ranker: str) -> str:
-    def rate(part: int, whole: int) -> str:
-        return f"{part}/{whole} ({part / whole:.0%})" if whole else "0/0"
+def rate(part: int, whole: int) -> str:
+    return f"{part}/{whole} ({part / whole:.0%})" if whole else "0/0"
 
-    exact = sum(record["exact"] for record in records)
+
+def stats(records: list[dict]) -> dict:
     planned_parsed = [record for record in records if record["status_parsed"] == "ready"]
     checked = [record for record in planned_parsed if record.get("violations") is not None]
-    broken = [record for record in checked if any(record["violations"])]
-    picks = [pick for record in checked for pick in record["violations"]]
     both = [record for record in records if "picks_parsed" in record and "picks_gold" in record]
-    same_first = sum(record["picks_parsed"][0] == record["picks_gold"][0] for record in both)
-    same_set = sum(set(record["picks_parsed"]) == set(record["picks_gold"]) for record in both)
     seconds = [record["total_seconds"] for record in records]
-    parse_seconds = [record["parse_seconds"] for record in records]
-    feasibility = Counter((record["status_gold"] == "ready", record["status_parsed"] == "ready") for record in records)
-    wrong_fields = Counter(field for record in records for field in record["fields_wrong"])
+    return {
+        "exact": sum(record["exact"] for record in records), "sentences": len(records),
+        "checked": checked, "broken": [record for record in checked if any(record["violations"])],
+        "picks": [pick for record in checked for pick in record["violations"]],
+        "both": both,
+        "same_first": sum(record["picks_parsed"][0] == record["picks_gold"][0] for record in both),
+        "same_set": sum(set(record["picks_parsed"]) == set(record["picks_gold"]) for record in both),
+        "seconds": (statistics.median(seconds), max(seconds)),
+        "parse_seconds": [record["parse_seconds"] for record in records],
+        "feasibility": Counter((record["status_gold"] == "ready", record["status_parsed"] == "ready")
+                               for record in records),
+        "wrong_fields": Counter(field for record in records for field in record["fields_wrong"]),
+    }
+
+
+def summary(records: list[dict], classifier: str, ranker: str) -> str:
+    numbers = stats(records)
+    exact, checked, broken, picks, both = (numbers[key] for key in ("exact", "checked", "broken", "picks", "both"))
+    same_first, same_set, seconds = numbers["same_first"], numbers["same_set"], numbers["seconds"]
+    parse_seconds, feasibility, wrong_fields = numbers["parse_seconds"], numbers["feasibility"], numbers["wrong_fields"]
     lines = [
         f"# End-to-end pipeline evaluation (classifier: {classifier})", "",
         "Sentences: `llm/parse/data/test_claude.csv`, written by Claude (Opus 5.5) — **not real student data**. "
@@ -160,7 +176,7 @@ def summary(records: list[dict], classifier: str, ranker: str) -> str:
         f"| 2. Planned from parsed conditions, some pick breaks a hand-written hard condition | {rate(len(broken), len(checked))} |",
         f"| — picks that break one | {rate(sum(bool(pick) for pick in picks), len(picks))} |",
         f"| 3. Same first pick (both plannable) | {rate(same_first, len(both))}; same set of picks {rate(same_set, len(both))} |",
-        f"| 4. Seconds from sentence to recommendation (median, max) | {statistics.median(seconds):.2f}, {max(seconds):.2f} |",
+        f"| 4. Seconds from sentence to recommendation (median, max) | {seconds[0]:.2f}, {seconds[1]:.2f} |",
         f"| — of which parse() (median, max) | {statistics.median(parse_seconds):.3f}, {max(parse_seconds):.3f} |",
         "", "Fields that differ (sentences): " + (", ".join(f"{field} {count}" for field, count in wrong_fields.most_common()) or "none"),
         "", "\"Breaks a hard condition\" is checked by `uniplan.advisor.hard_violations` (clashes, avoided times, "
@@ -176,14 +192,50 @@ def summary(records: list[dict], classifier: str, ranker: str) -> str:
     return "\n".join(lines) + "\n"
 
 
+def comparison(first: Path, second: Path) -> str:
+    """Two saved runs side by side, plus how often their first picks differ on the same conditions."""
+    runs = [json.loads(path.read_text()) for path in (first, second)]
+    numbers = [stats(run["records"]) for run in runs]
+    rows = [
+        ("Clause classifier", *[run["classifier"] for run in runs]),
+        ("Ranker", *[run["ranker"] for run in runs]),
+        ("Parsed conditions equal the hand-written ones", *[rate(n["exact"], n["sentences"]) for n in numbers]),
+        ("Planned from parsed conditions, some pick breaks a hand-written hard condition",
+         *[rate(len(n["broken"]), len(n["checked"])) for n in numbers]),
+        ("Picks that break one", *[rate(sum(bool(p) for p in n["picks"]), len(n["picks"])) for n in numbers]),
+        ("Same first pick as with the hand-written conditions", *[rate(n["same_first"], len(n["both"])) for n in numbers]),
+        ("Same three picks", *[rate(n["same_set"], len(n["both"])) for n in numbers]),
+        ("Seconds, sentence to recommendation (median, max)",
+         *[f"{n['seconds'][0]:.2f}, {n['seconds'][1]:.2f}" for n in numbers]),
+    ]
+    by_id = [{record["sentence_id"]: record for record in run["records"]} for run in runs]
+    shared = [sid for sid in by_id[0] if "picks_gold" in by_id[0][sid] and "picks_gold" in by_id[1].get(sid, {})]
+    moved = sum(by_id[0][sid]["picks_gold"][0] != by_id[1][sid]["picks_gold"][0] for sid in shared)
+    lines = ["# Pipeline evaluation: two runs compared", "",
+             "Sentences: `llm/parse/data/test_claude.csv` (written by Claude; not real student data).", "",
+             f"| | `{first.name}` | `{second.name}` |", "| --- | --- | --- |"]
+    lines += [f"| {name} | {a} | {b} |" for name, a, b in rows]
+    lines += ["", f"With the same hand-written conditions, the two runs put a different timetable first in "
+                  f"{rate(moved, len(shared))} of the sentences both could plan."]
+    return "\n".join(lines) + "\n"
+
+
 def main_cli(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     parser.add_argument("--linear-from", metavar="REF",
                         help="use llm/parse/output/linear_model.json as committed on this git ref")
     parser.add_argument("--configured-server", action="store_true",
                         help="let llm/ollama.py use ~/.config/uniplan/ollama_url instead of this Mac")
+    parser.add_argument("--ranker", choices=("model", "rule"), default="model",
+                        help="rank() with llm/rank/model.json, or the z-score rule it falls back to")
+    parser.add_argument("--compare", nargs=2, type=Path, metavar="JSON", help="compare two saved runs")
     parser.add_argument("--limit", type=int, default=0, help="only the first N sentences")
     args = parser.parse_args(argv)
+    if args.compare:
+        target = OUT / f"compare_{args.compare[0].stem}_vs_{args.compare[1].stem}.md"
+        target.write_text(comparison(*args.compare))
+        print(f"wrote {target}")
+        return 0
 
     classify, classifier, name = None, "", "runtime"
     if args.linear_from:
@@ -202,14 +254,18 @@ def main_cli(argv: list[str] | None = None) -> int:
         except (OSError, ValueError, KeyError):
             classifier = "keyword rules (llm/parse/output/linear_model.json is missing, so parse() falls back)"
         name = "keywords" if classifier.startswith("keyword") else "linear"
-    ranker = ("trained pairwise model (llm/rank/model.json)" if rank_model.load() is not None
-              else "rule: minus the sum of z-scores of the cared-about features (llm/rank/model.json is missing)")
+    trained = rank_model.load() is not None and args.ranker == "model"
+    ranker = ("trained pairwise model (llm/rank/model.json)" if trained else
+              "rule: minus the sum of z-scores of the cared-about features" +
+              ("" if args.ranker == "rule" else " (llm/rank/model.json is missing)"))
+    name += "_model" if trained else "_rule"
+    rule_only = mock.patch.object(rank_model, "load", return_value=None) if args.ranker == "rule" else nullcontext()
 
     chosen = sentences()[:args.limit or None]
     records = []
     lock = gpu_lock("scripts/evaluate_pipeline.py", "mac") if parsing.RUNTIME.startswith("ollama") and not args.linear_from \
         else nullcontext()
-    with tempfile.TemporaryDirectory() as temp, lock:
+    with tempfile.TemporaryDirectory() as temp, lock, rule_only:
         catalog = tracked_catalog(Path(temp))
         groups = {}
         for units in UNIT_SETS:

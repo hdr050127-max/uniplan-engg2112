@@ -98,7 +98,7 @@ def main() -> None:
     quant = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4", bnb_4bit_use_double_quant=True,
                                bnb_4bit_compute_dtype=torch.bfloat16)
     model = AutoModelForCausalLM.from_pretrained(args.base, quantization_config=quant, device_map={"": 0},
-                                                 torch_dtype=torch.bfloat16)
+                                                 dtype=torch.bfloat16)
     model = prepare_model_for_kbit_training(model, use_gradient_checkpointing=True)
     model.config.use_cache = False
     model = get_peft_model(model, LoraConfig(
@@ -147,7 +147,7 @@ def main() -> None:
     # Merge the best adapter into the full-precision base on the CPU (about 16 GB of RAM), for GGUF export.
     del model
     torch.cuda.empty_cache()
-    base = AutoModelForCausalLM.from_pretrained(args.base, torch_dtype=torch.bfloat16, low_cpu_mem_usage=True)
+    base = AutoModelForCausalLM.from_pretrained(args.base, dtype=torch.bfloat16, low_cpu_mem_usage=True)
     merged = PeftModel.from_pretrained(base, out / "adapter").merge_and_unload()
     merged.save_pretrained(out / "merged", safe_serialization=True)
     tokenizer.save_pretrained(out / "merged")

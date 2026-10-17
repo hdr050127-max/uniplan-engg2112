@@ -223,6 +223,9 @@ _LUNCH_BAD = re.compile(r"紧|不够|赶|没时间|来不及|不能")
 _EXAM = re.compile(r"考试|测验|考")
 _EVERY_DAY = re.compile(r"每天(?:都)?(?:要|得|需要)?(到校|去学校|来学校|在校园|在学校|在校|上课|有课)")
 _ONLY = re.compile(r"固定|只|仅")
+# Absolute "none at all" claims; being the best of the picks is not enough for these.
+_NO_WAIT = re.compile(r"不用等|无需等|不需要等|没有空等|没空等|不用空等|零空等")
+_NO_EARLY_LATE = re.compile(r"没有?早晚课|无早晚课|没有早课|没有晚课|没早课|没晚课")
 _NO_CLASS_BY = re.compile(r"((?:上午|早上|中午|下午|晚上)?\s*\d{1,2}(?:[:：]\d{2}|\s*点半?))\s*(之前|以前|前|之后|以后|后)"
                           r"\s*(?:都)?(?:没课|没有课|不上课|无课|不用上课)")
 _SAME = re.compile(r"一样|相同|差不多|持平|不变")
@@ -358,6 +361,11 @@ def _check_sentence(text: str, facts: dict, allowed: dict, first: bool) -> str |
         elif _ONLY.search(clause):  # "固定周二、周三到校" must name every such day
             if days != (set(facts["campus"]) if _CAMPUS.search(clause) else set(facts["class_days"]) | set(facts["campus"])):
                 return "weekday"
+    if (_NO_WAIT.search(text) and not re.search(r"基本不用等", text) and facts["features"]["gap_min"] >= 1 or
+            re.search(r"基本不用等", text) and facts["features"]["gap_min"] >= SMALL["gap_min"]):
+        return "direction"
+    if _NO_EARLY_LATE.search(text) and facts["features"]["outside_min"] >= 1:
+        return "direction"
     for match in _EVERY_DAY.finditer(text):
         days = set(facts["campus"]) | (set(facts["class_days"]) if match.group(1) in ("上课", "有课") else set())
         if not set(range(1, 6)) <= days:
@@ -374,7 +382,7 @@ def _check_sentence(text: str, facts: dict, allowed: dict, first: bool) -> str |
             if not first:
                 return "superlative"
             continue
-        if re.match(r"\D{0,3}\d", text[match.end():match.end() + 5]):
+        if re.match(r"\D{0,3}\d", _FIRST.sub("第份", text[match.end():match.end() + 8])):
             continue  # "最多 3 天" restates a limit; the number itself was checked above
         care = _axis_near(text, match.start(), match.end())
         if word == "多" or care not in facts["best"]:

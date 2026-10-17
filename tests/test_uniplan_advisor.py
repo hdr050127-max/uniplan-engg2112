@@ -239,6 +239,8 @@ class FactCheckTests(unittest.TestCase):
             "固定周二到校。": (0, "weekday"),  # leaves out Wednesday
             "每天都有午休时间。": (0, "topic"),  # no lunch condition was set
             "适合你每天在校园。": (0, "weekday"),
+            "没早晚课。": (1, "direction"),           # pick 2 has 60 minutes a week
+            "课之间不用等。": (0, "direction"),       # 30 minutes a week is not none
         }
         for text, (index, why) in cases.items():
             with self.subTest(text=text):

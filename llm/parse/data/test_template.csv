@@ -1,0 +1,20 @@
+sentence_id,sentence,clause,label,block,max_days,max_class_hours,max_campus_hours,lunch,prefer_hours,note
+t01,我周二和周四晚上要打工，所以那两天晚上不能上课,我周二和周四晚上要打工，所以那两天晚上不能上课,blocked_time,"Tue,Thu 18:00-24:00",,,,,,"所以…那两天" refers back, so it stays in the same clause
+t02,"I have to pick up my son at 3pm every day, and I'd rather not have gaps between classes",I have to pick up my son at 3pm every day,blocked_time,Mon-Fri 15:00-24:00,,,,,,an afternoon pick-up blocks from that time on
+,,I'd rather not have gaps between classes,prefer_less_waiting,,,,,,,
+t03,一周最多去学校三天，每天上课不超过5小时,一周最多去学校三天,max_days,,3,,,,,
+,,每天上课不超过5小时,max_daily_hours,,,5,,,,hours of class (not time on campus)
+t04,中午留半个小时吃饭，不要网课,中午留半个小时吃饭,lunch,,,,,11:30-14:00 30,,no time given: default window 11:30-14:00
+,,不要网课,in_person_only,,,,,,,
+t05,"I'm not a morning person, ideally no classes before 11am",I'm not a morning person,prefer_no_early_late,,,,,,,no clock time: leave prefer_hours blank
+,,ideally no classes before 11am,prefer_no_early_late,,,,,,11:00-18:00,hedge word + clock time: soft; missing end stays 18:00
+t06,周五下午有篮球训练，课最好集中在几天里,周五下午有篮球训练,blocked_time,Fri 12:00-18:00,,,,,,下午 = 12:00-18:00
+,,课最好集中在几天里,prefer_fewer_days,,,,,,,
+t07,I can't be on campus more than 8 hours a day,I can't be on campus more than 8 hours a day,max_daily_hours,,,,8,,,time on campus (not hours of class)
+t08,只想周一周三周四来学校，上午的课最好少一点,只想周一周三周四来学校,blocked_time,"Tue,Fri all",,,,,,named days to come: block the other weekdays
+,,上午的课最好少一点,prefer_no_early_late,,,,,,,
+t09,希望能和室友在同一个 lab，课之间别等太久,希望能和室友在同一个 lab,other,,,,,,,the scheduler cannot act on this
+,,课之间别等太久,prefer_less_waiting,,,,,,,
+t10,"周一 morning 要上班, max 4 days a week, 午饭 at least 45 min",周一 morning 要上班,blocked_time,Mon 0:00-10:00,,,,,,morning = 0:00-10:00
+,,max 4 days a week,max_days,,4,,,,,
+,,午饭 at least 45 min,lunch,,,,,11:30-14:00 45,,

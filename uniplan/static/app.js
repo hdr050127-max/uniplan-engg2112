@@ -50,7 +50,7 @@ const state = {
   cares: new Set(AXES), selected: null, variant: {}, week: {}, routeDay: {},
   tab: "week", enrolled: {}, friend: null, notice: "", compare: [], history: [],
   sharedPlan: null, participant: null, firstInteraction: null,
-  say: null, view: "all", reasons: {},
+  say: null, view: "all", viewPicked: false, reasons: {},
 };
 
 function minutes(value) {
@@ -538,7 +538,7 @@ function renderSay() {
     } else {
       row.classList.add("note");
       const meaning = clause.label === "other" ? "没听懂，可以在下面手动设置"
-        : `听出是“${LABEL_NAME[clause.label] || clause.label}”，但没找到具体的数或时间，请在下面设置`;
+        : `听出是“${LABEL_NAME[clause.label] || clause.label}”，但没读出具体的数字或时间，可以在下面自己设置`;
       row.append(el("span", "", clause.problems.length ? "识别出的时间或数字不合理，已忽略" : meaning), quote);
     }
     box.append(row);
@@ -685,10 +685,11 @@ async function plan(profile, { groups = null, pinned = {}, excluded = [], notice
     state.routeDay = {};
     state.compare = [];
     state.notice = notice;
-    // A new plan opens on the three recommended timetables; re-plans keep the current view.
+    // Plans open on the recommended timetables; a re-plan keeps the list the student picked.
     const recommended = Boolean(result.ranking_result?.recommendation);
+    if (!notice) state.viewPicked = false;
     if (!recommended) state.view = "all";
-    else if (!notice) state.view = state.sharedPlan ? "all" : "recommend";
+    else if (!state.viewPicked) state.view = state.sharedPlan ? "all" : "recommend";
     if (enrolled) state.enrolled = enrolled;
     else if (!notice) {
       state.enrolled = {};
@@ -910,6 +911,7 @@ function reasonSource() {
     return `理由由本地千问（${written.model}）改写，每句都和课表核对过${status === "partial" ? "；没通过核对的句子保留原样" : ""}。`;
   }
   if (status === "rejected") return "千问改写的句子没通过和课表的核对，显示按课表数据生成的原句。";
+  if (status === "busy") return "显卡正在跑批量任务，这次没请千问改写，理由按课表数据生成。";
   if (status) return "本地千问暂时不可用，理由按课表数据生成。";
   return "理由按课表数据生成。";
 }
@@ -989,6 +991,7 @@ function renderPlans() {
       choice.addEventListener("click", () => {
         if (state.view === key) return;
         state.view = key;
+        state.viewPicked = true;
         state.selected = null;
         state.compare = [];
         renderPlans();

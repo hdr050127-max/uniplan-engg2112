@@ -9,11 +9,12 @@ from __future__ import annotations
 
 import secrets
 from collections import OrderedDict
+from datetime import date, timedelta
 from threading import Lock
 from typing import Any, Callable
 
 from llm.contracts import Conditions, preferences_of, to_profile_fields
-from llm.explain import explain
+from llm.explain import explain, explain_detailed
 from llm.parse import parse
 from llm.rank import rank
 
@@ -117,7 +118,10 @@ def recommend(pool: list[dict[str, Any]], profile: dict[str, Any], student_text:
     menus, sources = {}, set()
     for axes in AXIS_SETS:
         chosen, from_front = select_candidates(pool, axes)
-        candidates = [built.setdefault(entry["candidate_id"], candidate(entry)) for entry in chosen]
+        for entry in chosen:
+            if entry["candidate_id"] not in built:  # each timetable's meetings are built once
+                built[entry["candidate_id"]] = candidate(entry)
+        candidates = [built[entry["candidate_id"]] for entry in chosen]
         conditions = conditions_of(profile, axes)
         order, scores, source = rank_candidates(candidates, preferences_of(conditions, student_text))
         sources.add(source)
@@ -179,6 +183,53 @@ def plan_from_sentence(text: str, raw_profile: dict[str, Any], snapshot_catalog:
     return result
 
 
+def hard_violations(meetings: list[dict[str, Any]], profile: dict[str, Any]) -> list[str]:
+    """Re-check every hard condition on the dated meetings of one timetable, without schedule.py.
+
+    Used by the tests and scripts/evaluate_explain.py; an empty list means no violation.
+    "Only in-person classes" is not re-checked: it depends on which groups offer any.
+    """
+    problems = []
+    by_date = {}
+    for meeting in meetings:
+        by_date.setdefault(meeting["date"], []).append(meeting)
+    for day, daily in by_date.items():
+        daily = sorted(daily, key=lambda m: m["start_min"])
+        for a, b in zip(daily, daily[1:]):
+            if b["start_min"] < a["end_min"]:
+                problems.append(f"overlap on {day}: {a['unit_code']} / {b['unit_code']}")
+        ordinary = [m for m in daily if not m["is_fixed_assessment"]]
+        for m in ordinary:
+            for w in profile["unavailable_windows"]:
+                if w["weekday"] == m["weekday"] and m["start_min"] < w["end_min"] and w["start_min"] < m["end_min"]:
+                    problems.append(f"class in avoided time on {day}")
+        if profile.get("max_daily_minutes") and sum(m["end_min"] - m["start_min"] for m in ordinary) > profile["max_daily_minutes"]:
+            problems.append(f"too many class minutes on {day}")
+        on_campus = [m for m in ordinary if not m["is_online"]]
+        if (profile.get("max_daily_span") and on_campus and
+                max(m["end_min"] for m in on_campus) - min(m["start_min"] for m in on_campus) > profile["max_daily_span"]):
+            problems.append(f"too long on campus on {day}")
+        lunch = profile.get("lunch")
+        if lunch and ordinary:
+            free, cursor = False, lunch["start_min"]
+            for m in sorted(ordinary, key=lambda m: m["start_min"]):
+                if m["end_min"] <= cursor or m["start_min"] >= lunch["end_min"]:
+                    continue
+                free = free or m["start_min"] - cursor >= lunch["minutes"]
+                cursor = max(cursor, m["end_min"])
+            if not (free or lunch["end_min"] - cursor >= lunch["minutes"]):
+                problems.append(f"no lunch break on {day}")
+    if profile.get("max_days_per_week"):
+        weeks = {}
+        for m in meetings:
+            if not m["is_fixed_assessment"] and not m["is_online"]:
+                day = date.fromisoformat(m["date"])
+                weeks.setdefault(day - timedelta(days=day.weekday()), set()).add(day)
+        if any(len(days) > profile["max_days_per_week"] for days in weeks.values()):
+            problems.append("too many campus days in a week")
+    return problems
+
+
 class ExplainRegistry:
     """Recent recommendations, so the page can ask the local model for reasons afterwards.
 
@@ -195,20 +246,22 @@ class ExplainRegistry:
         token = secrets.token_hex(12)
         picks = {axes: [items[cid] for cid in menu["picks"]] for axes, menu in recommendation["menus"].items()}
         with self._lock:
-            self._items[token] = {"student_text": student_text, "profile": profile, "picks": picks, "done": {}}
+            self._items[token] = {"student_text": student_text, "profile": profile, "picks": picks,
+                                  "done": {}, "locks": {}}
             while len(self._items) > self._limit:
                 self._items.popitem(last=False)
         return token
 
     def explain(self, token: str, axes: str) -> dict[str, Any] | None:
-        from llm.explain import explain_detailed
-
+        """The reasons for one menu; a second request for the same menu waits for the first."""
         with self._lock:
             context = self._items.get(token)
-        if context is None or axes not in context["picks"]:
-            return None
-        if axes not in context["done"]:
-            context["done"][axes] = explain_detailed(
-                context["student_text"], conditions_of(context["profile"], axes.split(",")),
-                context["picks"][axes])
-        return context["done"][axes]
+            if context is None or axes not in context["picks"]:
+                return None
+            menu_lock = context["locks"].setdefault(axes, Lock())
+        with menu_lock:
+            if axes not in context["done"]:
+                context["done"][axes] = explain_detailed(
+                    context["student_text"], conditions_of(context["profile"], axes.split(",")),
+                    context["picks"][axes])
+            return context["done"][axes]

@@ -60,6 +60,16 @@ def chat(model: str, messages: list[dict], *, schema: dict | None = None,
         return json.loads(response.read())["message"]["content"]
 
 
+def unload(model: str) -> None:
+    """Free a model's GPU memory before a batch switches to another model (7B and 14B
+    together nearly fill the Windows GPU's 16 GB and slow both down)."""
+    body = {"model": model, "keep_alive": 0}
+    request = urllib.request.Request(f"{base_url()}/api/generate", json.dumps(body).encode(),
+                                     {"Content-Type": "application/json"})
+    with urllib.request.urlopen(request, timeout=60):
+        pass
+
+
 def available(model: str | None = None) -> bool:
     """Whether the server in use answers (and has the model, if one is named)."""
     names = _models(base_url())

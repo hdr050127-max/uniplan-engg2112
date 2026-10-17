@@ -101,12 +101,15 @@ class SetBaseline:
 
 
 class PairwiseLR:
-    def __init__(self, interactions: bool, C: float = 1.0):
-        self.interactions, self.C = interactions, C
-        self.name = "成对逻辑回归 + 学生交叉项" if interactions else "成对逻辑回归（只用课表特征）"
+    def __init__(self, interactions: bool, C: float = 1.0, use_focus: bool = True):
+        self.interactions, self.C, self.use_focus = interactions, C, use_focus
+        self.name = ("成对逻辑回归（只用课表特征）" if not interactions else
+                     "成对逻辑回归 + 学生交叉项" if use_focus else "成对逻辑回归 + 交叉项（不看 cares 顺序）")
 
     def features(self, x, s):
         zx = z(x, self.spec)
+        if not self.use_focus:      # which cares only, not which comes first
+            s = [0.0, 0.0, 0.0] + list(s[3:])
         return np.concatenate([zx, np.outer(s, zx).ravel()]) if self.interactions else zx
 
     def fit(self, rows, spec):
@@ -270,6 +273,7 @@ def main() -> int:
         (lambda **p: SetBaseline(True), [{}]),
         (lambda **p: PairwiseLR(False, **p), [{"C": c} for c in (0.01, 0.03, 0.1, 0.3, 1, 3)]),
         (lambda **p: PairwiseLR(True, **p), [{"C": c} for c in (0.01, 0.03, 0.1, 0.3, 1, 3)]),
+        (lambda **p: PairwiseLR(True, use_focus=False, **p), [{"C": c} for c in (0.01, 0.03, 0.1, 0.3, 1, 3)]),
         (lambda **p: PairClassifier("rf", **p),
          [{"n_estimators": 300, "max_depth": d, "min_samples_leaf": m} for d in (4, 8, None) for m in (1, 5)]),
         (lambda **p: PairClassifier("mlp", **p),

@@ -134,15 +134,15 @@ ASKING = {  # what llm.parse.clarify may add; questions here are made up for the
     "conditions": {"unavailable_windows": [FRIDAY]}, "unrecognised": [],
     "summary": "周五全天不上课；每周最多到校几天还没说。",
     "questions": [
-        {"kind": "hard_or_soft", "clause_index": 0, "text": "周五是完全不能来，还是尽量不来？",
-         "options": [{"text": "完全不能", "label": "blocked_time", "fields": {}},
-                     {"text": "尽量不来", "label": "prefer_fewer_days", "fields": {"cares": ["campus_days"]}}]},
-        {"kind": "missing_value", "clause_index": 1, "text": "每周最多来几天？",
-         "options": [{"text": "先不限", "label": "max_days", "fields": {}},
-                     {"text": "3 天", "label": "max_days", "fields": {"max_days_per_week": 3}}]},
-        {"kind": "low_confidence", "clause_index": 7, "text": "这句是指……？", "options": []},
-        {"kind": "offer", "clause_index": None, "text": "要留出午饭时间吗？",
-         "options": [{"text": "留 30 分钟", "label": None,
+        {"kind": "hard_or_soft", "clause_index": 0, "text": "Can't, or would rather not?",
+         "options": [{"text": "Can't", "label": "blocked_time", "fields": {}},
+                     {"text": "Would rather not", "label": "prefer_fewer_days", "fields": {"cares": ["campus_days"]}}]},
+        {"kind": "missing_value", "clause_index": 1, "text": "How many days a week, at most?",
+         "options": [{"text": "Leave as is", "label": "max_days", "fields": {}},
+                     {"text": "3", "label": "max_days", "fields": {"max_days_per_week": 3}}]},
+        {"kind": "low_confidence", "clause_index": 7, "text": "Which did you mean?", "options": []},
+        {"kind": "offer", "clause_index": None, "text": "Lunch break?",
+         "options": [{"text": "30 min between 11:30 am and 2 pm", "label": None,
                       "fields": {"lunch": {"start_min": 690, "end_min": 840, "minutes": 30}}}]},
     ],
 }
@@ -164,21 +164,24 @@ class ClarifyTests(unittest.TestCase):
             read_sentence("我周五要打工")
         parsed.assert_called_once_with("我周五要打工")                # no overrides: parse() as before
 
-    def test_notes_and_questions_are_in_english(self):
+    def test_questions_are_the_parsers_and_each_option_carries_its_note(self):
+        with mock.patch.object(advisor, "parse", return_value=ASKING):
+            result = read_sentence("我周五要打工，最多来几天吧")
+        hard, missing, offer = result["questions"]
+        asked = [question for question in ASKING["questions"] if question["clause_index"] != 7]
+        self.assertEqual([question["text"] for question in result["questions"]], [question["text"] for question in asked])
+        self.assertEqual([o["text"] for o in hard["options"]], ["Can't", "Would rather not"])  # as llm.parse wrote them
+        self.assertEqual([o["text"] for o in offer["options"]], ["30 min between 11:30 am and 2 pm", "No"])
+        self.assertIn("Fri", result["clauses"][0]["note"])                    # llm.parse.clarify.describe_clause
+        self.assertEqual(hard["options"][0]["note"], result["clauses"][0]["note"])
+        self.assertIn("3", missing["options"][1]["note"])                      # the note once "3" is chosen
+        self.assertNotIn("note", offer["options"][0])
         with mock.patch.object(advisor, "parse", return_value=ASKING), \
                 mock.patch.object(advisor.wording, "clause_describer", return_value=None):
             result = read_sentence("我周五要打工，最多来几天吧")
-        self.assertEqual([clause["note"] for clause in result["clauses"]],
+        self.assertEqual([clause["note"] for clause in result["clauses"]],    # uniplan.wording stands in
                          ["Not available Fri", "A cap on days a week, but no number was given"])
-        hard, missing, offer = result["questions"]
-        self.assertEqual(hard["text"], "Can't, or would rather not?")
-        self.assertEqual([(o["text"], o["note"]) for o in hard["options"]],
-                         [("Can't", "Not available Fri"), ("Would rather not", "Fewer days on campus, if possible")])
-        self.assertEqual([o["text"] for o in missing["options"]], ["I'll add it to the sentence", "3"])
-        self.assertEqual(missing["options"][1]["note"], "At most 3 days on campus a week")
-        self.assertEqual(offer["text"], "Lunch break?")
-        self.assertEqual([o["text"] for o in offer["options"]], ["30 min between 11:30 am and 2 pm", "No"])
-        self.assertNotIn("note", offer["options"][0])
+        self.assertEqual(result["questions"][1]["options"][1]["note"], "At most 3 days on campus a week")
 
     def test_the_parsers_describer_writes_the_notes_when_it_works(self):
         describe = mock.Mock(side_effect=lambda clause: f"{clause['label']} read")
@@ -386,6 +389,14 @@ class FactCheckTests(unittest.TestCase):
         with mock.patch.object(explainer, "choose_model", return_value=None):
             self.assertEqual(explainer.explain_detailed("", {}, self.picks)["status"], "unavailable")
 
+    def test_rewriting_is_off_unless_a_model_is_named(self):
+        with mock.patch.dict(os.environ), \
+                mock.patch.object(explainer.ollama, "available", side_effect=AssertionError("asked Ollama")):
+            os.environ.pop("UNIPLAN_EXPLAIN_MODEL", None)
+            self.assertFalse(explainer.rewriting_on())
+            self.assertIsNone(explainer.choose_model())
+            self.assertEqual(explainer.explain_detailed("", {"cares": ["gap"]}, self.picks)["status"], "unavailable")
+
     def test_templates_read_as_plain_english(self):
         reasons = explainer.explain("", {"cares": ["gap"]}, self.picks, model=None)
         self.assertTrue(reasons[0].startswith("First because, compared with option 2, it has "), reasons[0])
@@ -489,9 +500,15 @@ class ServerTests(unittest.TestCase):
         self.assertEqual(ordered["ranking_result"]["recommendation"]["menus"]["gap,campus_days,outside_hours"]["cares"],
                          ["outside_hours", "gap", "campus_days"])
 
-        status, reasons = self.post("/api/explain", {"token": recommendation["explain_token"], "axes": "gap"})
+        self.assertNotIn("explain_token", recommendation)  # templates only unless a model is named
+        with mock.patch.dict(os.environ, {"UNIPLAN_EXPLAIN_MODEL": "qwen2.5:7b"}), \
+                mock.patch.object(explainer, "choose_model", return_value=None):
+            _, named = self.post("/api/prepare", {"profile": profile, "save": False, "required_groups": groups,
+                                                  "student_text": "我周五要打工，不想课之间等太久"})
+            rewritten = named["ranking_result"]["recommendation"]
+            status, reasons = self.post("/api/explain", {"token": rewritten["explain_token"], "axes": "gap"})
         self.assertEqual(status, 200)
-        self.assertEqual((reasons["status"], reasons["reasons"]), ("unavailable", recommendation["menus"]["gap"]["reasons"]))
+        self.assertEqual((reasons["status"], reasons["reasons"]), ("unavailable", rewritten["menus"]["gap"]["reasons"]))
         self.assertEqual(self.post("/api/explain", {"token": "nope", "axes": "gap"})[0], 404)
 
         menu = recommendation["menus"]["gap,campus_days,outside_hours"]

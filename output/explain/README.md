@@ -90,3 +90,9 @@ preferred hours. The Chinese check of the same kind found 29 of 30 correct. So t
 lets through more wrong rewrites than the Chinese one. These failure modes were found on v2 and the
 exam, so they were recorded, not fixed (fixing them now would tune on the test sets). Templates are
 true by construction in both languages.
+
+**Decision (2026-10-17, coordinator):** the English site shows the template reasons only. With English
+rewrites passing the check 24 to 34% of the time, and 10 of 30 passed ones wrong on a manual check, the
+7B is no longer asked by default (`llm.explain.rewriting_on`); it is asked only when
+`UNIPLAN_EXPLAIN_MODEL` names a model. The Chinese numbers above stay for comparison. This is a
+negative result and is reported as one.

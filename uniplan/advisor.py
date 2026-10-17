@@ -207,9 +207,9 @@ def read_sentence(text: str, overrides: dict[int, str] | None = None) -> dict[st
     ``overrides`` relabels clauses (by index) the student answered a question about.
     Anything the scheduler would reject (a window ending before it starts, a lunch
     longer than its window...) is dropped here and listed under ``problems``.
-    Each clause gets an English ``note``; questions and options are worded in English
-    (``uniplan.wording``), and each option of a question about a clause gets the note
-    the clause would have with that answer.
+    Each clause gets an English ``note`` (``llm.parse.clarify.describe_clause``, or
+    ``uniplan.wording`` if that fails), and each option of a question about a clause gets the
+    note the clause would have with that answer. Question and option text is the parser's own.
     """
     result = parse(text, overrides=overrides) if overrides else parse(text)
     describer = wording.clause_describer()
@@ -227,18 +227,14 @@ def read_sentence(text: str, overrides: dict[int, str] | None = None) -> dict[st
         options = [{**option, **_applicable(option.get("fields") or {})} for option in question["options"]]
         if question["kind"] == "offer" and not any(option.get("label") is None and not option["profile_fields"]
                                                    and not option["cares"] for option in options):
-            options.append({"text": "", "label": None, "fields": {}, **_applicable({})})
-        worded = []
+            options.append({"text": "No", "label": None, "fields": {}, **_applicable({})})
+        noted = []
         for option in options:
-            note, has_values = None, True
-            if clause is not None:
+            if clause is not None:  # what the clause would say with this answer, beside it
                 label, fields = _reading(clause, option)
-                reading = _applicable(fields)
-                note = _note(describer, clause["text"], label, fields, reading)
-                has_values = bool(reading["profile_fields"] or reading["cares"])
-            english = wording.option_text(question, option, clause, note, has_values)
-            worded.append({**option, "text": english, **({"note": note} if note is not None else {})})
-        questions.append({**question, "text": wording.question_text(question, clause), "options": worded})
+                option = {**option, "note": _note(describer, clause["text"], label, fields, _applicable(fields))}
+            noted.append(option)
+        questions.append({**question, "options": noted})
     return {**result, "clauses": clauses, "questions": questions, "mode": parse_mode()}
 
 

@@ -10,6 +10,7 @@ from pathlib import Path
 from threading import Lock
 from urllib.parse import parse_qs, urlsplit
 
+from llm.explain import rewriting_on
 from llm.parse.labels import LABELS
 
 from .advisor import ExplainRegistry, model_server, read_sentence
@@ -208,11 +209,14 @@ class AppHandler(BaseHTTPRequestHandler):
                 result["fetch"] = fetch_result
                 ranking = result.get("ranking_result") or {}
                 if ranking.get("recommendation"):
-                    # The sentence stays in memory for the reasons request; it is never saved.
                     candidates = ranking["recommendation"].pop("_candidates", None)
-                    ranking["recommendation"]["explain_token"] = self.server.explanations.add(
-                        student_text, result["profile"], ranking["recommendation"],
-                        ranking["shortlist"]["items"], candidates)
+                    if rewriting_on():
+                        # Only when a model is named to reword the reasons; the page shows the
+                        # templates otherwise. The sentence stays in memory for that request; it
+                        # is never saved.
+                        ranking["recommendation"]["explain_token"] = self.server.explanations.add(
+                            student_text, result["profile"], ranking["recommendation"],
+                            ranking["shortlist"]["items"], candidates)
                 data = result.get("module_two_result")
                 if data:
                     age = snapshot_age_days(data.get("snapshot_time"))

@@ -1158,27 +1158,14 @@ function reasonOf(index) {
   return keepUnits(written?.reasons?.[index] || rec.menu.reasons[index]);
 }
 
-function reasonSimplified() {
-  // The configured model server did not answer, or no model wrote the reasons.
-  const written = state.reasons[recommendation().key];
-  return Boolean(written?.fell_back) || ["unavailable", "failed"].includes(written?.status);
-}
-
 function reasonSource() {
+  // Said only when a model really reworded the reasons (UNIPLAN_EXPLAIN_MODEL on the server);
+  // by default the reasons are the templates and nothing is added.
   const written = state.reasons[recommendation().key];
   const status = written?.status;
-  if (status === "pending") return "Rewording the reasons…";
-  if (status === "model" || status === "partial") {
-    const where = written.fell_back
-      ? `The model server is offline, so ${written.model} on this computer reworded the reasons`
-      : `Reworded by ${written.model} on our own machine`;
-    return `${where}. Every sentence was checked against its timetable${
-      status === "partial" ? "; sentences that failed the check keep their original wording" : ""}.`;
-  }
-  if (status === "rejected") return "The reworded reasons did not match the timetables, so the original wording is shown.";
-  if (status === "busy") return "The model server is busy with a batch job, so the reasons keep their original wording.";
-  if (status) return "Simplified mode: the language model is offline, so the reasons keep their original wording.";
-  return "Reasons are written from the timetable data.";
+  if (status !== "model" && status !== "partial") return "";
+  return `Reworded by ${written.model}. Every sentence was checked against its timetable${
+    status === "partial" ? "; sentences that failed the check keep their original wording" : ""}.`;
 }
 
 function updateReasons() {
@@ -1188,7 +1175,7 @@ function updateReasons() {
   const source = document.querySelector(".reason-source");
   if (source) {
     source.textContent = reasonSource();
-    source.classList.toggle("warn", reasonSimplified());
+    source.hidden = !source.textContent;
   }
 }
 
@@ -1196,7 +1183,6 @@ async function loadReasons() {
   const rec = recommendation();
   if (state.view !== "recommend" || !rec?.token || state.reasons[rec.key]) return;
   state.reasons[rec.key] = { status: "pending" };
-  updateReasons();
   try {
     const data = await post("/api/explain", { token: rec.token, axes: rec.axes });
     state.reasons[rec.key] = data.reasons ? data : { status: "failed" };
@@ -1315,7 +1301,11 @@ function renderPlans() {
   const workspace = el("div", "workspace");
   const list = el("div", "plan-list");
   plans.forEach((item, index) => list.append(planCard(item, index, plans)));
-  if (rec) list.append(el("p", `reason-source${reasonSimplified() ? " warn" : ""}`, reasonSource()));
+  if (rec?.token) {
+    const source = el("p", "reason-source", reasonSource());
+    source.hidden = !source.textContent;
+    list.append(source);
+  }
   const side = el("div", "side");
   if (state.compare.length === 2) {
     const [a, b] = state.compare.map((id) => plans.find((item) => item.candidate_id === id));

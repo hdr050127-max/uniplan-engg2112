@@ -306,7 +306,8 @@ _FIRST = re.compile(r"第\s*[1-3一二三](?:\s*[份名])?")  # a pick ("排第 
 _COMPARATIVE = re.compile(r"更|比较|较为|相对|比")
 _OPINION = re.compile(r"高效|灵活|方便|合适|适合|理想|舒服|划算|完美|很好|不错")
 # "多等 37 分钟", "少到校 0.9 天", "少换 1.0 次楼": a difference between two picks.
-_RELATIVE = re.compile(r"(?<![最至])(?:多|少)[^\d，。；、]{0,4}?\s*(\d+(?:\.\d+)?)\s*(个?小时|分钟|天|次)")
+_RELATIVE = re.compile(r"(?<![最至])(多|少)[^\d，。；、]{0,4}?\s*(\d+(?:\.\d+)?)\s*(个?小时|分钟|天|次)")
+_EARLIEST_LATEST = re.compile(r"最[早晚]")
 _WITHIN = re.compile(r"之内|之间|以内|内|里")
 _OUTSIDE = re.compile(r"以外|之外|外")
 # Things the fact sheet says nothing about; a sentence mentioning them cannot be checked.
@@ -379,6 +380,18 @@ def _mentioned_days(clause: str) -> set[int]:
     return days
 
 
+def _relative_claims(text: str) -> set[tuple[str, float, str, str | None]]:
+    """("多" or "少", number, unit, "day"/"week"/None) for each difference stated in the text."""
+    claims = set()
+    for match in _RELATIVE.finditer(text):
+        before = re.split(r"[，,。；;、！!？?\n]", text[:match.start()])[-1]
+        markers = [(found.start(), "week" if found.group() == "每周" else "day")
+                   for found in re.finditer(r"每天|那天|每周", before)]
+        period = max(markers)[1] if markers else None
+        claims.add((match.group(1), float(match.group(2)), match.group(3).lstrip("个"), period))
+    return claims
+
+
 def allowed_values(lines: list[str]) -> dict:
     """Times, (number, unit) amounts and bare numbers that the fact lines state.
 
@@ -391,7 +404,7 @@ def allowed_values(lines: list[str]) -> dict:
     _, rest = _times(_digits("\n".join(line for line in lines if line not in relative)))
     amounts, rest = _amounts(rest)
     return {"times": times, "amounts": set(amounts),
-            "relative": set(_amounts(_digits("\n".join(relative)))[0]),
+            "relative": _relative_claims(_FIRST.sub(" ", _digits("\n".join(relative)))),
             "numbers": [number for number, _ in amounts] + _numbers(_WEEKDAY.sub(" ", rest))}
 
 
@@ -432,8 +445,11 @@ def _check_sentence(text: str, facts: dict, allowed: dict, first: bool) -> str |
     times, rest = _times(_FIRST.sub(" ", text))
     if any(value not in allowed["times"] for value in times):
         return "time"
-    for number, unit in _RELATIVE.findall(rest):
-        if not _close(float(number), [value for value, kind in allowed["relative"] if kind == unit.lstrip("个")]):
+    for way, number, unit, period in _relative_claims(rest):
+        # Same direction, amount and unit as a stated difference, and not "每天" for a weekly figure.
+        if not any(way == fact_way and abs(number - fact_number) <= 0.01 and unit == fact_unit and
+                   (period is None or fact_period is None or period == fact_period)
+                   for fact_way, fact_number, fact_unit, fact_period in allowed["relative"]):
             return "number"
         if not against_first:
             return "reference"
@@ -471,6 +487,9 @@ def _check_sentence(text: str, facts: dict, allowed: dict, first: bool) -> str |
         bound = facts["earliest"] if before else facts["latest"]
         if bound is not None and (bound < clock if before else bound > clock):
             return "time"
+    for match in _EARLIEST_LATEST.finditer(text):
+        if not re.match(r"\D{0,3}\d", text[match.end():match.end() + 5]):
+            return "superlative"  # "最晚下课" with no time compares picks without a fact behind it
     for match in _SUPER.finditer(text):
         word = match.group(1)
         if word in _OPINION_WORDS:

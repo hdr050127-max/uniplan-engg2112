@@ -8,6 +8,8 @@ Sentences: `llm/parse/data/test_claude.csv`, written by Claude (Opus 5.5) — **
 | Planned (feasible) | 106; not planned: {'no_feasible': 36} |
 | Recommended timetables | 314; with a time clash or a broken hard condition: 0 |
 | Template reasons passing the checker | 314/314 (100%) |
+| Pick 1: main reason = the model's biggest difference from pick 2, template | 98/106 (92%) |
+| — the reason shown (model rewrite if it passed, else template) | 98/106 (92%) |
 | Model sentences returned | 0 (requests by status: {'template': 106}) |
 | Model sentences that passed and were shown | 0/0 |
 | — pick 1 | 0/0 |

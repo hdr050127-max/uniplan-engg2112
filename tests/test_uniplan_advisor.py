@@ -257,6 +257,9 @@ class FactCheckTests(unittest.TestCase):
             "每天都要到校。": (0, "weekday"),
             "上午 11 点前没课。": (0, "time"),
             "课外活动时间 0 分钟。": (0, "topic"),
+            "比第 1 份每周少等 4.5 小时。": (1, "number"),      # the stated difference is 多等
+            "比第 1 份每天多等 4.5 小时。": (1, "number"),      # a weekly figure said per day
+            "这份最晚下课。": (0, "superlative"),
             "比第 1 份多等 4.5 小时，早晚课一样。": (1, "comparison"),  # pick 2 has 60 more minutes
             "固定周二到校。": (0, "weekday"),  # leaves out Wednesday
             "每天都有午休时间。": (0, "topic"),  # no lunch condition was set

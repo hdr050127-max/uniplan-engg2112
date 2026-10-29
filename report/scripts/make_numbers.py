@@ -174,6 +174,7 @@ def synthetic_numbers(m: Macros) -> dict:
     hard2 = read_csv("llm/parse/data/train_claude_round2.csv")
     m.add("sHardOne", count(len(hard1)), "llm/parse/data/train_claude.csv: rows (one per clause)")
     m.add("sHardTwo", count(len(hard2)), "llm/parse/data/train_claude_round2.csv: rows (one per clause)")
+    m.add("sHardAll", count(len(hard1) + len(hard2)), "train_claude.csv + train_claude_round2.csv rows (Claude-written hard clauses)")
     graded = read_jsonl("llm/parse/output/review_round1_claude.jsonl")
     assert len(graded) == read_json("llm/parse/output/review_round1_stats.json")["grading"]["graded"]
     m.add("sGraded", count(len(graded)), "llm/parse/output/review_round1_claude.jsonl: rows (= review_round1_stats.json grading.graded)")
@@ -315,6 +316,13 @@ def review_numbers(m: Macros) -> None:
     m.add("rHeldTwo", pct(Fraction(Decimal(repr(one_row(two, lr)["pairwise_accuracy"])))),
           "llm/rank/output/model_comparison_round2.json: same model refitted on 120 personas (not shipped)")
 
+    m.add("rDomShare", pct(Fraction(one["train_pairs"] - teacher, one["train_pairs"])),
+          "llm/rank/output/model_comparison.json: code-decided dominance pairs / train_pairs (deployed model)")
+    for stem, name in (("LR", lr), ("Eq", "等权打分")):
+        acc = one_row(one, name)["accuracy_by_label_source"]["model"]
+        m.add(f"rHeldTeacher{stem}", pct(Fraction(Decimal(repr(acc)))),
+              f"llm/rank/output/model_comparison.json: {name} accuracy_by_label_source.model (held-out pairs Qwen 14B judged)")
+
     # Qwen2.5-14B on the ranking exam: each pair asked once, red (shown first) as in the exam.
     key = read_json("llm/rank/exam/key.json")
     asked = [r for r in read_jsonl("llm/rank/exam/llm_qwen2.5_14b.jsonl") if r["kind"] == "pair"]
@@ -340,6 +348,9 @@ def review_numbers(m: Macros) -> None:
     planned = sorted(r["total_seconds"] for r in pipe if r.get("status_parsed") == "ready")
     mid = len(planned) // 2
     median = planned[mid] if len(planned) % 2 else (planned[mid - 1] + planned[mid]) / 2
+    gold_none = sum(r.get("status_gold") == "no_feasible" for r in pipe)
+    m.add("plNoFitPct", pct(Fraction(gold_none, len(pipe))),
+          f"output/pipeline/…_exam.json: status_gold == no_feasible, {gold_none}/{len(pipe)} (same 110 as plNoFit)")
     m.add("plMedianRec", fixed(Fraction(Decimal(repr(median))), 2),
           f"output/pipeline/…_exam.json: median total_seconds over {len(planned)} sentences with status_parsed == ready")
 

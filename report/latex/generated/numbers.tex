@@ -38,6 +38,8 @@
 \newcommand{\sHardOne}{141}
 % llm/parse/data/train_claude_round2.csv: rows (one per clause)
 \newcommand{\sHardTwo}{201}
+% train_claude.csv + train_claude_round2.csv rows (Claude-written hard clauses)
+\newcommand{\sHardAll}{342}
 % llm/parse/output/review_round1_claude.jsonl: rows (= review_round1_stats.json grading.graded)
 \newcommand{\sGraded}{476}
 % llm/parse/data/test_claude.csv: rows with a sentence_id (one per sentence)
@@ -118,6 +120,12 @@
 \newcommand{\rHeldOne}{90.5}
 % llm/rank/output/model_comparison_round2.json: same model refitted on 120 personas (not shipped)
 \newcommand{\rHeldTwo}{90.0}
+% llm/rank/output/model_comparison.json: code-decided dominance pairs / train_pairs (deployed model)
+\newcommand{\rDomShare}{61.8}
+% llm/rank/output/model_comparison.json: 成对逻辑回归 + 学生交叉项 accuracy_by_label_source.model (held-out pairs Qwen 14B judged)
+\newcommand{\rHeldTeacherLR}{87.0}
+% llm/rank/output/model_comparison.json: 等权打分 accuracy_by_label_source.model (held-out pairs Qwen 14B judged)
+\newcommand{\rHeldTeacherEq}{65.7}
 % llm/rank/exam/llm_qwen2.5_14b.jsonl: pairs where 14B chose the timetable shown first (red), 317/540
 \newcommand{\rQwenFirst}{58.7}
 % llm/parse/output/train_round2.jsonl: split == train and source claude_*
@@ -128,6 +136,8 @@
 \newcommand{\pLinVal}{88.8}
 % llm/parse/output/exam/parse_results.json: model == keywords, val.accuracy
 \newcommand{\pKeyVal}{71.2}
+% output/pipeline/…_exam.json: status_gold == no_feasible, 110/304 (same 110 as plNoFit)
+\newcommand{\plNoFitPct}{36.2}
 % output/pipeline/…_exam.json: median total_seconds over 196 sentences with status_parsed == ready
 \newcommand{\plMedianRec}{0.61}
 % llm/parse/output/lora_train_log_7b_r2.json: settings.rank

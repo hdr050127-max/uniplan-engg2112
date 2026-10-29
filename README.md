@@ -8,7 +8,7 @@ ENGG2112 (University of Sydney), Semester 2 2026, final project. The report is b
 
 ## Run it
 
-Python 3 (tested with 3.12). The web application uses only the standard library, so there is nothing to install.
+**Python 3.11 or newer** (tested with 3.12 and 3.13). The `python3` that ships with macOS is 3.9 and will not work: the code uses `typing.NotRequired`. The web application uses only the standard library, so there is nothing else to install.
 
 ```bash
 python3 main.py
@@ -64,8 +64,11 @@ Re-running the experiments themselves needs Ollama with Qwen2.5-7B and 14B and, 
 | `tests/` | Unit and end-to-end tests |
 | `report/` | Report source, number generator and derived data |
 | `docs/DESIGN.md` | Web page design brief |
+| `docs/notes/` | Working notes from development (in Chinese) |
+| `timetable_scraper.py`, `sync_building_locations.py` | Fetching the public timetable and building locations |
+| `archive/` | Early-phase files (proposal drafts, curriculum tables), not used by the final system |
 
-Some working notes (`RESEARCH_NOTES.md`, `RANKING_PLAN.md`, `README_uniplan.md` and most result summaries) are in Chinese.
+The working notes in `docs/notes/`, `CLAUDE.md` (instructions for the Claude Code sessions that built the project) and most result summaries are in Chinese.
 
 ## Use of AI
 

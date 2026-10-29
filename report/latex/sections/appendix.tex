@@ -117,7 +117,9 @@ The ranker (\texttt{llm/rank/model.json}) last changed at 18:02 on 17 October 20
 
 \section{Repository Guide}\label{app:repo}
 
-Code: \repo. Every number and table in this report is regenerated from the result files by \path{report/scripts/make_numbers.py}.
+Code: \repo
+
+Every number and table in this report is regenerated from the result files by \path{report/scripts/make_numbers.py}. The repository's README lists the final models and how to run and reproduce everything.
 \begin{itemize}[leftmargin=*]
 	\item Deployed ranker: \path{llm/rank/model.json}.
 	\item Deployed parser: the Ollama model \path{uniplan-parse-7b-r2}, trained by \path{llm/parse/windows/train_lora.py} (the 7B weights are too large for the repository).

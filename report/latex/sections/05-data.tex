@@ -1,0 +1,12 @@
+\section{Data}\label{sec:data}
+
+UniPlan uses one real data source and several synthetic ones (Table~\ref{tab:data}). The real source is the public University of Sydney timetable for Semester~2, 2026~\cite{usyd_timetable}. A small scraper fetched only the units we needed on 24--25 September 2026, at most one request a second, and kept no staff names. The snapshot covers \dUnits{} units, \dMeetings{} dated class meetings, \dOptions{} class options and \dGroups{} activity groups. Classes were expanded to their real teaching dates, so alternate weeks and one-off assessments are handled. Seat numbers are as of the snapshot, taken mid-semester, so classes that were full then are excluded from every count and test (for ENGG2112 and AMME2301, \ttTwoFull{} of \ttTwoOptions{} classes). Walking times use the \dBuildings{} buildings' positions on the public campus map.
+
+\begin{table}[h]
+	\caption{Datasets. Everything below the line was written or labelled by AI models; no real student wrote a sentence, answered a question or labelled a pair.}
+	\label{tab:data}
+	\centering\small
+	\input{generated/tab_data}
+\end{table}
+
+\textbf{All evaluation data is synthetic.} The sentences, personas, preference labels and both final exams were produced by AI models, not by students. We kept the generators apart from the models under test where we could: Qwen2.5-7B wrote most of the parser's training clauses (Claude added \sClaudeTrain{} harder ones), while fresh Claude agents that saw no training data wrote every test set and exam; Qwen2.5-14B labelled the ranker's training pairs, while separate Claude agents answered the ranking exam. Each model was frozen before its exam was committed with a SHA-256 hash, and each exam was written by a new agent that saw only the labelling rules and was scored once (Appendix~\ref{app:provenance}). This independence is between model families, not between people (Section~\ref{sec:limits}).

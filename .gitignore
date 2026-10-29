@@ -22,3 +22,15 @@ Assignment Proposal/*
 # Model weights and adapters are rebuilt by scripts, not committed.
 llm/**/adapters/
 llm/**/*.safetensors
+
+# Report: working notes, drafts and the title-page author line (student ID) stay local.
+report/*.md
+report/*.pdf
+report/latex/author.tex
+report/latex/main.pdf
+report/latex/*.aux
+report/latex/*.log
+report/latex/*.bbl
+report/latex/*.blg
+report/latex/*.toc
+report/latex/*.out

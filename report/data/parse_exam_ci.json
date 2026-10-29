@@ -1,0 +1,119 @@
+{
+ "exam": "llm/parse/exam/exam.csv",
+ "sentences": 304,
+ "clauses": 461,
+ "reps": 10000,
+ "seed": 2112,
+ "methods": {
+  "keyword rules": {
+   "clause_accuracy": 0.8482,
+   "clause_ci": [
+    0.8121,
+    0.8824
+   ],
+   "sentence_all_right": 0.7105,
+   "sentence_ci": [
+    0.6579,
+    0.7599
+   ]
+  },
+  "TF-IDF + logistic regression (linear-r1)": {
+   "clause_accuracy": 0.846,
+   "clause_ci": [
+    0.8103,
+    0.8793
+   ],
+   "sentence_all_right": 0.6743,
+   "sentence_ci": [
+    0.6217,
+    0.727
+   ]
+  },
+  "Qwen 7B zero-shot, prompt v1": {
+   "clause_accuracy": 0.8503,
+   "clause_ci": [
+    0.8162,
+    0.8828
+   ],
+   "sentence_all_right": 0.6776,
+   "sentence_ci": [
+    0.625,
+    0.7303
+   ]
+  },
+  "Qwen 7B zero-shot, prompt v2": {
+   "clause_accuracy": 0.8612,
+   "clause_ci": [
+    0.8271,
+    0.8935
+   ],
+   "sentence_all_right": 0.6941,
+   "sentence_ci": [
+    0.6414,
+    0.7467
+   ]
+  },
+  "Qwen 7B QLoRA round 1": {
+   "clause_accuracy": 0.9241,
+   "clause_ci": [
+    0.9,
+    0.9467
+   ],
+   "sentence_all_right": 0.7599,
+   "sentence_ci": [
+    0.7105,
+    0.8092
+   ]
+  },
+  "Qwen 7B QLoRA round 2": {
+   "clause_accuracy": 0.9479,
+   "clause_ci": [
+    0.9266,
+    0.9675
+   ],
+   "sentence_all_right": 0.7796,
+   "sentence_ci": [
+    0.7336,
+    0.8257
+   ]
+  }
+ },
+ "differences": {
+  "Qwen 7B QLoRA round 2 minus Qwen 7B QLoRA round 1": {
+   "clause": 0.0239,
+   "clause_ci": [
+    0.0022,
+    0.0445
+   ],
+   "sentence": 0.0197,
+   "sentence_ci": [
+    -0.0132,
+    0.0526
+   ]
+  },
+  "Qwen 7B QLoRA round 2 minus Qwen 7B zero-shot, prompt v2": {
+   "clause": 0.0868,
+   "clause_ci": [
+    0.0575,
+    0.117
+   ],
+   "sentence": 0.0855,
+   "sentence_ci": [
+    0.0461,
+    0.1283
+   ]
+  },
+  "Qwen 7B QLoRA round 2 minus keyword rules": {
+   "clause": 0.0998,
+   "clause_ci": [
+    0.0621,
+    0.1384
+   ],
+   "sentence": 0.0691,
+   "sentence_ci": [
+    0.023,
+    0.1151
+   ]
+  }
+ }
+}

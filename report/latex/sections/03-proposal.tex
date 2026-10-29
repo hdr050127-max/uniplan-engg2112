@@ -1,0 +1,22 @@
+\section{From Proposal to Final System}\label{sec:change}
+
+The proposal planned a 16-student pilot in which each student compared 16 pairs of timetables, a logistic regression per student, and a usability study. The final system keeps the exact scheduler, the separation of hard limits from preferences and an interpretable logistic ranker, but changes the input, data and evaluation (Table~\ref{tab:change}).
+
+\begin{table}[h]
+	\caption{What the proposal planned and what was built.}
+	\label{tab:change}
+	\centering\small
+	\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.13\linewidth}>{\raggedright\arraybackslash}p{0.3\linewidth}>{\raggedright\arraybackslash}p{0.51\linewidth}@{}}
+		\toprule
+		& Proposal & Final system \\
+		\midrule
+		Input & Form with times and numeric weights & One sentence, parsed by a fine-tuned LLM and confirmed by the student \\
+		Learning & One model per student & One model with student terms (Eq.~\ref{eq:utility}) \\
+		Labels & 16 consenting students & AI-written personas labelled by Qwen2.5-14B, audited by Claude \\
+		Evaluation & Held-out pairs; usability study & Exams by fresh AI agents, committed after the freeze, scored once; no usability study \\
+		Team & TUT04-06, four workstreams & One member with generative AI assistance (Appendix~\ref{app:ai}) \\
+		\bottomrule
+	\end{tabular}
+\end{table}
+
+The plan changed in three steps. On 9 October, simulations showed only one to four non-dominated timetables per unit combination, so most of the 16 comparisons asked about timetables nobody should pick; we moved to a short list and one shared model. On 16 October the input became a sentence, because students describe their week in words rather than weights (Section~\ref{sec:intro}). With no real preference data, we chose to have a model label preferences rather than recruit participants in the weeks left, which also answered the unit's call for meaningful use of generative AI. On 17 October we decided to use no human data and to test every model only on data written by a different AI system. The proposal's 20 hand-solved feasibility cases became randomised tests against a slower reference search.

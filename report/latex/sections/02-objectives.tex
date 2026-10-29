@@ -1,0 +1,18 @@
+\section{Objectives and Problem Statement}\label{sec:prob}
+
+The project had three objectives: \textbf{(O1)} read a student's sentence into a fixed set of scheduling conditions accurately enough that most sentences need no correction; \textbf{(O2)} recommend only timetables that meet every hard condition and never clash; \textbf{(O3)} among the valid timetables, put first the three this student is most likely to choose, each with a checkable reason.
+
+\textbf{Parsing.} The input is a set of units $U$ and a sentence $s$. Rules split $s$ into clauses $s_1,\dots,s_m$, and a classifier $f:s_k\mapsto y_k$ assigns each clause one of nine labels: unavailable time, maximum days per week, maximum class hours per day, lunch break, in-person only, prefer fewer days, prefer less waiting, prefer no early or late classes, and \emph{other}. Rules read days, times and amounts from each clause and merge them into hard limits $c_H$ and soft preferences $c_S$ (comfortable hours and an ordered list of what the student cares about).
+
+\textbf{Feasible set.} Let $T(U)$ be every choice of one class per required activity group. $F(U,c_H)\subseteq T(U)$ keeps the choices with no clash on any teaching date that satisfy $c_H$. A timetable is \emph{non-dominated} if no other is at least as good on waiting time $G$, campus days $D$ and early or late minutes $O$ and better on one; the non-dominated members of $F$, topped up to at least 10 and capped at 20, form the candidates $C$.
+
+\textbf{Ranking.} Each candidate $t$ has 13 standardised features $z(t)$, such as campus days, waiting time, building changes and days with only one class (full list in Appendix~\ref{app:model}). The student has eight terms $\sigma(c_S)$: which of $D$, $G$, $O$ they care about most, which they care about at all, and how their comfortable hours differ from 9:00--18:00. The score
+\begin{equation}
+	u(t) = \sum_{i=1}^{13} z_i(t)\Big(w_i + \sum_{j=1}^{8} w_{ij}\,\sigma_j\Big),
+	\qquad
+	P(a \succ b) = \frac{1}{1+e^{-(u(a)-u(b))}}
+	\label{eq:utility}
+\end{equation}
+gives each student their own weight on every feature. The weights are fitted to labelled pairs with an $L_2$-regularised logistic loss, and the top three candidates by $u$ are recommended.
+
+\textbf{Criteria.} We judge each objective against a baseline. O1 is met if the parser beats keyword rules with a paired 95\% interval above zero. O2 is met if no recommendation clashes; we also report how often one breaks a condition the student stated. O3 is met if the trained ranker beats \emph{equal weights}, which adds standardised $D$, $G$ and $O$ with the same weights for every student, in the same sense; a \emph{care-only} rule that adds only the measures the student named, and random order, are weaker baselines.

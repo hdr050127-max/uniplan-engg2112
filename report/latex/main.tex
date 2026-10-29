@@ -1,0 +1,89 @@
+% UniPlan final report, ENGG2112 2026 S2.
+% Built from the unit's 2026 report template (Final Report Template.zip, 23 Sep 2026),
+% adapted for XeTeX: compile with `tectonic -X compile main.tex` from this folder.
+% Every number in the text comes from generated/numbers.tex (report/scripts/make_numbers.py).
+\documentclass[12pt,a4paper]{article}
+
+\usepackage{graphicx}
+\usepackage[top=1in, bottom=1in, left=1in, right=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs,array}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usetikzlibrary{positioning,arrows.meta,fit}
+\usepackage[font=small,labelfont=bf,skip=4pt]{caption}
+\usepackage{enumitem}
+\setlist{nolistsep,noitemsep}
+\usepackage{cite}
+% Chinese for the original prompts in Appendix A (macOS system font; the font file is not redistributed).
+\usepackage{xeCJK}
+\setCJKmainfont[Path=/System/Library/Fonts/,FontIndex=0]{Hiragino Sans GB.ttc}
+\xeCJKsetup{CJKspace=true}
+\usepackage[hidelinks]{hyperref}
+
+\linespread{1.06}
+\setlength{\parskip}{8pt plus2pt minus2pt}
+\widowpenalty 10000
+\clubpenalty 10000
+
+\definecolor{accent}{HTML}{5B4E9E}
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+\newcommand{\repo}{\textit{[public repository link to be added]}}
+
+\input{generated/numbers}
+
+\begin{document}
+
+%===========================================================
+\begin{titlepage}
+	\begin{center}
+		\includegraphics[width=0.55\textwidth]{figures/usyd-logo.png}~\\[2cm]
+		\HRule \\[0.4cm]
+		{ \LARGE
+			\textbf{Project Report for ENGG2112}\\[0.4cm]
+			\emph{UniPlan: From a Student's Sentence to\\Three Clash-Free Timetables}\\[0.4cm]
+		}
+		\HRule \\[1.5cm]
+		{ \large
+			% The author line with the student ID lives in author.tex, which is not committed.
+			\InputIfFileExists{author}{}{Han Dongrui, Mechanical Engineering} \\[0.1cm]
+		}
+		\vfill
+		Code: \repo \\[0.8cm]
+		\textsc{\large Faculty of Engineering}\\[0.4cm]
+		{\large 1 November 2026}
+	\end{center}
+\end{titlepage}
+
+\pagenumbering{roman}
+\input{sections/00-summary}
+\newpage
+
+\setcounter{tocdepth}{1}
+\tableofcontents
+\addtocontents{toc}{\protect\thispagestyle{empty}}
+\newpage
+\pagenumbering{arabic}
+
+\input{sections/01-background}
+\input{sections/02-objectives}
+\input{sections/03-proposal}
+\input{sections/04-related}
+\input{sections/05-data}
+\input{sections/06-method}
+\input{sections/07-results}
+\input{sections/08-system}
+\input{sections/09-sociotech}
+\input{sections/10-recommendations}
+\input{sections/11-conclusions}
+
+\clearpage
+\bibliographystyle{IEEEtran}
+\bibliography{refs}
+
+\clearpage
+\appendix
+\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
+\input{sections/appendix}
+
+\end{document}

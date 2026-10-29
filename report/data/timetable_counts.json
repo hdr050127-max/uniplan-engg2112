@@ -1,0 +1,97 @@
+[
+ {
+  "units": [
+   "ENGG2112",
+   "AMME2301"
+  ],
+  "snapshot": {
+   "snapshot_id": "timetable_meetings_2026_S2C_AMME1362_AMME2262_AMME2301_CIVL3206_ENGG2112_20261009",
+   "year": 2026,
+   "session_code": "S2C",
+   "snapshot_time": "2026-09-25T20:02:15+10:00",
+   "source_url": "https://timetable.sydney.edu.au/even/timetable/"
+  },
+  "feasible_count": 6800,
+  "distinct_GDO": 172,
+  "non_dominated": 4,
+  "seconds_full_flow": 0.04,
+  "search": {
+   "required_groups": 7,
+   "total_options": 71,
+   "eligible_options": 42,
+   "full_options": 29,
+   "unavailable_options": 0,
+   "conflicting_options": 0,
+   "rejected_branches": 92,
+   "visited_nodes": 848,
+   "feasible_count": 6800,
+   "preference_filtered": 0,
+   "groups_without_options": []
+  }
+ },
+ {
+  "units": [
+   "AMME2262",
+   "AMME2301",
+   "CIVL3206",
+   "ENGG2112"
+  ],
+  "snapshot": {
+   "snapshot_id": "timetable_meetings_2026_S2C_AMME1362_AMME2262_AMME2301_CIVL3206_ENGG2112_20261009",
+   "year": 2026,
+   "session_code": "S2C",
+   "snapshot_time": "2026-09-25T20:02:15+10:00",
+   "source_url": "https://timetable.sydney.edu.au/even/timetable/"
+  },
+  "feasible_count": 96064,
+  "distinct_GDO": 160,
+  "non_dominated": 1,
+  "seconds_full_flow": 0.06,
+  "search": {
+   "required_groups": 15,
+   "total_options": 119,
+   "eligible_options": 67,
+   "full_options": 52,
+   "unavailable_options": 0,
+   "conflicting_options": 0,
+   "rejected_branches": 4914,
+   "visited_nodes": 10801,
+   "feasible_count": 96064,
+   "preference_filtered": 0,
+   "groups_without_options": []
+  }
+ },
+ {
+  "units": [
+   "AMME2262",
+   "AMME2301",
+   "CIVL3206",
+   "ENGG2112",
+   "AMME1362"
+  ],
+  "snapshot": {
+   "snapshot_id": "timetable_meetings_2026_S2C_AMME1362_AMME2262_AMME2301_CIVL3206_ENGG2112_20261009",
+   "year": 2026,
+   "session_code": "S2C",
+   "snapshot_time": "2026-09-25T20:02:15+10:00",
+   "source_url": "https://timetable.sydney.edu.au/even/timetable/"
+  },
+  "feasible_count": 24304704,
+  "distinct_GDO": 398,
+  "non_dominated": 2,
+  "seconds_full_flow": 3.43,
+  "search": {
+   "required_groups": 19,
+   "total_options": 203,
+   "eligible_options": 119,
+   "full_options": 84,
+   "unavailable_options": 0,
+   "conflicting_options": 0,
+   "rejected_branches": 2086566,
+   "visited_nodes": 1340551,
+   "feasible_count": 24304704,
+   "preference_filtered": 0,
+   "groups_without_options": []
+  }
+ }
+]

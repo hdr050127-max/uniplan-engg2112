@@ -1,0 +1,14 @@
+{
+ "note": "Ranking final exam, trained LR minus equal weights; synthetic AI-written personas and answers",
+ "personas": 20,
+ "pairs_scored": 485,
+ "reps": 10000,
+ "seed": 2112,
+ "lr_accuracy": 0.8329896907216495,
+ "equal_accuracy": 0.7814432989690722,
+ "difference": 0.05154639175257736,
+ "difference_ci95": [
+  -0.046277665995975825,
+  0.1470588235294117
+ ]
+}

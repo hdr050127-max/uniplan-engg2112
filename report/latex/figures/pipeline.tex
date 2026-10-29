@@ -1,0 +1,22 @@
+% Figure 1: the UniPlan pipeline. Shaded = learned model, white = deterministic code.
+\begin{tikzpicture}[
+	node distance=3mm and 3mm,
+	box/.style={draw=black!70, align=center, font=\footnotesize,
+		minimum height=11mm, text width=20.5mm, inner sep=1.5pt},
+	ml/.style={box, fill=accent!15, draw=accent},
+	code/.style={box, fill=white},
+	io/.style={align=center, font=\footnotesize\itshape, text width=13mm},
+	arr/.style={-{Stealth[length=1.6mm]}, black!70},
+]
+	\node[io] (in) {Units and one sentence};
+	\node[ml, right=of in] (parse) {\textbf{Parse}\\Qwen2.5-7B\\QLoRA + rules};
+	\node[code, right=of parse] (confirm) {\textbf{Confirm}\\student checks,\\answers questions};
+	\node[code, right=of confirm] (sched) {\textbf{Schedule}\\exact search,\\10--20 candidates};
+	\node[ml, right=of sched] (rank) {\textbf{Rank}\\logistic regression,\\13 features};
+	\node[code, right=of rank, text width=23mm] (explain) {\textbf{Explain}\\contributions,\\fact check};
+	\draw[arr] (in) -- (parse);
+	\draw[arr] (parse) -- (confirm);
+	\draw[arr] (confirm) -- (sched);
+	\draw[arr] (sched) -- (rank);
+	\draw[arr] (rank) -- (explain);
+\end{tikzpicture}

@@ -1,0 +1,131 @@
+\section{Use of Generative AI}\label{app:ai}
+
+Generative AI was used in two different ways: as parts of the system, and as an assistant while building it. Both are listed here.
+
+\subsection{AI Inside the System}
+
+\begin{center}\small
+\begin{tabular}{@{}p{0.22\linewidth}p{0.72\linewidth}@{}}
+	\toprule
+	Model & Role \\
+	\midrule
+	Qwen2.5-7B (fine-tuned) & Run-time clause classifier (Section~\ref{sec:parse}); served locally through Ollama. \\
+	Qwen2.5-7B (untrained) & Generated the synthetic training clauses; zero-shot baseline; tried as a rewriter of reasons (switched off). \\
+	Qwen2.5-14B & Teacher: labelled timetable pairs while playing each persona; direct-ranking baseline. \\
+	Claude & Wrote the parsing test sets and both final exams, graded and audited labels, wrote the personas, and answered the ranking exam, using separate agents that had not seen training data. \\
+	\bottomrule
+\end{tabular}
+\end{center}
+
+\subsection{AI Used to Build the Project}
+
+Claude Code (Anthropic) was used throughout development in the Claude desktop app. It wrote most of the code under the author's direction, ran the experiments, proposed and documented design changes, and drafted this report from the project's result files. OpenAI Codex helped draft and revise the proposal; that record is in the proposal's appendix. The author set the goals, made the design decisions recorded in Section~\ref{sec:change}, chose what to keep, and is responsible for the submitted work.
+
+\subsection{Selected Prompts and Outputs}
+
+The five exchanges below are from the main Claude Code conversation that coordinated the project (session \texttt{4ea07490}, stored locally by Claude Code). The author's messages are given in the original Chinese with an English translation; Claude's replies were in Chinese and are given as English translations, shortened, with [\ldots] marking omissions. Times are Sydney time (AEDT). Each is followed by what we changed and how the result was checked.
+
+\newcommand{\who}[1]{\par\noindent\textbf{#1}\quad}
+\newenvironment{exchange}[1]{\subsubsection*{#1}\small}{\par}
+
+\begin{exchange}{1.\ The system design (16 October 2026, 18:10--18:14)}
+\who{Author:} 我直接用千问的开源模型就好了啊 / 我想的是我们有一个可视化的前端 然后只有判断逻辑接上大模型就好了 / 大模型只做语义分割 然后映射到我们设计好的条件里 然后由写好的程序来安排课表 然后再输出回大模型挑选 判断 \\
+\textit{(``I'll just use Qwen's open-source model.'' / ``What I have in mind is a visual front end, with only the decision logic connected to the LLM.'' / ``The LLM only does semantic segmentation, then maps it to conditions we have designed; then a written program arranges the timetable; then it goes back to the LLM to pick and judge.'')}
+
+\who{Claude:} ``[\ldots] There is one bottom line: deciding whether a timetable clashes must be done by the program, not by the LLM. The LLM will get times wrong, and recommending a timetable with a clash is a serious flaw. [\ldots] Understood, that is the flow. One correction on wording: in the report and the Q\&A say `semantic parsing' or `information extraction'. `Semantic segmentation' means per-pixel classification of images [\ldots] 1. LLM (parsing): turn the student's sentence into conditions in a fixed, pre-designed format [\ldots] 2. Program (scheduling): build every clash-free timetable from the hard conditions, then narrow them to 10--20 candidates [\ldots] 3. LLM (selection): read the student's words and the candidate summaries, pick the top 3 and write a reason for each. 4. Program (check): make sure the picks really are candidates; if not, ask again or fall back to a rule ranking. [\ldots] Show the parsed conditions to the student to confirm before scheduling.''
+
+\who{What we changed:} We kept the split between learned parts and code and the confirmation step, and adopted the corrected terminology. We later fine-tuned the parser instead of only prompting it, and replaced the LLM in step 3 with a trained logistic ranker.
+\who{How we checked:} On the final exam, Qwen2.5-14B judging pairs directly agreed with the answers on \rQwen\% of pairs, against \rLR\% for the trained ranker (Table~\ref{tab:rank}).
+\end{exchange}
+
+\begin{exchange}{2.\ Where machine learning belongs (16 October 2026, 18:58--19:00)}
+\who{Author:} 回溯搜索是课程中有的吗 / 那我们就深化机器学习 然后我们可以先确定好算法是什么 \\
+\textit{(``Is backtracking search covered in the unit?'' / ``Then let's go deeper on machine learning, and first settle which algorithms to use.'')}
+
+\who{Claude:} ``It is not in the unit. I searched the Week 1--11 slides, lecture transcripts and tutorials [\ldots] That is fine [\ldots] scheduling is an ordinary engineering program whose job is to guarantee correct timetables; it is not the AI part. [\ldots] The core problem is classifying a student's clause into one of 9 condition types, a text classification problem. We solve the same task with a ladder of algorithms from simple to complex and compare them [\ldots] keyword rules; TF-IDF with logistic regression; [\ldots] Qwen without training; Qwen fine-tuned with LoRA. [\ldots] The test set is fixed before training and not changed afterwards.''
+
+\who{What we changed:} We kept the ladder and the fixed test set, but did not build the naive Bayes and neural-network variants, and after a hand test dropped the 0.5B and 1.5B models and fine-tuned the 7B model instead.
+\who{How we checked:} All remaining methods were scored on the same held-out exam (Table~\ref{tab:parse}).
+\end{exchange}
+
+\begin{exchange}{3.\ No human data, and the teacher--student loop (17 October 2026, 15:20--15:21)}
+\who{Author:} 不需要组员了 基本都是我们做了 / 对 你出题 qwen来答 你判断对错 然后训练qwen \\
+\textit{(``We don't need team members any more; we have done almost all of it.'' / ``Right: you write the questions, Qwen answers, you mark them, and then we train Qwen.'')}
+
+\who{Claude:} ``[\ldots] The ranking check that team members were to answer will instead be answered by me (Claude) as a second annotator independent of Qwen. [\ldots] The report must say clearly that the test questions and check answers were produced by AI (Claude), not real students. [\ldots] It shows the system can parse and select accurately; it cannot show that real students will be satisfied. That goes into the limitations. [\ldots] This is the `teacher and student' approach: I am the teacher, Qwen is the student. [\ldots] The test set (the 142 sentences) is fixed before training; my training questions must not repeat it or paraphrase it. I will check the similarity of new questions to the test questions and delete those that are too close.''
+
+\who{What we changed:} The synthetic-data statements in Sections~\ref{sec:data} and~\ref{sec:limits} follow this exchange. Because the first test set was later read while designing round~2, we added a second test set and the final exams.
+\who{How we checked:} Similarity checks between training and test sentences, and exams written by agents that had not seen any training data (Appendix~\ref{app:provenance}).
+\end{exchange}
+
+\begin{exchange}{4.\ Guarding against over-fitting (17 October 2026, 19:56--20:22)}
+\who{Author:} 我希望不要过拟合你能明白吗 / 对的 未来我们训练好后我也希望你能出很多新题 然后你来考我们训练好的模型 \\
+\textit{(``I want to avoid over-fitting; do you understand?'' / ``Right. After the models are trained I also want you to write many new questions and examine our trained models.'')}
+
+\who{Claude:} ``Understood. [\ldots] There are two kinds of over-fitting here: the model memorising the training questions, and us `tuning against the exam', which is subtler and more dangerous. [\ldots] The round-2 data was added after reading the round-1 errors on test v1, so v1 is no longer fair for round 2. I wrote v2 before starting round 2 [\ldots] I will fix the decision rule now, before the results [\ldots] Once every model is final, a brand-new `final exam', sat once, with nothing tuned afterwards. [\ldots] The questions are written by a fresh Claude subagent that receives only the labelling rules [\ldots] another independent subagent re-labels them [\ldots] the exam is committed and locked, with the time and a checksum, before any model is scored.''
+
+\who{Author (20:22):} 不需要中英文混合 就是英文版就可以啊 \textit{(``No need for mixed Chinese and English; an English version is fine.'')}
+
+\who{What we changed:} The plan proposed English, Chinese and mixed sentences; on the author's instruction the exam was English only, which Section~\ref{sec:socio} lists as a fairness limitation. The round-2 decision rule was committed before round 2 was scored.
+\who{How we checked:} The commits, times and SHA-256 hashes in Appendix~\ref{app:provenance}.
+\end{exchange}
+
+\begin{exchange}{5.\ Restating and asking back (17 October 2026, 20:30)}
+\who{Author:} 我还希望我们用自然语言描述需求之后这个模型还能给我们一些反馈 比如判断完复述一下判断结果 如果有不确定的还可以反问 而且也可以多嘴的问一些学生没提到 但是我们能做到的东西 你觉得是否能做到 \\
+\textit{(``I'd also like the model to give feedback after a student describes their needs: restate what it understood, ask back when it is unsure, and even ask about things the student did not mention but we can handle. Do you think that can be done?'')}
+
+\who{Claude:} ``It can, and it fits our structure well. [\ldots] 1. Restate: [\ldots] generated directly by the program from the parsed conditions, not written freely by the LLM, so it cannot misstate them. 2. Ask back when unsure, using three signals: the fine-tuned 7B and logistic regression disagree about a clause; the wording sits between `can't' and `would rather not'; a value is missing [\ldots] 3. Ask about things the student did not mention but we can do, such as a lunch break, in-person only, or days per week; at most 2, and easy to skip. [\ldots] The final exam can check whether the questions land where the model is really wrong.''
+
+\who{What we changed:} Built as proposed; the restatement became margin notes beside each clause on the web page.
+\who{How we checked:} On the exam the questions covered \cCoveredPct\% of wrong clauses (Section~\ref{sec:res-parse}).
+\end{exchange}
+
+\subsection{How AI Output Was Checked}
+
+\begin{itemize}[leftmargin=*]
+	\item \textbf{Code.} The repository has an automated test suite, including randomised tests that compare the fast scheduler with a slower reference search.
+	\item \textbf{Models.} No model was scored on data written by its own family. Test sets and exams were written by Claude, frozen and hashed before scoring (Appendix~\ref{app:provenance}), and used once.
+	\item \textbf{Labels.} Qwen's ranking labels were asked in both orders and audited by Claude without sight of Qwen's answers.
+	\item \textbf{Reasons.} Every displayed reason passes a rule-based fact check against the timetable; the LLM rewriter was switched off when it failed this check too often.
+	\item \textbf{This report.} Every number from our experiments is generated by a script from the result files in the repository, and each fact was traced to its source file before it was written. An independent AI reviewer, which had not seen the drafting, checked the draft against the marking rubric and recomputed 23 numbers.
+\end{itemize}
+
+\section{Data and Exam Provenance}\label{app:provenance}
+
+The ranker (\texttt{llm/rank/model.json}) last changed at 18:02 on 17 October 2026 (commit \texttt{7ea2629}), before its exam was committed at 20:40 (\texttt{2eed03a}). The parser was frozen at git tag \texttt{exam-freeze} (commit \texttt{33ffb54}, 20:44 AEDT), before its exam was committed at 20:49 (\texttt{7e60a11}). Both exams were scored later that evening and not changed afterwards.
+
+\begin{center}\small
+\begin{tabular}{@{}ll@{}}
+	\toprule
+	File & SHA-256 (first 16 hex digits) \\
+	\midrule
+	\texttt{llm/parse/exam/exam.csv} & \texttt{195925d33cfb95fc} \\
+	\texttt{llm/parse/exam/exam\_second\_annotator.csv} & \texttt{40895018c3d34595} \\
+	\texttt{llm/rank/exam/personas.json} & \texttt{684178d7f5342a7e} \\
+	\texttt{llm/rank/exam/questions.jsonl} & \texttt{dd160599ac5e755c} \\
+	\texttt{llm/rank/exam/answers.jsonl} & \texttt{e3767ed281e849e8} \\
+	\texttt{llm/rank/model.json} (deployed ranker) & \texttt{c4d2a264b6fd0450} \\
+	\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Model Details}\label{app:model}
+
+\textbf{Ranking features} (each a weekly average over the teaching weeks, standardised): days on campus; waiting between classes; minutes outside the student's comfortable hours, and separately the early and the late minutes; earliest start; latest finish; longest day on campus; most class hours in a day; Friday free; building changes; days with only one class; share of online classes.
+
+\textbf{Parser fine-tuning} (round~2): the Qwen2.5-7B Instruct model in 4-bit NF4 precision with LoRA adapters of rank \loraRank{} and $\alpha=\loraAlpha$, learning rate \loraLR, \loraEpochs{} epochs, best validation epoch \loraBest, \loraMinutes{} minutes on one RTX~4090 Laptop GPU (round~1: \loraMinutesOne{} minutes).
+
+\section{Repository Guide}\label{app:repo}
+
+Code: \repo. Every number and table in this report is regenerated from the result files by \path{report/scripts/make_numbers.py}.
+\begin{itemize}[leftmargin=*]
+	\item Deployed ranker: \path{llm/rank/model.json}.
+	\item Deployed parser: the Ollama model \path{uniplan-parse-7b-r2}, trained by \path{llm/parse/windows/train_lora.py} (the 7B weights are too large for the repository).
+	\item Offline fallback parser: \path{llm/parse/output/linear_model.json}.
+	\item Scheduler: \texttt{uniplan/schedule.py}; web application: \texttt{main.py}.
+	\item Every other model in the comparisons, with its training script and outputs: \path{llm/parse/} and \path{llm/rank/}.
+\end{itemize}
+
+\section{Contributions}\label{app:contrib}
+
+The project was completed by one member, Han Dongrui, with the generative AI assistance described in Appendix~\ref{app:ai}. The report uses the conventional authorial ``we''.

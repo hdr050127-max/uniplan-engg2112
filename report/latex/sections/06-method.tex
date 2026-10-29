@@ -1,0 +1,34 @@
+\section{Methodology}\label{sec:meth}
+
+Figure~\ref{fig:pipeline} shows the four stages. Learned parts propose and verifiable code decides what is allowed: AI only reads the sentence and ranks valid timetables, and validity is checked by code, like an interlock. A parsing error can still let through a timetable that breaks what the student meant (Section~\ref{sec:res-pipeline}), which is why the student confirms the conditions first, but no model error can produce a clash.
+
+\begin{figure}[h]
+	\centering
+	\input{figures/pipeline}
+	\caption{The UniPlan pipeline. Shaded boxes are learned models; white boxes are code. The student confirms the parsed conditions before any timetable is built.}
+	\label{fig:pipeline}
+\end{figure}
+
+\subsection{Parsing the Sentence}\label{sec:parse}
+
+Rules split the sentence, a classifier labels each clause, and rules read the values; in an early four-sentence pilot, untrained Qwen models asked for all conditions at once dropped some and invented others.
+
+We compared keyword rules, TF-IDF (term-frequency, inverse-document-frequency) character $n$-grams with logistic regression, Qwen2.5-7B with a detailed prompt and no training, and Qwen2.5-7B fine-tuned with QLoRA~\cite{dettmers2023qlora}. Training data came from a teacher--student loop: Qwen2.5-7B generated \sClauses{} labelled clauses in English, Chinese and mixed language, Claude graded \sGraded{} of them and wrote \sHardOne{} harder ones, and a second round added \sHardTwo{} Claude-written clauses aimed at round~1's two weakest labels, giving \sTrainTwo{} training clauses (\sClaudeTrainPct\% written by Claude) and \sValTwo{} validation clauses after rejected ones were removed. Fine-tuning took \loraMinutes{} minutes on one RTX~4090 Laptop GPU (Appendix~\ref{app:model}); the model was then quantised and served through Ollama. Round~2 replaced round~1 under a rule written before it was scored.
+
+When unsure, the parser asks instead of guessing: when a second, cheaper classifier disagrees, when a clause could be hard or soft, or when a busy time has no day or hour. The student's answer overrides the model.
+
+\subsection{Building Valid Timetables}\label{sec:schedule}
+
+The scheduler enumerates every valid timetable exactly. It searches the activity groups with the fewest options first, removes every class that clashes with a chosen one, and backtracks as soon as a group has no class left; pairwise clashes are precomputed as bit sets and classes with the same times and places are searched once. Hard limits (clashes, unavailable times, full classes, walking time when set, day and hour limits, lunch) are checked on real dates, $G$, $D$ and $O$ are updated incrementally, and the non-dominated timetables are kept. Five units (\ttFive{} valid timetables) take \ttFiveSec{}~s on a Mac. If nothing is feasible, the scheduler names the clashing activities and offers the timetables that break the fewest limits, stating each; a clash is never allowed. We used no learning or approximation here: the search order affects only speed, and every valid timetable is still found.
+
+\subsection{Ranking the Candidates}\label{sec:rank}
+
+Claude wrote \sPersonas{} student personas across ten situations (commuters, workers, parents, night owls and others), each a sentence with its intended conditions. For each persona the real scheduler produced candidates, and Qwen2.5-14B, playing the persona, chose between pairs shown as side-by-side tables. Each pair was asked in both orders and kept only if the answers agreed (\tKept{} of \tAsked{}, \tConsistent\%); when two timetables were almost equal on the persona's main concern, code decided by dominance or called a tie. Claude audited \tClaudeN{} of the teacher's labels without seeing its answers, agreed with \tClaudeAgree\%, and replaced the \sReplaced{} it disagreed with.
+
+The deployed model was fitted to the first \rDeployPersonas{} training personas (\rDeployTeacher{} teacher pairs plus \rDeployCode{} pairs that code could decide alone), with the regularisation chosen by 5-fold cross-validation grouped by persona. A refit on all 120 training personas scored no better on the held-out personas (\rHeldTwo\% against \rHeldOne\%), so by a rule set beforehand it was not shipped. A random forest and a small neural network scored within one point in cross-validation, so we kept logistic regression, a ``glass-box'' model in the sense of the Week~11 lecture~\cite{engg2112_w11}: each score splits exactly into per-feature contributions, and the weights are a 4~KB file.
+
+\subsection{Reasons, Evaluation and Environment}\label{sec:explain}
+
+Each pick's reason is built from facts about its dated meetings and from the ranker's contributions, for example ``Vs option 2: 0.9 fewer days on campus a week and 1.8 fewer days a week with just one class; costs 2~h~53~min more waiting a week.''
+
+Validation data was used for every design choice. The two final exams were written by fresh Claude agents that never saw the models, training data or model errors, committed after the models were frozen (Appendix~\ref{app:provenance}), and scored once. Intervals are 95\% bootstrap intervals resampling sentences or personas, paired when comparing methods. Training ran on a laptop RTX~4090 GPU (16~GB) and the web application on a Mac; every result has a seeded script and stored output. After the freeze the model weights, the ranker and the scheduler's search logic did not change; we added the closest-timetable fallback and changed wording and the web page.

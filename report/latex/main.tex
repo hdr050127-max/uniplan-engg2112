@@ -15,6 +15,7 @@
 \usepackage{enumitem}
 \setlist{nolistsep,noitemsep}
 \usepackage{cite}
+\usepackage{needspace}
 % Chinese for the original prompts in Appendix A (macOS system font; the font file is not redistributed).
 \usepackage{xeCJK}
 \setCJKmainfont[Path=/System/Library/Fonts/,FontIndex=0]{Hiragino Sans GB.ttc}
@@ -87,6 +88,7 @@
 \input{sections/11-conclusions}
 
 \clearpage
+\phantomsection\addcontentsline{toc}{section}{References}
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
 

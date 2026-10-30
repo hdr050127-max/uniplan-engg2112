@@ -5,7 +5,7 @@ Generative AI was used in two different ways: as parts of the system, and as an 
 \subsection{AI Inside the System}
 
 \begin{center}\small
-\begin{tabular}{@{}p{0.22\linewidth}p{0.72\linewidth}@{}}
+\begin{tabular}{@{}>{\raggedright\arraybackslash}p{0.24\linewidth}>{\raggedright\arraybackslash}p{0.7\linewidth}@{}}
 	\toprule
 	Model & Role \\
 	\midrule
@@ -26,7 +26,7 @@ Claude Code (Anthropic) was used throughout development in the Claude desktop ap
 The five exchanges below are from the main Claude Code conversation that coordinated the project (session \texttt{4ea07490}, stored locally by Claude Code). The author's messages are given in the original Chinese with an English translation; Claude's replies were in Chinese and are given as English translations, shortened, with [\ldots] marking omissions. Times are Sydney time (AEDT). Each is followed by what we changed and how the result was checked.
 
 \newcommand{\who}[1]{\par\noindent\textbf{#1}\quad}
-\newenvironment{exchange}[1]{\subsubsection*{#1}\small}{\par}
+\newenvironment{exchange}[1]{\needspace{8\baselineskip}\subsubsection*{#1}\small}{\par}
 
 \begin{exchange}{1.\ The system design (16 October 2026, 18:10 to 18:14)}
 \who{Author:} 我直接用千问的开源模型就好了啊 / 我想的是我们有一个可视化的前端 然后只有判断逻辑接上大模型就好了 / 大模型只做语义分割 然后映射到我们设计好的条件里 然后由写好的程序来安排课表 然后再输出回大模型挑选 判断 \\

@@ -655,7 +655,7 @@ def tab_data(d: dict, s: dict) -> str:
         ("Parsing tests v1, v2", f"{s1[0]} + {s2[0]} sentences", "Claude", "Development"),
         ("Parsing exam", f"{ex[0]} sentences, {ex[1]} clauses", "Two fresh Claude agents", "Final test"),
         ("Personas", f"{s['personas'][0]} ({s['personas'][1]} train, {s['personas'][2]} held out)", "Claude", "Ranker"),
-        ("Teacher labels", f"{count(s['labels'])} pairs: {count(s['labels'] - s['label_code'])} asked ({count(s['label_kept'])} consistent), {count(s['label_code'])} by code", "Qwen2.5-14B or code; audited by Claude", "Ranker training (deployed model: first 60 personas)"),
+        ("Teacher labels", f"{count(s['labels'])} pairs: {count(s['labels'] - s['label_code'])} asked ({count(s['label_kept'])} consistent), {count(s['label_code'])} by code", "Qwen2.5-14B or code; audited by Claude", "Ranker training (60 personas used)"),
         ("Ranking exam", f"{s['exam_personas']} personas, {s['questions']} questions", "Fresh Claude agents", "Final test"),
     ]
     col = r">{\raggedright\arraybackslash}p"

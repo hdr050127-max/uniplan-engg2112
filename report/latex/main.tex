@@ -21,6 +21,14 @@
 \xeCJKsetup{CJKspace=true}
 \usepackage[hidelinks]{hyperref}
 
+% \bstctlcite from the IEEEtran documentation, so the IEEEtran bibliography style can be configured
+% from article: it turns off the long dash IEEEtran prints for a repeated author.
+\makeatletter
+\def\bstctlcite{\@ifnextchar[{\@bstctlcite}{\@bstctlcite[@auxout]}}
+\def\@bstctlcite[#1]#2{\@bsphack\@for\@citeb:=#2\do{\edef\@citeb{\expandafter\@firstofone\@citeb}%
+  \if@filesw\immediate\write\csname #1\endcsname{\string\citation{\@citeb}}\fi}\@esphack}
+\makeatother
+
 \linespread{1.06}
 \setlength{\parskip}{8pt plus2pt minus2pt}
 \widowpenalty 10000
@@ -33,6 +41,7 @@
 \input{generated/numbers}
 
 \begin{document}
+\bstctlcite{IEEEexample:BSTcontrol}
 
 %===========================================================
 \begin{titlepage}

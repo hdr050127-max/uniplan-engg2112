@@ -24,7 +24,7 @@ The parser questioned \cAsked\% of clauses (\cAskedN, of which \cCovered{} were 
 
 The trained logistic regression agreed with the independent answers on \rLR\% of pairs and recovered \rLRTop{} of their top three (Table~\ref{tab:rank}); equal weights reached \rEq\% and \rEqTop. The paired difference is \rDiffEq{} points (95\% CI \rDiffEqLo{} to \rDiffEqHi), so the trained model is level with equal weights within the uncertainty: a rule that ignores what the student said does almost as well on this exam. Most of the deployed model's training pairs (\rDomShare\%) were dominance pairs, which push it towards the same choices as equal weights. The student terms helped against the teacher's labels (removing them cost \rAblInteraction{} points on 20 held-out personas) but are not shown to help on independent answers. Qwen2.5-14B judging pairs directly did worse (\rQwen\%), partly because it was asked each pair once and chose the first-shown timetable \rQwenFirst\% of the time, whereas the teacher labels were asked in both orders.
 
-On the \rAgreePersonas{} personas answered twice, the two answerers agreed on \rAgree\% of pairs where both chose a side, similar to the human--human and human--LLM agreement of about 80\% reported in~\cite{zheng2023judge} and close to the model's score. Against the teacher's labels, accuracy was flat beyond 60 training personas, so better labels, not more, would help.
+On the \rAgreePersonas{} personas answered twice, the two answerers agreed on \rAgree\% of pairs where both chose a side, similar to the human-human and human-LLM agreement of about 80\% reported in~\cite{zheng2023judge} and close to the model's score. Against the teacher's labels, accuracy was flat beyond 60 training personas, so better labels, not more, would help.
 
 \subsection{Whole Pipeline and Reasons}\label{sec:res-pipeline}
 
@@ -34,7 +34,4 @@ All \exPicks{} template reasons passed the automatic fact check, as designed, an
 
 \subsection{Issues Faced}\label{sec:issue}
 
-\begin{itemize}[leftmargin=*]
-	\item \textbf{The teacher changed its mind when the order changed.} With the first ranking prompt only \tPilotFirst{} of \tPilotN{} pilot pairs got the same answer in both orders. A side-by-side table, the main concern stated first and code-decided near-ties raised this to \tPilotAskedOK{} of the \tPilotAsked{} pairs still put to the 14B model (\tPilotFinal{} of \tPilotN{} with the code-decided ones).
-	\item \textbf{Waiting-focused students sometimes got more waiting}, because code-labelled pairs favour fewer one-class days when waiting is equal.
-\end{itemize}
+With the first ranking prompt, the teacher gave the same answer in both orders for only \tPilotFirst{} of \tPilotN{} pilot pairs. A side-by-side table, the main concern stated first and code-decided near-ties raised this to \tPilotAskedOK{} of the \tPilotAsked{} pairs still put to the 14B model (\tPilotFinal{} of \tPilotN{} with the code-decided ones). Students focused on waiting sometimes got more waiting, because code-labelled pairs favour fewer one-class days when waiting is equal.

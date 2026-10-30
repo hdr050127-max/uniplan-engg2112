@@ -11,7 +11,7 @@
 	\node[io] (in) {Units and one sentence};
 	\node[ml, right=of in] (parse) {\textbf{Parse}\\Qwen2.5-7B\\QLoRA + rules};
 	\node[code, right=of parse] (confirm) {\textbf{Confirm}\\checks and\\answers};
-	\node[code, right=of confirm] (sched) {\textbf{Schedule}\\exact search,\\10--20 candidates};
+	\node[code, right=of confirm] (sched) {\textbf{Schedule}\\exact search,\\10 to 20 candidates};
 	\node[ml, right=of sched] (rank) {\textbf{Rank}\\logistic regression,\\13 features};
 	\node[code, right=of rank, text width=23mm] (explain) {\textbf{Explain}\\contributions,\\fact check};
 	\draw[arr] (in) -- (parse);

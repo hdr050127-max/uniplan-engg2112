@@ -148,8 +148,8 @@ def data_numbers(m: Macros) -> dict:
     m.add("ttFiveSec", fixed(five["seconds_full_flow"], 1), f"{src}: five units seconds_full_flow (Mac), 1 decimal")
 
     first, last = (date.fromisoformat(s) for s in (min(stamps), max(stamps)))
-    span = (f"{first.day}--{last.day} {last:%b %Y}" if (first.year, first.month) == (last.year, last.month)
-            else f"{first.day} {first:%b} -- {last.day} {last:%b %Y}")
+    span = (f"{first.day} and {last.day} {last:%b %Y}" if (first.year, first.month) == (last.year, last.month)
+            else f"{first.day} {first:%b} to {last.day} {last:%b %Y}")
     return {"units": len(units), "meetings": len(meetings), "options": len(options),
             "buildings": len(buildings), "span": span}
 
@@ -440,8 +440,8 @@ def parse_numbers(m: Macros) -> list[tuple[str, str, str, bool]]:
         exact[stem or model] = (clause, sentence)
         c_lo, c_hi = methods[ci_name]["clause_ci"]
         s_lo, s_hi = methods[ci_name]["sentence_ci"]
-        table.append((label, f"{pct(clause)} ({pct(c_lo)}--{pct(c_hi)})",
-                      f"{pct(sentence)} ({pct(s_lo)}--{pct(s_hi)})", "deployed" in label))
+        table.append((label, f"{pct(clause)} ({pct(c_lo)} to {pct(c_hi)})",
+                      f"{pct(sentence)} ({pct(s_lo)} to {pct(s_hi)})", "deployed" in label))
         if stem:
             where = f'{src}: model == "{model}", test'
             m.add(f"p{stem}C", pct(clause), f"{where}.accuracy = {clauses_right}/{test['n']}")
@@ -514,7 +514,7 @@ def rank_numbers(m: Macros) -> list[tuple[str, str, str, bool]]:
 
     def cell(row):
         lo, hi = row["ci95"]
-        return f"{pct(acc(row))} ({pct(lo)}--{pct(hi)})"
+        return f"{pct(acc(row))} ({pct(lo)} to {pct(hi)})"
 
     for stem, row, what in (("LR", lr, "trained LR (model.json)"), ("Eq", equal, "equal weights"),
                             ("Cares", cares, "cares-only rule"), ("Qwen", qwen_pair, "Qwen 14B each pair")):
@@ -569,8 +569,8 @@ def rank_numbers(m: Macros) -> list[tuple[str, str, str, bool]]:
     m.add("rMs", ms, "summary only: llm/rank/output/RESULTS.md:148 (rank() on 20 real candidates incl. features), regex")
 
     return [("Random", pct(report["random_baseline"]["pairwise_accuracy"]), prop(report["random_baseline"]["top3_hit"]), False),
-            ("Qwen2.5-14B judging each pair (once, as shown)", cell(qwen_pair), "---", False),
-            ("Qwen2.5-14B picking the top 3", "---", prop(qwen_top["top3_hit"]), False),
+            ("Qwen2.5-14B judging each pair (once, as shown)", cell(qwen_pair), "n/a", False),
+            ("Qwen2.5-14B picking the top 3", "n/a", prop(qwen_top["top3_hit"]), False),
             ("Cares-only rule", cell(cares), prop(cares["top3_hit"]), False),
             ("Equal weights", cell(equal), prop(equal["top3_hit"]), False),
             ("Trained logistic regression (deployed)", cell(lr), prop(lr["top3_hit"]), True)]

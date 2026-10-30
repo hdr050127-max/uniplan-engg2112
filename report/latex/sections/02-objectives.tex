@@ -6,7 +6,7 @@ The project had three objectives: \textbf{(O1)} read a student's sentence into a
 
 \textbf{Feasible set.} Let $T(U)$ be every choice of one class per required activity group. $F(U,c_H)\subseteq T(U)$ keeps the choices with no clash on any teaching date that satisfy $c_H$. A timetable is \emph{non-dominated} if no other is at least as good on waiting time $G$, campus days $D$ and early or late minutes $O$ and better on one; the non-dominated members of $F$, topped up to at least 10 by the student's stated priorities and capped at 20, form the candidates $C$.
 
-\textbf{Ranking.} Each candidate $t$ has 13 standardised features $z(t)$, such as campus days, waiting time, building changes and days with only one class (full list in Appendix~\ref{app:model}). The student has eight terms $\sigma(c_S)$: which of $D$, $G$, $O$ they care about most, which they care about at all, and how their comfortable hours differ from 9:00--18:00. The score
+\textbf{Ranking.} Each candidate $t$ has 13 standardised features $z(t)$, such as campus days, waiting time, building changes and days with only one class (full list in Appendix~\ref{app:model}). The student has eight terms $\sigma(c_S)$: which of $D$, $G$, $O$ they care about most, which they care about at all, and how their comfortable hours differ from 9:00 to 18:00. The score
 \begin{equation}
 	u(t) = \sum_{i=1}^{13} z_i(t)\Big(w_i + \sum_{j=1}^{8} w_{ij}\,\sigma_j\Big),
 	\qquad

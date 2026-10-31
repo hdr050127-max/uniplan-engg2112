@@ -4,22 +4,30 @@ Figure~\ref{fig:pipeline} shows the four stages. Learned parts propose and verif
 
 \begin{figure}[h]
 	\centering
-	\input{figures/pipeline}
-	\caption{The UniPlan pipeline. Shaded boxes are learned models; white boxes are code. The student confirms the parsed conditions before any timetable is built.}
+	\includegraphics[width=\textwidth]{figures/fig_pipeline.pdf}
+	\caption{The UniPlan pipeline: shaded boxes are learned models, white boxes are code.}
 	\label{fig:pipeline}
 \end{figure}
 
 \subsection{Parsing the Sentence}\label{sec:parse}
 
-Rules split the sentence, a classifier labels each clause, and rules read the values; in an early four-sentence pilot, untrained Qwen models asked for all conditions at once dropped some and invented others.
+Rules split the sentence, a classifier labels each clause, and rules read the values; in a four-sentence pilot, untrained Qwen models asked for all conditions at once dropped some and invented others.
 
 We compared keyword rules, TF-IDF (term-frequency, inverse-document-frequency) character $n$-grams with logistic regression, Qwen2.5-7B with a detailed prompt and no training, and Qwen2.5-7B fine-tuned with QLoRA~\cite{dettmers2023qlora}. Training data came from a teacher-student loop: Qwen2.5-7B generated \sClauses{} labelled clauses in English, Chinese and mixed language, Claude graded \sGraded{} of them and wrote \sHardOne{} harder ones, and a second round added \sHardTwo{} Claude-written clauses aimed at round~1's two weakest labels, giving \sTrainTwo{} training clauses (\sClaudeTrainPct\% written by Claude) and \sValTwo{} validation clauses after rejected ones were removed. Fine-tuning took \loraMinutes{} minutes on one RTX~4090 Laptop GPU (Appendix~\ref{app:model}); the model was then quantised and served through Ollama. Round~2 replaced round~1 under a rule written before it was scored.
 
 When unsure, the parser asks instead of guessing: when a second, cheaper classifier disagrees, when a clause could be hard or soft, or when a busy time has no day or hour. The student's answer overrides the model.
 
 \subsection{Building Valid Timetables}\label{sec:schedule}
+\setlength{\columnsep}{14pt}
+\begin{wrapfigure}{r}{0.47\textwidth}
+	\vspace{-0.7\baselineskip}
+	\includegraphics[width=0.47\textwidth]{figures/fig_pareto.pdf}
+	\caption{Every valid timetable for one AI-written exam student (\figUnits{} units, at most \figSpan{} hours a day on campus): \figFeasible{} timetables in \figTypes{} types with equal measures. The dotted line joins the front, the same on all three measures. Of \figStudents{} exam students with a timetable, \figSmallFront{} had one to four non-dominated types (Figure~\ref{fig:appendix}).}
+	\label{fig:pareto}
+	\vspace{-\baselineskip}
+\end{wrapfigure}
 
-The scheduler enumerates every valid timetable exactly. It searches the activity groups with the fewest options first, removes every class that clashes with a chosen one, and backtracks as soon as a group has no class left; pairwise clashes are precomputed as bit sets and classes with the same times and places are searched once. Hard limits (clashes, unavailable times, full classes, walking time when set, day and hour limits, lunch) are checked on real dates, $G$, $D$ and $O$ are updated incrementally, and the non-dominated timetables are kept. Five units (\ttFive{} valid timetables) take \ttFiveSec{}~s on a Mac. If nothing is feasible, the scheduler names the clashing activities and offers the timetables that break the fewest limits, stating each; a clash is never allowed. We used no learning or approximation here: the search order affects only speed, and every valid timetable is still found. On 65 randomly generated problems, 40 with day, hour and lunch limits, it matched a slower reference search exactly in the number of timetables and their measures.
+The scheduler lists every valid timetable exactly. It searches the activity groups with the fewest options first, removes every class that clashes with a chosen one, and backtracks as soon as a group has no class left; pairwise clashes are precomputed as bit sets and classes with the same times and places are searched once. Hard limits (clashes, unavailable times, full classes, walking time when set, day and hour limits, lunch) are checked on real dates, $G$, $D$ and $O$ are updated incrementally, and the non-dominated timetables are kept (Figure~\ref{fig:pareto}). Five units (\ttFive{} valid timetables) take \ttFiveSec{}~s on a Mac. If nothing is feasible, the scheduler names the clashing activities and offers the timetables that break the fewest limits, stating each; a clash is never allowed. We used no learning or approximation here: the search order affects only speed, and every valid timetable is still found. On 65 randomly generated problems, 40 with day, hour and lunch limits, it matched a slower reference search exactly in the number of timetables and their measures.
 
 \subsection{Ranking the Candidates}\label{sec:rank}
 

@@ -1,26 +1,19 @@
 \section{Results}\label{sec:findings}
 
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=\textwidth]{figures/fig_results.pdf}
+	\caption{Both final exams (AI-written, scored once), each method with its 95\% bootstrap interval: deployed models in colour, the O1 and O3 baselines in black. Every value: Tables~\ref{tab:parse} and~\ref{tab:rank}.}
+	\label{fig:results}
+\end{figure}
+
 \subsection{Parsing and Asking Back}\label{sec:res-parse}
 
-\begin{table}[h]
-	\caption{Parsing exam (\sExamS{} AI-written sentences, \sExamC{} clauses). Clauses are scored on the annotator's clause boundaries; whole sentences run the full parser and require every condition to match. 95\% bootstrap intervals over sentences.}
-	\label{tab:parse}
-	\centering\small
-	\input{generated/tab_parse}
-\end{table}
-
-Against the keyword-rule baseline of O1, the deployed model was \pDiffKeyC{} points better on clauses and \pDiffKeyS{} on whole sentences (paired 95\% CIs \pDiffKeyCLo{} to \pDiffKeyCHi{} and \pDiffKeySLo{} to \pDiffKeySHi; Table~\ref{tab:parse}). Fine-tuning made the difference: the same model untrained was no better than keyword rules, and training added \pDiffZeroC{} points on clauses (CI \pDiffZeroCLo{} to \pDiffZeroCHi) and \pDiffZeroS{} on whole sentences. Round~2 beat round~1 by \pDiffOneC{} points on clauses (CI \pDiffOneCLo{} to \pDiffOneCHi), but on whole sentences the difference is within noise. The offline fallback, TF-IDF with logistic regression, was chosen on validation data (\pLinVal\% of clauses against \pKeyVal\% for keywords; those clauses were mostly Chinese or mixed, the exam all English) but was no better than keyword rules on the exam; we did not switch afterwards. Splitting was exactly right for only \pSplit\% of sentences, the same for every classifier (a different split often still gives the same conditions), and most remaining sentence errors come from the rule-based steps.
+Against the keyword-rule baseline of O1, the deployed model was \pDiffKeyC{} points better on clauses and \pDiffKeyS{} on whole sentences (paired 95\% CIs \pDiffKeyCLo{} to \pDiffKeyCHi{} and \pDiffKeySLo{} to \pDiffKeySHi; Figure~\ref{fig:results}). Fine-tuning made the difference: the same model untrained was no better than keyword rules, and training added \pDiffZeroC{} points on clauses (CI \pDiffZeroCLo{} to \pDiffZeroCHi) and \pDiffZeroS{} on whole sentences. Round~2 beat round~1 by \pDiffOneC{} points on clauses (CI \pDiffOneCLo{} to \pDiffOneCHi), but on whole sentences the difference is within noise. The offline fallback, TF-IDF with logistic regression, was chosen on validation data (\pLinVal\% of clauses against \pKeyVal\% for keywords; those clauses were mostly Chinese or mixed, the exam all English) but was no better than keyword rules on the exam; we did not switch afterwards. Splitting was exactly right for only \pSplit\% of sentences, the same for every classifier (a different split often still gives the same conditions), and most remaining sentence errors come from the rule-based steps.
 
 The parser questioned \cAsked\% of clauses (\cAskedN, of which \cCovered{} were wrong), and \cSentWithQ\% of sentences got at least one question or offer. The questions covered \cCovered{} of the \cWrong{} wrong clauses, and for \cOption{} of them the correct reading was an option, so if students picked it clause accuracy would reach about \cProjected\% (a projection; no student answered).
 
 \subsection{Ranking}\label{sec:res-rank}
-
-\begin{table}[h]
-	\caption{Ranking exam: \sRankExamPersonas{} new AI-written personas with the exam writer's conditions and up to 8 timetables each, \sRankQ{} questions, \sRankScored{} with a clear answer (\sRankSame{} ``about the same'' not scored). Intervals resample personas. Top-3 hit is the share of the answerers' top three recovered, weighted for ties; ties cap it at \rCeiling.}
-	\label{tab:rank}
-	\centering\small
-	\input{generated/tab_rank}
-\end{table}
 
 The trained logistic regression agreed with the independent answers on \rLR\% of pairs and recovered \rLRTop{} of their top three (Table~\ref{tab:rank}); equal weights reached \rEq\% and \rEqTop. The paired difference is \rDiffEq{} points (95\% CI \rDiffEqLo{} to \rDiffEqHi), so the trained model is level with equal weights within the uncertainty: a rule that ignores what the student said does almost as well on this exam. Most of the deployed model's training pairs (\rDomShare\%) were dominance pairs, which push it towards the same choices as equal weights. The student terms helped against the teacher's labels (removing them cost \rAblInteraction{} points on 20 held-out personas) but are not shown to help on independent answers. Qwen2.5-14B judging pairs directly did worse (\rQwen\%), partly because it was asked each pair once and chose the first-shown timetable \rQwenFirst\% of the time, whereas teacher labels used both orders.
 

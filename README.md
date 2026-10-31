@@ -44,9 +44,12 @@ Every other model we compared (keyword rules, untrained Qwen2.5-7B, QLoRA round 
 | Feasible-timetable counts and timing | `python3 report/scripts/count_timetables.py` | `report/data/timetable_counts.json` |
 | Parsing exam confidence intervals | `python3 report/scripts/parse_exam_ci.py` | `report/data/parse_exam_ci.json` |
 | Ranking exam paired interval | `python3 report/scripts/rank_exam_paired.py` | `report/data/rank_exam_paired.json` |
+| Pareto example and front sizes (Figures 2 and 5) | `python3 report/scripts/pareto_figure.py` | `report/data/pareto_example.json` |
+| Figure data, then every figure | `python3 report/scripts/figure_data.py`, then `node report/figures/render.mjs` | `report/latex/figures/fig_*.pdf` |
+| Screenshots of the web page (Figure 4) | start `python3 main.py --port 8768`, then `node report/figures/capture_app.mjs` | `report/figures/app_*.png` |
 | The PDF | `cd report/latex && tectonic -X compile main.tex` | `report/latex/main.pdf` |
 
-None of these call a language model; they read the stored results. The PDF needs [Tectonic](https://tectonic-typesetting.github.io) and, for the Chinese quotations in Appendix A, the macOS font Hiragino Sans GB.
+None of these call a language model except the screenshots, which run the web page with the deployed parser in Ollama; the rest read the stored results. The figures are web pages (`report/figures/`) printed to PDF by headless Google Chrome with Node.js 22 or later. The PDF needs [Tectonic](https://tectonic-typesetting.github.io) and, for the Chinese quotations in Appendix A, the macOS font Hiragino Sans GB.
 
 Re-running the experiments themselves needs Ollama with Qwen2.5-7B and 14B and, for fine-tuning, a CUDA GPU; the commands are in `llm/parse/evaluate.py`, `llm/rank/output/RESULTS.md` and `scripts/evaluate_*.py`. The final exams were frozen before scoring: their SHA-256 hashes and commits are in `llm/parse/exam/PROVENANCE.md` and `llm/rank/exam/PROVENANCE.md`.
 
@@ -62,7 +65,7 @@ Re-running the experiments themselves needs Ollama with Qwen2.5-7B and 14B and, 
 | `data/` | Public timetable snapshot, building locations, unit catalogue |
 | `output/` | Pipeline, reason and final-exam results |
 | `tests/` | Unit and end-to-end tests |
-| `report/` | Report source, number generator and derived data |
+| `report/` | Report source, number generator, figures (as web pages) and derived data |
 | `docs/DESIGN.md` | Web page design brief |
 | `docs/notes/` | Working notes from development (in Chinese) |
 | `timetable_scraper.py`, `sync_building_locations.py` | Fetching the public timetable and building locations |

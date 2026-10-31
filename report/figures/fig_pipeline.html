@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pipeline</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&display=block">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="data.js"></script>
+<script src="common.js"></script>
+<style>
+  .head { display: flex; justify-content: flex-end; }
+  .head .legend { margin-bottom: 5pt; }
+  .legend .box { width: 9pt; height: 6.5pt; border-radius: 1.5pt; }
+  .flow { display: flex; align-items: stretch; flex: 1; }
+  .input { width: 0.7in; display: flex; align-items: center; color: var(--ink-2); font-size: 7.6pt; line-height: 1.25; }
+  .arrow { width: 0.17in; flex: none; display: flex; align-items: center; justify-content: center; }
+  .stage {
+    flex: 1; border-radius: 4pt; padding: 4pt 6pt 4.5pt; display: flex; flex-direction: column; gap: 2pt;
+    border: 0.8pt solid var(--rule); background: #fff;
+  }
+  .stage.learned { background: var(--accent-tint); border-color: var(--accent-line); }
+  .stage .name { font-weight: 600; font-size: 8.4pt; letter-spacing: -0.005em; }
+  .stage.learned .name { color: var(--accent); }
+  .stage .how { color: var(--ink-2); font-size: 7.2pt; line-height: 1.28; flex: 1; }
+  .stage .out { color: var(--muted); font-size: 7pt; line-height: 1.25; border-top: 0.6pt solid var(--grid); padding-top: 3pt; }
+  .stage.learned .out { border-top-color: #e0dcf1; }
+  .out b { color: var(--ink); font-weight: 500; }
+</style>
+</head>
+<body>
+<div class="flow">
+  <div class="input">Units and<br>one sentence</div>
+  <div class="arrow"></div>
+  <div class="stage learned"><div class="name">Parse</div>
+    <div class="how">Fine-tuned Qwen2.5-7B labels clauses; rules read the values</div>
+    <div class="out">Out: <b>conditions</b></div></div>
+  <div class="arrow"></div>
+  <div class="stage"><div class="name">Confirm</div>
+    <div class="how">The student checks every condition; unsure ones are asked</div>
+    <div class="out">Out: <b>confirmed conditions</b></div></div>
+  <div class="arrow"></div>
+  <div class="stage"><div class="name">Schedule</div>
+    <div class="how">Exact search for every valid timetable; no clash can pass</div>
+    <div class="out">Out: <b>10 to 20 candidates</b></div></div>
+  <div class="arrow"></div>
+  <div class="stage learned"><div class="name">Rank</div>
+    <div class="how">Logistic regression on 13 features, weighted per student</div>
+    <div class="out">Out: <b>top 3</b></div></div>
+  <div class="arrow"></div>
+  <div class="stage"><div class="name">Explain</div>
+    <div class="how">Reasons from the ranker’s contributions, fact-checked</div>
+    <div class="out">Out: <b>3 picks with reasons</b></div></div>
+</div>
+<script>
+page(6.27, 1.3);
+for (const slot of document.querySelectorAll(".arrow")) {
+  slot.innerHTML = `<svg width="14" height="8" viewBox="0 0 14 8"><path d="M0 4 H12" stroke="var(--muted)" stroke-width="1"/>
+    <path d="M9 1 L12.5 4 L9 7" fill="none" stroke="var(--muted)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+}
+ready();
+</script>
+</body>
+</html>

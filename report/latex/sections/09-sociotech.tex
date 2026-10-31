@@ -4,11 +4,11 @@
 
 \textbf{Demand would concentrate.} Thousands of students with similar wishes, such as no Friday classes, would be steered to the same classes, which would fill sooner; students who enrol last may lose most. A deployed version should show seat numbers and spread recommendations across equivalent classes.
 
-\textbf{Accuracy may differ between students.} We tested only English written by an AI. Real students writing in a second language, or in Chinese or mixed language (most of the training clauses), may be misread more often, so accuracy should be measured per group of real students before launch, in line with the fairness principles of the Week~11 lecture~\cite{engg2112_w11}.
+\textbf{Accuracy may differ between students.} We tested only English written by an AI. Real students writing in a second language, or in Chinese or mixed language (most of the training clauses), may be misread more often, so accuracy should be measured per group before launch, following the fairness principles of the Week~11 lecture~\cite{engg2112_w11}.
 
 \textbf{The sentence is sensitive.} Students explain their week with a job, a disability or a family member who needs care. The Week~6 lecture warns about leakage and re-identification of personal data in AI systems~\cite{engg2112_w06}. UniPlan runs its models locally and needs no name or ID; a deployed service should discard sentences after use and never send them to a third-party model provider.
 
-\textbf{People over-trust automated advice.} Users of decision aids tend to accept the first suggestion and miss its errors~\cite{parasuraman2010}, so a student may skim past a misread condition; margin notes and questions reduce but do not remove this risk.
+\textbf{People over-trust automated advice.} Users of decision aids tend to accept the first suggestion and miss its errors~\cite{parasuraman2010}; notes and questions reduce this risk but do not remove it.
 
 \textbf{The model learned an AI's preferences.} The ranker was distilled~\cite{hinton2015distill} from Qwen2.5-14B playing students, so any bias in how these models imagine students, such as everyone wanting fewer days, is now in the weights; only real students can reveal it.
 

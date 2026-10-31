@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Pareto example</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&display=block">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="data.js"></script>
+<script src="common.js"></script>
+</head>
+<body>
+<script>
+page(2.95, 2.6);
+whenFonts(() => {
+// One exam student's valid timetables on two of the three measures (the front is the same on all three here).
+const ex = DATA.pareto;
+const xy = Object.fromEntries(Object.entries(ex.points).map(([id, v]) => [id, { id, x: v[0], y: v[1] }]));
+const picks = ex.picks.map(id => xy[id]);
+const front = ex.front.map(id => xy[id]).sort((a, b) => a.x - b.x);
+const others = Object.values(xy).filter(p => !ex.front.includes(p.id) && !ex.picks.includes(p.id));
+const lone = front.find(p => !ex.picks.includes(p.id));
+
+legend([
+  { kind: "dot", color: "var(--accent)", label: "Ranker’s top 3" },
+  { kind: "dot", color: "var(--ink)", size: 5, label: "Non-dominated" },
+  { kind: "line", color: "var(--ink)", dash: true, width: "1.4pt", label: "Pareto front" },
+  { kind: "dot", color: "var(--dot)", size: 5,
+    label: `Other types (${ex.profiles} in all, from ${ex.feasible_count.toLocaleString("en")} timetables)` },
+]);
+const { svg, width, height } = canvas();
+const m = { top: 4, right: 4, bottom: 33, left: 30 };
+const x = d3.scaleLinear([5, 9], [m.left, width - m.right]);
+const y = d3.scaleLinear([2.72, 5.1], [height - m.bottom, m.top]);
+
+svg.append("g").attr("transform", `translate(0,${height - m.bottom})`)
+  .call(d3.axisBottom(x).ticks(5).tickFormat(d3.format("d")).tickPadding(5))
+  .call(g => styleAxis(g, { grid: { attr: "y2", length: -(height - m.top - m.bottom) }, baseline: true }));
+svg.append("g").attr("transform", `translate(${m.left},0)`)
+  .call(d3.axisLeft(y).tickValues([3, 4, 5]).tickFormat(d3.format("d")).tickPadding(6))
+  .call(g => styleAxis(g, { grid: { attr: "x2", length: width - m.left - m.right } }));
+svg.append("text").attr("class", "axis-title").attr("x", (m.left + width - m.right) / 2).attr("y", height - 2)
+  .attr("text-anchor", "middle").text("Waiting between classes (hours a week)");
+svg.append("text").attr("class", "axis-title").attr("transform", `translate(9,${(m.top + height - m.bottom) / 2}) rotate(-90)`)
+  .attr("text-anchor", "middle").text("Days on campus a week (average)");
+svg.append("text").attr("class", "note").attr("x", width - m.right - 3).attr("y", m.top + 9)
+  .attr("text-anchor", "end").text("Lower is better on both axes");
+
+const ring = sel => sel.attr("stroke", "#fff").attr("stroke-width", 1.1);
+svg.append("g").selectAll("circle").data(others).join("circle")
+  .attr("cx", d => x(d.x)).attr("cy", d => y(d.y)).attr("r", 2.4).attr("fill", "var(--dot)").call(ring);
+svg.append("path").attr("d", d3.line(d => x(d.x), d => y(d.y))(front))
+  .attr("fill", "none").attr("stroke", "var(--ink)").attr("stroke-width", 1.4)
+  .attr("stroke-linecap", "round").attr("stroke-dasharray", "0.1 3.2");
+svg.append("g").selectAll("circle").data(front).join("circle")
+  .attr("cx", d => x(d.x)).attr("cy", d => y(d.y)).attr("r", 3.1).attr("fill", "var(--ink)").call(ring);
+svg.append("g").selectAll("circle").data(picks).join("circle")
+  .attr("cx", d => x(d.x)).attr("cy", d => y(d.y)).attr("r", 4.2).attr("fill", "var(--accent)")
+  .attr("stroke", "#fff").attr("stroke-width", 1.4);
+
+// Direct labels: what each marked timetable is (pick 2's advantage comes from its reason on the page).
+const label = (p, text, dx, dy, anchor = "start", baseline = "middle") =>
+  svg.append("text").attr("class", "label").attr("x", x(p.x) + dx).attr("y", y(p.y) + dy)
+    .attr("text-anchor", anchor).attr("dominant-baseline", baseline).text(text);
+label(picks[0], "Pick 1 · fewest days", 15, 0.5);
+label(picks[1], "Pick 2 · days end at 4 pm", -4, -9, "start", "auto");
+label(lone, "Least waiting", 0, -9, "middle", "auto");
+const at = { x: x(5.08), y: y(3.36) };
+svg.append("line").attr("x1", x(picks[2].x) - 1).attr("y1", y(picks[2].y) + 5).attr("x2", at.x + 10).attr("y2", at.y - 9)
+  .attr("stroke", "var(--muted)").attr("stroke-width", 0.7);
+const three = svg.append("text").attr("class", "label").attr("x", at.x).attr("y", at.y);
+three.append("tspan").attr("x", at.x).attr("dy", 0).text("Pick 3 ·");
+three.append("tspan").attr("x", at.x).attr("dy", "1.2em").text("less waiting");
+
+});
+</script>
+</body>
+</html>

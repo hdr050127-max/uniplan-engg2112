@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>The web page</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&display=block">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="data.js"></script>
+<script src="common.js"></script>
+<style>
+  /* Two real screenshots (report/figures/capture_app.mjs), framed alike and set to the same height. */
+  .row { display: flex; gap: 0.2in; align-items: flex-start; justify-content: center; }
+  figure { margin: 0; display: flex; flex-direction: column; gap: 4pt; }
+  figcaption { font-size: 7.6pt; color: var(--ink-2); }
+  figcaption b { color: var(--ink); font-weight: 600; margin-right: 3pt; }
+  .shot { border: 0.8pt solid var(--rule); border-radius: 5pt; overflow: hidden; background: #fff; }
+  .shot img { display: block; height: 100%; width: auto; }
+</style>
+</head>
+<body>
+<div class="row">
+  <figure id="a"><figcaption><b>a</b>The sentence read back: a note beside each clause, and a question</figcaption>
+    <div class="shot"><img src="app_read.png" alt=""></div></figure>
+  <figure id="b"><figcaption><b>b</b>The first pick, with its reason</figcaption>
+    <div class="shot"><img src="app_picks.png" alt=""></div></figure>
+</div>
+<script>
+page(6.27, 1.76);
+// Both screenshots at one height that fills the width: height = (width - gap) / (sum of aspect ratios).
+Promise.all([...document.images].map(img => img.decode())).then(() => whenFonts(() => {
+  const [a, b] = document.images;
+  const gap = 0.2 * PX, border = 2 * 0.8 * PT;
+  const ratio = img => img.naturalWidth / img.naturalHeight;
+  const caption = document.querySelector("figcaption").getBoundingClientRect().height + 4 * PT;
+  const h = Math.min((document.body.clientWidth - gap - 2 * border) / (ratio(a) + ratio(b)),
+                     document.body.clientHeight - caption - border);
+  for (const img of [a, b]) img.parentElement.style.height = `${h}px`;
+}));
+</script>
+</body>
+</html>

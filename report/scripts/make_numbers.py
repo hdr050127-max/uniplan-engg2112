@@ -576,6 +576,25 @@ def rank_numbers(m: Macros) -> list[tuple[str, str, str, bool]]:
             ("Trained logistic regression (deployed)", cell(lr), prop(lr["top3_hit"]), True)]
 
 
+# ------------------------------------------------------------------------------- the figures
+
+def figure_numbers(m: Macros) -> None:
+    """The Pareto example (Figure 2) and the front sizes (Figure 6a), from report/scripts/pareto_figure.py."""
+    rel = "report/data/pareto_example.json"
+    data = read_json(rel)
+    ex = data["example"]
+    students = data["students"]
+    span = ex["conditions"]["max_daily_span"]
+    assert span % 60 == 0, span
+    m.add("figUnits", count(len(ex["units"])), f"{rel}: example.units ({ex['sentence_id']})")
+    m.add("figSpan", count(span // 60), f"{rel}: example.conditions.max_daily_span / 60")
+    m.add("figFeasible", count(ex["feasible_count"]), f"{rel}: example.feasible_count")
+    m.add("figTypes", count(ex["profiles"]), f"{rel}: example.profiles (distinct G/D/O)")
+    m.add("figFront", count(len(ex["front"])), f"{rel}: len(example.front)")
+    m.add("figStudents", count(len(students)), f"{rel}: exam sentences whose intended conditions allow a timetable")
+    m.add("figSmallFront", count(sum(s["front"] <= 4 for s in students)), f"{rel}: students with front <= 4")
+
+
 # ------------------------------------------------------------------------- pipeline and reasons
 
 def pipeline_numbers(m: Macros) -> None:
@@ -695,6 +714,7 @@ def main() -> None:
     rank_table = rank_numbers(m)
     pipeline_numbers(m)
     reason_numbers(m)
+    figure_numbers(m)
 
     OUT.mkdir(parents=True, exist_ok=True)
     files = {

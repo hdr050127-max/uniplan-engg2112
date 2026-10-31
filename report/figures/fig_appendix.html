@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Front sizes and learning curve</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&display=block">
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
+<script src="data.js"></script>
+<script src="common.js"></script>
+</head>
+<body>
+<script>
+// Two appendix panels: (a) how many non-dominated profiles each exam student had, against the shortlist's minimum;
+// (b) the ranker's held-out accuracy against the number of training personas.
+page(6.27, 2.1);
+whenFonts(() => {
+const { svg, width, height } = canvas();
+const half = (width - 36) / 2;
+const m = { top: 30, bottom: 32, left: 40 };
+
+function frame(x0, w, x, y, xTicks, yTicks, xTitle, yTitle, title) {
+  svg.append("text").attr("class", "panel-title").attr("x", x0 - 36).attr("y", 9).text(title);
+  svg.append("g").attr("transform", `translate(0,${height - m.bottom})`)
+    .call(d3.axisBottom(x).tickValues(xTicks).tickFormat(d3.format("d")).tickPadding(4))
+    .call(g => styleAxis(g, { baseline: true }));
+  svg.append("g").attr("transform", `translate(${x0},0)`)
+    .call(d3.axisLeft(y).tickValues(yTicks).tickFormat(d3.format("d")).tickPadding(5))
+    .call(g => styleAxis(g, { grid: { attr: "x2", length: w } }));
+  svg.append("text").attr("class", "axis-title").attr("x", x0 + w / 2).attr("y", height - 3)
+    .attr("text-anchor", "middle").text(xTitle);
+  svg.append("text").attr("class", "axis-title").attr("transform", `translate(${x0 - 29},${(m.top + height - m.bottom) / 2}) rotate(-90)`)
+    .attr("text-anchor", "middle").text(yTitle);
+}
+
+// (a) Front sizes.
+const sizes = DATA.front_sizes, shortlist = DATA.candidate_min;
+const students = DATA.students.length;
+const xs = d3.range(1, shortlist + 1);
+const ax0 = m.left, aw = half - m.left;
+const ax = d3.scaleBand(xs, [ax0, ax0 + aw]).padding(0.38);
+const top = d3.max(Object.values(sizes));
+const ay = d3.scaleLinear([0, Math.ceil(top / 20) * 20], [height - m.bottom, m.top]);
+frame(ax0, aw, ax, ay, xs, [0, 20, 40, 60, 80], "Non-dominated types per student", "Exam students",
+  `(a) Front sizes, ${students} exam students with a valid timetable`);
+for (const n of xs) {
+  const count = sizes[n] || 0;
+  if (!count) continue;
+  svg.append("rect").attr("x", ax(n)).attr("width", ax.bandwidth()).attr("y", ay(count))
+    .attr("height", ay(0) - ay(count)).attr("rx", 1.5).attr("fill", "var(--ink-2)");
+  svg.append("text").attr("class", "value").attr("x", ax(n) + ax.bandwidth() / 2).attr("y", ay(count) - 3)
+    .attr("text-anchor", "middle").text(count);
+}
+const lineX = ax(shortlist) + ax.bandwidth() / 2;
+svg.append("line").attr("x1", lineX).attr("x2", lineX).attr("y1", m.top - 4).attr("y2", ay(0))
+  .attr("stroke", "var(--muted)").attr("stroke-width", 1);
+svg.append("text").attr("class", "note").attr("x", lineX - 5).attr("y", ay(36)).attr("text-anchor", "end")
+  .text(`The shortlist needs ${shortlist},`);
+svg.append("text").attr("class", "note").attr("x", lineX - 5).attr("y", ay(36) + 10).attr("text-anchor", "end")
+  .text("so the front is");
+svg.append("text").attr("class", "note").attr("x", lineX - 5).attr("y", ay(36) + 20).attr("text-anchor", "end")
+  .text("always topped up");
+
+// (b) Learning curve.
+const curve = DATA.curve;
+const bx0 = half + 36 + m.left, bw = width - bx0 - 6;
+const bx = d3.scaleLinear([0, 125], [bx0, bx0 + bw]);
+const by = d3.scaleLinear([75, 95], [height - m.bottom, m.top]);
+frame(bx0, bw, bx, by, [6, 30, 60, 90, 120], [75, 80, 85, 90, 95], "Training personas", "Held-out pairs agreed (%)",
+  "(b) Ranker learning curve, 20 held-out personas");
+svg.append("path").attr("d", d3.area(d => bx(d.personas), d => by(d.accuracy - d.sd), d => by(d.accuracy + d.sd))(curve))
+  .attr("fill", "var(--accent-tint)");
+svg.append("path").attr("d", d3.line(d => bx(d.personas), d => by(d.accuracy))(curve))
+  .attr("fill", "none").attr("stroke", "var(--accent)").attr("stroke-width", 1.6).attr("stroke-linejoin", "round");
+svg.append("g").selectAll("circle").data(curve).join("circle").attr("cx", d => bx(d.personas)).attr("cy", d => by(d.accuracy))
+  .attr("r", 3).attr("fill", "var(--accent)").attr("stroke", "#fff").attr("stroke-width", 1);
+const sixty = curve.find(d => d.personas === 60), last = curve[curve.length - 1];
+svg.append("line").attr("x1", bx(60)).attr("x2", bx(60)).attr("y1", m.top - 2).attr("y2", by(75))
+  .attr("stroke", "var(--muted)").attr("stroke-width", 1);
+svg.append("text").attr("class", "note").attr("x", bx(60) + 5).attr("y", by(93.6)).text("deployed: 60 personas");
+svg.append("text").attr("class", "value").attr("x", bx(60) - 6).attr("y", by(sixty.accuracy) - 6).attr("text-anchor", "end").text(sixty.accuracy.toFixed(1));
+svg.append("text").attr("class", "value").attr("x", bx(last.personas)).attr("y", by(last.accuracy) - 7).attr("text-anchor", "middle").text(last.accuracy.toFixed(1));
+});
+</script>
+</body>
+</html>

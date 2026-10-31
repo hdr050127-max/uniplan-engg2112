@@ -5,7 +5,7 @@ Figure~\ref{fig:pipeline} shows the four stages. Learned parts propose and verif
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=\textwidth]{figures/fig_pipeline.pdf}
-	\caption{The UniPlan pipeline: shaded boxes are learned models, white boxes are code.}
+	\caption{The UniPlan pipeline: shaded boxes are learned models, white boxes are code. The student confirms the parsed conditions before any timetable is built.}
 	\label{fig:pipeline}
 \end{figure}
 
@@ -22,7 +22,7 @@ When unsure, the parser asks instead of guessing: when a second, cheaper classif
 \begin{wrapfigure}{r}{0.47\textwidth}
 	\vspace{-0.7\baselineskip}
 	\includegraphics[width=0.47\textwidth]{figures/fig_pareto.pdf}
-	\caption{Every valid timetable for one AI-written exam student (\figUnits{} units, at most \figSpan{} hours a day on campus): \figFeasible{} timetables in \figTypes{} types with equal measures. The dotted line joins the front, the same on all three measures. Of \figStudents{} exam students with a timetable, \figSmallFront{} had one to four non-dominated types (Figure~\ref{fig:appendix}).}
+	\caption{Every valid timetable for one AI-written exam student (\figUnits{} units, at most \figSpan{} hours a day on campus): \figFeasible{} timetables in \figTypes{} types with equal measures (hollow circles; seven types beyond 7.3~h, all dominated, are off the right edge). The staircase is the Pareto front and the black points its \figFront{} members, the same on all three measures; the numbered points are the ranker's picks, pick~2 off the front. Of \figStudents{} exam students with a timetable, \figSmallFront{} had one to four types on the front (Figure~\ref{fig:appendix}).}
 	\label{fig:pareto}
 	\vspace{-\baselineskip}
 \end{wrapfigure}

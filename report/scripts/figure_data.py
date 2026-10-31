@@ -3,7 +3,8 @@
 Run from the repository root: python3 report/scripts/figure_data.py
 Run report/scripts/make_numbers.py and report/scripts/pareto_figure.py first: the result values are read
 from the generated tables, so a figure always shows exactly what the tables print, and the timetable
-example from report/data/pareto_example.json. Then render with: node report/figures/render.mjs
+example from report/data/pareto_example.json. Then render with:
+    node report/figures/render.mjs report/latex/figures document --flat
 All evaluation data is AI-written (synthetic), not real students; see the report's Appendix B.
 """
 import json

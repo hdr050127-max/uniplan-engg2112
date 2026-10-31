@@ -2,118 +2,17 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Exam results</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&display=block">
-<link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/d3@7.9.0/dist/d3.min.js"></script>
 <script src="data.js"></script>
-<script src="common.js"></script>
+<script src="lib.js"></script>
+<script src="themes.js"></script>
+<script src="figures.js"></script>
+<style>html, body { margin: 0; background: #fff; overflow: hidden; }</style>
 </head>
 <body>
 <script>
-page(6.27, 1.84);
-whenFonts(() => {
-// Both final exams: each method's score with its 95% interval; the deployed model and the baseline its
-// objective is judged against are drawn in colour, and the paired difference that decides the objective is noted.
-const { svg, width, height } = canvas();
-const N = DATA.numbers;
-const ROW = 15.5, TOP = 33;
-
-const short = {
-  "Keyword rules": "Keyword rules",
-  "TF-IDF + logistic regression": "TF-IDF classifier",
-  "Qwen2.5-7B zero-shot (prompt v1)": "Qwen2.5-7B, prompt v1",
-  "Qwen2.5-7B zero-shot (prompt v2)": "Qwen2.5-7B, prompt v2",
-  "Qwen2.5-7B QLoRA round 1": "QLoRA round 1",
-  "Qwen2.5-7B QLoRA round 2 (deployed)": "QLoRA round 2 (deployed)",
-  "Qwen2.5-14B judging each pair (once, as shown)": "Qwen2.5-14B as judge",
-  "Cares-only rule": "Cares-only rule",
-  "Equal weights": "Equal weights",
-  "Trained logistic regression (deployed)": "Trained ranker (deployed)",
-};
-const role = d => d.deployed ? "deployed" : (d.method === "Keyword rules" || d.method === "Equal weights") ? "baseline" : "other";
-const look = {
-  deployed: { dot: "var(--accent)", line: "var(--accent)", r: 3.4, w: 1.7, label: "label-strong", labelFill: "var(--accent)" },
-  baseline: { dot: "var(--ink)", line: "var(--ink)", r: 3.0, w: 1.4, label: "label", labelFill: "var(--ink)" },
-  other: { dot: "#b3b0a8", line: "#d3d0c9", r: 2.6, w: 1.3, label: "label", labelFill: "var(--ink-2)" },
-};
-
-// rows: [{label, d, metric}], at x0..x0+w for the plot; labels end at x0 - 8.
-function panel({ x0, w, rows, metric, domain, ticks, title, valueSide }) {
-  const x = d3.scaleLinear(domain, [x0, x0 + w]);
-  const bottom = TOP + rows.length * ROW;
-  const g = svg.append("g");
-  g.append("text").attr("class", "label").attr("x", x0).attr("y", TOP - 8).attr("fill", "var(--ink-2)").text(title);
-  g.append("g").attr("transform", `translate(0,${bottom + 2})`)
-    .call(d3.axisBottom(x).tickValues(ticks).tickFormat(d3.format("d")).tickPadding(4))
-    .call(a => styleAxis(a, { grid: { attr: "y2", length: -(bottom - TOP + 6) }, baseline: true }));
-  rows.forEach((d, i) => {
-    const cy = TOP + i * ROW + ROW / 2;
-    const v = d[metric], s = look[role(d)];
-    g.append("line").attr("x1", x(v.low)).attr("x2", x(v.high)).attr("y1", cy).attr("y2", cy)
-      .attr("stroke", s.line).attr("stroke-width", s.w).attr("stroke-linecap", "round");
-    g.append("circle").attr("cx", x(v.value)).attr("cy", cy).attr("r", s.r).attr("fill", s.dot)
-      .attr("stroke", "#fff").attr("stroke-width", 1);
-    if (role(d) !== "other") {
-      const left = (valueSide || (role(d) === "deployed" ? "left" : "right")) === "left";
-      g.append("text").attr("class", role(d) === "deployed" ? "value-strong" : "value")
-        .attr("x", left ? x(v.low) - 4 : x(v.high) + 4).attr("y", cy).attr("dominant-baseline", "central")
-        .attr("text-anchor", left ? "end" : "start").text(v.text);
-    }
-  });
-  return { x, bottom };
-}
-function labels(x1, rows) {
-  rows.forEach((d, i) => {
-    const s = look[role(d)];
-    svg.append("text").attr("class", s.label).style("fill", s.labelFill).attr("x", x1).attr("y", TOP + i * ROW + ROW / 2)
-      .attr("text-anchor", "end").attr("dominant-baseline", "central").text(short[d.method]);
-  });
-}
-function header(x0, text) {
-  svg.append("text").attr("class", "panel-title").attr("x", x0).attr("y", 8).text(text);
-}
-function note(x0, y, lines) {
-  lines.forEach((line, i) => svg.append("text").attr("class", "note").attr("x", x0).attr("y", y + i * 10.5).text(line));
-}
-
-// Column widths come from the measured label widths, so nothing is cut off.
-function widest(rows) {
-  const probe = svg.append("g");
-  const w = d3.max(rows, d => probe.append("text").attr("class", look[role(d)].label).text(short[d.method]).node().getComputedTextLength());
-  probe.remove();
-  return Math.ceil(w) + 8;
-}
-const parse = DATA.parse;
-const rank = DATA.rank.filter(d => d.pairs);
-const random = DATA.rank.find(d => d.reference !== undefined).reference;
-const L = widest(parse), RL = widest(rank), G = 22, GAP = 30;
-const P = Math.floor((width - L - G - GAP - RL - 6) * 0.58 / 2);
-const R0 = L + 2 * P + G + GAP, RW = width - R0 - RL - 6;
-
-// Parsing exam: labels, then clauses and whole sentences.
-header(0, `Parsing exam · ${N.sExamS} sentences, ${N.sExamC} clauses`);
-labels(L - 8, parse);
-const a = panel({ x0: L, w: P, rows: parse, metric: "clauses", domain: [78, 100], ticks: [80, 90, 100], title: "Clauses right (%)" });
-panel({ x0: L + P + G, w: P, rows: parse, metric: "sentences", domain: [60, 86], ticks: [60, 70, 80], title: "Whole sentences (%)" });
-
-// Ranking exam: random is a reference line, the rest are rows.
-header(R0, `Ranking exam · ${N.sRankExamPersonas} personas, ${N.sRankScored} pairs`);
-labels(R0 + RL - 8, rank);
-const c = panel({ x0: R0 + RL, w: RW, rows: rank, metric: "pairs", domain: [45, 95], ticks: [50, 70, 90],
-  title: "Pairs agreed (%)" });
-svg.append("line").attr("x1", c.x(random)).attr("x2", c.x(random)).attr("y1", TOP - 2).attr("y2", c.bottom + 2)
-  .attr("stroke", "var(--muted)").attr("stroke-width", 0.9);
-svg.append("text").attr("class", "note").attr("x", c.x(random)).attr("y", c.bottom + 29).attr("text-anchor", "middle").text("random");
-
-// The paired differences that decide O1 and O3, under each half, level with each other.
-const y0 = a.bottom + 33;
-note(0, y0, [`Deployed minus keyword rules, paired: clauses +${N.pDiffKeyC} (95% CI ${N.pDiffKeyCLo} to ${N.pDiffKeyCHi}),`,
-  `whole sentences +${N.pDiffKeyS} (${N.pDiffKeySLo} to ${N.pDiffKeySHi}). Both above zero: O1 met.`]);
-note(R0, y0, [`Trained ranker minus equal weights, paired: +${N.rDiffEq} points`,
-  `(95% CI ${N.rDiffEqLo} to ${N.rDiffEqHi}). Interval includes zero: O3 not met.`]);
-
-});
+const T = THEMES[window.SCHEME || new URLSearchParams(location.search).get("scheme") || "journal"];
+start(T, () => figResults(T));
 </script>
 </body>
 </html>

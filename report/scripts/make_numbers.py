@@ -293,6 +293,7 @@ def teacher_numbers(m: Macros) -> None:
     seven = read_json("llm/rank/output/rank_pilot_v3d_qwen2.5_7b_summary.json")
     seven_hit = int(seven["consistent_all"].split("/")[0]) - seven["program_ties"] - seven["program_dominance"]
     assert seven["asked_model"] == asked_n and abs(seven_hit / asked_n - seven["consistent_rate_asked"]) < 0.001
+    m.add("tPilotCodeN", count(final_of - asked_n), "llm/rank/output/rank_pilot_v3d_qwen2.5_14b_summary.json: pairs minus asked_model (near-ties decided by code)")
     m.add("tPilotSevenOK", count(seven_hit),
           "llm/rank/output/rank_pilot_v3d_qwen2.5_7b_summary.json: consistent_all minus the code-decided pairs (prompt v3d, qwen2.5:7b)")
     m.add("rQwenSec", fixed(Fraction(Decimal(repr(read_json("llm/rank/output/exam_report.json")["llm_seconds_per_call"]))), 1),
@@ -598,6 +599,11 @@ def figure_numbers(m: Macros) -> None:
     m.add("figFront", count(len(ex["front"])), f"{rel}: len(example.front)")
     m.add("figStudents", count(len(students)), f"{rel}: exam sentences whose intended conditions allow a timetable")
     m.add("figSmallFront", count(sum(s["front"] <= 4 for s in students)), f"{rel}: students with front <= 4")
+    pipe = "output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json"
+    record = one(read_json(pipe)["records"], lambda r: r["sentence_id"] == ex["sentence_id"])
+    parsed_span = record["parsed"]["max_daily_span"]
+    assert parsed_span % 60 == 0 and record["status_parsed"] == "ready" and any(record["violations"]), (parsed_span, record["status_parsed"])
+    m.add("figParsedSpan", count(parsed_span // 60), f"{pipe}: parsed.max_daily_span / 60 for {ex['sentence_id']} (the deployed parser's reading; a violating case)")
 
 
 # ------------------------------------------------------------------------- pipeline and reasons
@@ -621,6 +627,12 @@ def pipeline_numbers(m: Macros) -> None:
     m.add("plSameFirstOf", count(len(both)), f"{rel}: records with both picks_parsed and picks_gold")
     m.add("plSameFirst", pct(Fraction(same_first, len(both))), f"{rel}: {same_first}/{len(both)}")
     m.add("plMedian", fixed(statistics.median(seconds), 2), f"{rel}: median total_seconds (sentence to recommendation)")
+    parse_s = [r["parse_seconds"] for r in records]
+    m.add("plParseMedian", fixed(statistics.median(parse_s), 2), f"{rel}: median parse_seconds over all records (the GPU step)")
+    m.add("plParsePerHour", count(int(round(3600 / statistics.median(parse_s), -3))),
+          f"{rel}: 3600 / median parse_seconds, rounded to the nearest thousand (one sentence at a time)")
+    false_no_fit = [r for r in records if r["status_parsed"] != "ready" and r["status_gold"] == "ready"]
+    m.add("plFalseNoFit", count(len(false_no_fit)), f"{rel}: status_parsed != ready while status_gold == ready (wrongly told nothing fits)")
     m.add("plMax", fixed(max(seconds), 2), f"{rel}: max total_seconds")
 
     rel = "output/pipeline/nearest_eval_exam.json"
@@ -630,6 +642,8 @@ def pipeline_numbers(m: Macros) -> None:
     breaks = Fraction(sum(r["picks"][0]["limits_broken"] for r in no_fit), len(no_fit))
     m.add("plNoFit", count(len(no_fit)), f"{rel}: records with strict == no_feasible (all got closest timetables)")
     m.add("plNoFitBreaks", prop(breaks), f"{rel}: mean picks[0].limits_broken over those records")
+    m.add("plNoFitWindow", count(sum("unavailable_windows" in r["picks"][0]["kinds"] for r in no_fit)),
+          f"{rel}: no_feasible records whose first closest timetable breaks an unavailable window (picks[0].kinds)")
     nearest_picks = sum(len(r["picks"]) for r in no_fit)
     m.add("plNearestPicks", count(nearest_picks), f"{rel}: picks over the no_feasible records")
     m.add("plNearestClash", count(sum(bool(p["clashes"]) for r in no_fit for p in r["picks"])),

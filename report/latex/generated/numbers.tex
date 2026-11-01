@@ -108,6 +108,8 @@
 \newcommand{\tPilotAskedOK}{20}
 % llm/rank/output/rank_pilot_v3d_qwen2.5_14b_summary.json consistent_all (prompt v3d, qwen2.5:14b, incl. code-decided pairs)
 \newcommand{\tPilotFinal}{28}
+% llm/rank/output/rank_pilot_v3d_qwen2.5_14b_summary.json: pairs minus asked_model (near-ties decided by code)
+\newcommand{\tPilotCodeN}{8}
 % llm/rank/output/rank_pilot_v3d_qwen2.5_7b_summary.json: consistent_all minus the code-decided pairs (prompt v3d, qwen2.5:7b)
 \newcommand{\tPilotSevenOK}{19}
 % llm/rank/output/exam_report.json llm_seconds_per_call (qwen2.5:14b on the exam)
@@ -312,12 +314,20 @@
 \newcommand{\plSameFirst}{92.6}
 % output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: median total_seconds (sentence to recommendation)
 \newcommand{\plMedian}{0.58}
+% output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: median parse_seconds over all records (the GPU step)
+\newcommand{\plParseMedian}{0.39}
+% output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: 3600 / median parse_seconds, rounded to the nearest thousand (one sentence at a time)
+\newcommand{\plParsePerHour}{9{,}000}
+% output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: status_parsed != ready while status_gold == ready (wrongly told nothing fits)
+\newcommand{\plFalseNoFit}{6}
 % output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: max total_seconds
 \newcommand{\plMax}{1.42}
 % output/pipeline/nearest_eval_exam.json: records with strict == no_feasible (all got closest timetables)
 \newcommand{\plNoFit}{110}
 % output/pipeline/nearest_eval_exam.json: mean picks[0].limits_broken over those records
 \newcommand{\plNoFitBreaks}{1.18}
+% output/pipeline/nearest_eval_exam.json: no_feasible records whose first closest timetable breaks an unavailable window (picks[0].kinds)
+\newcommand{\plNoFitWindow}{92}
 % output/pipeline/nearest_eval_exam.json: picks over the no_feasible records
 \newcommand{\plNearestPicks}{293}
 % output/pipeline/nearest_eval_exam.json: picks with a non-empty clashes list (expected 0)
@@ -362,3 +372,5 @@
 \newcommand{\figStudents}{194}
 % report/data/pareto_example.json: students with front <= 4
 \newcommand{\figSmallFront}{190}
+% output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: parsed.max_daily_span / 60 for e187 (the deployed parser's reading; a violating case)
+\newcommand{\figParsedSpan}{10}

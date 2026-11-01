@@ -24,6 +24,7 @@ checked against that JSON.
 from __future__ import annotations
 
 import csv
+from collections import Counter
 import importlib.util
 import json
 import math
@@ -738,6 +739,11 @@ def reason_numbers(m: Macros) -> None:
 # ---------------------------------------------------------------------------------------- tables
 
 def tab_data(d: dict, s: dict) -> str:
+    personas = read_json("llm/rank/data/personas.json")["personas"]
+    train_ids = {p["id"] for p in personas if p["split"] == "train" and p.get("round", 1) == 1}
+    labels = read_jsonl("llm/rank/output/labels_v3d_qwen2.5_14b_corrected.jsonl")
+    deploy_teacher = sum(r["persona"] in train_ids and r["label"] in ("A", "B") for r in labels)
+    deploy_code = read_json("llm/rank/output/model_comparison.json")["train_pairs"] - deploy_teacher
     s1, s2, ex = s["sets"]["TestOne"], s["sets"]["TestTwo"], s["sets"]["Exam"]
     real = [
         (f"Timetable snapshot, 2026 S2 ({d['span']})",
@@ -751,6 +757,7 @@ def tab_data(d: dict, s: dict) -> str:
         ("Parsing exam", f"{ex[0]} sentences, {ex[1]} clauses", "Two fresh Claude agents", "Final test"),
         ("Personas", f"{s['personas'][0]} ({s['personas'][1]} train, {s['personas'][2]} held out)", "Claude", "Ranker"),
         ("Teacher labels", f"{count(s['labels'])} pairs: {count(s['labels'] - s['label_code'])} asked ({count(s['label_kept'])} consistent), {count(s['label_code'])} by code", "Qwen2.5-14B or code; audited by Claude", "Ranker training (60 personas used)"),
+        ("Dominance pairs", f"{count(deploy_code)}", "Code; ties excluded", "Ranker"),
         ("Ranking exam", f"{s['exam_personas']} personas, {s['questions']} questions", "Fresh Claude agents", "Final test"),
     ]
     col = r">{\raggedright\arraybackslash}p"
@@ -778,6 +785,23 @@ def tab_rows(header: list[str], rows: list[tuple[str, str, str, bool]]) -> str:
     return "\n".join(lines) + "\n"
 
 
+def split_numbers(m: Macros) -> None:
+    """How the parser's clauses were split and cleaned (Appendix C)."""
+    rel = "llm/parse/output/train_round2.jsonl"
+    rows = read_jsonl(rel)
+    texts = [r["text"] for r in rows]
+    m.add("sDupClauses", count(len(texts) - len(set(texts))), f"{rel}: clauses whose text occurs more than once")
+    train_texts = {r["text"] for r in rows if r["split"] == "train"}
+    assert not any(r["text"] in train_texts for r in rows if r["split"] == "val"), "a validation clause is in the training split"
+    for split, stem in (("train", "Train"), ("val", "Val")):
+        per = Counter(r["label"] for r in rows if r["split"] == split)
+        assert len(per) == 9, per
+        m.add(f"sLabelMin{stem}", count(min(per.values())), f"{rel}: fewest clauses of one label in the {split} split")
+        m.add(f"sLabelMax{stem}", count(max(per.values())), f"{rel}: most clauses of one label in the {split} split")
+    graded = read_jsonl("llm/parse/output/review_round1_claude.jsonl")
+    m.add("sRejected", count(sum(not r["keep"] for r in graded)), "llm/parse/output/review_round1_claude.jsonl: graded clauses with keep == false")
+
+
 def main() -> None:
     m = Macros()
     d = data_numbers(m)
@@ -791,6 +815,7 @@ def main() -> None:
     pipeline_numbers(m)
     reason_numbers(m)
     figure_numbers(m)
+    split_numbers(m)
 
     OUT.mkdir(parents=True, exist_ok=True)
     files = {

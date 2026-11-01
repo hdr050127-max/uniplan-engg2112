@@ -23,14 +23,13 @@ Claude Code (Anthropic) was used throughout development in the Claude desktop ap
 
 \subsection{Selected Prompts and Outputs}
 
-The six exchanges below are from Claude Code conversations: exchanges 1 to 5 from the main conversation that coordinated the project (session \texttt{4ea07490}, 9 to 24 October, about 7,000 messages, stored locally by Claude Code), exchange 6 from the session that drafted this report (\texttt{87ac3594}, 28 October to 1 November, about 5,800 messages). The author's messages are given in the original Chinese with an English translation; Claude's replies were in Chinese and are given as English translations, shortened, with [\ldots] marking omissions. Times are Sydney time (AEDT). Each is followed by what we changed and how the result was checked.
+The six exchanges below are from Claude Code conversations: exchanges 1 to 5 from the main conversation that coordinated the project (session \texttt{4ea07490}, 9 to 24 October, about 7,000 messages, stored locally by Claude Code), exchange 6 from the session that drafted this report (\texttt{87ac3594}, 28 October to 1 November, about 5,800 messages). Both sides wrote in Chinese: the author's messages are given in English translation, and Claude's replies as English translations, shortened, with [\ldots] marking omissions; the originals are in the stored transcripts. Times are Sydney time (AEDT). Each is followed by what we changed and how the result was checked.
 
 \newcommand{\who}[1]{\par\noindent\textbf{#1}\quad}
 \newenvironment{exchange}[1]{\needspace{8\baselineskip}\subsubsection*{#1}\small}{\par}
 
 \begin{exchange}{1.\ The system design (16 October 2026, 18:10 to 18:14)}
-\who{Author:} 我直接用千问的开源模型就好了啊 / 我想的是我们有一个可视化的前端 然后只有判断逻辑接上大模型就好了 / 大模型只做语义分割 然后映射到我们设计好的条件里 然后由写好的程序来安排课表 然后再输出回大模型挑选 判断 \\
-\textit{(``I'll just use Qwen's open-source model.'' / ``What I have in mind is a visual front end, with only the decision logic connected to the LLM.'' / ``The LLM only does semantic segmentation, then maps it to conditions we have designed; then a written program arranges the timetable; then it goes back to the LLM to pick and judge.'')}
+\who{Author:} ``I'll just use Qwen's open-source model.'' / ``What I have in mind is a visual front end, with only the decision logic connected to the LLM.'' / ``The LLM only does semantic segmentation, then maps it to conditions we have designed; then a written program arranges the timetable; then it goes back to the LLM to pick and judge.''
 
 \who{Claude:} ``[\ldots] There is one bottom line: deciding whether a timetable clashes must be done by the program, not by the LLM. The LLM will get times wrong, and recommending a timetable with a clash is a serious flaw. [\ldots] Understood, that is the flow. One correction on wording: in the report and the Q\&A say `semantic parsing' or `information extraction'. `Semantic segmentation' means per-pixel classification of images [\ldots] 1. LLM (parsing): turn the student's sentence into conditions in a fixed, pre-designed format [\ldots] 2. Program (scheduling): build every clash-free timetable from the hard conditions, then narrow them to 10 to 20 candidates [\ldots] 3. LLM (selection): read the student's words and the candidate summaries, pick the top 3 and write a reason for each. 4. Program (check): make sure the picks really are candidates; if not, ask again or fall back to a rule ranking. [\ldots] Show the parsed conditions to the student to confirm before scheduling.''
 
@@ -39,8 +38,7 @@ The six exchanges below are from Claude Code conversations: exchanges 1 to 5 fro
 \end{exchange}
 
 \begin{exchange}{2.\ Where machine learning belongs (16 October 2026, 18:58 to 19:00)}
-\who{Author:} 回溯搜索是课程中有的吗 / 那我们就深化机器学习 然后我们可以先确定好算法是什么 \\
-\textit{(``Is backtracking search covered in the unit?'' / ``Then let's go deeper on machine learning, and first settle which algorithms to use.'')}
+\who{Author:} ``Is backtracking search covered in the unit?'' / ``Then let's go deeper on machine learning, and first settle which algorithms to use.''
 
 \who{Claude:} ``It is not in the unit. I searched the slides for Weeks 1 to 11, lecture transcripts and tutorials [\ldots] That is fine [\ldots] scheduling is an ordinary engineering program whose job is to guarantee correct timetables; it is not the AI part. [\ldots] The core problem is classifying a student's clause into one of 9 condition types, a text classification problem. We solve the same task with a ladder of algorithms from simple to complex and compare them [\ldots] keyword rules; TF-IDF with logistic regression; [\ldots] Qwen without training; Qwen fine-tuned with LoRA. [\ldots] The test set is fixed before training and not changed afterwards.''
 
@@ -49,8 +47,7 @@ The six exchanges below are from Claude Code conversations: exchanges 1 to 5 fro
 \end{exchange}
 
 \begin{exchange}{3.\ No human data, and the teacher-student loop (17 October 2026, 15:20 to 15:21)}
-\who{Author:} 不需要组员了 基本都是我们做了 / 对 你出题 qwen来答 你判断对错 然后训练qwen \\
-\textit{(``We don't need team members [to answer the ranking check] any more; we have done almost all of it.'' / ``Right: you write the questions, Qwen answers, you mark them, and then we train Qwen.'')}
+\who{Author:} ``We don't need team members [to answer the ranking check] any more; we have done almost all of it.'' / ``Right: you write the questions, Qwen answers, you mark them, and then we train Qwen.''
 
 \who{Claude:} ``[\ldots] The ranking check that team members were to answer will instead be answered by me (Claude) as a second annotator independent of Qwen. [\ldots] The report must say clearly that the test questions and check answers were produced by AI (Claude), not real students. [\ldots] It shows the system can parse and select accurately; it cannot show that real students will be satisfied. That goes into the limitations. [\ldots] This is the `teacher and student' approach: I am the teacher, Qwen is the student. [\ldots] The test set (the 142 sentences) is fixed before training; my training questions must not repeat it or paraphrase it. I will check the similarity of new questions to the test questions and delete those that are too close.''
 
@@ -59,20 +56,18 @@ The six exchanges below are from Claude Code conversations: exchanges 1 to 5 fro
 \end{exchange}
 
 \begin{exchange}{4.\ Guarding against over-fitting (17 October 2026, 19:56 to 20:22)}
-\who{Author:} 我希望不要过拟合你能明白吗 / 对的 未来我们训练好后我也希望你能出很多新题 然后你来考我们训练好的模型 \\
-\textit{(``I want to avoid over-fitting; do you understand?'' / ``Right. After the models are trained I also want you to write many new questions and examine our trained models.'')}
+\who{Author:} ``I want to avoid over-fitting; do you understand?'' / ``Right. After the models are trained I also want you to write many new questions and examine our trained models.''
 
 \who{Claude:} ``Understood. [\ldots] There are two kinds of over-fitting here: the model memorising the training questions, and us `tuning against the exam', which is subtler and more dangerous. [\ldots] The round-2 data was added after reading the round-1 errors on test v1, so v1 is no longer fair for round 2. I wrote v2 before starting round 2 [\ldots] I will fix the decision rule now, before the results [\ldots] Once every model is final, a brand-new `final exam', sat once, with nothing tuned afterwards. [\ldots] The questions are written by a fresh Claude subagent that receives only the labelling rules [\ldots] another independent subagent re-labels them [\ldots] the exam is committed and locked, with the time and a checksum, before any model is scored.''
 
-\who{Author (20:22):} 不需要中英文混合 就是英文版就可以啊 \textit{(``No need for mixed Chinese and English; an English version is fine.'')}
+\who{Author (20:22):} ``No need for mixed Chinese and English; an English version is fine.''
 
 \who{What we changed:} The plan proposed English, Chinese and mixed sentences; on the author's instruction the exam was English only, which Section~\ref{sec:socio} lists as a fairness limitation. The round-2 decision rule was committed before round 2 was scored.
 \who{How we checked:} The commits, times and SHA-256 hashes in Appendix~\ref{app:provenance}.
 \end{exchange}
 
 \begin{exchange}{5.\ Restating and asking back (17 October 2026, 20:30)}
-\who{Author:} 我还希望我们用自然语言描述需求之后这个模型还能给我们一些反馈 比如判断完复述一下判断结果 如果有不确定的还可以反问 而且也可以多嘴的问一些学生没提到 但是我们能做到的东西 你觉得是否能做到 \\
-\textit{(``I'd also like the model to give feedback after a student describes their needs: restate what it understood, ask back when it is unsure, and even ask about things the student did not mention but we can handle. Do you think that can be done?'')}
+\who{Author:} ``I'd also like the model to give feedback after a student describes their needs: restate what it understood, ask back when it is unsure, and even ask about things the student did not mention but we can handle. Do you think that can be done?''
 
 \who{Claude:} ``It can, and it fits our structure well. [\ldots] 1. Restate: [\ldots] generated directly by the program from the parsed conditions, not written freely by the LLM, so it cannot misstate them. 2. Ask back when unsure, using three signals: the fine-tuned 7B and logistic regression disagree about a clause; the wording sits between `can't' and `would rather not'; a value is missing [\ldots] 3. Ask about things the student did not mention but we can do, such as a lunch break, in-person only, or days per week; at most 2, and easy to skip. [\ldots] The final exam can check whether the questions land where the model is really wrong.''
 

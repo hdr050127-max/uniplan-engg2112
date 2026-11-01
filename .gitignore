@@ -34,3 +34,4 @@ report/latex/*.bbl
 report/latex/*.blg
 report/latex/*.toc
 report/latex/*.out
+report/figures/preview/

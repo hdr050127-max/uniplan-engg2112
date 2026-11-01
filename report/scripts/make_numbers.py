@@ -339,6 +339,11 @@ def review_numbers(m: Macros) -> None:
         m.add(f"rExamClear{stem}", pct(Fraction(Decimal(repr(clear[key])))), f"{rel}: groups.focus_clear.{key}")
     m.add("rExamClearGap", fixed((Fraction(Decimal(repr(clear["cares_only"]))) - Fraction(Decimal(repr(clear["equal_weights"])))) * 100, 1),
           f"{rel}: focus_clear cares_only minus equal_weights, in points")
+    # Pairs that are near-ties on the main concern with neither timetable dominant: the other features decide.
+    near = read_json(rel)["groups"]["near_tie_undominated"]
+    m.add("rExamNearN", count(near["pairs"]), f"{rel}: groups.near_tie_undominated.pairs")
+    for stem, key in (("LR", "logistic_regression"), ("Eq", "equal_weights")):
+        m.add(f"rExamNear{stem}", pct(Fraction(Decimal(repr(near[key])))), f"{rel}: groups.near_tie_undominated.{key}")
 
     # Qwen2.5-14B on the ranking exam: each pair asked once, red (shown first) as in the exam.
     key = read_json("llm/rank/exam/key.json")
@@ -645,6 +650,13 @@ def pipeline_numbers(m: Macros) -> None:
           f"{rel}: 3600 / median parse_seconds, rounded to the nearest thousand (one sentence at a time)")
     m.add("plViolNoGold", count(sum(r["status_gold"] != "ready" for r in plannable if r.get("violations") is not None and any(r["violations"]))),
           f"{rel}: violating records whose intended conditions allowed no timetable (status_gold != ready)")
+    viol = [r for r in plannable if r.get("violations") is not None and any(r["violations"])]
+    no_gold = {r["sentence_id"] for r in viol if r["status_gold"] != "ready"}
+    fix_ids = {s["sentence_id"] for s in read_json("report/data/violations_fixable.json")["sentences"] if s["fixable"]}
+    m.add("plViolBoth", count(len(no_gold & fix_ids)),
+          f"{rel} + report/data/violations_fixable.json: violating records both without an intended-condition timetable and with the fix offered")
+    m.add("plViolOther", count(len(viol) - len(no_gold | fix_ids)),
+          f"{rel} + report/data/violations_fixable.json: violating records in neither group (none has a wrong clause label: splitting or value reading)")
     false_no_fit = [r for r in records if r["status_parsed"] != "ready" and r["status_gold"] == "ready"]
     m.add("plFalseNoFit", count(len(false_no_fit)), f"{rel}: status_parsed != ready while status_gold == ready (wrongly told nothing fits)")
     m.add("plMax", fixed(max(seconds), 2), f"{rel}: max total_seconds")

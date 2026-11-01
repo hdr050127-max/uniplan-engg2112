@@ -144,6 +144,12 @@
 \newcommand{\rExamClearLR}{74.1}
 % report/data/rank_exam_subsets.json: focus_clear cares_only minus equal_weights, in points
 \newcommand{\rExamClearGap}{0.4}
+% report/data/rank_exam_subsets.json: groups.near_tie_undominated.pairs
+\newcommand{\rExamNearN}{146}
+% report/data/rank_exam_subsets.json: groups.near_tie_undominated.logistic_regression
+\newcommand{\rExamNearLR}{89.7}
+% report/data/rank_exam_subsets.json: groups.near_tie_undominated.equal_weights
+\newcommand{\rExamNearEq}{72.6}
 % llm/rank/exam/llm_qwen2.5_14b.jsonl: pairs where 14B chose the timetable shown first (red), 317/540
 \newcommand{\rQwenFirst}{58.7}
 % llm/parse/output/train_round2.jsonl: split == train and source claude_*
@@ -332,6 +338,10 @@
 \newcommand{\plParsePerHour}{9{,}000}
 % output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: violating records whose intended conditions allowed no timetable (status_gold != ready)
 \newcommand{\plViolNoGold}{8}
+% output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json + report/data/violations_fixable.json: violating records both without an intended-condition timetable and with the fix offered
+\newcommand{\plViolBoth}{3}
+% output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json + report/data/violations_fixable.json: violating records in neither group (none has a wrong clause label: splitting or value reading)
+\newcommand{\plViolOther}{5}
 % output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: status_parsed != ready while status_gold == ready (wrongly told nothing fits)
 \newcommand{\plFalseNoFit}{6}
 % output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: max total_seconds

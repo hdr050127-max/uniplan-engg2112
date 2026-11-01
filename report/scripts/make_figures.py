@@ -148,12 +148,12 @@ def fig_pipeline():
     ax = fig.add_axes((0, 0, 1, 1))
     ax.set(xlim=(0, W), ylim=(0, H))
     ax.axis("off")
-    stages = [  # name, what it does, learned?
-        ("Parse", "reads the\nsentence as\nconditions", True),
-        ("Confirm", "the student\nchecks the\nconditions", False),
-        ("Schedule", f"lists every\nvalid timetable,\nkeeps {DATA['candidate_min']} to 20", False),
-        ("Rank", "scores them,\nkeeps the\nbest three", True),
-        ("Explain", "writes a\nreason for\neach pick", False),
+    stages = [  # name, what it does, who does it: "learned model", "student" or "program"
+        ("Parse", "reads the\nsentence as\nconditions", "learned model"),
+        ("Confirm", "the student\nchecks the\nconditions", "student"),
+        ("Schedule", "lists every\nvalid timetable,\nkeeps a short list", "program"),
+        ("Rank", "scores them,\nkeeps the\nbest three", "learned model"),
+        ("Explain", "writes a\nreason for\neach pick", "program"),
     ]
     source, result = "Courses and\none sentence", "Three\ntimetables,\neach with\na reason"
     name_style = dict(fontsize=9.5, weight="bold")
@@ -174,7 +174,8 @@ def fig_pipeline():
     x = 0.02
     ax.text(x, mid, source, ha="left", va="center", **end_style)
     x += src_w
-    for (name, desc, learned), w in zip(stages, widths):
+    for (name, desc, who), w in zip(stages, widths):
+        learned = who == "learned model"
         arrow(x, x + gap)
         x += gap
         ax.add_patch(FancyBboxPatch((x, bottom), w, height, boxstyle="round,pad=0,rounding_size=0.05",
@@ -182,7 +183,7 @@ def fig_pipeline():
                                     lw=0.9 if learned else 0.6))
         ax.text(x + w / 2, top - 0.055, name, ha="center", va="top", **name_style)
         ax.text(x + w / 2, top - 0.23, desc, ha="center", va="top", **desc_style)
-        ax.text(x + w / 2, bottom - 0.03, "learned model" if learned else "program", ha="center", va="top",
+        ax.text(x + w / 2, bottom - 0.03, who, ha="center", va="top",
                 fontsize=7.5, family=CAPS, color=ACCENT if learned else SOFT)
         x += w
     arrow(x, x + gap)
@@ -413,7 +414,7 @@ def fig_appendix():
     high = max(m + s for m, s in zip(acc, sd))
     b.set(xlim=(0, max(px) + 6), ylim=(5 * math.floor((low - 1) / 5), 5 * math.ceil((high + 1) / 5)))
     b.set_xticks(range(0, max(px) + 1, 30))
-    b.set_xlabel("Simulated students in training")
+    b.set_xlabel("Training personas")
     b.set_ylabel("Held-out agreement (%)")
 
     letter(fig, 0.0, H, "a")

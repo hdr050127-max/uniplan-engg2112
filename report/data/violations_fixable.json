@@ -1,0 +1,343 @@
+{
+ "note": "Exam sentences whose recommendation broke a stated condition, and whether a clarifying question had offered the right reading; AI-written sentences, by report/scripts/violations_fixable.py",
+ "violating": 16,
+ "fixable": 6,
+ "sentences": [
+  {
+   "sentence_id": "e023",
+   "sentence": "first class to last class shouldn't be longer than 8 hrs, and I need a 30 min feed somewhere in the middle",
+   "clauses": [
+    {
+     "text": "first class to last class shouldn't be longer than 8 hrs",
+     "right": "max_daily_hours",
+     "read": "max_daily_hours",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    },
+    {
+     "text": "I need a 30 min feed somewhere in the middle",
+     "right": "lunch",
+     "read": "lunch",
+     "wrong": false,
+     "asked": true,
+     "fixable": false
+    }
+   ],
+   "fixable": false
+  },
+  {
+   "sentence_id": "e029",
+   "sentence": "Don't mind gaps, do mind 8am classes",
+   "clauses": [
+    {
+     "text": "Don't mind gaps",
+     "right": "other",
+     "read": "other",
+     "wrong": false,
+     "asked": true,
+     "fixable": false
+    },
+    {
+     "text": "do mind 8am classes",
+     "right": "blocked_time",
+     "read": "prefer_no_early_late",
+     "wrong": true,
+     "asked": true,
+     "fixable": true
+    }
+   ],
+   "fixable": true
+  },
+  {
+   "sentence_id": "e091",
+   "sentence": "I'd prefer to finish by 5 on Wednesdays",
+   "clauses": [
+    {
+     "text": "I'd prefer to finish by 5 on Wednesdays",
+     "right": "blocked_time",
+     "read": "prefer_no_early_late",
+     "wrong": true,
+     "asked": true,
+     "fixable": true
+    }
+   ],
+   "fixable": true
+  },
+  {
+   "sentence_id": "e093",
+   "sentence": "no gaps no mornings no online",
+   "clauses": [
+    {
+     "text": "no gaps",
+     "right": "prefer_less_waiting",
+     "read": "prefer_less_waiting",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    },
+    {
+     "text": "no mornings",
+     "right": "blocked_time",
+     "read": "blocked_time",
+     "wrong": false,
+     "asked": true,
+     "fixable": false
+    },
+    {
+     "text": "no online",
+     "right": "in_person_only",
+     "read": "in_person_only",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    }
+   ],
+   "fixable": false
+  },
+  {
+   "sentence_id": "e099",
+   "sentence": "Ideally nothing before 9 on any day and Wednesdays off for my placement",
+   "clauses": [
+    {
+     "text": "Ideally nothing before 9 on any day",
+     "right": "prefer_no_early_late",
+     "read": "prefer_no_early_late",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    },
+    {
+     "text": "Wednesdays off for my placement",
+     "right": "blocked_time",
+     "read": "blocked_time",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    }
+   ],
+   "fixable": false
+  },
+  {
+   "sentence_id": "e105",
+   "sentence": "I like having my classes in the morning so the arvo's free for work",
+   "clauses": [
+    {
+     "text": "I like having my classes in the morning so the arvo's free for work",
+     "right": "blocked_time",
+     "read": "prefer_no_early_late",
+     "wrong": true,
+     "asked": true,
+     "fixable": true
+    }
+   ],
+   "fixable": true
+  },
+  {
+   "sentence_id": "e121",
+   "sentence": "no 9ams please, and I'd like to be finished by 4 if possible",
+   "clauses": [
+    {
+     "text": "no 9ams please",
+     "right": "blocked_time",
+     "read": "prefer_no_early_late",
+     "wrong": true,
+     "asked": true,
+     "fixable": true
+    },
+    {
+     "text": "I'd like to be finished by 4 if possible",
+     "right": "prefer_no_early_late",
+     "read": "prefer_no_early_late",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    }
+   ],
+   "fixable": true
+  },
+  {
+   "sentence_id": "e151",
+   "sentence": "No classes before 10 except Wednesday when I can do 9",
+   "clauses": [
+    {
+     "text": "No classes before 10 except Wednesday when I can do 9",
+     "right": "blocked_time",
+     "read": "blocked_time",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    }
+   ],
+   "fixable": false
+  },
+  {
+   "sentence_id": "e159",
+   "sentence": "Not a fan of gaps, not a fan of 8ams either",
+   "clauses": [
+    {
+     "text": "Not a fan of gaps",
+     "right": "prefer_less_waiting",
+     "read": "prefer_less_waiting",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    },
+    {
+     "text": "not a fan of 8ams either",
+     "right": "blocked_time",
+     "read": "prefer_no_early_late",
+     "wrong": true,
+     "asked": true,
+     "fixable": true
+    }
+   ],
+   "fixable": true
+  },
+  {
+   "sentence_id": "e164",
+   "sentence": "I'm doing a 20 hour a week internship so I need classes capped at 4 hours a day",
+   "clauses": [
+    {
+     "text": "I'm doing a 20 hour a week internship so I need classes capped at 4 hours a day",
+     "right": "max_daily_hours",
+     "read": "max_daily_hours",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    }
+   ],
+   "fixable": false
+  },
+  {
+   "sentence_id": "e187",
+   "sentence": "I don't care about days, I care about not being on campus for 10 hour days, 7 max",
+   "clauses": [
+    {
+     "text": "I don't care about days",
+     "right": "other",
+     "read": "other",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    },
+    {
+     "text": "I care about not being on campus for 10 hour days, 7 max",
+     "right": "max_daily_hours",
+     "read": "max_daily_hours",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    }
+   ],
+   "fixable": false
+  },
+  {
+   "sentence_id": "e190",
+   "sentence": "I volunteer with the Rural Fire Service every second Tuesday and every Thursday night",
+   "clauses": [
+    {
+     "text": "I volunteer with the Rural Fire Service every second Tuesday and every Thursday night",
+     "right": "blocked_time",
+     "read": "blocked_time",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    }
+   ],
+   "fixable": false
+  },
+  {
+   "sentence_id": "e199",
+   "sentence": "only tues and thurs work for me",
+   "clauses": [
+    {
+     "text": "only tues and thurs work for me",
+     "right": "blocked_time",
+     "read": "max_days",
+     "wrong": true,
+     "asked": true,
+     "fixable": true
+    }
+   ],
+   "fixable": true
+  },
+  {
+   "sentence_id": "e229",
+   "sentence": "Class hours per day: 4 max. Days per week: 3 max. Lunch: yes pls.",
+   "clauses": [
+    {
+     "text": "Class hours per day: 4 max",
+     "right": "max_daily_hours",
+     "read": "max_daily_hours",
+     "wrong": false,
+     "asked": true,
+     "fixable": false
+    },
+    {
+     "text": "Days per week: 3 max",
+     "right": "max_days",
+     "read": "max_days",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    },
+    {
+     "text": "Lunch: yes pls",
+     "right": "lunch",
+     "read": "lunch",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    }
+   ],
+   "fixable": false
+  },
+  {
+   "sentence_id": "e248",
+   "sentence": "I hate 8ams with a passion",
+   "clauses": [
+    {
+     "text": "I hate 8ams with a passion",
+     "right": "blocked_time",
+     "read": "prefer_no_early_late",
+     "wrong": true,
+     "asked": true,
+     "fixable": false
+    }
+   ],
+   "fixable": false
+  },
+  {
+   "sentence_id": "e278",
+   "sentence": "no classes before 10 no classes after 4 no classes on friday",
+   "clauses": [
+    {
+     "text": "no classes before 10",
+     "right": "blocked_time",
+     "read": "blocked_time",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    },
+    {
+     "text": "no classes after 4",
+     "right": "blocked_time",
+     "read": "blocked_time",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    },
+    {
+     "text": "no classes on friday",
+     "right": "blocked_time",
+     "read": "blocked_time",
+     "wrong": false,
+     "asked": false,
+     "fixable": false
+    }
+   ],
+   "fixable": false
+  }
+ ]
+}

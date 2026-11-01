@@ -50,7 +50,7 @@ The five exchanges below are from the main Claude Code conversation that coordin
 
 \begin{exchange}{3.\ No human data, and the teacher-student loop (17 October 2026, 15:20 to 15:21)}
 \who{Author:} 不需要组员了 基本都是我们做了 / 对 你出题 qwen来答 你判断对错 然后训练qwen \\
-\textit{(``We don't need team members any more; we have done almost all of it.'' / ``Right: you write the questions, Qwen answers, you mark them, and then we train Qwen.'')}
+\textit{(``We don't need team members [to answer the ranking check] any more; we have done almost all of it.'' / ``Right: you write the questions, Qwen answers, you mark them, and then we train Qwen.'')}
 
 \who{Claude:} ``[\ldots] The ranking check that team members were to answer will instead be answered by me (Claude) as a second annotator independent of Qwen. [\ldots] The report must say clearly that the test questions and check answers were produced by AI (Claude), not real students. [\ldots] It shows the system can parse and select accurately; it cannot show that real students will be satisfied. That goes into the limitations. [\ldots] This is the `teacher and student' approach: I am the teacher, Qwen is the student. [\ldots] The test set (the 142 sentences) is fixed before training; my training questions must not repeat it or paraphrase it. I will check the similarity of new questions to the test questions and delete those that are too close.''
 
@@ -76,8 +76,14 @@ The five exchanges below are from the main Claude Code conversation that coordin
 
 \who{Claude:} ``It can, and it fits our structure well. [\ldots] 1. Restate: [\ldots] generated directly by the program from the parsed conditions, not written freely by the LLM, so it cannot misstate them. 2. Ask back when unsure, using three signals: the fine-tuned 7B and logistic regression disagree about a clause; the wording sits between `can't' and `would rather not'; a value is missing [\ldots] 3. Ask about things the student did not mention but we can do, such as a lunch break, in-person only, or days per week; at most 2, and easy to skip. [\ldots] The final exam can check whether the questions land where the model is really wrong.''
 
-\who{What we changed:} Built as proposed; the restatement became margin notes beside each clause on the web page.
+\who{What we changed:} Built as proposed; the restatement became margin notes beside each clause on the web page. The rules were finished and frozen with the parser at 20:44 (Appendix~\ref{app:provenance}); the edits after the exam changed their English wording only.
 \who{How we checked:} On the exam the questions covered \cCoveredPct\% of wrong clauses (Section~\ref{sec:res-parse}).
+\end{exchange}
+
+\begin{exchange}{6.\ Revising the report from an independent review (30 October 2026)}
+\who{User:} [after pasting six numbered findings from a review written in another session] ``Here is the independent review; see whether it is worth taking.''
+\who{Claude:} ``All six hold. [\ldots] The summary said the ranker `did not beat' equal weights, which reads as worse or level; it scored higher, with a paired interval that includes zero, so the advantage is unproven and O3 is still not met. [\ldots] The scheduler paragraph now gives the 65 randomised tests, 40 with limits, from the test suite; I ran them again first. [\ldots] The learning-curve sentence no longer claims that better labels would help: the curve only shows that more labels of the same kind would not.''
+\who{What we changed:} Every number cited in the review was traced back to its result file before the wording changed, and the body was trimmed elsewhere to stay within ten pages. Four such review rounds, each by a session that had not seen the drafting, preceded submission.
 \end{exchange}
 
 \subsection{How AI Output Was Checked}
@@ -93,7 +99,7 @@ The five exchanges below are from the main Claude Code conversation that coordin
 
 \section{Data and Exam Provenance}\label{app:provenance}
 
-The ranker (\texttt{llm/rank/model.json}) last changed at 18:02 on 17 October 2026 (commit \texttt{7ea2629}), before its exam was committed at 20:40 (\texttt{2eed03a}). The parser was frozen at git tag \texttt{exam-freeze} (commit \texttt{33ffb54}, 20:44 AEDT), before its exam was committed at 20:49 (\texttt{7e60a11}). Both exams were scored later that evening and not changed afterwards.
+The ranker (\texttt{llm/rank/model.json}) last changed at 18:02 on 17 October 2026 (commit \texttt{7ea2629}), before its exam was committed at 20:40 (\texttt{2eed03a}). The parser was frozen at git tag \texttt{exam-freeze} (commit \texttt{33ffb54}, 20:44 AEDT, 17 October), before its exam was committed at 20:49 (\texttt{7e60a11}). Both exams were scored later that evening and not changed afterwards.
 
 \begin{center}\small
 \begin{tabular}{@{}ll@{}}
@@ -133,7 +139,7 @@ The ranker (\texttt{llm/rank/model.json}) last changed at 18:02 on 17 October 20
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{figures/fig_appendix.pdf}
-	\caption{(a) Types on the front for each exam student whose intended conditions allow a timetable (\figStudents{} of \sExamS); the dashed line is the shortlist's minimum of 10, which the front never reaches, so it is always topped up. (b) The ranker's agreement with the labels (teacher and code-decided pairs) of 20 held-out personas, by number of training personas (mean over random draws, band $\pm1$~SD); the ringed point is the 60 the deployed model used.}
+	\caption{(a) Types on the front for each exam student whose intended conditions allow a timetable (\figStudents{} of \sExamS); the dashed line is the shortlist's minimum of 10, which the front never reaches, so it is always topped up. (b) The ranker's agreement with the labels (teacher and code-decided pairs) of 20 held-out personas, by number of training personas (mean over random draws, band $\pm1$~SD); the ringed point is the 60 the deployed model used (the deployed model itself, fitted to the first 60, scored \rHeldOne\%).}
 	\label{fig:appendix}
 \end{figure}
 
@@ -153,4 +159,4 @@ Every number and table in this report is regenerated from the result files by \p
 
 \section{Contributions}\label{app:contrib}
 
-The project was completed by one member, Han Dongrui, with the generative AI assistance described in Appendix~\ref{app:ai}. The report uses the conventional authorial ``we''.
+The project was completed by one member, Han Dongrui, with the generative AI assistance described in Appendix~\ref{app:ai}; the proposal's four workstreams were planned for a team that did not continue past the proposal. The report uses the conventional authorial ``we''. Decisions the author made, in order (Section~\ref{sec:change}): to run every model locally through Ollama; to make the input one sentence; to label preferences with a model rather than recruit participants; to use no human data and to test only on exams written by a different AI system; to make the final exam English only; and not to ship the 120-persona refit under the rule set beforehand.

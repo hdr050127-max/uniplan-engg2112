@@ -625,6 +625,18 @@ def pipeline_numbers(m: Macros) -> None:
     breaks = Fraction(sum(r["picks"][0]["limits_broken"] for r in no_fit), len(no_fit))
     m.add("plNoFit", count(len(no_fit)), f"{rel}: records with strict == no_feasible (all got closest timetables)")
     m.add("plNoFitBreaks", prop(breaks), f"{rel}: mean picks[0].limits_broken over those records")
+    nearest_picks = sum(len(r["picks"]) for r in no_fit)
+    m.add("plNearestPicks", count(nearest_picks), f"{rel}: picks over the no_feasible records")
+    m.add("plNearestClash", count(sum(bool(p["clashes"]) for r in no_fit for p in r["picks"])),
+          f"{rel}: picks with a non-empty clashes list (expected 0)")
+    rel = "output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json"
+    m.add("plPicksN", count(sum(len(r["picks_parsed"]) for r in plannable)), f"{rel}: picks_parsed over plannable records")
+    m.add("plClashN", count(sum("clash" in v for r in checked for pick in r["violations"] for v in pick)),
+          f"{rel}: violation strings mentioning a clash (hard_violations re-checks the dated meetings; expected 0)")
+    rel = "report/data/violations_fixable.json"
+    fixable = read_json(rel)
+    assert fixable["violating"] == broken, (fixable["violating"], broken)
+    m.add("plViolFix", count(fixable["fixable"]), f"{rel}: violating sentences where a clarifying question offered the annotator's label (report/scripts/violations_fixable.py)")
 
 
 def reason_numbers(m: Macros) -> None:

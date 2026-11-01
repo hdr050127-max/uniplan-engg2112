@@ -408,7 +408,7 @@ def fig_appendix():
     deployed = 60  # the deployed ranker was trained on 60 simulated students
     d = next(c for c in curve if c["personas"] == deployed)
     b.plot(deployed, d["accuracy"], "o", ms=8.5, mfc="none", mec=INK, mew=0.9, zorder=4)
-    b.annotate("deployed", (deployed, d["accuracy"]), xytext=(0, -13), textcoords="offset points", ha="center",
+    b.annotate("deployed size", (deployed, d["accuracy"]), xytext=(0, -13), textcoords="offset points", ha="center",
                va="top", **NOTE)
     low = min(m - s for m, s in zip(acc, sd))
     high = max(m + s for m, s in zip(acc, sd))

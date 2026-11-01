@@ -290,6 +290,11 @@ def teacher_numbers(m: Macros) -> None:
     m.add("tPilotAskedOK", count(asked_ok), "same: consistent_all minus the code-decided pairs; matches consistent_rate_asked")
     m.add("tPilotFinal", count(final_hit),
           "llm/rank/output/rank_pilot_v3d_qwen2.5_14b_summary.json consistent_all (prompt v3d, qwen2.5:14b, incl. code-decided pairs)")
+    seven = read_json("llm/rank/output/rank_pilot_v3d_qwen2.5_7b_summary.json")
+    seven_hit = int(seven["consistent_all"].split("/")[0]) - seven["program_ties"] - seven["program_dominance"]
+    assert seven["asked_model"] == asked_n and abs(seven_hit / asked_n - seven["consistent_rate_asked"]) < 0.001
+    m.add("tPilotSevenOK", count(seven_hit),
+          "llm/rank/output/rank_pilot_v3d_qwen2.5_7b_summary.json: consistent_all minus the code-decided pairs (prompt v3d, qwen2.5:7b)")
     m.add("rQwenSec", fixed(Fraction(Decimal(repr(read_json("llm/rank/output/exam_report.json")["llm_seconds_per_call"]))), 1),
           "llm/rank/output/exam_report.json llm_seconds_per_call (qwen2.5:14b on the exam)")
 
@@ -318,7 +323,7 @@ def review_numbers(m: Macros) -> None:
 
     m.add("rDomShare", pct(Fraction(one["train_pairs"] - teacher, one["train_pairs"])),
           "llm/rank/output/model_comparison.json: code-decided dominance pairs / train_pairs (deployed model)")
-    for stem, name in (("LR", lr), ("Eq", "等权打分")):
+    for stem, name in (("LR", lr), ("Eq", "等权打分"), ("Care", "按 cares 打分（基准）")):
         acc = one_row(one, name)["accuracy_by_label_source"]["model"]
         m.add(f"rHeldTeacher{stem}", pct(Fraction(Decimal(repr(acc)))),
               f"llm/rank/output/model_comparison.json: {name} accuracy_by_label_source.model (held-out pairs Qwen 14B judged)")

@@ -19,11 +19,11 @@ Generative AI was used in two different ways: as parts of the system, and as an 
 
 \subsection{AI Used to Build the Project}
 
-Claude Code (Anthropic) was used throughout development in the Claude desktop app. It wrote most of the code under the author's direction, ran the experiments, proposed and documented design changes, and drafted this report from the project's result files. OpenAI Codex helped draft and revise the proposal; that record is in the proposal's appendix. The author set the goals, made the design decisions recorded in Section~\ref{sec:change}, chose what to keep, and is responsible for the submitted work.
+Claude Code (Anthropic) was used throughout development in the Claude desktop app. It wrote most of the code under the author's direction, ran the experiments, proposed and documented design changes, and drafted this report from the project's result files. OpenAI Codex helped draft and revise the proposal; that record is in the proposal's appendix. The author set the goals and the report's scope, made the design decisions recorded in Section~\ref{sec:change}, decided which findings of each independent review to accept, rejected drafts of the figures until the final set, approved every revision, and is responsible for the submitted work; the drafting instructions are in session \texttt{87ac3594}.
 
 \subsection{Selected Prompts and Outputs}
 
-The five exchanges below are from the main Claude Code conversation that coordinated the project (session \texttt{4ea07490}, stored locally by Claude Code). The author's messages are given in the original Chinese with an English translation; Claude's replies were in Chinese and are given as English translations, shortened, with [\ldots] marking omissions. Times are Sydney time (AEDT). Each is followed by what we changed and how the result was checked.
+The six exchanges below are from Claude Code conversations: exchanges 1 to 5 from the main conversation that coordinated the project (session \texttt{4ea07490}, stored locally by Claude Code), exchange 6 from the session that drafted this report (\texttt{87ac3594}). The author's messages are given in the original Chinese with an English translation; Claude's replies were in Chinese and are given as English translations, shortened, with [\ldots] marking omissions. Times are Sydney time (AEDT). Each is followed by what we changed and how the result was checked.
 
 \newcommand{\who}[1]{\par\noindent\textbf{#1}\quad}
 \newenvironment{exchange}[1]{\needspace{8\baselineskip}\subsubsection*{#1}\small}{\par}
@@ -81,9 +81,9 @@ The five exchanges below are from the main Claude Code conversation that coordin
 \end{exchange}
 
 \begin{exchange}{6.\ Revising the report from an independent review (30 October 2026)}
-\who{User:} [after pasting six numbered findings from a review written in another session] ``Here is the independent review; see whether it is worth taking.''
+\who{Author:} [after pasting six numbered findings from a review written in another session] ``Here is the independent review; see whether it is worth taking.''
 \who{Claude:} ``All six hold. [\ldots] The summary said the ranker `did not beat' equal weights, which reads as worse or level; it scored higher, with a paired interval that includes zero, so the advantage is unproven and O3 is still not met. [\ldots] The scheduler paragraph now gives the 65 randomised tests, 40 with limits, from the test suite; I ran them again first. [\ldots] The learning-curve sentence no longer claims that better labels would help: the curve only shows that more labels of the same kind would not.''
-\who{What we changed:} Every number cited in the review was traced back to its result file before the wording changed, and the body was trimmed elsewhere to stay within ten pages. Four such review rounds, each by a session that had not seen the drafting, preceded submission.
+\who{What we changed:} Every number cited in the review was traced back to its result file before the wording changed, and the body was trimmed elsewhere to stay within ten pages. Five such review rounds, each by a session that had not seen the drafting, preceded submission.
 \end{exchange}
 
 \subsection{How AI Output Was Checked}
@@ -93,7 +93,7 @@ The five exchanges below are from the main Claude Code conversation that coordin
 	\item \textbf{Models.} No model was scored on data written by its own family. The final exams were written by fresh Claude agents, frozen and hashed before scoring (Appendix~\ref{app:provenance}), and used once; the development test sets were written in the coordinating session and reused during development.
 	\item \textbf{Labels.} Qwen's ranking labels were asked in both orders and audited by Claude without sight of Qwen's answers.
 	\item \textbf{Reasons.} Every displayed reason passes a rule-based fact check against the timetable; the LLM rewriter was switched off when it failed this check too often.
-	\item \textbf{This report.} Every number from our experiments is generated by a script from the result files in the repository, and each fact was traced to its source file before it was written. Three rounds of independent AI review, by sessions that had not seen the drafting, checked successive drafts against the marking rubric and recomputed about 60 numbers from the raw files.
+	\item \textbf{This report.} Every number from our experiments is generated by a script from the result files in the repository, and each fact was traced to its source file before it was written. Five rounds of independent AI review, by sessions that had not seen the drafting, checked successive drafts against the marking rubric and each recomputed about 60 numbers from the raw files.
 	\item \textbf{Figures.} Claude drew every figure with matplotlib from the same result files (\path{report/scripts/make_figures.py}); each was checked against the tables and by eye, and the screenshots are of the running application.
 \end{itemize}
 
@@ -139,7 +139,7 @@ The ranker (\texttt{llm/rank/model.json}) last changed at 18:02 on 17 October 20
 \begin{figure}[ht]
 	\centering
 	\includegraphics[width=\textwidth]{figures/fig_appendix.pdf}
-	\caption{(a) Types on the front for each exam student whose intended conditions allow a timetable (\figStudents{} of \sExamS); the dashed line is the shortlist's minimum of 10, which the front never reaches, so it is always topped up. (b) The ranker's agreement with the labels (teacher and code-decided pairs) of 20 held-out personas, by number of training personas (mean over random draws, band $\pm1$~SD); the ringed point is the 60 the deployed model used (the deployed model itself, fitted to the first 60, scored \rHeldOne\%).}
+	\caption{(a) Types on the front for each exam student whose intended conditions allow a timetable (\figStudents{} of \sExamS); the dashed line is the shortlist's minimum of 10, which the front never reaches, so it is always topped up. (b) The ranker's agreement with the labels (teacher and code-decided pairs) of 20 held-out personas, by number of training personas (mean over random draws, band $\pm1$~SD); the ring marks the 60 training personas of the deployed model, which itself (fitted to the first 60) scored \rHeldOne\%; the curve keeps the deployed model's regularisation, while the 120-persona refit of Section~\ref{sec:rank} re-tuned it and scored \rHeldTwo\%.}
 	\label{fig:appendix}
 \end{figure}
 

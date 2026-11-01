@@ -108,6 +108,8 @@
 \newcommand{\tPilotAskedOK}{20}
 % llm/rank/output/rank_pilot_v3d_qwen2.5_14b_summary.json consistent_all (prompt v3d, qwen2.5:14b, incl. code-decided pairs)
 \newcommand{\tPilotFinal}{28}
+% llm/rank/output/rank_pilot_v3d_qwen2.5_7b_summary.json: consistent_all minus the code-decided pairs (prompt v3d, qwen2.5:7b)
+\newcommand{\tPilotSevenOK}{19}
 % llm/rank/output/exam_report.json llm_seconds_per_call (qwen2.5:14b on the exam)
 \newcommand{\rQwenSec}{2.1}
 % llm/rank/data/personas.json: split == train and round == 1 (model.json is the round-1 fit)
@@ -126,6 +128,8 @@
 \newcommand{\rHeldTeacherLR}{87.0}
 % llm/rank/output/model_comparison.json: 等权打分 accuracy_by_label_source.model (held-out pairs Qwen 14B judged)
 \newcommand{\rHeldTeacherEq}{65.7}
+% llm/rank/output/model_comparison.json: 按 cares 打分（基准） accuracy_by_label_source.model (held-out pairs Qwen 14B judged)
+\newcommand{\rHeldTeacherCare}{85.5}
 % llm/rank/exam/llm_qwen2.5_14b.jsonl: pairs where 14B chose the timetable shown first (red), 317/540
 \newcommand{\rQwenFirst}{58.7}
 % llm/parse/output/train_round2.jsonl: split == train and source claude_*

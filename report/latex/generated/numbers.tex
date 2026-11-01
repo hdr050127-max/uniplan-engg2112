@@ -92,6 +92,8 @@
 \newcommand{\rDiffEqLo}{\ensuremath{-}4.6}
 % report/data/rank_exam_paired.json difference_ci95[1]
 \newcommand{\rDiffEqHi}{14.7}
+% report/data/rank_exam_paired.json: personas x (half-width/1.96 / (difference/(1.96+0.84)))^2, rounded to tens: students for 80% power to detect the observed gain, assuming real students vary like the exam personas
+\newcommand{\rPilotStudents}{140}
 % summary only: llm/parse/exam/PROVENANCE.md, regex 'dropped N candidate sentences'
 \newcommand{\sExamDropped}{93}
 % report/data/timetable_counts.json ENGG2112+AMME2301 search.full_options
@@ -314,6 +316,12 @@
 \newcommand{\rCurveMax}{89.7}
 % summary only: llm/rank/output/RESULTS.md:148 (rank() on 20 real candidates incl. features), regex
 \newcommand{\rMs}{3.6}
+% output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: records with exact == false (not parsed to exactly the intended conditions)
+\newcommand{\plWrongS}{67}
+% output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json + llm/parse/output/exam/predictions/ollama-short_uniplan-parse-7b-r2.json: wrong sentences with at least one wrong clause label on the annotator's clauses
+\newcommand{\plWrongLabelS}{19}
+% same: wrong sentences with every clause label right, so the error is in splitting or value reading
+\newcommand{\plWrongRuleS}{48}
 % output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: records with exact == true
 \newcommand{\plExactN}{237}
 % output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: 237/304 records exact

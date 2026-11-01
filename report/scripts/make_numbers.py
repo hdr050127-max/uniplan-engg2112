@@ -265,6 +265,14 @@ def teacher_numbers(m: Macros) -> None:
     m.add("rDiffEqLo", fixed(Fraction(Decimal(repr(lo))) * 100, 1),
           "report/data/rank_exam_paired.json difference_ci95[0] (paired bootstrap over personas, 10,000 reps, seed 2112)")
     m.add("rDiffEqHi", fixed(Fraction(Decimal(repr(hi))) * 100, 1), "report/data/rank_exam_paired.json difference_ci95[1]")
+    # Pilot size: the interval's half-width is 1.96 standard errors over the exam's personas; a gain equal to the
+    # observed difference needs 1.96 + 0.84 standard errors for 80% power at the 5% level, and n scales as 1/SE².
+    half = (Fraction(Decimal(repr(hi))) - Fraction(Decimal(repr(lo)))) / 2
+    se = half / Fraction(Decimal("1.96"))
+    need = Fraction(Decimal(repr(paired["difference"]))) / (Fraction(Decimal("1.96")) + Fraction(Decimal("0.84")))
+    m.add("rPilotStudents", count(int(round(paired["personas"] * float((se / need) ** 2), -1))),
+          "report/data/rank_exam_paired.json: personas x (half-width/1.96 / (difference/(1.96+0.84)))^2, rounded to tens: "
+          "students for 80% power to detect the observed gain, assuming real students vary like the exam personas")
 
     prov = (ROOT / "llm/parse/exam/PROVENANCE.md").read_text(encoding="utf-8")
     dropped = re.search(r"dropped\s+(\d+)\s+candidate\s+sentences", prov)
@@ -630,6 +638,17 @@ def pipeline_numbers(m: Macros) -> None:
     records = read_json(rel)["records"]
     exact = sum(r["exact"] for r in records)
     plannable = [r for r in records if r["status_parsed"] == "ready"]
+    # Whole-sentence errors by cause: a wrong clause label (on the annotator's clauses), or the rule-based steps.
+    sys.path.insert(0, str(ROOT))
+    from llm.parse.gold import load as load_gold  # noqa: E402
+    gold = {s["id"]: s for s in load_gold(ROOT / "llm/parse/exam/exam.csv")}
+    preds_rel = "llm/parse/output/exam/predictions/ollama-short_uniplan-parse-7b-r2.json"
+    preds = read_json(preds_rel)["predictions"]
+    wrong_s = [r for r in records if not r["exact"]]
+    wrong_label = [r for r in wrong_s if any(preds[c["text"]]["label"] != c["label"] for c in gold[r["sentence_id"]]["clauses"])]
+    m.add("plWrongS", count(len(wrong_s)), f"{rel}: records with exact == false (not parsed to exactly the intended conditions)")
+    m.add("plWrongLabelS", count(len(wrong_label)), f"{rel} + {preds_rel}: wrong sentences with at least one wrong clause label on the annotator's clauses")
+    m.add("plWrongRuleS", count(len(wrong_s) - len(wrong_label)), "same: wrong sentences with every clause label right, so the error is in splitting or value reading")
     checked = [r for r in plannable if r.get("violations") is not None]
     broken = sum(any(r["violations"]) for r in checked)
     both = [r for r in records if "picks_parsed" in r and "picks_gold" in r]

@@ -1,0 +1,23 @@
+{
+ "note": "Exam pairs with a clear answer, split by whether the two timetables differ on the persona's main concern by at least the TIE threshold of llm/rank/label.py; a method's tie scores 0.5. Synthetic personas and answers; by report/scripts/rank_exam_subsets.py",
+ "groups": {
+  "focus_clear": {
+   "pairs": 255,
+   "logistic_regression": 0.7411764705882353,
+   "equal_weights": 0.7411764705882353,
+   "cares_only": 0.7450980392156863
+  },
+  "near_tie_dominated": {
+   "pairs": 84,
+   "logistic_regression": 1.0,
+   "equal_weights": 1.0,
+   "cares_only": 0.75
+  },
+  "near_tie_undominated": {
+   "pairs": 146,
+   "logistic_regression": 0.8972602739726028,
+   "equal_weights": 0.726027397260274,
+   "cares_only": 0.636986301369863
+  }
+ }
+}

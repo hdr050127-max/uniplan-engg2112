@@ -46,6 +46,7 @@ Every other model we compared (keyword rules, untrained Qwen2.5-7B, QLoRA round 
 | Ranking exam paired interval | `python3 report/scripts/rank_exam_paired.py` | `report/data/rank_exam_paired.json` |
 | Pareto example and front sizes (Figures 2 and 5) | `python3 report/scripts/pareto_figure.py` | `report/data/pareto_example.json` |
 | Which violating recommendations had the fix offered (Section 7.3) | `python3 report/scripts/violations_fixable.py` | `report/data/violations_fixable.json` |
+| Ranking exam split by whether the main concern clearly differs (Section 7.2) | `python3 report/scripts/rank_exam_subsets.py` | `report/data/rank_exam_subsets.json` |
 | Figure data, then every figure | `python3 report/scripts/figure_data.py`, then `python3 report/scripts/make_figures.py` (needs matplotlib and fontTools) | `report/latex/figures/fig_*.pdf` |
 | Screenshots of the web page (Figure 4) | start `python3 main.py --port 8768`, then `node report/figures/capture_app.mjs` | `report/figures/app_*.png` |
 | The PDF | `cd report/latex && tectonic -X compile main.tex` | `report/latex/main.pdf` |

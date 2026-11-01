@@ -324,10 +324,21 @@ def review_numbers(m: Macros) -> None:
 
     m.add("rDomShare", pct(Fraction(one["train_pairs"] - teacher, one["train_pairs"])),
           "llm/rank/output/model_comparison.json: code-decided dominance pairs / train_pairs (deployed model)")
+    held = {}
     for stem, name in (("LR", lr), ("Eq", "等权打分"), ("Care", "按 cares 打分（基准）")):
-        acc = one_row(one, name)["accuracy_by_label_source"]["model"]
-        m.add(f"rHeldTeacher{stem}", pct(Fraction(Decimal(repr(acc)))),
+        acc = held[stem] = Fraction(Decimal(repr(one_row(one, name)["accuracy_by_label_source"]["model"])))
+        m.add(f"rHeldTeacher{stem}", pct(acc),
               f"llm/rank/output/model_comparison.json: {name} accuracy_by_label_source.model (held-out pairs Qwen 14B judged)")
+    m.add("rHeldCareGap", fixed((held["Care"] - held["Eq"]) * 100, 1),
+          "llm/rank/output/model_comparison.json: cares-only minus equal weights on the held-out pairs Qwen judged, in points")
+    # The exam scored on the same kind of pair (the main concern differs by at least the TIE threshold).
+    rel = "report/data/rank_exam_subsets.json"
+    clear = read_json(rel)["groups"]["focus_clear"]
+    m.add("rExamClearN", count(clear["pairs"]), f"{rel}: groups.focus_clear.pairs (report/scripts/rank_exam_subsets.py)")
+    for stem, key in (("Cares", "cares_only"), ("Eq", "equal_weights"), ("LR", "logistic_regression")):
+        m.add(f"rExamClear{stem}", pct(Fraction(Decimal(repr(clear[key])))), f"{rel}: groups.focus_clear.{key}")
+    m.add("rExamClearGap", fixed((Fraction(Decimal(repr(clear["cares_only"]))) - Fraction(Decimal(repr(clear["equal_weights"])))) * 100, 1),
+          f"{rel}: focus_clear cares_only minus equal_weights, in points")
 
     # Qwen2.5-14B on the ranking exam: each pair asked once, red (shown first) as in the exam.
     key = read_json("llm/rank/exam/key.json")
@@ -599,6 +610,7 @@ def figure_numbers(m: Macros) -> None:
     m.add("figFront", count(len(ex["front"])), f"{rel}: len(example.front)")
     m.add("figStudents", count(len(students)), f"{rel}: exam sentences whose intended conditions allow a timetable")
     m.add("figSmallFront", count(sum(s["front"] <= 4 for s in students)), f"{rel}: students with front <= 4")
+    m.add("figFewTypes", count(sum(s["profiles"] < 10 for s in students)), f"{rel}: students with fewer than 10 types (the shortlist cannot reach 10)")
     pipe = "output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json"
     record = one(read_json(pipe)["records"], lambda r: r["sentence_id"] == ex["sentence_id"])
     parsed_span = record["parsed"]["max_daily_span"]
@@ -627,10 +639,12 @@ def pipeline_numbers(m: Macros) -> None:
     m.add("plSameFirstOf", count(len(both)), f"{rel}: records with both picks_parsed and picks_gold")
     m.add("plSameFirst", pct(Fraction(same_first, len(both))), f"{rel}: {same_first}/{len(both)}")
     m.add("plMedian", fixed(statistics.median(seconds), 2), f"{rel}: median total_seconds (sentence to recommendation)")
-    parse_s = [r["parse_seconds"] for r in records]
-    m.add("plParseMedian", fixed(statistics.median(parse_s), 2), f"{rel}: median parse_seconds over all records (the GPU step)")
+    parse_s = [r["parse_seconds"] for r in plannable]
+    m.add("plParseMedian", fixed(statistics.median(parse_s), 2), f"{rel}: median parse_seconds over the plannable records (same set as plMedian)")
     m.add("plParsePerHour", count(int(round(3600 / statistics.median(parse_s), -3))),
           f"{rel}: 3600 / median parse_seconds, rounded to the nearest thousand (one sentence at a time)")
+    m.add("plViolNoGold", count(sum(r["status_gold"] != "ready" for r in plannable if r.get("violations") is not None and any(r["violations"]))),
+          f"{rel}: violating records whose intended conditions allowed no timetable (status_gold != ready)")
     false_no_fit = [r for r in records if r["status_parsed"] != "ready" and r["status_gold"] == "ready"]
     m.add("plFalseNoFit", count(len(false_no_fit)), f"{rel}: status_parsed != ready while status_gold == ready (wrongly told nothing fits)")
     m.add("plMax", fixed(max(seconds), 2), f"{rel}: max total_seconds")

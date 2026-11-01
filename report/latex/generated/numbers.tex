@@ -132,6 +132,18 @@
 \newcommand{\rHeldTeacherEq}{65.7}
 % llm/rank/output/model_comparison.json: 按 cares 打分（基准） accuracy_by_label_source.model (held-out pairs Qwen 14B judged)
 \newcommand{\rHeldTeacherCare}{85.5}
+% llm/rank/output/model_comparison.json: cares-only minus equal weights on the held-out pairs Qwen judged, in points
+\newcommand{\rHeldCareGap}{19.8}
+% report/data/rank_exam_subsets.json: groups.focus_clear.pairs (report/scripts/rank_exam_subsets.py)
+\newcommand{\rExamClearN}{255}
+% report/data/rank_exam_subsets.json: groups.focus_clear.cares_only
+\newcommand{\rExamClearCares}{74.5}
+% report/data/rank_exam_subsets.json: groups.focus_clear.equal_weights
+\newcommand{\rExamClearEq}{74.1}
+% report/data/rank_exam_subsets.json: groups.focus_clear.logistic_regression
+\newcommand{\rExamClearLR}{74.1}
+% report/data/rank_exam_subsets.json: focus_clear cares_only minus equal_weights, in points
+\newcommand{\rExamClearGap}{0.4}
 % llm/rank/exam/llm_qwen2.5_14b.jsonl: pairs where 14B chose the timetable shown first (red), 317/540
 \newcommand{\rQwenFirst}{58.7}
 % llm/parse/output/train_round2.jsonl: split == train and source claude_*
@@ -314,10 +326,12 @@
 \newcommand{\plSameFirst}{92.6}
 % output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: median total_seconds (sentence to recommendation)
 \newcommand{\plMedian}{0.58}
-% output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: median parse_seconds over all records (the GPU step)
-\newcommand{\plParseMedian}{0.39}
+% output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: median parse_seconds over the plannable records (same set as plMedian)
+\newcommand{\plParseMedian}{0.38}
 % output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: 3600 / median parse_seconds, rounded to the nearest thousand (one sentence at a time)
 \newcommand{\plParsePerHour}{9{,}000}
+% output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: violating records whose intended conditions allowed no timetable (status_gold != ready)
+\newcommand{\plViolNoGold}{8}
 % output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: status_parsed != ready while status_gold == ready (wrongly told nothing fits)
 \newcommand{\plFalseNoFit}{6}
 % output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: max total_seconds
@@ -372,5 +386,7 @@
 \newcommand{\figStudents}{194}
 % report/data/pareto_example.json: students with front <= 4
 \newcommand{\figSmallFront}{190}
+% report/data/pareto_example.json: students with fewer than 10 types (the shortlist cannot reach 10)
+\newcommand{\figFewTypes}{56}
 % output/pipeline/pipeline_eval_uniplan-parse-7b-r2_model_exam.json: parsed.max_daily_span / 60 for e187 (the deployed parser's reading; a violating case)
 \newcommand{\figParsedSpan}{10}

@@ -27,6 +27,7 @@ llm/**/*.safetensors
 report/*.md
 report/*.pdf
 report/latex/author.tex
+report/latex/members.tex
 report/latex/main.pdf
 report/latex/*.aux
 report/latex/*.log
